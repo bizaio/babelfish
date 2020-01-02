@@ -28,8 +28,8 @@
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<validation-api.version>2.0.1.Final</validation-api.version>
-		<jackson.version>2.10.0</jackson.version>
-		<libphonenumber.version>8.10.19</libphonenumber.version>
+		<jackson.version>2.10.1</jackson.version>
+		<libphonenumber.version>8.11.1</libphonenumber.version>
 		<lombok.version>1.18.10</lombok.version>
 	</properties>
 

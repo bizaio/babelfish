@@ -31,10 +31,4 @@ public class CDRResponse<L, M> {
   @NotNull
   public M meta;
 
-  @BabelFishModelProperty(hidden = true)
-  @NotNull
-  @NonNull
-  @Getter(onMethod_ = {@JsonIgnore})
-  public String version;
-
 }
