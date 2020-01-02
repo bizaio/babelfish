@@ -4,10 +4,24 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.biza</groupId>
 	<artifactId>cdr-babelfish</artifactId>
-	<version>1.1.0-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 	<name>Biza CDR: Babelfish Payload Converter</name>
 	<description>The Babelfish Payload Converter enables the efficient translation of payloads associated with the Consumer Data Right to and from Java and JSON representations as well as between versions of various payloads.</description>
-
+	<url>https://github.com/bizaio/cdr-babelfish</url>
+	<organization>
+		<name>Biza.io</name>
+		<url>https://biza.io/</url>
+	</organization>
+	<scm>
+		<url>https://github.com/bizaio/cdr-babelfish</url>
+		<developerConnection>scm:git:https://github.com/bizaio/cdr-babelfish.git</developerConnection>
+		<connection>scm:git:https://github.com/bizaio/cdr-babelfish.git</connection>
+	</scm>
+	<issueManagement>
+		<url>https://github.com/bizaio/cdr-babelfish/issues</url>
+		<system>Github</system>
+	</issueManagement>
+	
 	<properties>
 		<java.version>11</java.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
