@@ -17,24 +17,25 @@ import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-
-import io.biza.cdr.babelfish.model.banking.BankingAccount;
+import io.biza.cdr.babelfish.model.common.Links;
+import io.biza.cdr.babelfish.model.common.Meta;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.biza.cdr.babelfish.v1.model.CDRResponse;
+import io.biza.cdr.babelfish.v1.model.banking.BankingAccount;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.experimental.Accessors;
 
-@AllArgsConstructor
-@NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
-@Builder
 @Data
+@Accessors
 @Valid
 @BabelFishModel(description =  "Response containing a list of Banking Accounts")
-public class ResponseBankingAccountListData {
+public abstract class ResponseBankingAccountListData {
 
     @BabelFishModelProperty(
         description =  "The list of accounts returned. If the filter results in an empty set then this array may have no records",

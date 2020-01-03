@@ -13,13 +13,24 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.response;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.biza.cdr.babelfish.v1.model.CDRResponse;
+import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
+import io.biza.cdr.babelfish.v1.model.common.Links;
+import io.biza.cdr.babelfish.v1.model.common.LinksPaginated;
+import io.biza.cdr.babelfish.v1.model.common.Meta;
+import io.biza.cdr.babelfish.v1.model.common.MetaPaginated;
+import lombok.Data;
 import lombok.NonNull;
+import lombok.experimental.Accessors;
 
-// extends PaginatedResponse
-public class ResponseBankingPayeeList {
+@Data
+@Accessors
+@Valid
+public abstract class ResponseBankingPayeeList {
 
     @BabelFishModelProperty(
         required = true
@@ -27,4 +38,11 @@ public class ResponseBankingPayeeList {
     @NotNull
     @NonNull
     ResponseBankingPayeeListData data;
+    
+
+    @JsonUnwrapped
+    @NotNull
+    @NonNull
+    @BabelFishModelProperty(required = true)
+    public CDRResponse<LinksPaginated, MetaPaginated> metadata;
 }

@@ -26,10 +26,10 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.biza.cdr.babelfish.v1.enumerations.BankingLoanRepaymentType;
 import io.biza.cdr.babelfish.converters.LocalDateToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToCurrencyConverter;
 import io.biza.cdr.babelfish.converters.StringToLocalDateConverter;
-import io.biza.cdr.babelfish.enumerations.BankingLoanRepaymentType;
 import io.biza.cdr.babelfish.converters.DurationToStringConverter;
 import io.biza.cdr.babelfish.converters.AmountStringToBigDecimalConverter;
 import io.biza.cdr.babelfish.converters.BigDecimalToAmountStringConverter;

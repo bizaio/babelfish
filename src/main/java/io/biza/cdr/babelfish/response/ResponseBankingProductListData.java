@@ -16,21 +16,25 @@ package io.biza.cdr.babelfish.response;
 import java.util.List;
 
 import javax.validation.Valid;
-
-import io.biza.cdr.babelfish.model.banking.BankingProduct;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.biza.cdr.babelfish.v1.model.CDRResponse;
+import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
+import io.biza.cdr.babelfish.v1.model.banking.BankingProduct;
+import io.biza.cdr.babelfish.v1.model.common.Links;
+import io.biza.cdr.babelfish.v1.model.common.Meta;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.experimental.Accessors;
 
-@Builder
-@AllArgsConstructor
 @Data
+@Accessors
 @Valid
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
-public class ResponseBankingProductListData {
+public abstract class ResponseBankingProductListData {
 
     @BabelFishModelProperty(
         description =  "The list of products returned.  If the filter results in an empty set then this array may have no records",

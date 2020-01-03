@@ -22,8 +22,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.support.FormatChecker;
+import io.biza.cdr.babelfish.v1.enumerations.BankingProductFeatureType;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
-import io.biza.cdr.babelfish.enumerations.BankingProductFeatureType;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

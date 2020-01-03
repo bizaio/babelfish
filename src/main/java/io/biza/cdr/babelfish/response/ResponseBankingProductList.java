@@ -14,9 +14,9 @@
 package io.biza.cdr.babelfish.response;
 
 import javax.validation.Valid;
-
+import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.biza.cdr.babelfish.model.CDRResponse;
 import io.biza.cdr.babelfish.model.common.LinksPaginated;
 import io.biza.cdr.babelfish.model.common.MetaPaginated;
@@ -28,18 +28,25 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.experimental.Accessors;
 
-@AllArgsConstructor
-@NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
-@Builder
 @Data
-@EqualsAndHashCode(callSuper=true)
+@Accessors
 @Valid
 @BabelFishModel(description =  "Response containing a Product List")
-public class ResponseBankingProductList  extends CDRResponse<LinksPaginated, MetaPaginated> {
+public abstract class ResponseBankingProductList {
 
     @BabelFishModelProperty(
         required = true
     )
-    ResponseBankingProductListData data;
+    @NonNull
+    @NotNull
+    protected ResponseBankingProductListData data;
+    
+    @JsonUnwrapped
+    @NotNull
+    @NonNull
+    @BabelFishModelProperty(required = true)
+    protected CDRResponse<LinksPaginated, MetaPaginated> metadata;
 }

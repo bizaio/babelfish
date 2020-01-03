@@ -14,16 +14,22 @@
 package io.biza.cdr.babelfish.response;
 
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-
-import io.biza.cdr.babelfish.model.CDRResponse;
-import io.biza.cdr.babelfish.model.banking.BankingPayeeDetail;
-import io.biza.cdr.babelfish.model.common.Links;
-import io.biza.cdr.babelfish.model.common.Meta;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.biza.cdr.babelfish.v1.model.CDRResponse;
+import io.biza.cdr.babelfish.v1.model.banking.BankingPayeeDetail;
+import io.biza.cdr.babelfish.v1.model.common.Links;
+import io.biza.cdr.babelfish.v1.model.common.Meta;
+import lombok.Data;
 import lombok.NonNull;
+import lombok.experimental.Accessors;
 
-public class ResponseBankingPayeeById  extends CDRResponse<Links, Meta> {
+@Data
+@Accessors
+@Valid
+public abstract class ResponseBankingPayeeById  {
 
     @BabelFishModelProperty(
         required = true
@@ -31,4 +37,11 @@ public class ResponseBankingPayeeById  extends CDRResponse<Links, Meta> {
     @NonNull
     @NotNull
     BankingPayeeDetail data;
+    
+
+    @JsonUnwrapped
+    @NotNull
+    @NonNull
+    @BabelFishModelProperty(required = true)
+    public CDRResponse<Links, Meta> metadata;
 }

@@ -17,7 +17,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.enumerations.PayloadTypeBankingDomesticPayeePayId;
+import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingDomesticPayeePayId;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

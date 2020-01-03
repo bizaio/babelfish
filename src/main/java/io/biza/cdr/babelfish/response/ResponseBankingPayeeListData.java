@@ -14,13 +14,22 @@
 package io.biza.cdr.babelfish.response;
 
 import java.util.List;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-
-import io.biza.cdr.babelfish.model.banking.BankingPayee;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.biza.cdr.babelfish.v1.model.CDRResponse;
+import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
+import io.biza.cdr.babelfish.v1.model.banking.BankingPayee;
+import io.biza.cdr.babelfish.v1.model.common.Links;
+import io.biza.cdr.babelfish.v1.model.common.Meta;
+import lombok.Data;
 import lombok.NonNull;
+import lombok.experimental.Accessors;
 
-public class ResponseBankingPayeeListData {
+@Data
+@Accessors
+@Valid
+public abstract class ResponseBankingPayeeListData {
 
     @BabelFishModelProperty(
         description =  "The list of payees returned",

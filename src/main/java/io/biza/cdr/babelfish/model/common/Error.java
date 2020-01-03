@@ -13,8 +13,11 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.common;
 
+import java.net.URI;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.AccessLevel;
@@ -23,41 +26,60 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.experimental.Accessors;
 
-@AllArgsConstructor
-@NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
-@Builder
-@Data
 @Valid
 @BabelFishModel(description =  "Error Information")
-public class Error {
+public interface Error {
 
     @BabelFishModelProperty(
         description =  "Must be one of the following: 0001 – Account not able to be found",
         required = true
     )
-    @NonNull
-    @NotNull
-    String code;
+    @JsonGetter("code")
+    public String getCode();
+    @JsonSetter("code")
+    public void setCode(@NotNull String code);
+    public default Error code(@NotNull String code) {
+      setCode(code);
+      return this;
+    }
 
     @BabelFishModelProperty(
         description =  "Must be one of the following: Invalid account",
         required = true
     )
-    @NonNull
-    @NotNull
-    String title;
+    @JsonGetter("title")
+    public String getTitle();
+    @JsonSetter("title")
+    public void setTitle(@NotNull String title);
+    public default Error title(@NotNull String title) {
+      setTitle(title);
+      return this;
+    }
 
     @BabelFishModelProperty(
         description =  "ID of the account not found",
         required = true
     )
-    @NonNull
-    @NotNull
-    String detail;
+    @JsonGetter("detail")
+    public String getDetail();
+    @JsonSetter("detail")
+    public void setDetail(@NotNull String detail);
+    public default Error detail(@NotNull String detail) {
+      setDetail(detail);
+      return this;
+    }
 
     @BabelFishModelProperty(
         description =  "Optional additional data for specific error types"
     )
-    Object meta;
+    @JsonGetter("meta")
+    public Object getMeta();
+    @JsonSetter("meta")
+    public void setMeta(Object meta);
+    public default Error meta(Object meta) {
+      setMeta(meta);
+      return this;
+    }
 }

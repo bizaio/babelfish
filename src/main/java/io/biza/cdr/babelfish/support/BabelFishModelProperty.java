@@ -43,5 +43,10 @@ public @interface BabelFishModelProperty {
      * Should this property be hidden when parsing into api definitions
      */
     boolean hidden() default false;
+    
+    /**
+     * Attribute name
+     */
+    String attributeName() default "";
 
 }

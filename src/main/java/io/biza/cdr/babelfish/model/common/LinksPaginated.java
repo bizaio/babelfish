@@ -18,7 +18,11 @@ import java.net.URI;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
+import io.biza.cdr.babelfish.converters.UriStringToUriConverter;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
@@ -28,14 +32,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.experimental.Accessors;
 
-@AllArgsConstructor
-@NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
-@Builder
-@Data
 @Valid
-@BabelFishModel(description = "Paginated Links", parent = Links.class)
-public class LinksPaginated {
+@BabelFishModel(description = "Paginated Links")
+public interface LinksPaginated {
 	
 	/**
 	 * Minimal field validation possible at POJO level
@@ -45,42 +46,64 @@ public class LinksPaginated {
 	 * First and Last Page:     [ Yes, No, No, No, No ]
 	 * Page not First or Last:  [ Yes, Yes, Yes, Yes, Yes ]
 	 */
-	@BabelFishModelProperty(description = "Fully qualified link that generated the current response document", required = true, dataType = "java.lang.String")
-	@NonNull
-	@NotNull
+	@BabelFishModelProperty(description = "Fully qualified link that generated the current response document", required = true, dataType = "java.lang.String", attributeName = "self")
 	@JsonSerialize(converter = UriToUriStringConverter.class)
-	URI self;
+	@JsonGetter("self")
+	public URI getSelf();
+	@JsonDeserialize(converter = UriStringToUriConverter.class)
+	@JsonSetter("self")
+    public void setSelf(URI self);
+	public default LinksPaginated self(URI self) {
+	  setSelf(self);
+	  return this;
+	}
 
-	@BabelFishModelProperty(description = "URI to the first page of this set. Mandatory if this response is not the first page", dataType = "java.lang.String")
-	@JsonSerialize(converter = UriToUriStringConverter.class)
-	URI first;
+	@BabelFishModelProperty(description = "URI to the first page of this set. Mandatory if this response is not the first page", dataType = "java.lang.String", attributeName = "first")
+    @JsonSerialize(converter = UriToUriStringConverter.class)
+	@JsonGetter("first")
+    public URI getFirst();
+	@JsonSetter("first")
+    @JsonDeserialize(converter = UriStringToUriConverter.class)
+    public void setFirst(URI first);
+    public default LinksPaginated first(URI first) {
+      setFirst(first);
+      return this;
+    }
 
-	@BabelFishModelProperty(description = "URI to the previous page of this set. Mandatory if this response is not the first page", dataType = "java.lang.String")
-	@JsonSerialize(converter = UriToUriStringConverter.class)
-	URI prev;
+	@BabelFishModelProperty(description = "URI to the previous page of this set. Mandatory if this response is not the prev page", dataType = "java.lang.String", attributeName = "prev")
+    @JsonSerialize(converter = UriToUriStringConverter.class)
+	@JsonGetter("prev")
+    public URI getPrev();
+    @JsonDeserialize(converter = UriStringToUriConverter.class)
+    @JsonSetter("prev")
+    public void setPrev(URI prev);
+    public default LinksPaginated prev(URI prev) {
+      setPrev(prev);
+      return this;
+    }
 
-	@BabelFishModelProperty(description = "URI to the next page of this set. Mandatory if this response is not the last page", dataType = "java.lang.String")
-	@JsonSerialize(converter = UriToUriStringConverter.class)
-	URI next;
+	@BabelFishModelProperty(description = "URI to the next page of this set. Mandatory if this response is not the last page", dataType = "java.lang.String", attributeName = "next")
+    @JsonSerialize(converter = UriToUriStringConverter.class)
+	@JsonGetter("next")
+    public URI getNext();
+    @JsonDeserialize(converter = UriStringToUriConverter.class)
+    @JsonSetter("next")
+    public void setNext(URI next);
+    public default LinksPaginated next(URI next) {
+      setNext(next);
+      return this;
+    }
 
-	@BabelFishModelProperty(description = "URI to the last page of this set. Mandatory if this response is not the last page", dataType = "java.lang.String")
-	@JsonSerialize(converter = UriToUriStringConverter.class)
-	URI last;
+	@BabelFishModelProperty(description = "URI to the last page of this set. Mandatory if this response is not the last page", dataType = "java.lang.String", attributeName = "last")
+    @JsonSerialize(converter = UriToUriStringConverter.class)
+	@JsonGetter("last")
+    public URI getLast();
+    @JsonDeserialize(converter = UriStringToUriConverter.class)
+    @JsonSetter("last")
+    public void setLast(URI last);
+    public default LinksPaginated last(URI last) {
+      setLast(last);
+      return this;
+    }
 	
-    @AssertTrue(message = "Previous page set but First Page not set")
-    private boolean isFirstSetWhenPrevExists() {
-    	return prev != null && first == null ? false : true; 
-    }
-    
-    @AssertTrue(message = "Next page set but Last Page not set")
-    private boolean isLastSetWhenNextExists() {
-    	return next != null && last == null ? false : true; 
-    }
-    
-    @AssertTrue(message = "While on first and last page (next & prev null), zero links should be defined outside of self")
-    private boolean isFirstAndLastPage() {
-    	return (next == null && prev == null) ? ((first != null || last != null) ? false : true) : true;
-    }
-
-
 }

@@ -15,10 +15,10 @@ package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import io.biza.cdr.babelfish.enumerations.BankingTransactionService;
-import io.biza.cdr.babelfish.enumerations.PayloadTypeTransactionExtension;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.biza.cdr.babelfish.v1.enumerations.BankingTransactionService;
+import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeTransactionExtension;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

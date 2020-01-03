@@ -28,12 +28,12 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.support.FormatChecker;
+import io.biza.cdr.babelfish.v1.enumerations.BankingProductLendingRateType;
 import io.biza.cdr.babelfish.converters.BigDecimalToRateStringConverter;
 import io.biza.cdr.babelfish.converters.PeriodToStringConverter;
 import io.biza.cdr.babelfish.converters.RateStringToBigDecimalConverter;
 import io.biza.cdr.babelfish.converters.StringToPeriodConverter;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
-import io.biza.cdr.babelfish.enumerations.BankingProductLendingRateType;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

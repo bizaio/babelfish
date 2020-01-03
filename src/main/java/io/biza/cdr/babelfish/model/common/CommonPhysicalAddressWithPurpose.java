@@ -13,39 +13,48 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.common;
 
+import java.net.URI;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import io.biza.cdr.babelfish.enumerations.AddressPurpose;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.biza.cdr.babelfish.v1.enumerations.AddressPurpose;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.experimental.Accessors;
 
-@AllArgsConstructor
-@NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
-@Builder
-@Data
 @Valid
 @BabelFishModel(description =  "Physical Address with Purpose", parent = CommonPhysicalAddress.class)
-public class CommonPhysicalAddressWithPurpose {
+public interface CommonPhysicalAddressWithPurpose {
 	
 	@JsonUnwrapped
 	@BabelFishModelProperty(
 			hidden = true
-	)	
-	CommonPhysicalAddress physicalAddress;
+	)
+	public CommonPhysicalAddress getPhysicalAddress();
+	public void setPhysicalAddress(@NotNull CommonPhysicalAddress physicalAddress);
+	public default CommonPhysicalAddressWithPurpose physicalAddress(@NotNull CommonPhysicalAddress physicalAddress) {
+	  setPhysicalAddress(physicalAddress);
+	  return this;
+	}
 
     @BabelFishModelProperty(
         description =  "Enumeration of values indicating the purpose of the physical address",
         required = true
     )
-    @NonNull
-    @NotNull
-    AddressPurpose purpose;
+    @JsonGetter("purpose")
+    public AddressPurpose getPurpose();
+    @JsonSetter("purpose")
+    public void setPurpose(@NotNull AddressPurpose purpose);
+    public default CommonPhysicalAddressWithPurpose purpose(@NotNull AddressPurpose purpose) {
+      setPurpose(purpose);
+      return this;
+    }
 }

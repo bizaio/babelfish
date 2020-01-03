@@ -18,7 +18,9 @@ import java.time.LocalDate;
 import java.util.Currency;
 
 import javax.validation.Valid;
-
+import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -36,13 +38,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
-@Builder
-@Data
 @Valid
 @BabelFishModel(description =  "Credit Card Account Details")
-public class BankingCreditCardAccount {
+public interface BankingCreditCardAccount {
 
     @BabelFishModelProperty(
         description =  "The minimum payment amount due for the next card payment",
@@ -50,8 +48,17 @@ public class BankingCreditCardAccount {
         dataType = "java.lang.String"
     )
     @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
+    @JsonGetter("minPaymentAmount")
+    public BigDecimal getMinPaymentAmount();
+    
     @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
-    BigDecimal minPaymentAmount;
+    @JsonSetter("minPaymentAmount")
+    public void setMinPaymentAmount(@NotNull BigDecimal minPaymentAmount);
+    
+    public default BankingCreditCardAccount minPaymentAmount(@NotNull BigDecimal minPaymentAmount) {
+      setMinPaymentAmount(minPaymentAmount);
+      return this;
+    }
 
     @BabelFishModelProperty(
         description =  "The amount due for the next card payment",
@@ -59,17 +66,34 @@ public class BankingCreditCardAccount {
         dataType = "java.lang.String"
     )
     @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
+    @JsonGetter("paymentDueAmount")
+    public BigDecimal getPaymentDueAmount();
+        
     @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
-    BigDecimal paymentDueAmount;
+    @JsonSetter("paymentDueAmount")
+    public void setPaymentDueAmount(@NotNull BigDecimal paymentDueAmount);
+    
+    public default BankingCreditCardAccount paymentDueAmount(@NotNull BigDecimal paymentDueAmount) {
+      setPaymentDueAmount(paymentDueAmount);
+      return this;
+    }
 
     @BabelFishModelProperty(
-        description =  "If absent assumes AUD",
+        description =  "Payment Currency for Credit Card",
         dataType = "java.lang.String"
     )
     @JsonSerialize(converter = CurrencyToStringConverter.class)
+    @JsonGetter("paymentCurrency")
+    public Currency getPaymentCurrency();
+    
     @JsonDeserialize(converter = StringToCurrencyConverter.class)
-    @Builder.Default
-    Currency paymentCurrency = Currency.getInstance("AUD");
+    @JsonSetter("paymentCurrency")
+    public void setPaymentCurrency(Currency paymentCurrency);
+    
+    public default BankingCreditCardAccount paymentCurrency(@NotNull Currency paymentCurrency) {
+      setPaymentCurrency(paymentCurrency);
+      return this;
+    }
 
     @BabelFishModelProperty(
         description =  "Date that the next payment for the card is due",
@@ -77,6 +101,16 @@ public class BankingCreditCardAccount {
         dataType = "java.lang.String"
     )
     @JsonSerialize(converter = LocalDateToStringConverter.class)
+    @JsonGetter("paymentDueDate")
+    public LocalDate getPaymentDueDate();
+    
     @JsonDeserialize(converter = StringToLocalDateConverter.class)
-    LocalDate paymentDueDate;
+    @JsonSetter("paymentDueDate")
+    public void setPaymentDueDate(LocalDate paymentDueDate);
+    
+    public default BankingCreditCardAccount paymentDueDate(LocalDate paymentDueDate) {
+      setPaymentDueDate(paymentDueDate);
+      return this;
+    }
+    
 }

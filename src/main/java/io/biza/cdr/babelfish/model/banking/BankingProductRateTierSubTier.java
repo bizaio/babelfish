@@ -19,8 +19,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.enumerations.BankingProductRateTierApplicationMethod;
-import io.biza.cdr.babelfish.enumerations.CommonUnitOfMeasureType;
+import io.biza.cdr.babelfish.v1.enumerations.BankingProductRateTierApplicationMethod;
+import io.biza.cdr.babelfish.v1.enumerations.CommonUnitOfMeasureType;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

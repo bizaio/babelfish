@@ -21,10 +21,10 @@ import javax.validation.constraints.AssertTrue;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
-import io.biza.cdr.babelfish.enumerations.BankingProductDiscountEligibilityType;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.support.FormatChecker;
+import io.biza.cdr.babelfish.v1.enumerations.BankingProductDiscountEligibilityType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

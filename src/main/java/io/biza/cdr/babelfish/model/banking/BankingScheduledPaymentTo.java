@@ -18,7 +18,7 @@ import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.enumerations.PayloadTypeBankingScheduledPayment;
+import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingScheduledPayment;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

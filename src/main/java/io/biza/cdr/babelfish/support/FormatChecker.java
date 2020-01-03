@@ -24,8 +24,8 @@ import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.PhoneNumberUtil.PhoneNumberFormat;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
-import io.biza.cdr.babelfish.enumerations.AddressPurpose;
 import io.biza.cdr.babelfish.model.common.CommonPhysicalAddressWithPurpose;
+import io.biza.cdr.babelfish.v1.enumerations.AddressPurpose;
 
 public class FormatChecker {
 	

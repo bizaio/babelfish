@@ -13,22 +13,33 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.response;
 
-import io.biza.cdr.babelfish.enumerations.PayloadTypeCustomer;
-import io.biza.cdr.babelfish.model.common.CommonOrganisation;
-import io.biza.cdr.babelfish.model.common.CommonPerson;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeCustomer;
+import io.biza.cdr.babelfish.v1.model.CDRResponse;
+import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
+import io.biza.cdr.babelfish.v1.model.common.CommonOrganisation;
+import io.biza.cdr.babelfish.v1.model.common.CommonPerson;
+import io.biza.cdr.babelfish.v1.model.common.Links;
+import io.biza.cdr.babelfish.v1.model.common.Meta;
+import lombok.Data;
+import lombok.NonNull;
+import lombok.experimental.Accessors;
+import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 
-public class ResponseCommonCustomerData {
+@Data
+@Accessors
+@Valid
+public abstract class ResponseCommonCustomerData {
 
     @BabelFishModelProperty(
         description =  "The type of customer object that is present",
         required = true
     )
-    PayloadTypeCustomer customerUType;
+    protected PayloadTypeCustomer customerUType;
 
-    CommonPerson person;
-    CommonOrganisation organisation;
+    protected CommonPerson person;
+    protected CommonOrganisation organisation;
     
     @AssertTrue(message = "Only one of Person or Organisation type must be populated and aligned with customerUType")
     private boolean isUTypeAligned() {

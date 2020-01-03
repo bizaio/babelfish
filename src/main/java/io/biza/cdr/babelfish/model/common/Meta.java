@@ -13,14 +13,17 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.common;
 
+import java.net.URI;
 import javax.validation.Valid;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import lombok.Builder;
+import lombok.Data;
+import lombok.NonNull;
+import lombok.experimental.Accessors;
 
-@Builder
 @Valid
 @BabelFishModel(description =  "Meta Detail")
-public class Meta {
+public interface Meta {
 	
 	
 }

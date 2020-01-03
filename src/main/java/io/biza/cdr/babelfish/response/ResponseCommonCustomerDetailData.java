@@ -13,13 +13,24 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.response;
 
-import io.biza.cdr.babelfish.enumerations.PayloadTypeCustomer;
-import io.biza.cdr.babelfish.model.common.CommonOrganisationDetail;
-import io.biza.cdr.babelfish.model.common.CommonPersonDetail;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeCustomer;
+import io.biza.cdr.babelfish.v1.model.CDRResponse;
+import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
+import io.biza.cdr.babelfish.v1.model.common.CommonOrganisationDetail;
+import io.biza.cdr.babelfish.v1.model.common.CommonPersonDetail;
+import io.biza.cdr.babelfish.v1.model.common.Links;
+import io.biza.cdr.babelfish.v1.model.common.Meta;
+import lombok.Data;
+import lombok.NonNull;
+import lombok.experimental.Accessors;
+import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 
-public class ResponseCommonCustomerDetailData {
+@Data
+@Accessors
+@Valid
+public abstract class ResponseCommonCustomerDetailData {
 
     @BabelFishModelProperty(
         description =  "The type of customer object that is present",

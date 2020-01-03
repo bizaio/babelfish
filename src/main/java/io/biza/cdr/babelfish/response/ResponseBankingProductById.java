@@ -14,32 +14,40 @@
 package io.biza.cdr.babelfish.response;
 
 import javax.validation.Valid;
-
+import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import io.biza.cdr.babelfish.model.CDRResponse;
-import io.biza.cdr.babelfish.model.banking.BankingProductDetail;
-import io.biza.cdr.babelfish.model.common.Links;
-import io.biza.cdr.babelfish.model.common.Meta;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.biza.cdr.babelfish.v1.model.CDRResponse;
+import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
+import io.biza.cdr.babelfish.v1.model.banking.BankingProductDetail;
+import io.biza.cdr.babelfish.v1.model.common.Links;
+import io.biza.cdr.babelfish.v1.model.common.Meta;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.experimental.Accessors;
 
-@Builder
-@AllArgsConstructor
 @Data
-@EqualsAndHashCode(callSuper=true)
+@Accessors
 @Valid
-@NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
-@JsonIgnoreProperties({"xV"})
-public class ResponseBankingProductById  extends CDRResponse<Links, Meta> {
+public abstract class ResponseBankingProductById {
 
     @BabelFishModelProperty(
         required = true
     )
+    @NotNull
+    @NonNull
     BankingProductDetail data;
+    
+
+    @JsonUnwrapped
+    @NotNull
+    @NonNull
+    @BabelFishModelProperty(required = true)
+    public CDRResponse<Links, Meta> metadata;
 }

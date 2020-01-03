@@ -14,11 +14,21 @@
 package io.biza.cdr.babelfish.response;
 
 import java.util.List;
-
-import io.biza.cdr.babelfish.model.banking.BankingTransaction;
+import javax.validation.Valid;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.biza.cdr.babelfish.v1.model.CDRResponse;
+import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
+import io.biza.cdr.babelfish.v1.model.banking.BankingTransaction;
+import io.biza.cdr.babelfish.v1.model.common.Links;
+import io.biza.cdr.babelfish.v1.model.common.Meta;
+import lombok.Data;
+import lombok.NonNull;
+import lombok.experimental.Accessors;
 
-public class ResponseBankingTransactionListData {
+@Data
+@Accessors
+@Valid
+public abstract class ResponseBankingTransactionListData {
 
     @BabelFishModelProperty(
         required = true

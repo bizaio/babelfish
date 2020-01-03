@@ -23,10 +23,10 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.biza.cdr.babelfish.v1.enumerations.BankingProductCategory;
 import io.biza.cdr.babelfish.converters.DateTimeStringToOffsetDateTimeConverter;
 import io.biza.cdr.babelfish.converters.OffsetDateTimeToDateTimeStringConverter;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
-import io.biza.cdr.babelfish.enumerations.BankingProductCategory;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

@@ -15,10 +15,8 @@ package io.biza.cdr.babelfish.response;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.biza.cdr.babelfish.model.CDRResponse;
-import io.biza.cdr.babelfish.model.banking.BankingBalance;
-import io.biza.cdr.babelfish.model.common.Links;
-import io.biza.cdr.babelfish.model.common.Meta;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.AccessLevel;
@@ -28,15 +26,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.experimental.Accessors;
 
-@AllArgsConstructor
-@NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
-@Builder
-@Data
-@EqualsAndHashCode(callSuper=true)
 @Valid
 @BabelFishModel(description =  "Response containing a Banking Accounts Balance by Identifier")
-public class ResponseBankingAccountsBalanceById extends CDRResponse<Links, Meta> {
+public interface ResponseBankingAccountsBalanceById extends CDRResponse {
 
     @BabelFishModelProperty(
         required = true
@@ -44,4 +38,5 @@ public class ResponseBankingAccountsBalanceById extends CDRResponse<Links, Meta>
     @NonNull
     @NotNull
     BankingBalance data;
+
 }

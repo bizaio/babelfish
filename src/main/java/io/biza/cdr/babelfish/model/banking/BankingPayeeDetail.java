@@ -19,7 +19,7 @@ import javax.validation.constraints.AssertTrue;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.enumerations.PayloadTypeBankingPayee;
+import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingPayee;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
