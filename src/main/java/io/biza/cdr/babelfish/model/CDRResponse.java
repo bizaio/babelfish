@@ -41,6 +41,7 @@ import lombok.experimental.Accessors;
 
 @BabelFishModel(
     description = "The CDR Response")
+@Valid
 public interface CDRResponse {
   @BabelFishModelProperty(description = "The Links Object", required = true)
   @JsonGetter("links")

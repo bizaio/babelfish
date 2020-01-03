@@ -15,7 +15,8 @@ package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.AccessLevel;
@@ -25,27 +26,37 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-@AllArgsConstructor
-@NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
-@Builder
-@Data
 @Valid
 @BabelFishModel(description =  "International Payee Bank Address Details")
-public class BankingInternationalPayeeBankDetailsBankAddress {
+public interface BankingInternationalPayeeBankDetailsBankAddress {
 
     @BabelFishModelProperty(
         description =  "Name of the recipient Bank",
         required = true
     )
-    @NonNull
-    @NotNull
-    String name;
-
+    @JsonGetter("name")
+    public String getName();
+    
+    @JsonSetter("name")
+    public void setName(@NotNull String name);
+    
+    public default BankingInternationalPayeeBankDetailsBankAddress name(@NotNull String name) {
+      setName(name);
+      return this;
+    }
+    
     @BabelFishModelProperty(
         description =  "Address of the recipient Bank",
         required = true
     )
-    @NonNull
-    @NotNull
-    String address;
+    @JsonGetter("address")
+    public String getAddress();
+    
+    @JsonSetter("address")
+    public void setAddress(@NotNull String address);
+    
+    public default BankingInternationalPayeeBankDetailsBankAddress address(@NotNull String address) {
+      setAddress(address);
+      return this;
+    }
 }

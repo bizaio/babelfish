@@ -14,7 +14,8 @@
 package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
-
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 import io.biza.cdr.babelfish.support.BabelFishModel;
@@ -25,24 +26,21 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
-@Builder
-@Data
 @Valid
 @BabelFishModel(modelName = "BankingAccountProductFeature", description = "Banking Account Product Feature", parent = BankingProductFeature.class)
-public class BankingProductFeatureWithActivated {
-
-	@JsonUnwrapped
-	@BabelFishModelProperty(
-			hidden = true
-	)
-	@Valid
-	BankingProductFeature bankingProductFeature;
+public interface BankingProductFeatureWithActivated extends BankingProductFeature {
 	
     @BabelFishModelProperty(
             description = "True if the feature is already activated and false if the feature is available for activation."
     )
-    @Builder.Default
-    Boolean isActivated = true;
+    @JsonGetter("isActivated")
+    public Boolean isActivated();
+    
+    @JsonSetter("isActivated")
+    public void setIsActivated(Boolean isActivated);
+    
+    public default BankingProductFeatureWithActivated isActivated(Boolean isActivated) {
+      setIsActivated(isActivated);
+      return this;
+    }
 }

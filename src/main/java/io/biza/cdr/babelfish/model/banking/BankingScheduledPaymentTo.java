@@ -56,22 +56,5 @@ public class BankingScheduledPaymentTo {
     BankingDomesticPayee domestic;
     BankingBillerPayee biller;
     BankingInternationalPayee international;
-    
-    @AssertTrue(
-            message = "One and only one of accountId, payeeId, domestic, biller, international should be populated based on toUType")
-    private boolean isUTypePopulated() {
-        if (toUType.equals(PayloadTypeBankingScheduledPayment.ACCOUNT_ID)) {
-            return accountId != null && payeeId == null && domestic == null && biller == null && international == null;
-        } else if (toUType.equals(PayloadTypeBankingScheduledPayment.PAYEE_ID)) {
-            return payeeId != null && accountId == null && domestic == null && biller == null && international == null;
-        } else if (toUType.equals(PayloadTypeBankingScheduledPayment.DOMESTIC)) {
-            return domestic != null && accountId == null && payeeId == null && biller == null && international == null;
-        } else if (toUType.equals(PayloadTypeBankingScheduledPayment.BILLER)) {
-            return biller != null && accountId == null && payeeId == null && domestic == null && international == null;
-        } else if (toUType.equals(PayloadTypeBankingScheduledPayment.INTERNATIONAL)) {
-            return international != null && accountId == null && payeeId == null && domestic == null && biller == null;
-        }
 
-        return false;
-    }
 }

@@ -16,6 +16,9 @@ package io.biza.cdr.babelfish.response;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import io.biza.cdr.babelfish.model.banking.BankingAccount;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.model.CDRResponse;
 import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
@@ -26,16 +29,20 @@ import lombok.Data;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
 
-@Data
-@Accessors
 @Valid
-public abstract class ResponseBankingAccountsBalanceListData {
+public interface ResponseBankingAccountsBalanceListData {
 
     @BabelFishModelProperty(
-        description =  "The list of balances returned",
-        required = true
-    )
-    @NonNull
-    @NotNull
-    List<BankingBalance> balances;
+        description = "The list of accounts returned. If the filter results in an empty set then this array may have no records",
+        required = true)
+    @JsonGetter("balances")
+    public List<BankingBalance> getBalances();
+
+    @JsonSetter("balances")
+    public void setBalances(@NotNull List<BankingBalance> balances);
+
+    public default ResponseBankingAccountsBalanceListData balances(@NotNull List<BankingBalance> balances) {
+      setBalances(balances);
+      return this;
+    }
 }

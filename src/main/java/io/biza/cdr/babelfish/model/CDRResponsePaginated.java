@@ -43,6 +43,7 @@ import lombok.experimental.Accessors;
 
 @BabelFishModel(
     description = "This is a Paginated CDR Response")
+@Valid
 public interface CDRResponsePaginated {
   @BabelFishModelProperty(description = "The Links Object", required = true)
   @JsonGetter("links")

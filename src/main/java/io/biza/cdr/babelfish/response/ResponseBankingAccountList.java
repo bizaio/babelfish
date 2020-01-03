@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.response;
 
@@ -33,19 +31,19 @@ import lombok.NonNull;
 import lombok.experimental.Accessors;
 
 @Valid
-@BabelFishModel(description =  "Response containing a list of Banking Accounts")
+@BabelFishModel(description = "Response containing a list of Banking Accounts")
 public interface ResponseBankingAccountList extends CDRResponse {
 
-    @BabelFishModelProperty(
-        required = true
-    )
-    @JsonGetter("data")
-    public ResponseBankingAccountListData getData();
-    @JsonSetter("data")
-    public void setData(@NotNull ResponseBankingAccountListData data);
-    public default ResponseBankingAccountList data(ResponseBankingAccountListData data) {
-      setData(data);
-      return this;
-    }
-    
+  @BabelFishModelProperty(required = true)
+  @JsonGetter("data")
+  public ResponseBankingAccountListData getData();
+
+  @JsonSetter("data")
+  public void setData(@NotNull ResponseBankingAccountListData data);
+
+  public default ResponseBankingAccountList data(ResponseBankingAccountListData data) {
+    setData(data);
+    return this;
+  }
+
 }

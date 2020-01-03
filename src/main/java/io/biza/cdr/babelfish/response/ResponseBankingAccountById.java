@@ -37,8 +37,10 @@ public interface ResponseBankingAccountById extends CDRResponse {
   @BabelFishModelProperty(required = true)
   @JsonGetter("data")
   public BankingAccountDetail getData();
+
   @JsonSetter("data")
   public void setData(@NotNull BankingAccountDetail data);
+
   public default ResponseBankingAccountById data(@NotNull BankingAccountDetail data) {
     setData(data);
     return this;

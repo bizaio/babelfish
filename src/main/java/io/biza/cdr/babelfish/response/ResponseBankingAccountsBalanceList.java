@@ -15,15 +15,12 @@ package io.biza.cdr.babelfish.response;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import io.biza.cdr.babelfish.model.CDRResponse;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.LinksPaginated;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
-import io.biza.cdr.babelfish.v1.model.common.MetaPaginated;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,22 +29,19 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
 
-@Data
-@Accessors
 @Valid
 @BabelFishModel(description =  "Response containing a Banking Accounts Balances List")
-public abstract class ResponseBankingAccountsBalanceList {
-
-    @BabelFishModelProperty(
-        required = true
-    )
-    @NonNull
-    @NotNull
-    ResponseBankingAccountsBalanceListData data;
+public interface ResponseBankingAccountsBalanceList extends CDRResponse {
     
-    @JsonUnwrapped
-    @NotNull
-    @NonNull
     @BabelFishModelProperty(required = true)
-    public CDRResponse<LinksPaginated, MetaPaginated> metadata;
+    @JsonGetter("data")
+    public ResponseBankingAccountsBalanceListData getData();
+
+    @JsonSetter("data")
+    public void setData(@NotNull ResponseBankingAccountsBalanceListData data);
+
+    public default ResponseBankingAccountsBalanceList data(ResponseBankingAccountsBalanceListData data) {
+      setData(data);
+      return this;
+    }
 }

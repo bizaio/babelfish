@@ -16,7 +16,8 @@ package io.biza.cdr.babelfish.model.banking;
 import java.util.List;
 
 import javax.validation.Valid;
-
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 import io.biza.cdr.babelfish.support.BabelFishModel;
@@ -27,52 +28,133 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
-@Builder
-@Data
 @Valid
 @BabelFishModel(description =  "Banking Product Detailed Information", parent = BankingProduct.class)
-public class BankingProductDetail {
-	
-	@JsonUnwrapped
-	@BabelFishModelProperty(
-			hidden = true
-	)	
-	BankingProduct bankingProduct;
+public interface BankingProductDetail extends BankingProduct {
 
     @BabelFishModelProperty(
         description =  "An array of bundles that this product participates in.  Each bundle is described by free form information but also by a list of product IDs of the other products that are included in the bundle.  It is assumed that the current product is included in the bundle also"
     )
-    List<BankingProductBundle> bundles;
-
+    @JsonGetter("bundles")
+    public List<BankingProductBundle> getBundles();
+    
+    @JsonSetter("bundles")
+    public void setBundles(List<BankingProductBundle> bundles);
+    
+    public default BankingProductDetail bundles(List<BankingProductBundle> bundles) {
+      setBundles(bundles);
+      return this;
+    }
+    
+    public default void addBundle(BankingProductBundle bundle) {
+      getBundles().add(bundle);
+    }
+    
     @BabelFishModelProperty(
         description =  "Array of features available for the product"
     )
-    List<BankingProductFeature> features;
-
+    @JsonGetter("features")
+    public List<BankingProductFeature> getFeatures();
+    
+    @JsonSetter("features")
+    public void setFeatures(List<BankingProductFeature> features);
+    
+    public default BankingProductDetail features(List<BankingProductFeature> features) {
+      setFeatures(features);
+      return this;
+    }
+    
+    public default void addFeature(BankingProductFeature feature) {
+      getFeatures().add(feature);
+    }
+    
     @BabelFishModelProperty(
         description =  "Constraints on the application for or operation of the product such as minimum balances or limit thresholds"
     )
-    List<BankingProductConstraint> constraints;
-
+    @JsonGetter("constraints")
+    public List<BankingProductConstraint> getConstraints();
+    
+    @JsonSetter("constraints")
+    public void setConstraints(List<BankingProductConstraint> constraints);
+    
+    public default BankingProductDetail constraints(List<BankingProductConstraint> constraints) {
+      setConstraints(constraints);
+      return this;
+    }
+    
+    public default void addConstraint(BankingProductConstraint constraint) {
+      getConstraints().add(constraint);
+    }
+    
     @BabelFishModelProperty(
         description =  "Eligibility criteria for the product"
     )
-    List<BankingProductEligibility> eligibility;
-
+    @JsonGetter("eligibility")
+    public List<BankingProductEligibility> getEligibility();
+    
+    @JsonSetter("eligibility")
+    public void setEligibility(List<BankingProductEligibility> eligibility);
+    
+    public default BankingProductDetail eligibility(List<BankingProductEligibility> eligibility) {
+      setEligibility(eligibility);
+      return this;
+    }
+    
+    public default void addEligibility(BankingProductEligibility eligibility) {
+      getEligibility().add(eligibility);
+    }
+    
     @BabelFishModelProperty(
         description =  "Fees applicable for the product"
     )
-    List<BankingProductFee> fees;
+    @JsonGetter("fees")
+    public List<BankingProductFee> getFees();
+    
+    @JsonSetter("fees")
+    public void setFees(List<BankingProductFee> fees);
+    
+    public default BankingProductDetail fees(List<BankingProductFee> fees) {
+      setFees(fees);
+      return this;
+    }
+    
+    public default void addFee(BankingProductFee fee) {
+      getFees().add(fee);
+    }
+    
 
     @BabelFishModelProperty(
         description =  "Interest rates available for deposits"
     )
-    List<BankingProductDepositRate> depositRates;
-
+    @JsonGetter("depositRates")
+    public List<BankingProductDepositRate> getDepositRates();
+    
+    @JsonSetter("depositRates")
+    public void setDepositRates(List<BankingProductDepositRate> depositRates);
+    
+    public default BankingProductDetail depositRates(List<BankingProductDepositRate> depositRates) {
+      setDepositRates(depositRates);
+      return this;
+    }
+    
+    public default void addDepositRate(BankingProductDepositRate depositRate) {
+      getDepositRates().add(depositRate);
+    }
+    
     @BabelFishModelProperty(
         description =  "Interest rates charged against lending balances"
     )
-    List<BankingProductLendingRate> lendingRates;
-}
+    @JsonGetter("lendingRates")
+    public List<BankingProductLendingRate> getLendingRates();
+    
+    @JsonSetter("lendingRates")
+    public void setLendingRates(List<BankingProductLendingRate> lendingRates);
+    
+    public default BankingProductDetail lendingRates(List<BankingProductLendingRate> lendingRates) {
+      setLendingRates(lendingRates);
+      return this;
+    }
+    
+    public default void addLendingRate(BankingProductLendingRate lendingRate) {
+      getLendingRates().add(lendingRate);
+    }}

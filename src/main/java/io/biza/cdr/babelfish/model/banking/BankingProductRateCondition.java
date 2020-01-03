@@ -15,10 +15,14 @@ package io.biza.cdr.babelfish.model.banking;
 
 import java.net.URI;
 import javax.validation.Valid;
-
+import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.biza.cdr.babelfish.converters.UriStringToUriConverter;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import lombok.AccessLevel;
@@ -27,23 +31,38 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
-@Builder
-@Data
 @Valid
 @BabelFishModel(description =  "Defines a condition for the applicability of a tiered rate")
-public class BankingProductRateCondition {
+public interface BankingProductRateCondition {
 
     @BabelFishModelProperty(
         description =  "Display text providing more information on the condition"
     )
-    String additionalInfo;
+    @JsonGetter("additionalInfo")
+    public String getAdditionalInfo();
+
+    @JsonSetter("additionalInfo")
+    public void setAdditionalInfo(String additionalInfo);
+
+    public default BankingProductRateCondition additionalInfo(@NotNull String additionalInfo) {
+      setAdditionalInfo(additionalInfo);
+      return this;
+    }
 
     @BabelFishModelProperty(
         description =  "Link to a web page with more information on this condition",
         dataType = "java.lang.String"
     )
     @JsonSerialize(converter = UriToUriStringConverter.class)
-    URI additionalInfoUri;
+    @JsonGetter("additionalInfoUri")
+    public URI getAdditionalInfoUri();
+
+    @JsonDeserialize(converter = UriStringToUriConverter.class)
+    @JsonSetter("additionalInfoUri")
+    public void setAdditionalInfoUri(URI additionalInfoUri);
+
+    public default BankingProductRateCondition additionalInfoUri(URI additionalInfoUri) {
+      setAdditionalInfoUri(additionalInfoUri);
+      return this;
+    }
 }
