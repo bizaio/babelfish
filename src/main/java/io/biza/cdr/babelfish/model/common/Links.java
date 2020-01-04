@@ -13,6 +13,7 @@ package io.biza.cdr.babelfish.model.common;
 
 import java.net.URI;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -21,6 +22,7 @@ import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
@@ -36,5 +38,8 @@ public abstract class Links {
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("self")
+  @NotNull
+  @NonNull
+  @Valid
   URI self;
 }

@@ -31,6 +31,7 @@ public abstract class CDRResponse {
   @BabelFishModelProperty(description = "The Links Object", required = true)
   @JsonProperty("links")
   @NotNull
+  @Valid
   Links links;
 
   @BabelFishModelProperty(
@@ -38,5 +39,6 @@ public abstract class CDRResponse {
       required = true)
   @JsonProperty("meta")
   @NotNull
+  @Valid
   Meta meta;
 }
