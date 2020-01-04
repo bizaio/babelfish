@@ -1,4 +1,4 @@
-package io.biza.cdr.babelfish.v1;
+package io.biza.cdr.babelfish.tests.v1.model;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -8,11 +8,13 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.cdr.babelfish.v1.model.CDRResponse;
 import io.biza.cdr.babelfish.v1.model.common.Links;
 import io.biza.cdr.babelfish.v1.model.common.Meta;
 
+@DisplayName("CDR Response V1 Tests")
 public class CDRResponseV1Test {
   private Validator validator;
   
@@ -23,6 +25,7 @@ public class CDRResponseV1Test {
   }
 
   @Test
+  @DisplayName("Create valid CDR Response V1")
   void createValidCDRResponse() {
     CDRResponse myResponse = new CDRResponse();
     myResponse.links(new Links().self(URI.create("http://localhost/"))).meta(new Meta());
@@ -30,12 +33,14 @@ public class CDRResponseV1Test {
   }
   
   @Test
+  @DisplayName("Create CDR Response V1 with Missing Links and Meta")
   void createCDRResponseWithMissingLinksAndMeta() {
     CDRResponse myResponse = new CDRResponse();
     assertFalse(validator.validate(myResponse).isEmpty());
   }
   
   @Test
+  @DisplayName("Create CDR Response V1 with Missing Meta")
   void createCDRResponseWithMissingMeta() {
     CDRResponse myResponse = new CDRResponse();
     myResponse.links(new Links().self(URI.create("http://localhost/")));
@@ -43,6 +48,7 @@ public class CDRResponseV1Test {
   }
 
   @Test
+  @DisplayName("Create CDR Response V1 with Missing Links")
   void createCDRResponseWithMissingLinks() {
     CDRResponse myResponse = new CDRResponse();
     myResponse.meta(new Meta());
@@ -51,6 +57,7 @@ public class CDRResponseV1Test {
 
 
   @Test
+  @DisplayName("Create CDR Response V1 with Links and broken self link")
   void createCDRResponseWithMissingLinksSelf() {
     CDRResponse myResponse = new CDRResponse();
     myResponse.links(new Links());

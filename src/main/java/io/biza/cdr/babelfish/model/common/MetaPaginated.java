@@ -12,6 +12,7 @@
 package io.biza.cdr.babelfish.model.common;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModel;
@@ -32,6 +33,7 @@ public abstract class MetaPaginated extends Meta {
   @JsonProperty("totalRecords")
   @NotNull
   @NonNull
+  @Min(0)
   public Integer totalRecords;
 
   @BabelFishModelProperty(description = "The total number of pages in the full set.",
@@ -39,5 +41,6 @@ public abstract class MetaPaginated extends Meta {
   @JsonProperty("totalPages")
   @NotNull
   @NonNull
+  @Min(0)
   public Integer totalPages;
 }

@@ -23,18 +23,18 @@ public class LinksPaginated extends io.biza.cdr.babelfish.model.common.LinksPagi
    * Yes, Yes ]
    */
   @AssertTrue(message = "Previous page set but First Page not set")
-  private boolean isFirstSetWhenPrevExists() {
+  public boolean isFirstSetWhenPrevExists() {
     return prev != null && first == null ? false : true;
   }
 
   @AssertTrue(message = "Next page set but Last Page not set")
-  private boolean isLastSetWhenNextExists() {
+  public boolean isLastSetWhenNextExists() {
     return next != null && last == null ? false : true;
   }
 
   @AssertTrue(
       message = "While on first and last page (next & prev null), zero links should be defined outside of self")
-  private boolean isFirstAndLastPage() {
+  public boolean isFirstAndLastPage() {
     return (next == null && prev == null) ? ((first != null || last != null) ? false : true) : true;
   }
 }

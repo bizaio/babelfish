@@ -12,7 +12,21 @@
 package io.biza.cdr.babelfish.v1.model;
 
 import javax.validation.Valid;
+import javax.validation.constraints.AssertTrue;
 
 @Valid
 public class CDRResponsePaginated extends io.biza.cdr.babelfish.model.CDRResponsePaginated {
+
+  @AssertTrue(message = "First and Last Page Detected but Total Pages is >1")
+  public boolean isTotalPagesBiggerThanLinks() {
+    return (links() != null && links().next() == null && links().prev() == null)
+        ? (meta() != null && meta().totalPages() > 1 ? false : true)
+        : true;
+  }
+
+  /**
+   * @AssertTrue(message = "If totalRecords is greater than 0 totalPages should be greater than 0")
+   *                     public boolean someRecordsCannotBeZeroPages() { return false; //return
+   *                     totalRecords > 0 ? (totalPages > 0 ? true : false) : true; }
+   */
 }

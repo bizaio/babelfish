@@ -36,6 +36,9 @@
 		<hibernate-validator.version>6.1.0.Final</hibernate-validator.version>
 		<javax.el-api.version>3.0.0</javax.el-api.version>
 		<javax.el.version>2.2.6</javax.el.version>
+		<maven-surefire-report-plugin.version>3.0.0-M4</maven-surefire-report-plugin.version>
+		<maven-site-plugin.version>3.8.2</maven-site-plugin.version>
+		<maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
 	</properties>
 
 	<build>
@@ -45,8 +48,29 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${maven-surefire-plugin.version}</version>
 			</plugin>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>${maven-site-plugin.version}</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>${maven-project-info-reports-plugin.version}</version>
+            </plugin>
 		</plugins>
 	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>${maven-surefire-report-plugin.version}</version>
+			</plugin>
+		</plugins>
+	</reporting>
 
 	<dependencies>
 		<dependency>
