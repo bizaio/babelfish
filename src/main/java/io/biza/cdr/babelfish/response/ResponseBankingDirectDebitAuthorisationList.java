@@ -15,34 +15,29 @@ package io.biza.cdr.babelfish.response;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import io.biza.cdr.babelfish.model.CDRResponse;
+import io.biza.cdr.babelfish.model.CDRResponsePaginated;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.LinksPaginated;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
-import io.biza.cdr.babelfish.v1.model.common.MetaPaginated;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
 
-@Data
 @Accessors
 @Valid
-public abstract class ResponseBankingDirectDebitAuthorisationList {
+public interface ResponseBankingDirectDebitAuthorisationList extends CDRResponsePaginated {
+  
+  @BabelFishModelProperty(required = true)
+  @JsonGetter("data")
+  public ResponseBankingDirectDebitAuthorisationListData getData();
 
-    @BabelFishModelProperty(
-        required = true
-    )
-    @NonNull
-    @NotNull
-    ResponseBankingDirectDebitAuthorisationListData data;
-    
+  @JsonSetter("data")
+  public void setData(@NotNull ResponseBankingDirectDebitAuthorisationListData data);
 
-    @JsonUnwrapped
-    @NotNull
-    @NonNull
-    @BabelFishModelProperty(required = true)
-    public CDRResponse<LinksPaginated, MetaPaginated> metadata;
+  public default ResponseBankingDirectDebitAuthorisationList data(ResponseBankingDirectDebitAuthorisationListData data) {
+    setData(data);
+    return this;
+  }
 }

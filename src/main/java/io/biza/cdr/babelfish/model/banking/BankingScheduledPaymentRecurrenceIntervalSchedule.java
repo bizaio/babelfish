@@ -58,7 +58,7 @@ public interface BankingScheduledPaymentRecurrenceIntervalSchedule {
 
   @BabelFishModelProperty(
       description = "Indicates the number of payments remaining in the schedule. If both finalPaymentDate and paymentsRemaining are present then payments will stop according to the most constraining value, If neither field is present the payments will continue indefinitely")
-  @Min(1)
+  @Min(0)
   @JsonGetter("paymentsRemaining")
   public Integer getPaymentsRemaining();
 

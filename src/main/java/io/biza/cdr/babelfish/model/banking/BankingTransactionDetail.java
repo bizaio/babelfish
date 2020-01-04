@@ -1,21 +1,20 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 import io.biza.cdr.babelfish.support.BabelFishModel;
@@ -27,26 +26,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-
-@AllArgsConstructor
-@NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
-@Builder
-@Data
 @Valid
-@BabelFishModel(description =  "Banking Transaction Detailed Information", parent = BankingTransaction.class)
-public class BankingTransactionDetail {
-	
-	@JsonUnwrapped
-	@BabelFishModelProperty(
-			hidden = true
-	)
-	@Valid
-	BankingTransaction bankingTransaction;
+@BabelFishModel(description = "Banking Transaction Detailed Information",
+    parent = BankingTransaction.class)
+public interface BankingTransactionDetail extends BankingTransaction {
 
-    @BabelFishModelProperty(
-        required = true
-    )
-    @NonNull
-    @NotNull
-    BankingTransactionDetailExtendedData extendedData;
+  @BabelFishModelProperty(required = true)
+  @JsonGetter("extendedData")
+  public BankingTransactionDetailExtendedData getExtendedData();
+
+  @JsonSetter("extendedData")
+  public void setExtendedData(@NotNull BankingTransactionDetailExtendedData extendedData);
+
+  public default BankingTransactionDetail extendedData(
+      @NotNull BankingTransactionDetailExtendedData extendedData) {
+    setExtendedData(extendedData);
+    return this;
+  }
 }
