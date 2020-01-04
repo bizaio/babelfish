@@ -19,6 +19,6 @@ import io.biza.cdr.babelfish.v1.model.common.CommonOrganisationDetail;
 import io.biza.cdr.babelfish.v1.model.common.CommonPersonDetail;
 import javax.validation.constraints.AssertTrue;
 
-public class ResponseCommonCustomerDetailData extends io.biza.cdr.babelfish.response.ResponseCommonCustomerDetailData {
+public class ResponseCommonCustomerDetailData extends io.biza.cdr.babelfish.response.container.ResponseCommonCustomerDetailData {
 
 }

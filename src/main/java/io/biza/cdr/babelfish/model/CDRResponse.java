@@ -39,28 +39,43 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
 
-@BabelFishModel(
-    description = "The CDR Response")
+@BabelFishModel(description = "The CDR Response")
 @Valid
-public interface CDRResponse {
+public abstract class CDRResponse {
   @BabelFishModelProperty(description = "The Links Object", required = true)
-  @JsonGetter("links")
-  public Links getLinks();
-  @JsonSetter("links")
-  public void setLinks(@NotNull Links links);
-  default public CDRResponse links(@NotNull Links links) {
-    setLinks(links);
-    return this;
-  }
+  @JsonProperty("links")
+  @NotNull
+  Links links;
 
   @BabelFishModelProperty(
       description = "The meta object is used to provide additional information such as second factor authorisation data, traffic management, pagination counts or other purposes that are complementary to the workings of the API.",
       required = true)
-  @JsonGetter("meta")
-  public Meta getMeta();
-  @JsonSetter("meta")
-  public void setMeta(@NotNull Meta meta);
-  default public CDRResponse meta(@NotNull Meta meta) {
+  @JsonProperty("meta")
+  @NotNull
+  Meta meta;
+
+  public Links getLinks() {
+    return links;
+  }
+
+  public void setLinks(@NotNull Links links) {
+    this.links = links;
+  }
+
+  public CDRResponse links(@NotNull Links links) {
+    setLinks(links);
+    return this;
+  }
+
+  public Meta getMeta() {
+    return meta;
+  }
+
+  public void setMeta(@NotNull Meta meta) {
+    this.meta = meta;
+  }
+
+  public CDRResponse meta(@NotNull Meta meta) {
     setMeta(meta);
     return this;
   }

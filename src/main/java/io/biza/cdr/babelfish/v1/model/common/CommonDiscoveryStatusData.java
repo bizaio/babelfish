@@ -33,7 +33,7 @@ import lombok.NonNull;
 
 @Valid
 public class CommonDiscoveryStatusData
-    extends io.biza.cdr.babelfish.model.common.CommonDiscoveryStatusData {
+    extends io.biza.cdr.babelfish.response.container.ResponseCommonDiscoveryStatusData {
 
   public CommonDiscoveryStatusData(@NonNull CommonDiscoveryStatusType status,
       @NonNull LocalDateTime updateTime) {

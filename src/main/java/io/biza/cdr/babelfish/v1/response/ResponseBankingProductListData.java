@@ -25,7 +25,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Valid
-public class ResponseBankingProductListData extends io.biza.cdr.babelfish.response.ResponseBankingProductListData {
+public class ResponseBankingProductListData extends io.biza.cdr.babelfish.response.container.ResponseBankingProductListData {
 
   
 }

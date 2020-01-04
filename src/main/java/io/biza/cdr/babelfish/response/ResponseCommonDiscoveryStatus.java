@@ -14,15 +14,16 @@ package io.biza.cdr.babelfish.response;
 import java.net.URI;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.biza.cdr.babelfish.model.CDRResponse;
-import io.biza.cdr.babelfish.model.common.CommonDiscoveryStatusData;
 import io.biza.cdr.babelfish.model.common.Links;
 import io.biza.cdr.babelfish.model.common.LinksPaginated;
 import io.biza.cdr.babelfish.model.common.Meta;
+import io.biza.cdr.babelfish.response.container.ResponseCommonDiscoveryStatusData;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,20 +33,20 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
 
-@Data
-@Accessors
 @Valid
 @BabelFishModel(modelName = "ResponseCommonDiscoveryStatus", description = "Common Discovery Status")
-public abstract class ResponseCommonDiscoveryStatus {
-
+public interface ResponseCommonDiscoveryStatus extends CDRResponse {
+  
   @BabelFishModelProperty(required = true)
-  @NonNull
-  @NotNull
-  CommonDiscoveryStatusData data;
+  @JsonGetter("data")
+  public ResponseCommonDiscoveryStatusData getData();
 
-  @JsonUnwrapped
-  @NotNull
-  @NonNull
-  @BabelFishModelProperty(required = true)
-  public CDRResponse<Links, Meta> container;
+  @JsonSetter("data")
+  public void setData(@NotNull ResponseCommonDiscoveryStatusData data);
+
+  public default ResponseCommonDiscoveryStatus data(@NotNull ResponseCommonDiscoveryStatusData data) {
+    setData(data);
+    return this;
+  }
+
 }

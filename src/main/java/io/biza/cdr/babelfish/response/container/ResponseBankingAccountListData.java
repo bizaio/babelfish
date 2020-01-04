@@ -9,42 +9,42 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
  *******************************************************************************/
-package io.biza.cdr.babelfish.response;
+package io.biza.cdr.babelfish.response.container;
+
+import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import io.biza.cdr.babelfish.model.CDRResponse;
+import io.biza.cdr.babelfish.model.banking.BankingAccount;
+import io.biza.cdr.babelfish.model.banking.BankingBalance;
 import io.biza.cdr.babelfish.model.common.Links;
 import io.biza.cdr.babelfish.model.common.Meta;
-import io.biza.cdr.babelfish.response.container.ResponseBankingAccountListData;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
 
 @Valid
 @BabelFishModel(description = "Response containing a list of Banking Accounts")
-public interface ResponseBankingAccountList extends CDRResponse {
+public interface ResponseBankingAccountListData {
+  @BabelFishModelProperty(
+      description = "The list of accounts returned. If the filter results in an empty set then this array may have no records",
+      required = true)
+  @JsonGetter("accounts")
+  public List<BankingAccount> getAccounts();
 
-  @BabelFishModelProperty(required = true)
-  @JsonGetter("data")
-  public ResponseBankingAccountListData getData();
+  @JsonSetter("accounts")
+  public void setAccounts(@NotNull List<BankingAccount> accounts);
 
-  @JsonSetter("data")
-  public void setData(@NotNull ResponseBankingAccountListData data);
-
-  public default ResponseBankingAccountList data(ResponseBankingAccountListData data) {
-    setData(data);
+  public default ResponseBankingAccountListData accounts(@NotNull List<BankingAccount> accounts) {
+    setAccounts(accounts);
     return this;
   }
-
 }

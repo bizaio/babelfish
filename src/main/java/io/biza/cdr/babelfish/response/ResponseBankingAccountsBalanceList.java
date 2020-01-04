@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.biza.cdr.babelfish.model.CDRResponse;
+import io.biza.cdr.babelfish.response.container.ResponseBankingAccountsBalanceListData;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.AccessLevel;

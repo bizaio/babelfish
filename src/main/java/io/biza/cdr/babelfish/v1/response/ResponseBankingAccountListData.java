@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Valid
-public class ResponseBankingAccountListData extends io.biza.cdr.babelfish.response.ResponseBankingAccountListData {
+public class ResponseBankingAccountListData extends io.biza.cdr.babelfish.response.container.ResponseBankingAccountListData {
 
   public ResponseBankingAccountListData(@NonNull List<BankingAccount> accounts) {
     super(accounts);

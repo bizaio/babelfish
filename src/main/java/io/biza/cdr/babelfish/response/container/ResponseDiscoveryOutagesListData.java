@@ -11,46 +11,40 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *******************************************************************************/
-package io.biza.cdr.babelfish.response;
+package io.biza.cdr.babelfish.response.container;
 
+import java.util.List;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeCustomer;
 import io.biza.cdr.babelfish.v1.model.CDRResponse;
 import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
-import io.biza.cdr.babelfish.v1.model.common.CommonOrganisation;
-import io.biza.cdr.babelfish.v1.model.common.CommonPerson;
+import io.biza.cdr.babelfish.v1.model.banking.BankingTransaction;
+import io.biza.cdr.babelfish.v1.model.common.CommonDiscoveryOutage;
 import io.biza.cdr.babelfish.v1.model.common.Links;
 import io.biza.cdr.babelfish.v1.model.common.Meta;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
-import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 
-@Data
-@Accessors
 @Valid
-public abstract class ResponseCommonCustomerData {
+public interface ResponseDiscoveryOutagesListData {
 
     @BabelFishModelProperty(
-        description =  "The type of customer object that is present",
+        description =  "List of scheduled outages. Property is mandatory but may contain and empty list if no outages are scheduled",
         required = true
     )
-    protected PayloadTypeCustomer customerUType;
+    @JsonGetter("outages")
+    public List<CommonDiscoveryOutage> getOutages();
 
-    protected CommonPerson person;
-    protected CommonOrganisation organisation;
-    
-    @AssertTrue(message = "Only one of Person or Organisation type must be populated and aligned with customerUType")
-    private boolean isUTypeAligned() {
-        if(PayloadTypeCustomer.PERSON.equals(customerUType)) {
-            return person != null && organisation == null;
-        }
-        
-        if(PayloadTypeCustomer.ORGANISATION.equals(customerUType)) {
-            return organisation != null && person == null;
-        }
-        
-        return false;
+    @JsonSetter("outages")
+    public void setOutages(@NotNull List<CommonDiscoveryOutage> outages);
+
+    public default ResponseDiscoveryOutagesListData outages(
+        @NotNull List<CommonDiscoveryOutage> outages) {
+      setOutages(outages);
+      return this;
     }
 }

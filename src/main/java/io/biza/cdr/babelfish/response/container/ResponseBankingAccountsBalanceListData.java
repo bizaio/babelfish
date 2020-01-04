@@ -11,27 +11,38 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *******************************************************************************/
-package io.biza.cdr.babelfish.response;
+package io.biza.cdr.babelfish.response.container;
 
 import java.util.List;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import io.biza.cdr.babelfish.model.banking.BankingAccount;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.model.CDRResponse;
 import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
-import io.biza.cdr.babelfish.v1.model.banking.BankingTransaction;
+import io.biza.cdr.babelfish.v1.model.banking.BankingBalance;
 import io.biza.cdr.babelfish.v1.model.common.Links;
 import io.biza.cdr.babelfish.v1.model.common.Meta;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
 
-@Data
-@Accessors
 @Valid
-public abstract class ResponseBankingTransactionListData {
+public interface ResponseBankingAccountsBalanceListData {
 
     @BabelFishModelProperty(
-        required = true
-    )
-    List<BankingTransaction> transactions;
+        description = "The list of accounts returned. If the filter results in an empty set then this array may have no records",
+        required = true)
+    @JsonGetter("balances")
+    public List<BankingBalance> getBalances();
+
+    @JsonSetter("balances")
+    public void setBalances(@NotNull List<BankingBalance> balances);
+
+    public default ResponseBankingAccountsBalanceListData balances(@NotNull List<BankingBalance> balances) {
+      setBalances(balances);
+      return this;
+    }
 }

@@ -20,7 +20,7 @@ import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.model.common.CommonDiscoveryOutage;
 import lombok.NonNull;
 
-public class ResponseDiscoveryOutagesListData extends io.biza.cdr.babelfish.response.ResponseDiscoveryOutagesListData {
+public class ResponseDiscoveryOutagesListData extends io.biza.cdr.babelfish.response.container.ResponseDiscoveryOutagesListData {
 
   public ResponseDiscoveryOutagesListData(@NonNull List<CommonDiscoveryOutage> outages) {
     super(outages);

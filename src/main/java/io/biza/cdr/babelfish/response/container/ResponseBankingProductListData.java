@@ -9,39 +9,39 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
  *******************************************************************************/
-package io.biza.cdr.babelfish.response;
+package io.biza.cdr.babelfish.response.container;
 
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import io.biza.cdr.babelfish.model.CDRResponsePaginated;
+import io.biza.cdr.babelfish.model.banking.BankingPayee;
+import io.biza.cdr.babelfish.model.banking.BankingProduct;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
-import io.biza.cdr.babelfish.v1.model.banking.BankingBalance;
-import io.biza.cdr.babelfish.v1.model.banking.BankingDirectDebit;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
 
 @Valid
-public interface ResponseBankingDirectDebitAuthorisationListData {
+public interface ResponseBankingProductListData extends CDRResponsePaginated {
 
-  @BabelFishModelProperty(description = "The list of authorisations returned", required = true)
-  @JsonGetter("directDebitAuthorisations")
-  public List<BankingDirectDebit> getDirectDebitAuthorisations();
+  @BabelFishModelProperty(
+      description = "The list of products returned.  If the filter results in an empty set then this array may have no records",
+      required = true)
+  @JsonGetter("products")
+  public List<BankingProduct> getProducts();
 
-  @JsonSetter("directDebitAuthorisations")
-  public void setDirectDebitAuthorisations(
-      @NotNull List<BankingDirectDebit> directDebitAuthorisations);
+  @JsonSetter("products")
+  public void setProducts(@NotNull List<BankingProduct> products);
 
-  public default ResponseBankingDirectDebitAuthorisationListData directDebitAuthorisations(
-      @NotNull List<BankingDirectDebit> directDebitAuthorisations) {
-    setDirectDebitAuthorisations(directDebitAuthorisations);
+  public default ResponseBankingProductListData products(@NotNull List<BankingProduct> products) {
+    setProducts(products);
     return this;
   }
-
 }

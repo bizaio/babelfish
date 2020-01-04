@@ -11,28 +11,27 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *******************************************************************************/
-package io.biza.cdr.babelfish.response;
+package io.biza.cdr.babelfish.v1.model;
 
-import java.util.List;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
-import io.biza.cdr.babelfish.v1.model.banking.BankingScheduledPayment;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
+import io.biza.cdr.babelfish.v1.model.common.CommonDiscoveryStatusData;
+import io.biza.cdr.babelfish.v1.model.common.LinksPaginated;
+import io.biza.cdr.babelfish.v1.model.common.MetaPaginated;
+import io.biza.cdr.babelfish.v1.response.ResponseCommonDiscoveryStatus;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.experimental.Accessors;
 
-@Data
-@Accessors
 @Valid
-public abstract class ResponseBankingScheduledPaymentsListData {
+public class CDRResponsePaginated extends io.biza.cdr.babelfish.model.CDRResponsePaginated {
 
-    @BabelFishModelProperty(
-        description =  "The list of scheduled payments to return",
-        required = true
-    )
-    List<BankingScheduledPayment> scheduledPayments;
 }

@@ -16,11 +16,11 @@ package io.biza.cdr.babelfish.v1.model;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.biza.cdr.babelfish.model.common.Links;
-import io.biza.cdr.babelfish.model.common.Meta;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.model.common.CommonDiscoveryStatusData;
+import io.biza.cdr.babelfish.v1.model.common.Links;
+import io.biza.cdr.babelfish.v1.model.common.Meta;
 import io.biza.cdr.babelfish.v1.response.ResponseCommonDiscoveryStatus;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -32,27 +32,6 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Valid
-public class CDRResponse implements io.biza.cdr.babelfish.model.CDRResponse {
-  Links links;
-  Meta meta;
+public class CDRResponse extends io.biza.cdr.babelfish.model.CDRResponse {
   
-  @Override
-  public void setLinks(@NotNull Links links) {
-    this.links = links;
-  }
-
-  @Override
-  public Links getLinks() {
-    return links;
-  }
-
-  @Override
-  public Meta getMeta() {
-    return meta;
-  }
-
-  @Override
-  public void setMeta(@NotNull Meta meta) {
-    this.meta = meta;
-  }
 }

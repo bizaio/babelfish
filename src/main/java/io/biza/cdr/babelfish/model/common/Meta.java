@@ -23,7 +23,7 @@ import lombok.experimental.Accessors;
 
 @Valid
 @BabelFishModel(description =  "Meta Detail")
-public interface Meta {
+public abstract class Meta {
 	
 	
 }

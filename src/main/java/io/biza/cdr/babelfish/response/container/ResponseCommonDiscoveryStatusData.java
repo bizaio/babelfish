@@ -9,7 +9,7 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
  *******************************************************************************/
-package io.biza.cdr.babelfish.model.common;
+package io.biza.cdr.babelfish.response.container;
 
 import java.net.URI;
 import java.time.LocalDateTime;
@@ -37,7 +37,7 @@ import lombok.NonNull;
 import lombok.experimental.Accessors;
 
 @BabelFishModel(description = "Common Discovery Status Information")
-public interface CommonDiscoveryStatusData {
+public interface ResponseCommonDiscoveryStatusData {
 
   @BabelFishModelProperty(
       description = "Enumeration with values. OK (implementation is fully functional). PARTIAL_FAILURE (one or more end points are unexpectedly unavailable). UNAVAILABLE (the full implementation is unexpectedly unavailable). SCHEDULED_OUTAGE (an advertised outage is in effect)",
@@ -48,7 +48,7 @@ public interface CommonDiscoveryStatusData {
   @JsonSetter("status")
   public void setStatus(CommonDiscoveryStatusType status);
 
-  default public CommonDiscoveryStatusData status(CommonDiscoveryStatusType status) {
+  default public ResponseCommonDiscoveryStatusData status(CommonDiscoveryStatusType status) {
     setStatus(status);
     return this;
   }
@@ -64,7 +64,7 @@ public interface CommonDiscoveryStatusData {
   @JsonSetter("updatedTime")
   public void setUpdateTime(LocalDateTime updateTime);
 
-  default public CommonDiscoveryStatusData updateTime(LocalDateTime updateTime) {
+  default public ResponseCommonDiscoveryStatusData updateTime(LocalDateTime updateTime) {
     setUpdateTime(updateTime);
     return this;
   }
@@ -77,7 +77,7 @@ public interface CommonDiscoveryStatusData {
   @JsonSetter("explanation")
   public void setExplanation(String explanation);
 
-  default public CommonDiscoveryStatusData explanation(String explanation) {
+  default public ResponseCommonDiscoveryStatusData explanation(String explanation) {
     setExplanation(explanation);
     return this;
   }
@@ -92,7 +92,7 @@ public interface CommonDiscoveryStatusData {
   @JsonSetter("detectionTime")
   public void setDetectionTime(LocalDateTime detectionTime);
 
-  default public CommonDiscoveryStatusData detectionTime(LocalDateTime detectionTime) {
+  default public ResponseCommonDiscoveryStatusData detectionTime(LocalDateTime detectionTime) {
     setDetectionTime(detectionTime);
     return this;
   }
@@ -107,7 +107,7 @@ public interface CommonDiscoveryStatusData {
   @JsonSetter("expectedResolutionTime")
   public void setExpectedResolutionTime(LocalDateTime expectedResolutionTime);
 
-  default public CommonDiscoveryStatusData expectedResolutionTime(
+  default public ResponseCommonDiscoveryStatusData expectedResolutionTime(
       LocalDateTime expectedResolutionTime) {
     setExpectedResolutionTime(expectedResolutionTime);
     return this;

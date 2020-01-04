@@ -16,32 +16,32 @@ package io.biza.cdr.babelfish.response;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import io.biza.cdr.babelfish.model.CDRResponse;
+import io.biza.cdr.babelfish.model.banking.BankingBalance;
+import io.biza.cdr.babelfish.model.banking.BankingPayeeDetail;
+import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.banking.BankingPayeeDetail;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
 
-@Data
-@Accessors
 @Valid
-public abstract class ResponseBankingPayeeById  {
+@BabelFishModel(description = "Response containing a Banking Payee By Identifier")
+public interface ResponseBankingPayeeById extends CDRResponse {
+  
+  @BabelFishModelProperty(required = true)
+  @JsonGetter("data")
+  public BankingPayeeDetail getData();
 
-    @BabelFishModelProperty(
-        required = true
-    )
-    @NonNull
-    @NotNull
-    BankingPayeeDetail data;
-    
+  @JsonSetter("data")
+  public void setData(@NotNull BankingPayeeDetail data);
 
-    @JsonUnwrapped
-    @NotNull
-    @NonNull
-    @BabelFishModelProperty(required = true)
-    public CDRResponse<Links, Meta> metadata;
+  public default ResponseBankingPayeeById data(@NotNull BankingPayeeDetail data) {
+    setData(data);
+    return this;
+  }
+
 }

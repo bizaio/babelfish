@@ -44,25 +44,39 @@ import lombok.experimental.Accessors;
 @BabelFishModel(
     description = "This is a Paginated CDR Response")
 @Valid
-public interface CDRResponsePaginated {
+public abstract class CDRResponsePaginated {
   @BabelFishModelProperty(description = "The Links Object", required = true)
-  @JsonGetter("links")
-  public LinksPaginated getLinks();
-  @JsonSetter("links")
-  public void setLinks(LinksPaginated links);
-  default public CDRResponsePaginated links(LinksPaginated links) {
-    setLinks(links);
-    return this;
-  }
-
+  @JsonProperty("links")
+  @NotNull
+  LinksPaginated links;
+  
   @BabelFishModelProperty(
       description = "The meta object is used to provide additional information such as second factor authorisation data, traffic management, pagination counts or other purposes that are complementary to the workings of the API.",
       required = true, attributeName = "meta")
-  @JsonGetter("meta")
-  public MetaPaginated getMeta();
-  @JsonSetter("meta")
-  public void setMeta(MetaPaginated meta);
-  default public CDRResponsePaginated meta(MetaPaginated meta) {
+  @JsonProperty("meta")
+  @NotNull
+  MetaPaginated meta;
+  
+  public LinksPaginated getLinks() {
+    return links;
+  }
+  public void setLinks(LinksPaginated links) {
+    this.links = links;
+  }
+  public CDRResponsePaginated links(LinksPaginated links) {
+    setLinks(links);
+    return this;
+  }
+  
+  public MetaPaginated getMeta() {
+    return meta;
+  }
+  
+  public void setMeta(MetaPaginated meta) {
+    this.meta = meta;
+  }
+  
+  public CDRResponsePaginated meta(MetaPaginated meta) {
     setMeta(meta);
     return this;
   }

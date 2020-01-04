@@ -15,30 +15,32 @@ package io.biza.cdr.babelfish.response;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.biza.cdr.babelfish.model.CDRResponse;
+import io.biza.cdr.babelfish.model.CDRResponsePaginated;
 import io.biza.cdr.babelfish.model.common.LinksPaginated;
 import io.biza.cdr.babelfish.model.common.MetaPaginated;
+import io.biza.cdr.babelfish.response.container.ResponseBankingScheduledPaymentsListData;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
 
-@Data
-@Accessors
 @Valid
-public abstract class ResponseBankingScheduledPaymentsList {
+public interface ResponseBankingScheduledPaymentsList extends CDRResponsePaginated {
+  
+  @BabelFishModelProperty(required = true)
+  @JsonGetter("data")
+  public ResponseBankingScheduledPaymentsListData getData();
 
-    @BabelFishModelProperty(
-        required = true
-    )
-    @NonNull
-    @NotNull
-    ResponseBankingScheduledPaymentsListData data;
-    
-    @JsonUnwrapped
-    @NotNull
-    @NonNull
-    @BabelFishModelProperty(required = true)
-    public CDRResponse<LinksPaginated, MetaPaginated> metadata;
+  @JsonSetter("data")
+  public void setData(@NotNull ResponseBankingScheduledPaymentsListData data);
+
+  public default ResponseBankingScheduledPaymentsList data(ResponseBankingScheduledPaymentsListData data) {
+    setData(data);
+    return this;
+  }
+   
 }

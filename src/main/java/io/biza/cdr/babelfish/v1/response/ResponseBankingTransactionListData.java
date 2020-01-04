@@ -23,7 +23,7 @@ import io.biza.cdr.babelfish.v1.model.banking.BankingTransaction;
 import lombok.NonNull;
 
 @Valid
-public class ResponseBankingTransactionListData extends io.biza.cdr.babelfish.response.ResponseBankingTransactionListData {
+public class ResponseBankingTransactionListData extends io.biza.cdr.babelfish.response.container.ResponseBankingTransactionListData {
 
   
 }

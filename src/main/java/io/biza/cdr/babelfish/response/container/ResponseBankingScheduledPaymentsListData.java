@@ -9,33 +9,37 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
  *******************************************************************************/
-package io.biza.cdr.babelfish.response;
+package io.biza.cdr.babelfish.response.container;
 
+import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import io.biza.cdr.babelfish.model.CDRResponsePaginated;
-import io.biza.cdr.babelfish.response.container.ResponseBankingPayeeListData;
+import io.biza.cdr.babelfish.model.banking.BankingProduct;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.biza.cdr.babelfish.v1.model.CDRResponse;
+import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
+import io.biza.cdr.babelfish.v1.model.banking.BankingScheduledPayment;
+import io.biza.cdr.babelfish.v1.model.common.Links;
+import io.biza.cdr.babelfish.v1.model.common.Meta;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
 
 @Valid
-public interface ResponseBankingPayeeList extends CDRResponsePaginated {
+public interface ResponseBankingScheduledPaymentsListData {
 
-  @BabelFishModelProperty(required = true)
-  @JsonGetter("data")
-  public ResponseBankingPayeeListData getData();
+  @BabelFishModelProperty(description = "The list of scheduled payments to return", required = true)
+  @JsonGetter("scheduledPayments")
+  public List<BankingScheduledPayment> getScheduledPayments();
 
-  @JsonSetter("data")
-  public void setData(@NotNull ResponseBankingPayeeListData data);
+  @JsonSetter("scheduledPayments")
+  public void setScheduledPayments(@NotNull List<BankingScheduledPayment> scheduledPayments);
 
-  public default ResponseBankingPayeeList data(ResponseBankingPayeeListData data) {
-    setData(data);
+  public default ResponseBankingScheduledPaymentsListData scheduledPayments(
+      @NotNull List<BankingScheduledPayment> scheduledPayments) {
+    setScheduledPayments(scheduledPayments);
     return this;
   }
-
 }

@@ -27,10 +27,61 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Valid
-public class LinksPaginated extends io.biza.cdr.babelfish.model.common.LinksPaginated {
+public class LinksPaginated implements io.biza.cdr.babelfish.model.common.LinksPaginated {
+  URI self;
+  URI first;
+  URI prev;
+  URI next;
+  URI last;
 
-  public LinksPaginated(@NonNull URI self) {
-    super(self);
+  @Override
+  public URI getSelf() {
+    return self;
+  }
+
+  @Override
+  public void setSelf(URI self) {
+    this.self = self;
+  }
+
+  @Override
+  public URI getFirst() {
+    return first;
+  }
+
+  @Override
+  public void setFirst(URI first) {
+    this.first = first;
+  }
+
+  @Override
+  public URI getPrev() {
+    return prev;
+  }
+
+  @Override
+  public void setPrev(URI prev) {
+    this.prev = prev;
+  }
+
+  @Override
+  public URI getNext() {
+    return next;
+  }
+
+  @Override
+  public void setNext(URI next) {
+    this.next = next;
+  }
+
+  @Override
+  public URI getLast() {
+    return last;
+  }
+
+  @Override
+  public void setLast(URI last) {
+    this.last = last;
   }
 
   /**
@@ -54,6 +105,5 @@ public class LinksPaginated extends io.biza.cdr.babelfish.model.common.LinksPagi
   private boolean isFirstAndLastPage() {
     return (next == null && prev == null) ? ((first != null || last != null) ? false : true) : true;
   }
-
 
 }

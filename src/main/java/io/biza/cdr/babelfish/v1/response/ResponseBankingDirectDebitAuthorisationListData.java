@@ -20,7 +20,7 @@ import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.model.banking.BankingDirectDebit;
 import lombok.NonNull;
 
-public class ResponseBankingDirectDebitAuthorisationListData extends io.biza.cdr.babelfish.response.ResponseBankingDirectDebitAuthorisationListData {
+public class ResponseBankingDirectDebitAuthorisationListData extends io.biza.cdr.babelfish.response.container.ResponseBankingDirectDebitAuthorisationListData {
 
   public ResponseBankingDirectDebitAuthorisationListData(
       @NonNull List<BankingDirectDebit> directDebitAuthorisations) {

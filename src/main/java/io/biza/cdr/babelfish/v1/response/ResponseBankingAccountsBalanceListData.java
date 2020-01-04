@@ -21,7 +21,7 @@ import io.biza.cdr.babelfish.v1.model.banking.BankingBalance;
 import lombok.NonNull;
 
 @Valid
-public class ResponseBankingAccountsBalanceListData extends io.biza.cdr.babelfish.response.ResponseBankingAccountsBalanceListData {
+public class ResponseBankingAccountsBalanceListData extends io.biza.cdr.babelfish.response.container.ResponseBankingAccountsBalanceListData {
 
   public ResponseBankingAccountsBalanceListData(@NonNull List<BankingBalance> balances) {
     super(balances);

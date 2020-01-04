@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.biza.cdr.babelfish.model.CDRResponse;
 import io.biza.cdr.babelfish.model.CDRResponsePaginated;
+import io.biza.cdr.babelfish.response.container.ResponseBankingDirectDebitAuthorisationListData;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Data;
 import lombok.NonNull;

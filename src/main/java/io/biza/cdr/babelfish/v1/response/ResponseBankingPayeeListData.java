@@ -19,7 +19,7 @@ import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.model.banking.BankingPayee;
 import lombok.NonNull;
 
-public class ResponseBankingPayeeListData extends io.biza.cdr.babelfish.response.ResponseBankingPayeeListData {
+public class ResponseBankingPayeeListData extends io.biza.cdr.babelfish.response.container.ResponseBankingPayeeListData {
 
   public ResponseBankingPayeeListData(@NonNull List<BankingPayee> payees) {
     super(payees);

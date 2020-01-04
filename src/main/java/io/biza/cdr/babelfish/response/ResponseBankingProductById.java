@@ -15,14 +15,15 @@ package io.biza.cdr.babelfish.response;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import io.biza.cdr.babelfish.model.CDRResponse;
+import io.biza.cdr.babelfish.model.CDRResponsePaginated;
+import io.biza.cdr.babelfish.model.banking.BankingPayeeDetail;
+import io.biza.cdr.babelfish.model.banking.BankingProductDetail;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
-import io.biza.cdr.babelfish.v1.model.banking.BankingProductDetail;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,22 +33,19 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
 
-@Data
 @Accessors
 @Valid
-public abstract class ResponseBankingProductById {
+public interface ResponseBankingProductById extends CDRResponse {
+  
+  @BabelFishModelProperty(required = true)
+  @JsonGetter("data")
+  public BankingProductDetail getData();
 
-    @BabelFishModelProperty(
-        required = true
-    )
-    @NotNull
-    @NonNull
-    BankingProductDetail data;
-    
+  @JsonSetter("data")
+  public void setData(@NotNull BankingProductDetail data);
 
-    @JsonUnwrapped
-    @NotNull
-    @NonNull
-    @BabelFishModelProperty(required = true)
-    public CDRResponse<Links, Meta> metadata;
+  public default ResponseBankingProductById data(@NotNull BankingProductDetail data) {
+    setData(data);
+    return this;
+  }
 }

@@ -11,31 +11,34 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *******************************************************************************/
-package io.biza.cdr.babelfish.response;
+package io.biza.cdr.babelfish.response.container;
 
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import io.biza.cdr.babelfish.model.CDRResponsePaginated;
+import io.biza.cdr.babelfish.model.banking.BankingPayee;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
-import io.biza.cdr.babelfish.v1.model.banking.BankingPayee;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
+import io.biza.cdr.babelfish.v1.model.banking.BankingBalance;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
 
-@Data
 @Accessors
 @Valid
-public abstract class ResponseBankingPayeeListData {
+public interface ResponseBankingPayeeListData extends CDRResponsePaginated {
+    
+    @BabelFishModelProperty(description = "The list of authorisations returned", required = true)
+    @JsonGetter("payees")
+    public List<BankingPayee> getPayees();
 
-    @BabelFishModelProperty(
-        description =  "The list of payees returned",
-        required = true
-    )
-    @NonNull
-    @NotNull
-    List<BankingPayee> payees;
+    @JsonSetter("payees")
+    public void setPayees(@NotNull List<BankingPayee> payees);
+
+    public default ResponseBankingPayeeListData payees(@NotNull List<BankingPayee> payees) {
+      setPayees(payees);
+      return this;
+    }
 }

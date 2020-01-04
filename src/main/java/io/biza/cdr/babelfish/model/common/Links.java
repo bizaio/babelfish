@@ -32,20 +32,26 @@ import lombok.experimental.SuperBuilder;
 
 @Valid
 @BabelFishModel(description = "CDS Links")
-public interface Links {
+public abstract class Links {
+  
+  URI self;
 
   @BabelFishModelProperty(
       description = "Fully qualified link that generated the current response document",
       required = true, dataType = "java.lang.String")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonGetter("self")
-  public URI getSelf();
+  public URI getSelf() {
+    return self;
+  }
 
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonSetter("self")
-  public void setSelf(URI self);
+  public void setSelf(URI self) {
+    this.self = self;
+  }
 
-  public default Links self(URI self) {
+  public Links self(URI self) {
     setSelf(self);
     return this;
   }
