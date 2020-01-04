@@ -19,6 +19,7 @@ import io.biza.cdr.babelfish.model.common.MetaPaginated;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
@@ -31,6 +32,8 @@ public abstract class CDRResponsePaginated {
   @BabelFishModelProperty(description = "The Links Object", required = true)
   @JsonProperty("links")
   @NotNull
+  @NonNull
+  @Valid
   LinksPaginated links;
 
   @BabelFishModelProperty(
@@ -38,5 +41,7 @@ public abstract class CDRResponsePaginated {
       required = true)
   @JsonProperty("meta")
   @NotNull
+  @NonNull
+  @Valid
   MetaPaginated meta;
 }

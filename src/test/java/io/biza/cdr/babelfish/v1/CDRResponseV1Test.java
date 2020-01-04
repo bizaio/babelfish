@@ -23,27 +23,27 @@ public class CDRResponseV1Test {
   }
 
   @Test
-  void createValidBaseResponse() {
+  void createValidCDRResponse() {
     CDRResponse myResponse = new CDRResponse();
     myResponse.links(new Links().self(URI.create("http://localhost/"))).meta(new Meta());
     assertTrue(validator.validate(myResponse).isEmpty());
   }
   
   @Test
-  void createBaseResponseWithMissingLinksAndMeta() {
+  void createCDRResponseWithMissingLinksAndMeta() {
     CDRResponse myResponse = new CDRResponse();
     assertFalse(validator.validate(myResponse).isEmpty());
   }
   
   @Test
-  void createBaseResponseWithMissingMeta() {
+  void createCDRResponseWithMissingMeta() {
     CDRResponse myResponse = new CDRResponse();
     myResponse.links(new Links().self(URI.create("http://localhost/")));
     assertFalse(validator.validate(myResponse).isEmpty());
   }
 
   @Test
-  void createBaseResponseWithMissingLinks() {
+  void createCDRResponseWithMissingLinks() {
     CDRResponse myResponse = new CDRResponse();
     myResponse.meta(new Meta());
     assertFalse(validator.validate(myResponse).isEmpty());
@@ -51,7 +51,7 @@ public class CDRResponseV1Test {
 
 
   @Test
-  void createBaseResponseWithMissingLinksSelf() {
+  void createCDRResponseWithMissingLinksSelf() {
     CDRResponse myResponse = new CDRResponse();
     myResponse.links(new Links());
     myResponse.meta(new Meta());
