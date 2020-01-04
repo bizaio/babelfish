@@ -13,29 +13,25 @@ package io.biza.cdr.babelfish.response;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.CDRResponsePaginated;
 import io.biza.cdr.babelfish.response.container.ResponseBankingPayeeListData;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
 @Valid
-public interface ResponseBankingPayeeList extends CDRResponsePaginated {
+public abstract class ResponseBankingPayeeList extends CDRResponsePaginated {
 
   @BabelFishModelProperty(required = true)
-  @JsonGetter("data")
-  public ResponseBankingPayeeListData getData();
-
-  @JsonSetter("data")
-  public void setData(@NotNull ResponseBankingPayeeListData data);
-
-  public default ResponseBankingPayeeList data(ResponseBankingPayeeListData data) {
-    setData(data);
-    return this;
-  }
+  @JsonProperty("data")
+  @NotNull
+  @NonNull
+  public ResponseBankingPayeeListData data;
 
 }

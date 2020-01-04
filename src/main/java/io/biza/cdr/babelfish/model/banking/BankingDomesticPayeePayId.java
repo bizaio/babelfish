@@ -15,63 +15,39 @@ package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingDomesticPayeePayId;
 import io.biza.cdr.babelfish.support.BabelFishModel;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description =  "Domestic Payee PayID Detail")
-public interface BankingDomesticPayeePayId {
+public abstract class BankingDomesticPayeePayId {
 
     @BabelFishModelProperty(
         description =  "The name assigned to the PayID by the owner of the PayID"
     )
-    @JsonGetter("name")
-    public String getName();
-    
-    @JsonSetter("name")
-    public void setName(String name);
-    
-    public default BankingDomesticPayeePayId name(String name) {
-      setName(name);
-      return this;
-    }
-    
+    String name;
+
     @BabelFishModelProperty(
         description =  "The identifier of the PayID (dependent on type)",
         required = true
     )
-    @JsonGetter("identifier")
-    public String getIdentifier();
-    
-    @JsonSetter("identifier")
-    public void setIdentifier(@NotNull String identifier);
-    
-    public default BankingDomesticPayeePayId identifier(@NotNull String identifier) {
-      setIdentifier(identifier);
-      return this;
-    }
+    @NonNull
+    @NotNull
+    String identifier;
 
     @BabelFishModelProperty(
         description =  "The type of the PayID",
         required = true
     )
-    @JsonGetter("type")
-    public PayloadTypeBankingDomesticPayeePayId getType();
-    
-    @JsonSetter("type")
-    public void setType(@NotNull PayloadTypeBankingDomesticPayeePayId type);
-    
-    public default BankingDomesticPayeePayId type(@NotNull PayloadTypeBankingDomesticPayeePayId type) {
-      setType(type);
-      return this;
-    }
+    @NonNull
+    @NotNull
+    PayloadTypeBankingDomesticPayeePayId type;
 }

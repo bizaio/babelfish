@@ -13,39 +13,27 @@ package io.biza.cdr.babelfish.response;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import io.biza.cdr.babelfish.model.CDRResponse;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.CDRResponsePaginated;
-import io.biza.cdr.babelfish.model.common.LinksPaginated;
-import io.biza.cdr.babelfish.model.common.MetaPaginated;
 import io.biza.cdr.babelfish.response.container.ResponseBankingProductListData;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
+@Valid
 @BabelFishModel(description = "Response containing a Product List")
-public interface ResponseBankingProductList extends CDRResponsePaginated {
+public abstract class ResponseBankingProductList extends CDRResponsePaginated {
 
   @BabelFishModelProperty(required = true)
-  @JsonGetter("data")
-  public ResponseBankingProductListData getData();
-
-  @JsonSetter("data")
-  public void setData(@NotNull ResponseBankingProductListData data);
-
-  public default ResponseBankingProductList data(ResponseBankingProductListData data) {
-    setData(data);
-    return this;
-  }
+  @JsonProperty("data")
+  @NotNull
+  @NonNull
+  public ResponseBankingProductListData data;
 
 }

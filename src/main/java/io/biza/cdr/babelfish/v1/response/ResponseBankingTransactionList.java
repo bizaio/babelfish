@@ -11,19 +11,7 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response;
 
-import io.biza.cdr.babelfish.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.common.LinksPaginated;
-import io.biza.cdr.babelfish.v1.model.common.MetaPaginated;
-import io.biza.cdr.babelfish.v1.response.ResponseBankingTransactionListData;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import lombok.NonNull;
-
 public class ResponseBankingTransactionList
     extends io.biza.cdr.babelfish.response.ResponseBankingTransactionList {
-
-  public ResponseBankingTransactionList(@NonNull ResponseBankingTransactionListData data,
-      @NonNull CDRResponse<LinksPaginated, MetaPaginated> metadata) {
-    super(data, metadata);
-  }
 
 }

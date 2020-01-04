@@ -13,12 +13,6 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response;
 
-
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
-
 public class ResponseCommonCustomerDetail extends io.biza.cdr.babelfish.response.ResponseCommonCustomerDetail {
 
 }

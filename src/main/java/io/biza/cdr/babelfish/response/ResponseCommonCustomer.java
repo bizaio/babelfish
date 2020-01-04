@@ -12,31 +12,26 @@
 package io.biza.cdr.babelfish.response;
 
 import io.biza.cdr.babelfish.model.CDRResponse;
-import io.biza.cdr.babelfish.model.banking.BankingPayeeDetail;
 import io.biza.cdr.babelfish.response.container.ResponseCommonCustomerData;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
 @Valid
-public interface ResponseCommonCustomer extends CDRResponse {
+public abstract class ResponseCommonCustomer extends CDRResponse {
 
   @BabelFishModelProperty(required = true)
-  @JsonGetter("data")
-  public ResponseCommonCustomerData getData();
-
-  @JsonSetter("data")
-  public void setData(@NotNull ResponseCommonCustomerData data);
-
-  public default ResponseCommonCustomer data(@NotNull ResponseCommonCustomerData data) {
-    setData(data);
-    return this;
-  }
+  @JsonProperty("data")
+  @NotNull
+  @NonNull
+  public ResponseCommonCustomerData data;
 
 }

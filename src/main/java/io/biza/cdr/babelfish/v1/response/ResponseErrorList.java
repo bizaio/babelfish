@@ -13,26 +13,9 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response;
 
-import java.util.List;
-
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import io.biza.cdr.babelfish.v1.model.common.Error;
 
 @Valid
 public class ResponseErrorList extends io.biza.cdr.babelfish.response.ResponseErrorList {
-
-  public ResponseErrorList(@NonNull List<Error> errors) {
-    super(errors);
-  }
 
 }

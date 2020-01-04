@@ -13,10 +13,7 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response;
 
-import java.util.List;
 import javax.validation.Valid;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.banking.BankingScheduledPayment;
 
 @Valid
 public class ResponseBankingScheduledPaymentsListData extends io.biza.cdr.babelfish.response.container.ResponseBankingScheduledPaymentsListData {

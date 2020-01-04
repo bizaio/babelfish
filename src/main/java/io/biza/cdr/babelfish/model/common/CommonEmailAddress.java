@@ -11,66 +11,45 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.common;
 
-import java.net.URI;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.CommonEmailAddressPurpose;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
+@Valid
 @BabelFishModel(description = "Email Address Definition")
-public interface CommonEmailAddress {
+public abstract class CommonEmailAddress {
 
   @BabelFishModelProperty(
       description = "The purpose for the email, as specified by the customer (Enumeration)",
       required = true)
-  @JsonGetter("purpose")
-  public CommonEmailAddressPurpose getPurpose();
-
-  @JsonSetter("purpose")
-  public void setPurpose(@NotNull CommonEmailAddressPurpose purpose);
-
-  default public CommonEmailAddress purpose(CommonEmailAddressPurpose purpose) {
-    setPurpose(purpose);
-    return this;
-  }
+  @JsonProperty("purpose")
+  @NotNull
+  @NonNull
+  public CommonEmailAddressPurpose purpose;
 
   @BabelFishModelProperty(
       description = "A correctly formatted email address, as defined by the addr_spec format in [RFC 5322](https://www.ietf.org/rfc/rfc5322.txt)",
       required = true)
   @Email
-  @JsonGetter("address")
-  public String getAddress();
-
-  @JsonSetter("address")
-  public void setAddress(@NotNull String address);
-
-  default public CommonEmailAddress address(String address) {
-    setAddress(address);
-    return this;
-  }
+  @JsonProperty("address")
+  @NotNull
+  @NonNull
+  public String address;
 
   @BabelFishModelProperty(
       description = "May be true for one and only one email record in the collection. Denotes the default email address")
-  @JsonGetter("isPreferred")
-  public Boolean isPreferred();
+  @JsonProperty("isPreferred")
+  public Boolean isPreferred;
 
-  @JsonSetter("isPreferred")
-  public void setIsPreferred(Boolean isPreferred);
-
-  default public CommonEmailAddress isPreferred(Boolean isPreferred) {
-    setIsPreferred(isPreferred);
-    return this;
-  }
 }

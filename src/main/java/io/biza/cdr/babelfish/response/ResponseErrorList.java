@@ -17,26 +17,18 @@ import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.LinksPaginated;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
-import io.biza.cdr.babelfish.v1.model.common.MetaPaginated;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 import io.biza.cdr.babelfish.model.common.Error;
 
-@Data
 @Accessors
+@Getter
+@Setter
 @Valid
 @BabelFishModel(description =  "CDS Error Response")
 public abstract class ResponseErrorList {
@@ -46,6 +38,7 @@ public abstract class ResponseErrorList {
     )
     @NonNull
     @NotNull
+    @JsonProperty("errors")
     List<Error> errors;
     
 }

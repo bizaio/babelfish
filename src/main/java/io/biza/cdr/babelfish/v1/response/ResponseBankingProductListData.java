@@ -13,16 +13,7 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response;
 
-import java.util.List;
-
 import javax.validation.Valid;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.banking.BankingProduct;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Valid
 public class ResponseBankingProductListData extends io.biza.cdr.babelfish.response.container.ResponseBankingProductListData {

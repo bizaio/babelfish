@@ -19,8 +19,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -28,127 +26,73 @@ import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.converters.AmountStringToBigDecimalConverter;
 import io.biza.cdr.babelfish.converters.BigDecimalToAmountStringConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description =  "A Representation of a Banking Account Balance")
-public interface BankingBalance {
+public abstract class BankingBalance {
 
     @BabelFishModelProperty(
         description =  "A unique ID of the account adhering to the standards for ID permanence",
         required = true
     )
-    @JsonGetter("accountId")
-    public String getAccountId();
-    @JsonSetter("accountId")
-    public void setAccountId(@NotNull String accountId);
-    public default BankingBalance accountId(@NotNull String accountId) {
-      setAccountId(accountId);
-      return this;
-    }
+    @NotNull
+    @NonNull
+    String accountId;
 
     @BabelFishModelProperty(
         description =  "The balance of the account at this time. Should align to the balance available via other channels such as Internet Banking. Assumed to be negative if the customer has money owing",
         required = true,
         dataType = "java.lang.String"
     )
-    @JsonGetter("currentBalance")
+    @NonNull
+    @NotNull
     @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
-    public BigDecimal getCurrentBalance();
-    
-    @JsonSetter("currentBalance")
-    @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
-    public void setCurrentBalance(@NotNull BigDecimal currentBalance);
-    
-    public default BankingBalance currentBalance(@NotNull BigDecimal currentBalance) {
-      setCurrentBalance(currentBalance);
-      return this;
-    }
-    
+    BigDecimal currentBalance;
+
     @BabelFishModelProperty(
         description =  "Balance representing the amount of funds available for transfer. Assumed to be zero or positive",
         required = true,
         dataType = "java.lang.String"
     )
-    @JsonGetter("availableBalance")
+    @NonNull
+    @NotNull
     @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
-    public BigDecimal getAvailableBalance();
-    
-    @JsonSetter("availableBalance")
     @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
-    public BigDecimal setAvailableBalance(@NotNull BigDecimal availableBalance);
-    
-    public default BankingBalance availableBalance(@NotNull BigDecimal availableBalance) {
-      setAvailableBalance(availableBalance);
-      return this;
-    }
+    BigDecimal availableBalance;
 
     @BabelFishModelProperty(
         description =  "Object representing the maximum amount of credit that is available for this account. Assumed to be zero if absent",
         dataType = "java.lang.String"
     )
-    @JsonGetter("creditLimit")
     @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
-    public BigDecimal getCreditLimit();
-    
-    @JsonSetter("creditLimit")
     @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
-    public void setCreditLimit(BigDecimal creditLimit);
-    
-    public default BankingBalance creditLimit(@NotNull BigDecimal creditLimit) {
-      setCreditLimit(creditLimit);
-      return this;
-    }
+    BigDecimal creditLimit;
 
     @BabelFishModelProperty(
         description =  "Object representing the available limit amortised according to payment schedule. Assumed to be zero if absent",
         dataType = "java.lang.String"
     )
     @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
-    @JsonGetter("amortisedLimit")
-    public BigDecimal getAmortisedLimit();
-    
     @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
-    @JsonSetter("amortisedLimit")
-    public void setAmortisedLimit(BigDecimal amortisedLimit);
-    
-    public default BankingBalance amortisedLimit(BigDecimal amortisedLimit) {
-      setAmortisedLimit(amortisedLimit);
-      return this;
-    }
+    BigDecimal amortisedLimit = BigDecimal.ZERO;
 
     @BabelFishModelProperty(
         description =  "The currency for the balance amounts. If absent assumed to be AUD",
         dataType = "java.lang.String"
     )
     @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
-    @JsonGetter("currency")
-    public Currency getCurrency();
-    
     @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
-    @JsonSetter("currency")
-    public void setCurrency(Currency currency);
-    
-    public default BankingBalance currency(Currency currency) {
-      setCurrency(currency);
-      return this;
-    }
+    Currency currency;
 
     @BabelFishModelProperty(
         description =  "Optional array of balances for the account in other currencies. Included to support accounts that support multi-currency purses such as Travel Cards"
     )
-    @JsonGetter("purses")
-    public List<BankingBalancePurse> getPurses();
-    @JsonSetter("purses")
-    public void setPurses(List<BankingBalancePurse> purses);
-    
-    public default BankingBalance purses(List<BankingBalancePurse> purses) {
-      setPurses(purses);
-      return this;
-    }
+    List<BankingBalancePurse> purses;
 }

@@ -11,79 +11,11 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.model.common;
 
-import java.net.URI;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.NotNull;
-import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Valid
-public class LinksPaginated implements io.biza.cdr.babelfish.model.common.LinksPaginated {
-  URI self;
-  URI first;
-  URI prev;
-  URI next;
-  URI last;
-
-  @Override
-  public URI getSelf() {
-    return self;
-  }
-
-  @Override
-  public void setSelf(URI self) {
-    this.self = self;
-  }
-
-  @Override
-  public URI getFirst() {
-    return first;
-  }
-
-  @Override
-  public void setFirst(URI first) {
-    this.first = first;
-  }
-
-  @Override
-  public URI getPrev() {
-    return prev;
-  }
-
-  @Override
-  public void setPrev(URI prev) {
-    this.prev = prev;
-  }
-
-  @Override
-  public URI getNext() {
-    return next;
-  }
-
-  @Override
-  public void setNext(URI next) {
-    this.next = next;
-  }
-
-  @Override
-  public URI getLast() {
-    return last;
-  }
-
-  @Override
-  public void setLast(URI last) {
-    this.last = last;
-  }
-
+public class LinksPaginated extends io.biza.cdr.babelfish.model.common.LinksPaginated {
   /**
    * Minimal field validation possible at POJO level Scenario: [ self, first, prev, next, last ]
    * First Page and not Last: [ Yes, No, No, Yes, Yes ] Last Page and not First: [ Yes, Yes, Yes,

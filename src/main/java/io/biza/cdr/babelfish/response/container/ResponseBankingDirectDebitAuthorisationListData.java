@@ -14,34 +14,24 @@ package io.biza.cdr.babelfish.response.container;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
-import io.biza.cdr.babelfish.v1.model.banking.BankingBalance;
 import io.biza.cdr.babelfish.v1.model.banking.BankingDirectDebit;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
 @Valid
-public interface ResponseBankingDirectDebitAuthorisationListData {
+public abstract class ResponseBankingDirectDebitAuthorisationListData {
 
   @BabelFishModelProperty(description = "The list of authorisations returned", required = true)
-  @JsonGetter("directDebitAuthorisations")
-  public List<BankingDirectDebit> getDirectDebitAuthorisations();
-
-  @JsonSetter("directDebitAuthorisations")
-  public void setDirectDebitAuthorisations(
-      @NotNull List<BankingDirectDebit> directDebitAuthorisations);
-
-  public default ResponseBankingDirectDebitAuthorisationListData directDebitAuthorisations(
-      @NotNull List<BankingDirectDebit> directDebitAuthorisations) {
-    setDirectDebitAuthorisations(directDebitAuthorisations);
-    return this;
-  }
+  @JsonProperty("directDebitAuthorisations")
+  @NotNull
+  @NonNull
+  public List<BankingDirectDebit> directDebitAuthorisations;
 
 }

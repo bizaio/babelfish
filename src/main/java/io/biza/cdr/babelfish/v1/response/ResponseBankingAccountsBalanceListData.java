@@ -13,18 +13,9 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response;
 
-import java.util.List;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.banking.BankingBalance;
-import lombok.NonNull;
 
 @Valid
 public class ResponseBankingAccountsBalanceListData extends io.biza.cdr.babelfish.response.container.ResponseBankingAccountsBalanceListData {
-
-  public ResponseBankingAccountsBalanceListData(@NonNull List<BankingBalance> balances) {
-    super(balances);
-  }
 
 }

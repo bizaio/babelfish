@@ -15,36 +15,26 @@ import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.banking.BankingAccount;
-import io.biza.cdr.babelfish.model.banking.BankingBalance;
-import io.biza.cdr.babelfish.model.common.Links;
-import io.biza.cdr.babelfish.model.common.Meta;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "Response containing a list of Banking Accounts")
-public interface ResponseBankingAccountListData {
+public abstract class ResponseBankingAccountListData {
   @BabelFishModelProperty(
       description = "The list of accounts returned. If the filter results in an empty set then this array may have no records",
       required = true)
-  @JsonGetter("accounts")
-  public List<BankingAccount> getAccounts();
-
-  @JsonSetter("accounts")
-  public void setAccounts(@NotNull List<BankingAccount> accounts);
-
-  public default ResponseBankingAccountListData accounts(@NotNull List<BankingAccount> accounts) {
-    setAccounts(accounts);
-    return this;
-  }
+  @JsonProperty("accounts")
+  @NotNull
+  @NonNull
+  public List<BankingAccount> accounts;
 }

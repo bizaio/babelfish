@@ -11,59 +11,37 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.response.container;
 
-import io.biza.cdr.babelfish.model.banking.BankingPayee;
 import io.biza.cdr.babelfish.model.common.CommonOrganisation;
 import io.biza.cdr.babelfish.model.common.CommonPerson;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeCustomer;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
-import java.util.List;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
 @Valid
-public interface ResponseCommonCustomerData {
+public abstract class ResponseCommonCustomerData {
 
   @BabelFishModelProperty(description = "The type of customer object that is present",
       required = true)
-  @JsonGetter("customerUType")
-  public PayloadTypeCustomer getType();
-
-  @JsonSetter("customerUType")
-  public void setType(@NotNull PayloadTypeCustomer type);
-
-  public default ResponseCommonCustomerData type(@NotNull PayloadTypeCustomer type) {
-    setType(type);
-    return this;
-  }
+  @JsonProperty("customerUType")
+  @NotNull
+  @NonNull
+  public PayloadTypeCustomer type;
 
   @BabelFishModelProperty(description = "The Person Record for the Customer")
-  @JsonGetter("person")
-  public CommonPerson getPerson();
-
-  @JsonSetter("person")
-  public void setPerson(CommonPerson person);
-
-  public default ResponseCommonCustomerData person(CommonPerson person) {
-    setPerson(person);
-    return this;
-  }
+  @JsonProperty("person")
+  public CommonPerson person;
 
   @BabelFishModelProperty(description = "The Organisation Record for the Customer")
-  @JsonGetter("organisation")
-  public CommonOrganisation getOrganisation();
-
-  @JsonSetter("organisation")
-  public void setOrganisation(CommonOrganisation organisation);
-
-  public default ResponseCommonCustomerData organisation(CommonOrganisation organisation) {
-    setOrganisation(organisation);
-    return this;
-  }
+  @JsonProperty("organisation")
+  public CommonOrganisation organisation;
 
 }

@@ -18,9 +18,6 @@ import java.time.LocalDate;
 import java.util.Currency;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -32,15 +29,16 @@ import io.biza.cdr.babelfish.converters.LocalDateToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToCurrencyConverter;
 import io.biza.cdr.babelfish.converters.StringToLocalDateConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description =  "Credit Card Account Details")
-public interface BankingCreditCardAccount {
+public abstract class BankingCreditCardAccount {
 
     @BabelFishModelProperty(
         description =  "The minimum payment amount due for the next card payment",
@@ -48,17 +46,8 @@ public interface BankingCreditCardAccount {
         dataType = "java.lang.String"
     )
     @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
-    @JsonGetter("minPaymentAmount")
-    public BigDecimal getMinPaymentAmount();
-    
     @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
-    @JsonSetter("minPaymentAmount")
-    public void setMinPaymentAmount(@NotNull BigDecimal minPaymentAmount);
-    
-    public default BankingCreditCardAccount minPaymentAmount(@NotNull BigDecimal minPaymentAmount) {
-      setMinPaymentAmount(minPaymentAmount);
-      return this;
-    }
+    BigDecimal minPaymentAmount;
 
     @BabelFishModelProperty(
         description =  "The amount due for the next card payment",
@@ -66,34 +55,16 @@ public interface BankingCreditCardAccount {
         dataType = "java.lang.String"
     )
     @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
-    @JsonGetter("paymentDueAmount")
-    public BigDecimal getPaymentDueAmount();
-        
     @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
-    @JsonSetter("paymentDueAmount")
-    public void setPaymentDueAmount(@NotNull BigDecimal paymentDueAmount);
-    
-    public default BankingCreditCardAccount paymentDueAmount(@NotNull BigDecimal paymentDueAmount) {
-      setPaymentDueAmount(paymentDueAmount);
-      return this;
-    }
+    BigDecimal paymentDueAmount;
 
     @BabelFishModelProperty(
-        description =  "Payment Currency for Credit Card",
+        description =  "If absent assumes AUD",
         dataType = "java.lang.String"
     )
     @JsonSerialize(converter = CurrencyToStringConverter.class)
-    @JsonGetter("paymentCurrency")
-    public Currency getPaymentCurrency();
-    
     @JsonDeserialize(converter = StringToCurrencyConverter.class)
-    @JsonSetter("paymentCurrency")
-    public void setPaymentCurrency(Currency paymentCurrency);
-    
-    public default BankingCreditCardAccount paymentCurrency(@NotNull Currency paymentCurrency) {
-      setPaymentCurrency(paymentCurrency);
-      return this;
-    }
+    Currency paymentCurrency = Currency.getInstance("AUD");
 
     @BabelFishModelProperty(
         description =  "Date that the next payment for the card is due",
@@ -101,16 +72,6 @@ public interface BankingCreditCardAccount {
         dataType = "java.lang.String"
     )
     @JsonSerialize(converter = LocalDateToStringConverter.class)
-    @JsonGetter("paymentDueDate")
-    public LocalDate getPaymentDueDate();
-    
     @JsonDeserialize(converter = StringToLocalDateConverter.class)
-    @JsonSetter("paymentDueDate")
-    public void setPaymentDueDate(LocalDate paymentDueDate);
-    
-    public default BankingCreditCardAccount paymentDueDate(LocalDate paymentDueDate) {
-      setPaymentDueDate(paymentDueDate);
-      return this;
-    }
-    
+    LocalDate paymentDueDate;
 }

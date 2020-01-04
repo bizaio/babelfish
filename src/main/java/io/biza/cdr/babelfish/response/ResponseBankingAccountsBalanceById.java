@@ -13,37 +13,27 @@ package io.biza.cdr.babelfish.response;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.CDRResponse;
-import io.biza.cdr.babelfish.model.banking.BankingAccountDetail;
 import io.biza.cdr.babelfish.model.banking.BankingBalance;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "Response containing a Banking Accounts Balance by Identifier")
-public interface ResponseBankingAccountsBalanceById extends CDRResponse {
+public abstract class ResponseBankingAccountsBalanceById extends CDRResponse {
 
   @BabelFishModelProperty(required = true)
-  @JsonGetter("data")
-  public BankingBalance getData();
-
-  @JsonSetter("data")
-  public void setData(@NotNull BankingBalance data);
-
-  public default ResponseBankingAccountsBalanceById data(@NotNull BankingBalance data) {
-    setData(data);
-    return this;
-  }
+  @JsonProperty("data")
+  @NotNull
+  @NonNull
+  public BankingBalance data;
 
 }

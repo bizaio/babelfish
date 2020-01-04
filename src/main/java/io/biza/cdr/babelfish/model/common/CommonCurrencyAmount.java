@@ -12,13 +12,9 @@
 package io.biza.cdr.babelfish.model.common;
 
 import java.math.BigDecimal;
-import java.net.URI;
 import java.util.Currency;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.converters.AmountStringToBigDecimalConverter;
@@ -27,48 +23,31 @@ import io.biza.cdr.babelfish.converters.CurrencyToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToCurrencyConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
-@BabelFishModel(description = "Currency Amount")
+@Getter
+@Setter
+@Accessors(fluent = true)
 @Valid
-public interface CommonCurrencyAmount {
+@BabelFishModel(description = "Currency Amount")
+public abstract class CommonCurrencyAmount {
 
   @BabelFishModelProperty(
       description = "The current balance of the account at this time. Should align to the current balance available via other channels such as ATM balance enquiry or Internet Banking",
       required = true, dataType = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
-  @JsonGetter("amount")
-  public BigDecimal getAmount();
-
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
-  @JsonSetter("amount")
-  public void setAmount(@NotNull BigDecimal amount);
-
-  default public CommonCurrencyAmount amount(BigDecimal amount) {
-    setAmount(amount);
-    return this;
-  }
+  @JsonProperty("amount")
+  public BigDecimal amount;
 
   @BabelFishModelProperty(description = "Currency Amount Currency Code", required = false,
       dataType = "java.lang.String")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
-  @JsonGetter("currency")
-  public Currency getCurrency();
-
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
-  @JsonSetter("currency")
-  public void setCurrency(Currency currency);
-
-  default public CommonCurrencyAmount currency(Currency currency) {
-    setCurrency(currency);
-    return this;
-  }
+  @JsonProperty("currency")
+  public Currency currency;
 
 }
 

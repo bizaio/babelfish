@@ -14,25 +14,7 @@
 package io.biza.cdr.babelfish.v1.response;
 
 import javax.validation.Valid;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.banking.BankingProductDetail;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Valid
 public class ResponseBankingProductById extends io.biza.cdr.babelfish.response.ResponseBankingProductById {
-
-  public ResponseBankingProductById(@NonNull BankingProductDetail data,
-      @NonNull CDRResponse<Links, Meta> metadata) {
-    super(data, metadata);
-  }
 }

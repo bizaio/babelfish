@@ -11,15 +11,8 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.common;
 
-import java.net.URI;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.AddressPAFFlatUnitType;
@@ -28,320 +21,142 @@ import io.biza.cdr.babelfish.v1.enumerations.AddressPAFPostalDeliveryType;
 import io.biza.cdr.babelfish.v1.enumerations.AddressPAFStateType;
 import io.biza.cdr.babelfish.v1.enumerations.AddressPAFStreetSuffix;
 import io.biza.cdr.babelfish.v1.enumerations.AddressPAFStreetType;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
+@Valid
 @BabelFishModel(
     description = "Australian address formatted according to the file format defined by the [PAF file format](https://auspost.com.au/content/dam/auspost_corp/media/documents/australia-post-data-guide.pdf)")
-public interface CommonPAFAddress {
+public abstract class CommonPAFAddress {
 
   @BabelFishModelProperty(
       description = "Unique identifier for an address as defined by Australia Post.  Also known as Delivery Point Identifier")
-  @JsonGetter("dpid")
-  public String getDpid();
-
-  @JsonSetter("dpid")
-  public void setDpid(String dpid);
-
-  public default CommonPAFAddress dpid(String dpid) {
-    setDpid(dpid);
-    return this;
-  }
+  @JsonProperty("dpid")
+  public String dpid;
 
   @BabelFishModelProperty(
       description = "Thoroughfare number for a property (first number in a property ranged address)")
-  @JsonGetter("thoroughfareNumber1")
-  public Integer getThoroughfareNumber1();
+  @JsonProperty("thoroughfareNumber1")
+  public Integer thoroughfareNumber1;
 
-  @JsonSetter("thoroughfareNumber1")
-  public void setThoroughfareNumber1(Integer thoroughfareNumber1);
-
-  public default void setThoroughfareNumber1(String thoroughfareNumber1) {
-    if (thoroughfareNumber1 != null) {
-      setThoroughfareNumber1(
-          thoroughfareNumber1.equals("00000") ? null : Integer.parseInt(thoroughfareNumber1));
+  public void thoroughfareNumber1(String thoroughfareNumber1String) {
+    if (thoroughfareNumber1String != null) {
+      thoroughfareNumber1 = thoroughfareNumber1String.equals("00000") ? null
+          : Integer.parseInt(thoroughfareNumber1String);
     }
-  }
-
-  public default CommonPAFAddress thoroughfareNumber1(Integer thoroughfareNumber1) {
-    setThoroughfareNumber1(thoroughfareNumber1);
-    return this;
   }
 
   @BabelFishModelProperty(
       description = "Suffix for the thoroughfare number. Only relevant is thoroughfareNumber1 is populated")
-  @JsonGetter("thoroughfareNumber1Suffix")
-  public String getThoroughfareNumber1Suffix();
-
-  @JsonSetter("thoroughfareNumber1Suffix")
-  public void setThoroughfareNumber1Suffix(String thoroughfareNumber1Suffix);
-
-  public default CommonPAFAddress thoroughfareNumber1Suffix(String thoroughfareNumber1Suffix) {
-    setThoroughfareNumber1Suffix(thoroughfareNumber1Suffix);
-    return this;
-  }
+  @JsonProperty("thoroughfareNumber1Suffix")
+  public String thoroughfareNumber1Suffix;
 
   @BabelFishModelProperty(
       description = "Second thoroughfare number (only used if the property has a ranged address eg 23-25)")
-  @JsonGetter("thoroughfareNumber2")
-  public Integer getThoroughfareNumber2();
+  @JsonProperty("thoroughfareNumber2")
+  public Integer thoroughfareNumber2;
 
-  @JsonSetter("thoroughfareNumber2")
-  public void setThoroughfareNumber2(Integer thoroughfareNumber1);
-
-  public default void setThoroughfareNumber2(String thoroughfareNumber2) {
-    if (thoroughfareNumber2 != null) {
-      setThoroughfareNumber2(
-          thoroughfareNumber2.equals("00000") ? null : Integer.parseInt(thoroughfareNumber2));
+  public void thoroughfareNumber2(String thoroughfareNumber2String) {
+    if (thoroughfareNumber2String != null) {
+      thoroughfareNumber2 = thoroughfareNumber2String.equals("00000") ? null
+          : Integer.parseInt(thoroughfareNumber2String);
     }
-  }
-
-  public default CommonPAFAddress thoroughfareNumber2(Integer thoroughfareNumber2) {
-    setThoroughfareNumber1(thoroughfareNumber2);
-    return this;
   }
 
   @BabelFishModelProperty(
       description = "Suffix for the second thoroughfare number. Only relevant is thoroughfareNumber2 is populated")
-  @JsonGetter("thoroughfareNumber2Suffix")
-  public String getThoroughfareNumber2Suffix();
-
-  @JsonSetter("thoroughfareNumber2Suffix")
-  public void setThoroughfareNumber2Suffix(String thoroughfareNumber2Suffix);
-
-  public default CommonPAFAddress thoroughfareNumber2Suffix(String thoroughfareNumber2Suffix) {
-    setThoroughfareNumber1Suffix(thoroughfareNumber2Suffix);
-    return this;
-  }
+  @JsonProperty("thoroughfareNumber2Suffix")
+  public String thoroughfareNumber2Suffix;
 
   @BabelFishModelProperty(description = "Type of flat or unit for the address",
       dataType = "java.lang.String")
-  @JsonGetter("flatUnitType")
-  public AddressPAFFlatUnitType getFlatUnitType();
-
-  @JsonSetter("flatUnitType")
-  public void setFlatUnitType(AddressPAFFlatUnitType flatUnitType);
-
-  public default CommonPAFAddress flatUnitType(AddressPAFFlatUnitType flatUnitType) {
-    setFlatUnitType(flatUnitType);
-    return this;
-  }
+  @JsonProperty("flatUnitType")
+  public AddressPAFFlatUnitType flatUnitType;
 
   @BabelFishModelProperty(description = "Unit number (including suffix, if applicable)")
-  @JsonGetter("flatUnitNumber")
-  public String getFlatUnitNumber();
-
-  @JsonSetter("flatUnitNumber")
-  public void setFlatUnitNumber(String flatUnitNumber);
-
-  public default CommonPAFAddress flatUnitNumber(String flatUnitNumber) {
-    setFlatUnitNumber(flatUnitNumber);
-    return this;
-  }
+  @JsonProperty("flatUnitNumber")
+  public String flatUnitNumber;
 
   @BabelFishModelProperty(description = "Type of floor or level for the address",
       dataType = "java.lang.String")
-  @JsonGetter("floorLevelType")
-  public AddressPAFFloorLevelType getFloorLevelType();
-
-  @JsonSetter("floorLevelType")
-  public void setFloorLevelType(AddressPAFFloorLevelType floorLevelType);
-
-  public default CommonPAFAddress floorLevelType(AddressPAFFloorLevelType floorLevelType) {
-    setFloorLevelType(floorLevelType);
-    return this;
-  }
+  @JsonProperty("floorLevelType")
+  public AddressPAFFloorLevelType floorLevelType;
 
   @BabelFishModelProperty(description = "Floor or level number (including alpha characters)")
-  @JsonGetter("floorLevelNumber")
-  public String getFloorLevelNumber();
-
-  @JsonSetter("floorLevelNumber")
-  public void setFloorLevelNumber(String floorLevelNumber);
-
-  public default CommonPAFAddress floorLevelNumber(String floorLevelNumber) {
-    setFloorLevelNumber(floorLevelNumber);
-    return this;
-  }
+  @JsonProperty("floorLevelNumber")
+  public String floorLevelNumber;
 
   @BabelFishModelProperty(description = "Allotment number for the address")
-  @JsonGetter("lotNumber")
-  public String getLotNumber();
-
-  @JsonSetter("lotNumber")
-  public void setLotNumber(String lotNumber);
-
-  public default CommonPAFAddress lotNumber(String lotNumber) {
-    setLotNumber(lotNumber);
-    return this;
-  }
+  @JsonProperty("lotNumber")
+  public String lotNumber;
 
   @BabelFishModelProperty(description = "Building/Property name 1")
-  @JsonGetter("buildingName1")
-  public String getBuildingName1();
+  @JsonProperty("buildingName1")
+  public String buildingName1;
 
-  @JsonSetter("buildingName1")
-  public void setBuildingName1(String buildingName1);
-
-  public default CommonPAFAddress buildingName1(String buildingName1) {
-    setBuildingName1(buildingName1);
-    return this;
-  }
-
-  @BabelFishModelProperty(description = "Building/Property name 2")  
-  @JsonGetter("buildingName2")
-  public String getBuildingName2();
-
-  @JsonSetter("buildingName2")
-  public void setBuildingName2(String buildingName2);
-
-  public default CommonPAFAddress buildingName2(String buildingName2) {
-    setBuildingName2(buildingName2);
-    return this;
-  }
+  @BabelFishModelProperty(description = "Building/Property name 2")
+  @JsonProperty("buildingName2")
+  public String buildingName2;
 
   @BabelFishModelProperty(description = "The name of the street")
-  @JsonGetter("streetName")
-  public String getStreetName();
-
-  @JsonSetter("streetName")
-  public void setStreetName(String streetName);
-
-  public default CommonPAFAddress streetName(String streetName) {
-    setStreetName(streetName);
-    return this;
-  }
+  @JsonProperty("streetName")
+  public String streetName;
 
   @BabelFishModelProperty(
       description = "The street type. Valid enumeration defined by Australia Post PAF code file",
       dataType = "java.lang.String")
-  @JsonGetter("streetType")
-  public AddressPAFStreetType getStreetType();
-
-  @JsonSetter("streetType")
-  public void setStreetType(AddressPAFStreetType streetType);
-
-  public default CommonPAFAddress streetType(AddressPAFStreetType streetType) {
-    setStreetType(streetType);
-    return this;
-  }
+  @JsonProperty("streetType")
+  public AddressPAFStreetType streetType;
 
   @BabelFishModelProperty(
       description = "The street type suffix. Valid enumeration defined by Australia Post PAF code file",
       dataType = "java.lang.String")
-  @JsonGetter("streetSuffix")
-  public AddressPAFStreetSuffix getStreetSuffix();
-
-  @JsonSetter("streetSuffix")
-  public void setStreetSuffix(AddressPAFStreetSuffix streetSuffix);
-
-  public default CommonPAFAddress streetSuffix(AddressPAFStreetSuffix streetSuffix) {
-    setStreetSuffix(streetSuffix);
-    return this;
-  }
+  @JsonProperty("streetSuffix")
+  public AddressPAFStreetSuffix streetSuffix;
 
   @BabelFishModelProperty(
       description = "Postal delivery type. (eg. PO BOX). Valid enumeration defined by Australia Post PAF code file",
       dataType = "java.lang.String")
-  @JsonGetter("postalDeliveryType")
-  public AddressPAFPostalDeliveryType getPostalDeliveryType();
-
-  @JsonSetter("postalDeliveryType")
-  public void setPostalDeliveryType(AddressPAFPostalDeliveryType postalDeliveryType);
-
-  public default CommonPAFAddress postalDeliveryType(
-      AddressPAFPostalDeliveryType postalDeliveryType) {
-    setPostalDeliveryType(postalDeliveryType);
-    return this;
-  }
+  @JsonProperty("postalDeliveryType")
+  public AddressPAFPostalDeliveryType postalDeliveryType;
 
   @BabelFishModelProperty(
       description = "Postal delivery number if the address is a postal delivery type")
-  @JsonGetter("postalDeliveryNumber")
-  public Integer getPostalDeliveryNumber();
+  @JsonProperty("postalDeliveryNumber")
+  public Integer postalDeliveryNumber;
 
-  @JsonSetter("postalDeliveryNumber")
-  public void setPostalDeliveryNumber(Integer postalDeliveryNumber);
-
-  public default void setPostalDeliveryNumber(String postalDeliveryNumber) {
-    if (postalDeliveryNumber != null) {
-      setPostalDeliveryNumber(
-          postalDeliveryNumber.equals("00000") ? null : Integer.parseInt(postalDeliveryNumber));
+  public void postalDeliveryNumber(String postalDeliveryNumberString) {
+    if (postalDeliveryNumberString != null) {
+      postalDeliveryNumber = postalDeliveryNumberString.equals("00000") ? null
+          : Integer.parseInt(postalDeliveryNumberString);
     }
   }
 
-  public default CommonPAFAddress postalDeliveryNumber(Integer postalDeliveryNumber) {
-    setPostalDeliveryNumber(postalDeliveryNumber);
-    return this;
-  }
-
-
   @BabelFishModelProperty(
       description = "Postal delivery number prefix related to the postal delivery number")
-  @JsonGetter("postalDeliveryNumberPrefix")
-  public String getPostalDeliveryNumberPrefix();
-
-  @JsonSetter("postalDeliveryNumberPrefix")
-  public void setPostalDeliveryNumberPrefix(String postalDeliveryNumberPrefix);
-
-  public default CommonPAFAddress postalDeliveryNumberPrefix(String postalDeliveryNumberPrefix) {
-    setPostalDeliveryNumberPrefix(postalDeliveryNumberPrefix);
-    return this;
-  }
+  @JsonProperty("postalDeliveryNumberPrefix")
+  public String postalDeliveryNumberPrefix;
 
   @BabelFishModelProperty(
       description = "Postal delivery number suffix related to the postal delivery number")
-  @JsonGetter("postalDeliveryNumberSuffix")
-  public String getPostalDeliveryNumberSuffix();
-
-  @JsonSetter("postalDeliveryNumberSuffix")
-  public void setPostalDeliveryNumberSuffix(String postalDeliveryNumberSuffix);
-
-  public default CommonPAFAddress postalDeliveryNumberSuffix(String postalDeliveryNumberSuffix) {
-    setPostalDeliveryNumberSuffix(postalDeliveryNumberSuffix);
-    return this;
-  }
+  @JsonProperty("postalDeliveryNumberSuffix")
+  public String postalDeliveryNumberSuffix;
 
   @BabelFishModelProperty(description = "Full name of locality", required = true)
-  @JsonGetter("localityName")
-  public String getLocalityName();
-
-  @JsonSetter("localityName")
-  public void setLocalityName(@NotNull String localityName);
-
-  public default CommonPAFAddress localityName(@NotNull String localityName) {
-    setLocalityName(localityName);
-    return this;
-  }
+  @JsonProperty("localityName")
+  public String localityName;
 
   @BabelFishModelProperty(description = "Postcode for the locality", required = true)
-  @JsonGetter("postcode")
-  public String getPostcode();
-
-  @JsonSetter("postcode")
-  public void setPostcode(@NotNull String postcode);
-
-  public default CommonPAFAddress postcode(@NotNull String postcode) {
-    setPostcode(postcode);
-    return this;
-  }
+  @JsonProperty("postcode")
+  public String postcode;
 
   @BabelFishModelProperty(
       description = "State in which the address belongs. Valid enumeration defined by Australia Post PAF code file",
       required = true, dataType = "java.lang.String")
-  @JsonGetter("state")
-  public AddressPAFStateType getState();
-
-  @JsonSetter("state")
-  public void setState(@NotNull AddressPAFStateType state);
-
-  public default CommonPAFAddress state(@NotNull AddressPAFStateType state) {
-    setState(state);
-    return this;
-  }
+  @JsonProperty("state")
+  public AddressPAFStateType state;
 }

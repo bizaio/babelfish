@@ -13,22 +13,7 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response;
 
-import io.biza.cdr.babelfish.v1.response.ResponseDiscoveryOutagesListData;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
-import lombok.NonNull;
-
-import javax.validation.constraints.NotNull;
-
 
 public class ResponseDiscoveryOutagesList extends io.biza.cdr.babelfish.response.ResponseDiscoveryOutagesList {
-
-  public ResponseDiscoveryOutagesList(@NonNull ResponseDiscoveryOutagesListData data,
-      @NonNull CDRResponse<Links, Meta> metadata) {
-    super(data, metadata);
-    // TODO Auto-generated constructor stub
-  }
 
 }

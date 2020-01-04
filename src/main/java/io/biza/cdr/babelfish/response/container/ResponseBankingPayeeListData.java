@@ -16,29 +16,24 @@ package io.biza.cdr.babelfish.response.container;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.CDRResponsePaginated;
 import io.biza.cdr.babelfish.model.banking.BankingPayee;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.banking.BankingBalance;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
-@Accessors
+@Getter
+@Setter
+@Accessors(fluent = true)
 @Valid
-public interface ResponseBankingPayeeListData extends CDRResponsePaginated {
+public abstract class ResponseBankingPayeeListData extends CDRResponsePaginated {
     
     @BabelFishModelProperty(description = "The list of authorisations returned", required = true)
-    @JsonGetter("payees")
-    public List<BankingPayee> getPayees();
-
-    @JsonSetter("payees")
-    public void setPayees(@NotNull List<BankingPayee> payees);
-
-    public default ResponseBankingPayeeListData payees(@NotNull List<BankingPayee> payees) {
-      setPayees(payees);
-      return this;
-    }
+    @JsonProperty("payees")
+    @NotNull
+    @NonNull
+    public List<BankingPayee> payees;
 }

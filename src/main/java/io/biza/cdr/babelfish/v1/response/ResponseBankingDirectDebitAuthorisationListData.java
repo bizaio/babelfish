@@ -13,18 +13,6 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response;
 
-import java.util.List;
-
-import javax.validation.constraints.NotNull;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.banking.BankingDirectDebit;
-import lombok.NonNull;
-
 public class ResponseBankingDirectDebitAuthorisationListData extends io.biza.cdr.babelfish.response.container.ResponseBankingDirectDebitAuthorisationListData {
-
-  public ResponseBankingDirectDebitAuthorisationListData(
-      @NonNull List<BankingDirectDebit> directDebitAuthorisations) {
-    super(directDebitAuthorisations);
-  }
 
 }

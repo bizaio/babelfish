@@ -11,53 +11,31 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.common;
 
-import java.net.URI;
 import java.util.List;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.support.FormatChecker;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
+@Valid
 @BabelFishModel(description = "Organisation Definition in Detail",
     parent = CommonOrganisation.class)
-public interface CommonOrganisationDetail {
-
-  @JsonUnwrapped
-  @BabelFishModelProperty(hidden = true)
-  public CommonOrganisation getOrganisation();
-
-  public void setOrganisation(CommonOrganisation commonOrganisation);
-
-  default public CommonOrganisationDetail organisation(CommonOrganisation commonOrganisation) {
-    setOrganisation(commonOrganisation);
-    return this;
-  }
+public abstract class CommonOrganisationDetail extends CommonOrganisation {
 
   @BabelFishModelProperty(
       description = "Must contain at least one address. One and only one address may have the purpose of REGISTERED. Zero or one, and no more than one, record may have the purpose of MAIL. If zero then the REGISTERED address is to be used for mail",
       required = true)
-  @JsonGetter("physicalAddresses")
-  public List<CommonPhysicalAddressWithPurpose> getPhysicalAddresses();
+  @JsonProperty("physicalAddresses")
+  @NotNull
+  @NonNull
+  public List<CommonPhysicalAddressWithPurpose> physicalAddresses;
 
-  @JsonSetter("physicalAddresses")
-  public void setPhysicalAddresses(List<CommonPhysicalAddressWithPurpose> physicalAddresses);
-
-  public default CommonOrganisationDetail physicalAddresses(
-      List<CommonPhysicalAddressWithPurpose> physicalAddresses) {
-    setPhysicalAddresses(physicalAddresses);
-    return this;
-  }
 }

@@ -14,28 +14,24 @@ package io.biza.cdr.babelfish.response;
 import io.biza.cdr.babelfish.model.CDRResponse;
 import io.biza.cdr.babelfish.response.container.ResponseDiscoveryOutagesListData;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
 @Valid
-public interface ResponseDiscoveryOutagesList extends CDRResponse {
+public abstract class ResponseDiscoveryOutagesList extends CDRResponse {
 
   @BabelFishModelProperty(required = true)
-  @JsonGetter("data")
-  public ResponseDiscoveryOutagesListData getData();
-
-  @JsonSetter("data")
-  public void setData(@NotNull ResponseDiscoveryOutagesListData data);
-
-  public default ResponseDiscoveryOutagesList data(ResponseDiscoveryOutagesListData data) {
-    setData(data);
-    return this;
-  }
+  @JsonProperty("data")
+  @NotNull
+  @NonNull
+  public ResponseDiscoveryOutagesListData data;
 
 }

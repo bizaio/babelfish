@@ -15,28 +15,7 @@ package io.biza.cdr.babelfish.v1.response;
 
 import javax.validation.Valid;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.common.LinksPaginated;
-import io.biza.cdr.babelfish.v1.model.common.MetaPaginated;
-import io.biza.cdr.babelfish.v1.response.ResponseBankingProductListData;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-
 @Valid
 public class ResponseBankingProductList extends io.biza.cdr.babelfish.response.ResponseBankingProductList {
-
-  public ResponseBankingProductList(@NonNull ResponseBankingProductListData data,
-      @NonNull CDRResponse<LinksPaginated, MetaPaginated> metadata) {
-    this.data = data;
-    this.metadata = metadata;
-  }
 
 }

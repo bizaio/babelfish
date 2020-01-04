@@ -13,26 +13,8 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.model.common;
 
-import java.net.URI;
-
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.experimental.SuperBuilder;
 
 @Valid
 public class Links extends io.biza.cdr.babelfish.model.common.Links {
-
-  public Links(@NonNull URI self) {
-    super(self);
-  }
 }

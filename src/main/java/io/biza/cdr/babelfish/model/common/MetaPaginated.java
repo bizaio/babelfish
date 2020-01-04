@@ -13,44 +13,33 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.common;
 
-import java.net.URI;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "Paginated Meta Details", parent = Meta.class)
-public interface MetaPaginated {
+public abstract class MetaPaginated extends Meta {
   @BabelFishModelProperty(description = "The total number of records in the full set.",
       required = true)
-  @JsonGetter("totalRecords")
-  public Integer getTotalRecords();
-  @JsonSetter("totalRecords")
-  public void setTotalRecords(@NotNull Integer totalRecords);
-  public default MetaPaginated totalRecords(@NotNull Integer totalRecords) {
-    setTotalRecords(totalRecords);
-    return this;
-  }
+  @JsonProperty("totalRecords")
+  @NotNull
+  @NonNull
+  public Integer totalRecords;
 
   @BabelFishModelProperty(description = "The total number of pages in the full set.",
       required = true)
-  @JsonGetter("totalPages")
-  public Integer getTotalPages();
-  @JsonSetter("totalPages")
-  public void setTotalPages(@NotNull Integer totalPages);
-  public default MetaPaginated totalPages(@NotNull Integer totalPages) {
-    setTotalPages(totalPages);
-    return this;
-  }
+  @JsonProperty("totalPages")
+  @NotNull
+  @NonNull
+  public Integer totalPages;
 }

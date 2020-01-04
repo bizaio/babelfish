@@ -11,19 +11,7 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response;
 
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.banking.BankingTransactionDetail;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
-import lombok.NonNull;
-
 public class ResponseBankingTransactionById
     extends io.biza.cdr.babelfish.response.ResponseBankingTransactionById {
-
-  public ResponseBankingTransactionById(@NonNull BankingTransactionDetail data,
-      @NonNull CDRResponse<Links, Meta> metadata) {
-    super(data, metadata);
-  }
 
 }

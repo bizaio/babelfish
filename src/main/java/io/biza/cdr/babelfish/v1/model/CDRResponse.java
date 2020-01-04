@@ -14,22 +14,6 @@
 package io.biza.cdr.babelfish.v1.model;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.common.CommonDiscoveryStatusData;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
-import io.biza.cdr.babelfish.v1.response.ResponseCommonDiscoveryStatus;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Valid
 public class CDRResponse extends io.biza.cdr.babelfish.model.CDRResponse {

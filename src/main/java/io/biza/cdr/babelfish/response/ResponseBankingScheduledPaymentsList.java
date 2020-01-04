@@ -15,32 +15,25 @@ package io.biza.cdr.babelfish.response;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import io.biza.cdr.babelfish.model.CDRResponse;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.CDRResponsePaginated;
-import io.biza.cdr.babelfish.model.common.LinksPaginated;
-import io.biza.cdr.babelfish.model.common.MetaPaginated;
 import io.biza.cdr.babelfish.response.container.ResponseBankingScheduledPaymentsListData;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
 @Valid
-public interface ResponseBankingScheduledPaymentsList extends CDRResponsePaginated {
+public abstract class ResponseBankingScheduledPaymentsList extends CDRResponsePaginated {
   
   @BabelFishModelProperty(required = true)
-  @JsonGetter("data")
-  public ResponseBankingScheduledPaymentsListData getData();
-
-  @JsonSetter("data")
-  public void setData(@NotNull ResponseBankingScheduledPaymentsListData data);
-
-  public default ResponseBankingScheduledPaymentsList data(ResponseBankingScheduledPaymentsListData data) {
-    setData(data);
-    return this;
-  }
+  @JsonProperty("data")
+  @NotNull
+  @NonNull
+  public ResponseBankingScheduledPaymentsListData data;
    
 }

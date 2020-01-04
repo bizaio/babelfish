@@ -13,14 +13,7 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response;
 
-import java.util.List;
 import javax.validation.Valid;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.common.LinksPaginated;
-import io.biza.cdr.babelfish.v1.model.common.MetaPaginated;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.banking.BankingTransaction;
-import lombok.NonNull;
 
 @Valid
 public class ResponseBankingTransactionListData extends io.biza.cdr.babelfish.response.container.ResponseBankingTransactionListData {

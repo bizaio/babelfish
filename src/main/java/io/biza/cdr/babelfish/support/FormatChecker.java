@@ -130,10 +130,10 @@ public class FormatChecker {
 		int mailCount = 0;
 
 		for (CommonPhysicalAddressWithPurpose oneAddress : physicalAddresses) {
-			if (oneAddress.getPurpose().equals(AddressPurpose.REGISTERED)) {
+			if (oneAddress.purpose().equals(AddressPurpose.REGISTERED)) {
 				registeredCount++;
 			}
-			if (oneAddress.getPurpose().equals(AddressPurpose.MAIL)) {
+			if (oneAddress.purpose().equals(AddressPurpose.MAIL)) {
 				mailCount++;
 			}
 		}

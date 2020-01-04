@@ -15,33 +15,25 @@ package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description =  "Object containing details of the source of the payment. Currently only specifies an account ID but provided as an object to facilitate future extensibility and consistency with the to object")
-public interface BankingScheduledPaymentFrom {
+public abstract class BankingScheduledPaymentFrom {
 
     @BabelFishModelProperty(
         description =  "ID of the account that is the source of funds for the payment",
         required = true
     )
-    @JsonGetter("accountId")
-    public String getAccountId();
-    
-    @JsonSetter("accountId")
-    public void setAccountId(@NotNull String accountId);
-    
-    public default BankingScheduledPaymentFrom accountId(@NotNull String accountId) {
-      setAccountId(accountId);
-      return this;
-    }
+    @NonNull
+    @NotNull
+    String accountId;
 }

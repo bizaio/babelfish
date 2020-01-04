@@ -16,35 +16,20 @@ package io.biza.cdr.babelfish.response.container;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
-import io.biza.cdr.babelfish.v1.model.banking.BankingTransaction;
 import io.biza.cdr.babelfish.v1.model.common.CommonDiscoveryOutage;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
-import lombok.Data;
 import lombok.NonNull;
-import lombok.experimental.Accessors;
 
 @Valid
-public interface ResponseDiscoveryOutagesListData {
+public abstract class ResponseDiscoveryOutagesListData {
 
     @BabelFishModelProperty(
         description =  "List of scheduled outages. Property is mandatory but may contain and empty list if no outages are scheduled",
         required = true
     )
-    @JsonGetter("outages")
-    public List<CommonDiscoveryOutage> getOutages();
-
-    @JsonSetter("outages")
-    public void setOutages(@NotNull List<CommonDiscoveryOutage> outages);
-
-    public default ResponseDiscoveryOutagesListData outages(
-        @NotNull List<CommonDiscoveryOutage> outages) {
-      setOutages(outages);
-      return this;
-    }
+    @JsonProperty("outages")
+    @NotNull
+    @NonNull
+    public List<CommonDiscoveryOutage> outages;
 }

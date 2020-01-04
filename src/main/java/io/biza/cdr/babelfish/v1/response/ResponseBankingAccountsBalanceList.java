@@ -14,26 +14,8 @@
 package io.biza.cdr.babelfish.v1.response;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import io.biza.cdr.babelfish.v1.response.ResponseBankingAccountsBalanceListData;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.common.LinksPaginated;
-import io.biza.cdr.babelfish.v1.model.common.MetaPaginated;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Valid
 public class ResponseBankingAccountsBalanceList extends io.biza.cdr.babelfish.response.ResponseBankingAccountsBalanceList {
-
-  public ResponseBankingAccountsBalanceList(@NonNull ResponseBankingAccountsBalanceListData data,
-      @NonNull CDRResponse<LinksPaginated, MetaPaginated> metadata) {
-    super(data, metadata);
-  }
 
 }

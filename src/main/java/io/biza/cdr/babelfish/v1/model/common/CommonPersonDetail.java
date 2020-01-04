@@ -13,32 +13,13 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.model.common;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.support.FormatChecker;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Valid
 public class CommonPersonDetail extends io.biza.cdr.babelfish.model.common.CommonPersonDetail {
 	
-
-  public CommonPersonDetail(@NonNull io.biza.cdr.babelfish.model.common.CommonPerson commonPerson,
-      @NonNull List<io.biza.cdr.babelfish.model.common.CommonPhysicalAddressWithPurpose> physicalAddresses) {
-    super(commonPerson, physicalAddresses);
-  }
     @AssertTrue(
             message = "Physical Addresses must contain one and only one address of REGISTERED purpose and zero or one addresses of MAIL purpose")
     private boolean isPhysicalAddressesCorrect() {

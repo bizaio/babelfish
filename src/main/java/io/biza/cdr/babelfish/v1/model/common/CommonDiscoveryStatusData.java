@@ -11,42 +11,15 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.model.common;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.cdr.babelfish.converters.OffsetDateTimeToDateTimeStringConverter;
-import io.biza.cdr.babelfish.converters.DateTimeStringToOffsetDateTimeConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.CommonDiscoveryStatusType;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Valid
 public class CommonDiscoveryStatusData
     extends io.biza.cdr.babelfish.response.container.ResponseCommonDiscoveryStatusData {
-
-  public CommonDiscoveryStatusData(@NonNull CommonDiscoveryStatusType status,
-      @NonNull LocalDateTime updateTime) {
-    super(status, updateTime);
-  }
-  
-  public CommonDiscoveryStatusData(@NonNull CommonDiscoveryStatusType status,
-      @NonNull LocalDateTime updateTime, String explanation, LocalDateTime detectionTime, LocalDateTime expectedResolutionTime) {
-    super(status, updateTime);
-    setExplanation(explanation);
-    setDetectionTime(detectionTime);
-    setExpectedResolutionTime(expectedResolutionTime);
-  }
 
   @AssertTrue(
       message = "Detection Time should only be present if status is PARTIAL_FAILURE or UNAVAILABLE")

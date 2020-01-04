@@ -11,15 +11,11 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.common;
 
-import java.net.URI;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Locale;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.converters.LocaleToCountryStringConverter;
@@ -31,186 +27,88 @@ import io.biza.cdr.babelfish.converters.OffsetDateTimeToDateTimeStringConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.CommonOrganisationType;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
-import lombok.AccessLevel;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
+@Valid
 @BabelFishModel(description = "Organisation Definition in Brief")
-public interface CommonOrganisation {
+public abstract class CommonOrganisation {
   @BabelFishModelProperty(
       description = "The date and time that this record was last updated by the customer. If no update has occurred then this date should reflect the initial creation date for the data")
-  @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)  
-  @JsonGetter("lastUpdateTime")
-  public LocalDateTime getLastUpdateTime();
+  @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
-  @JsonSetter("lastUpdateTime")
-  public void setLastUpdateTime(LocalDateTime lastUpdateTime);
-
-  default public CommonOrganisation lastUpdateTime(LocalDateTime lastUpdateTime) {
-    setLastUpdateTime(lastUpdateTime);
-    return this;
-  }
+  @JsonProperty("lastUpdateTime")
+  public LocalDateTime lastUpdateTime;
 
   @BabelFishModelProperty(
-      description = "The first name of the individual providing access on behalf of the organisation. For people with single names this field need not be present.  The single name should be in the lastName field")  
-  @JsonGetter("agentFirstName")
-  public String getAgentFirstName();
-  @JsonSetter("agentFirstName")
-  public void setAgentFirstName(String agentFirstName);
-
-  default public CommonOrganisation agentFirstName(String agentFirstName) {
-    setAgentFirstName(agentFirstName);
-    return this;
-  }
+      description = "The first name of the individual providing access on behalf of the organisation. For people with single names this field need not be present.  The single name should be in the lastName field")
+  @JsonProperty("agentFirstName")
+  public String agentFirstName;
 
   @BabelFishModelProperty(
       description = "The last name of the individual providing access on behalf of the organisation. For people with single names the single name should be in this field",
       required = true)
-  @JsonGetter("agentLastName")
-  public String getAgentLastName();
-  @JsonSetter("agentLastName")
-  public void setAgentLastName(String agentLastName);
-
-  default public CommonOrganisation agentLastName(String agentLastName) {
-    setAgentLastName(agentLastName);
-    return this;
-  }
+  @JsonProperty("agentLastName")
+  public String agentLastName;
 
   @BabelFishModelProperty(
       description = "The role of the individual identified as the agent who is providing authorisation.  Expected to be used for display.  Default to “Unspecified” if the role is not known",
       required = true)
-  @JsonGetter("agentRole")  
-  public String getAgentRole();
-
-  @JsonSetter("agentRole")
-  public void setAgentRole(String agentRole);
-
-  default public CommonOrganisation agentRole(String agentRole) {
-    setAgentRole(agentRole);
-    return this;
-  }
+  @JsonProperty("agentRole")
+  public String agentRole;
 
   @BabelFishModelProperty(description = "Name of the organisation", required = true)
-  @JsonGetter("businessName")  
-  public String getBusinessName();
-  @JsonSetter("businessName")  
-  public void setBusinessName(String businessName);
-
-  default public CommonOrganisation businessName(String businessName) {
-    setBusinessName(businessName);
-    return this;
-  }
+  @JsonProperty("businessName")
+  public String businessName;
 
   @BabelFishModelProperty(description = "Legal name, if different to the business name")
-  @JsonGetter("legalName")  
-  public String getLegalName();
-  @JsonSetter("legalName")  
-  public void setLegalName(String legalName);
-
-  default public CommonOrganisation legalName(String legalName) {
-    setLegalName(legalName);
-    return this;
-  }
+  @JsonProperty("legalName")
+  public String legalName;
 
   @BabelFishModelProperty(
       description = "Short name used for communication, if  different to the business name")
-  @JsonGetter("shortName")  
-  public String getShortName();
-  @JsonSetter("shortName")  
-  public void setShortName(String shortName);
-
-  default public CommonOrganisation shortName(String shortName) {
-    setShortName(shortName);
-    return this;
-  }
+  @JsonProperty("shortName")
+  public String shortName;
 
   @BabelFishModelProperty(description = "Australian Business Number for the organisation")
-  @JsonGetter("abn")  
-  public String getAbn();
-  @JsonSetter("abn")  
-  public void setAbn(String abn);
-
-  default public CommonOrganisation abn(String abn) {
-    setAbn(abn);
-    return this;
-  }
+  @JsonProperty("abn")
+  public String abn;
 
   @BabelFishModelProperty(
-      description = "Australian Company Number for the organisation. Required only if an ACN is applicable for the organisation type")  
-  @JsonGetter("acn")
-  public String getAcn();
-  @JsonSetter("acn")
-  public void setAcn(String acn);
-
-  default public CommonOrganisation acn(String acn) {
-    setAcn(acn);
-    return this;
-  }
+      description = "Australian Company Number for the organisation. Required only if an ACN is applicable for the organisation type")
+  @JsonProperty("acn")
+  public String acn;
 
   @BabelFishModelProperty(
-      description = "True if registered with the ACNC.  False if not. Absent or null if not confirmed.")  
-  @JsonGetter("isACNCRegistered")
-  public Boolean isACNCRegistered();
-  @JsonSetter("isACNCRegistered")
-  public void setIsACNCRegistered(Boolean isACNCRegistered);
-
-  default public CommonOrganisation isACNCRegistered(Boolean isACNCRegistered) {
-    setIsACNCRegistered(isACNCRegistered);
-    return this;
-  }
+      description = "True if registered with the ACNC.  False if not. Absent or null if not confirmed.")
+  @JsonProperty("isACNCRegistered")
+  public Boolean isACNCRegistered;
 
   @BabelFishModelProperty(
       description = "[ANZSIC (2006)](http://www.abs.gov.au/anzsic) code for the organisation.")
-  @JsonGetter("industryCode")
-  public String getIndustryCode();
-  @JsonSetter("industryCode")
-  public String setIndustryCode(String industryCode);
-
-  default public CommonOrganisation industryCode(String industryCode) {
-    setIndustryCode(industryCode);
-    return this;
-  }
+  @JsonProperty("industryCode")
+  public String industryCode;
 
   @BabelFishModelProperty(description = "Legal organisation type", required = true)
-  @JsonGetter("organisationType")  
-  public CommonOrganisationType getOrganisationType();
-  @JsonSetter("organisationType")  
-  public void setOrganisationType(CommonOrganisationType organisationType);
-
-  default public CommonOrganisation organisationType(CommonOrganisationType organisationType) {
-    setOrganisationType(organisationType);
-    return this;
-  }
+  @JsonProperty("organisationType")
+  public CommonOrganisationType organisationType;
 
   @BabelFishModelProperty(
       description = "Enumeration with values from [ISO 3166 Alpha-3](https://www.iso.org/iso-3166-country-codes.html) country codes.  Assumed to be AUS if absent")
-  @JsonSerialize(converter = LocaleToCountryStringConverter.class)  
-  @JsonGetter("registeredCountry")  
-  public Locale getRegisteredCountry();
+  @JsonSerialize(converter = LocaleToCountryStringConverter.class)
   @JsonDeserialize(converter = CountryStringToLocaleConverter.class)
-  @JsonSetter("registeredCountry")  
-  public void setRegisteredCountry(Locale registeredCountry);
-
-  default public CommonOrganisation registeredCountry(Locale registeredCountry) {
-    setRegisteredCountry(registeredCountry);
-    return this;
-  }
+  @JsonProperty("registeredCountry")
+  public Locale registeredCountry;
 
   @BabelFishModelProperty(description = "The date the organisation described was established",
-      dataType = "java.lang.String")  
+      dataType = "java.lang.String")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
-  @JsonGetter("establishmentDate")
-  public LocalDate getEstablishmentDate();
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
-  @JsonSetter("establishmentDate")
-  public void setEstablishmentDate(LocalDate establishmentDate);
+  @JsonProperty("establishmentDate")
+  public LocalDate establishmentDate;
 
-  default public CommonOrganisation establishmentDate(LocalDate establishmentDate) {
-    setEstablishmentDate(establishmentDate);
-    return this;
-  }
 }

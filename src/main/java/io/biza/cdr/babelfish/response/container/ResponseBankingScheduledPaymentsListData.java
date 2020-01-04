@@ -14,32 +14,23 @@ package io.biza.cdr.babelfish.response.container;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import io.biza.cdr.babelfish.model.banking.BankingProduct;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
 import io.biza.cdr.babelfish.v1.model.banking.BankingScheduledPayment;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
 @Valid
-public interface ResponseBankingScheduledPaymentsListData {
+public abstract class ResponseBankingScheduledPaymentsListData {
 
   @BabelFishModelProperty(description = "The list of scheduled payments to return", required = true)
-  @JsonGetter("scheduledPayments")
-  public List<BankingScheduledPayment> getScheduledPayments();
-
-  @JsonSetter("scheduledPayments")
-  public void setScheduledPayments(@NotNull List<BankingScheduledPayment> scheduledPayments);
-
-  public default ResponseBankingScheduledPaymentsListData scheduledPayments(
-      @NotNull List<BankingScheduledPayment> scheduledPayments) {
-    setScheduledPayments(scheduledPayments);
-    return this;
-  }
+  @JsonProperty("scheduledPayments")
+  @NotNull
+  @NonNull
+  public List<BankingScheduledPayment> scheduledPayments;
 }

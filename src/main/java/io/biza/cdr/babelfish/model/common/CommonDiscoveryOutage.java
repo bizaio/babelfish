@@ -11,14 +11,11 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.common;
 
-import java.net.URI;
 import java.time.LocalDateTime;
 import java.time.Period;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.support.BabelFishModel;
@@ -27,73 +24,50 @@ import io.biza.cdr.babelfish.converters.OffsetDateTimeToDateTimeStringConverter;
 import io.biza.cdr.babelfish.converters.PeriodToStringConverter;
 import io.biza.cdr.babelfish.converters.DateTimeStringToOffsetDateTimeConverter;
 import io.biza.cdr.babelfish.converters.StringToPeriodConverter;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
+@Valid
 @BabelFishModel(description = "Outage Detail")
-public interface CommonDiscoveryOutage {
+public abstract class CommonDiscoveryOutage {
 
   @BabelFishModelProperty(description = "Date and time that the outage is scheduled to begin",
       required = true)
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
-  @JsonGetter("outageTime")
-  public LocalDateTime getOutageTime();
-
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
-  @JsonSetter("outageTime")
-  public void setOutageTime(LocalDateTime outageTime);
-
-  default public CommonDiscoveryOutage outageTime(LocalDateTime outageTime) {
-    setOutageTime(outageTime);
-    return this;
-  }
+  @JsonProperty("outageTime")
+  @NotNull
+  @NonNull
+  public LocalDateTime outageTime;
 
   @BabelFishModelProperty(
       description = "Planned duration of the outage. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations)",
       required = true)
   @JsonSerialize(converter = PeriodToStringConverter.class)
-  @JsonGetter("duration")
-  public Period getDuration();
-
   @JsonDeserialize(converter = StringToPeriodConverter.class)
-  @JsonSetter("duration")
-  public void setDuration(Period duration);
-
-  default public CommonDiscoveryOutage duration(Period duration) {
-    setDuration(duration);
-    return this;
-  }
+  @JsonProperty("duration")
+  @NotNull
+  @NonNull
+  public Period duration;
 
   @BabelFishModelProperty(
       description = "Flag that indicates, if present and set to true, that the outage is only partial meaning that only a subset of normally available end points will be affected by the outage")
-  @JsonGetter("isPartial")
-  public Boolean isPartial();
-
-  @JsonSetter("isPartial")
-  public void setIsPartial(Boolean isPartial);
-
-  default public CommonDiscoveryOutage isPartial(Boolean isPartial) {
-    setIsPartial(isPartial);
-    return this;
-  }
+  @JsonProperty("isPartial")
+  @NotNull
+  @NonNull
+  public Boolean isPartial;
 
   @BabelFishModelProperty(
       description = "Provides an explanation of the current outage that can be displayed to an end customer",
       required = true)
-  @JsonGetter("explanation")
-  public String getExplanation();
-
-  @JsonSetter("explanation")
-  public void setExplanation(String explanation);
-
-  default public CommonDiscoveryOutage explanation(String explanation) {
-    setExplanation(explanation);
-    return this;
-  }
+  @JsonProperty("explanation")
+  @NotNull
+  @NonNull
+  public String explanation;
 
 }

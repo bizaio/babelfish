@@ -14,33 +14,24 @@ package io.biza.cdr.babelfish.response.container;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
-import io.biza.cdr.babelfish.v1.model.banking.BankingScheduledPayment;
 import io.biza.cdr.babelfish.v1.model.banking.BankingTransaction;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
 @Valid
-public interface ResponseBankingTransactionListData {
+public abstract class ResponseBankingTransactionListData {
 
   @BabelFishModelProperty(description = "The list of transactions", required = true)
-  @JsonGetter("transactions")
-  public List<BankingTransaction> getTransactions();
-
-  @JsonSetter("transactions")
-  public void setTransactions(@NotNull List<BankingTransaction> transactions);
-
-  public default ResponseBankingTransactionListData transactions(
-      @NotNull List<BankingTransaction> transactions) {
-    setTransactions(transactions);
-    return this;
-  }
+  @JsonProperty("transactions")
+  @NotNull
+  @NonNull
+  public List<BankingTransaction> transactions;
 
 }

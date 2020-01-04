@@ -13,12 +13,6 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response;
 
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeCustomer;
-import io.biza.cdr.babelfish.v1.model.common.CommonOrganisation;
-import io.biza.cdr.babelfish.v1.model.common.CommonPerson;
-import javax.validation.constraints.AssertTrue;
-
 public class ResponseCommonCustomerData extends io.biza.cdr.babelfish.response.container.ResponseCommonCustomerData {
 
 }

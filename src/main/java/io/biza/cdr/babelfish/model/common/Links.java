@@ -13,46 +13,30 @@ package io.biza.cdr.babelfish.model.common;
 
 import java.net.URI;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.converters.UriStringToUriConverter;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
-import lombok.experimental.SuperBuilder;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "CDS Links")
 public abstract class Links {
-  
-  URI self;
 
   @BabelFishModelProperty(
       description = "Fully qualified link that generated the current response document",
       required = true, dataType = "java.lang.String")
   @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonGetter("self")
-  public URI getSelf() {
-    return self;
-  }
-
   @JsonDeserialize(converter = UriStringToUriConverter.class)
-  @JsonSetter("self")
-  public void setSelf(URI self) {
-    this.self = self;
-  }
+  @JsonProperty("self")
+  URI self;
 
-  public Links self(URI self) {
-    setSelf(self);
-    return this;
-  }
 }

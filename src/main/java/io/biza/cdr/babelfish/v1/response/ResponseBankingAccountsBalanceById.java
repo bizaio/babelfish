@@ -14,26 +14,7 @@
 package io.biza.cdr.babelfish.v1.response;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.banking.BankingBalance;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Valid
 public class ResponseBankingAccountsBalanceById extends io.biza.cdr.babelfish.response.ResponseBankingAccountsBalanceById {
-
-    public ResponseBankingAccountsBalanceById(@NonNull BankingBalance data,
-      @NonNull CDRResponse<Links, Meta> metadata) {
-    super(data, metadata);
-  }
 }

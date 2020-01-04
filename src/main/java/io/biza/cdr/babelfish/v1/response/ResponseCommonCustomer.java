@@ -11,14 +11,6 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response;
 
-import io.biza.cdr.babelfish.v1.response.ResponseCommonCustomerData;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
-import lombok.NonNull;
-import javax.validation.constraints.NotNull;
-
 public class ResponseCommonCustomer extends io.biza.cdr.babelfish.response.ResponseCommonCustomer {
 
 }

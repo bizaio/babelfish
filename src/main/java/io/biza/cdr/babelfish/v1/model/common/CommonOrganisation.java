@@ -13,38 +13,9 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.model.common;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Locale;
-
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import io.biza.cdr.babelfish.converters.LocaleToCountryStringConverter;
-import io.biza.cdr.babelfish.converters.StringToLocalDateConverter;
-import io.biza.cdr.babelfish.converters.DateTimeStringToOffsetDateTimeConverter;
-import io.biza.cdr.babelfish.converters.CountryStringToLocaleConverter;
-import io.biza.cdr.babelfish.converters.LocalDateToStringConverter;
-import io.biza.cdr.babelfish.converters.OffsetDateTimeToDateTimeStringConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.enumerations.CommonOrganisationType;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.AccessLevel;
 
 @Valid
 public class CommonOrganisation extends io.biza.cdr.babelfish.model.common.CommonOrganisation {
-
-  public CommonOrganisation(@NonNull String agentLastName, @NonNull String agentRole,
-      @NonNull String businessName, @NonNull CommonOrganisationType organisationType) {
-    super(agentLastName, agentRole, businessName, organisationType);
-  }
 
 }

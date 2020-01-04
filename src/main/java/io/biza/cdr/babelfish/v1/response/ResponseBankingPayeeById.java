@@ -15,20 +15,8 @@ package io.biza.cdr.babelfish.v1.response;
 
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.banking.BankingPayeeDetail;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
-import lombok.NonNull;
 
 @Valid
 public class ResponseBankingPayeeById extends io.biza.cdr.babelfish.response.ResponseBankingPayeeById {
-
-  public ResponseBankingPayeeById(@NonNull BankingPayeeDetail data,
-      @NonNull CDRResponse<Links, Meta> metadata) {
-    super(data, metadata);
-  }
 
 }

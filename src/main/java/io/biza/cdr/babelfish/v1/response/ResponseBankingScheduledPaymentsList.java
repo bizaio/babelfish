@@ -11,13 +11,6 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response;
 
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.common.LinksPaginated;
-import io.biza.cdr.babelfish.v1.model.common.MetaPaginated;
-import io.biza.cdr.babelfish.v1.response.ResponseBankingScheduledPaymentsListData;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import lombok.NonNull;
-
 public class ResponseBankingScheduledPaymentsList
     extends io.biza.cdr.babelfish.response.ResponseBankingScheduledPaymentsList {
 

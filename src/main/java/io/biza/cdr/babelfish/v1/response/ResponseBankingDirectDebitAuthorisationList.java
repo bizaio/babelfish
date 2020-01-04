@@ -13,20 +13,6 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response;
 
-import javax.validation.constraints.NotNull;
-import io.biza.cdr.babelfish.v1.response.ResponseBankingDirectDebitAuthorisationListData;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.common.LinksPaginated;
-import io.biza.cdr.babelfish.v1.model.common.MetaPaginated;
-import lombok.NonNull;
-
 public class ResponseBankingDirectDebitAuthorisationList extends io.biza.cdr.babelfish.response.ResponseBankingDirectDebitAuthorisationList {
-
-  public ResponseBankingDirectDebitAuthorisationList(
-      @NonNull ResponseBankingDirectDebitAuthorisationListData data,
-      @NonNull CDRResponse<LinksPaginated, MetaPaginated> metadata) {
-    super(data, metadata);
-  }
 
 }

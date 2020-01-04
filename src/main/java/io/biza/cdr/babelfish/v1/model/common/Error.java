@@ -12,21 +12,7 @@
 package io.biza.cdr.babelfish.v1.model.common;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Valid
 public class Error extends io.biza.cdr.babelfish.model.common.Error {
-
-  public Error(@NonNull String code, @NonNull String title, @NonNull String detail) {
-    super(code, title, detail);
-
-  }
 }

@@ -11,81 +11,42 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.common;
 
-import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.support.FormatChecker;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
+@Valid
 @BabelFishModel(description = "Person definition in detail", parent = CommonPerson.class)
-public interface CommonPersonDetail {
-
-  @BabelFishModelProperty(hidden = true)
-  @JsonUnwrapped
-  public CommonPerson getCommonPerson();
-
-  public void setCommonPerson(@NotNull CommonPerson commonPerson);
-
-  public default CommonPersonDetail commonPerson(@NotNull CommonPerson commonPerson) {
-    setCommonPerson(commonPerson);
-    return this;
-  }
+public abstract class CommonPersonDetail extends CommonPerson {
 
   @BabelFishModelProperty(
       description = "Array is mandatory but may be empty if no phone numbers are held",
       required = true)
-  @JsonGetter("phoneNumbers")
-  public List<CommonPhoneNumber> getPhoneNumbers();
-
-  @JsonSetter("phoneNumbers")
-  public void setPhoneNumbers(@NotNull List<CommonPhoneNumber> phoneNumbers);
-
-  public default CommonPersonDetail phoneNumbers(@NotNull List<CommonPhoneNumber> phoneNumbers) {
-    setPhoneNumbers(phoneNumbers);
-    return this;
-  }
+  @JsonProperty("phoneNumbers")
+  @NonNull
+  @NotNull
+  public List<CommonPhoneNumber> phoneNumbers = List.of();
 
   @BabelFishModelProperty(description = "May be empty", required = true)
-  @JsonGetter("emailAddresses")
-  public List<CommonEmailAddress> getEmailAddresses();
-
-  @JsonSetter("emailAddresses")
-  public void setEmailAddresses(@NotNull List<CommonEmailAddress> emailAddresses);
-
-  public default CommonPersonDetail emailAdddresses(
-      @NotNull List<CommonEmailAddress> emailAddresses) {
-    setEmailAddresses(emailAddresses);
-    return this;
-  }
+  @JsonProperty("emailAddresses")
+  @NonNull
+  @NotNull
+  public List<CommonEmailAddress> emailAddresses = List.of();
 
   @BabelFishModelProperty(
       description = "Must contain at least one address. One and only one address may have the purpose of REGISTERED. Zero or one, and no more than one, record may have the purpose of MAIL. If zero then the REGISTERED address is to be used for mail",
       required = true)
-  @JsonGetter("physicalAddresses")
-  public List<CommonPhysicalAddressWithPurpose> getPhysicalAddresses();
-
-  @JsonSetter("physicalAddresses")
-  public void setPhysicalAddresses(
-      @NotNull List<CommonPhysicalAddressWithPurpose> physicalAddresses);
-
-  public default CommonPersonDetail physicalAddresses(
-      @NotNull List<CommonPhysicalAddressWithPurpose> physicalAddresses) {
-    setPhysicalAddresses(physicalAddresses);
-    return this;
-  }
+  @JsonProperty("physicalAddresses")
+  public List<CommonPhysicalAddressWithPurpose> physicalAddresses = List.of();
 
 }

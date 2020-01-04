@@ -13,39 +13,10 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.model.common;
 
-import java.math.BigDecimal;
-import java.util.Currency;
-
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import io.biza.cdr.babelfish.converters.AmountStringToBigDecimalConverter;
-import io.biza.cdr.babelfish.converters.BigDecimalToAmountStringConverter;
-import io.biza.cdr.babelfish.converters.CurrencyToStringConverter;
-import io.biza.cdr.babelfish.converters.StringToCurrencyConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Valid
 public class CommonCurrencyAmount extends io.biza.cdr.babelfish.model.common.CommonCurrencyAmount {
-
-  public CommonCurrencyAmount(@NonNull BigDecimal amount) {
-    super(amount);
-  }
-  
-  public CommonCurrencyAmount(@NonNull BigDecimal amount, @NonNull Currency currency) {
-    super(amount);
-    setCurrency(currency);
-  }
 
 }
 

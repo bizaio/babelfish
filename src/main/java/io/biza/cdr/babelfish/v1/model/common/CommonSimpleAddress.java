@@ -17,29 +17,10 @@ import java.util.Locale;
 
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.converters.LocaleToCountryStringConverter;
-import io.biza.cdr.babelfish.converters.CountryStringToLocaleConverter;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Valid
 public class CommonSimpleAddress extends io.biza.cdr.babelfish.model.common.CommonSimpleAddress {
     
-    public CommonSimpleAddress(@NonNull String addressLine1, @NonNull String city,
-      @NonNull String state) {
-    super(addressLine1, city, state);
-  }
-
     @AssertTrue(
             message = "Postcode and State must be correct when Country is defined as Australia (en-AU)")
     private boolean isAustralianFieldChecks() {

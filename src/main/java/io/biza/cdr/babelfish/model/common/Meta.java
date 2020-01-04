@@ -13,14 +13,15 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.common;
 
-import java.net.URI;
 import javax.validation.Valid;
 import io.biza.cdr.babelfish.support.BabelFishModel;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
+@Getter
+@Setter
+@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description =  "Meta Detail")
 public abstract class Meta {
