@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.enumerations;
 
@@ -34,8 +32,8 @@ public enum BankingProductLendingRateType implements LabelValueEnumInterface {
   BUNDLE_DISCOUNT_FIXED("BUNDLE_DISCOUNT_FIXED","A discount rate off the fixed rate obtained by originating a bundle instead of a standalone product"),
   BUNDLE_DISCOUNT_VARIABLE("BUNDLE_DISCOUNT_VARIABLE","A discount rate off the variable rate obtained by originating a bundle instead of a standalone product");
   // @formatter:on	
-
   private String value;
+
   private String label;
 
   BankingProductLendingRateType(String value, String label) {

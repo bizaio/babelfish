@@ -28,7 +28,6 @@ import lombok.experimental.Accessors;
 @Accessors(fluent = true)
 @Valid
 public abstract class ResponseBankingProductListData extends CDRResponsePaginated {
-
   @BabelFishModelProperty(
       description = "The list of products returned.  If the filter results in an empty set then this array may have no records",
       required = true)

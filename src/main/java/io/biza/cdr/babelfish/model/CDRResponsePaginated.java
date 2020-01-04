@@ -22,8 +22,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-@BabelFishModel(
-    description = "This is a Paginated CDR Response")
+@BabelFishModel(description = "This is a Paginated CDR Response")
 @Valid
 @Getter
 @Setter
@@ -33,12 +32,11 @@ public abstract class CDRResponsePaginated {
   @JsonProperty("links")
   @NotNull
   LinksPaginated links;
-  
+
   @BabelFishModelProperty(
       description = "The meta object is used to provide additional information such as second factor authorisation data, traffic management, pagination counts or other purposes that are complementary to the workings of the API.",
       required = true)
   @JsonProperty("meta")
   @NotNull
   MetaPaginated meta;
-
 }

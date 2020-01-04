@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.common;
 
@@ -28,23 +26,19 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(fluent = true)
 @Valid
-@BabelFishModel(description =  "Physical Address Detail")
+@BabelFishModel(description = "Physical Address Detail")
 public abstract class CommonPhysicalAddress {
+  @BabelFishModelProperty(description = "The type of address object present", required = true)
+  @JsonProperty("addressUType")
+  @NotNull
+  @NonNull
+  public PayloadTypeAddress addressType;
 
-    @BabelFishModelProperty(
-        description =  "The type of address object present",
-        required = true
-    )
-    @JsonProperty("addressUType")
-    @NotNull
-    @NonNull
-    public PayloadTypeAddress addressType;
-    
-    @BabelFishModelProperty(description = "Address in Simple Address format")
-    @JsonProperty("simple")
-    public CommonSimpleAddress simple;
-        
-    @BabelFishModelProperty(description = "Address in PAF Format")
-    @JsonProperty("paf")
-    public CommonPAFAddress paf;
+  @BabelFishModelProperty(description = "Address in Simple Address format")
+  @JsonProperty("simple")
+  public CommonSimpleAddress simple;
+
+  @BabelFishModelProperty(description = "Address in PAF Format")
+  @JsonProperty("paf")
+  public CommonPAFAddress paf;
 }

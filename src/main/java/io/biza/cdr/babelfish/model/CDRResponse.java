@@ -39,5 +39,4 @@ public abstract class CDRResponse {
   @JsonProperty("meta")
   @NotNull
   Meta meta;
-
 }

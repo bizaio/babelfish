@@ -1,20 +1,17 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.response;
 
 import java.util.List;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -30,15 +27,11 @@ import io.biza.cdr.babelfish.model.common.Error;
 @Getter
 @Setter
 @Valid
-@BabelFishModel(description =  "CDS Error Response")
+@BabelFishModel(description = "CDS Error Response")
 public abstract class ResponseErrorList {
-
-    @BabelFishModelProperty(
-        required = true
-    )
-    @NonNull
-    @NotNull
-    @JsonProperty("errors")
-    List<Error> errors;
-    
+  @BabelFishModelProperty(required = true)
+  @NonNull
+  @NotNull
+  @JsonProperty("errors")
+  List<Error> errors;
 }

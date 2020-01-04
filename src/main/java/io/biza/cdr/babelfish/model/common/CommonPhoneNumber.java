@@ -33,7 +33,6 @@ import lombok.experimental.Accessors;
 @Valid
 @BabelFishModel(description = "Phone Number Detail")
 public abstract class CommonPhoneNumber {
-
   @BabelFishModelProperty(
       description = "May be true for one and only one entry to indicate the preferred phone number. Assumed to be 'false' if not present")
   @JsonProperty("isPreferred")
@@ -90,5 +89,4 @@ public abstract class CommonPhoneNumber {
     fullNumber(phoneUtil.format(number, PhoneNumberFormat.RFC3966));
     extension(number.getExtension());
   }
-
 }

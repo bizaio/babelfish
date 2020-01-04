@@ -28,7 +28,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Accessors(fluent = true)
 @Valid
 public abstract class ResponseCommonCustomerData {
-
   @BabelFishModelProperty(description = "The type of customer object that is present",
       required = true)
   @JsonProperty("customerUType")
@@ -43,5 +42,4 @@ public abstract class ResponseCommonCustomerData {
   @BabelFishModelProperty(description = "The Organisation Record for the Customer")
   @JsonProperty("organisation")
   public CommonOrganisation organisation;
-
 }

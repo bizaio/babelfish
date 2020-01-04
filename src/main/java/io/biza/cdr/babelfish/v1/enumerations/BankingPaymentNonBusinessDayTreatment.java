@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.enumerations;
 
@@ -25,7 +23,8 @@ import io.biza.cdr.babelfish.support.LabelValueEnumInterface;
  * TODO: Clarify descriptions of this enum:
  * https://github.com/ConsumerDataStandardsAustralia/standards-maintenance/issues/81
  */
-@BabelFishModel(description = "Enumerated field giving the treatment where a scheduled payment date is not a business day. If absent assumed to be ON")
+@BabelFishModel(
+    description = "Enumerated field giving the treatment where a scheduled payment date is not a business day. If absent assumed to be ON")
 public enum BankingPaymentNonBusinessDayTreatment implements LabelValueEnumInterface {
   // @formatter:off    
   AFTER("AFTER", "The next business day immediately following the scheduled date"),
@@ -33,8 +32,8 @@ public enum BankingPaymentNonBusinessDayTreatment implements LabelValueEnumInter
   ON("ON", "Execute on the Non Business Day"),
   ONLY("ONLY", "Only execute if possible on this date");
   // @formatter:on  
-
   private String value;
+
   private String label;
 
   BankingPaymentNonBusinessDayTreatment(String value, String label) {

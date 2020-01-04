@@ -28,7 +28,6 @@ import lombok.experimental.Accessors;
 @Valid
 @BabelFishModel(description = "Simple Address Detail")
 public abstract class CommonSimpleAddress {
-
   @BabelFishModelProperty(
       description = "Name of the individual or business formatted for inclusion in an address used for physical mail")
   @JsonProperty("mailingName")

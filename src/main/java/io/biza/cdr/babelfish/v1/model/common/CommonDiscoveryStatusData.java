@@ -20,20 +20,18 @@ import io.biza.cdr.babelfish.v1.enumerations.CommonDiscoveryStatusType;
 @Valid
 public class CommonDiscoveryStatusData
     extends io.biza.cdr.babelfish.response.container.ResponseCommonDiscoveryStatusData {
-
   @AssertTrue(
       message = "Detection Time should only be present if status is PARTIAL_FAILURE or UNAVAILABLE")
   private boolean isDetectionTimePresent() {
-    return Arrays.asList(new CommonDiscoveryStatusType[] {CommonDiscoveryStatusType.PARTIAL_FAILURE,
-        CommonDiscoveryStatusType.UNAVAILABLE}).contains(status)
-            ? FormatChecker.isDefined(detectionTime)
-            : true;
+    return Arrays.asList(new CommonDiscoveryStatusType[] {
+        CommonDiscoveryStatusType.PARTIAL_FAILURE, CommonDiscoveryStatusType.UNAVAILABLE
+    }).contains(status) ? FormatChecker.isDefined(detectionTime) : true;
   }
 
   @AssertTrue(message = "Resolution Time should only be present if status is not OK")
   private boolean isResolutionTimePresent() {
-    return Arrays.asList(new CommonDiscoveryStatusType[] {CommonDiscoveryStatusType.OK})
-        .contains(status) ? !FormatChecker.isDefined(detectionTime) : true;
+    return Arrays.asList(new CommonDiscoveryStatusType[] {
+        CommonDiscoveryStatusType.OK
+    }).contains(status) ? !FormatChecker.isDefined(detectionTime) : true;
   }
-
 }

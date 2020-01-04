@@ -29,7 +29,6 @@ import lombok.experimental.Accessors;
 @Valid
 @BabelFishModel(description = "Person definition in brief")
 public abstract class CommonPerson {
-
   @BabelFishModelProperty(
       description = "The date and time that this record was last updated by the customer.  If no update has occurred then this date should reflect the initial creation date for the data")
   @JsonProperty("lastUpdateTime")
@@ -57,7 +56,6 @@ public abstract class CommonPerson {
 
   @BabelFishModelProperty(
       description = "Also known as title or salutation.  The prefix to the name (e.g. Mr, Mrs, Ms, Miss, Sir, etc)")
-
   @JsonProperty("prefix")
   public String prefix;
 

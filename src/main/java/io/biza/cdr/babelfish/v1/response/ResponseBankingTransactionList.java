@@ -13,5 +13,4 @@ package io.biza.cdr.babelfish.v1.response;
 
 public class ResponseBankingTransactionList
     extends io.biza.cdr.babelfish.response.ResponseBankingTransactionList {
-
 }

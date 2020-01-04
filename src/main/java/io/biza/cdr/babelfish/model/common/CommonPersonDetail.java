@@ -28,7 +28,6 @@ import lombok.experimental.Accessors;
 @Valid
 @BabelFishModel(description = "Person definition in detail", parent = CommonPerson.class)
 public abstract class CommonPersonDetail extends CommonPerson {
-
   @BabelFishModelProperty(
       description = "Array is mandatory but may be empty if no phone numbers are held",
       required = true)
@@ -48,5 +47,4 @@ public abstract class CommonPersonDetail extends CommonPerson {
       required = true)
   @JsonProperty("physicalAddresses")
   public List<CommonPhysicalAddressWithPurpose> physicalAddresses = List.of();
-
 }

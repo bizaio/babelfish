@@ -27,11 +27,9 @@ import lombok.experimental.Accessors;
 @Accessors(fluent = true)
 @Valid
 public abstract class ResponseBankingDirectDebitAuthorisationListData {
-
   @BabelFishModelProperty(description = "The list of authorisations returned", required = true)
   @JsonProperty("directDebitAuthorisations")
   @NotNull
   @NonNull
   public List<BankingDirectDebit> directDebitAuthorisations;
-
 }

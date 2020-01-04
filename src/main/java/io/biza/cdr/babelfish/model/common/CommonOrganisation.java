@@ -110,5 +110,4 @@ public abstract class CommonOrganisation {
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   @JsonProperty("establishmentDate")
   public LocalDate establishmentDate;
-
 }

@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.enumerations;
 
@@ -27,8 +25,8 @@ public enum PayloadTypeBankingScheduledPaymentRecurrence implements LabelValueEn
   LAST_WEEKDAY("lastWeekDay", "Indicates that the schedule of payments is defined according to the last occurrence of a specific weekday in an interval."),
   EVENT_BASED("eventBased", "Indicates that the schedule of payments is defined according to an external event that cannot be predetermined.");
   // @formatter:on
-
   private String value;
+
   private String label;
 
   PayloadTypeBankingScheduledPaymentRecurrence(String value, String label) {
@@ -44,7 +42,8 @@ public enum PayloadTypeBankingScheduledPaymentRecurrence implements LabelValueEn
 
   @JsonCreator
   public static PayloadTypeBankingScheduledPaymentRecurrence fromValue(String text) {
-    for (PayloadTypeBankingScheduledPaymentRecurrence b : PayloadTypeBankingScheduledPaymentRecurrence.values()) {
+    for (PayloadTypeBankingScheduledPaymentRecurrence b : PayloadTypeBankingScheduledPaymentRecurrence
+        .values()) {
       if (String.valueOf(b.value).equals(text)) {
         return b;
       }

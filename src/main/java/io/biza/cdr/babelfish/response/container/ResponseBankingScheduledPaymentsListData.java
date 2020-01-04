@@ -27,7 +27,6 @@ import lombok.experimental.Accessors;
 @Accessors(fluent = true)
 @Valid
 public abstract class ResponseBankingScheduledPaymentsListData {
-
   @BabelFishModelProperty(description = "The list of scheduled payments to return", required = true)
   @JsonProperty("scheduledPayments")
   @NotNull

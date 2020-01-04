@@ -25,7 +25,6 @@ import lombok.NonNull;
 
 @BabelFishModel(description = "Common Discovery Status Information")
 public abstract class ResponseCommonDiscoveryStatusData {
-
   @BabelFishModelProperty(
       description = "Enumeration with values. OK (implementation is fully functional). PARTIAL_FAILURE (one or more end points are unexpectedly unavailable). UNAVAILABLE (the full implementation is unexpectedly unavailable). SCHEDULED_OUTAGE (an advertised outage is in effect)",
       required = true)
@@ -60,6 +59,4 @@ public abstract class ResponseCommonDiscoveryStatusData {
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   @JsonProperty("expectedResolutionTime")
   public LocalDateTime expectedResolutionTime;
-
 }
-

@@ -27,13 +27,12 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(fluent = true)
 @Valid
-@BabelFishModel(modelName = "ResponseCommonDiscoveryStatus", description = "Common Discovery Status")
+@BabelFishModel(modelName = "ResponseCommonDiscoveryStatus",
+    description = "Common Discovery Status")
 public abstract class ResponseCommonDiscoveryStatus extends CDRResponse {
-  
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull
   @NonNull
   public ResponseCommonDiscoveryStatusData data;
-
 }

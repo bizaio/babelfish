@@ -29,11 +29,9 @@ import lombok.experimental.Accessors;
 @Valid
 @BabelFishModel(description = "Response containing a Banking Accounts Balance by Identifier")
 public abstract class ResponseBankingAccountsBalanceById extends CDRResponse {
-
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull
   @NonNull
   public BankingBalance data;
-
 }

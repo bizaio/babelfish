@@ -27,11 +27,9 @@ import lombok.experimental.Accessors;
 @Accessors(fluent = true)
 @Valid
 public abstract class ResponseBankingTransactionListData {
-
   @BabelFishModelProperty(description = "The list of transactions", required = true)
   @JsonProperty("transactions")
   @NotNull
   @NonNull
   public List<BankingTransaction> transactions;
-
 }

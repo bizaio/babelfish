@@ -11,7 +11,6 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.response;
 
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -28,7 +27,6 @@ import lombok.experimental.Accessors;
 @Accessors(fluent = true)
 @Valid
 public abstract class ResponseCommonCustomerDetail extends CDRResponse {
-
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull

@@ -37,5 +37,4 @@ public class LinksPaginated extends io.biza.cdr.babelfish.model.common.LinksPagi
   private boolean isFirstAndLastPage() {
     return (next == null && prev == null) ? ((first != null || last != null) ? false : true) : true;
   }
-
 }

@@ -15,5 +15,4 @@ import javax.validation.Valid;
 
 @Valid
 public class CommonPerson extends io.biza.cdr.babelfish.model.common.CommonPerson {
-
 }

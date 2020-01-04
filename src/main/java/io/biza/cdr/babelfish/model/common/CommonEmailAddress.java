@@ -29,7 +29,6 @@ import lombok.experimental.Accessors;
 @Valid
 @BabelFishModel(description = "Email Address Definition")
 public abstract class CommonEmailAddress {
-
   @BabelFishModelProperty(
       description = "The purpose for the email, as specified by the customer (Enumeration)",
       required = true)
@@ -51,5 +50,4 @@ public abstract class CommonEmailAddress {
       description = "May be true for one and only one email record in the collection. Denotes the default email address")
   @JsonProperty("isPreferred")
   public Boolean isPreferred;
-
 }

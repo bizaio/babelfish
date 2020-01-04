@@ -30,7 +30,6 @@ import lombok.experimental.Accessors;
 @Valid
 @BabelFishModel(description = "CDS Links")
 public abstract class Links {
-
   @BabelFishModelProperty(
       description = "Fully qualified link that generated the current response document",
       required = true, dataType = "java.lang.String")
@@ -38,5 +37,4 @@ public abstract class Links {
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("self")
   URI self;
-
 }

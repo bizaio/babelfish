@@ -32,7 +32,6 @@ import lombok.experimental.Accessors;
 @BabelFishModel(
     description = "Australian address formatted according to the file format defined by the [PAF file format](https://auspost.com.au/content/dam/auspost_corp/media/documents/australia-post-data-guide.pdf)")
 public abstract class CommonPAFAddress {
-
   @BabelFishModelProperty(
       description = "Unique identifier for an address as defined by Australia Post.  Also known as Delivery Point Identifier")
   @JsonProperty("dpid")

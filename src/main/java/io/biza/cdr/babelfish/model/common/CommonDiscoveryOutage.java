@@ -35,7 +35,6 @@ import lombok.experimental.Accessors;
 @Valid
 @BabelFishModel(description = "Outage Detail")
 public abstract class CommonDiscoveryOutage {
-
   @BabelFishModelProperty(description = "Date and time that the outage is scheduled to begin",
       required = true)
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
@@ -69,5 +68,4 @@ public abstract class CommonDiscoveryOutage {
   @NotNull
   @NonNull
   public String explanation;
-
 }
