@@ -27,8 +27,7 @@ public class CDRResponseV1Test {
   @Test
   @DisplayName("Create valid CDR Response V1")
   void createValidCDRResponse() {
-    CDRResponse myResponse = new CDRResponse();
-    myResponse.links(new Links().self(URI.create("http://localhost/"))).meta(new Meta());
+    CDRResponse myResponse = new CDRResponse().links(new Links().self(URI.create("http://localhost/"))).meta(new Meta());
     assertTrue(validator.validate(myResponse).isEmpty());
   }
   

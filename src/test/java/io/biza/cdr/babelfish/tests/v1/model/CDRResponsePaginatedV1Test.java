@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.logging.LoggerFactory;
+import io.biza.cdr.babelfish.tests.v1.ModelConstants;
 import io.biza.cdr.babelfish.v1.model.CDRResponsePaginated;
 import io.biza.cdr.babelfish.v1.model.common.LinksPaginated;
 import io.biza.cdr.babelfish.v1.model.common.MetaPaginated;
@@ -19,7 +20,6 @@ import io.biza.cdr.babelfish.v1.model.common.MetaPaginated;
 public class CDRResponsePaginatedV1Test {
   private Validator validator;
 
-  public static URI DEFAULT_URI = URI.create("http://localhost/");
 
   @BeforeEach
   public void setup() {
@@ -29,10 +29,9 @@ public class CDRResponsePaginatedV1Test {
 
   @Test
   void createValidCDRResponsePaginated() {
-    CDRResponsePaginated myResponse = new CDRResponsePaginated();
-    myResponse
-        .links(new LinksPaginated().self(DEFAULT_URI).first(DEFAULT_URI).next(DEFAULT_URI)
-            .last(DEFAULT_URI).prev(DEFAULT_URI))
+    CDRResponsePaginated myResponse = new CDRResponsePaginated()
+        .links(new LinksPaginated().self(ModelConstants.DEFAULT_URI).first(ModelConstants.DEFAULT_URI).next(ModelConstants.DEFAULT_URI)
+            .last(ModelConstants.DEFAULT_URI).prev(ModelConstants.DEFAULT_URI))
         .meta(new MetaPaginated().totalPages(10).totalRecords(100));
     assertTrue(validator.validate(myResponse).isEmpty(), validator.validate(myResponse).toString());
   }
@@ -45,34 +44,30 @@ public class CDRResponsePaginatedV1Test {
 
   @Test
   void invalidResponsePaginatedWithMissingMetaPaginated() {
-    CDRResponsePaginated myResponse = new CDRResponsePaginated();
-    myResponse.links(new LinksPaginated().self(DEFAULT_URI).first(DEFAULT_URI).next(DEFAULT_URI)
-        .last(DEFAULT_URI).prev(DEFAULT_URI));
+    CDRResponsePaginated myResponse = new CDRResponsePaginated().links(new LinksPaginated().self(ModelConstants.DEFAULT_URI).first(ModelConstants.DEFAULT_URI).next(ModelConstants.DEFAULT_URI)
+        .last(ModelConstants.DEFAULT_URI).prev(ModelConstants.DEFAULT_URI));
     assertFalse(validator.validate(myResponse).isEmpty());
   }
 
   @Test
   void invalidResponsePaginatedWithMissingLinksPaginated() {
-    CDRResponsePaginated myResponse = new CDRResponsePaginated();
-    myResponse.meta(new MetaPaginated());
+    CDRResponsePaginated myResponse = new CDRResponsePaginated().meta(new MetaPaginated());
     assertFalse(validator.validate(myResponse).isEmpty());
   }
 
 
   @Test
   void invalidResponsePaginatedWithMissingLinksPaginatedSelf() {
-    CDRResponsePaginated myResponse = new CDRResponsePaginated();
-    myResponse.links(new LinksPaginated().first(DEFAULT_URI).next(DEFAULT_URI).last(DEFAULT_URI)
-        .prev(DEFAULT_URI));
-    myResponse.meta(new MetaPaginated());
+    CDRResponsePaginated myResponse = new CDRResponsePaginated().links(new LinksPaginated().first(ModelConstants.DEFAULT_URI).next(ModelConstants.DEFAULT_URI).last(ModelConstants.DEFAULT_URI)
+        .prev(ModelConstants.DEFAULT_URI)).meta(new MetaPaginated());
     assertFalse(validator.validate(myResponse).isEmpty());
   }
 
   @Test
   void invalidResponsePaginatedWithPreviousPageButFirstPageMissing() {
     CDRResponsePaginated myResponse = new CDRResponsePaginated();
-    myResponse.links(new LinksPaginated().self(DEFAULT_URI).next(DEFAULT_URI).last(DEFAULT_URI)
-        .prev(DEFAULT_URI)).meta(new MetaPaginated().totalPages(10).totalRecords(100));
+    myResponse.links(new LinksPaginated().self(ModelConstants.DEFAULT_URI).next(ModelConstants.DEFAULT_URI).last(ModelConstants.DEFAULT_URI)
+        .prev(ModelConstants.DEFAULT_URI)).meta(new MetaPaginated().totalPages(10).totalRecords(100));
     assertFalse(validator.validate(myResponse).isEmpty(),
         validator.validate(myResponse).toString());
   }
@@ -80,8 +75,8 @@ public class CDRResponsePaginatedV1Test {
   @Test
   void invalidResponsePaginatedWithNextPageButLastPageMissing() {
     CDRResponsePaginated myResponse = new CDRResponsePaginated();
-    myResponse.links(new LinksPaginated().self(DEFAULT_URI).first(DEFAULT_URI).next(DEFAULT_URI)
-        .prev(DEFAULT_URI)).meta(new MetaPaginated().totalPages(10).totalRecords(100));
+    myResponse.links(new LinksPaginated().self(ModelConstants.DEFAULT_URI).first(ModelConstants.DEFAULT_URI).next(ModelConstants.DEFAULT_URI)
+        .prev(ModelConstants.DEFAULT_URI)).meta(new MetaPaginated().totalPages(10).totalRecords(100));
     assertFalse(validator.validate(myResponse).isEmpty(),
         validator.validate(myResponse).toString());
   }
@@ -89,7 +84,7 @@ public class CDRResponsePaginatedV1Test {
   @Test
   void invalidResponsePaginatedWithSinglePage() {
     CDRResponsePaginated myResponse = new CDRResponsePaginated();
-    myResponse.links(new LinksPaginated().self(DEFAULT_URI).first(DEFAULT_URI).last(DEFAULT_URI))
+    myResponse.links(new LinksPaginated().self(ModelConstants.DEFAULT_URI).first(ModelConstants.DEFAULT_URI).last(ModelConstants.DEFAULT_URI))
         .meta(new MetaPaginated().totalPages(1).totalRecords(10));
     assertFalse(validator.validate(myResponse).isEmpty(),
         validator.validate(myResponse).toString());
@@ -98,7 +93,7 @@ public class CDRResponsePaginatedV1Test {
   @Test
   void invalidResponsePaginatedWithSinglePageAndMoreThanOnePageTotal() {
     CDRResponsePaginated myResponse = new CDRResponsePaginated();
-    myResponse.links(new LinksPaginated().self(DEFAULT_URI))
+    myResponse.links(new LinksPaginated().self(ModelConstants.DEFAULT_URI))
         .meta(new MetaPaginated().totalPages(10).totalRecords(10));
     assertFalse(validator.validate(myResponse).isEmpty(),
         validator.validate(myResponse).toString());
@@ -107,14 +102,14 @@ public class CDRResponsePaginatedV1Test {
   @Test
   void invalidResponsePaginatedWithZeroRecords() {
     CDRResponsePaginated myResponse =
-        (CDRResponsePaginated) new CDRResponsePaginated().links(new LinksPaginated().self(DEFAULT_URI))
+        (CDRResponsePaginated) new CDRResponsePaginated().links(new LinksPaginated().self(ModelConstants.DEFAULT_URI))
         .meta(new MetaPaginated().totalPages(1).totalRecords(0));
     assertFalse(validator.validate(myResponse).isEmpty(),
         validator.validate(myResponse).toString());
   }
   /**
    * @Test void invalidResponsePaginatedWithZeroPages() { CDRResponsePaginated myResponse = new
-   *       CDRResponsePaginated(); myResponse.links((new LinksPaginated()).self(DEFAULT_URI))
+   *       CDRResponsePaginated(); myResponse.links((new LinksPaginated()).self(ModelConstants.DEFAULT_URI))
    *       .meta((new MetaPaginated()).totalPages(0).totalRecords(10));
    *       assertFalse(validator.validate(myResponse).isEmpty(),
    *       validator.validate(myResponse).toString()); }

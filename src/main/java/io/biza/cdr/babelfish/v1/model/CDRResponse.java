@@ -14,5 +14,5 @@ package io.biza.cdr.babelfish.v1.model;
 import javax.validation.Valid;
 
 @Valid
-public class CDRResponse extends io.biza.cdr.babelfish.model.CDRResponse {
+public class CDRResponse extends io.biza.cdr.babelfish.model.CDRResponse<CDRResponse> {
 }

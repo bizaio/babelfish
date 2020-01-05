@@ -14,7 +14,9 @@ package io.biza.cdr.babelfish.model;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.biza.cdr.babelfish.model.common.Links;
 import io.biza.cdr.babelfish.model.common.LinksPaginated;
+import io.biza.cdr.babelfish.model.common.Meta;
 import io.biza.cdr.babelfish.model.common.MetaPaginated;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
@@ -27,14 +29,23 @@ import lombok.experimental.Accessors;
 @Valid
 @Getter
 @Setter
-@Accessors(fluent = true)
-public abstract class CDRResponsePaginated {
+public abstract class CDRResponsePaginated <T extends CDRResponsePaginated<T>> {
   @BabelFishModelProperty(description = "The Links Object", required = true)
   @JsonProperty("links")
   @NotNull
   @NonNull
   @Valid
   LinksPaginated links;
+  
+  public LinksPaginated links() {
+    return getLinks();
+  }
+  
+  @SuppressWarnings("unchecked")
+  public T links(LinksPaginated links) {
+    setLinks(links);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "The meta object is used to provide additional information such as second factor authorisation data, traffic management, pagination counts or other purposes that are complementary to the workings of the API.",
@@ -44,4 +55,14 @@ public abstract class CDRResponsePaginated {
   @NonNull
   @Valid
   MetaPaginated meta;
+  
+  public MetaPaginated meta() {
+    return getMeta();
+  }
+  
+  @SuppressWarnings("unchecked")
+  public T meta(MetaPaginated meta) {
+    setMeta(meta);
+    return (T) this;
+  }
 }

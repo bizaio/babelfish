@@ -28,10 +28,9 @@ import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "Paginated Links")
-public abstract class LinksPaginated {
+public abstract class LinksPaginated<T extends LinksPaginated<T>> {
   /**
    * Minimal field validation possible at POJO level Scenario: [ self, first, prev, next, last ]
    * First Page and not Last: [ Yes, No, No, Yes, Yes ] Last Page and not First: [ Yes, Yes, Yes,
@@ -49,6 +48,16 @@ public abstract class LinksPaginated {
   @Valid
   public URI self;
 
+  public URI self() {
+    return getSelf();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T self(URI self) {
+    setSelf(self);
+    return (T) this;
+  }
+
   @BabelFishModelProperty(
       description = "URI to the first page of this set. Mandatory if this response is not the first page",
       dataType = "java.lang.String", attributeName = "first")
@@ -57,6 +66,16 @@ public abstract class LinksPaginated {
   @JsonProperty("first")
   @Valid
   public URI first;
+
+  public URI first() {
+    return getFirst();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T first(URI first) {
+    setFirst(first);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "URI to the previous page of this set. Mandatory if this response is not the prev page",
@@ -67,6 +86,16 @@ public abstract class LinksPaginated {
   @Valid
   public URI prev;
 
+  public URI prev() {
+    return getPrev();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T prev(URI prev) {
+    setPrev(prev);
+    return (T) this;
+  }
+
   @BabelFishModelProperty(
       description = "URI to the next page of this set. Mandatory if this response is not the last page",
       dataType = "java.lang.String", attributeName = "next")
@@ -76,6 +105,16 @@ public abstract class LinksPaginated {
   @Valid
   public URI next;
 
+  public URI next() {
+    return getNext();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T next(URI next) {
+    setNext(next);
+    return (T) this;
+  }
+
   @BabelFishModelProperty(
       description = "URI to the last page of this set. Mandatory if this response is not the last page",
       dataType = "java.lang.String", attributeName = "last")
@@ -84,4 +123,14 @@ public abstract class LinksPaginated {
   @JsonProperty("last")
   @Valid
   public URI last;
+
+  public URI last() {
+    return getLast();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T last(URI last) {
+    setLast(last);
+    return (T) this;
+  }
 }

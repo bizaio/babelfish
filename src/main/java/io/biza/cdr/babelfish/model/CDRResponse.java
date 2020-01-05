@@ -26,13 +26,22 @@ import lombok.experimental.Accessors;
 @Valid
 @Getter
 @Setter
-@Accessors(fluent = true)
-public abstract class CDRResponse {
+public abstract class CDRResponse <T extends CDRResponse<T>> {
   @BabelFishModelProperty(description = "The Links Object", required = true)
   @JsonProperty("links")
   @NotNull
   @Valid
   Links links;
+  
+  public Links links() {
+    return getLinks();
+  }
+  
+  @SuppressWarnings("unchecked")
+  public T links(Links links) {
+    setLinks(links);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "The meta object is used to provide additional information such as second factor authorisation data, traffic management, pagination counts or other purposes that are complementary to the workings of the API.",
@@ -41,4 +50,14 @@ public abstract class CDRResponse {
   @NotNull
   @Valid
   Meta meta;
+  
+  public Meta meta() {
+    return getMeta();
+  }
+  
+  @SuppressWarnings("unchecked")
+  public T meta(Meta meta) {
+    setMeta(meta);
+    return (T) this;
+  }
 }

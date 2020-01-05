@@ -41,5 +41,5 @@ public abstract class Links {
   @NotNull
   @NonNull
   @Valid
-  URI self;
+  public URI self;
 }
