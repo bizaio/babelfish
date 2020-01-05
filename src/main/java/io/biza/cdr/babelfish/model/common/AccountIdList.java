@@ -11,48 +11,37 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *******************************************************************************/
-package io.biza.cdr.babelfish.model.banking;
+package io.biza.cdr.babelfish.model.common;
 
+import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NonNull;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @Valid
-@BabelFishModel(description = "International Payee Bank Address Details")
-public abstract class BankingInternationalPayeeBankDetailsBankAddress<T extends BankingInternationalPayeeBankDetailsBankAddress<T>> {
-  @BabelFishModelProperty(description = "Name of the recipient Bank", required = true)
-  @NonNull
+@BabelFishModel(description = "Account ID List")
+public abstract class AccountIdList<T extends AccountIdList<T>> {
+  @BabelFishModelProperty(
+      description = "List of Account Identifiers",
+      required = true)
+  @JsonProperty("accountIds")
   @NotNull
-  String name;
+  @NonNull
+  List<String> accountIds;
 
-  public String name() {
-    return getName();
+  public List<String> accountIds() {
+    return getAccountIds();
   }
 
   @SuppressWarnings("unchecked")
-  public T name(String name) {
-    setName(name);
+  public T accountIds(List<String> accountIds) {
+    setAccountIds(accountIds);
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Address of the recipient Bank", required = true)
-  @NonNull
-  @NotNull
-  String address;
-
-  public String address() {
-    return getAddress();
-  }
-
-  @SuppressWarnings("unchecked")
-  public T address(String address) {
-    setAddress(address);
-    return (T) this;
-  }
 }

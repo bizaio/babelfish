@@ -1,3 +1,4 @@
+package io.biza.cdr.babelfish.request;
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
@@ -11,10 +12,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *******************************************************************************/
-package io.biza.cdr.babelfish.model.banking;
+
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.biza.cdr.babelfish.model.common.AccountIdList;
+import io.biza.cdr.babelfish.model.common.Meta;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
@@ -24,35 +28,29 @@ import lombok.Setter;
 @Getter
 @Setter
 @Valid
-@BabelFishModel(description = "International Payee Bank Address Details")
-public abstract class BankingInternationalPayeeBankDetailsBankAddress<T extends BankingInternationalPayeeBankDetailsBankAddress<T>> {
-  @BabelFishModelProperty(description = "Name of the recipient Bank", required = true)
-  @NonNull
+@BabelFishModel(description = "Request containing a set of Account IDs")
+public abstract class RequestAccountIds<T> {
+  @BabelFishModelProperty(required = true)
+  @JsonProperty("data")
   @NotNull
-  String name;
+  @NonNull
+  public AccountIdList<?> data;
+  
+  @BabelFishModelProperty(
+      description = "The meta object is used to provide additional information such as second factor authorisation data, traffic management, pagination counts or other purposes that are complementary to the workings of the API.",
+      required = true)
+  @JsonProperty("meta")
+  @NotNull
+  @Valid
+  Meta<?> meta;
 
-  public String name() {
-    return getName();
+  public Meta<?> meta() {
+    return getMeta();
   }
 
   @SuppressWarnings("unchecked")
-  public T name(String name) {
-    setName(name);
-    return (T) this;
-  }
-
-  @BabelFishModelProperty(description = "Address of the recipient Bank", required = true)
-  @NonNull
-  @NotNull
-  String address;
-
-  public String address() {
-    return getAddress();
-  }
-
-  @SuppressWarnings("unchecked")
-  public T address(String address) {
-    setAddress(address);
+  public T meta(Meta<?> meta) {
+    setMeta(meta);
     return (T) this;
   }
 }
