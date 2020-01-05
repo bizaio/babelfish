@@ -20,14 +20,12 @@ import io.biza.cdr.babelfish.v1.enumerations.AddressPurpose;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "Physical Address with Purpose", parent = CommonPhysicalAddress.class)
-public abstract class CommonPhysicalAddressWithPurpose extends CommonPhysicalAddress {
+public abstract class CommonPhysicalAddressWithPurpose<T> extends CommonPhysicalAddress<CommonPhysicalAddressWithPurpose<T>> {
   @BabelFishModelProperty(
       description = "Enumeration of values indicating the purpose of the physical address",
       required = true)
@@ -35,4 +33,14 @@ public abstract class CommonPhysicalAddressWithPurpose extends CommonPhysicalAdd
   @NotNull
   @NonNull
   public AddressPurpose purpose;
+
+  public AddressPurpose purpose() {
+    return getPurpose();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T purpose(AddressPurpose purpose) {
+    setPurpose(purpose);
+    return (T) this;
+  }
 }

@@ -20,14 +20,12 @@ import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "Paginated Meta Details", parent = Meta.class)
-public abstract class MetaPaginated extends Meta {
+public abstract class MetaPaginated<T extends MetaPaginated<T>> {
   @BabelFishModelProperty(description = "The total number of records in the full set.",
       required = true)
   @JsonProperty("totalRecords")
@@ -36,6 +34,16 @@ public abstract class MetaPaginated extends Meta {
   @Min(0)
   public Integer totalRecords;
 
+public Integer totalRecords() {
+  return getTotalRecords();
+}
+
+@SuppressWarnings("unchecked")
+public T totalRecords(Integer totalRecords) {
+   setTotalRecords(totalRecords);
+   return (T) this;
+}
+
   @BabelFishModelProperty(description = "The total number of pages in the full set.",
       required = true)
   @JsonProperty("totalPages")
@@ -43,4 +51,14 @@ public abstract class MetaPaginated extends Meta {
   @NonNull
   @Min(0)
   public Integer totalPages;
+
+public Integer totalPages() {
+  return getTotalPages();
+}
+
+@SuppressWarnings("unchecked")
+public T totalPages(Integer totalPages) {
+   setTotalPages(totalPages);
+   return (T) this;
+}
 }

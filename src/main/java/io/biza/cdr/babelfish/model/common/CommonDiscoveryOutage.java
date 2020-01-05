@@ -27,14 +27,12 @@ import io.biza.cdr.babelfish.converters.StringToPeriodConverter;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "Outage Detail")
-public abstract class CommonDiscoveryOutage {
+public abstract class CommonDiscoveryOutage <T extends CommonDiscoveryOutage<T>> {
   @BabelFishModelProperty(description = "Date and time that the outage is scheduled to begin",
       required = true)
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
@@ -43,6 +41,16 @@ public abstract class CommonDiscoveryOutage {
   @NotNull
   @NonNull
   public LocalDateTime outageTime;
+
+public LocalDateTime outageTime() {
+  return getOutageTime();
+}
+
+@SuppressWarnings("unchecked")
+public T outageTime(LocalDateTime outageTime) {
+   setOutageTime(outageTime);
+   return (T) this;
+}
 
   @BabelFishModelProperty(
       description = "Planned duration of the outage. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations)",
@@ -54,12 +62,32 @@ public abstract class CommonDiscoveryOutage {
   @NonNull
   public Period duration;
 
+public Period duration() {
+  return getDuration();
+}
+
+@SuppressWarnings("unchecked")
+public T duration(Period duration) {
+   setDuration(duration);
+   return (T) this;
+}
+
   @BabelFishModelProperty(
       description = "Flag that indicates, if present and set to true, that the outage is only partial meaning that only a subset of normally available end points will be affected by the outage")
   @JsonProperty("isPartial")
   @NotNull
   @NonNull
   public Boolean isPartial;
+
+public Boolean isPartial() {
+  return getIsPartial();
+}
+
+@SuppressWarnings("unchecked")
+public T isPartial(Boolean isPartial) {
+   setIsPartial(isPartial);
+   return (T) this;
+}
 
   @BabelFishModelProperty(
       description = "Provides an explanation of the current outage that can be displayed to an end customer",
@@ -68,4 +96,14 @@ public abstract class CommonDiscoveryOutage {
   @NotNull
   @NonNull
   public String explanation;
+
+public String explanation() {
+  return getExplanation();
+}
+
+@SuppressWarnings("unchecked")
+public T explanation(String explanation) {
+   setExplanation(explanation);
+   return (T) this;
+}
 }

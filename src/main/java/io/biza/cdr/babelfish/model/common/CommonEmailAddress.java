@@ -21,14 +21,12 @@ import io.biza.cdr.babelfish.v1.enumerations.CommonEmailAddressPurpose;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "Email Address Definition")
-public abstract class CommonEmailAddress {
+public abstract class CommonEmailAddress <T extends CommonEmailAddress<T>> {
   @BabelFishModelProperty(
       description = "The purpose for the email, as specified by the customer (Enumeration)",
       required = true)
@@ -36,6 +34,16 @@ public abstract class CommonEmailAddress {
   @NotNull
   @NonNull
   public CommonEmailAddressPurpose purpose;
+
+public CommonEmailAddressPurpose purpose() {
+  return getPurpose();
+}
+
+@SuppressWarnings("unchecked")
+public T purpose(CommonEmailAddressPurpose purpose) {
+   setPurpose(purpose);
+   return (T) this;
+}
 
   @BabelFishModelProperty(
       description = "A correctly formatted email address, as defined by the addr_spec format in [RFC 5322](https://www.ietf.org/rfc/rfc5322.txt)",
@@ -46,8 +54,28 @@ public abstract class CommonEmailAddress {
   @NonNull
   public String address;
 
+public String address() {
+  return getAddress();
+}
+
+@SuppressWarnings("unchecked")
+public T address(String address) {
+   setAddress(address);
+   return (T) this;
+}
+
   @BabelFishModelProperty(
       description = "May be true for one and only one email record in the collection. Denotes the default email address")
   @JsonProperty("isPreferred")
   public Boolean isPreferred;
+
+public Boolean isPreferred() {
+  return getIsPreferred();
+}
+
+@SuppressWarnings("unchecked")
+public T isPreferred(Boolean isPreferred) {
+   setIsPreferred(isPreferred);
+   return (T) this;
+}
 }

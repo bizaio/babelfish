@@ -37,9 +37,9 @@ public abstract class ResponseCommonCustomerData {
 
   @BabelFishModelProperty(description = "The Person Record for the Customer")
   @JsonProperty("person")
-  public CommonPerson person;
+  public CommonPerson<?> person;
 
   @BabelFishModelProperty(description = "The Organisation Record for the Customer")
   @JsonProperty("organisation")
-  public CommonOrganisation organisation;
+  public CommonOrganisation<?> organisation;
 }

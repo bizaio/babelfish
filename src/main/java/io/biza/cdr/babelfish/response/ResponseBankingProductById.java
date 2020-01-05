@@ -26,7 +26,7 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(fluent = true)
 @Valid
-public abstract class ResponseBankingProductById extends CDRResponse {
+public abstract class ResponseBankingProductById extends CDRResponse<ResponseBankingProductById> {
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull

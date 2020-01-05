@@ -33,5 +33,5 @@ public abstract class ResponseErrorList {
   @NonNull
   @NotNull
   @JsonProperty("errors")
-  List<Error> errors;
+  List<Error<?>> errors;
 }

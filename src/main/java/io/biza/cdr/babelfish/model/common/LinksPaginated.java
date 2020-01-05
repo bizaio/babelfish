@@ -24,7 +24,6 @@ import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
@@ -58,6 +57,7 @@ public abstract class LinksPaginated<T extends LinksPaginated<T>> {
     return (T) this;
   }
 
+
   @BabelFishModelProperty(
       description = "URI to the first page of this set. Mandatory if this response is not the first page",
       dataType = "java.lang.String", attributeName = "first")
@@ -76,6 +76,7 @@ public abstract class LinksPaginated<T extends LinksPaginated<T>> {
     setFirst(first);
     return (T) this;
   }
+
 
   @BabelFishModelProperty(
       description = "URI to the previous page of this set. Mandatory if this response is not the prev page",
@@ -96,6 +97,7 @@ public abstract class LinksPaginated<T extends LinksPaginated<T>> {
     return (T) this;
   }
 
+
   @BabelFishModelProperty(
       description = "URI to the next page of this set. Mandatory if this response is not the last page",
       dataType = "java.lang.String", attributeName = "next")
@@ -115,6 +117,7 @@ public abstract class LinksPaginated<T extends LinksPaginated<T>> {
     return (T) this;
   }
 
+
   @BabelFishModelProperty(
       description = "URI to the last page of this set. Mandatory if this response is not the last page",
       dataType = "java.lang.String", attributeName = "last")
@@ -133,4 +136,5 @@ public abstract class LinksPaginated<T extends LinksPaginated<T>> {
     setLast(last);
     return (T) this;
   }
+
 }

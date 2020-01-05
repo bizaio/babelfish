@@ -15,5 +15,5 @@ import javax.validation.Valid;
 
 @Valid
 public class CommonPhysicalAddressWithPurpose
-    extends io.biza.cdr.babelfish.model.common.CommonPhysicalAddressWithPurpose {
+    extends io.biza.cdr.babelfish.model.common.CommonPhysicalAddressWithPurpose<CommonPhysicalAddressWithPurpose> {
 }

@@ -15,5 +15,5 @@ import javax.validation.Valid;
 
 @Valid
 public class CommonDiscoveryOutage
-    extends io.biza.cdr.babelfish.model.common.CommonDiscoveryOutage {
+    extends io.biza.cdr.babelfish.model.common.CommonDiscoveryOutage<CommonDiscoveryOutage> {
 }

@@ -14,5 +14,5 @@ package io.biza.cdr.babelfish.v1.model.common;
 import javax.validation.Valid;
 
 @Valid
-public class Meta extends io.biza.cdr.babelfish.model.common.Meta {
+public class Meta extends io.biza.cdr.babelfish.model.common.Meta<Meta> {
 }

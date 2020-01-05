@@ -26,7 +26,7 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(fluent = true)
 @Valid
-public abstract class ResponseBankingPayeeList extends CDRResponsePaginated {
+public abstract class ResponseBankingPayeeList extends CDRResponsePaginated<ResponseBankingPayeeList> {
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull

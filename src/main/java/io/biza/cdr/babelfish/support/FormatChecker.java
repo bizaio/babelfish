@@ -117,13 +117,13 @@ public class FormatChecker {
   }
 
   public static boolean isAddressPopulated(
-      List<CommonPhysicalAddressWithPurpose> physicalAddresses) {
+      List<CommonPhysicalAddressWithPurpose<?>> physicalAddresses) {
     if (physicalAddresses == null) {
       return false;
     }
     int registeredCount = 0;
     int mailCount = 0;
-    for (CommonPhysicalAddressWithPurpose oneAddress : physicalAddresses) {
+    for (CommonPhysicalAddressWithPurpose<?> oneAddress : physicalAddresses) {
       if (oneAddress.purpose().equals(AddressPurpose.REGISTERED)) {
         registeredCount++;
       }

@@ -25,14 +25,12 @@ import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "Currency Amount")
-public abstract class CommonCurrencyAmount {
+public abstract class CommonCurrencyAmount <T extends CommonCurrencyAmount<T>> {
   @BabelFishModelProperty(
       description = "The current balance of the account at this time. Should align to the current balance available via other channels such as ATM balance enquiry or Internet Banking",
       required = true, dataType = "java.lang.String")
@@ -41,10 +39,30 @@ public abstract class CommonCurrencyAmount {
   @JsonProperty("amount")
   public BigDecimal amount;
 
+public BigDecimal amount() {
+  return getAmount();
+}
+
+@SuppressWarnings("unchecked")
+public T amount(BigDecimal amount) {
+   setAmount(amount);
+   return (T) this;
+}
+
   @BabelFishModelProperty(description = "Currency Amount Currency Code", required = false,
       dataType = "java.lang.String")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   @JsonProperty("currency")
   public Currency currency;
+
+public Currency currency() {
+  return getCurrency();
+}
+
+@SuppressWarnings("unchecked")
+public T currency(Currency currency) {
+   setCurrency(currency);
+   return (T) this;
+}
 }

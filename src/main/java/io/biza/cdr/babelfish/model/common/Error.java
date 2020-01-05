@@ -17,15 +17,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NonNull;
-import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Data
 @Valid
 @BabelFishModel(description = "Error Information")
-public abstract class Error <T extends Error<T>> {
+public abstract class Error<T extends Error<T>> {
   @BabelFishModelProperty(
       description = "Must be one of the following: 0001 – Account not able to be found",
       required = true)
@@ -90,4 +87,5 @@ public abstract class Error <T extends Error<T>> {
     setMeta(meta);
     return (T) this;
   }
+
 }

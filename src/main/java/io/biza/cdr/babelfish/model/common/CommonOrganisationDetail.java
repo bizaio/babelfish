@@ -20,20 +20,18 @@ import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "Organisation Definition in Detail",
     parent = CommonOrganisation.class)
-public abstract class CommonOrganisationDetail extends CommonOrganisation {
+public abstract class CommonOrganisationDetail<T> extends CommonOrganisation<CommonOrganisationDetail<T>> {
   @BabelFishModelProperty(
       description = "Must contain at least one address. One and only one address may have the purpose of REGISTERED. Zero or one, and no more than one, record may have the purpose of MAIL. If zero then the REGISTERED address is to be used for mail",
       required = true)
   @JsonProperty("physicalAddresses")
   @NotNull
   @NonNull
-  public List<CommonPhysicalAddressWithPurpose> physicalAddresses;
+  public List<CommonPhysicalAddressWithPurpose<?>> physicalAddresses;
 }

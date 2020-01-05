@@ -15,12 +15,10 @@ import javax.validation.Valid;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "Meta Detail")
-public abstract class Meta {
+public abstract class Meta <T extends Meta<T>> {
 }

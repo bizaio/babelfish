@@ -26,7 +26,7 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(fluent = true)
 @Valid
-public abstract class ResponseCommonCustomerDetail extends CDRResponse {
+public abstract class ResponseCommonCustomerDetail extends CDRResponse<ResponseCommonCustomerDetail> {
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull

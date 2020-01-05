@@ -24,14 +24,12 @@ import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "CDS Links")
-public abstract class Links {
+public abstract class Links <T extends Links<T>> {
   @BabelFishModelProperty(
       description = "Fully qualified link that generated the current response document",
       required = true, dataType = "java.lang.String")
@@ -42,4 +40,14 @@ public abstract class Links {
   @NonNull
   @Valid
   public URI self;
+
+public URI self() {
+  return getSelf();
+}
+
+@SuppressWarnings("unchecked")
+public T self(URI self) {
+   setSelf(self);
+   return (T) this;
+}
 }

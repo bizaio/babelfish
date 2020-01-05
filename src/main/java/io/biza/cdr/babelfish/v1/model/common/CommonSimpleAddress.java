@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 
 @Valid
-public class CommonSimpleAddress extends io.biza.cdr.babelfish.model.common.CommonSimpleAddress {
+public class CommonSimpleAddress extends io.biza.cdr.babelfish.model.common.CommonSimpleAddress<CommonSimpleAddress> {
   @AssertTrue(
       message = "Postcode and State must be correct when Country is defined as Australia (en-AU)")
   private boolean isAustralianFieldChecks() {

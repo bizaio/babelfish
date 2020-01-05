@@ -14,5 +14,5 @@ package io.biza.cdr.babelfish.v1.model.common;
 import javax.validation.Valid;
 
 @Valid
-public class CommonCurrencyAmount extends io.biza.cdr.babelfish.model.common.CommonCurrencyAmount {
+public class CommonCurrencyAmount extends io.biza.cdr.babelfish.model.common.CommonCurrencyAmount<CommonCurrencyAmount> {
 }

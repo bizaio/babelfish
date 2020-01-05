@@ -20,31 +20,29 @@ import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "Person definition in detail", parent = CommonPerson.class)
-public abstract class CommonPersonDetail extends CommonPerson {
+public abstract class CommonPersonDetail extends CommonPerson<CommonPersonDetail> {
   @BabelFishModelProperty(
       description = "Array is mandatory but may be empty if no phone numbers are held",
       required = true)
   @JsonProperty("phoneNumbers")
   @NonNull
   @NotNull
-  public List<CommonPhoneNumber> phoneNumbers = List.of();
+  public List<CommonPhoneNumber<?>> phoneNumbers = List.of();
 
   @BabelFishModelProperty(description = "May be empty", required = true)
   @JsonProperty("emailAddresses")
   @NonNull
   @NotNull
-  public List<CommonEmailAddress> emailAddresses = List.of();
+  public List<CommonEmailAddress<?>> emailAddresses = List.of();
 
   @BabelFishModelProperty(
       description = "Must contain at least one address. One and only one address may have the purpose of REGISTERED. Zero or one, and no more than one, record may have the purpose of MAIL. If zero then the REGISTERED address is to be used for mail",
       required = true)
   @JsonProperty("physicalAddresses")
-  public List<CommonPhysicalAddressWithPurpose> physicalAddresses = List.of();
+  public List<CommonPhysicalAddressWithPurpose<?>> physicalAddresses = List.of();
 }

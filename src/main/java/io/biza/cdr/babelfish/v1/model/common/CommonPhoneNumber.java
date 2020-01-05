@@ -19,7 +19,7 @@ import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.support.PhoneNumberValidationResult;
 
 @Valid
-public class CommonPhoneNumber extends io.biza.cdr.babelfish.model.common.CommonPhoneNumber {
+public class CommonPhoneNumber extends io.biza.cdr.babelfish.model.common.CommonPhoneNumber<CommonPhoneNumber> {
   @AssertTrue(message = "Country Code, when supplied, should be in +## format")
   private boolean isCountryCodeValid() {
     return countryCode == null ? true : FormatChecker.phoneNumberCountryCodeValid(countryCode);
