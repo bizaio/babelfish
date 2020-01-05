@@ -9,7 +9,7 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
  *******************************************************************************/
-package io.biza.cdr.babelfish.v1.response;
+package io.biza.cdr.babelfish.v1.request;
 
 import javax.validation.Valid;
 
