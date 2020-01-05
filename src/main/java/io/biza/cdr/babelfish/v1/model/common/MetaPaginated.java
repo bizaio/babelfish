@@ -17,7 +17,14 @@ import javax.validation.constraints.AssertTrue;
 @Valid
 public class MetaPaginated extends io.biza.cdr.babelfish.model.common.MetaPaginated<MetaPaginated> {
   @AssertTrue(message = "If totalRecords is 0 totalPages MUST be 0")
-  public boolean zeroTotalRecordsMatchesZeroPages() {
-    return (totalRecords == 0) ? (totalPages == 0 ? true : false) : true;
+  public boolean isZeroTotalRecordsMatchesZeroPages() {
+    return (totalRecords() != null && totalRecords() == 0) ? ((totalPages() != null && totalPages() == 0) ? true : false) : true;
   }
+  
+  @AssertTrue(message = "If totalPages is 0 then totalRecords should be 0")
+  public boolean isZeroTotalPagesButNotZeroRecords() {
+    return (totalPages() != null && totalPages() == 0) ? ((totalRecords() != null && totalRecords() == 0) ? true : false) : true;
+  }
+  
+
 }

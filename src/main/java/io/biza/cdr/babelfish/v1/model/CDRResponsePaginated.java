@@ -13,6 +13,7 @@ package io.biza.cdr.babelfish.v1.model;
 
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
+import io.biza.cdr.babelfish.support.FormatChecker;
 
 @Valid
 public class CDRResponsePaginated
@@ -25,9 +26,14 @@ public class CDRResponsePaginated
         : true;
   }
 
-  /**
-   * @AssertTrue(message = "If totalRecords is greater than 0 totalPages should be greater than 0")
-   *                     public boolean someRecordsCannotBeZeroPages() { return false; //return
-   *                     totalRecords > 0 ? (totalPages > 0 ? true : false) : true; }
-   */
+  @AssertTrue(message = "Last Page URI page parameter should match totalPages")
+  public boolean isLastPagePageParamValid() {
+    return (links() != null && links().last() != null && meta() != null
+        && meta().totalPages() != null)
+            ? ((Integer.parseInt(
+                FormatChecker.mapifyQueryString(links().last()).get("page")) != meta().totalPages())
+                    ? false
+                    : true)
+            : true;
+  }
 }

@@ -8,6 +8,10 @@ import java.net.URI;
  *
  */
 public class ModelConstants {
-  public static URI DEFAULT_URI = URI.create("http://localhost/");
+  public static URI DEFAULT_FIRST_URI = URI.create("http://localhost/?page=1");
+  public static URI DEFAULT_SELF_URI = URI.create("http://localhost/?page=3");
+  public static URI DEFAULT_LAST_URI = URI.create("http://localhost/?page=10");
+  public static URI DEFAULT_PREV_URI = URI.create("http://localhost/?page=2");
+  public static URI DEFAULT_NEXT_URI = URI.create("http://localhost/?page=4");
 
 }

@@ -12,11 +12,14 @@
 package io.biza.cdr.babelfish.support;
 
 import java.math.BigDecimal;
+import java.net.URI;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.format.DateTimeParseException;
+import java.util.HashMap;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.PhoneNumberUtil.PhoneNumberFormat;
@@ -138,5 +141,14 @@ public class FormatChecker {
       return false;
     }
     return true;
+  }
+
+  public static HashMap<String, String> mapifyQueryString(URI uri) {
+    HashMap<String, String> urlMap = new HashMap<String, String>();
+    if(uri.getQuery() == null) { return urlMap; }
+    for (String param : uri.getQuery().split("&")) {
+      urlMap.put(StringUtils.substringBefore(param, "="), StringUtils.substringAfter(param, "="));
+    }
+    return urlMap;
   }
 }

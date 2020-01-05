@@ -32,6 +32,7 @@ public abstract class MetaPaginated<T extends MetaPaginated<T>> {
   @NotNull
   @NonNull
   @Min(0)
+  @Valid
   public Integer totalRecords;
 
   public Integer totalRecords() {
@@ -50,6 +51,7 @@ public abstract class MetaPaginated<T extends MetaPaginated<T>> {
   @NotNull
   @NonNull
   @Min(0)
+  @Valid
   public Integer totalPages;
 
   public Integer totalPages() {
