@@ -13,21 +13,26 @@ package io.biza.cdr.babelfish.model.common;
 
 import java.util.List;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+@NoArgsConstructor
 @Data
 @Valid
 @BabelFishModel(description = "Account ID List")
-public abstract class AccountIdList<T extends AccountIdList<T>> {
+public abstract class AccountIdsList<T extends AccountIdsList<T>> {
   @BabelFishModelProperty(description = "List of Account Identifiers", required = true)
   @JsonProperty("accountIds")
   @NotNull
   @NonNull
+  @NotEmpty(message = "At least one account identifier is required")
+  @Valid
   List<String> accountIds;
 
   public List<String> accountIds() {

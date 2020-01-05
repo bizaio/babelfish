@@ -22,8 +22,8 @@ public class BankingProductFee
     extends io.biza.cdr.babelfish.model.banking.BankingProductFee<BankingProductFee> {
   @AssertTrue(message = "Additional Value must be a Duration String when Fee type is PERIODIC")
   private boolean isValueDuration() {
-    return Arrays.asList(new BankingProductFeeType[] {BankingProductFeeType.PERIODIC})
-        .contains(feeType()) ? FormatChecker.isDuration(additionalValue()) : true;
+    return feeType() != null ? (Arrays.asList(new BankingProductFeeType[] {BankingProductFeeType.PERIODIC})
+        .contains(feeType()) ? FormatChecker.isDuration(additionalValue()) : true) : true;
   }
 
   @AssertTrue(message = "One of amount, balanceRate, transactionRate or accruedRate is mandatory")

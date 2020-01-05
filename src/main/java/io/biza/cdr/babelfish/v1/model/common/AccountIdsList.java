@@ -9,13 +9,14 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
  *******************************************************************************/
-package io.biza.cdr.babelfish.v1.model.banking;
+package io.biza.cdr.babelfish.v1.model.common;
 
+import java.util.List;
 import javax.validation.Valid;
 import lombok.NonNull;
 
 @Valid
-public class BankingProductBundle
-    extends io.biza.cdr.babelfish.model.banking.BankingProductBundle<BankingProductBundle> {
+public class AccountIdsList
+    extends io.biza.cdr.babelfish.model.common.AccountIdsList<AccountIdsList> {
 
 }

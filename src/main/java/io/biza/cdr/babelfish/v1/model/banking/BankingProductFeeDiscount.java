@@ -23,15 +23,15 @@ public class BankingProductFeeDiscount extends
   @AssertTrue(
       message = "Additional Value must be an Amount String when Discount type is BALANCE, DEPOSITS or PAYMENTS")
   private boolean isValueAmount() {
-    return Arrays
+    return discountType() != null ? (Arrays
         .asList(new BankingProductDiscountType[] {BankingProductDiscountType.BALANCE,
             BankingProductDiscountType.DEPOSITS, BankingProductDiscountType.PAYMENTS})
-        .contains(discountType()) ? FormatChecker.isDecimal(additionalValue()) : true;
+        .contains(discountType()) ? FormatChecker.isDecimal(additionalValue()) : true) : true;
   }
 
   @AssertTrue(message = "Additional Value must be an Duration String when Discount type is FEE_CAP")
   private boolean isValueDuration() {
-    return Arrays.asList(new BankingProductDiscountType[] {BankingProductDiscountType.FEE_CAP})
-        .contains(discountType()) ? FormatChecker.isDuration(additionalValue()) : true;
+    return discountType() != null ? (Arrays.asList(new BankingProductDiscountType[] {BankingProductDiscountType.FEE_CAP})
+        .contains(discountType()) ? FormatChecker.isDuration(additionalValue()) : true) : true;
   }
 }

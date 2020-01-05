@@ -23,20 +23,20 @@ public class BankingProductFeeDiscountEligibility extends
   @AssertTrue(
       message = "Additional Value must be a Positive Integer when Eligibility type is MIN_AGE or MAX_AGE")
   private boolean isValuePositiveInteger() {
-    return Arrays.asList(
+    return discountEligibilityType() != null ? (Arrays.asList(
         new BankingProductDiscountEligibilityType[] {BankingProductDiscountEligibilityType.MIN_AGE,
             BankingProductDiscountEligibilityType.MAX_AGE})
         .contains(discountEligibilityType()) ? FormatChecker.isPositiveInteger(additionalValue())
-            : true;
+            : true) : true;
   }
 
   @AssertTrue(
       message = "Additional Value must be an Amount String when Eligibility type is MIN_INCOME or MIN_TURNOVER")
   private boolean isValueAmount() {
-    return Arrays.asList(new BankingProductDiscountEligibilityType[] {
+    return discountEligibilityType() != null ? (Arrays.asList(new BankingProductDiscountEligibilityType[] {
         BankingProductDiscountEligibilityType.MIN_INCOME,
         BankingProductDiscountEligibilityType.MIN_TURNOVER}).contains(discountEligibilityType())
             ? FormatChecker.isDecimal(additionalValue())
-            : true;
+            : true) : true;
   }
 }

@@ -27,6 +27,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.CDRResponsePaginated;
 import io.biza.cdr.babelfish.model.banking.BankingProduct;
+import io.biza.cdr.babelfish.model.common.LinksPaginated;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
 import lombok.NonNull;
@@ -35,13 +36,23 @@ import lombok.Setter;
 @Getter
 @Setter
 @Valid
-public abstract class ResponseBankingProductListData<T>
-    extends CDRResponsePaginated<ResponseBankingProductListData<T>> {
+public abstract class ResponseBankingProductListData<T> {
   @BabelFishModelProperty(
       description = "The list of products returned.  If the filter results in an empty set then this array may have no records",
       required = true)
   @JsonProperty("products")
   @NotNull
   @NonNull
+  @Valid
   public List<BankingProduct<?>> products;
+  
+  public List<BankingProduct<?>> products() {
+    return getProducts();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T products(List<BankingProduct<?>> products) {
+    setProducts(products);
+    return (T) this;
+  }
 }

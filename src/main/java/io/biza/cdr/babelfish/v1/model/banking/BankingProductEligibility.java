@@ -22,24 +22,24 @@ public class BankingProductEligibility extends
     io.biza.cdr.babelfish.model.banking.BankingProductEligibility<BankingProductEligibility> {
   @AssertTrue(message = "Additional Information must be populated when Eligibility type is OTHER")
   private boolean isInfoDefined() {
-    return Arrays.asList(new BankingProductEligibilityType[] {BankingProductEligibilityType.OTHER})
-        .contains(eligibilityType()) ? FormatChecker.isDefined(additionalInfo()) : true;
+    return eligibilityType() != null ? (Arrays.asList(new BankingProductEligibilityType[] {BankingProductEligibilityType.OTHER})
+        .contains(eligibilityType()) ? FormatChecker.isDefined(additionalInfo()) : true) : true;
   }
 
   @AssertTrue(
       message = "Additional Value must be a Positive Integer when Eligibility type is MIN_AGE or MAX_AGE")
   private boolean isValuePositiveInteger() {
-    return Arrays.asList(new BankingProductEligibilityType[] {BankingProductEligibilityType.MIN_AGE,
+    return eligibilityType() != null ? (Arrays.asList(new BankingProductEligibilityType[] {BankingProductEligibilityType.MIN_AGE,
         BankingProductEligibilityType.MAX_AGE}).contains(eligibilityType())
             ? FormatChecker.isPositiveInteger(additionalValue())
-            : true;
+            : true) : true;
   }
 
   @AssertTrue(
       message = "Additional Value must be an Amount String when Eligibility type is MIN_INCOME or MIN_TURNOVER")
   private boolean isValueAmount() {
-    return Arrays.asList(new BankingProductEligibilityType[] {
+    return eligibilityType() != null ? (Arrays.asList(new BankingProductEligibilityType[] {
         BankingProductEligibilityType.MIN_INCOME, BankingProductEligibilityType.MIN_TURNOVER})
-        .contains(eligibilityType()) ? FormatChecker.isDecimal(additionalValue()) : true;
+        .contains(eligibilityType()) ? FormatChecker.isDecimal(additionalValue()) : true) : true;
   }
 }

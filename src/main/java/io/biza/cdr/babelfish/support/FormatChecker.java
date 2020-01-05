@@ -114,6 +114,10 @@ public class FormatChecker {
   public static boolean isDefined(String additionalValue) {
     return additionalValue != null;
   }
+  
+  public static boolean isNotEmpty(String additionalValue) {
+    return isDefined(additionalValue) && additionalValue != "";
+  }
 
   public static boolean isDefined(LocalDateTime dateTime) {
     return dateTime != null;

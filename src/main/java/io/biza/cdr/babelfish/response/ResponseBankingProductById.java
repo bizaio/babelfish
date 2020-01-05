@@ -11,10 +11,12 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.response;
 
+import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.CDRResponse;
+import io.biza.cdr.babelfish.model.banking.BankingProduct;
 import io.biza.cdr.babelfish.model.banking.BankingProductDetail;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
@@ -30,4 +32,14 @@ public abstract class ResponseBankingProductById<T> extends CDRResponse<Response
   @NotNull
   @NonNull
   public BankingProductDetail<?> data;
+  
+  public BankingProductDetail<?> data() {
+    return getData();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T data(BankingProductDetail<?> data) {
+    setData(data);
+    return (T) this;
+  }
 }

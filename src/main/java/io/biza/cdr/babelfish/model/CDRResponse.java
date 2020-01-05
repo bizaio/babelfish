@@ -46,7 +46,6 @@ public abstract class CDRResponse<T extends CDRResponse<T>> {
       description = "The meta object is used to provide additional information such as second factor authorisation data, traffic management, pagination counts or other purposes that are complementary to the workings of the API.",
       required = true)
   @JsonProperty("meta")
-  @NotNull
   @Valid
   Meta<?> meta;
 

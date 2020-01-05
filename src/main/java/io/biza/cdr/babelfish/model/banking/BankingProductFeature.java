@@ -21,11 +21,13 @@ import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductFeatureType;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 @Valid
 @BabelFishModel(description = "A Banking Product Feature")
 public abstract class BankingProductFeature<T extends BankingProductFeature<T>> {
@@ -83,37 +85,5 @@ public abstract class BankingProductFeature<T extends BankingProductFeature<T>> 
   public T additionalInfoUri(URI additionalInfoUri) {
     setAdditionalInfoUri(additionalInfoUri);
     return (T) this;
-  }
-
-  @AssertTrue(message = "Additional Information must be populated when Feature type is OTHER")
-  private boolean isInfoDefined() {
-    return Arrays.asList(new BankingProductFeatureType[] {BankingProductFeatureType.OTHER})
-        .contains(featureType) ? FormatChecker.isDefined(additionalInfo) : true;
-  }
-
-  @AssertTrue(
-      message = "Additional Value must be an Duration String when Feature type is INTEREST_FREE or INTEREST_FREE_TRANSFERS")
-  private boolean isValueDuration() {
-    return Arrays.asList(new BankingProductFeatureType[] {BankingProductFeatureType.INTEREST_FREE,
-        BankingProductFeatureType.INTEREST_FREE_TRANSFERS}).contains(featureType)
-            ? FormatChecker.isDuration(additionalValue)
-            : true;
-  }
-
-  @AssertTrue(
-      message = "Additional Value must be a Positive Integer when Feature type is FREE_TXNS or BONUS_REWARDS")
-  private boolean isValuePositiveInteger() {
-    return Arrays.asList(new BankingProductFeatureType[] {BankingProductFeatureType.FREE_TXNS,
-        BankingProductFeatureType.BONUS_REWARDS}).contains(featureType)
-            ? FormatChecker.isPositiveInteger(additionalValue)
-            : true;
-  }
-
-  @AssertTrue(
-      message = "Additional Value must be an Amount String when Eligibility type is FREE_TXNS_ALLOWANCE")
-  private boolean isValueAmount() {
-    return Arrays
-        .asList(new BankingProductFeatureType[] {BankingProductFeatureType.FREE_TXNS_ALLOWANCE})
-        .contains(featureType) ? FormatChecker.isDecimal(additionalValue) : true;
   }
 }

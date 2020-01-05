@@ -26,7 +26,7 @@ import lombok.Setter;
 @Valid
 @Getter
 @Setter
-public abstract class CDRResponsePaginated<T extends CDRResponsePaginated<T>> {
+public abstract class CDRResponsePaginated<T> {
   @BabelFishModelProperty(description = "The Links Object", required = true)
   @JsonProperty("links")
   @NotNull

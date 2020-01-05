@@ -16,31 +16,25 @@ import io.biza.cdr.babelfish.v1.model.common.Meta;
 @DisplayName("CDR Response V1 Tests")
 public class CDRResponseV1Test {
   private Validator validator;
-  
+
   @BeforeEach
   public void setup() {
-      ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-      validator = factory.getValidator();
+    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+    validator = factory.getValidator();
   }
 
   @Test
   @DisplayName("Create valid CDR Response V1")
   void createValidCDRResponse() {
-    CDRResponse myResponse = new CDRResponse().links(new Links().self(URI.create("http://localhost/"))).meta(new Meta());
+    CDRResponse myResponse =
+        new CDRResponse().links(new Links().self(URI.create("http://localhost/"))).meta(new Meta());
     assertTrue(validator.validate(myResponse).isEmpty());
   }
-  
+
   @Test
   @DisplayName("Create CDR Response V1 with Missing Links and Meta")
   void createCDRResponseWithMissingLinksAndMeta() {
     CDRResponse myResponse = new CDRResponse();
-    assertFalse(validator.validate(myResponse).isEmpty());
-  }
-  
-  @Test
-  @DisplayName("Create CDR Response V1 with Missing Meta")
-  void createCDRResponseWithMissingMeta() {
-    CDRResponse myResponse = new CDRResponse().links(new Links().self(URI.create("http://localhost/")));
     assertFalse(validator.validate(myResponse).isEmpty());
   }
 

@@ -22,9 +22,9 @@ public class BankingProductRateTier
   @AssertTrue(
       message = "Minimum and Maximum values must be equal when Unit Of Measure is a discrete value")
   private boolean isMinMaxEqual() {
-    return Arrays.asList(
+    return unitOfMeasure() != null ? (Arrays.asList(
         new CommonUnitOfMeasureType[] {CommonUnitOfMeasureType.DAY, CommonUnitOfMeasureType.MONTH})
         .contains(unitOfMeasure()) && maximumValue() != null ? (minimumValue() == maximumValue())
-            : true;
+            : true) : true;
   }
 }

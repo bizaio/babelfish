@@ -23,9 +23,18 @@ public class BankingProductDepositRate extends
   @AssertTrue(
       message = "Additional Value must be a Duration String when Fee type is FIXED or INTRODUCTORY")
   private boolean isValueDuration() {
-    return Arrays.asList(new BankingProductDepositRateType[] {BankingProductDepositRateType.FIXED,
+    return depositRateType() != null ? (Arrays.asList(new BankingProductDepositRateType[] {BankingProductDepositRateType.FIXED,
         BankingProductDepositRateType.INTRODUCTORY}).contains(depositRateType())
             ? FormatChecker.isDuration(additionalValue())
-            : true;
+            : true) : true;
+  }
+  
+  @AssertTrue(
+      message = "Additional Value must String when Fee Type is BONUS, BUNDLE_BONUS, FLOATING or MARKET_LINKED")
+  private boolean isValueString() {
+    return depositRateType() != null ? (Arrays.asList(new BankingProductDepositRateType[] {BankingProductDepositRateType.BONUS,
+        BankingProductDepositRateType.BUNDLE_BONUS,BankingProductDepositRateType.FLOATING, BankingProductDepositRateType.MARKET_LINKED }).contains(depositRateType())
+            ? FormatChecker.isNotEmpty(additionalValue())
+            : true) : true;
   }
 }

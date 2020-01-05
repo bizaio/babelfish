@@ -15,7 +15,7 @@ package io.biza.cdr.babelfish.request;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.cdr.babelfish.model.common.AccountIdList;
+import io.biza.cdr.babelfish.model.common.AccountIdsList;
 import io.biza.cdr.babelfish.model.common.Meta;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
@@ -32,14 +32,15 @@ public abstract class RequestAccountIds<T> {
   @JsonProperty("data")
   @NotNull
   @NonNull
-  public AccountIdList<?> data;
+  @Valid
+  public AccountIdsList<?> data;
 
-  public AccountIdList<?> data() {
+  public AccountIdsList<?> data() {
     return getData();
   }
 
   @SuppressWarnings("unchecked")
-  public T data(AccountIdList<?> data) {
+  public T data(AccountIdsList<?> data) {
     setData(data);
     return (T) this;
   }
@@ -48,7 +49,6 @@ public abstract class RequestAccountIds<T> {
       description = "The meta object is used to provide additional information such as second factor authorisation data, traffic management, pagination counts or other purposes that are complementary to the workings of the API.",
       required = true)
   @JsonProperty("meta")
-  @NotNull
   @Valid
   Meta<?> meta;
 

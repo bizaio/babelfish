@@ -38,6 +38,8 @@ import lombok.Setter;
     description = "Banking Product Discount Specification")
 public abstract class BankingProductFeeDiscount<T extends BankingProductFeeDiscount<T>> {
   @BabelFishModelProperty(description = "Description of the discount", required = true)
+  @NonNull
+  @NotNull
   String description;
 
   public String description() {

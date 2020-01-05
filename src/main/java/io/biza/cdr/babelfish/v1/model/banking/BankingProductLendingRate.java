@@ -23,8 +23,8 @@ public class BankingProductLendingRate extends
   @AssertTrue(
       message = "Additional Value must be an Duration String when Lending Rate Type INTRODUCTORY or FIXED")
   private boolean isValueDuration() {
-    return Arrays.asList(new BankingProductLendingRateType[] {
+    return lendingRateType() != null ? (Arrays.asList(new BankingProductLendingRateType[] {
         BankingProductLendingRateType.INTRODUCTORY, BankingProductLendingRateType.FIXED})
-        .contains(lendingRateType()) ? FormatChecker.isDuration(additionalValue()) : true;
+        .contains(lendingRateType()) ? FormatChecker.isDuration(additionalValue()) : true) : true;
   }
 }

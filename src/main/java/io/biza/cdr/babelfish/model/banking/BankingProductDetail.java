@@ -23,20 +23,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Banking Product Detailed Information", parent = BankingProduct.class)
-public abstract class BankingProductDetail<T extends BankingProductDetail<T>> {
-  @JsonUnwrapped
-  @BabelFishModelProperty(hidden = true)
-  BankingProduct<?> bankingProduct;
-
-  public BankingProduct<?> bankingProduct() {
-    return getBankingProduct();
-  }
-
-  @SuppressWarnings("unchecked")
-  public T bankingProduct(BankingProduct<?> bankingProduct) {
-    setBankingProduct(bankingProduct);
-    return (T) this;
-  }
+public abstract class BankingProductDetail<T> extends BankingProduct<T> {
 
   @BabelFishModelProperty(
       description = "An array of bundles that this product participates in.  Each bundle is described by free form information but also by a list of product IDs of the other products that are included in the bundle.  It is assumed that the current product is included in the bundle also")

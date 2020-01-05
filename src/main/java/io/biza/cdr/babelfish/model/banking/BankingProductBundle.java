@@ -14,23 +14,31 @@ package io.biza.cdr.babelfish.model.banking;
 import java.net.URI;
 import java.util.List;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.biza.cdr.babelfish.converters.UriStringToUriConverter;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 @Valid
 @BabelFishModel(description = "Banking Product Bundle Definition")
-public abstract class BankingProductBundle<T extends BankingProductBundle<T>> {
+public abstract class BankingProductBundle<T> {
   @BabelFishModelProperty(description = "Name of the bundle", required = true)
   @NonNull
   @NotNull
+  @NotBlank
+  @Valid
   String name;
 
   public String name() {
@@ -46,6 +54,8 @@ public abstract class BankingProductBundle<T extends BankingProductBundle<T>> {
   @BabelFishModelProperty(description = "Description of the bundle", required = true)
   @NonNull
   @NotNull
+  @NotBlank
+  @Valid
   String description;
 
   public String description() {
@@ -75,6 +85,7 @@ public abstract class BankingProductBundle<T extends BankingProductBundle<T>> {
       description = "Link to a web page with more information on the bundle criteria and benefits",
       dataType = "java.lang.String")
   @JsonSerialize(converter = UriToUriStringConverter.class)
+  @JsonDeserialize(converter = UriStringToUriConverter.class)
   URI additionalInfoUri;
 
   public URI additionalInfoUri() {

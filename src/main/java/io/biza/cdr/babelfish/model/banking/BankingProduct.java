@@ -31,7 +31,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "An Australian Banking Product")
-public abstract class BankingProduct<T extends BankingProduct<T>> {
+public abstract class BankingProduct<T> {
   @BabelFishModelProperty(
       description = "A data holder specific unique identifier for this product. This identifier must be unique to a product but does not otherwise need to adhere to ID permanence guidelines.",
       required = true)
