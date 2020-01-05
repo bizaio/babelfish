@@ -35,5 +35,5 @@ public abstract class ResponseBankingAccountListData {
   @JsonProperty("accounts")
   @NotNull
   @NonNull
-  public List<BankingAccount> accounts;
+  public List<BankingAccount<?>> accounts;
 }

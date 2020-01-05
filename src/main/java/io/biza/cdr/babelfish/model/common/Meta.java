@@ -20,5 +20,5 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Meta Detail")
-public abstract class Meta <T extends Meta<T>> {
+public abstract class Meta<T extends Meta<T>> {
 }

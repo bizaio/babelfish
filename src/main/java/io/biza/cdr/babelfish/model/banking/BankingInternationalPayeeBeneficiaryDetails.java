@@ -6,8 +6,12 @@
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
+ * 
+ * public ANY WARRANTY() { return getWARRANTY(); }
+ * 
+ * @SuppressWarnings("unchecked") public T WARRANTY(ANY WARRANTY) { setWARRANTY(WARRANTY); return
+ * (T) this; } even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.banking;
 
@@ -23,16 +27,24 @@ import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "International Payee Beneficiary Details")
-public abstract class BankingInternationalPayeeBeneficiaryDetails {
+public abstract class BankingInternationalPayeeBeneficiaryDetails<T extends BankingInternationalPayeeBeneficiaryDetails<T>> {
   @BabelFishModelProperty(description = "Name of the beneficiary")
   String name;
+
+  public String name() {
+    return getName();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T name(String name) {
+    setName(name);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "Country where the beneficiary resides. A valid [ISO 3166 Alpha-3](https://www.iso.org/iso-3166-country-codes.html) country code",
@@ -43,6 +55,26 @@ public abstract class BankingInternationalPayeeBeneficiaryDetails {
   @JsonDeserialize(converter = CountryStringToLocaleConverter.class)
   Locale country;
 
+  public Locale country() {
+    return getCountry();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T country(Locale country) {
+    setCountry(country);
+    return (T) this;
+  }
+
   @BabelFishModelProperty(description = "Response message for the payment")
   String message;
+
+  public String message() {
+    return getMessage();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T message(String message) {
+    setMessage(message);
+    return (T) this;
+  }
 }

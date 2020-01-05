@@ -26,7 +26,8 @@ import lombok.Setter;
 @Valid
 @BabelFishModel(description = "Organisation Definition in Detail",
     parent = CommonOrganisation.class)
-public abstract class CommonOrganisationDetail<T> extends CommonOrganisation<CommonOrganisationDetail<T>> {
+public abstract class CommonOrganisationDetail<T>
+    extends CommonOrganisation<CommonOrganisationDetail<T>> {
   @BabelFishModelProperty(
       description = "Must contain at least one address. One and only one address may have the purpose of REGISTERED. Zero or one, and no more than one, record may have the purpose of MAIL. If zero then the REGISTERED address is to be used for mail",
       required = true)

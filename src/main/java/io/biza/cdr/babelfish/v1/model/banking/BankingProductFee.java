@@ -18,12 +18,11 @@ import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductFeeType;
 
 @Valid
-public class BankingProductFee extends io.biza.cdr.babelfish.model.banking.BankingProductFee {
+public class BankingProductFee extends io.biza.cdr.babelfish.model.banking.BankingProductFee<BankingProductFee> {
   @AssertTrue(message = "Additional Value must be a Duration String when Fee type is PERIODIC")
   private boolean isValueDuration() {
-    return Arrays.asList(new BankingProductFeeType[] {
-        BankingProductFeeType.PERIODIC
-    }).contains(feeType()) ? FormatChecker.isDuration(additionalValue()) : true;
+    return Arrays.asList(new BankingProductFeeType[] {BankingProductFeeType.PERIODIC})
+        .contains(feeType()) ? FormatChecker.isDuration(additionalValue()) : true;
   }
 
   @AssertTrue(message = "One of amount, balanceRate, transactionRate or accruedRate is mandatory")

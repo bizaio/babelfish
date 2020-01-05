@@ -6,8 +6,12 @@
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
+ * 
+ * public ANY WARRANTY() { return getWARRANTY(); }
+ * 
+ * @SuppressWarnings("unchecked") public T WARRANTY(ANY WARRANTY) { setWARRANTY(WARRANTY); return
+ * (T) this; } even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.banking;
 
@@ -26,14 +30,12 @@ import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "Representation of a Direct Debit Authorisation")
-public abstract class BankingDirectDebit {
+public abstract class BankingDirectDebit<T extends BankingDirectDebit<T>> {
   @BabelFishModelProperty(
       description = "A unique ID of the account adhering to the standards for ID permanence.",
       required = true)
@@ -41,10 +43,30 @@ public abstract class BankingDirectDebit {
   @NotNull
   String accountId;
 
+  public String accountId() {
+    return getAccountId();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T accountId(String accountId) {
+    setAccountId(accountId);
+    return (T) this;
+  }
+
   @BabelFishModelProperty(required = true)
   @NonNull
   @NotNull
-  BankingAuthorisedEntity authorisedEntity;
+  BankingAuthorisedEntity<?> authorisedEntity;
+
+  public BankingAuthorisedEntity<?> authorisedEntity() {
+    return getAuthorisedEntity();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T authorisedEntity(BankingAuthorisedEntity<?> authorisedEntity) {
+    setAuthorisedEntity(authorisedEntity);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "The date and time of the last debit executed under this authorisation",
@@ -53,9 +75,29 @@ public abstract class BankingDirectDebit {
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   LocalDateTime lastDebitDateTime;
 
+  public LocalDateTime lastDebitDateTime() {
+    return getLastDebitDateTime();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T lastDebitDateTime(LocalDateTime lastDebitDateTime) {
+    setLastDebitDateTime(lastDebitDateTime);
+    return (T) this;
+  }
+
   @BabelFishModelProperty(
       description = "The amount of the last debit executed under this authorisation")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   BigDecimal lastDebitAmount;
+
+  public BigDecimal lastDebitAmount() {
+    return getLastDebitAmount();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T lastDebitAmount(BigDecimal lastDebitAmount) {
+    setLastDebitAmount(lastDebitAmount);
+    return (T) this;
+  }
 }

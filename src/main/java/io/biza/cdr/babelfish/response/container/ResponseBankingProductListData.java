@@ -27,12 +27,13 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(fluent = true)
 @Valid
-public abstract class ResponseBankingProductListData extends CDRResponsePaginated<ResponseBankingProductListData> {
+public abstract class ResponseBankingProductListData
+    extends CDRResponsePaginated<ResponseBankingProductListData> {
   @BabelFishModelProperty(
       description = "The list of products returned.  If the filter results in an empty set then this array may have no records",
       required = true)
   @JsonProperty("products")
   @NotNull
   @NonNull
-  public List<BankingProduct> products;
+  public List<BankingProduct<?>> products;
 }

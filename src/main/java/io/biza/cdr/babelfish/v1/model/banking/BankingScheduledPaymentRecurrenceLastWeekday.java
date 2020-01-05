@@ -15,5 +15,5 @@ import javax.validation.Valid;
 
 @Valid
 public class BankingScheduledPaymentRecurrenceLastWeekday
-    extends io.biza.cdr.babelfish.model.banking.BankingScheduledPaymentRecurrenceLastWeekday {
+    extends io.biza.cdr.babelfish.model.banking.BankingScheduledPaymentRecurrenceLastWeekday<BankingScheduledPaymentRecurrenceLastWeekday> {
 }

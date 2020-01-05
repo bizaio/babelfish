@@ -32,7 +32,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Outage Detail")
-public abstract class CommonDiscoveryOutage <T extends CommonDiscoveryOutage<T>> {
+public abstract class CommonDiscoveryOutage<T extends CommonDiscoveryOutage<T>> {
   @BabelFishModelProperty(description = "Date and time that the outage is scheduled to begin",
       required = true)
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
@@ -42,15 +42,15 @@ public abstract class CommonDiscoveryOutage <T extends CommonDiscoveryOutage<T>>
   @NonNull
   public LocalDateTime outageTime;
 
-public LocalDateTime outageTime() {
-  return getOutageTime();
-}
+  public LocalDateTime outageTime() {
+    return getOutageTime();
+  }
 
-@SuppressWarnings("unchecked")
-public T outageTime(LocalDateTime outageTime) {
-   setOutageTime(outageTime);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T outageTime(LocalDateTime outageTime) {
+    setOutageTime(outageTime);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "Planned duration of the outage. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations)",
@@ -62,15 +62,15 @@ public T outageTime(LocalDateTime outageTime) {
   @NonNull
   public Period duration;
 
-public Period duration() {
-  return getDuration();
-}
+  public Period duration() {
+    return getDuration();
+  }
 
-@SuppressWarnings("unchecked")
-public T duration(Period duration) {
-   setDuration(duration);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T duration(Period duration) {
+    setDuration(duration);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "Flag that indicates, if present and set to true, that the outage is only partial meaning that only a subset of normally available end points will be affected by the outage")
@@ -79,15 +79,15 @@ public T duration(Period duration) {
   @NonNull
   public Boolean isPartial;
 
-public Boolean isPartial() {
-  return getIsPartial();
-}
+  public Boolean isPartial() {
+    return getIsPartial();
+  }
 
-@SuppressWarnings("unchecked")
-public T isPartial(Boolean isPartial) {
-   setIsPartial(isPartial);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T isPartial(Boolean isPartial) {
+    setIsPartial(isPartial);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "Provides an explanation of the current outage that can be displayed to an end customer",
@@ -97,13 +97,13 @@ public T isPartial(Boolean isPartial) {
   @NonNull
   public String explanation;
 
-public String explanation() {
-  return getExplanation();
-}
+  public String explanation() {
+    return getExplanation();
+  }
 
-@SuppressWarnings("unchecked")
-public T explanation(String explanation) {
-   setExplanation(explanation);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T explanation(String explanation) {
+    setExplanation(explanation);
+    return (T) this;
+  }
 }

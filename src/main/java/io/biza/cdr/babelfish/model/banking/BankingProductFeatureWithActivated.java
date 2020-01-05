@@ -6,8 +6,12 @@
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
+ * 
+ * public ANY WARRANTY() { return getWARRANTY(); }
+ * 
+ * @SuppressWarnings("unchecked") public T WARRANTY(ANY WARRANTY) { setWARRANTY(WARRANTY); return
+ * (T) this; } even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.banking;
 
@@ -17,21 +21,39 @@ import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(modelName = "BankingAccountProductFeature",
     description = "Banking Account Product Feature", parent = BankingProductFeature.class)
-public abstract class BankingProductFeatureWithActivated {
+public abstract class BankingProductFeatureWithActivated<T extends BankingProductFeatureWithActivated<T>> {
   @JsonUnwrapped
   @BabelFishModelProperty(hidden = true)
   @Valid
-  BankingProductFeature bankingProductFeature;
+  BankingProductFeature<?> bankingProductFeature;
+
+  public BankingProductFeature<?> bankingProductFeature() {
+    return getBankingProductFeature();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T bankingProductFeature(BankingProductFeature<?> bankingProductFeature) {
+    setBankingProductFeature(bankingProductFeature);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "True if the feature is already activated and false if the feature is available for activation.")
   Boolean isActivated = true;
+
+  public Boolean isActivated() {
+    return getIsActivated();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T isActivated(Boolean isActivated) {
+    setIsActivated(isActivated);
+    return (T) this;
+  }
 }

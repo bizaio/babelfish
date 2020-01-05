@@ -16,7 +16,7 @@ import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.v1.enumerations.BankingTransactionStatus;
 
 @Valid
-public class BankingTransaction extends io.biza.cdr.babelfish.model.banking.BankingTransaction {
+public class BankingTransaction extends io.biza.cdr.babelfish.model.banking.BankingTransaction<BankingTransaction> {
   @AssertTrue(message = "Posting Date and Time must be set when status is POSTED")
   private boolean isPostedDateDefined() {
     return BankingTransactionStatus.POSTED.equals(status())

@@ -19,7 +19,8 @@ import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.support.PhoneNumberValidationResult;
 
 @Valid
-public class CommonPhoneNumber extends io.biza.cdr.babelfish.model.common.CommonPhoneNumber<CommonPhoneNumber> {
+public class CommonPhoneNumber
+    extends io.biza.cdr.babelfish.model.common.CommonPhoneNumber<CommonPhoneNumber> {
   @AssertTrue(message = "Country Code, when supplied, should be in +## format")
   private boolean isCountryCodeValid() {
     return countryCode == null ? true : FormatChecker.phoneNumberCountryCodeValid(countryCode);
@@ -27,16 +28,17 @@ public class CommonPhoneNumber extends io.biza.cdr.babelfish.model.common.Common
 
   @AssertTrue(message = "Full Phone Number could not be passed as possibly valid")
   private boolean isFullPhoneNumberValid() {
-    return Arrays.asList(new PhoneNumberValidationResult[] {
-        PhoneNumberValidationResult.VALID, PhoneNumberValidationResult.INCORRECT_FORMAT
-    }).contains(FormatChecker.phoneNumberValidity(fullNumber, PhoneNumberFormat.RFC3966));
+    return Arrays
+        .asList(new PhoneNumberValidationResult[] {PhoneNumberValidationResult.VALID,
+            PhoneNumberValidationResult.INCORRECT_FORMAT})
+        .contains(FormatChecker.phoneNumberValidity(fullNumber, PhoneNumberFormat.RFC3966));
   }
 
   @AssertTrue(
       message = "Full Phone Number must be formatted according to section 5.1.4. of RFC 3966")
   private boolean isFullPhoneNumberCorrectlyFormatted() {
-    return Arrays.asList(new PhoneNumberValidationResult[] {
-        PhoneNumberValidationResult.INCORRECT_FORMAT
-    }).contains(FormatChecker.phoneNumberValidity(fullNumber, PhoneNumberFormat.RFC3966));
+    return Arrays
+        .asList(new PhoneNumberValidationResult[] {PhoneNumberValidationResult.INCORRECT_FORMAT})
+        .contains(FormatChecker.phoneNumberValidity(fullNumber, PhoneNumberFormat.RFC3966));
   }
 }

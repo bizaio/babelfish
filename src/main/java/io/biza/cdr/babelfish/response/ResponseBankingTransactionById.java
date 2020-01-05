@@ -26,10 +26,11 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(fluent = true)
 @Valid
-public abstract class ResponseBankingTransactionById extends CDRResponse<ResponseBankingTransactionById> {
+public abstract class ResponseBankingTransactionById
+    extends CDRResponse<ResponseBankingTransactionById> {
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull
   @NonNull
-  public BankingTransactionDetail data;
+  public BankingTransactionDetail<?> data;
 }

@@ -20,25 +20,24 @@ import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @BabelFishModel(description = "The CDR Response")
 @Valid
 @Getter
 @Setter
-public abstract class CDRResponse <T extends CDRResponse<T>> {
+public abstract class CDRResponse<T extends CDRResponse<T>> {
   @BabelFishModelProperty(description = "The Links Object", required = true)
   @JsonProperty("links")
   @NotNull
   @Valid
-  Links links;
-  
-  public Links links() {
+  Links<?> links;
+
+  public Links<?> links() {
     return getLinks();
   }
-  
+
   @SuppressWarnings("unchecked")
-  public T links(Links links) {
+  public T links(Links<?> links) {
     setLinks(links);
     return (T) this;
   }
@@ -49,14 +48,14 @@ public abstract class CDRResponse <T extends CDRResponse<T>> {
   @JsonProperty("meta")
   @NotNull
   @Valid
-  Meta meta;
-  
-  public Meta meta() {
+  Meta<?> meta;
+
+  public Meta<?> meta() {
     return getMeta();
   }
-  
+
   @SuppressWarnings("unchecked")
-  public T meta(Meta meta) {
+  public T meta(Meta<?> meta) {
     setMeta(meta);
     return (T) this;
   }

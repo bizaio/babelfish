@@ -30,7 +30,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Phone Number Detail")
-public abstract class CommonPhoneNumber <T extends CommonPhoneNumber<T>> {
+public abstract class CommonPhoneNumber<T extends CommonPhoneNumber<T>> {
   @BabelFishModelProperty(
       description = "May be true for one and only one entry to indicate the preferred phone number. Assumed to be 'false' if not present")
   @JsonProperty("isPreferred")
@@ -43,74 +43,74 @@ public abstract class CommonPhoneNumber <T extends CommonPhoneNumber<T>> {
   @NonNull
   public CommonPhoneNumberPurpose purpose;
 
-public CommonPhoneNumberPurpose purpose() {
-  return getPurpose();
-}
+  public CommonPhoneNumberPurpose purpose() {
+    return getPurpose();
+  }
 
-@SuppressWarnings("unchecked")
-public T purpose(CommonPhoneNumberPurpose purpose) {
-   setPurpose(purpose);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T purpose(CommonPhoneNumberPurpose purpose) {
+    setPurpose(purpose);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "If absent, assumed to be Australia (+61). The + should be included")
   @JsonProperty("countryCode")
   public String countryCode;
 
-public String countryCode() {
-  return getCountryCode();
-}
+  public String countryCode() {
+    return getCountryCode();
+  }
 
-@SuppressWarnings("unchecked")
-public T countryCode(String countryCode) {
-   setCountryCode(countryCode);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T countryCode(String countryCode) {
+    setCountryCode(countryCode);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "Required for non Mobile Phones, if field is present and refers to Australian code - the leading 0 should be omitted.")
   @JsonProperty("areaCode")
   public String areaCode;
 
-public String areaCode() {
-  return getAreaCode();
-}
+  public String areaCode() {
+    return getAreaCode();
+  }
 
-@SuppressWarnings("unchecked")
-public T areaCode(String areaCode) {
-   setAreaCode(areaCode);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T areaCode(String areaCode) {
+    setAreaCode(areaCode);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "The actual phone number, with leading zeros as appropriate", required = true)
   @JsonProperty("number")
   public String number;
 
-public String number() {
-  return getNumber();
-}
+  public String number() {
+    return getNumber();
+  }
 
-@SuppressWarnings("unchecked")
-public T number(String number) {
-   setNumber(number);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T number(String number) {
+    setNumber(number);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "An extension number (if applicable)")
   @JsonProperty("extension")
   public String extension;
 
-public String extension() {
-  return getExtension();
-}
+  public String extension() {
+    return getExtension();
+  }
 
-@SuppressWarnings("unchecked")
-public T extension(String extension) {
-   setExtension(extension);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T extension(String extension) {
+    setExtension(extension);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "Fully formatted phone number with country code, area code, number and extension incorporated. Formatted according to section 5.1.4. of [RFC 3966](https://www.ietf.org/rfc/rfc3966.txt)",
@@ -118,15 +118,15 @@ public T extension(String extension) {
   @JsonProperty("fullNumber")
   public String fullNumber;
 
-public String fullNumber() {
-  return getFullNumber();
-}
+  public String fullNumber() {
+    return getFullNumber();
+  }
 
-@SuppressWarnings("unchecked")
-public T fullNumber(String fullNumber) {
-   setFullNumber(fullNumber);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T fullNumber(String fullNumber) {
+    setFullNumber(fullNumber);
+    return (T) this;
+  }
 
   /**
    * A method to setup a CommonPhoneNumber set of values from a single candidate input number

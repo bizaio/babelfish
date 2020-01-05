@@ -6,14 +6,17 @@
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
+ * 
+ * public ANY WARRANTY() { return getWARRANTY(); }
+ * 
+ * @SuppressWarnings("unchecked") public T WARRANTY(ANY WARRANTY) { setWARRANTY(WARRANTY); return
+ * (T) this; } even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.banking;
 
 import java.time.LocalDate;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -25,14 +28,12 @@ import io.biza.cdr.babelfish.support.BabelFishModel;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "Describes the detail of the scheduled payment")
-public abstract class BankingScheduledPaymentRecurrence {
+public abstract class BankingScheduledPaymentRecurrence<T extends BankingScheduledPaymentRecurrence<T>> {
   @BabelFishModelProperty(
       description = "The date of the next payment under the recurrence schedule",
       dataType = "java.lang.String")
@@ -40,37 +41,78 @@ public abstract class BankingScheduledPaymentRecurrence {
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   private LocalDate nextPaymentDate;
 
+  public LocalDate nextPaymentDate() {
+    return getNextPaymentDate();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T nextPaymentDate(LocalDate nextPaymentDate) {
+    setNextPaymentDate(nextPaymentDate);
+    return (T) this;
+  }
+
   @BabelFishModelProperty(description = "The type of recurrence used to define the schedule",
       required = true)
   @NonNull
   @NotNull
   private PayloadTypeBankingScheduledPaymentRecurrence recurrenceUType;
 
-  private BankingScheduledPaymentRecurrenceOnceOff onceOff;
-
-  private BankingScheduledPaymentRecurrenceIntervalSchedule intervalSchedule;
-
-  private BankingScheduledPaymentRecurrenceLastWeekday lastWeekDay;
-
-  private BankingScheduledPaymentRecurrenceEventBased eventBased;
-
-  @AssertTrue(
-      message = "One and Only One Recurrence Type Object must be populated to align with recurrencyUType")
-  private boolean isRecurrenceTypeCorrect() {
-    if (recurrenceUType.equals(PayloadTypeBankingScheduledPaymentRecurrence.ONCE_OFF)) {
-      return onceOff != null && intervalSchedule == null && lastWeekDay == null
-          && eventBased == null ? true : false;
-    } else if (recurrenceUType
-        .equals(PayloadTypeBankingScheduledPaymentRecurrence.INTERVAL_SCHEDULE)) {
-      return intervalSchedule != null && onceOff == null && lastWeekDay == null
-          && eventBased == null ? true : false;
-    } else if (recurrenceUType.equals(PayloadTypeBankingScheduledPaymentRecurrence.LAST_WEEKDAY)) {
-      return lastWeekDay != null && intervalSchedule == null && intervalSchedule == null
-          && eventBased == null ? true : false;
-    } else if (recurrenceUType.equals(PayloadTypeBankingScheduledPaymentRecurrence.EVENT_BASED)) {
-      return eventBased != null && onceOff == null && intervalSchedule == null
-          && lastWeekDay == null ? true : false;
-    }
-    return false;
+  public PayloadTypeBankingScheduledPaymentRecurrence recurrenceUType() {
+    return getRecurrenceUType();
   }
+
+  @SuppressWarnings("unchecked")
+  public T recurrenceUType(PayloadTypeBankingScheduledPaymentRecurrence recurrenceUType) {
+    setRecurrenceUType(recurrenceUType);
+    return (T) this;
+  }
+
+  private BankingScheduledPaymentRecurrenceOnceOff<?> onceOff;
+
+  public BankingScheduledPaymentRecurrenceOnceOff<?> onceOff() {
+    return getOnceOff();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T onceOff(BankingScheduledPaymentRecurrenceOnceOff<?> onceOff) {
+    setOnceOff(onceOff);
+    return (T) this;
+  }
+
+  private BankingScheduledPaymentRecurrenceIntervalSchedule<?> intervalSchedule;
+
+  public BankingScheduledPaymentRecurrenceIntervalSchedule<?> intervalSchedule() {
+    return getIntervalSchedule();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T intervalSchedule(BankingScheduledPaymentRecurrenceIntervalSchedule<?> intervalSchedule) {
+    setIntervalSchedule(intervalSchedule);
+    return (T) this;
+  }
+
+  private BankingScheduledPaymentRecurrenceLastWeekday<?> lastWeekDay;
+
+  public BankingScheduledPaymentRecurrenceLastWeekday<?> lastWeekDay() {
+    return getLastWeekDay();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T lastWeekDay(BankingScheduledPaymentRecurrenceLastWeekday<?> lastWeekDay) {
+    setLastWeekDay(lastWeekDay);
+    return (T) this;
+  }
+
+  private BankingScheduledPaymentRecurrenceEventBased<?> eventBased;
+
+  public BankingScheduledPaymentRecurrenceEventBased<?> eventBased() {
+    return getEventBased();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T eventBased(BankingScheduledPaymentRecurrenceEventBased<?> eventBased) {
+    setEventBased(eventBased);
+    return (T) this;
+  }
+
 }

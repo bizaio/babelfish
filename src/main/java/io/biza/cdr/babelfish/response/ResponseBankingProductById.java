@@ -31,5 +31,5 @@ public abstract class ResponseBankingProductById extends CDRResponse<ResponseBan
   @JsonProperty("data")
   @NotNull
   @NonNull
-  public BankingProductDetail data;
+  public BankingProductDetail<?> data;
 }

@@ -19,9 +19,7 @@ import java.lang.annotation.Target;
 /**
  * Provides API Model data for Methods and Fields
  */
-@Target({
-    ElementType.METHOD, ElementType.FIELD
-})
+@Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface BabelFishModelProperty {
   /**

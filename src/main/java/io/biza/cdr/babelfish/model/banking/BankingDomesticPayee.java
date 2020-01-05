@@ -6,13 +6,16 @@
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
+ * 
+ * public ANY WARRANTY() { return getWARRANTY(); }
+ * 
+ * @SuppressWarnings("unchecked") public T WARRANTY(ANY WARRANTY) { setWARRANTY(WARRANTY); return
+ * (T) this; } even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingDomesticPayee;
@@ -20,35 +23,61 @@ import io.biza.cdr.babelfish.support.BabelFishModel;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "Representation of a Domestic Payee Detail")
-public abstract class BankingDomesticPayee {
+public abstract class BankingDomesticPayee<T extends BankingDomesticPayee<T>> {
   @BabelFishModelProperty(description = "Type of account object included.", required = true)
   @NotNull
   @NonNull
   PayloadTypeBankingDomesticPayee payeeAccountUType;
 
-  private BankingDomesticPayeeAccount account;
-
-  private BankingDomesticPayeeCard card;
-
-  private BankingDomesticPayeePayId payId;
-
-  @AssertTrue(
-      message = "Payee Account Type must supply matching Payee Account Type Specific Information")
-  private boolean isAccountTypeCorrect() {
-    if (payeeAccountUType.equals(PayloadTypeBankingDomesticPayee.ACCOUNT)) {
-      return account != null && card == null && payId == null ? true : false;
-    } else if (payeeAccountUType.equals(PayloadTypeBankingDomesticPayee.CARD)) {
-      return card != null && account == null && payId == null ? true : false;
-    } else if (payeeAccountUType.equals(PayloadTypeBankingDomesticPayee.PAY_ID)) {
-      return payId != null && account == null && card == null ? true : false;
-    }
-    return false;
+  public PayloadTypeBankingDomesticPayee payeeAccountUType() {
+    return getPayeeAccountUType();
   }
+
+  @SuppressWarnings("unchecked")
+  public T payeeAccountUType(PayloadTypeBankingDomesticPayee payeeAccountUType) {
+    setPayeeAccountUType(payeeAccountUType);
+    return (T) this;
+  }
+
+  private BankingDomesticPayeeAccount<?> account;
+
+  public BankingDomesticPayeeAccount<?> account() {
+    return getAccount();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T account(BankingDomesticPayeeAccount<?> account) {
+    setAccount(account);
+    return (T) this;
+  }
+
+  private BankingDomesticPayeeCard<?> card;
+
+  public BankingDomesticPayeeCard<?> card() {
+    return getCard();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T card(BankingDomesticPayeeCard<?> card) {
+    setCard(card);
+    return (T) this;
+  }
+
+  private BankingDomesticPayeePayId<?> payId;
+
+  public BankingDomesticPayeePayId<?> payId() {
+    return getPayId();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T payId(BankingDomesticPayeePayId<?> payId) {
+    setPayId(payId);
+    return (T) this;
+  }
+
 }

@@ -17,7 +17,7 @@ import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingScheduledPayment;
 
 @Valid
 public class BankingScheduledPaymentTo
-    extends io.biza.cdr.babelfish.model.banking.BankingScheduledPaymentTo {
+    extends io.biza.cdr.babelfish.model.banking.BankingScheduledPaymentTo<BankingScheduledPaymentTo> {
   @AssertTrue(
       message = "One and only one of accountId, payeeId, domestic, biller, international should be populated based on toUType")
   private boolean isUTypePopulated() {

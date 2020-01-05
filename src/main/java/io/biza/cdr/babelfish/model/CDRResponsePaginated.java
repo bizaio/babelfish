@@ -14,35 +14,32 @@ package io.biza.cdr.babelfish.model;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.cdr.babelfish.model.common.Links;
 import io.biza.cdr.babelfish.model.common.LinksPaginated;
-import io.biza.cdr.babelfish.model.common.Meta;
 import io.biza.cdr.babelfish.model.common.MetaPaginated;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @BabelFishModel(description = "This is a Paginated CDR Response")
 @Valid
 @Getter
 @Setter
-public abstract class CDRResponsePaginated <T extends CDRResponsePaginated<T>> {
+public abstract class CDRResponsePaginated<T extends CDRResponsePaginated<T>> {
   @BabelFishModelProperty(description = "The Links Object", required = true)
   @JsonProperty("links")
   @NotNull
   @NonNull
   @Valid
-  LinksPaginated links;
-  
-  public LinksPaginated links() {
+  LinksPaginated<?> links;
+
+  public LinksPaginated<?> links() {
     return getLinks();
   }
-  
+
   @SuppressWarnings("unchecked")
-  public T links(LinksPaginated links) {
+  public T links(LinksPaginated<?> links) {
     setLinks(links);
     return (T) this;
   }
@@ -54,14 +51,14 @@ public abstract class CDRResponsePaginated <T extends CDRResponsePaginated<T>> {
   @NotNull
   @NonNull
   @Valid
-  MetaPaginated meta;
-  
-  public MetaPaginated meta() {
+  MetaPaginated<?> meta;
+
+  public MetaPaginated<?> meta() {
     return getMeta();
   }
-  
+
   @SuppressWarnings("unchecked")
-  public T meta(MetaPaginated meta) {
+  public T meta(MetaPaginated<?> meta) {
     setMeta(meta);
     return (T) this;
   }

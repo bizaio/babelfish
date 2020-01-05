@@ -6,8 +6,12 @@
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
+ * 
+ * public ANY WARRANTY() { return getWARRANTY(); }
+ * 
+ * @SuppressWarnings("unchecked") public T WARRANTY(ANY WARRANTY) { setWARRANTY(WARRANTY); return
+ * (T) this; } even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.banking;
 
@@ -23,15 +27,13 @@ import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(
     description = "Indicates that the payment is a once off payment on a specific future date. Mandatory if recurrenceUType is set to onceOff")
-public abstract class BankingScheduledPaymentRecurrenceOnceOff {
+public abstract class BankingScheduledPaymentRecurrenceOnceOff<T extends BankingScheduledPaymentRecurrenceOnceOff<T>> {
   @BabelFishModelProperty(description = "The scheduled date for the once off payment",
       required = true, dataType = "java.lang.String")
   @NonNull
@@ -39,4 +41,14 @@ public abstract class BankingScheduledPaymentRecurrenceOnceOff {
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   private LocalDate paymentDate;
+
+  public LocalDate paymentDate() {
+    return getPaymentDate();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T paymentDate(LocalDate paymentDate) {
+    setPaymentDate(paymentDate);
+    return (T) this;
+  }
 }

@@ -6,8 +6,12 @@
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
+ * 
+ * public ANY WARRANTY() { return getWARRANTY(); }
+ * 
+ * @SuppressWarnings("unchecked") public T WARRANTY(ANY WARRANTY) { setWARRANTY(WARRANTY); return
+ * (T) this; } even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.banking;
 
@@ -27,15 +31,13 @@ import io.biza.cdr.babelfish.support.BabelFishModel;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(
     description = "Indicates that the schedule of payments is defined according to the last occurrence of a specific weekday in an interval. Mandatory if recurrenceUType is set to lastWeekDay")
-public abstract class BankingScheduledPaymentRecurrenceLastWeekday {
+public abstract class BankingScheduledPaymentRecurrenceLastWeekday<T extends BankingScheduledPaymentRecurrenceLastWeekday<T>> {
   @BabelFishModelProperty(
       description = "The limit date after which no more payments should be made using this schedule. If both finalPaymentDate and paymentsRemaining are present then payments will stop according to the most constraining value. If neither field is present the payments will continue indefinitely",
       dataType = "java.lang.String")
@@ -43,10 +45,30 @@ public abstract class BankingScheduledPaymentRecurrenceLastWeekday {
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   private LocalDate finalPaymentDate;
 
+  public LocalDate finalPaymentDate() {
+    return getFinalPaymentDate();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T finalPaymentDate(LocalDate finalPaymentDate) {
+    setFinalPaymentDate(finalPaymentDate);
+    return (T) this;
+  }
+
   @BabelFishModelProperty(
       description = "Indicates the number of payments remaining in the schedule. If both finalPaymentDate and paymentsRemaining are present then payments will stop according to the most constraining value. If neither field is present the payments will continue indefinitely")
   @Min(1)
   Integer paymentsRemaining;
+
+  public Integer paymentsRemaining() {
+    return getPaymentsRemaining();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T paymentsRemaining(Integer paymentsRemaining) {
+    setPaymentsRemaining(paymentsRemaining);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "The interval for the payment. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations) with components less than a day in length ignored. This duration defines the period between payments starting with nextPaymentDate",
@@ -57,6 +79,16 @@ public abstract class BankingScheduledPaymentRecurrenceLastWeekday {
   @JsonDeserialize(converter = StringToPeriodConverter.class)
   Period interval;
 
+  public Period interval() {
+    return getInterval();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T interval(Period interval) {
+    setInterval(interval);
+    return (T) this;
+  }
+
   @BabelFishModelProperty(
       description = "The weekDay specified. The payment will occur on the last occurrence of this weekday in the interval. Value is constrained to 1 to 7 with 1 indicating Monday.",
       required = true)
@@ -64,4 +96,14 @@ public abstract class BankingScheduledPaymentRecurrenceLastWeekday {
   @NotNull
   @Min(1)
   Integer lastWeekDay;
+
+  public Integer lastWeekDay() {
+    return getLastWeekDay();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T lastWeekDay(Integer lastWeekDay) {
+    setLastWeekDay(lastWeekDay);
+    return (T) this;
+  }
 }

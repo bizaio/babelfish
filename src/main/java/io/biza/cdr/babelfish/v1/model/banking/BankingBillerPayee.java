@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 
 @Valid
-public class BankingBillerPayee extends io.biza.cdr.babelfish.model.banking.BankingBillerPayee {
+public class BankingBillerPayee extends io.biza.cdr.babelfish.model.banking.BankingBillerPayee<BankingBillerPayee> {
   @AssertTrue(message = "BPAY CRN of Card Format MUST be Masked")
   private boolean isCrnMasked() {
     if (crn().matches("(\\w{4} ){3}\\w{4}")) {
@@ -28,5 +28,5 @@ public class BankingBillerPayee extends io.biza.cdr.babelfish.model.banking.Bank
       return true;
     }
   }
-  
+
 }

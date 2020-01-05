@@ -14,5 +14,6 @@ package io.biza.cdr.babelfish.v1.model.common;
 import javax.validation.Valid;
 
 @Valid
-public class CommonEmailAddress extends io.biza.cdr.babelfish.model.common.CommonEmailAddress<CommonEmailAddress> {
+public class CommonEmailAddress
+    extends io.biza.cdr.babelfish.model.common.CommonEmailAddress<CommonEmailAddress> {
 }

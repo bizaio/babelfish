@@ -29,36 +29,36 @@ import lombok.Setter;
 @Valid
 @BabelFishModel(
     description = "Australian address formatted according to the file format defined by the [PAF file format](https://auspost.com.au/content/dam/auspost_corp/media/documents/australia-post-data-guide.pdf)")
-public abstract class CommonPAFAddress <T extends CommonPAFAddress<T>> {
+public abstract class CommonPAFAddress<T extends CommonPAFAddress<T>> {
   @BabelFishModelProperty(
       description = "Unique identifier for an address as defined by Australia Post.  Also known as Delivery Point Identifier")
   @JsonProperty("dpid")
   public String dpid;
 
-public String dpid() {
-  return getDpid();
-}
+  public String dpid() {
+    return getDpid();
+  }
 
-@SuppressWarnings("unchecked")
-public T dpid(String dpid) {
-   setDpid(dpid);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T dpid(String dpid) {
+    setDpid(dpid);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "Thoroughfare number for a property (first number in a property ranged address)")
   @JsonProperty("thoroughfareNumber1")
   public Integer thoroughfareNumber1;
 
-public Integer thoroughfareNumber1() {
-  return getThoroughfareNumber1();
-}
+  public Integer thoroughfareNumber1() {
+    return getThoroughfareNumber1();
+  }
 
-@SuppressWarnings("unchecked")
-public T thoroughfareNumber1(Integer thoroughfareNumber1) {
-   setThoroughfareNumber1(thoroughfareNumber1);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T thoroughfareNumber1(Integer thoroughfareNumber1) {
+    setThoroughfareNumber1(thoroughfareNumber1);
+    return (T) this;
+  }
 
   public void thoroughfareNumber1(String thoroughfareNumber1String) {
     if (thoroughfareNumber1String != null) {
@@ -72,30 +72,30 @@ public T thoroughfareNumber1(Integer thoroughfareNumber1) {
   @JsonProperty("thoroughfareNumber1Suffix")
   public String thoroughfareNumber1Suffix;
 
-public String thoroughfareNumber1Suffix() {
-  return getThoroughfareNumber1Suffix();
-}
+  public String thoroughfareNumber1Suffix() {
+    return getThoroughfareNumber1Suffix();
+  }
 
-@SuppressWarnings("unchecked")
-public T thoroughfareNumber1Suffix(String thoroughfareNumber1Suffix) {
-   setThoroughfareNumber1Suffix(thoroughfareNumber1Suffix);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T thoroughfareNumber1Suffix(String thoroughfareNumber1Suffix) {
+    setThoroughfareNumber1Suffix(thoroughfareNumber1Suffix);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "Second thoroughfare number (only used if the property has a ranged address eg 23-25)")
   @JsonProperty("thoroughfareNumber2")
   public Integer thoroughfareNumber2;
 
-public Integer thoroughfareNumber2() {
-  return getThoroughfareNumber2();
-}
+  public Integer thoroughfareNumber2() {
+    return getThoroughfareNumber2();
+  }
 
-@SuppressWarnings("unchecked")
-public T thoroughfareNumber2(Integer thoroughfareNumber2) {
-   setThoroughfareNumber2(thoroughfareNumber2);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T thoroughfareNumber2(Integer thoroughfareNumber2) {
+    setThoroughfareNumber2(thoroughfareNumber2);
+    return (T) this;
+  }
 
   public void thoroughfareNumber2(String thoroughfareNumber2String) {
     if (thoroughfareNumber2String != null) {
@@ -109,129 +109,129 @@ public T thoroughfareNumber2(Integer thoroughfareNumber2) {
   @JsonProperty("thoroughfareNumber2Suffix")
   public String thoroughfareNumber2Suffix;
 
-public String thoroughfareNumber2Suffix() {
-  return getThoroughfareNumber2Suffix();
-}
+  public String thoroughfareNumber2Suffix() {
+    return getThoroughfareNumber2Suffix();
+  }
 
-@SuppressWarnings("unchecked")
-public T thoroughfareNumber2Suffix(String thoroughfareNumber2Suffix) {
-   setThoroughfareNumber2Suffix(thoroughfareNumber2Suffix);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T thoroughfareNumber2Suffix(String thoroughfareNumber2Suffix) {
+    setThoroughfareNumber2Suffix(thoroughfareNumber2Suffix);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "Type of flat or unit for the address",
       dataType = "java.lang.String")
   @JsonProperty("flatUnitType")
   public AddressPAFFlatUnitType flatUnitType;
 
-public AddressPAFFlatUnitType flatUnitType() {
-  return getFlatUnitType();
-}
+  public AddressPAFFlatUnitType flatUnitType() {
+    return getFlatUnitType();
+  }
 
-@SuppressWarnings("unchecked")
-public T flatUnitType(AddressPAFFlatUnitType flatUnitType) {
-   setFlatUnitType(flatUnitType);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T flatUnitType(AddressPAFFlatUnitType flatUnitType) {
+    setFlatUnitType(flatUnitType);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "Unit number (including suffix, if applicable)")
   @JsonProperty("flatUnitNumber")
   public String flatUnitNumber;
 
-public String flatUnitNumber() {
-  return getFlatUnitNumber();
-}
+  public String flatUnitNumber() {
+    return getFlatUnitNumber();
+  }
 
-@SuppressWarnings("unchecked")
-public T flatUnitNumber(String flatUnitNumber) {
-   setFlatUnitNumber(flatUnitNumber);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T flatUnitNumber(String flatUnitNumber) {
+    setFlatUnitNumber(flatUnitNumber);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "Type of floor or level for the address",
       dataType = "java.lang.String")
   @JsonProperty("floorLevelType")
   public AddressPAFFloorLevelType floorLevelType;
 
-public AddressPAFFloorLevelType floorLevelType() {
-  return getFloorLevelType();
-}
+  public AddressPAFFloorLevelType floorLevelType() {
+    return getFloorLevelType();
+  }
 
-@SuppressWarnings("unchecked")
-public T floorLevelType(AddressPAFFloorLevelType floorLevelType) {
-   setFloorLevelType(floorLevelType);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T floorLevelType(AddressPAFFloorLevelType floorLevelType) {
+    setFloorLevelType(floorLevelType);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "Floor or level number (including alpha characters)")
   @JsonProperty("floorLevelNumber")
   public String floorLevelNumber;
 
-public String floorLevelNumber() {
-  return getFloorLevelNumber();
-}
+  public String floorLevelNumber() {
+    return getFloorLevelNumber();
+  }
 
-@SuppressWarnings("unchecked")
-public T floorLevelNumber(String floorLevelNumber) {
-   setFloorLevelNumber(floorLevelNumber);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T floorLevelNumber(String floorLevelNumber) {
+    setFloorLevelNumber(floorLevelNumber);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "Allotment number for the address")
   @JsonProperty("lotNumber")
   public String lotNumber;
 
-public String lotNumber() {
-  return getLotNumber();
-}
+  public String lotNumber() {
+    return getLotNumber();
+  }
 
-@SuppressWarnings("unchecked")
-public T lotNumber(String lotNumber) {
-   setLotNumber(lotNumber);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T lotNumber(String lotNumber) {
+    setLotNumber(lotNumber);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "Building/Property name 1")
   @JsonProperty("buildingName1")
   public String buildingName1;
 
-public String buildingName1() {
-  return getBuildingName1();
-}
+  public String buildingName1() {
+    return getBuildingName1();
+  }
 
-@SuppressWarnings("unchecked")
-public T buildingName1(String buildingName1) {
-   setBuildingName1(buildingName1);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T buildingName1(String buildingName1) {
+    setBuildingName1(buildingName1);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "Building/Property name 2")
   @JsonProperty("buildingName2")
   public String buildingName2;
 
-public String buildingName2() {
-  return getBuildingName2();
-}
+  public String buildingName2() {
+    return getBuildingName2();
+  }
 
-@SuppressWarnings("unchecked")
-public T buildingName2(String buildingName2) {
-   setBuildingName2(buildingName2);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T buildingName2(String buildingName2) {
+    setBuildingName2(buildingName2);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "The name of the street")
   @JsonProperty("streetName")
   public String streetName;
 
-public String streetName() {
-  return getStreetName();
-}
+  public String streetName() {
+    return getStreetName();
+  }
 
-@SuppressWarnings("unchecked")
-public T streetName(String streetName) {
-   setStreetName(streetName);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T streetName(String streetName) {
+    setStreetName(streetName);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "The street type. Valid enumeration defined by Australia Post PAF code file",
@@ -239,15 +239,15 @@ public T streetName(String streetName) {
   @JsonProperty("streetType")
   public AddressPAFStreetType streetType;
 
-public AddressPAFStreetType streetType() {
-  return getStreetType();
-}
+  public AddressPAFStreetType streetType() {
+    return getStreetType();
+  }
 
-@SuppressWarnings("unchecked")
-public T streetType(AddressPAFStreetType streetType) {
-   setStreetType(streetType);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T streetType(AddressPAFStreetType streetType) {
+    setStreetType(streetType);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "The street type suffix. Valid enumeration defined by Australia Post PAF code file",
@@ -255,15 +255,15 @@ public T streetType(AddressPAFStreetType streetType) {
   @JsonProperty("streetSuffix")
   public AddressPAFStreetSuffix streetSuffix;
 
-public AddressPAFStreetSuffix streetSuffix() {
-  return getStreetSuffix();
-}
+  public AddressPAFStreetSuffix streetSuffix() {
+    return getStreetSuffix();
+  }
 
-@SuppressWarnings("unchecked")
-public T streetSuffix(AddressPAFStreetSuffix streetSuffix) {
-   setStreetSuffix(streetSuffix);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T streetSuffix(AddressPAFStreetSuffix streetSuffix) {
+    setStreetSuffix(streetSuffix);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "Postal delivery type. (eg. PO BOX). Valid enumeration defined by Australia Post PAF code file",
@@ -271,30 +271,30 @@ public T streetSuffix(AddressPAFStreetSuffix streetSuffix) {
   @JsonProperty("postalDeliveryType")
   public AddressPAFPostalDeliveryType postalDeliveryType;
 
-public AddressPAFPostalDeliveryType postalDeliveryType() {
-  return getPostalDeliveryType();
-}
+  public AddressPAFPostalDeliveryType postalDeliveryType() {
+    return getPostalDeliveryType();
+  }
 
-@SuppressWarnings("unchecked")
-public T postalDeliveryType(AddressPAFPostalDeliveryType postalDeliveryType) {
-   setPostalDeliveryType(postalDeliveryType);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T postalDeliveryType(AddressPAFPostalDeliveryType postalDeliveryType) {
+    setPostalDeliveryType(postalDeliveryType);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "Postal delivery number if the address is a postal delivery type")
   @JsonProperty("postalDeliveryNumber")
   public Integer postalDeliveryNumber;
 
-public Integer postalDeliveryNumber() {
-  return getPostalDeliveryNumber();
-}
+  public Integer postalDeliveryNumber() {
+    return getPostalDeliveryNumber();
+  }
 
-@SuppressWarnings("unchecked")
-public T postalDeliveryNumber(Integer postalDeliveryNumber) {
-   setPostalDeliveryNumber(postalDeliveryNumber);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T postalDeliveryNumber(Integer postalDeliveryNumber) {
+    setPostalDeliveryNumber(postalDeliveryNumber);
+    return (T) this;
+  }
 
   public void postalDeliveryNumber(String postalDeliveryNumberString) {
     if (postalDeliveryNumberString != null) {
@@ -308,58 +308,58 @@ public T postalDeliveryNumber(Integer postalDeliveryNumber) {
   @JsonProperty("postalDeliveryNumberPrefix")
   public String postalDeliveryNumberPrefix;
 
-public String postalDeliveryNumberPrefix() {
-  return getPostalDeliveryNumberPrefix();
-}
+  public String postalDeliveryNumberPrefix() {
+    return getPostalDeliveryNumberPrefix();
+  }
 
-@SuppressWarnings("unchecked")
-public T postalDeliveryNumberPrefix(String postalDeliveryNumberPrefix) {
-   setPostalDeliveryNumberPrefix(postalDeliveryNumberPrefix);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T postalDeliveryNumberPrefix(String postalDeliveryNumberPrefix) {
+    setPostalDeliveryNumberPrefix(postalDeliveryNumberPrefix);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "Postal delivery number suffix related to the postal delivery number")
   @JsonProperty("postalDeliveryNumberSuffix")
   public String postalDeliveryNumberSuffix;
 
-public String postalDeliveryNumberSuffix() {
-  return getPostalDeliveryNumberSuffix();
-}
+  public String postalDeliveryNumberSuffix() {
+    return getPostalDeliveryNumberSuffix();
+  }
 
-@SuppressWarnings("unchecked")
-public T postalDeliveryNumberSuffix(String postalDeliveryNumberSuffix) {
-   setPostalDeliveryNumberSuffix(postalDeliveryNumberSuffix);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T postalDeliveryNumberSuffix(String postalDeliveryNumberSuffix) {
+    setPostalDeliveryNumberSuffix(postalDeliveryNumberSuffix);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "Full name of locality", required = true)
   @JsonProperty("localityName")
   public String localityName;
 
-public String localityName() {
-  return getLocalityName();
-}
+  public String localityName() {
+    return getLocalityName();
+  }
 
-@SuppressWarnings("unchecked")
-public T localityName(String localityName) {
-   setLocalityName(localityName);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T localityName(String localityName) {
+    setLocalityName(localityName);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "Postcode for the locality", required = true)
   @JsonProperty("postcode")
   public String postcode;
 
-public String postcode() {
-  return getPostcode();
-}
+  public String postcode() {
+    return getPostcode();
+  }
 
-@SuppressWarnings("unchecked")
-public T postcode(String postcode) {
-   setPostcode(postcode);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T postcode(String postcode) {
+    setPostcode(postcode);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "State in which the address belongs. Valid enumeration defined by Australia Post PAF code file",
@@ -367,13 +367,13 @@ public T postcode(String postcode) {
   @JsonProperty("state")
   public AddressPAFStateType state;
 
-public AddressPAFStateType state() {
-  return getState();
-}
+  public AddressPAFStateType state() {
+    return getState();
+  }
 
-@SuppressWarnings("unchecked")
-public T state(AddressPAFStateType state) {
-   setState(state);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T state(AddressPAFStateType state) {
+    setState(state);
+    return (T) this;
+  }
 }

@@ -6,8 +6,12 @@
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
+ * 
+ * public ANY WARRANTY() { return getWARRANTY(); }
+ * 
+ * @SuppressWarnings("unchecked") public T WARRANTY(ANY WARRANTY) { setWARRANTY(WARRANTY); return
+ * (T) this; } even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.banking;
 
@@ -20,14 +24,12 @@ import io.biza.cdr.babelfish.support.BabelFishModel;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "Describes a Scheduled Payment")
-public abstract class BankingScheduledPayment {
+public abstract class BankingScheduledPayment<T extends BankingScheduledPayment<T>> {
   @BabelFishModelProperty(
       description = "A unique ID of the scheduled payment adhering to the standards for ID permanence",
       required = true)
@@ -35,9 +37,29 @@ public abstract class BankingScheduledPayment {
   @NotNull
   String scheduledPaymentId;
 
+  public String scheduledPaymentId() {
+    return getScheduledPaymentId();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T scheduledPaymentId(String scheduledPaymentId) {
+    setScheduledPaymentId(scheduledPaymentId);
+    return (T) this;
+  }
+
   @BabelFishModelProperty(
       description = "The short display name of the payee as provided by the customer")
   String nickname;
+
+  public String nickname() {
+    return getNickname();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T nickname(String nickname) {
+    setNickname(nickname);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "The reference for the transaction that will be used by the originating institution for the purposes of constructing a statement narrative on the payer’s account. Empty string if no data provided",
@@ -46,12 +68,32 @@ public abstract class BankingScheduledPayment {
   @NotNull
   String payerReference;
 
+  public String payerReference() {
+    return getPayerReference();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T payerReference(String payerReference) {
+    setPayerReference(payerReference);
+    return (T) this;
+  }
+
   @BabelFishModelProperty(
       description = "The reference for the transaction that will be provided by the originating institution. Empty string if no data provided",
       required = true)
   @NonNull
   @NotNull
   String payeeReference;
+
+  public String payeeReference() {
+    return getPayeeReference();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T payeeReference(String payeeReference) {
+    setPayeeReference(payeeReference);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "Indicates whether the schedule is currently active. The value SKIP is equivalent to ACTIVE except that the customer has requested the next normal occurrence to be skipped.",
@@ -60,18 +102,48 @@ public abstract class BankingScheduledPayment {
   @NotNull
   BankingScheduledPaymentStatus status;
 
-  @BabelFishModelProperty(required = true)
-  @NonNull
-  @NotNull
-  BankingScheduledPaymentFrom from;
+  public BankingScheduledPaymentStatus status() {
+    return getStatus();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T status(BankingScheduledPaymentStatus status) {
+    setStatus(status);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(required = true)
   @NonNull
   @NotNull
-  List<BankingScheduledPaymentSet> paymentSet;
+  BankingScheduledPaymentFrom<?> from;
+
+  public BankingScheduledPaymentFrom<?> from() {
+    return getFrom();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T from(BankingScheduledPaymentFrom<?> from) {
+    setFrom(from);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(required = true)
   @NonNull
   @NotNull
-  BankingScheduledPaymentRecurrence recurrence;
+  List<BankingScheduledPaymentSet<?>> paymentSet;
+
+  @BabelFishModelProperty(required = true)
+  @NonNull
+  @NotNull
+  BankingScheduledPaymentRecurrence<?> recurrence;
+
+  public BankingScheduledPaymentRecurrence<?> recurrence() {
+    return getRecurrence();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T recurrence(BankingScheduledPaymentRecurrence<?> recurrence) {
+    setRecurrence(recurrence);
+    return (T) this;
+  }
 }

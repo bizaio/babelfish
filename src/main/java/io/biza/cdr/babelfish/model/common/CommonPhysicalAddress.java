@@ -25,48 +25,48 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Physical Address Detail")
-public abstract class CommonPhysicalAddress <T extends CommonPhysicalAddress<T>> {
+public abstract class CommonPhysicalAddress<T extends CommonPhysicalAddress<T>> {
   @BabelFishModelProperty(description = "The type of address object present", required = true)
   @JsonProperty("addressUType")
   @NotNull
   @NonNull
   public PayloadTypeAddress addressType;
 
-public PayloadTypeAddress addressType() {
-  return getAddressType();
-}
+  public PayloadTypeAddress addressType() {
+    return getAddressType();
+  }
 
-@SuppressWarnings("unchecked")
-public T addressType(PayloadTypeAddress addressType) {
-   setAddressType(addressType);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T addressType(PayloadTypeAddress addressType) {
+    setAddressType(addressType);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "Address in Simple Address format")
   @JsonProperty("simple")
   public CommonSimpleAddress<?> simple;
 
-public CommonSimpleAddress<?> simple() {
-  return getSimple();
-}
+  public CommonSimpleAddress<?> simple() {
+    return getSimple();
+  }
 
-@SuppressWarnings("unchecked")
-public T simple(CommonSimpleAddress<?> simple) {
-   setSimple(simple);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T simple(CommonSimpleAddress<?> simple) {
+    setSimple(simple);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "Address in PAF Format")
   @JsonProperty("paf")
   public CommonPAFAddress<?> paf;
 
-public CommonPAFAddress<?> paf() {
-  return getPaf();
-}
+  public CommonPAFAddress<?> paf() {
+    return getPaf();
+  }
 
-@SuppressWarnings("unchecked")
-public T paf(CommonPAFAddress<?> paf) {
-   setPaf(paf);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T paf(CommonPAFAddress<?> paf) {
+    setPaf(paf);
+    return (T) this;
+  }
 }

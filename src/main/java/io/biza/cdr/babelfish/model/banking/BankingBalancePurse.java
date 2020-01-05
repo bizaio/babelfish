@@ -6,8 +6,12 @@
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
+ * 
+ * public ANY WARRANTY() { return getWARRANTY(); }
+ * 
+ * @SuppressWarnings("unchecked") public T WARRANTY(ANY WARRANTY) { setWARRANTY(WARRANTY); return
+ * (T) this; } even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.banking;
 
@@ -26,14 +30,12 @@ import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "An Australian Bank Account Purse Balance Representation")
-public abstract class BankingBalancePurse {
+public abstract class BankingBalancePurse<T extends BankingBalancePurse<T>> {
   @BabelFishModelProperty(description = "The balance available for this additional currency purse",
       required = true)
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
@@ -42,8 +44,28 @@ public abstract class BankingBalancePurse {
   @NotNull
   BigDecimal amount;
 
+  public BigDecimal amount() {
+    return getAmount();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T amount(BigDecimal amount) {
+    setAmount(amount);
+    return (T) this;
+  }
+
   @BabelFishModelProperty(description = "The currency for the purse")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   Currency currency;
+
+  public Currency currency() {
+    return getCurrency();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T currency(Currency currency) {
+    setCurrency(currency);
+    return (T) this;
+  }
 }

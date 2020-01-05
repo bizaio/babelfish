@@ -6,8 +6,12 @@
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
+ * 
+ * public ANY WARRANTY() { return getWARRANTY(); }
+ * 
+ * @SuppressWarnings("unchecked") public T WARRANTY(ANY WARRANTY) { setWARRANTY(WARRANTY); return
+ * (T) this; } even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.banking;
 
@@ -18,14 +22,12 @@ import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "Banking Transaction Detail X2P101 Payload")
-public abstract class BankingTransactionDetailExtendedDataX2p101Payload {
+public abstract class BankingTransactionDetailExtendedDataX2p101Payload<T extends BankingTransactionDetailExtendedDataX2p101Payload<T>> {
   @BabelFishModelProperty(
       description = "An extended string description. Only present if specified by the extensionUType field",
       required = true)
@@ -33,10 +35,40 @@ public abstract class BankingTransactionDetailExtendedDataX2p101Payload {
   @NotNull
   String extendedDescription;
 
+  public String extendedDescription() {
+    return getExtendedDescription();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T extendedDescription(String extendedDescription) {
+    setExtendedDescription(extendedDescription);
+    return (T) this;
+  }
+
   @BabelFishModelProperty(description = "An end to end ID for the payment created at initiation")
   String endToEndId;
+
+  public String endToEndId() {
+    return getEndToEndId();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T endToEndId(String endToEndId) {
+    setEndToEndId(endToEndId);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "Purpose of the payment.  Format is defined by NPP standards for the x2p1.01 overlay service")
   String purposeCode;
+
+  public String purposeCode() {
+    return getPurposeCode();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T purposeCode(String purposeCode) {
+    setPurposeCode(purposeCode);
+    return (T) this;
+  }
 }

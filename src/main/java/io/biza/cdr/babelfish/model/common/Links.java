@@ -29,7 +29,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "CDS Links")
-public abstract class Links <T extends Links<T>> {
+public abstract class Links<T extends Links<T>> {
   @BabelFishModelProperty(
       description = "Fully qualified link that generated the current response document",
       required = true, dataType = "java.lang.String")
@@ -41,13 +41,13 @@ public abstract class Links <T extends Links<T>> {
   @Valid
   public URI self;
 
-public URI self() {
-  return getSelf();
-}
+  public URI self() {
+    return getSelf();
+  }
 
-@SuppressWarnings("unchecked")
-public T self(URI self) {
-   setSelf(self);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T self(URI self) {
+    setSelf(self);
+    return (T) this;
+  }
 }

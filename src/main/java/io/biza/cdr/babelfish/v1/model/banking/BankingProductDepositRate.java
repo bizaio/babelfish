@@ -19,12 +19,13 @@ import io.biza.cdr.babelfish.v1.enumerations.BankingProductDepositRateType;
 
 @Valid
 public class BankingProductDepositRate
-    extends io.biza.cdr.babelfish.model.banking.BankingProductDepositRate {
+    extends io.biza.cdr.babelfish.model.banking.BankingProductDepositRate<BankingProductDepositRate> {
   @AssertTrue(
       message = "Additional Value must be a Duration String when Fee type is FIXED or INTRODUCTORY")
   private boolean isValueDuration() {
-    return Arrays.asList(new BankingProductDepositRateType[] {
-        BankingProductDepositRateType.FIXED, BankingProductDepositRateType.INTRODUCTORY
-    }).contains(depositRateType()) ? FormatChecker.isDuration(additionalValue()) : true;
+    return Arrays.asList(new BankingProductDepositRateType[] {BankingProductDepositRateType.FIXED,
+        BankingProductDepositRateType.INTRODUCTORY}).contains(depositRateType())
+            ? FormatChecker.isDuration(additionalValue())
+            : true;
   }
 }

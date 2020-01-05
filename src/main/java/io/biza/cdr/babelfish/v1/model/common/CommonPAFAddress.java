@@ -15,7 +15,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 
 @Valid
-public class CommonPAFAddress extends io.biza.cdr.babelfish.model.common.CommonPAFAddress<CommonPAFAddress> {
+public class CommonPAFAddress
+    extends io.biza.cdr.babelfish.model.common.CommonPAFAddress<CommonPAFAddress> {
   @AssertTrue(
       message = "Thoroughfare Suffixes should only be set when Thoroughfare Numbers are set")
   private boolean isInvalidSuffixes() {

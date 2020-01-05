@@ -6,8 +6,12 @@
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
+ * 
+ * public ANY WARRANTY() { return getWARRANTY(); }
+ * 
+ * @SuppressWarnings("unchecked") public T WARRANTY(ANY WARRANTY) { setWARRANTY(WARRANTY); return
+ * (T) this; } even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.banking;
 
@@ -22,32 +26,70 @@ import io.biza.cdr.babelfish.support.BabelFishModel;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "Banking Product Bundle Definition")
-public abstract class BankingProductBundle {
+public abstract class BankingProductBundle<T extends BankingProductBundle<T>> {
   @BabelFishModelProperty(description = "Name of the bundle", required = true)
   @NonNull
   @NotNull
   String name;
+
+  public String name() {
+    return getName();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T name(String name) {
+    setName(name);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "Description of the bundle", required = true)
   @NonNull
   @NotNull
   String description;
 
+  public String description() {
+    return getDescription();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T description(String description) {
+    setDescription(description);
+    return (T) this;
+  }
+
   @BabelFishModelProperty(description = "Display text providing more information on the bundle")
   String additionalInfo;
+
+  public String additionalInfo() {
+    return getAdditionalInfo();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T additionalInfo(String additionalInfo) {
+    setAdditionalInfo(additionalInfo);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "Link to a web page with more information on the bundle criteria and benefits",
       dataType = "java.lang.String")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   URI additionalInfoUri;
+
+  public URI additionalInfoUri() {
+    return getAdditionalInfoUri();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T additionalInfoUri(URI additionalInfoUri) {
+    setAdditionalInfoUri(additionalInfoUri);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "Array of product IDs for products included in the bundle that are available via the product end points.  Note that this array is not intended to represent a comprehensive model of the products included in the bundle and some products available for the bundle may not be available via the product reference end points")

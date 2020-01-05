@@ -17,7 +17,7 @@ import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingScheduledPaymentR
 
 @Valid
 public class BankingScheduledPaymentRecurrence
-    extends io.biza.cdr.babelfish.model.banking.BankingScheduledPaymentRecurrence {
+    extends io.biza.cdr.babelfish.model.banking.BankingScheduledPaymentRecurrence<BankingScheduledPaymentRecurrence> {
   @AssertTrue(
       message = "One and Only One Recurrence Type Object must be populated to align with recurrencyUType")
   private boolean isRecurrenceTypeCorrect() {

@@ -16,7 +16,7 @@ import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingPayee;
 
 @Valid
-public class BankingPayeeDetail extends io.biza.cdr.babelfish.model.banking.BankingPayeeDetail {
+public class BankingPayeeDetail extends io.biza.cdr.babelfish.model.banking.BankingPayeeDetail<BankingPayeeDetail> {
   @AssertTrue(
       message = "One and only one of domestic, biller and international should be populated based on payeeUType")
   private boolean isUTypePopulated() {

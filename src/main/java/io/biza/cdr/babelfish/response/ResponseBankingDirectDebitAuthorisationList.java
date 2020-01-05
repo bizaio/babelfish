@@ -28,7 +28,8 @@ import lombok.experimental.Accessors;
 @Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "Response containing a a list of Direct Debit Authorisations")
-public abstract class ResponseBankingDirectDebitAuthorisationList extends CDRResponsePaginated<ResponseBankingDirectDebitAuthorisationList> {
+public abstract class ResponseBankingDirectDebitAuthorisationList
+    extends CDRResponsePaginated<ResponseBankingDirectDebitAuthorisationList> {
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull

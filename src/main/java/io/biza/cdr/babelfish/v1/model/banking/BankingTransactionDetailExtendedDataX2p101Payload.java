@@ -15,5 +15,5 @@ import javax.validation.Valid;
 
 @Valid
 public class BankingTransactionDetailExtendedDataX2p101Payload
-    extends io.biza.cdr.babelfish.model.banking.BankingTransactionDetailExtendedDataX2p101Payload {
+    extends io.biza.cdr.babelfish.model.banking.BankingTransactionDetailExtendedDataX2p101Payload<BankingTransactionDetailExtendedDataX2p101Payload> {
 }

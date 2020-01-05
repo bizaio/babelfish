@@ -19,20 +19,19 @@ import io.biza.cdr.babelfish.v1.enumerations.BankingProductDiscountType;
 
 @Valid
 public class BankingProductFeeDiscount
-    extends io.biza.cdr.babelfish.model.banking.BankingProductFeeDiscount {
+    extends io.biza.cdr.babelfish.model.banking.BankingProductFeeDiscount<BankingProductFeeDiscount> {
   @AssertTrue(
       message = "Additional Value must be an Amount String when Discount type is BALANCE, DEPOSITS or PAYMENTS")
   private boolean isValueAmount() {
-    return Arrays.asList(new BankingProductDiscountType[] {
-        BankingProductDiscountType.BALANCE, BankingProductDiscountType.DEPOSITS,
-        BankingProductDiscountType.PAYMENTS
-    }).contains(discountType()) ? FormatChecker.isDecimal(additionalValue()) : true;
+    return Arrays
+        .asList(new BankingProductDiscountType[] {BankingProductDiscountType.BALANCE,
+            BankingProductDiscountType.DEPOSITS, BankingProductDiscountType.PAYMENTS})
+        .contains(discountType()) ? FormatChecker.isDecimal(additionalValue()) : true;
   }
 
   @AssertTrue(message = "Additional Value must be an Duration String when Discount type is FEE_CAP")
   private boolean isValueDuration() {
-    return Arrays.asList(new BankingProductDiscountType[] {
-        BankingProductDiscountType.FEE_CAP
-    }).contains(discountType()) ? FormatChecker.isDuration(additionalValue()) : true;
+    return Arrays.asList(new BankingProductDiscountType[] {BankingProductDiscountType.FEE_CAP})
+        .contains(discountType()) ? FormatChecker.isDuration(additionalValue()) : true;
   }
 }

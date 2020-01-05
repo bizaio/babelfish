@@ -15,7 +15,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 
 @Valid
-public class LinksPaginated extends io.biza.cdr.babelfish.model.common.LinksPaginated<LinksPaginated> {
+public class LinksPaginated
+    extends io.biza.cdr.babelfish.model.common.LinksPaginated<LinksPaginated> {
   /**
    * Minimal field validation possible at POJO level Scenario: [ self, first, prev, next, last ]
    * First Page and not Last: [ Yes, No, No, Yes, Yes ] Last Page and not First: [ Yes, Yes, Yes,

@@ -30,7 +30,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Currency Amount")
-public abstract class CommonCurrencyAmount <T extends CommonCurrencyAmount<T>> {
+public abstract class CommonCurrencyAmount<T extends CommonCurrencyAmount<T>> {
   @BabelFishModelProperty(
       description = "The current balance of the account at this time. Should align to the current balance available via other channels such as ATM balance enquiry or Internet Banking",
       required = true, dataType = "java.lang.String")
@@ -39,15 +39,15 @@ public abstract class CommonCurrencyAmount <T extends CommonCurrencyAmount<T>> {
   @JsonProperty("amount")
   public BigDecimal amount;
 
-public BigDecimal amount() {
-  return getAmount();
-}
+  public BigDecimal amount() {
+    return getAmount();
+  }
 
-@SuppressWarnings("unchecked")
-public T amount(BigDecimal amount) {
-   setAmount(amount);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T amount(BigDecimal amount) {
+    setAmount(amount);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "Currency Amount Currency Code", required = false,
       dataType = "java.lang.String")
@@ -56,13 +56,13 @@ public T amount(BigDecimal amount) {
   @JsonProperty("currency")
   public Currency currency;
 
-public Currency currency() {
-  return getCurrency();
-}
+  public Currency currency() {
+    return getCurrency();
+  }
 
-@SuppressWarnings("unchecked")
-public T currency(Currency currency) {
-   setCurrency(currency);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T currency(Currency currency) {
+    setCurrency(currency);
+    return (T) this;
+  }
 }

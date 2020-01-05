@@ -27,10 +27,11 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(fluent = true)
 @Valid
-public abstract class ResponseBankingPayeeListData extends CDRResponsePaginated<ResponseBankingPayeeListData> {
+public abstract class ResponseBankingPayeeListData
+    extends CDRResponsePaginated<ResponseBankingPayeeListData> {
   @BabelFishModelProperty(description = "The list of authorisations returned", required = true)
   @JsonProperty("payees")
   @NotNull
   @NonNull
-  public List<BankingPayee> payees;
+  public List<BankingPayee<?>> payees;
 }

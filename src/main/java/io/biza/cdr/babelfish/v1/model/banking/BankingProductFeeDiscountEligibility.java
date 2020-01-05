@@ -19,14 +19,15 @@ import io.biza.cdr.babelfish.v1.enumerations.BankingProductDiscountEligibilityTy
 
 @Valid
 public class BankingProductFeeDiscountEligibility
-    extends io.biza.cdr.babelfish.model.banking.BankingProductFeeDiscountEligibility {
+    extends io.biza.cdr.babelfish.model.banking.BankingProductFeeDiscountEligibility<BankingProductFeeDiscountEligibility> {
   @AssertTrue(
       message = "Additional Value must be a Positive Integer when Eligibility type is MIN_AGE or MAX_AGE")
   private boolean isValuePositiveInteger() {
-    return Arrays.asList(new BankingProductDiscountEligibilityType[] {
-        BankingProductDiscountEligibilityType.MIN_AGE, BankingProductDiscountEligibilityType.MAX_AGE
-    }).contains(discountEligibilityType()) ? FormatChecker.isPositiveInteger(additionalValue())
-        : true;
+    return Arrays.asList(
+        new BankingProductDiscountEligibilityType[] {BankingProductDiscountEligibilityType.MIN_AGE,
+            BankingProductDiscountEligibilityType.MAX_AGE})
+        .contains(discountEligibilityType()) ? FormatChecker.isPositiveInteger(additionalValue())
+            : true;
   }
 
   @AssertTrue(
@@ -34,7 +35,8 @@ public class BankingProductFeeDiscountEligibility
   private boolean isValueAmount() {
     return Arrays.asList(new BankingProductDiscountEligibilityType[] {
         BankingProductDiscountEligibilityType.MIN_INCOME,
-        BankingProductDiscountEligibilityType.MIN_TURNOVER
-    }).contains(discountEligibilityType()) ? FormatChecker.isDecimal(additionalValue()) : true;
+        BankingProductDiscountEligibilityType.MIN_TURNOVER}).contains(discountEligibilityType())
+            ? FormatChecker.isDecimal(additionalValue())
+            : true;
   }
 }

@@ -15,5 +15,5 @@ import javax.validation.Valid;
 
 @Valid
 public class BankingInternationalPayeeBeneficiaryDetails
-    extends io.biza.cdr.babelfish.model.banking.BankingInternationalPayeeBeneficiaryDetails {
+    extends io.biza.cdr.babelfish.model.banking.BankingInternationalPayeeBeneficiaryDetails<BankingInternationalPayeeBeneficiaryDetails> {
 }

@@ -15,5 +15,5 @@ import javax.validation.Valid;
 
 @Valid
 public class BankingTermDepositAccount
-    extends io.biza.cdr.babelfish.model.banking.BankingTermDepositAccount {
+    extends io.biza.cdr.babelfish.model.banking.BankingTermDepositAccount<BankingTermDepositAccount> {
 }

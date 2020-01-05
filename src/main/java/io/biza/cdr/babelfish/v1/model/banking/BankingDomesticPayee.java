@@ -16,7 +16,7 @@ import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingDomesticPayee;
 
 @Valid
-public class BankingDomesticPayee extends io.biza.cdr.babelfish.model.banking.BankingDomesticPayee {
+public class BankingDomesticPayee extends io.biza.cdr.babelfish.model.banking.BankingDomesticPayee<BankingDomesticPayee> {
   @AssertTrue(
       message = "Payee Account Type must supply matching Payee Account Type Specific Information")
   private boolean isAccountTypeCorrect() {
@@ -29,6 +29,6 @@ public class BankingDomesticPayee extends io.biza.cdr.babelfish.model.banking.Ba
     }
     return false;
   }
-  
-  
+
+
 }

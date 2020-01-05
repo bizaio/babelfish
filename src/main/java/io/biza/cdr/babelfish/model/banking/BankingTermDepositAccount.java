@@ -6,8 +6,12 @@
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
+ * 
+ * public ANY WARRANTY() { return getWARRANTY(); }
+ * 
+ * @SuppressWarnings("unchecked") public T WARRANTY(ANY WARRANTY) { setWARRANTY(WARRANTY); return
+ * (T) this; } even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.banking;
 
@@ -30,14 +34,12 @@ import io.biza.cdr.babelfish.v1.enumerations.BankingTermDepositMaturityInstructi
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(description = "Term Deposit Account Description")
-public abstract class BankingTermDepositAccount {
+public abstract class BankingTermDepositAccount<T extends BankingTermDepositAccount<T>> {
   @BabelFishModelProperty(description = "The lodgement date of the original deposit",
       required = true, dataType = "java.lang.String")
   @NonNull
@@ -46,12 +48,32 @@ public abstract class BankingTermDepositAccount {
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   private LocalDate lodgementDate;
 
+  public LocalDate lodgementDate() {
+    return getLodgementDate();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T lodgementDate(LocalDate lodgementDate) {
+    setLodgementDate(lodgementDate);
+    return (T) this;
+  }
+
   @BabelFishModelProperty(description = "Maturity date for the term deposit", required = true)
   @NonNull
   @NotNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   private LocalDate maturityDate;
+
+  public LocalDate maturityDate() {
+    return getMaturityDate();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T maturityDate(LocalDate maturityDate) {
+    setMaturityDate(maturityDate);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "Amount to be paid upon maturity. If absent it implies the amount to paid is variable and cannot currently be calculated",
@@ -60,14 +82,44 @@ public abstract class BankingTermDepositAccount {
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   private BigDecimal maturityAmount;
 
+  public BigDecimal maturityAmount() {
+    return getMaturityAmount();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T maturityAmount(BigDecimal maturityAmount) {
+    setMaturityAmount(maturityAmount);
+    return (T) this;
+  }
+
   @BabelFishModelProperty(description = "Maturity Amount Currency", dataType = "java.lang.String")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   Currency maturityCurrency = Currency.getInstance("AUD");
+
+  public Currency maturityCurrency() {
+    return getMaturityCurrency();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T maturityCurrency(Currency maturityCurrency) {
+    setMaturityCurrency(maturityCurrency);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "Current instructions on action to be taken at maturity",
       required = true)
   @NonNull
   @NotNull
   BankingTermDepositMaturityInstructions maturityInstructions;
+
+  public BankingTermDepositMaturityInstructions maturityInstructions() {
+    return getMaturityInstructions();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T maturityInstructions(BankingTermDepositMaturityInstructions maturityInstructions) {
+    setMaturityInstructions(maturityInstructions);
+    return (T) this;
+  }
 }

@@ -17,13 +17,14 @@ import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingAccount;
 
 @Valid
-public class BankingAccountDetail extends io.biza.cdr.babelfish.model.banking.BankingAccountDetail {
-  
+public class BankingAccountDetail
+    extends io.biza.cdr.babelfish.model.banking.BankingAccountDetail<BankingAccountDetail> {
+
   @AssertTrue(message = "Account Number must not be an unmasked PAN")
   private boolean isAccountNumberUnmaskedPan() {
-    return FormatChecker.isPanNumber(accountNumber) ? false : true;
+    return FormatChecker.isPanNumber(accountNumber()) ? false : true;
   }
-  
+
   @AssertTrue(message = "Account Type must supply matching Account Type Specific Information")
   private boolean isAccountTypeCorrect() {
     if (specificAccountUType().equals(PayloadTypeBankingAccount.TERM_DEPOSIT)) {

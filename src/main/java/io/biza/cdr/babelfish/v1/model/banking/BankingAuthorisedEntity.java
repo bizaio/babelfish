@@ -15,5 +15,5 @@ import javax.validation.Valid;
 
 @Valid
 public class BankingAuthorisedEntity
-    extends io.biza.cdr.babelfish.model.banking.BankingAuthorisedEntity {
+    extends io.biza.cdr.babelfish.model.banking.BankingAuthorisedEntity<BankingAuthorisedEntity> {
 }

@@ -19,35 +19,36 @@ import io.biza.cdr.babelfish.v1.enumerations.BankingProductFeatureType;
 
 @Valid
 public class BankingProductFeature
-    extends io.biza.cdr.babelfish.model.banking.BankingProductFeature {
+    extends io.biza.cdr.babelfish.model.banking.BankingProductFeature<BankingProductFeature> {
   @AssertTrue(message = "Additional Information must be populated when Feature type is OTHER")
   private boolean isInfoDefined() {
-    return Arrays.asList(new BankingProductFeatureType[] {
-        BankingProductFeatureType.OTHER
-    }).contains(featureType()) ? FormatChecker.isDefined(additionalInfo()) : true;
+    return Arrays.asList(new BankingProductFeatureType[] {BankingProductFeatureType.OTHER})
+        .contains(featureType()) ? FormatChecker.isDefined(additionalInfo()) : true;
   }
 
   @AssertTrue(
       message = "Additional Value must be an Duration String when Feature type is INTEREST_FREE or INTEREST_FREE_TRANSFERS")
   private boolean isValueDuration() {
-    return Arrays.asList(new BankingProductFeatureType[] {
-        BankingProductFeatureType.INTEREST_FREE, BankingProductFeatureType.INTEREST_FREE_TRANSFERS
-    }).contains(featureType()) ? FormatChecker.isDuration(additionalValue()) : true;
+    return Arrays.asList(new BankingProductFeatureType[] {BankingProductFeatureType.INTEREST_FREE,
+        BankingProductFeatureType.INTEREST_FREE_TRANSFERS}).contains(featureType())
+            ? FormatChecker.isDuration(additionalValue())
+            : true;
   }
 
   @AssertTrue(
       message = "Additional Value must be a Positive Integer when Feature type is FREE_TXNS or BONUS_REWARDS")
   private boolean isValuePositiveInteger() {
-    return Arrays.asList(new BankingProductFeatureType[] {
-        BankingProductFeatureType.FREE_TXNS, BankingProductFeatureType.BONUS_REWARDS
-    }).contains(featureType()) ? FormatChecker.isPositiveInteger(additionalValue()) : true;
+    return Arrays.asList(new BankingProductFeatureType[] {BankingProductFeatureType.FREE_TXNS,
+        BankingProductFeatureType.BONUS_REWARDS}).contains(featureType())
+            ? FormatChecker.isPositiveInteger(additionalValue())
+            : true;
   }
 
   @AssertTrue(
       message = "Additional Value must be an Amount String when Eligibility type is FREE_TXNS_ALLOWANCE")
   private boolean isValueAmount() {
-    return Arrays.asList(new BankingProductFeatureType[] {
-        BankingProductFeatureType.FREE_TXNS_ALLOWANCE
-    }).contains(featureType()) ? FormatChecker.isDecimal(additionalValue()) : true;
+    return Arrays
+        .asList(new BankingProductFeatureType[] {BankingProductFeatureType.FREE_TXNS_ALLOWANCE})
+        .contains(featureType()) ? FormatChecker.isDecimal(additionalValue()) : true;
   }
 }

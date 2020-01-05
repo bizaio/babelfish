@@ -15,5 +15,5 @@ import javax.validation.Valid;
 
 @Valid
 public class BankingProductRateCondition
-    extends io.biza.cdr.babelfish.model.banking.BankingProductRateCondition {
+    extends io.biza.cdr.babelfish.model.banking.BankingProductRateCondition<BankingProductRateCondition> {
 }

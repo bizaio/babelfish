@@ -20,9 +20,7 @@ import java.lang.annotation.Target;
 /**
  * Provides model data for classes
  */
-@Target({
-    ElementType.TYPE
-})
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface BabelFishModel {

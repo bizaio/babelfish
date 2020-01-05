@@ -14,5 +14,5 @@ package io.biza.cdr.babelfish.v1.model.banking;
 import javax.validation.Valid;
 
 @Valid
-public class BankingProduct extends io.biza.cdr.babelfish.model.banking.BankingProduct {
+public class BankingProduct extends io.biza.cdr.babelfish.model.banking.BankingProduct<BankingProduct> {
 }

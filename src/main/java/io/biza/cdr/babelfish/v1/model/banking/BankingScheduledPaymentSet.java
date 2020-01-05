@@ -15,5 +15,5 @@ import javax.validation.Valid;
 
 @Valid
 public class BankingScheduledPaymentSet
-    extends io.biza.cdr.babelfish.model.banking.BankingScheduledPaymentSet {
+    extends io.biza.cdr.babelfish.model.banking.BankingScheduledPaymentSet<BankingScheduledPaymentSet> {
 }

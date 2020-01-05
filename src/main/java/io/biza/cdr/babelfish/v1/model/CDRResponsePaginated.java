@@ -15,7 +15,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 
 @Valid
-public class CDRResponsePaginated extends io.biza.cdr.babelfish.model.CDRResponsePaginated<CDRResponsePaginated> {
+public class CDRResponsePaginated
+    extends io.biza.cdr.babelfish.model.CDRResponsePaginated<CDRResponsePaginated> {
 
   @AssertTrue(message = "First and Last Page Detected but Total Pages is >1")
   public boolean isTotalPagesBiggerThanLinks() {

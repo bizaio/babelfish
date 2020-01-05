@@ -6,8 +6,12 @@
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
+ * 
+ * public ANY WARRANTY() { return getWARRANTY(); }
+ * 
+ * @SuppressWarnings("unchecked") public T WARRANTY(ANY WARRANTY) { setWARRANTY(WARRANTY); return
+ * (T) this; } even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.banking;
 
@@ -26,23 +30,41 @@ import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
 @BabelFishModel(
     description = "The set of payment amounts and destination accounts for this payment accommodating multi-part payments. A single entry indicates a simple payment with one destination account. Must have at least one entry")
-public abstract class BankingScheduledPaymentSet {
+public abstract class BankingScheduledPaymentSet<T extends BankingScheduledPaymentSet<T>> {
   @BabelFishModelProperty(required = true)
   @NonNull
   @NotNull
-  BankingScheduledPaymentTo to;
+  BankingScheduledPaymentTo<?> to;
+
+  public BankingScheduledPaymentTo<?> to() {
+    return getTo();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T to(BankingScheduledPaymentTo<?> to) {
+    setTo(to);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "Flag indicating whether the amount of the payment is calculated based on the context of the event. For instance a payment to reduce the balance of a credit card to zero. If absent then false is assumed")
   Boolean isAmountCalculated = false;
+
+  public Boolean isAmountCalculated() {
+    return getIsAmountCalculated();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T isAmountCalculated(Boolean isAmountCalculated) {
+    setIsAmountCalculated(isAmountCalculated);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "Flag indicating whether the amount of the payment is calculated based on the context of the event. For instance a payment to reduce the balance of a credit card to zero. If absent then false is assumed",
@@ -51,9 +73,29 @@ public abstract class BankingScheduledPaymentSet {
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   private BigDecimal amount;
 
+  public BigDecimal amount() {
+    return getAmount();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T amount(BigDecimal amount) {
+    setAmount(amount);
+    return (T) this;
+  }
+
   @BabelFishModelProperty(description = "The currency for the payment.",
       dataType = "java.lang.String")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   Currency currency = Currency.getInstance("AUD");
+
+  public Currency currency() {
+    return getCurrency();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T currency(Currency currency) {
+    setCurrency(currency);
+    return (T) this;
+  }
 }

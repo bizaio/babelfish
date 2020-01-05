@@ -18,8 +18,6 @@ import javax.validation.constraints.AssertTrue;
 public class MetaPaginated extends io.biza.cdr.babelfish.model.common.MetaPaginated<MetaPaginated> {
   @AssertTrue(message = "If totalRecords is 0 totalPages MUST be 0")
   public boolean zeroTotalRecordsMatchesZeroPages() {
-    return (totalRecords == 0)
-        ? (totalPages == 0 ? true : false)
-        : true;
+    return (totalRecords == 0) ? (totalPages == 0 ? true : false) : true;
   }
 }

@@ -14,5 +14,5 @@ package io.biza.cdr.babelfish.v1.model.banking;
 import javax.validation.Valid;
 
 @Valid
-public class BankingDirectDebit extends io.biza.cdr.babelfish.model.banking.BankingBillerPayee {
+public class BankingDirectDebit extends io.biza.cdr.babelfish.model.banking.BankingDirectDebit<BankingDirectDebit> {
 }

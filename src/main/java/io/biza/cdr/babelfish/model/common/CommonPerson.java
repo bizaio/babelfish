@@ -26,36 +26,36 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Person definition in brief")
-public abstract class CommonPerson <T extends CommonPerson<T>> {
+public abstract class CommonPerson<T extends CommonPerson<T>> {
   @BabelFishModelProperty(
       description = "The date and time that this record was last updated by the customer.  If no update has occurred then this date should reflect the initial creation date for the data")
   @JsonProperty("lastUpdateTime")
   public LocalDateTime lastUpdateTime;
 
-public LocalDateTime lastUpdateTime() {
-  return getLastUpdateTime();
-}
+  public LocalDateTime lastUpdateTime() {
+    return getLastUpdateTime();
+  }
 
-@SuppressWarnings("unchecked")
-public T lastUpdateTime(LocalDateTime lastUpdateTime) {
-   setLastUpdateTime(lastUpdateTime);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T lastUpdateTime(LocalDateTime lastUpdateTime) {
+    setLastUpdateTime(lastUpdateTime);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "For people with single names this field need not be present.  The single name should be in the lastName field")
   @JsonProperty("firstName")
   public String firstName;
 
-public String firstName() {
-  return getFirstName();
-}
+  public String firstName() {
+    return getFirstName();
+  }
 
-@SuppressWarnings("unchecked")
-public T firstName(String firstName) {
-   setFirstName(firstName);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T firstName(String firstName) {
+    setFirstName(firstName);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "For people with single names the single name should be in this field",
@@ -65,15 +65,15 @@ public T firstName(String firstName) {
   @NonNull
   public String lastName;
 
-public String lastName() {
-  return getLastName();
-}
+  public String lastName() {
+    return getLastName();
+  }
 
-@SuppressWarnings("unchecked")
-public T lastName(String lastName) {
-   setLastName(lastName);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T lastName(String lastName) {
+    setLastName(lastName);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "Field is mandatory but array may be empty",
       required = true)
@@ -87,42 +87,42 @@ public T lastName(String lastName) {
   @JsonProperty("prefix")
   public String prefix;
 
-public String prefix() {
-  return getPrefix();
-}
+  public String prefix() {
+    return getPrefix();
+  }
 
-@SuppressWarnings("unchecked")
-public T prefix(String prefix) {
-   setPrefix(prefix);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T prefix(String prefix) {
+    setPrefix(prefix);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "Used for a trailing suffix to the name (e.g. Jr)")
   @JsonProperty("suffix")
   public String suffix;
 
-public String suffix() {
-  return getSuffix();
-}
+  public String suffix() {
+    return getSuffix();
+  }
 
-@SuppressWarnings("unchecked")
-public T suffix(String suffix) {
-   setSuffix(suffix);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T suffix(String suffix) {
+    setSuffix(suffix);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "Value is a valid [ANZCO v1.2](http://www.abs.gov.au/ANZSCO) Standard Occupation classification.")
   @JsonProperty("occupationCode")
   public String occupationCode;
 
-public String occupationCode() {
-  return getOccupationCode();
-}
+  public String occupationCode() {
+    return getOccupationCode();
+  }
 
-@SuppressWarnings("unchecked")
-public T occupationCode(String occupationCode) {
-   setOccupationCode(occupationCode);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T occupationCode(String occupationCode) {
+    setOccupationCode(occupationCode);
+    return (T) this;
+  }
 }
