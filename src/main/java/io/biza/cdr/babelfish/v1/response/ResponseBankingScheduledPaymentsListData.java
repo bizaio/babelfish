@@ -15,5 +15,5 @@ import javax.validation.Valid;
 
 @Valid
 public class ResponseBankingScheduledPaymentsListData
-    extends io.biza.cdr.babelfish.response.container.ResponseBankingScheduledPaymentsListData {
+    extends io.biza.cdr.babelfish.response.container.ResponseBankingScheduledPaymentsListData<ResponseBankingScheduledPaymentsListData> {
 }

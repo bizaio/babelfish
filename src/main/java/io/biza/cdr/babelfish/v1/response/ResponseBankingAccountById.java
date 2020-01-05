@@ -15,5 +15,5 @@ import javax.validation.Valid;
 
 @Valid
 public class ResponseBankingAccountById
-    extends io.biza.cdr.babelfish.response.ResponseBankingAccountById {
+    extends io.biza.cdr.babelfish.response.ResponseBankingAccountById<ResponseBankingAccountById> {
 }

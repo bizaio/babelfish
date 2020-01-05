@@ -11,6 +11,9 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response;
 
-public class ResponseBankingDirectDebitAuthorisationListData extends
-    io.biza.cdr.babelfish.response.container.ResponseBankingDirectDebitAuthorisationListData<ResponseBankingDirectDebitAuthorisationListData> {
+import javax.validation.Valid;
+
+@Valid
+public class RequestAccountIds
+    extends io.biza.cdr.babelfish.request.RequestAccountIds<RequestAccountIds> {
 }

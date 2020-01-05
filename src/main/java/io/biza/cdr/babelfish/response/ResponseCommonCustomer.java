@@ -29,14 +29,14 @@ public abstract class ResponseCommonCustomer<T> extends CDRResponse<ResponseComm
   @JsonProperty("data")
   @NotNull
   @NonNull
-  public ResponseCommonCustomerData data;
+  public ResponseCommonCustomerData<?> data;
 
-  public ResponseCommonCustomerData data() {
+  public ResponseCommonCustomerData<?> data() {
     return getData();
   }
 
   @SuppressWarnings("unchecked")
-  public T data(ResponseCommonCustomerData data) {
+  public T data(ResponseCommonCustomerData<?> data) {
     setData(data);
     return (T) this;
   }

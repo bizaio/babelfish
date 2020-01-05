@@ -6,6 +6,16 @@
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+
+public ANY WARRANTY() {
+  return getWARRANTY();
+}
+
+@SuppressWarnings("unchecked")
+public T WARRANTY(ANY WARRANTY) {
+   setWARRANTY(WARRANTY);
+   return (T) this;
+}
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
  *******************************************************************************/
@@ -18,22 +28,30 @@ import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeCustomer;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
-public abstract class ResponseCommonCustomerData {
+public abstract class ResponseCommonCustomerData <T extends ResponseCommonCustomerData<T>> {
   @BabelFishModelProperty(description = "The type of customer object that is present",
       required = true)
   @JsonProperty("customerUType")
   @NotNull
   @NonNull
   public PayloadTypeCustomer type;
+
+public PayloadTypeCustomer type() {
+  return getType();
+}
+
+@SuppressWarnings("unchecked")
+public T type(PayloadTypeCustomer type) {
+   setType(type);
+   return (T) this;
+}
 
   @BabelFishModelProperty(description = "The Person Record for the Customer")
   @JsonProperty("person")

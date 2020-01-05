@@ -30,14 +30,14 @@ public abstract class ResponseDiscoveryOutagesList<T>
   @JsonProperty("data")
   @NotNull
   @NonNull
-  public ResponseDiscoveryOutagesListData data;
+  public ResponseDiscoveryOutagesListData<?> data;
 
-  public ResponseDiscoveryOutagesListData data() {
+  public ResponseDiscoveryOutagesListData<?> data() {
     return getData();
   }
 
   @SuppressWarnings("unchecked")
-  public T data(ResponseDiscoveryOutagesListData data) {
+  public T data(ResponseDiscoveryOutagesListData<?> data) {
     setData(data);
     return (T) this;
   }

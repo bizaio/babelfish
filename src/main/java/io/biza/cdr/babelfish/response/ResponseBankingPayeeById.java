@@ -26,7 +26,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Response containing a Banking Payee By Identifier")
-public abstract class ResponseBankingPayeeById extends CDRResponse<ResponseBankingPayeeById> {
+public abstract class ResponseBankingPayeeById<T> extends CDRResponse<ResponseBankingPayeeById<T>> {
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull

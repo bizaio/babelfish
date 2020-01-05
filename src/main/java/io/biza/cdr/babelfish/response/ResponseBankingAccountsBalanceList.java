@@ -32,14 +32,14 @@ public abstract class ResponseBankingAccountsBalanceList<T>
   @JsonProperty("data")
   @NotNull
   @NonNull
-  public ResponseBankingAccountsBalanceListData data;
+  public ResponseBankingAccountsBalanceListData<?> data;
 
-  public ResponseBankingAccountsBalanceListData data() {
+  public ResponseBankingAccountsBalanceListData<?> data() {
     return getData();
   }
 
   @SuppressWarnings("unchecked")
-  public T data(ResponseBankingAccountsBalanceListData data) {
+  public T data(ResponseBankingAccountsBalanceListData<?> data) {
     setData(data);
     return (T) this;
   }

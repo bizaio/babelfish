@@ -32,14 +32,14 @@ public abstract class ResponseBankingDirectDebitAuthorisationList<T>
   @JsonProperty("data")
   @NotNull
   @NonNull
-  public ResponseBankingDirectDebitAuthorisationListData data;
+  public ResponseBankingDirectDebitAuthorisationListData<?> data;
 
-  public ResponseBankingDirectDebitAuthorisationListData data() {
+  public ResponseBankingDirectDebitAuthorisationListData<?> data() {
     return getData();
   }
 
   @SuppressWarnings("unchecked")
-  public T data(ResponseBankingDirectDebitAuthorisationListData data) {
+  public T data(ResponseBankingDirectDebitAuthorisationListData<?> data) {
     setData(data);
     return (T) this;
   }

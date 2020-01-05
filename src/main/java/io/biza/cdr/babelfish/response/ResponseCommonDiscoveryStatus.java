@@ -33,14 +33,14 @@ public abstract class ResponseCommonDiscoveryStatus<T>
   @JsonProperty("data")
   @NotNull
   @NonNull
-  public ResponseCommonDiscoveryStatusData data;
+  public ResponseCommonDiscoveryStatusData<?> data;
 
-  public ResponseCommonDiscoveryStatusData data() {
+  public ResponseCommonDiscoveryStatusData<?> data() {
     return getData();
   }
 
   @SuppressWarnings("unchecked")
-  public T data(ResponseCommonDiscoveryStatusData data) {
+  public T data(ResponseCommonDiscoveryStatusData<?> data) {
     setData(data);
     return (T) this;
   }

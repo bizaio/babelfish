@@ -6,6 +6,16 @@
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+
+public ANY WARRANTY() {
+  return getWARRANTY();
+}
+
+@SuppressWarnings("unchecked")
+public T WARRANTY(ANY WARRANTY) {
+   setWARRANTY(WARRANTY);
+   return (T) this;
+}
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
  *******************************************************************************/
@@ -20,13 +30,11 @@ import io.biza.cdr.babelfish.v1.model.banking.BankingScheduledPayment;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(fluent = true)
 @Valid
-public abstract class ResponseBankingScheduledPaymentsListData {
+public abstract class ResponseBankingScheduledPaymentsListData <T extends ResponseBankingScheduledPaymentsListData<T>> {
   @BabelFishModelProperty(description = "The list of scheduled payments to return", required = true)
   @JsonProperty("scheduledPayments")
   @NotNull

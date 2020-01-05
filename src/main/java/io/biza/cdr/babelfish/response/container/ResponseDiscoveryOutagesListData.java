@@ -6,6 +6,16 @@
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+
+public ANY WARRANTY() {
+  return getWARRANTY();
+}
+
+@SuppressWarnings("unchecked")
+public T WARRANTY(ANY WARRANTY) {
+   setWARRANTY(WARRANTY);
+   return (T) this;
+}
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
  *******************************************************************************/
@@ -20,7 +30,7 @@ import io.biza.cdr.babelfish.v1.model.common.CommonDiscoveryOutage;
 import lombok.NonNull;
 
 @Valid
-public abstract class ResponseDiscoveryOutagesListData {
+public abstract class ResponseDiscoveryOutagesListData <T extends ResponseDiscoveryOutagesListData<T>> {
   @BabelFishModelProperty(
       description = "List of scheduled outages. Property is mandatory but may contain and empty list if no outages are scheduled",
       required = true)

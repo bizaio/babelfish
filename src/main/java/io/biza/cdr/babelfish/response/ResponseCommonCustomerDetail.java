@@ -30,14 +30,14 @@ public abstract class ResponseCommonCustomerDetail<T>
   @JsonProperty("data")
   @NotNull
   @NonNull
-  public ResponseCommonCustomerDetailData data;
+  public ResponseCommonCustomerDetailData<?> data;
 
-  public ResponseCommonCustomerDetailData data() {
+  public ResponseCommonCustomerDetailData<?> data() {
     return getData();
   }
 
   @SuppressWarnings("unchecked")
-  public T data(ResponseCommonCustomerDetailData data) {
+  public T data(ResponseCommonCustomerDetailData<?> data) {
     setData(data);
     return (T) this;
   }
