@@ -27,6 +27,9 @@ public class BankingAccountDetail
 
   @AssertTrue(message = "Account Type must supply matching Account Type Specific Information")
   private boolean isAccountTypeCorrect() {
+    // Return true if not defined, @NotNull will pick this up later
+    if(specificAccountUType() == null) { return true; }
+    
     if (specificAccountUType().equals(PayloadTypeBankingAccount.TERM_DEPOSIT)) {
       return termDeposit() != null && creditCard() == null && loan() == null ? true : false;
     } else if (specificAccountUType().equals(PayloadTypeBankingAccount.CREDIT_CARD)) {

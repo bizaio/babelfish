@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.CDRResponse;
 import io.biza.cdr.babelfish.model.banking.BankingAccountDetail;
+import io.biza.cdr.babelfish.response.container.ResponseBankingAccountListData;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
@@ -33,4 +34,14 @@ public abstract class ResponseBankingAccountById<T>
   @NotNull
   @NonNull
   public BankingAccountDetail<?> data;
+  
+  public BankingAccountDetail<?> data() {
+    return getData();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T data(BankingAccountDetail<?> data) {
+    setData(data);
+    return (T) this;
+  }
 }

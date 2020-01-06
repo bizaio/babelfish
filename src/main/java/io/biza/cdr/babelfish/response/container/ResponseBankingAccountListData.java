@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.banking.BankingAccount;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -37,5 +38,16 @@ public abstract class ResponseBankingAccountListData<T> {
   @JsonProperty("accounts")
   @NotNull
   @NonNull
+  @Valid
   public List<BankingAccount<?>> accounts;
+  
+  public List<BankingAccount<?>> accounts() {
+    return getAccounts();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T accounts(List<BankingAccount<?>> accounts) {
+    setAccounts(accounts);
+    return (T) this;
+  }
 }

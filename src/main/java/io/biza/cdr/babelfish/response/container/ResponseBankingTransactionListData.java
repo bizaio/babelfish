@@ -34,4 +34,14 @@ public abstract class ResponseBankingTransactionListData<T> {
   @NotNull
   @NonNull
   public List<BankingTransaction> transactions;
+
+  public List<BankingTransaction> transactions() {
+    return getTransactions();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T transactions(List<BankingTransaction> transactions) {
+    setTransactions(transactions);
+    return (T) this;
+  }
 }
