@@ -14,17 +14,23 @@ package io.biza.cdr.babelfish.support;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.BooleanSupplier;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.PhoneNumberUtil.PhoneNumberFormat;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
+import io.biza.cdr.babelfish.Constants;
 import io.biza.cdr.babelfish.model.common.CommonPhysicalAddressWithPurpose;
 import io.biza.cdr.babelfish.v1.enumerations.AddressPurpose;
 
@@ -42,6 +48,10 @@ public class FormatChecker {
     } catch (NumberFormatException e) {
       return false;
     }
+  }
+
+  public static boolean isASCIIString(String inputString) {
+    return StringUtils.isAsciiPrintable(inputString);
   }
 
   public static PhoneNumberValidationResult phoneNumberValidity(String fullNumber,
@@ -105,7 +115,7 @@ public class FormatChecker {
 
   public static Boolean isAmountString(String decimal) {
     try {
-      if(Pattern.matches("^\\-?([1-9](\\d){0,15}|0)\\.(\\d){2,}$", decimal)) {
+      if (Pattern.matches("^\\-?([1-9](\\d){0,15}|0)\\.(\\d){2,}$", decimal)) {
         // Check it parses to BigDecimal too
         new BigDecimal(decimal);
         return true;
@@ -171,4 +181,68 @@ public class FormatChecker {
     }
     return urlMap;
   }
+
+  public static Boolean isNaturalNumber(int i) {
+    return i >= 0;
+  }
+
+  public static Boolean isPositiveInteger(int i) {
+    return i > 0;
+  }
+
+  public static Boolean isNegativeInteger(int i) {
+    return i <= 0;
+  }
+
+  public static Boolean isDateTimeString(String input) {
+    try {
+      LocalDateTime localDateTime =
+          LocalDateTime.parse(input, Constants.CDR_DATETIMESTRING_FORMATTER);
+      return input.equals(localDateTime.format(Constants.CDR_DATETIMESTRING_FORMATTER));
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
+  public static Boolean isDateString(String input) {
+    try {
+      LocalDate localDate = LocalDate.parse(input);
+      return input.equals(localDate.format(Constants.CDR_DATESTRING_FORMATTER));
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
+  public static Boolean isCurrencyString(String input) {
+    try {
+      Currency.getInstance(input);
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
+  public static Boolean isRateString(String input) {
+    try {
+      if (Pattern.matches("^\\-?(0|1){1}\\.(\\d){2,16}$", input)) {
+        // Check it parses to BigDecimal too
+        new BigDecimal(input);
+        return true;
+      } else {
+        return false;
+      }
+    } catch (NumberFormatException e) {
+      return false;
+    }
+  }
+
+  public static Boolean isUriString(String input) {
+    try {
+      URI.create(input);
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
 }
