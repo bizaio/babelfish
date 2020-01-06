@@ -33,7 +33,7 @@ import lombok.Setter;
 @Valid
 @BabelFishModel(
     description = "Indicates that the schedule of payments is defined according to the last occurrence of a specific weekday in an interval. Mandatory if recurrenceUType is set to lastWeekDay")
-public abstract class BankingScheduledPaymentRecurrenceLastWeekday<T extends BankingScheduledPaymentRecurrenceLastWeekday<T>> {
+public abstract class BankingScheduledPaymentRecurrenceLastWeekday<T> {
   @BabelFishModelProperty(
       description = "The limit date after which no more payments should be made using this schedule. If both finalPaymentDate and paymentsRemaining are present then payments will stop according to the most constraining value. If neither field is present the payments will continue indefinitely",
       dataType = "java.lang.String")

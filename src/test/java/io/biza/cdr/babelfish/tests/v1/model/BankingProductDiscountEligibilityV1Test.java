@@ -2,31 +2,15 @@ package io.biza.cdr.babelfish.tests.v1.model;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import java.lang.reflect.InvocationTargetException;
-import java.net.URI;
-import java.util.List;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import org.apache.commons.beanutils.BeanUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.cdr.babelfish.tests.v1.ModelConstants;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductDiscountEligibilityType;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.CDRResponsePaginated;
-import io.biza.cdr.babelfish.v1.model.banking.BankingProduct;
-import io.biza.cdr.babelfish.v1.model.banking.BankingProductBundle;
 import io.biza.cdr.babelfish.v1.model.banking.BankingProductFeeDiscountEligibility;
-import io.biza.cdr.babelfish.v1.model.common.AccountIdsList;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.LinksPaginated;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
-import io.biza.cdr.babelfish.v1.model.common.MetaPaginated;
-import io.biza.cdr.babelfish.v1.request.RequestAccountIds;
-import io.biza.cdr.babelfish.v1.response.ResponseBankingProductList;
-import io.biza.cdr.babelfish.v1.response.ResponseBankingProductListData;
 
 @DisplayName("BankingProductDiscountEligibility V1 Tests")
 public class BankingProductDiscountEligibilityV1Test {
@@ -71,9 +55,9 @@ public class BankingProductDiscountEligibilityV1Test {
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    // Any value specified is invalid
-    data.additionalValue("Invalid");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    // Any value specified is also correct
+    data.additionalValue("Pension Recipient Explanation");
+    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
@@ -191,9 +175,9 @@ public class BankingProductDiscountEligibilityV1Test {
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    // Any value specified is invalid
-    data.additionalValue("Invalid");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    // Any value specified is ok for discount eligibility
+    data.additionalValue("Explanation about the Student conditions for discount eligibility");
+    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
 

@@ -23,7 +23,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Domestic Payee Card Number Details")
-public abstract class BankingDomesticPayeeCard<T extends BankingDomesticPayeeCard<T>> {
+public abstract class BankingDomesticPayeeCard<T> {
   @BabelFishModelProperty(description = "Name of the account to pay to", required = true)
   @NonNull
   @NotNull

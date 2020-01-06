@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Setter
 @Valid
 public abstract class ResponseDiscoveryOutagesList<T>
-    extends CDRResponse<ResponseDiscoveryOutagesList<T>> {
+    extends CDRResponse<T> {
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull

@@ -23,7 +23,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "International Payee Beneficiary and Bank Details")
-public abstract class BankingInternationalPayee<T extends BankingInternationalPayee<T>> {
+public abstract class BankingInternationalPayee<T> {
   @BabelFishModelProperty(required = true)
   @NonNull
   @NotNull

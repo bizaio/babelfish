@@ -29,7 +29,7 @@ import lombok.Setter;
 @Valid
 @BabelFishModel(
     description = "Indicates that the payment is a once off payment on a specific future date. Mandatory if recurrenceUType is set to onceOff")
-public abstract class BankingScheduledPaymentRecurrenceOnceOff<T extends BankingScheduledPaymentRecurrenceOnceOff<T>> {
+public abstract class BankingScheduledPaymentRecurrenceOnceOff<T> {
   @BabelFishModelProperty(description = "The scheduled date for the once off payment",
       required = true, dataType = "java.lang.String")
   @NonNull

@@ -23,7 +23,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Representation of a BPAY Payee")
-public abstract class BankingBillerPayee<T extends BankingBillerPayee<T>> {
+public abstract class BankingBillerPayee<T> {
   @BabelFishModelProperty(description = "BPAY Biller Code of the Biller", required = true)
   @NotNull
   @NonNull

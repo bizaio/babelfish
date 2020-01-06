@@ -25,7 +25,7 @@ import lombok.Setter;
 @Setter
 @Valid
 public abstract class ResponseCommonCustomerDetail<T>
-    extends CDRResponse<ResponseCommonCustomerDetail<T>> {
+    extends CDRResponse<T> {
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull

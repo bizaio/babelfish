@@ -29,7 +29,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Banking Payee Basic Information")
-public abstract class BankingPayee<T extends BankingPayee<T>> {
+public abstract class BankingPayee<T> {
   @BabelFishModelProperty(description = "ID of the payee adhering to the rules of ID permanence",
       required = true)
   @NonNull

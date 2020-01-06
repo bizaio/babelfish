@@ -23,18 +23,32 @@ public class BankingProductDepositRate extends
   @AssertTrue(
       message = "Additional Value must be a Duration String when Fee type is FIXED or INTRODUCTORY")
   private boolean isValueDuration() {
-    return depositRateType() != null ? (Arrays.asList(new BankingProductDepositRateType[] {BankingProductDepositRateType.FIXED,
-        BankingProductDepositRateType.INTRODUCTORY}).contains(depositRateType())
-            ? FormatChecker.isDuration(additionalValue())
-            : true) : true;
+    return FormatChecker.isDefined(depositRateType())
+        ? (Arrays.asList(new BankingProductDepositRateType[] {BankingProductDepositRateType.FIXED,
+            BankingProductDepositRateType.INTRODUCTORY}).contains(depositRateType())
+                ? FormatChecker.isDefined(additionalValue()) && FormatChecker.isDuration(additionalValue())
+                : true)
+        : true;
   }
-  
+
   @AssertTrue(
-      message = "Additional Value must String when Fee Type is BONUS, BUNDLE_BONUS, FLOATING or MARKET_LINKED")
+      message = "Additional Value must String when Deposit Rate Type is BONUS, BUNDLE_BONUS, FLOATING or MARKET_LINKED")
   private boolean isValueString() {
-    return depositRateType() != null ? (Arrays.asList(new BankingProductDepositRateType[] {BankingProductDepositRateType.BONUS,
-        BankingProductDepositRateType.BUNDLE_BONUS,BankingProductDepositRateType.FLOATING, BankingProductDepositRateType.MARKET_LINKED }).contains(depositRateType())
-            ? FormatChecker.isNotEmpty(additionalValue())
-            : true) : true;
+    return FormatChecker.isDefined(depositRateType())
+        ? (Arrays.asList(new BankingProductDepositRateType[] {BankingProductDepositRateType.BONUS,
+            BankingProductDepositRateType.BUNDLE_BONUS, BankingProductDepositRateType.FLOATING,
+            BankingProductDepositRateType.MARKET_LINKED}).contains(depositRateType())
+                ? FormatChecker.isNotEmpty(additionalValue())
+                : true)
+        : true;
+  }
+
+  @AssertTrue(message = "Additional Value should be null when Deposit Rate Type is VARIABLE")
+  private boolean isValueStringNull() {
+    return FormatChecker.isDefined(depositRateType())
+        ? (Arrays
+            .asList(new BankingProductDepositRateType[] {BankingProductDepositRateType.VARIABLE})
+            .contains(depositRateType()) ? !FormatChecker.isNotEmpty(additionalValue()) : true)
+        : true;
   }
 }

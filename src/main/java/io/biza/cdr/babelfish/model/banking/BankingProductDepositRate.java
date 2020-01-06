@@ -14,15 +14,12 @@ package io.biza.cdr.babelfish.model.banking;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.time.Period;
-import java.util.Arrays;
 import java.util.List;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductDepositRateType;
 import io.biza.cdr.babelfish.converters.RateStringToBigDecimalConverter;
 import io.biza.cdr.babelfish.converters.BigDecimalToRateStringConverter;
@@ -38,7 +35,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "A Description of a Deposit Rate")
-public abstract class BankingProductDepositRate<T extends BankingProductDepositRate<T>> {
+public abstract class BankingProductDepositRate<T> {
   @BabelFishModelProperty(
       description = "The type of rate (base, bonus, etc). See the next section for an overview of valid values and their meaning",
       required = true)
@@ -123,15 +120,6 @@ public abstract class BankingProductDepositRate<T extends BankingProductDepositR
   public T additionalValue(String additionalValue) {
     setAdditionalValue(additionalValue);
     return (T) this;
-  }
-
-  @AssertTrue(
-      message = "Additional Value must be a Duration String when Fee type is FIXED or INTRODUCTORY")
-  private boolean isValueDuration() {
-    return Arrays.asList(new BankingProductDepositRateType[] {BankingProductDepositRateType.FIXED,
-        BankingProductDepositRateType.INTRODUCTORY}).contains(depositRateType)
-            ? FormatChecker.isDuration(additionalValue)
-            : true;
   }
 
   @BabelFishModelProperty(description = "Display text providing more information on the rate")

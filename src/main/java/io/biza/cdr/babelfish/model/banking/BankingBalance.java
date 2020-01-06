@@ -30,7 +30,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "A Representation of a Banking Account Balance")
-public abstract class BankingBalance<T extends BankingBalance<T>> {
+public abstract class BankingBalance<T> {
   @BabelFishModelProperty(
       description = "A unique ID of the account adhering to the standards for ID permanence",
       required = true)

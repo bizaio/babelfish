@@ -29,7 +29,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Describes the detail of the scheduled payment")
-public abstract class BankingScheduledPaymentRecurrence<T extends BankingScheduledPaymentRecurrence<T>> {
+public abstract class BankingScheduledPaymentRecurrence<T> {
   @BabelFishModelProperty(
       description = "The date of the next payment under the recurrence schedule",
       dataType = "java.lang.String")

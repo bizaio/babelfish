@@ -28,7 +28,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Scheduled Payment Interval Description")
-public abstract class BankingScheduledPaymentInterval<T extends BankingScheduledPaymentInterval<T>> {
+public abstract class BankingScheduledPaymentInterval<T> {
   @BabelFishModelProperty(
       description = "An interval for the payment. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations) with components less than a day in length ignored. This duration defines the period between payments starting with nextPaymentDate",
       required = true, dataType = "java.lang.String")

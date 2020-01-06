@@ -23,7 +23,7 @@ import lombok.Setter;
 @Valid
 @BabelFishModel(modelName = "BankingAccountProductFeature",
     description = "Banking Account Product Feature", parent = BankingProductFeature.class)
-public abstract class BankingProductFeatureWithActivated<T extends BankingProductFeatureWithActivated<T>> {
+public abstract class BankingProductFeatureWithActivated<T> extends BankingProductFeature<T> {
   @JsonUnwrapped
   @BabelFishModelProperty(hidden = true)
   @Valid

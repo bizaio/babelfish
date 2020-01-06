@@ -14,14 +14,12 @@ package io.biza.cdr.babelfish.model.banking;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.converters.BigDecimalToRateStringConverter;
 import io.biza.cdr.babelfish.converters.RateStringToBigDecimalConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingAccount;
 import io.biza.cdr.babelfish.v1.model.common.CommonPhysicalAddress;
 import lombok.Getter;
@@ -32,7 +30,7 @@ import lombok.Setter;
 @Valid
 @BabelFishModel(description = "Detailed Australian Banking Account Information",
     parent = BankingAccount.class)
-public abstract class BankingAccountDetail<T> extends BankingAccount<BankingAccountDetail<T>> {
+public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
   @BabelFishModelProperty(
       description = "The unmasked BSB for the account. Is expected to be formatted as digits only with leading zeros included and no punctuation or spaces")
   String bsb;
@@ -59,11 +57,6 @@ public abstract class BankingAccountDetail<T> extends BankingAccount<BankingAcco
   public T accountNumber(String accountNumber) {
     setAccountNumber(accountNumber);
     return (T) this;
-  }
-
-  @AssertTrue(message = "Account Number must not be an unmasked PAN")
-  private boolean isAccountNumberUnmaskedPan() {
-    return FormatChecker.isPanNumber(accountNumber) ? false : true;
   }
 
   @BabelFishModelProperty(

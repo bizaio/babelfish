@@ -12,25 +12,20 @@
 package io.biza.cdr.babelfish.model.banking;
 
 import java.net.URI;
-import java.util.Arrays;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductFeatureType;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Data
 @NoArgsConstructor
 @Valid
 @BabelFishModel(description = "A Banking Product Feature")
-public abstract class BankingProductFeature<T extends BankingProductFeature<T>> {
+public abstract class BankingProductFeature<T> {
   @BabelFishModelProperty(description = "The type of feature described", required = true)
   BankingProductFeatureType featureType;
 

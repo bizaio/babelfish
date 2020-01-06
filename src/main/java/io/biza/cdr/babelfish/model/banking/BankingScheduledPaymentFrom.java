@@ -24,7 +24,7 @@ import lombok.Setter;
 @Valid
 @BabelFishModel(
     description = "Object containing details of the source of the payment. Currently only specifies an account ID but provided as an object to facilitate future extensibility and consistency with the to object")
-public abstract class BankingScheduledPaymentFrom<T extends BankingScheduledPaymentFrom<T>> {
+public abstract class BankingScheduledPaymentFrom<T> {
   @BabelFishModelProperty(
       description = "ID of the account that is the source of funds for the payment",
       required = true)

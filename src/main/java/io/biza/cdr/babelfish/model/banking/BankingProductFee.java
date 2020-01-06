@@ -38,7 +38,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Banking Product Fee Definition")
-public abstract class BankingProductFee<T extends BankingProductFee<T>> {
+public abstract class BankingProductFee<T> {
   @BabelFishModelProperty(description = "Name of the fee", required = true)
   @NonNull
   @NotNull

@@ -31,7 +31,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Representation of a Direct Debit Authorisation")
-public abstract class BankingDirectDebit<T extends BankingDirectDebit<T>> {
+public abstract class BankingDirectDebit<T> {
   @BabelFishModelProperty(
       description = "A unique ID of the account adhering to the standards for ID permanence.",
       required = true)

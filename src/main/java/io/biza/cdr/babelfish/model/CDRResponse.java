@@ -25,7 +25,7 @@ import lombok.Setter;
 @Valid
 @Getter
 @Setter
-public abstract class CDRResponse<T extends CDRResponse<T>> {
+public abstract class CDRResponse<T> {
   @BabelFishModelProperty(description = "The Links Object", required = true)
   @JsonProperty("links")
   @NotNull

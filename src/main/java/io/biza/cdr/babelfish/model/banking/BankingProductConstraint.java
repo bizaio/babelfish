@@ -12,13 +12,10 @@
 package io.biza.cdr.babelfish.model.banking;
 
 import java.net.URI;
-import java.util.Arrays;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductConstraintType;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
@@ -30,7 +27,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Banking Product Constraint Definition")
-public abstract class BankingProductConstraint<T extends BankingProductConstraint<T>> {
+public abstract class BankingProductConstraint<T> {
   @BabelFishModelProperty(
       description = "The type of constraint described.  See the next section for an overview of valid values and their meaning",
       required = true)
@@ -89,15 +86,5 @@ public abstract class BankingProductConstraint<T extends BankingProductConstrain
   public T additionalInfoUri(URI additionalInfoUri) {
     setAdditionalInfoUri(additionalInfoUri);
     return (T) this;
-  }
-
-  @AssertTrue(
-      message = "Additional Value must be an Amount String when Eligibility type is MIN_BALANCE, MAX_BALANCE, OPENING_BALANCE, MAX_LIMIT or MIN_LIMIT")
-  private boolean isValueAmount() {
-    return Arrays
-        .asList(new BankingProductConstraintType[] {BankingProductConstraintType.MIN_BALANCE,
-            BankingProductConstraintType.MAX_BALANCE, BankingProductConstraintType.OPENING_BALANCE,
-            BankingProductConstraintType.MIN_LIMIT, BankingProductConstraintType.MAX_LIMIT})
-        .contains(constraintType) ? FormatChecker.isDecimal(additionalValue) : true;
   }
 }

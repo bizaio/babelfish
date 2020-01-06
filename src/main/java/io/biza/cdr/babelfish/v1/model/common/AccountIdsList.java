@@ -11,9 +11,7 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.model.common;
 
-import java.util.List;
 import javax.validation.Valid;
-import lombok.NonNull;
 
 @Valid
 public class AccountIdsList

@@ -12,9 +12,7 @@
 package io.biza.cdr.babelfish.model.banking;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductRateTierApplicationMethod;
@@ -28,7 +26,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Defines the criteria and conditions for which a rate applies")
-public abstract class BankingProductRateTier<T extends BankingProductRateTier<T>> {
+public abstract class BankingProductRateTier<T> {
   @BabelFishModelProperty(description = "A display name for the tier", required = true)
   @NonNull
   @NotNull
@@ -119,11 +117,4 @@ public abstract class BankingProductRateTier<T extends BankingProductRateTier<T>
     return (T) this;
   }
 
-  @AssertTrue(
-      message = "Minimum and Maximum values must be equal when Unit Of Measure is a discrete value")
-  private boolean isMinMaxEqual() {
-    return Arrays.asList(
-        new CommonUnitOfMeasureType[] {CommonUnitOfMeasureType.DAY, CommonUnitOfMeasureType.MONTH})
-        .contains(unitOfMeasure) && maximumValue != null ? (minimumValue == maximumValue) : true;
-  }
 }

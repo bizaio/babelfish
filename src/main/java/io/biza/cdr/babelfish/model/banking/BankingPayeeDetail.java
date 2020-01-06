@@ -23,7 +23,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Banking Payee Detailed Information", parent = BankingPayee.class)
-public abstract class BankingPayeeDetail<T extends BankingPayeeDetail<T>> {
+public abstract class BankingPayeeDetail<T> {
   @JsonUnwrapped
   @BabelFishModelProperty(hidden = true)
   BankingPayee<?> bankingPayee;

@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Getter
 @Setter
 @Valid
-public abstract class ResponseCommonCustomer<T> extends CDRResponse<ResponseCommonCustomer<T>> {
+public abstract class ResponseCommonCustomer<T> extends CDRResponse<T> {
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull

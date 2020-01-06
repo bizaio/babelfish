@@ -2,31 +2,15 @@ package io.biza.cdr.babelfish.tests.v1.model;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import java.lang.reflect.InvocationTargetException;
-import java.net.URI;
-import java.util.List;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import org.apache.commons.beanutils.BeanUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.cdr.babelfish.tests.v1.ModelConstants;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductFeatureType;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.CDRResponsePaginated;
-import io.biza.cdr.babelfish.v1.model.banking.BankingProduct;
-import io.biza.cdr.babelfish.v1.model.banking.BankingProductBundle;
 import io.biza.cdr.babelfish.v1.model.banking.BankingProductFeature;
-import io.biza.cdr.babelfish.v1.model.common.AccountIdsList;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.LinksPaginated;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
-import io.biza.cdr.babelfish.v1.model.common.MetaPaginated;
-import io.biza.cdr.babelfish.v1.request.RequestAccountIds;
-import io.biza.cdr.babelfish.v1.response.ResponseBankingProductList;
-import io.biza.cdr.babelfish.v1.response.ResponseBankingProductListData;
 
 @DisplayName("BankingProductBundle V1 Tests")
 public class BankingProductFeatureV1Test {
@@ -113,9 +97,9 @@ public class BankingProductFeatureV1Test {
 
   @Test
   @DisplayName("BankingProductFeature for Free Transaction Allowance with Value")
-  void bankingProductFeatureFreeTransactionsValue() {
+  void bankingProductFeatureFreeTransactionsAllowance() {
     BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.FREE_TXNS);
+        new BankingProductFeature().featureType(BankingProductFeatureType.FREE_TXNS_ALLOWANCE);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());

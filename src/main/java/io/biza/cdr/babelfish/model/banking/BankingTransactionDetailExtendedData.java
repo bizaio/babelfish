@@ -25,7 +25,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Banking Transaction Detailed Extended Data")
-public abstract class BankingTransactionDetailExtendedData<T extends BankingTransactionDetailExtendedData<T>> {
+public abstract class BankingTransactionDetailExtendedData<T> {
   @BabelFishModelProperty(
       description = "Label of the originating payer. Mandatory for inbound payment")
   String payer;

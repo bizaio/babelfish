@@ -35,7 +35,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Term Deposit Account Description")
-public abstract class BankingTermDepositAccount<T extends BankingTermDepositAccount<T>> {
+public abstract class BankingTermDepositAccount<T> {
   @BabelFishModelProperty(description = "The lodgement date of the original deposit",
       required = true, dataType = "java.lang.String")
   @NonNull

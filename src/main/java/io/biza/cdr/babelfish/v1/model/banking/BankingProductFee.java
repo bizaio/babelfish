@@ -16,19 +16,35 @@ import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductFeeType;
+import io.biza.cdr.babelfish.v1.enumerations.BankingProductLendingRateType;
 
 @Valid
 public class BankingProductFee
     extends io.biza.cdr.babelfish.model.banking.BankingProductFee<BankingProductFee> {
   @AssertTrue(message = "Additional Value must be a Duration String when Fee type is PERIODIC")
   private boolean isValueDuration() {
-    return feeType() != null ? (Arrays.asList(new BankingProductFeeType[] {BankingProductFeeType.PERIODIC})
-        .contains(feeType()) ? FormatChecker.isDuration(additionalValue()) : true) : true;
+    return FormatChecker.isDefined(feeType())
+        ? (Arrays.asList(new BankingProductFeeType[] {BankingProductFeeType.PERIODIC})
+            .contains(feeType()) ? FormatChecker.isDefined(additionalValue()) && FormatChecker.isDuration(additionalValue()) : true)
+        : true;
   }
 
   @AssertTrue(message = "One of amount, balanceRate, transactionRate or accruedRate is mandatory")
   private boolean isAmountOrRateSet() {
-    return amount() != null || balanceRate() != null || transactionRate() != null
-        || accruedRate() != null;
+    return FormatChecker.isDefined(amount()) || FormatChecker.isDefined(balanceRate())
+        || FormatChecker.isDefined(transactionRate()) || FormatChecker.isDefined(accruedRate());
+  }
+
+  @AssertTrue(
+      message = "Additional Value should be null when Fee Type is TRANSACTION, WITHDRAWAL, DEPOSIT, PAYMENT, PURCHASE, EVENT, UPFRONT or EXIT")
+  private boolean isValueStringNull() {
+    return FormatChecker.isDefined(feeType()) ? (Arrays.asList(new BankingProductFeeType[] {
+        BankingProductFeeType.TRANSACTION,
+        BankingProductFeeType.WITHDRAWAL, BankingProductFeeType.DEPOSIT,
+        BankingProductFeeType.PAYMENT, BankingProductFeeType.PURCHASE, BankingProductFeeType.EVENT,
+        BankingProductFeeType.UPFRONT, BankingProductFeeType.EXIT}).contains(feeType())
+            ? !FormatChecker.isDefined(additionalValue())
+            : true)
+        : true;
   }
 }

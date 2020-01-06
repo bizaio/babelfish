@@ -6,18 +6,12 @@
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
-
-public ANY WARRANTY() {
-  return getWARRANTY();
-}
-
-@SuppressWarnings("unchecked")
-public T WARRANTY(ANY WARRANTY) {
-   setWARRANTY(WARRANTY);
-   return (T) this;
-}
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
+ * 
+ * public ANY WARRANTY() { return getWARRANTY(); }
+ * 
+ * @SuppressWarnings("unchecked") public T WARRANTY(ANY WARRANTY) { setWARRANTY(WARRANTY); return
+ * (T) this; } even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.response.container;
 
@@ -35,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Getter
 @Setter
 @Valid
-public abstract class ResponseCommonCustomerData <T extends ResponseCommonCustomerData<T>> {
+public abstract class ResponseCommonCustomerData<T> {
   @BabelFishModelProperty(description = "The type of customer object that is present",
       required = true)
   @JsonProperty("customerUType")
@@ -43,15 +37,15 @@ public abstract class ResponseCommonCustomerData <T extends ResponseCommonCustom
   @NonNull
   public PayloadTypeCustomer type;
 
-public PayloadTypeCustomer type() {
-  return getType();
-}
+  public PayloadTypeCustomer type() {
+    return getType();
+  }
 
-@SuppressWarnings("unchecked")
-public T type(PayloadTypeCustomer type) {
-   setType(type);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T type(PayloadTypeCustomer type) {
+    setType(type);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "The Person Record for the Customer")
   @JsonProperty("person")

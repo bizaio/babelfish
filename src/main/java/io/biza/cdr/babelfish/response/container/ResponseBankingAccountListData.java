@@ -6,18 +6,12 @@
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
-
-public ANY WARRANTY() {
-  return getWARRANTY();
-}
-
-@SuppressWarnings("unchecked")
-public T WARRANTY(ANY WARRANTY) {
-   setWARRANTY(WARRANTY);
-   return (T) this;
-}
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
+ * 
+ * public ANY WARRANTY() { return getWARRANTY(); }
+ * 
+ * @SuppressWarnings("unchecked") public T WARRANTY(ANY WARRANTY) { setWARRANTY(WARRANTY); return
+ * (T) this; } even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.response.container;
 
@@ -36,7 +30,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Response containing a list of Banking Accounts")
-public abstract class ResponseBankingAccountListData <T extends ResponseBankingAccountListData<T>> {
+public abstract class ResponseBankingAccountListData<T> {
   @BabelFishModelProperty(
       description = "The list of accounts returned. If the filter results in an empty set then this array may have no records",
       required = true)

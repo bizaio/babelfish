@@ -15,6 +15,7 @@ import java.util.Arrays;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.support.FormatChecker;
+import io.biza.cdr.babelfish.v1.enumerations.BankingProductDepositRateType;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductEligibilityType;
 
 @Valid
@@ -22,24 +23,52 @@ public class BankingProductEligibility extends
     io.biza.cdr.babelfish.model.banking.BankingProductEligibility<BankingProductEligibility> {
   @AssertTrue(message = "Additional Information must be populated when Eligibility type is OTHER")
   private boolean isInfoDefined() {
-    return eligibilityType() != null ? (Arrays.asList(new BankingProductEligibilityType[] {BankingProductEligibilityType.OTHER})
-        .contains(eligibilityType()) ? FormatChecker.isDefined(additionalInfo()) : true) : true;
+    return FormatChecker.isDefined(eligibilityType())
+        ? (Arrays.asList(new BankingProductEligibilityType[] {BankingProductEligibilityType.OTHER})
+            .contains(eligibilityType()) ? FormatChecker.isDefined(additionalInfo()) : true)
+        : true;
   }
 
   @AssertTrue(
       message = "Additional Value must be a Positive Integer when Eligibility type is MIN_AGE or MAX_AGE")
   private boolean isValuePositiveInteger() {
-    return eligibilityType() != null ? (Arrays.asList(new BankingProductEligibilityType[] {BankingProductEligibilityType.MIN_AGE,
-        BankingProductEligibilityType.MAX_AGE}).contains(eligibilityType())
-            ? FormatChecker.isPositiveInteger(additionalValue())
-            : true) : true;
+    return FormatChecker.isDefined(eligibilityType())
+        ? (Arrays.asList(new BankingProductEligibilityType[] {BankingProductEligibilityType.MIN_AGE,
+            BankingProductEligibilityType.MAX_AGE}).contains(eligibilityType())
+                ? FormatChecker.isPositiveInteger(additionalValue())
+                : true)
+        : true;
   }
 
   @AssertTrue(
       message = "Additional Value must be an Amount String when Eligibility type is MIN_INCOME or MIN_TURNOVER")
   private boolean isValueAmount() {
-    return eligibilityType() != null ? (Arrays.asList(new BankingProductEligibilityType[] {
-        BankingProductEligibilityType.MIN_INCOME, BankingProductEligibilityType.MIN_TURNOVER})
-        .contains(eligibilityType()) ? FormatChecker.isDecimal(additionalValue()) : true) : true;
+    return FormatChecker.isDefined(eligibilityType())
+        ? (Arrays.asList(new BankingProductEligibilityType[] {
+            BankingProductEligibilityType.MIN_INCOME, BankingProductEligibilityType.MIN_TURNOVER})
+            .contains(eligibilityType()) ? FormatChecker.isDefined(additionalValue()) && FormatChecker.isAmountString(additionalValue()) : true)
+        : true;
+  }
+
+  @AssertTrue(
+      message = "Additional Value must String when Eligibility type is EMPLOYMENT_STATUS or RESIDENCY_STATUS")
+  private boolean isValueString() {
+    return FormatChecker.isDefined(eligibilityType()) ? (Arrays.asList(
+        new BankingProductEligibilityType[] {BankingProductEligibilityType.EMPLOYMENT_STATUS,
+            BankingProductEligibilityType.RESIDENCY_STATUS})
+        .contains(eligibilityType()) ? FormatChecker.isNotEmpty(additionalValue()) : true) : true;
+  }
+
+  @AssertTrue(
+      message = "Additional Value should be null when Eligibility type is STAFF, STUDENT, NATURAL_PERSON, BUSINESS, PENSION_RECIPIENT or OTHER")
+  private boolean isValueStringNull() {
+    return FormatChecker.isDefined(eligibilityType())
+        ? (Arrays.asList(new BankingProductEligibilityType[] {BankingProductEligibilityType.STAFF,
+            BankingProductEligibilityType.NATURAL_PERSON, BankingProductEligibilityType.OTHER,
+            BankingProductEligibilityType.BUSINESS, BankingProductEligibilityType.PENSION_RECIPIENT,
+            BankingProductEligibilityType.STUDENT}).contains(eligibilityType())
+                ? !FormatChecker.isNotEmpty(additionalValue())
+                : true)
+        : true;
   }
 }

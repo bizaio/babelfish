@@ -6,18 +6,12 @@
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
-
-public ANY WARRANTY() {
-  return getWARRANTY();
-}
-
-@SuppressWarnings("unchecked")
-public T WARRANTY(ANY WARRANTY) {
-   setWARRANTY(WARRANTY);
-   return (T) this;
-}
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
+ * 
+ * public ANY WARRANTY() { return getWARRANTY(); }
+ * 
+ * @SuppressWarnings("unchecked") public T WARRANTY(ANY WARRANTY) { setWARRANTY(WARRANTY); return
+ * (T) this; } even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.response.container;
 
@@ -40,7 +34,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Common Discovery Status Information")
-public abstract class ResponseCommonDiscoveryStatusData <T extends ResponseCommonDiscoveryStatusData<T>> {
+public abstract class ResponseCommonDiscoveryStatusData<T> {
   @BabelFishModelProperty(
       description = "Enumeration with values. OK (implementation is fully functional). PARTIAL_FAILURE (one or more end points are unexpectedly unavailable). UNAVAILABLE (the full implementation is unexpectedly unavailable). SCHEDULED_OUTAGE (an advertised outage is in effect)",
       required = true)
@@ -49,15 +43,15 @@ public abstract class ResponseCommonDiscoveryStatusData <T extends ResponseCommo
   @NonNull
   public CommonDiscoveryStatusType status;
 
-public CommonDiscoveryStatusType status() {
-  return getStatus();
-}
+  public CommonDiscoveryStatusType status() {
+    return getStatus();
+  }
 
-@SuppressWarnings("unchecked")
-public T status(CommonDiscoveryStatusType status) {
-   setStatus(status);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T status(CommonDiscoveryStatusType status) {
+    setStatus(status);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "The date and time that this status was last updated by the Data Holder.",
@@ -67,30 +61,30 @@ public T status(CommonDiscoveryStatusType status) {
   @JsonProperty("updatedTime")
   public LocalDateTime updateTime;
 
-public LocalDateTime updateTime() {
-  return getUpdateTime();
-}
+  public LocalDateTime updateTime() {
+    return getUpdateTime();
+  }
 
-@SuppressWarnings("unchecked")
-public T updateTime(LocalDateTime updateTime) {
-   setUpdateTime(updateTime);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T updateTime(LocalDateTime updateTime) {
+    setUpdateTime(updateTime);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "Provides an explanation of the current outage that can be displayed to an end customer. Mandatory if the status property is any value other than OK")
   @JsonProperty("explanation")
   public String explanation;
 
-public String explanation() {
-  return getExplanation();
-}
+  public String explanation() {
+    return getExplanation();
+  }
 
-@SuppressWarnings("unchecked")
-public T explanation(String explanation) {
-   setExplanation(explanation);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T explanation(String explanation) {
+    setExplanation(explanation);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "The date and time that the current outage was detected. Should only be present if the status property is PARTIAL_FAILURE or UNAVAILABLE")
@@ -99,15 +93,15 @@ public T explanation(String explanation) {
   @JsonProperty("detectionTime")
   public LocalDateTime detectionTime;
 
-public LocalDateTime detectionTime() {
-  return getDetectionTime();
-}
+  public LocalDateTime detectionTime() {
+    return getDetectionTime();
+  }
 
-@SuppressWarnings("unchecked")
-public T detectionTime(LocalDateTime detectionTime) {
-   setDetectionTime(detectionTime);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T detectionTime(LocalDateTime detectionTime) {
+    setDetectionTime(detectionTime);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(
       description = "The date and time that full service is expected to resume (if known). Should not be present if the status property has a value of OK.")
@@ -116,13 +110,13 @@ public T detectionTime(LocalDateTime detectionTime) {
   @JsonProperty("expectedResolutionTime")
   public LocalDateTime expectedResolutionTime;
 
-public LocalDateTime expectedResolutionTime() {
-  return getExpectedResolutionTime();
-}
+  public LocalDateTime expectedResolutionTime() {
+    return getExpectedResolutionTime();
+  }
 
-@SuppressWarnings("unchecked")
-public T expectedResolutionTime(LocalDateTime expectedResolutionTime) {
-   setExpectedResolutionTime(expectedResolutionTime);
-   return (T) this;
-}
+  @SuppressWarnings("unchecked")
+  public T expectedResolutionTime(LocalDateTime expectedResolutionTime) {
+    setExpectedResolutionTime(expectedResolutionTime);
+    return (T) this;
+  }
 }

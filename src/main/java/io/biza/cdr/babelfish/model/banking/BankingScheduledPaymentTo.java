@@ -25,7 +25,7 @@ import lombok.Setter;
 @Valid
 @BabelFishModel(
     description = "Object containing details of the destination of the payment. Used to specify a variety of payment destination types")
-public abstract class BankingScheduledPaymentTo<T extends BankingScheduledPaymentTo<T>> {
+public abstract class BankingScheduledPaymentTo<T> {
   @BabelFishModelProperty(
       description = "The type of object provided that specifies the destination of the funds for the payment.",
       required = true)

@@ -24,7 +24,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Defines a condition for the applicability of a tiered rate")
-public abstract class BankingProductRateCondition<T extends BankingProductRateCondition<T>> {
+public abstract class BankingProductRateCondition<T> {
   @BabelFishModelProperty(description = "Display text providing more information on the condition")
   String additionalInfo;
 

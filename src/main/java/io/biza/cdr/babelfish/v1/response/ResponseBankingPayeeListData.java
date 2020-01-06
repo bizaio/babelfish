@@ -11,6 +11,6 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response;
 
-public class ResponseBankingPayeeListData
-    extends io.biza.cdr.babelfish.response.container.ResponseBankingPayeeListData<ResponseBankingPayeeListData> {
+public class ResponseBankingPayeeListData extends
+    io.biza.cdr.babelfish.response.container.ResponseBankingPayeeListData<ResponseBankingPayeeListData> {
 }

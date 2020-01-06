@@ -11,6 +11,6 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response;
 
-public class ResponseCommonCustomerDetailData
-    extends io.biza.cdr.babelfish.response.container.ResponseCommonCustomerDetailData<ResponseCommonCustomerDetailData> {
+public class ResponseCommonCustomerDetailData extends
+    io.biza.cdr.babelfish.response.container.ResponseCommonCustomerDetailData<ResponseCommonCustomerDetailData> {
 }

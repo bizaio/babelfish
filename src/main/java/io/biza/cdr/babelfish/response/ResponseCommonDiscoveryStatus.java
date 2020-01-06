@@ -28,7 +28,7 @@ import lombok.Setter;
 @BabelFishModel(modelName = "ResponseCommonDiscoveryStatus",
     description = "Common Discovery Status")
 public abstract class ResponseCommonDiscoveryStatus<T>
-    extends CDRResponse<ResponseCommonDiscoveryStatus<T>> {
+    extends CDRResponse<T> {
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull

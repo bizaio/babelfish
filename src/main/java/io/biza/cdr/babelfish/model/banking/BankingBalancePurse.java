@@ -31,7 +31,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "An Australian Bank Account Purse Balance Representation")
-public abstract class BankingBalancePurse<T extends BankingBalancePurse<T>> {
+public abstract class BankingBalancePurse<T> {
   @BabelFishModelProperty(description = "The balance available for this additional currency purse",
       required = true)
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)

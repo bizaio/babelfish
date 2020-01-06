@@ -28,7 +28,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "International Payee Beneficiary Details")
-public abstract class BankingInternationalPayeeBeneficiaryDetails<T extends BankingInternationalPayeeBeneficiaryDetails<T>> {
+public abstract class BankingInternationalPayeeBeneficiaryDetails<T> {
   @BabelFishModelProperty(description = "Name of the beneficiary")
   String name;
 

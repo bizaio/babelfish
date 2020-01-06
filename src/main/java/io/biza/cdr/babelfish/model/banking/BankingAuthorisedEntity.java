@@ -21,7 +21,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Authorised Entity details")
-public abstract class BankingAuthorisedEntity<T extends BankingAuthorisedEntity<T>> {
+public abstract class BankingAuthorisedEntity<T> {
   @BabelFishModelProperty(
       description = "Description of the authorised entity derived from previously executed direct debits")
   String description;

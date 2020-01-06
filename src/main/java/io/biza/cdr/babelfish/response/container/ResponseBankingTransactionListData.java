@@ -6,18 +6,12 @@
  * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
-
-public ANY WARRANTY() {
-  return getWARRANTY();
-}
-
-@SuppressWarnings("unchecked")
-public T WARRANTY(ANY WARRANTY) {
-   setWARRANTY(WARRANTY);
-   return (T) this;
-}
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
+ * 
+ * public ANY WARRANTY() { return getWARRANTY(); }
+ * 
+ * @SuppressWarnings("unchecked") public T WARRANTY(ANY WARRANTY) { setWARRANTY(WARRANTY); return
+ * (T) this; } even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.response.container;
 
@@ -34,7 +28,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Valid
-public abstract class ResponseBankingTransactionListData <T extends ResponseBankingTransactionListData<T>> {
+public abstract class ResponseBankingTransactionListData<T> {
   @BabelFishModelProperty(description = "The list of transactions", required = true)
   @JsonProperty("transactions")
   @NotNull

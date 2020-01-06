@@ -30,7 +30,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "An Australian Bank Account")
-public abstract class BankingAccount<T extends BankingAccount<T>> {
+public abstract class BankingAccount<T> {
   @BabelFishModelProperty(
       description = "A unique ID of the account adhering to the standards for ID permanence",
       required = true)

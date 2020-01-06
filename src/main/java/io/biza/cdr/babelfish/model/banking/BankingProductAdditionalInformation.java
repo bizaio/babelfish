@@ -25,7 +25,7 @@ import lombok.Setter;
 @Valid
 @BabelFishModel(
     description = "Object that contains links to additional information on specific topics")
-public abstract class BankingProductAdditionalInformation<T extends BankingProductAdditionalInformation<T>> {
+public abstract class BankingProductAdditionalInformation<T> {
   @BabelFishModelProperty(description = "General overview of the product",
       dataType = "java.lang.String")
   @JsonSerialize(converter = UriToUriStringConverter.class)

@@ -14,6 +14,7 @@ package io.biza.cdr.babelfish.v1.model.banking;
 import java.util.Arrays;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
+import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.CommonUnitOfMeasureType;
 
 @Valid
@@ -22,9 +23,10 @@ public class BankingProductRateTier
   @AssertTrue(
       message = "Minimum and Maximum values must be equal when Unit Of Measure is a discrete value")
   private boolean isMinMaxEqual() {
-    return unitOfMeasure() != null ? (Arrays.asList(
+    return FormatChecker.isDefined(unitOfMeasure()) ? (Arrays.asList(
         new CommonUnitOfMeasureType[] {CommonUnitOfMeasureType.DAY, CommonUnitOfMeasureType.MONTH})
         .contains(unitOfMeasure()) && maximumValue() != null ? (minimumValue() == maximumValue())
-            : true) : true;
+            : true)
+        : true;
   }
 }

@@ -12,7 +12,6 @@
 package io.biza.cdr.babelfish.v1.model.banking;
 
 import javax.validation.Valid;
-import lombok.NonNull;
 
 @Valid
 public class BankingProductBundle

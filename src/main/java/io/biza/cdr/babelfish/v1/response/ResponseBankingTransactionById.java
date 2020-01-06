@@ -11,6 +11,6 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response;
 
-public class ResponseBankingTransactionById
-    extends io.biza.cdr.babelfish.response.ResponseBankingTransactionById<ResponseBankingTransactionById> {
+public class ResponseBankingTransactionById extends
+    io.biza.cdr.babelfish.response.ResponseBankingTransactionById<ResponseBankingTransactionById> {
 }

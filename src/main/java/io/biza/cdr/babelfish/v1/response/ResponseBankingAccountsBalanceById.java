@@ -20,6 +20,6 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Response containing a specific account balance")
-public class ResponseBankingAccountsBalanceById
-    extends io.biza.cdr.babelfish.response.ResponseBankingAccountsBalanceById<ResponseBankingAccountsBalanceById> {
+public class ResponseBankingAccountsBalanceById extends
+    io.biza.cdr.babelfish.response.ResponseBankingAccountsBalanceById<ResponseBankingAccountsBalanceById> {
 }

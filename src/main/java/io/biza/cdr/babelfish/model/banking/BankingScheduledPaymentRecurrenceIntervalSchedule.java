@@ -32,7 +32,7 @@ import lombok.Setter;
 @Valid
 @BabelFishModel(
     description = "Indicates that the schedule of payments is defined by a series of intervals. Mandatory if recurrenceUType is set to intervalSchedule")
-public abstract class BankingScheduledPaymentRecurrenceIntervalSchedule<T extends BankingScheduledPaymentRecurrenceIntervalSchedule<T>> {
+public abstract class BankingScheduledPaymentRecurrenceIntervalSchedule<T> {
   @BabelFishModelProperty(
       description = "The limit date after which no more payments should be made using this schedule. If both finalPaymentDate and paymentsRemaining are present then payments will stop according to the most constraining value. If neither field is present the payments will continue indefinitely",
       dataType = "java.lang.String")

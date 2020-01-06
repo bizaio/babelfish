@@ -13,10 +13,8 @@ package io.biza.cdr.babelfish.model.banking;
 
 import java.math.BigDecimal;
 import java.net.URI;
-import java.util.Arrays;
 import java.util.List;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -25,7 +23,6 @@ import io.biza.cdr.babelfish.converters.RateStringToBigDecimalConverter;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductDiscountType;
 import lombok.Getter;
 import lombok.NonNull;
@@ -36,7 +33,7 @@ import lombok.Setter;
 @Valid
 @BabelFishModel(modelName = "BankingProductDiscount",
     description = "Banking Product Discount Specification")
-public abstract class BankingProductFeeDiscount<T extends BankingProductFeeDiscount<T>> {
+public abstract class BankingProductFeeDiscount<T> {
   @BabelFishModelProperty(description = "Description of the discount", required = true)
   @NonNull
   @NotNull
@@ -166,21 +163,6 @@ public abstract class BankingProductFeeDiscount<T extends BankingProductFeeDisco
   public T additionalValue(String additionalValue) {
     setAdditionalValue(additionalValue);
     return (T) this;
-  }
-
-  @AssertTrue(
-      message = "Additional Value must be an Amount String when Discount type is BALANCE, DEPOSITS or PAYMENTS")
-  private boolean isValueAmount() {
-    return Arrays
-        .asList(new BankingProductDiscountType[] {BankingProductDiscountType.BALANCE,
-            BankingProductDiscountType.DEPOSITS, BankingProductDiscountType.PAYMENTS})
-        .contains(discountType) ? FormatChecker.isDecimal(additionalValue) : true;
-  }
-
-  @AssertTrue(message = "Additional Value must be an Duration String when Discount type is FEE_CAP")
-  private boolean isValueDuration() {
-    return Arrays.asList(new BankingProductDiscountType[] {BankingProductDiscountType.FEE_CAP})
-        .contains(discountType) ? FormatChecker.isDuration(additionalValue) : true;
   }
 
   @BabelFishModelProperty(description = "Display text providing more information on the discount")

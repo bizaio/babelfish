@@ -12,14 +12,11 @@
 package io.biza.cdr.babelfish.model.banking;
 
 import java.net.URI;
-import java.util.Arrays;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductDiscountEligibilityType;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,7 +25,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Banking Product Discount Eligibility Details")
-public abstract class BankingProductFeeDiscountEligibility<T extends BankingProductFeeDiscountEligibility<T>> {
+public abstract class BankingProductFeeDiscountEligibility<T> {
   @BabelFishModelProperty(
       description = "The type of the specific eligibility constraint for a discount",
       required = true)
@@ -84,25 +81,5 @@ public abstract class BankingProductFeeDiscountEligibility<T extends BankingProd
   public T additionalInfoUri(URI additionalInfoUri) {
     setAdditionalInfoUri(additionalInfoUri);
     return (T) this;
-  }
-
-  @AssertTrue(
-      message = "Additional Value must be a Positive Integer when Eligibility type is MIN_AGE or MAX_AGE")
-  private boolean isValuePositiveInteger() {
-    return Arrays.asList(
-        new BankingProductDiscountEligibilityType[] {BankingProductDiscountEligibilityType.MIN_AGE,
-            BankingProductDiscountEligibilityType.MAX_AGE})
-        .contains(discountEligibilityType) ? FormatChecker.isPositiveInteger(additionalValue)
-            : true;
-  }
-
-  @AssertTrue(
-      message = "Additional Value must be an Amount String when Eligibility type is MIN_INCOME or MIN_TURNOVER")
-  private boolean isValueAmount() {
-    return Arrays.asList(new BankingProductDiscountEligibilityType[] {
-        BankingProductDiscountEligibilityType.MIN_INCOME,
-        BankingProductDiscountEligibilityType.MIN_TURNOVER}).contains(discountEligibilityType)
-            ? FormatChecker.isDecimal(additionalValue)
-            : true;
   }
 }

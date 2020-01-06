@@ -2,39 +2,21 @@ package io.biza.cdr.babelfish.tests.v1.model;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
-import java.net.URI;
-import java.util.List;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import org.apache.commons.beanutils.BeanUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.cdr.babelfish.tests.v1.ModelConstants;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductDiscountType;
-import io.biza.cdr.babelfish.v1.enumerations.BankingProductFeatureType;
-import io.biza.cdr.babelfish.v1.model.CDRResponse;
-import io.biza.cdr.babelfish.v1.model.CDRResponsePaginated;
-import io.biza.cdr.babelfish.v1.model.banking.BankingProduct;
-import io.biza.cdr.babelfish.v1.model.banking.BankingProductBundle;
-import io.biza.cdr.babelfish.v1.model.banking.BankingProductFeature;
 import io.biza.cdr.babelfish.v1.model.banking.BankingProductFeeDiscount;
-import io.biza.cdr.babelfish.v1.model.common.AccountIdsList;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.model.common.LinksPaginated;
-import io.biza.cdr.babelfish.v1.model.common.Meta;
-import io.biza.cdr.babelfish.v1.model.common.MetaPaginated;
-import io.biza.cdr.babelfish.v1.request.RequestAccountIds;
-import io.biza.cdr.babelfish.v1.response.ResponseBankingProductList;
-import io.biza.cdr.babelfish.v1.response.ResponseBankingProductListData;
 
 @DisplayName("BankingProductFeeDiscount V1 Tests")
 public class BankingProductFeeDiscountV1Test {
   private Validator validator;
-  
+
   // TODO: Test amount, balanceRate, transactionRate, feeRate, accruedRate variability
 
   @BeforeEach
@@ -42,7 +24,7 @@ public class BankingProductFeeDiscountV1Test {
     ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     validator = factory.getValidator();
   }
-  
+
   // TODO: Enforce description field
 
   @Test
@@ -56,7 +38,8 @@ public class BankingProductFeeDiscountV1Test {
   @DisplayName("BankingProductFeeDiscount for Balance")
   void bankingProductFeeDiscountBalance() {
     BankingProductFeeDiscount data =
-        new BankingProductFeeDiscount().description("Discount Description").amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.BALANCE);
+        new BankingProductFeeDiscount().description("Discount Description")
+            .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.BALANCE);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -79,7 +62,8 @@ public class BankingProductFeeDiscountV1Test {
   @DisplayName("BankingProductFeeDiscount for Deposits")
   void bankingProductFeeDiscountDeposits() {
     BankingProductFeeDiscount data =
-        new BankingProductFeeDiscount().description("Discount Description").amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.DEPOSITS);
+        new BankingProductFeeDiscount().description("Discount Description")
+            .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.DEPOSITS);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -102,7 +86,8 @@ public class BankingProductFeeDiscountV1Test {
   @DisplayName("BankingProductFeeDiscount for Payments")
   void bankingProductFeeDiscountPayments() {
     BankingProductFeeDiscount data =
-        new BankingProductFeeDiscount().description("Discount Description").amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.PAYMENTS);
+        new BankingProductFeeDiscount().description("Discount Description")
+            .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.PAYMENTS);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -125,7 +110,8 @@ public class BankingProductFeeDiscountV1Test {
   @DisplayName("BankingProductFeeDiscount for Fee Cap")
   void bankingProductFeeDiscountFeeCap() {
     BankingProductFeeDiscount data =
-        new BankingProductFeeDiscount().description("Discount Description").amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.FEE_CAP);
+        new BankingProductFeeDiscount().description("Discount Description")
+            .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.FEE_CAP);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -146,7 +132,8 @@ public class BankingProductFeeDiscountV1Test {
   @DisplayName("BankingProductFeeDiscount for Eligibility Only")
   void bankingProductFeeDiscountEligibilityOnly() {
     BankingProductFeeDiscount data =
-        new BankingProductFeeDiscount().description("Discount Description").amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.FEE_CAP);
+        new BankingProductFeeDiscount().description("Discount Description")
+            .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.ELIGIBILITY_ONLY);
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());

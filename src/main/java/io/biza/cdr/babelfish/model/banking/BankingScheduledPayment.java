@@ -25,7 +25,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Describes a Scheduled Payment")
-public abstract class BankingScheduledPayment<T extends BankingScheduledPayment<T>> {
+public abstract class BankingScheduledPayment<T> {
   @BabelFishModelProperty(
       description = "A unique ID of the scheduled payment adhering to the standards for ID permanence",
       required = true)

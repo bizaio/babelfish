@@ -38,7 +38,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Banking Loan Account Details")
-public abstract class BankingLoanAccount<T extends BankingLoanAccount<T>> {
+public abstract class BankingLoanAccount<T> {
   @BabelFishModelProperty(description = "Original Loan Start Date")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)

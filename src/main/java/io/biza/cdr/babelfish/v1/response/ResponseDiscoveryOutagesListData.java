@@ -11,6 +11,6 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response;
 
-public class ResponseDiscoveryOutagesListData
-    extends io.biza.cdr.babelfish.response.container.ResponseDiscoveryOutagesListData<ResponseDiscoveryOutagesListData> {
+public class ResponseDiscoveryOutagesListData extends
+    io.biza.cdr.babelfish.response.container.ResponseDiscoveryOutagesListData<ResponseDiscoveryOutagesListData> {
 }

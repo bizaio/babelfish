@@ -15,6 +15,7 @@ import java.util.Arrays;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.support.FormatChecker;
+import io.biza.cdr.babelfish.v1.enumerations.BankingProductEligibilityType;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductLendingRateType;
 
 @Valid
@@ -23,8 +24,39 @@ public class BankingProductLendingRate extends
   @AssertTrue(
       message = "Additional Value must be an Duration String when Lending Rate Type INTRODUCTORY or FIXED")
   private boolean isValueDuration() {
-    return lendingRateType() != null ? (Arrays.asList(new BankingProductLendingRateType[] {
-        BankingProductLendingRateType.INTRODUCTORY, BankingProductLendingRateType.FIXED})
-        .contains(lendingRateType()) ? FormatChecker.isDuration(additionalValue()) : true) : true;
+    return FormatChecker.isDefined(lendingRateType())
+        ? (Arrays.asList(new BankingProductLendingRateType[] {
+            BankingProductLendingRateType.INTRODUCTORY, BankingProductLendingRateType.FIXED})
+            .contains(lendingRateType())
+                ? FormatChecker.isDefined(additionalValue())
+                    && FormatChecker.isDuration(additionalValue())
+                : true)
+        : true;
+  }
+
+  @AssertTrue(
+      message = "Additional Value must be String when Lending Rate Type is DISCOUNT, PENALTY, FLOATING, MARKET_LINKED, BUNDLE_DISCOUNT_FIXED or BUNDLE_DISCOUNT_VARIABLE")
+  private boolean isValueString() {
+    return FormatChecker
+        .isDefined(lendingRateType())
+            ? (Arrays
+                .asList(new BankingProductLendingRateType[] {BankingProductLendingRateType.DISCOUNT,
+                    BankingProductLendingRateType.PENALTY, BankingProductLendingRateType.FLOATING,
+                    BankingProductLendingRateType.MARKET_LINKED,
+                    BankingProductLendingRateType.BUNDLE_DISCOUNT_FIXED,
+                    BankingProductLendingRateType.BUNDLE_DISCOUNT_VARIABLE})
+                .contains(lendingRateType()) ? FormatChecker.isNotEmpty(additionalValue()) : true)
+            : true;
+  }
+
+  @AssertTrue(
+      message = "Additional Value should be null when Lending Rate Type is VARIABLE, CASH_ADVANCE or PURCHASE")
+  private boolean isValueStringNull() {
+    return FormatChecker.isDefined(lendingRateType())
+        ? (Arrays
+            .asList(new BankingProductLendingRateType[] {BankingProductLendingRateType.VARIABLE,
+                BankingProductLendingRateType.CASH_ADVANCE, BankingProductLendingRateType.PURCHASE})
+            .contains(lendingRateType()) ? !FormatChecker.isDefined(additionalValue()) : true)
+        : true;
   }
 }

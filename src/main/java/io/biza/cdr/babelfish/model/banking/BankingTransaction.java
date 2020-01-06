@@ -15,7 +15,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Currency;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -37,7 +36,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Banking Transaction Brief Definition")
-public abstract class BankingTransaction<T extends BankingTransaction<T>> {
+public abstract class BankingTransaction<T> {
   @BabelFishModelProperty(description = "ID of the account for which transactions are provided",
       required = true)
   @NonNull
@@ -318,9 +317,4 @@ public abstract class BankingTransaction<T extends BankingTransaction<T>> {
     return (T) this;
   }
 
-  @AssertTrue(message = "Posting Date and Time must be set when status is POSTED")
-  private boolean isPostedDateDefined() {
-    return BankingTransactionStatus.POSTED.equals(status) ? (postingDateTime != null ? true : false)
-        : true;
-  }
 }

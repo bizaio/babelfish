@@ -19,6 +19,7 @@ import java.time.Period;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
@@ -93,28 +94,41 @@ public class FormatChecker {
     }
   }
 
-  public static Boolean isPeriod(String duration) {
+  public static Boolean isPeriod(String period) {
     try {
-      Period.parse(duration);
+      Period.parse(period);
       return true;
     } catch (DateTimeParseException e) {
       return false;
     }
   }
 
-  public static Boolean isDecimal(String decimal) {
+  public static Boolean isAmountString(String decimal) {
     try {
-      new BigDecimal(decimal);
-      return true;
+      if(Pattern.matches("^\\-?([1-9](\\d){0,15}|0)\\.(\\d){2,}$", decimal)) {
+        // Check it parses to BigDecimal too
+        new BigDecimal(decimal);
+        return true;
+      } else {
+        return false;
+      }
     } catch (NumberFormatException e) {
       return false;
     }
   }
 
+  public static boolean isDefined(Enum<?> inputEnum) {
+    return inputEnum != null;
+  }
+
+  public static boolean isDefined(BigDecimal inputDecimal) {
+    return inputDecimal != null;
+  }
+
   public static boolean isDefined(String additionalValue) {
     return additionalValue != null;
   }
-  
+
   public static boolean isNotEmpty(String additionalValue) {
     return isDefined(additionalValue) && additionalValue != "";
   }

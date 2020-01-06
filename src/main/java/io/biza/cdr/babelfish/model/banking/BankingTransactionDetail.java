@@ -13,7 +13,6 @@ package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
@@ -25,21 +24,7 @@ import lombok.Setter;
 @Valid
 @BabelFishModel(description = "Banking Transaction Detailed Information",
     parent = BankingTransaction.class)
-public abstract class BankingTransactionDetail<T extends BankingTransactionDetail<T>> {
-  @JsonUnwrapped
-  @BabelFishModelProperty(hidden = true)
-  @Valid
-  BankingTransaction<?> bankingTransaction;
-
-  public BankingTransaction<?> bankingTransaction() {
-    return getBankingTransaction();
-  }
-
-  @SuppressWarnings("unchecked")
-  public T bankingTransaction(BankingTransaction<?> bankingTransaction) {
-    setBankingTransaction(bankingTransaction);
-    return (T) this;
-  }
+public abstract class BankingTransactionDetail<T> extends BankingTransaction<T> {
 
   @BabelFishModelProperty(required = true)
   @NonNull

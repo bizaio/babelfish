@@ -26,7 +26,7 @@ import io.biza.cdr.babelfish.model.common.Error;
 @Setter
 @Valid
 @BabelFishModel(description = "CDS Error Response")
-public abstract class ResponseErrorList<T extends ResponseErrorList<T>> {
+public abstract class ResponseErrorList<T> {
   @BabelFishModelProperty(required = true)
   @NonNull
   @NotNull

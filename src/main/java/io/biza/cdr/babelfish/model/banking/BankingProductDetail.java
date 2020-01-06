@@ -13,7 +13,6 @@ package io.biza.cdr.babelfish.model.banking;
 
 import java.util.List;
 import javax.validation.Valid;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;

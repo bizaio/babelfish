@@ -23,7 +23,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Banking Transaction Detail X2P101 Payload")
-public abstract class BankingTransactionDetailExtendedDataX2p101Payload<T extends BankingTransactionDetailExtendedDataX2p101Payload<T>> {
+public abstract class BankingTransactionDetailExtendedDataX2p101Payload<T> {
   @BabelFishModelProperty(
       description = "An extended string description. Only present if specified by the extensionUType field",
       required = true)

@@ -32,7 +32,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Credit Card Account Details")
-public abstract class BankingCreditCardAccount<T extends BankingCreditCardAccount<T>> {
+public abstract class BankingCreditCardAccount<T> {
   @BabelFishModelProperty(description = "The minimum payment amount due for the next card payment",
       required = true, dataType = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)

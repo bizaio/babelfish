@@ -32,7 +32,7 @@ import lombok.Setter;
 @Valid
 @BabelFishModel(
     description = "The set of payment amounts and destination accounts for this payment accommodating multi-part payments. A single entry indicates a simple payment with one destination account. Must have at least one entry")
-public abstract class BankingScheduledPaymentSet<T extends BankingScheduledPaymentSet<T>> {
+public abstract class BankingScheduledPaymentSet<T> {
   @BabelFishModelProperty(required = true)
   @NonNull
   @NotNull

@@ -24,7 +24,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Domestic Payee PayID Detail")
-public abstract class BankingDomesticPayeePayId<T extends BankingDomesticPayeePayId<T>> {
+public abstract class BankingDomesticPayeePayId<T> {
   @BabelFishModelProperty(description = "The name assigned to the PayID by the owner of the PayID")
   String name;
 

@@ -30,7 +30,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "International Payee Bank Details")
-public abstract class BankingInternationalPayeeBankDetails<T extends BankingInternationalPayeeBankDetails<T>> {
+public abstract class BankingInternationalPayeeBankDetails<T> {
   @BabelFishModelProperty(
       description = "Country of the recipient institution. A valid [ISO 3166 Alpha-3](https://www.iso.org/iso-3166-country-codes.html) country code",
       required = true)

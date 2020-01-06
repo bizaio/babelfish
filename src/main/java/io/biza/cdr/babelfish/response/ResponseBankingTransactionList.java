@@ -25,7 +25,7 @@ import lombok.Setter;
 @Setter
 @Valid
 public abstract class ResponseBankingTransactionList<T>
-    extends CDRResponsePaginated<ResponseBankingTransactionList<T>> {
+    extends CDRResponsePaginated<T> {
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull

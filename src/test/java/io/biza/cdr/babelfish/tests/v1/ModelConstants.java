@@ -56,16 +56,20 @@ public class ModelConstants {
   public static final BankingProductEligibility DEFAULT_BANKING_PRODUCT_ELIGIBILITY =
       new BankingProductEligibility().eligibilityType(BankingProductEligibilityType.BUSINESS);
   public static final BankingProductFee DEFAULT_BANKING_PRODUCT_FEE =
-      new BankingProductFee().name("Fee Name").feeType(BankingProductFeeType.PERIODIC).additionalValue("P1D").amount(new BigDecimal("10.00"));
+      new BankingProductFee().name("Fee Name").feeType(BankingProductFeeType.PERIODIC)
+          .additionalValue("P1D").amount(new BigDecimal("10.00"));
   public static final BankingProductFeeDiscount DEFAULT_BANKING_PRODUCT_FEE_DISCOUNT =
-      new BankingProductFeeDiscount().description("Discount Description").amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.BALANCE)
+      new BankingProductFeeDiscount().description("Discount Description")
+          .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.BALANCE)
           .additionalValue("100.00");
   public static final BankingProductFeeDiscountEligibility DEFAULT_BANKING_PRODUCT_FEE_DISCOUNT_ELIGIBILITY =
       new BankingProductFeeDiscountEligibility()
           .discountEligibilityType(BankingProductDiscountEligibilityType.BUSINESS);
   public static final BankingProductDepositRate DEFAULT_BANKING_PRODUCT_DEPOSIT_RATE =
-      new BankingProductDepositRate().depositRateType(BankingProductDepositRateType.VARIABLE).rate(new BigDecimal("0.05"));
+      new BankingProductDepositRate().depositRateType(BankingProductDepositRateType.VARIABLE)
+          .rate(new BigDecimal("0.05"));
   public static final BankingProductLendingRate DEFAULT_BANKING_PRODUCT_LENDING_RATE =
-      new BankingProductLendingRate().lendingRateType(BankingProductLendingRateType.VARIABLE).rate(new BigDecimal("0.05"));
+      new BankingProductLendingRate().lendingRateType(BankingProductLendingRateType.VARIABLE)
+          .rate(new BigDecimal("0.05"));
 
 }
