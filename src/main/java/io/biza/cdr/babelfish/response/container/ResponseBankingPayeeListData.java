@@ -35,4 +35,14 @@ public abstract class ResponseBankingPayeeListData<T> {
   @NotNull
   @NonNull
   public List<BankingPayee<?>> payees;
+  
+  public List<BankingPayee<?>> payees() {
+    return getPayees();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T payees(List<BankingPayee<?>> data) {
+    setPayees(data);
+    return (T) this;
+  }
 }

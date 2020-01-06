@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.CDRResponse;
+import io.biza.cdr.babelfish.model.CDRResponsePaginated;
 import io.biza.cdr.babelfish.response.container.ResponseBankingAccountsBalanceListData;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
@@ -27,7 +28,7 @@ import lombok.Setter;
 @Valid
 @BabelFishModel(description = "Response containing a Banking Accounts Balances List")
 public abstract class ResponseBankingAccountsBalanceList<T>
-    extends CDRResponse<T> {
+    extends CDRResponsePaginated<T> {
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull

@@ -7,6 +7,14 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
 import io.biza.cdr.babelfish.v1.response.ResponseBankingAccountListData;
+import io.biza.cdr.babelfish.v1.response.ResponseBankingAccountsBalanceList;
+import io.biza.cdr.babelfish.v1.response.ResponseBankingAccountsBalanceListData;
+import io.biza.cdr.babelfish.v1.response.ResponseBankingPayeeById;
+import io.biza.cdr.babelfish.v1.response.ResponseBankingPayeeList;
+import io.biza.cdr.babelfish.v1.response.ResponseBankingPayeeListData;
+import io.biza.cdr.babelfish.v1.response.ResponseBankingScheduledPaymentsList;
+import io.biza.cdr.babelfish.v1.response.ResponseBankingScheduledPaymentsListData;
+import io.biza.cdr.babelfish.v1.response.ResponseBankingTransactionById;
 import io.biza.cdr.babelfish.v1.response.ResponseBankingTransactionList;
 import io.biza.cdr.babelfish.v1.response.ResponseBankingTransactionListData;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductCategory;
@@ -22,8 +30,11 @@ import io.biza.cdr.babelfish.v1.enumerations.BankingTermDepositMaturityInstructi
 import io.biza.cdr.babelfish.v1.enumerations.CommonUnitOfMeasureType;
 import io.biza.cdr.babelfish.v1.model.banking.BankingAccount;
 import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
+import io.biza.cdr.babelfish.v1.model.banking.BankingBalance;
 import io.biza.cdr.babelfish.v1.model.banking.BankingCreditCardAccount;
 import io.biza.cdr.babelfish.v1.model.banking.BankingLoanAccount;
+import io.biza.cdr.babelfish.v1.model.banking.BankingPayee;
+import io.biza.cdr.babelfish.v1.model.banking.BankingPayeeDetail;
 import io.biza.cdr.babelfish.v1.model.banking.BankingProduct;
 import io.biza.cdr.babelfish.v1.model.banking.BankingProductBundle;
 import io.biza.cdr.babelfish.v1.model.banking.BankingProductConstraint;
@@ -38,6 +49,7 @@ import io.biza.cdr.babelfish.v1.model.banking.BankingProductLendingRate;
 import io.biza.cdr.babelfish.v1.model.banking.BankingProductRateTier;
 import io.biza.cdr.babelfish.v1.model.banking.BankingTermDepositAccount;
 import io.biza.cdr.babelfish.v1.model.banking.BankingTransaction;
+import io.biza.cdr.babelfish.v1.model.banking.BankingTransactionDetail;
 import io.biza.cdr.babelfish.v1.model.common.Links;
 import io.biza.cdr.babelfish.v1.model.common.LinksPaginated;
 import io.biza.cdr.babelfish.v1.model.common.Meta;
@@ -124,9 +136,33 @@ public class ModelConstants {
       new ResponseBankingAccountList().links(DEFAULT_LINKS_PAGINATED).meta(DEFAULT_META_PAGINATED)
           .data(DEFAULT_RESPONSE_BANKING_ACCOUNT_LIST_DATA);
 
-  public static final ResponseBankingAccountById DEFAULT_RESPONSE_BANKING_BY_ID =
+  public static final ResponseBankingScheduledPaymentsListData DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST_DATA =
+      new ResponseBankingScheduledPaymentsListData();
+
+  public static final ResponseBankingScheduledPaymentsList DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST =
+      new ResponseBankingScheduledPaymentsList().links(DEFAULT_LINKS_PAGINATED)
+          .meta(DEFAULT_META_PAGINATED).data(DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST_DATA);
+
+  public static final BankingPayee DEFAULT_BANKING_PAYEE = new BankingPayee();
+
+  public static final ResponseBankingPayeeListData DEFAULT_RESPONSE_BANKING_PAYEE_LIST_DATA =
+      new ResponseBankingPayeeListData().payees(List.of(DEFAULT_BANKING_PAYEE));
+
+  public static final ResponseBankingPayeeList DEFAULT_RESPONSE_BANKING_PAYEE_LIST =
+      new ResponseBankingPayeeList().links(DEFAULT_LINKS_PAGINATED).meta(DEFAULT_META_PAGINATED)
+          .data(DEFAULT_RESPONSE_BANKING_PAYEE_LIST_DATA);
+
+  public static final ResponseBankingAccountById DEFAULT_RESPONSE_BANKING_ACCOUNT_BY_ID =
       new ResponseBankingAccountById().links(DEFAULT_LINKS).meta(DEFAULT_META)
           .data(DEFAULT_BANKING_ACCOUNT_DETAIL);
+
+  public static final BankingTransactionDetail DEFAULT_BANKING_TRANSACTION_DETAIL =
+      new BankingTransactionDetail();
+
+  public static final ResponseBankingTransactionById DEFAULT_RESPONSE_BANKING_TRANSACTION_BY_ID =
+      new ResponseBankingTransactionById().links(DEFAULT_LINKS)
+          .data(DEFAULT_BANKING_TRANSACTION_DETAIL);
+
 
   public static final BankingTransaction DEFAULT_BANKING_TRANSACTION = new BankingTransaction();
   public static final ResponseBankingTransactionListData DEFAULT_RESPONSE_BANKING_TRANSACTION_LIST_DATA =
@@ -136,6 +172,17 @@ public class ModelConstants {
       new ResponseBankingTransactionList().meta(DEFAULT_META_PAGINATED)
           .links(DEFAULT_LINKS_PAGINATED).data(DEFAULT_RESPONSE_BANKING_TRANSACTION_LIST_DATA);
 
+  public static final BankingBalance DEFAULT_BANKING_BALANCE = new BankingBalance();
 
+  public static final ResponseBankingAccountsBalanceListData DEFAULT_BANKING_ACCOUNTS_BALANCE_LIST_DATA =
+      new ResponseBankingAccountsBalanceListData().balances(List.of(DEFAULT_BANKING_BALANCE));
+
+  public static final ResponseBankingAccountsBalanceList DEFAULT_RESPONSE_BANKING_ACCOUNTS_BALANCE_LIST =
+      new ResponseBankingAccountsBalanceList().meta(DEFAULT_META_PAGINATED)
+          .links(DEFAULT_LINKS_PAGINATED).data(DEFAULT_BANKING_ACCOUNTS_BALANCE_LIST_DATA);
+
+  public static final BankingPayeeDetail DEFAULT_PAYEE_DETAIL = new BankingPayeeDetail();
+  public static final ResponseBankingPayeeById DEFAULT_RESPONSE_BANKING_PAYEE_BY_ID =
+      new ResponseBankingPayeeById().links(DEFAULT_LINKS).data(DEFAULT_PAYEE_DETAIL);
 
 }

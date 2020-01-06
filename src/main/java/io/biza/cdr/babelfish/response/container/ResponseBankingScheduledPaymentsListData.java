@@ -21,6 +21,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.model.banking.BankingScheduledPayment;
+import io.biza.cdr.babelfish.v1.model.banking.BankingTransaction;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -34,4 +35,14 @@ public abstract class ResponseBankingScheduledPaymentsListData<T> {
   @NotNull
   @NonNull
   public List<BankingScheduledPayment> scheduledPayments;
+  
+  public List<BankingScheduledPayment> scheduledPayments() {
+    return getScheduledPayments();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T scheduledPayments(List<BankingScheduledPayment> scheduledPayments) {
+    setScheduledPayments(scheduledPayments);
+    return (T) this;
+  }
 }

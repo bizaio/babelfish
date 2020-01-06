@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.CDRResponse;
+import io.biza.cdr.babelfish.model.banking.BankingBalance;
 import io.biza.cdr.babelfish.model.banking.BankingPayeeDetail;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
@@ -32,4 +33,14 @@ public abstract class ResponseBankingPayeeById<T> extends CDRResponse<T> {
   @NotNull
   @NonNull
   public BankingPayeeDetail<?> data;
+  
+  public BankingPayeeDetail<?> data() {
+    return getData();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T data(BankingPayeeDetail<?> data) {
+    setData(data);
+    return (T) this;
+  }
 }

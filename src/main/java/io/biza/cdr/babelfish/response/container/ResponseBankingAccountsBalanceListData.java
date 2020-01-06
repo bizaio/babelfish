@@ -19,8 +19,9 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.biza.cdr.babelfish.model.banking.BankingAccount;
+import io.biza.cdr.babelfish.model.banking.BankingBalance;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.banking.BankingBalance;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -35,5 +36,16 @@ public abstract class ResponseBankingAccountsBalanceListData<T> {
   @JsonProperty("balances")
   @NotNull
   @NonNull
-  public List<BankingBalance> balances;
+  public List<BankingBalance<?>> balances;
+  
+  public List<BankingBalance<?>> balances() {
+    return getBalances();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T balances(List<BankingBalance<?>> balances) {
+    setBalances(balances);
+    return (T) this;
+  }
+  
 }
