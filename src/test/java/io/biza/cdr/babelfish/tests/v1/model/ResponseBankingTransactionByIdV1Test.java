@@ -9,9 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.cdr.babelfish.tests.v1.ModelConstants;
-import io.biza.cdr.babelfish.v1.model.common.Links;
-import io.biza.cdr.babelfish.v1.response.ResponseBankingAccountList;
-import io.biza.cdr.babelfish.v1.response.ResponseBankingProductById;
 import io.biza.cdr.babelfish.v1.response.ResponseBankingTransactionById;
 
 @DisplayName("ResponseBankingTransactionById V1 Tests")

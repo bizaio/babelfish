@@ -12,7 +12,6 @@
 package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingPayee;
 import io.biza.cdr.babelfish.support.BabelFishModel;

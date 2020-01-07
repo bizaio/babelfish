@@ -11,14 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.cdr.babelfish.tests.v1.ModelConstants;
-import io.biza.cdr.babelfish.v1.enumerations.BankingProductCategory;
 import io.biza.cdr.babelfish.v1.enumerations.BankingScheduledPaymentStatus;
 import io.biza.cdr.babelfish.v1.model.banking.BankingScheduledPayment;
-import io.biza.cdr.babelfish.v1.model.banking.BankingProduct;
-import io.biza.cdr.babelfish.v1.model.common.LinksPaginated;
-import io.biza.cdr.babelfish.v1.model.common.MetaPaginated;
-import io.biza.cdr.babelfish.v1.response.ResponseBankingProductList;
-import io.biza.cdr.babelfish.v1.response.ResponseBankingProductListData;
 
 @DisplayName("BankingScheduledPayment V1 Tests")
 public class BankingScheduledPaymentV1Test {

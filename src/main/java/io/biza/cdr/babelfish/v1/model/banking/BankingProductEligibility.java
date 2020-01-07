@@ -15,7 +15,6 @@ import java.util.Arrays;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.support.FormatChecker;
-import io.biza.cdr.babelfish.v1.enumerations.BankingProductDepositRateType;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductEligibilityType;
 
 @Valid

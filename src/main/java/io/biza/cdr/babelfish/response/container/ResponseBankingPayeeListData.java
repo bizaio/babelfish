@@ -19,7 +19,6 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.cdr.babelfish.model.CDRResponsePaginated;
 import io.biza.cdr.babelfish.model.banking.BankingPayee;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;

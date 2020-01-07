@@ -73,6 +73,9 @@ public abstract class CommonOrganisation<T> {
       description = "The last name of the individual providing access on behalf of the organisation. For people with single names the single name should be in this field",
       required = true)
   @JsonProperty("agentLastName")
+  @NonNull
+  @NotNull
+  @Valid
   public String agentLastName;
 
   public String agentLastName() {
@@ -91,6 +94,7 @@ public abstract class CommonOrganisation<T> {
   @JsonProperty("agentRole")
   @NotNull
   @NonNull
+  @Valid
   public String agentRole = "Unspecified";
 
   public String agentRole() {
@@ -105,6 +109,9 @@ public abstract class CommonOrganisation<T> {
 
   @BabelFishModelProperty(description = "Name of the organisation", required = true)
   @JsonProperty("businessName")
+  @NonNull
+  @NotNull
+  @Valid
   public String businessName;
 
   public String businessName() {
@@ -207,6 +214,9 @@ public abstract class CommonOrganisation<T> {
 
   @BabelFishModelProperty(description = "Legal organisation type", required = true)
   @JsonProperty("organisationType")
+  @NonNull
+  @NotNull
+  @Valid
   public CommonOrganisationType organisationType;
 
   public CommonOrganisationType organisationType() {

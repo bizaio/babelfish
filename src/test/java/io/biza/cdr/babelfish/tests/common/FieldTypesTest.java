@@ -2,14 +2,9 @@ package io.biza.cdr.babelfish.tests.common;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.cdr.babelfish.support.FormatChecker;
-import io.biza.cdr.babelfish.tests.v1.ModelConstants;
 
 @DisplayName("CDR Common Field Types")
 public class FieldTypesTest {
@@ -19,7 +14,7 @@ public class FieldTypesTest {
     // Verify valid string
     assertTrue(FormatChecker.isASCIIString("Basic String"));
     // Check against null value
-    assertFalse(FormatChecker.isASCIIString(Character.toString((char)'\0')));
+    assertFalse(FormatChecker.isASCIIString(Character.toString('\0')));
   }
   
   @Test

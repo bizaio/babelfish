@@ -16,8 +16,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductDiscountEligibilityType;
-import io.biza.cdr.babelfish.v1.enumerations.BankingProductEligibilityType;
-import io.biza.cdr.babelfish.v1.enumerations.BankingProductFeatureType;
 
 @Valid
 public class BankingProductFeeDiscountEligibility extends

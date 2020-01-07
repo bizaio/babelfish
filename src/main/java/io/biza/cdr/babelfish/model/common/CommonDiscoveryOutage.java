@@ -13,7 +13,6 @@ package io.biza.cdr.babelfish.model.common;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.Period;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,11 +21,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.converters.OffsetDateTimeToDateTimeStringConverter;
-import io.biza.cdr.babelfish.converters.PeriodToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToDurationConverter;
 import io.biza.cdr.babelfish.converters.DateTimeStringToOffsetDateTimeConverter;
 import io.biza.cdr.babelfish.converters.DurationToStringConverter;
-import io.biza.cdr.babelfish.converters.StringToPeriodConverter;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -78,8 +75,6 @@ public abstract class CommonDiscoveryOutage<T extends CommonDiscoveryOutage<T>> 
   @BabelFishModelProperty(
       description = "Flag that indicates, if present and set to true, that the outage is only partial meaning that only a subset of normally available end points will be affected by the outage")
   @JsonProperty("isPartial")
-  @NotNull
-  @NonNull
   public Boolean isPartial;
 
   public Boolean isPartial() {

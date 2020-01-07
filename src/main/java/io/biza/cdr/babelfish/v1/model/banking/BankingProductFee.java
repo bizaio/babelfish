@@ -16,7 +16,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductFeeType;
-import io.biza.cdr.babelfish.v1.enumerations.BankingProductLendingRateType;
 
 @Valid
 public class BankingProductFee

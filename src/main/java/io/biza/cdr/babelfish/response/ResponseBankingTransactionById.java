@@ -11,12 +11,10 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.response;
 
-import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.CDRResponse;
-import io.biza.cdr.babelfish.model.banking.BankingAccount;
 import io.biza.cdr.babelfish.model.banking.BankingTransactionDetail;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;

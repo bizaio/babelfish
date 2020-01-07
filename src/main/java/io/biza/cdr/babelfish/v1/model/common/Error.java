@@ -12,7 +12,6 @@
 package io.biza.cdr.babelfish.v1.model.common;
 
 import javax.validation.Valid;
-import lombok.NonNull;
 
 @Valid
 public class Error extends io.biza.cdr.babelfish.model.common.Error<Error> {

@@ -11,9 +11,25 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.model.common;
 
+import java.util.Arrays;
 import javax.validation.Valid;
+import javax.validation.constraints.AssertTrue;
+import io.biza.cdr.babelfish.support.FormatChecker;
+import io.biza.cdr.babelfish.v1.enumerations.CommonOrganisationType;
 
 @Valid
 public class CommonOrganisation
     extends io.biza.cdr.babelfish.model.common.CommonOrganisation<CommonOrganisation> {
+  
+  // TODO: Verify ACN and ABN are correctly formatted
+  
+  @AssertTrue(
+      message = "ACN must be populated when organisationType is COMPANY")
+  private boolean isAcnPopulated() {
+    return FormatChecker.isDefined(organisationType())
+        ? (Arrays.asList(new CommonOrganisationType[] {CommonOrganisationType.COMPANY}).contains(organisationType())
+                ? FormatChecker.isDefined(acn())
+                : true)
+        : true;
+  }
 }
