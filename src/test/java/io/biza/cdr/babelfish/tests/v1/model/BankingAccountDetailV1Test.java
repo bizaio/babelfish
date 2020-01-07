@@ -38,7 +38,7 @@ public class BankingAccountDetailV1Test {
 
     data.setAccountId(UUID.randomUUID().toString());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.displayName("Display Name");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     

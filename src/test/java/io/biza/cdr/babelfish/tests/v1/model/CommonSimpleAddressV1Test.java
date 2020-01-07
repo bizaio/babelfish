@@ -41,7 +41,7 @@ public class CommonSimpleAddressV1Test {
     data.addressLine1("10 McGill Street");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    data.postcode("2000");
+    data.postcode("2550");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
     data.city("Cobargo");

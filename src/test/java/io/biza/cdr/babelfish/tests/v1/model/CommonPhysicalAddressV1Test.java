@@ -24,14 +24,14 @@ public class CommonPhysicalAddressV1Test {
 
   @Test
   @DisplayName("Create valid CommonPhysicalAddress")
-  void responseCommonPhysicalAddress() {
+  void commonPhysicalAddress() {
     CommonPhysicalAddress data = ModelConstants.DEFAULT_COMMON_PHYSICAL_ADDRESS;
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
   @DisplayName("CommonPhysicalAddress Mandatory Fields (Simple)")
-  void responseCommonPhysicalAddressMandatoryFieldsPerson() {
+  void commonPhysicalAddressMandatoryFieldsSimple() {
     CommonPhysicalAddress data = new CommonPhysicalAddress();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
@@ -49,7 +49,7 @@ public class CommonPhysicalAddressV1Test {
   
   @Test
   @DisplayName("CommonPhysicalAddress Mandatory Fields (PAF)")
-  void responseCommonPhysicalAddressMandatoryFieldsOrganisation() {
+  void commonPhysicalAddressMandatoryFieldsPAF() {
     CommonPhysicalAddress data = new CommonPhysicalAddress();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     

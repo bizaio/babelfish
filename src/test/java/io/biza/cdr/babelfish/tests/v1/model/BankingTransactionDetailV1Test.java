@@ -28,7 +28,7 @@ public class BankingTransactionDetailV1Test {
 
   @Test
   @DisplayName("Create valid BankingTransactionDetail")
-  void bankingAccountDetail() {
+  void bankingTransactionDetailDetail() {
     assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_TRANSACTION_DETAIL).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_BANKING_TRANSACTION_DETAIL).toString());
   }

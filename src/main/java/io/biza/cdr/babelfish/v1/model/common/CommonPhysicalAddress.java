@@ -20,7 +20,9 @@ public class CommonPhysicalAddress
     extends io.biza.cdr.babelfish.model.common.CommonPhysicalAddress<CommonPhysicalAddress> {
   @AssertTrue(
       message = "One and only one of simple or paf should be populated based on addressUType")
-  private boolean isUTypePopulated() {
+  private boolean addressTypeSpecifiedIsPopulated() {
+    if(addressType() == null) { return true; }
+    
     if (addressType().equals(PayloadTypeAddress.SIMPLE)) {
       return simple != null && paf == null;
     } else if (addressType.equals(PayloadTypeAddress.PAF)) {

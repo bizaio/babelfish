@@ -4,8 +4,11 @@ import java.math.BigDecimal;
 import java.net.URI;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.time.Period;
 import java.util.List;
+import java.util.UUID;
 import io.biza.cdr.babelfish.v1.response.ResponseBankingAccountListData;
 import io.biza.cdr.babelfish.v1.response.ResponseBankingAccountsBalanceList;
 import io.biza.cdr.babelfish.v1.response.ResponseBankingAccountsBalanceListData;
@@ -27,6 +30,8 @@ import io.biza.cdr.babelfish.v1.response.ResponseCommonDiscoveryStatus;
 import io.biza.cdr.babelfish.v1.response.ResponseErrorList;
 import io.biza.cdr.babelfish.v1.response.ResponseCommonDiscoveryOutagesList;
 import io.biza.cdr.babelfish.v1.response.ResponseCommonDiscoveryOutagesListData;
+import io.biza.cdr.babelfish.v1.enumerations.AddressPAFStateType;
+import io.biza.cdr.babelfish.v1.enumerations.BankingPayeeType;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductCategory;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductConstraintType;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductDepositRateType;
@@ -36,8 +41,22 @@ import io.biza.cdr.babelfish.v1.enumerations.BankingProductEligibilityType;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductFeatureType;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductFeeType;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductLendingRateType;
+import io.biza.cdr.babelfish.v1.enumerations.BankingScheduledPaymentStatus;
 import io.biza.cdr.babelfish.v1.enumerations.BankingTermDepositMaturityInstructions;
+import io.biza.cdr.babelfish.v1.enumerations.BankingTransactionStatus;
+import io.biza.cdr.babelfish.v1.enumerations.BankingTransactionType;
+import io.biza.cdr.babelfish.v1.enumerations.CommonDiscoveryStatusType;
+import io.biza.cdr.babelfish.v1.enumerations.CommonEmailAddressPurpose;
+import io.biza.cdr.babelfish.v1.enumerations.CommonOrganisationType;
+import io.biza.cdr.babelfish.v1.enumerations.CommonPhoneNumberPurpose;
 import io.biza.cdr.babelfish.v1.enumerations.CommonUnitOfMeasureType;
+import io.biza.cdr.babelfish.v1.enumerations.CommonWeekDay;
+import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeAddress;
+import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingDomesticPayee;
+import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingDomesticPayeePayId;
+import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingPayee;
+import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingScheduledPaymentRecurrence;
+import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeCustomer;
 import io.biza.cdr.babelfish.v1.model.banking.BankingAccount;
 import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
 import io.biza.cdr.babelfish.v1.model.banking.BankingAuthorisedEntity;
@@ -161,17 +180,24 @@ public class ModelConstants {
   public static final Meta DEFAULT_META = new Meta();
   public static final MetaPaginated DEFAULT_META_PAGINATED =
       new MetaPaginated().totalPages(10).totalRecords(100);
-  public static final BankingAccount DEFAULT_BANKING_ACCOUNT = new BankingAccount();
+  public static final BankingAccount DEFAULT_BANKING_ACCOUNT = new BankingAccount()
+      .accountId(UUID.randomUUID().toString()).displayName("Display Name")
+      .maskedNumber("XXXX XXXX XXXX 1234").productCategory(BankingProductCategory.BUSINESS_LOANS)
+      .productName("Business Loan Example");
   public static final ResponseBankingAccountListData DEFAULT_RESPONSE_BANKING_ACCOUNT_LIST_DATA =
       new ResponseBankingAccountListData().accounts(List.of(DEFAULT_BANKING_ACCOUNT));
 
   public static final BankingAccountDetail DEFAULT_BANKING_ACCOUNT_DETAIL =
-      new BankingAccountDetail();
+      new BankingAccountDetail().accountId(UUID.randomUUID().toString()).displayName("Display Name")
+          .maskedNumber("XXXX XXXX XXXX 1234")
+          .productCategory(BankingProductCategory.BUSINESS_LOANS)
+          .productName("Business Loan Example");
   public static final BankingTermDepositAccount DEFAULT_BANKING_TERM_DEPOSIT_ACCOUNT =
       new BankingTermDepositAccount().lodgementDate(LocalDate.now()).maturityDate(LocalDate.now())
           .maturityInstructions(BankingTermDepositMaturityInstructions.ROLLED_OVER);
   public static final BankingCreditCardAccount DEFAULT_BANKING_CREDIT_CARD_ACCOUNT =
-      new BankingCreditCardAccount();
+      new BankingCreditCardAccount().minPaymentAmount(new BigDecimal("10.00"))
+          .paymentDueAmount(new BigDecimal("10.00")).paymentDueDate(LocalDate.now());
   public static final BankingLoanAccount DEFAULT_BANKING_LOAN_ACCOUNT =
       new BankingLoanAccount().loanEndDate(LocalDate.now()).nextInstalmentDate(LocalDate.now())
           .repaymentFrequency(Duration.ofDays(10));
@@ -187,8 +213,9 @@ public class ModelConstants {
       new ResponseBankingScheduledPaymentsList().links(DEFAULT_LINKS_PAGINATED)
           .meta(DEFAULT_META_PAGINATED).data(DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST_DATA);
 
-  public static final BankingPayee DEFAULT_BANKING_PAYEE = new BankingPayee();
-  public static final BankingPayeeDetail DEFAULT_BANKING_PAYEE_DETAIL = new BankingPayeeDetail();
+  public static final BankingPayee DEFAULT_BANKING_PAYEE =
+      new BankingPayee().payeeId(UUID.randomUUID().toString()).nickname("Payee Nickname")
+          .type(BankingPayeeType.DOMESTIC);
 
   public static final ResponseBankingPayeeListData DEFAULT_RESPONSE_BANKING_PAYEE_LIST_DATA =
       new ResponseBankingPayeeListData().payees(List.of(DEFAULT_BANKING_PAYEE));
@@ -200,18 +227,28 @@ public class ModelConstants {
   public static final ResponseBankingAccountById DEFAULT_RESPONSE_BANKING_ACCOUNT_BY_ID =
       new ResponseBankingAccountById().links(DEFAULT_LINKS).meta(DEFAULT_META)
           .data(DEFAULT_BANKING_ACCOUNT_DETAIL);
+  public static final BankingTransactionDetailExtendedData DEFAULT_BANKING_TRANSACTION_DETAIL_EXTENDED_DATA =
+      new BankingTransactionDetailExtendedData();
 
   public static final BankingTransactionDetail DEFAULT_BANKING_TRANSACTION_DETAIL =
-      new BankingTransactionDetail();
+      new BankingTransactionDetail().accountId(UUID.randomUUID().toString())
+          .transactionId(UUID.randomUUID().toString()).isDetailAvailable(false)
+          .type(BankingTransactionType.PAYMENT).status(BankingTransactionStatus.POSTED)
+          .description("Transaction Description").amount(new BigDecimal("10.00")).reference("")
+          .postingDateTime(LocalDateTime.now())
+          .extendedData(ModelConstants.DEFAULT_BANKING_TRANSACTION_DETAIL_EXTENDED_DATA);
 
   public static final ResponseBankingTransactionById DEFAULT_RESPONSE_BANKING_TRANSACTION_BY_ID =
       new ResponseBankingTransactionById().links(DEFAULT_LINKS)
           .data(DEFAULT_BANKING_TRANSACTION_DETAIL);
 
 
-  public static final BankingTransaction DEFAULT_BANKING_TRANSACTION = new BankingTransaction();
-  public static final BankingTransactionDetailExtendedData DEFAULT_BANKING_TRANSACTION_DETAIL_EXTENDED_DATA =
-      new BankingTransactionDetailExtendedData();
+  public static final BankingTransaction DEFAULT_BANKING_TRANSACTION = new BankingTransaction()
+      .accountId(UUID.randomUUID().toString()).transactionId(UUID.randomUUID().toString())
+      .isDetailAvailable(false).type(BankingTransactionType.PAYMENT)
+      .status(BankingTransactionStatus.POSTED).description("Transaction Description")
+      .amount(new BigDecimal("10.00")).reference("").postingDateTime(LocalDateTime.now());
+
   public static final ResponseBankingTransactionListData DEFAULT_RESPONSE_BANKING_TRANSACTION_LIST_DATA =
       new ResponseBankingTransactionListData().transactions(List.of(DEFAULT_BANKING_TRANSACTION));
 
@@ -219,7 +256,9 @@ public class ModelConstants {
       new ResponseBankingTransactionList().meta(DEFAULT_META_PAGINATED)
           .links(DEFAULT_LINKS_PAGINATED).data(DEFAULT_RESPONSE_BANKING_TRANSACTION_LIST_DATA);
 
-  public static final BankingBalance DEFAULT_BANKING_BALANCE = new BankingBalance();
+  public static final BankingBalance DEFAULT_BANKING_BALANCE =
+      new BankingBalance().accountId(UUID.randomUUID().toString())
+          .currentBalance(new BigDecimal("1000.00")).availableBalance(new BigDecimal("500.00"));
 
   public static final ResponseBankingAccountsBalanceListData DEFAULT_BANKING_ACCOUNTS_BALANCE_LIST_DATA =
       new ResponseBankingAccountsBalanceListData().balances(List.of(DEFAULT_BANKING_BALANCE));
@@ -232,25 +271,27 @@ public class ModelConstants {
   public static final ResponseBankingPayeeById DEFAULT_RESPONSE_BANKING_PAYEE_BY_ID =
       new ResponseBankingPayeeById().links(DEFAULT_LINKS).data(DEFAULT_PAYEE_DETAIL);
 
-  public static final BankingBalancePurse DEFAULT_BANKING_BALANCE_PURSE = new BankingBalancePurse();
+  public static final BankingBalancePurse DEFAULT_BANKING_BALANCE_PURSE =
+      new BankingBalancePurse().amount(new BigDecimal("100.00"));
 
-  public static final BankingDomesticPayee DEFAULT_BANKING_DOMESTIC_PAYEE =
-      new BankingDomesticPayee();
-  public static final BankingBillerPayee DEFAULT_BANKING_BILLER_PAYEE = new BankingBillerPayee();
-  public static final BankingInternationalPayee DEFAULT_BANKING_INTERNATIONAL_PAYEE =
-      new BankingInternationalPayee();
+  public static final BankingBillerPayee DEFAULT_BANKING_BILLER_PAYEE =
+      new BankingBillerPayee().billerName("Energy Australia").billerCode("3111").crn("81752861");
   public static final BankingDomesticPayeeAccount DEFAULT_BANKING_DOMESTIC_PAYEE_ACCOUNT =
-      new BankingDomesticPayeeAccount();
+      new BankingDomesticPayeeAccount().bsb("123-123").accountNumber("12341234");
   public static final BankingDomesticPayeeCard DEFAULT_BANKING_DOMESTIC_PAYEE_CARD =
-      new BankingDomesticPayeeCard();
+      new BankingDomesticPayeeCard().cardNumber("XXXX XXXX XXXX 1234");
   public static final BankingDomesticPayeePayId DEFAULT_BANKING_DOMESTIC_PAYEE_PAYID =
-      new BankingDomesticPayeePayId();
+      new BankingDomesticPayeePayId().type(PayloadTypeBankingDomesticPayeePayId.EMAIL)
+          .identifier("valid@email.com");
 
   public static final BankingInternationalPayeeBeneficiaryDetails DEFAULT_BANKING_INTERNATIONAL_PAYEE_BENEFICIARY_DETAILS =
       new BankingInternationalPayeeBeneficiaryDetails();
   public static final BankingInternationalPayeeBankDetails DEFAULT_BANKING_INTERNATIONAL_PAYEE_BANK_DETAILS =
       new BankingInternationalPayeeBankDetails();
-  public static final BankingDirectDebit DEFAULT_BANKING_DIRECT_DEBIT = new BankingDirectDebit();
+  public static final BankingAuthorisedEntity DEFAULT_BANKING_AUTHORISED_ENTITY =
+      new BankingAuthorisedEntity();
+  
+  public static final BankingDirectDebit DEFAULT_BANKING_DIRECT_DEBIT = new BankingDirectDebit().accountId(UUID.randomUUID().toString()).authorisedEntity(ModelConstants.DEFAULT_BANKING_AUTHORISED_ENTITY);
   public static final ResponseBankingDirectDebitAuthorisationListData DEFAULT_RESPONSE_BANKING_DIRECT_DEBIT_AUTHORISATION_LIST_DATA =
       new ResponseBankingDirectDebitAuthorisationListData()
           .directDebitAuthorisations(List.of(DEFAULT_BANKING_DIRECT_DEBIT));
@@ -258,52 +299,116 @@ public class ModelConstants {
       new ResponseBankingDirectDebitAuthorisationList()
           .data(DEFAULT_RESPONSE_BANKING_DIRECT_DEBIT_AUTHORISATION_LIST_DATA);
 
-  public static final BankingAuthorisedEntity DEFAULT_BANKING_AUTHORISED_ENTITY =
-      new BankingAuthorisedEntity();
 
-  public static final BankingScheduledPayment DEFAULT_BANKING_SCHEDULED_PAYMENT =
-      new BankingScheduledPayment();
+
   public static final BankingScheduledPaymentFrom DEFAULT_BANKING_SCHEDULED_PAYMENT_FROM =
-      new BankingScheduledPaymentFrom();
-  public static final BankingScheduledPaymentSet DEFAULT_BANKING_SCHEDULED_PAYMENT_SET =
-      new BankingScheduledPaymentSet();
-  public static final BankingScheduledPaymentRecurrence DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE =
-      new BankingScheduledPaymentRecurrence();
+      new BankingScheduledPaymentFrom().accountId(UUID.randomUUID().toString());
   public static final BankingScheduledPaymentTo DEFAULT_BANKING_SCHEDULED_PAYMENT_TO =
       new BankingScheduledPaymentTo();
+  public static final BankingScheduledPaymentSet DEFAULT_BANKING_SCHEDULED_PAYMENT_SET =
+      new BankingScheduledPaymentSet().to(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_TO)
+          .amount(new BigDecimal("10.00"));
   public static final BankingScheduledPaymentRecurrenceOnceOff DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_ONCE_OFF =
-      new BankingScheduledPaymentRecurrenceOnceOff();
-  public static final BankingScheduledPaymentRecurrenceIntervalSchedule DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_INTERVAL_SCHEDULE =
-      new BankingScheduledPaymentRecurrenceIntervalSchedule();
+      new BankingScheduledPaymentRecurrenceOnceOff().paymentDate(LocalDate.now());
+  public static final BankingScheduledPaymentRecurrence DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE =
+      new BankingScheduledPaymentRecurrence()
+          .recurrenceUType(PayloadTypeBankingScheduledPaymentRecurrence.ONCE_OFF)
+          .onceOff(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_ONCE_OFF);
   public static final BankingScheduledPaymentRecurrenceLastWeekday DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_LAST_WEEKDAY =
-      new BankingScheduledPaymentRecurrenceLastWeekday();
+      new BankingScheduledPaymentRecurrenceLastWeekday().interval(Period.ofDays(30))
+          .lastWeekDay(CommonWeekDay.MON);
   public static final BankingScheduledPaymentRecurrenceEventBased DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_EVENT_BASED =
-      new BankingScheduledPaymentRecurrenceEventBased();
-  public static final BankingScheduledPaymentInterval DEFAULT_BANKING_SCHEDULED_PAYMENT_INTERVAL = new BankingScheduledPaymentInterval();
-  public static final CommonDiscoveryStatus DEFAULT_COMMON_DISCOVERY_STATUS = new CommonDiscoveryStatus();
-  public static final ResponseCommonDiscoveryStatus DEFAULT_RESPONSE_COMMON_DISCOVERY_STATUS = new ResponseCommonDiscoveryStatus().data(DEFAULT_COMMON_DISCOVERY_STATUS).links(DEFAULT_LINKS);
-  
-  public static final ResponseCommonDiscoveryOutagesListData DEFAULT_RESPONSE_COMMON_DISCOVERY_OUTAGES_LIST_DATA = new ResponseCommonDiscoveryOutagesListData();
-  public static final ResponseCommonDiscoveryOutagesList DEFAULT_RESPONSE_COMMON_DISCOVERY_OUTAGES_LIST = new ResponseCommonDiscoveryOutagesList();
-  public static final CommonDiscoveryOutage DEFAULT_COMMON_DISCOVERY_OUTAGE = new CommonDiscoveryOutage();
-  
-  public static final ResponseCommonCustomerData DEFAULT_RESPONSE_COMMON_CUSTOMER_DATA = new ResponseCommonCustomerData();
-  public static final ResponseCommonCustomer DEFAULT_RESPONSE_COMMON_CUSTOMER = new ResponseCommonCustomer();
+      new BankingScheduledPaymentRecurrenceEventBased()
+          .description("Event Based Payment Description");
+  public static final BankingScheduledPaymentInterval DEFAULT_BANKING_SCHEDULED_PAYMENT_INTERVAL =
+      new BankingScheduledPaymentInterval().interval(Period.ofDays(30));
+  public static final CommonDiscoveryStatus DEFAULT_COMMON_DISCOVERY_STATUS =
+      new CommonDiscoveryStatus().status(CommonDiscoveryStatusType.OK).updateTime(LocalDateTime.now());
+  public static final ResponseCommonDiscoveryStatus DEFAULT_RESPONSE_COMMON_DISCOVERY_STATUS =
+      new ResponseCommonDiscoveryStatus().data(DEFAULT_COMMON_DISCOVERY_STATUS)
+          .links(DEFAULT_LINKS);
 
-  public static final ResponseCommonCustomerDetailData DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL_DATA = new ResponseCommonCustomerDetailData();
-  public static final ResponseCommonCustomerDetail DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL = new ResponseCommonCustomerDetail();
-  
-  public static final CommonPerson DEFAULT_COMMON_PERSON = new CommonPerson();
-  public static final CommonOrganisation DEFAULT_COMMON_ORGANISATION = new CommonOrganisation();
-  
-  public static final CommonPersonDetail DEFAULT_COMMON_PERSON_DETAIL = new CommonPersonDetail();
-  public static final CommonOrganisationDetail DEFAULT_COMMON_ORGANISATION_DETAIL = new CommonOrganisationDetail();
-  public static final CommonPhysicalAddressWithPurpose DEFAULT_COMMON_PHYSICAL_ADDRESS_WITH_PURPOSE = new CommonPhysicalAddressWithPurpose();
-  public static final CommonPhysicalAddress DEFAULT_COMMON_PHYSICAL_ADDRESS = new CommonPhysicalAddress();
-  public static final CommonPhoneNumber DEFAULT_COMMON_PHONE_NUMBER = new CommonPhoneNumber();
-  public static final CommonEmailAddress DEFAULT_COMMON_EMAIL_ADDRESS = new CommonEmailAddress();
-  public static final CommonSimpleAddress DEFAULT_COMMON_SIMPLE_ADDRESS = new CommonSimpleAddress();
-  public static final CommonPAFAddress DEFAULT_COMMON_PAF_ADDRESS = new CommonPAFAddress();
-  public static final ResponseErrorList DEFAULT_RESPONSE_ERROR_LIST = new ResponseErrorList();
-  public static final io.biza.cdr.babelfish.v1.model.common.Error DEFAULT_ERROR = new io.biza.cdr.babelfish.v1.model.common.Error();
+  public static final CommonDiscoveryOutage DEFAULT_COMMON_DISCOVERY_OUTAGE =
+      new CommonDiscoveryOutage().outageTime(LocalDateTime.now()).duration(Duration.ofHours(1))
+          .explanation("Outage Explanation");
+  public static final ResponseCommonDiscoveryOutagesListData DEFAULT_RESPONSE_COMMON_DISCOVERY_OUTAGES_LIST_DATA =
+      new ResponseCommonDiscoveryOutagesListData().outages(List.of(ModelConstants.DEFAULT_COMMON_DISCOVERY_OUTAGE));
+
+  public static final ResponseCommonCustomerDetailData DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL_DATA =
+      new ResponseCommonCustomerDetailData().type(PayloadTypeCustomer.PERSON)
+          .person(ModelConstants.DEFAULT_COMMON_PERSON_DETAIL);
+  public static final ResponseCommonCustomerDetail DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL =
+      new ResponseCommonCustomerDetail().links(ModelConstants.DEFAULT_LINKS)
+          .data(ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL_DATA);
+
+  public static final CommonPerson DEFAULT_COMMON_PERSON = new CommonPerson().lastName("Last");
+  public static final CommonOrganisation DEFAULT_COMMON_ORGANISATION =
+      new CommonOrganisation().agentLastName("Last").businessName("Organisation Business Name")
+          .organisationType(CommonOrganisationType.OTHER);
+
+  public static final CommonPhysicalAddressWithPurpose DEFAULT_COMMON_PHYSICAL_ADDRESS_WITH_PURPOSE =
+      new CommonPhysicalAddressWithPurpose();
+  public static final CommonPhoneNumber DEFAULT_COMMON_PHONE_NUMBER =
+      new CommonPhoneNumber().purpose(CommonPhoneNumberPurpose.HOME).number("0733076000")
+          .fullNumber("tel:+61-073-307-6000").areaCode("7");
+  public static final CommonEmailAddress DEFAULT_COMMON_EMAIL_ADDRESS =
+      new CommonEmailAddress().purpose(CommonEmailAddressPurpose.HOME).address("test@test.com");
+  public static final CommonSimpleAddress DEFAULT_COMMON_SIMPLE_ADDRESS = new CommonSimpleAddress()
+      .addressLine1("10 McGill Street").postcode("2550").city("Cobargo").state("NSW");
+  public static final CommonPAFAddress DEFAULT_COMMON_PAF_ADDRESS = new CommonPAFAddress()
+      .localityName("Cobargo").postcode("2550").state(AddressPAFStateType.NSW);
+
+  public static final io.biza.cdr.babelfish.v1.model.common.Error DEFAULT_ERROR =
+      new io.biza.cdr.babelfish.v1.model.common.Error().code("0001 – Account not able to be found").title("Invalid account").detail(UUID.randomUUID().toString());
+  public static final BankingInternationalPayee DEFAULT_BANKING_INTERNATIONAL_PAYEE =
+      new BankingInternationalPayee()
+          .beneficiaryDetails(
+              ModelConstants.DEFAULT_BANKING_INTERNATIONAL_PAYEE_BENEFICIARY_DETAILS)
+          .bankDetails(ModelConstants.DEFAULT_BANKING_INTERNATIONAL_PAYEE_BANK_DETAILS);
+  public static final BankingScheduledPaymentRecurrenceIntervalSchedule DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_INTERVAL_SCHEDULE =
+      new BankingScheduledPaymentRecurrenceIntervalSchedule()
+          .intervals(List.of(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_INTERVAL));
+  public static final ResponseErrorList DEFAULT_RESPONSE_ERROR_LIST =
+      new ResponseErrorList().errors(List.of(ModelConstants.DEFAULT_ERROR));
+  public static final CommonPhysicalAddress DEFAULT_COMMON_PHYSICAL_ADDRESS =
+      new CommonPhysicalAddress().addressType(PayloadTypeAddress.SIMPLE)
+          .simple(ModelConstants.DEFAULT_COMMON_SIMPLE_ADDRESS);
+
+  public static final ResponseCommonDiscoveryOutagesList DEFAULT_RESPONSE_COMMON_DISCOVERY_OUTAGES_LIST =
+      new ResponseCommonDiscoveryOutagesList().links(ModelConstants.DEFAULT_LINKS)
+          .meta(ModelConstants.DEFAULT_META)
+          .data(ModelConstants.DEFAULT_RESPONSE_COMMON_DISCOVERY_OUTAGES_LIST_DATA);
+
+  public static final BankingScheduledPayment DEFAULT_BANKING_SCHEDULED_PAYMENT =
+      new BankingScheduledPayment().scheduledPaymentId(UUID.randomUUID().toString())
+          .payerReference("Payer Reference").payeeReference("Payee Reference")
+          .payeeReference("Payee Reference").status(BankingScheduledPaymentStatus.ACTIVE)
+          .from(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_FROM)
+          .paymentSet(List.of(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_SET))
+          .recurrence(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE);
+
+  public static final ResponseCommonCustomerData DEFAULT_RESPONSE_COMMON_CUSTOMER_DATA =
+      new ResponseCommonCustomerData().type(PayloadTypeCustomer.PERSON)
+          .person(ModelConstants.DEFAULT_COMMON_PERSON);
+
+  public static final ResponseCommonCustomer DEFAULT_RESPONSE_COMMON_CUSTOMER =
+      new ResponseCommonCustomer().links(ModelConstants.DEFAULT_LINKS)
+          .data(ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DATA);
+
+  public static final CommonPersonDetail DEFAULT_COMMON_PERSON_DETAIL =
+      new CommonPersonDetail().lastName("Last")
+          .physicalAddresses(List.of(ModelConstants.DEFAULT_COMMON_PHYSICAL_ADDRESS_WITH_PURPOSE));
+  public static final CommonOrganisationDetail DEFAULT_COMMON_ORGANISATION_DETAIL =
+      new CommonOrganisationDetail().agentLastName("Last")
+          .businessName("Organisation Business Name").organisationType(CommonOrganisationType.OTHER)
+          .physicalAddresses(List.of(ModelConstants.DEFAULT_COMMON_PHYSICAL_ADDRESS_WITH_PURPOSE));
+
+  public static final BankingDomesticPayee DEFAULT_BANKING_DOMESTIC_PAYEE =
+      new BankingDomesticPayee().payeeAccountType(PayloadTypeBankingDomesticPayee.ACCOUNT).account(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE_ACCOUNT);
+
+  public static final BankingPayeeDetail DEFAULT_BANKING_PAYEE_DETAIL =
+      new BankingPayeeDetail().payeeId(UUID.randomUUID().toString()).nickname("Payee Nickname")
+          .type(BankingPayeeType.DOMESTIC).payeeUType(PayloadTypeBankingPayee.DOMESTIC)
+          .domestic(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE);
+
 }

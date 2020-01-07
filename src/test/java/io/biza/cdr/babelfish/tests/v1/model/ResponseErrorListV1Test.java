@@ -1,6 +1,8 @@
 package io.biza.cdr.babelfish.tests.v1.model;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.List;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -27,5 +29,15 @@ public class ResponseErrorListV1Test {
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
+
+  @Test
+  @DisplayName("ResponseErrorList Mandatory Fields")
+  void responseErrorListMandatoryFields() {
+    ResponseErrorList data = new ResponseErrorList();
+    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    
+    data.errors(List.of(ModelConstants.DEFAULT_ERROR));
+    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+  }
 
 }

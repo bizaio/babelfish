@@ -30,6 +30,7 @@ public abstract class CommonPhysicalAddress<T extends CommonPhysicalAddress<T>> 
   @JsonProperty("addressUType")
   @NotNull
   @NonNull
+  @Valid
   public PayloadTypeAddress addressType;
 
   public PayloadTypeAddress addressType() {

@@ -25,14 +25,14 @@ public class BankingScheduledPaymentRecurrenceLastWeekdayV1Test {
 
   @Test
   @DisplayName("Create valid BankingScheduledPaymentRecurrenceLastWeekday")
-  void bankingScheduledPaymentInterval() {
+  void bankingScheduledPaymentRecurrenceLastWeekday() {
     assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_LAST_WEEKDAY).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_LAST_WEEKDAY).toString());
   }
   
   @Test
   @DisplayName("BankingScheduledPaymentRecurrenceLastWeekday Mandatory Fields")
-  void bankingScheduledPaymentIntervalMandatoryFields() {
+  void bankingScheduledPaymentRecurrenceLastWeekdayMandatoryFields() {
     BankingScheduledPaymentRecurrenceLastWeekday data = new BankingScheduledPaymentRecurrenceLastWeekday();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     

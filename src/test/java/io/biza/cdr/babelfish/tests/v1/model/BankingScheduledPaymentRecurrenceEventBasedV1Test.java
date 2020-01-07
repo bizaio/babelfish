@@ -23,14 +23,14 @@ public class BankingScheduledPaymentRecurrenceEventBasedV1Test {
 
   @Test
   @DisplayName("Create valid BankingScheduledPaymentRecurrenceEventBased")
-  void bankingScheduledPaymentRecurrenceOnceOff() {
+  void bankingScheduledPaymentRecurrenceEventBased() {
     assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_EVENT_BASED).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_EVENT_BASED).toString());
   }
   
   @Test
   @DisplayName("BankingScheduledPaymentRecurrenceEventBased Mandatory Fields")
-  void bankingScheduledPaymentRecurrenceOnceOffMandatoryFields() {
+  void bankingScheduledPaymentRecurrenceEventBasedMandatoryFields() {
     BankingScheduledPaymentRecurrenceEventBased data = new BankingScheduledPaymentRecurrenceEventBased();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     

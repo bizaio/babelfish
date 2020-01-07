@@ -53,10 +53,10 @@ public class BankingTransactionV1Test {
     
     data.status(BankingTransactionStatus.POSTED);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.description("Transaction Description");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+        
     data.amount(new BigDecimal("10.00"));
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     

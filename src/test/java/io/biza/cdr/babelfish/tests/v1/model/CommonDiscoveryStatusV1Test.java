@@ -40,7 +40,7 @@ public class CommonDiscoveryStatusV1Test {
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.updateTime(LocalDateTime.now());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-
+    
     // Should only be present if the status property is PARTIAL_FAILURE or UNAVAILABLE
     data.detectionTime(LocalDateTime.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());    

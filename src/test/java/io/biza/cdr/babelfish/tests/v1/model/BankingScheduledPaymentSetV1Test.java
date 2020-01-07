@@ -37,7 +37,7 @@ public class BankingScheduledPaymentSetV1Test {
     
     data.to(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_TO);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-
+    
     data.amount(new BigDecimal("10.00"));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
     

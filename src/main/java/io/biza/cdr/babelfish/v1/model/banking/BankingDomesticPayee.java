@@ -20,12 +20,16 @@ public class BankingDomesticPayee
     extends io.biza.cdr.babelfish.model.banking.BankingDomesticPayee<BankingDomesticPayee> {
   @AssertTrue(
       message = "Payee Account Type must supply matching Payee Account Type Specific Information")
-  private boolean isAccountTypeCorrect() {
-    if (payeeAccountUType().equals(PayloadTypeBankingDomesticPayee.ACCOUNT)) {
+  private boolean isAccountTypeCorrectlyPopulated() {
+    if (payeeAccountType() == null) {
+      return true;
+    }
+
+    if (payeeAccountType().equals(PayloadTypeBankingDomesticPayee.ACCOUNT)) {
       return account() != null && card() == null && payId() == null ? true : false;
-    } else if (payeeAccountUType().equals(PayloadTypeBankingDomesticPayee.CARD)) {
+    } else if (payeeAccountType().equals(PayloadTypeBankingDomesticPayee.CARD)) {
       return card() != null && account() == null && payId() == null ? true : false;
-    } else if (payeeAccountUType().equals(PayloadTypeBankingDomesticPayee.PAY_ID)) {
+    } else if (payeeAccountType().equals(PayloadTypeBankingDomesticPayee.PAY_ID)) {
       return payId() != null && account() == null && card() == null ? true : false;
     }
     return false;

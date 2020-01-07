@@ -25,14 +25,14 @@ public class BankingAccountV1Test {
 
   @Test
   @DisplayName("Create valid BankingAccount")
-  void bankingAccountListResponse() {
+  void bankingAccount() {
     assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_ACCOUNT).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_BANKING_ACCOUNT).toString());
   }
 
   @Test
   @DisplayName("BankingAccount Mandatory Fields")
-  void bankingAccountListMandatoryFields() {
+  void bankingAccountMandatoryFields() {
     BankingAccount data = new BankingAccount();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

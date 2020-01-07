@@ -13,6 +13,7 @@ package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingDomesticPayee;
 import io.biza.cdr.babelfish.support.BabelFishModel;
@@ -24,19 +25,20 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Representation of a Domestic Payee Detail")
-public abstract class BankingDomesticPayee<T extends BankingDomesticPayee<T>> {
+public abstract class BankingDomesticPayee<T> {
   @BabelFishModelProperty(description = "Type of account object included.", required = true)
   @NotNull
   @NonNull
-  PayloadTypeBankingDomesticPayee payeeAccountUType;
+  @JsonProperty("payeeAccountUType")
+  PayloadTypeBankingDomesticPayee payeeAccountType;
 
-  public PayloadTypeBankingDomesticPayee payeeAccountUType() {
-    return getPayeeAccountUType();
+  public PayloadTypeBankingDomesticPayee payeeAccountType() {
+    return getPayeeAccountType();
   }
 
   @SuppressWarnings("unchecked")
-  public T payeeAccountUType(PayloadTypeBankingDomesticPayee payeeAccountUType) {
-    setPayeeAccountUType(payeeAccountUType);
+  public T payeeAccountType(PayloadTypeBankingDomesticPayee payeeAccountType) {
+    setPayeeAccountType(payeeAccountType);
     return (T) this;
   }
 

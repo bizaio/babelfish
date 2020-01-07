@@ -21,7 +21,7 @@ public class BankingAuthorisedEntityV1Test {
 
   @Test
   @DisplayName("Create valid BankingAuthorisedEntity")
-  void bankingDirectDebit() {
+  void bankingAuthorisedEntity() {
     assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_AUTHORISED_ENTITY).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_BANKING_AUTHORISED_ENTITY).toString());
   }

@@ -21,9 +21,13 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.model.common.CommonDiscoveryOutage;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 
 @Valid
+@Getter
+@Setter
 public abstract class ResponseDiscoveryOutagesListData<T> {
   @BabelFishModelProperty(
       description = "List of scheduled outages. Property is mandatory but may contain and empty list if no outages are scheduled",
@@ -32,4 +36,14 @@ public abstract class ResponseDiscoveryOutagesListData<T> {
   @NotNull
   @NonNull
   public List<CommonDiscoveryOutage> outages;
+  
+  public List<CommonDiscoveryOutage> outages() {
+    return getOutages();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T outages(List<CommonDiscoveryOutage> outages) {
+    setOutages(outages);
+    return (T) this;
+  }
 }

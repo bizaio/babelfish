@@ -35,7 +35,7 @@ public class BankingDomesticPayeeV1Test {
     BankingDomesticPayee data = new BankingDomesticPayee();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    data.payeeAccountUType(PayloadTypeBankingDomesticPayee.ACCOUNT);
+    data.payeeAccountType(PayloadTypeBankingDomesticPayee.ACCOUNT);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
     data.account(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE_ACCOUNT);
@@ -51,7 +51,7 @@ public class BankingDomesticPayeeV1Test {
     BankingDomesticPayee data = new BankingDomesticPayee();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    data.payeeAccountUType(PayloadTypeBankingDomesticPayee.CARD);
+    data.payeeAccountType(PayloadTypeBankingDomesticPayee.CARD);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
     data.card(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE_CARD);
@@ -67,7 +67,7 @@ public class BankingDomesticPayeeV1Test {
     BankingDomesticPayee data = new BankingDomesticPayee();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    data.payeeAccountUType(PayloadTypeBankingDomesticPayee.PAY_ID);
+    data.payeeAccountType(PayloadTypeBankingDomesticPayee.PAY_ID);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
     data.payId(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE_PAYID);

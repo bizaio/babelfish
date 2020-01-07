@@ -2,6 +2,7 @@ package io.biza.cdr.babelfish.tests.v1.model;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.List;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -9,10 +10,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.cdr.babelfish.tests.v1.ModelConstants;
-import io.biza.cdr.babelfish.v1.response.ResponseCommonCustomer;
+import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeCustomer;
+import io.biza.cdr.babelfish.v1.response.ResponseCommonDiscoveryOutagesListData;
 
-@DisplayName("ResponseCommonCustomer V1 Tests")
-public class ResponseCommonCustomerV1Test {
+@DisplayName("ResponseDiscoveryOutagesListData V1 Tests")
+public class ResponseDiscoveryOutagesListDataV1Test {
   private Validator validator;
 
   @BeforeEach
@@ -22,27 +24,23 @@ public class ResponseCommonCustomerV1Test {
   }
 
   @Test
-  @DisplayName("Create valid ResponseCommonCustomer")
-  void responseCommonCustomer() {
-    ResponseCommonCustomer data = ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER;
+  @DisplayName("Create valid ResponseDiscoveryOutagesListData")
+  void responseDiscoveryOutagesListData() {
+    ResponseCommonDiscoveryOutagesListData data = ModelConstants.DEFAULT_RESPONSE_COMMON_DISCOVERY_OUTAGES_LIST_DATA;
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
-  @DisplayName("ResponseCommonCustomer Mandatory Fields")
-  void responseCommonCustomerMandatoryFields() {
-    ResponseCommonCustomer data = new ResponseCommonCustomer();
+  @DisplayName("ResponseDiscoveryOutagesListData Mandatory Fields")
+  void responseDiscoveryOutagesListDataMandatoryFields() {
+    
+    ResponseCommonDiscoveryOutagesListData data = new ResponseCommonDiscoveryOutagesListData();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    data.links(ModelConstants.DEFAULT_LINKS);
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-
-    data.data(ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DATA);
+    data.outages(List.of(ModelConstants.DEFAULT_COMMON_DISCOVERY_OUTAGE));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    // Should still validate with meta too
-    data.meta(ModelConstants.DEFAULT_META);
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
   }
+  
 }

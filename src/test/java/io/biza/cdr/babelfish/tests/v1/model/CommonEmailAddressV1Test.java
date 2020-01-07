@@ -26,14 +26,14 @@ public class CommonEmailAddressV1Test {
 
   @Test
   @DisplayName("Create valid CommonEmailAddress")
-  void commonPhoneNumber() {
+  void commonEmailAddress() {
     assertTrue(validator.validate(ModelConstants.DEFAULT_COMMON_EMAIL_ADDRESS).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_COMMON_EMAIL_ADDRESS).toString());
   }
   
   @Test
   @DisplayName("CommonEmailAddress Mandatory Fields (Home)")
-  void commonPhoneNumberMandatoryFieldsHome() {
+  void commonEmailAddressMandatoryFieldsHome() {
     CommonEmailAddress data = new CommonEmailAddress();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     

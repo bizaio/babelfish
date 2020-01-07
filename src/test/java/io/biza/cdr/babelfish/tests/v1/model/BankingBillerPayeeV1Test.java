@@ -41,7 +41,7 @@ public class BankingBillerPayeeV1Test {
     // Valid Biller Code (Energy Australia)
     data.billerCode("3111");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-
+    
     // Valid CRN for MOD09V02
     data.crn("81752861");
     

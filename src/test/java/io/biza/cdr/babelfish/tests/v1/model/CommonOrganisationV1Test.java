@@ -24,14 +24,14 @@ public class CommonOrganisationV1Test {
 
   @Test
   @DisplayName("Create valid CommonOrganisation")
-  void commonPerson() {
+  void commonOrganisation() {
     assertTrue(validator.validate(ModelConstants.DEFAULT_COMMON_ORGANISATION).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_COMMON_ORGANISATION).toString());
   }
   
   @Test
   @DisplayName("CommonOrganisation Mandatory Fields Other Organisation")
-  void commonPersonMandatoryFieldsOther() {
+  void commonOrganisationMandatoryFieldsOther() {
     CommonOrganisation data = new CommonOrganisation();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
@@ -48,7 +48,7 @@ public class CommonOrganisationV1Test {
   
   @Test
   @DisplayName("CommonOrganisation Mandatory Fields Company")
-  void commonPersonMandatoryFieldsCompany() {
+  void commonOrganisationMandatoryFieldsCompany() {
     CommonOrganisation data = new CommonOrganisation();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
