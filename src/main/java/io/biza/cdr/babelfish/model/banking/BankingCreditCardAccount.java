@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Currency;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
@@ -26,6 +27,7 @@ import io.biza.cdr.babelfish.converters.StringToCurrencyConverter;
 import io.biza.cdr.babelfish.converters.StringToLocalDateConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
@@ -37,6 +39,8 @@ public abstract class BankingCreditCardAccount<T> {
       required = true, dataType = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
+  @NotNull
+  @NonNull
   BigDecimal minPaymentAmount;
 
   public BigDecimal minPaymentAmount() {
@@ -53,6 +57,8 @@ public abstract class BankingCreditCardAccount<T> {
       dataType = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
+  @NotNull
+  @NonNull
   BigDecimal paymentDueAmount;
 
   public BigDecimal paymentDueAmount() {
@@ -84,6 +90,8 @@ public abstract class BankingCreditCardAccount<T> {
       required = true, dataType = "java.lang.String")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
+  @NotNull
+  @NonNull
   LocalDate paymentDueDate;
 
   public LocalDate paymentDueDate() {

@@ -20,13 +20,6 @@ import io.biza.cdr.babelfish.v1.enumerations.CommonUnitOfMeasureType;
 @Valid
 public class BankingProductRateTier
     extends io.biza.cdr.babelfish.model.banking.BankingProductRateTier<BankingProductRateTier> {
-  @AssertTrue(
-      message = "Minimum and Maximum values must be equal when Unit Of Measure is a discrete value")
-  private boolean isMinMaxEqual() {
-    return FormatChecker.isDefined(unitOfMeasure()) ? (Arrays.asList(
-        new CommonUnitOfMeasureType[] {CommonUnitOfMeasureType.DAY, CommonUnitOfMeasureType.MONTH})
-        .contains(unitOfMeasure()) && maximumValue() != null ? (minimumValue() == maximumValue())
-            : true)
-        : true;
-  }
+
+  // TODO: Avoid overlapping rate tiers
 }

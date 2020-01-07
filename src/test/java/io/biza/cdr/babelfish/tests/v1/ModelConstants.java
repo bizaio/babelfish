@@ -56,6 +56,7 @@ import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingDomesticPayee;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingDomesticPayeePayId;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingPayee;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingScheduledPaymentRecurrence;
+import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingScheduledPaymentTo;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeCustomer;
 import io.biza.cdr.babelfish.v1.model.banking.BankingAccount;
 import io.biza.cdr.babelfish.v1.model.banking.BankingAccountDetail;
@@ -290,8 +291,10 @@ public class ModelConstants {
       new BankingInternationalPayeeBankDetails();
   public static final BankingAuthorisedEntity DEFAULT_BANKING_AUTHORISED_ENTITY =
       new BankingAuthorisedEntity();
-  
-  public static final BankingDirectDebit DEFAULT_BANKING_DIRECT_DEBIT = new BankingDirectDebit().accountId(UUID.randomUUID().toString()).authorisedEntity(ModelConstants.DEFAULT_BANKING_AUTHORISED_ENTITY);
+
+  public static final BankingDirectDebit DEFAULT_BANKING_DIRECT_DEBIT =
+      new BankingDirectDebit().accountId(UUID.randomUUID().toString())
+          .authorisedEntity(ModelConstants.DEFAULT_BANKING_AUTHORISED_ENTITY);
   public static final ResponseBankingDirectDebitAuthorisationListData DEFAULT_RESPONSE_BANKING_DIRECT_DEBIT_AUTHORISATION_LIST_DATA =
       new ResponseBankingDirectDebitAuthorisationListData()
           .directDebitAuthorisations(List.of(DEFAULT_BANKING_DIRECT_DEBIT));
@@ -304,7 +307,8 @@ public class ModelConstants {
   public static final BankingScheduledPaymentFrom DEFAULT_BANKING_SCHEDULED_PAYMENT_FROM =
       new BankingScheduledPaymentFrom().accountId(UUID.randomUUID().toString());
   public static final BankingScheduledPaymentTo DEFAULT_BANKING_SCHEDULED_PAYMENT_TO =
-      new BankingScheduledPaymentTo();
+      new BankingScheduledPaymentTo().type(PayloadTypeBankingScheduledPaymentTo.ACCOUNT_ID)
+          .accountId(UUID.randomUUID().toString());
   public static final BankingScheduledPaymentSet DEFAULT_BANKING_SCHEDULED_PAYMENT_SET =
       new BankingScheduledPaymentSet().to(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_TO)
           .amount(new BigDecimal("10.00"));
@@ -323,7 +327,8 @@ public class ModelConstants {
   public static final BankingScheduledPaymentInterval DEFAULT_BANKING_SCHEDULED_PAYMENT_INTERVAL =
       new BankingScheduledPaymentInterval().interval(Period.ofDays(30));
   public static final CommonDiscoveryStatus DEFAULT_COMMON_DISCOVERY_STATUS =
-      new CommonDiscoveryStatus().status(CommonDiscoveryStatusType.OK).updateTime(LocalDateTime.now());
+      new CommonDiscoveryStatus().status(CommonDiscoveryStatusType.OK)
+          .updateTime(LocalDateTime.now());
   public static final ResponseCommonDiscoveryStatus DEFAULT_RESPONSE_COMMON_DISCOVERY_STATUS =
       new ResponseCommonDiscoveryStatus().data(DEFAULT_COMMON_DISCOVERY_STATUS)
           .links(DEFAULT_LINKS);
@@ -332,7 +337,8 @@ public class ModelConstants {
       new CommonDiscoveryOutage().outageTime(LocalDateTime.now()).duration(Duration.ofHours(1))
           .explanation("Outage Explanation");
   public static final ResponseCommonDiscoveryOutagesListData DEFAULT_RESPONSE_COMMON_DISCOVERY_OUTAGES_LIST_DATA =
-      new ResponseCommonDiscoveryOutagesListData().outages(List.of(ModelConstants.DEFAULT_COMMON_DISCOVERY_OUTAGE));
+      new ResponseCommonDiscoveryOutagesListData()
+          .outages(List.of(ModelConstants.DEFAULT_COMMON_DISCOVERY_OUTAGE));
 
   public static final ResponseCommonCustomerDetailData DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL_DATA =
       new ResponseCommonCustomerDetailData().type(PayloadTypeCustomer.PERSON)
@@ -359,7 +365,8 @@ public class ModelConstants {
       .localityName("Cobargo").postcode("2550").state(AddressPAFStateType.NSW);
 
   public static final io.biza.cdr.babelfish.v1.model.common.Error DEFAULT_ERROR =
-      new io.biza.cdr.babelfish.v1.model.common.Error().code("0001 – Account not able to be found").title("Invalid account").detail(UUID.randomUUID().toString());
+      new io.biza.cdr.babelfish.v1.model.common.Error().code("0001 – Account not able to be found")
+          .title("Invalid account").detail(UUID.randomUUID().toString());
   public static final BankingInternationalPayee DEFAULT_BANKING_INTERNATIONAL_PAYEE =
       new BankingInternationalPayee()
           .beneficiaryDetails(
@@ -404,7 +411,8 @@ public class ModelConstants {
           .physicalAddresses(List.of(ModelConstants.DEFAULT_COMMON_PHYSICAL_ADDRESS_WITH_PURPOSE));
 
   public static final BankingDomesticPayee DEFAULT_BANKING_DOMESTIC_PAYEE =
-      new BankingDomesticPayee().payeeAccountType(PayloadTypeBankingDomesticPayee.ACCOUNT).account(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE_ACCOUNT);
+      new BankingDomesticPayee().payeeAccountType(PayloadTypeBankingDomesticPayee.ACCOUNT)
+          .account(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE_ACCOUNT);
 
   public static final BankingPayeeDetail DEFAULT_BANKING_PAYEE_DETAIL =
       new BankingPayeeDetail().payeeId(UUID.randomUUID().toString()).nickname("Payee Nickname")

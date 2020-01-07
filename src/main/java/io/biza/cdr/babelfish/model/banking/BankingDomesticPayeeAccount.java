@@ -24,9 +24,7 @@ import lombok.Setter;
 @Valid
 @BabelFishModel(description = "Domestic Payment Payee Details")
 public abstract class BankingDomesticPayeeAccount<T> {
-  @BabelFishModelProperty(description = "Name of the account to pay to", required = true)
-  @NonNull
-  @NotNull
+  @BabelFishModelProperty(description = "Name of the account to pay to")
   String accountName;
 
   public String accountName() {

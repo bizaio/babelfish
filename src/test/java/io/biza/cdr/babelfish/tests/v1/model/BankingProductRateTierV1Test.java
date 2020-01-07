@@ -61,20 +61,20 @@ public class BankingProductRateTierV1Test {
     BankingProductRateTier data = new BankingProductRateTier().name("Test Rate Tier").unitOfMeasure(CommonUnitOfMeasureType.DOLLAR).minimumValue(new BigDecimal("10.00"));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    // Month should not
+    // Month with no bounding should pass
     data.unitOfMeasure(CommonUnitOfMeasureType.MONTH);
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    // Nor should Day
+    // As should day
     data.unitOfMeasure(CommonUnitOfMeasureType.DAY);
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    // Unless maximum value is set
+    // Including if maximum value is set
     data.unitOfMeasure(CommonUnitOfMeasureType.MONTH);
     data.maximumValue(new BigDecimal("10.00"));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    // Unless maximum value is set
+    // For Day too
     data.unitOfMeasure(CommonUnitOfMeasureType.DAY);
     data.maximumValue(new BigDecimal("10.00"));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());

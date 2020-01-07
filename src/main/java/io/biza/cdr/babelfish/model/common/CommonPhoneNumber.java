@@ -56,7 +56,7 @@ public abstract class CommonPhoneNumber<T extends CommonPhoneNumber<T>> {
   @BabelFishModelProperty(
       description = "If absent, assumed to be Australia (+61). The + should be included")
   @JsonProperty("countryCode")
-  public String countryCode;
+  public String countryCode = "+61";
 
   public String countryCode() {
     return getCountryCode();

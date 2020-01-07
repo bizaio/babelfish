@@ -38,7 +38,7 @@ public class BankingScheduledPaymentToV1Test {
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.accountId(UUID.randomUUID().toString());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-
+    
   }
   
   @Test

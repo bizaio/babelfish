@@ -87,7 +87,7 @@ public class BankingTransactionV1Test {
     data.type(BankingTransactionType.PAYMENT);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    data.status(BankingTransactionStatus.POSTED);
+    data.status(BankingTransactionStatus.PENDING);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
     data.description("Transaction Description");
