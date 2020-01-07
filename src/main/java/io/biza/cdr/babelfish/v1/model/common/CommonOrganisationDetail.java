@@ -27,24 +27,19 @@ public class CommonOrganisationDetail
     if (physicalAddresses() == null) {
       return true;
     }
-
+    
     int registeredCount = 0;
     int mailCount = 0;
     for (CommonPhysicalAddressWithPurpose<?> oneAddress : physicalAddresses()) {
-      if (oneAddress.purpose().equals(AddressPurpose.REGISTERED)) {
-        registeredCount++;
-      }
-      if (oneAddress.purpose().equals(AddressPurpose.MAIL)) {
-        mailCount++;
-      }
+      if(oneAddress.purpose() == null) { continue; }
+      if(oneAddress.purpose().equals(AddressPurpose.REGISTERED)) { registeredCount++; }
+      if(oneAddress.purpose().equals(AddressPurpose.MAIL)) { mailCount++; }
     }
-    if (registeredCount != 1) {
-      return false;
+    
+    if(registeredCount == 1 && mailCount <= 1) {
+      return true;
     }
-    if (mailCount != 0 && mailCount != 1) {
-      return false;
-    }
-    return true;
+    return false;
   }
 
 }

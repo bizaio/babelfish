@@ -35,17 +35,9 @@ public class LinksPaginatedV1Test {
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
     data.self(ModelConstants.DEFAULT_SELF_URI);
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
     data.first(ModelConstants.DEFAULT_FIRST_URI);
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
     data.prev(ModelConstants.DEFAULT_PREV_URI);
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
     data.next(ModelConstants.DEFAULT_NEXT_URI);
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
     data.last(ModelConstants.DEFAULT_LAST_URI);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
@@ -57,12 +49,8 @@ public class LinksPaginatedV1Test {
     LinksPaginated data = new LinksPaginated();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    data.self(ModelConstants.DEFAULT_FIRST_URI);
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
-    data.next(ModelConstants.DEFAULT_SELF_URI);
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+    data.self(ModelConstants.DEFAULT_SELF_URI);
+    data.next(ModelConstants.DEFAULT_NEXT_URI);
     data.last(ModelConstants.DEFAULT_LAST_URI);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
@@ -74,12 +62,8 @@ public class LinksPaginatedV1Test {
     LinksPaginated data = new LinksPaginated();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    data.self(ModelConstants.DEFAULT_LAST_URI);
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+    data.self(ModelConstants.DEFAULT_SELF_URI);
     data.first(ModelConstants.DEFAULT_FIRST_URI);
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
     data.prev(ModelConstants.DEFAULT_PREV_URI);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

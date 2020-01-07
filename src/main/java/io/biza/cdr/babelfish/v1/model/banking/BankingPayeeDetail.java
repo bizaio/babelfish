@@ -19,13 +19,14 @@ import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingPayee;
 public class BankingPayeeDetail
     extends io.biza.cdr.babelfish.model.banking.BankingPayeeDetail<BankingPayeeDetail> {
   @AssertTrue(
-      message = "One and only one of domestic, biller and international should be populated based on payeeUType")
+      message = "One and only one of payeeUType specified payload of domestic, biller and international should be present")
   private boolean isUTypePopulated() {
-    if (payeeUType().equals(PayloadTypeBankingPayee.DOMESTIC)) {
+    if(type() == null) { return true; }
+    if (type().equals(PayloadTypeBankingPayee.DOMESTIC)) {
       return domestic() != null && biller() == null && international() == null;
-    } else if (payeeUType().equals(PayloadTypeBankingPayee.BILLER)) {
+    } else if (type().equals(PayloadTypeBankingPayee.BILLER)) {
       return biller() != null && domestic() == null && international() == null;
-    } else if (payeeUType().equals(PayloadTypeBankingPayee.INTERNATIONAL)) {
+    } else if (type().equals(PayloadTypeBankingPayee.INTERNATIONAL)) {
       return international() != null && biller() == null && domestic() == null;
     }
     return false;

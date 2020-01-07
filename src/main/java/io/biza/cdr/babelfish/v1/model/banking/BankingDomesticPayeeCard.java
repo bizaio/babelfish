@@ -20,14 +20,11 @@ public class BankingDomesticPayeeCard
   @AssertTrue(message = "Card Number MUST be Masked PAN Format")
   private boolean isPanMasked() {
     if(cardNumber() == null) { return true; }
-    if (cardNumber().matches("(\\w{4} ){3}\\w{4}")) {
-      if (cardNumber().matches("(x{4} ){3}\\w{4}")) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
+    // We check masked PAN by checking for explicit types that are unmasked
+    if(cardNumber().matches("\\d{4}-\\d{4}-\\d{4}-\\d{4}") || cardNumber().matches("\\d{4} \\d{4} \\d{4} \\d{4}") || cardNumber().matches("\\d{16}")) {
       return false;
+    } else {
+      return true;
     }
   }
 }

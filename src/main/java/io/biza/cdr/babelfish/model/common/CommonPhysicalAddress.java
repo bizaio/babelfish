@@ -31,15 +31,15 @@ public abstract class CommonPhysicalAddress<T extends CommonPhysicalAddress<T>> 
   @NotNull
   @NonNull
   @Valid
-  public PayloadTypeAddress addressType;
+  public PayloadTypeAddress type;
 
-  public PayloadTypeAddress addressType() {
-    return getAddressType();
+  public PayloadTypeAddress type() {
+    return getType();
   }
 
   @SuppressWarnings("unchecked")
-  public T addressType(PayloadTypeAddress addressType) {
-    setAddressType(addressType);
+  public T type(PayloadTypeAddress addressType) {
+    setType(addressType);
     return (T) this;
   }
 

@@ -42,7 +42,7 @@ public class BankingPayeeV1Test {
     data.setNickname("Payee Nickname");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    data.type(BankingPayeeType.DOMESTIC);
+    data.payeeType(BankingPayeeType.DOMESTIC);
     
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());

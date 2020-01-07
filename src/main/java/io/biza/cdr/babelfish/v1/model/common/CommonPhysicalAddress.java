@@ -21,11 +21,11 @@ public class CommonPhysicalAddress
   @AssertTrue(
       message = "One and only one of simple or paf should be populated based on addressUType")
   private boolean addressTypeSpecifiedIsPopulated() {
-    if(addressType() == null) { return true; }
+    if(type() == null) { return true; }
     
-    if (addressType().equals(PayloadTypeAddress.SIMPLE)) {
+    if (type().equals(PayloadTypeAddress.SIMPLE)) {
       return simple != null && paf == null;
-    } else if (addressType.equals(PayloadTypeAddress.PAF)) {
+    } else if (type().equals(PayloadTypeAddress.PAF)) {
       return paf != null && simple == null;
     }
     return false;

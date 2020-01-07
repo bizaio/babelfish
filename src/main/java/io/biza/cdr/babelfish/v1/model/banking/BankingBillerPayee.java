@@ -19,7 +19,7 @@ public class BankingBillerPayee
     extends io.biza.cdr.babelfish.model.banking.BankingBillerPayee<BankingBillerPayee> {
   @AssertTrue(message = "BPAY CRN of Card Format MUST be Masked")
   private boolean isCrnMasked() {
-    if (crn().matches("(\\w{4} ){3}\\w{4}")) {
+    if (crn() != null && crn().matches("(\\w{4} ){3}\\w{4}")) {
       if (crn().matches("(x{4} ){3}\\w{4}")) {
         return true;
       } else {
@@ -28,6 +28,16 @@ public class BankingBillerPayee
     } else {
       return true;
     }
+  }
+  
+  @AssertTrue(message = "BPAY CRN of Card Format MUST be Masked")
+  private boolean isBillerCodeCompliant() {
+    if(billerCode() == null) { return true; }
+    // From BPAY's Developer site:
+    // The biller code must be a numeric value with 3 to 10 digits.
+    if(billerCode().matches("\\d{3,10}")) { return true; }
+    return false;
+    
   }
 
 }

@@ -45,10 +45,10 @@ public class BankingPayeeDetailV1Test {
     data.nickname("Payee Nickname");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    data.type(BankingPayeeType.DOMESTIC);
+    data.payeeType(BankingPayeeType.DOMESTIC);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    data.payeeUType(PayloadTypeBankingPayee.DOMESTIC);
+    data.type(PayloadTypeBankingPayee.DOMESTIC);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
     data.domestic(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE);
@@ -70,10 +70,10 @@ public class BankingPayeeDetailV1Test {
     data.nickname("Payee Nickname");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    data.type(BankingPayeeType.BILLER);
+    data.payeeType(BankingPayeeType.BILLER);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    data.payeeUType(PayloadTypeBankingPayee.BILLER);
+    data.type(PayloadTypeBankingPayee.BILLER);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
     data.biller(ModelConstants.DEFAULT_BANKING_BILLER_PAYEE);
@@ -95,10 +95,10 @@ public class BankingPayeeDetailV1Test {
     data.nickname("Payee Nickname");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    data.type(BankingPayeeType.INTERNATIONAL);
+    data.payeeType(BankingPayeeType.INTERNATIONAL);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    data.payeeUType(PayloadTypeBankingPayee.INTERNATIONAL);
+    data.type(PayloadTypeBankingPayee.INTERNATIONAL);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
     data.international(ModelConstants.DEFAULT_BANKING_INTERNATIONAL_PAYEE);

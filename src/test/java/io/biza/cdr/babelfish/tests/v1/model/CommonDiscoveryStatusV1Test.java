@@ -29,38 +29,38 @@ public class CommonDiscoveryStatusV1Test {
     assertTrue(validator.validate(ModelConstants.DEFAULT_COMMON_DISCOVERY_STATUS).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_COMMON_DISCOVERY_STATUS).toString());
   }
-  
+
   @Test
   @DisplayName("CommonDiscoveryStatus Mandatory Fields OK Status")
   void commonDiscoveryStatusMandatoryFieldsOk() {
     CommonDiscoveryStatus data = new CommonDiscoveryStatus();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.status(CommonDiscoveryStatusType.OK);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.updateTime(LocalDateTime.now());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     // Should only be present if the status property is PARTIAL_FAILURE or UNAVAILABLE
     data.detectionTime(LocalDateTime.now());
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());    
+    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.detectionTime(null);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
-    //  Should not be present if the status property has a value of OK.
+
+    // Should not be present if the status property has a value of OK.
     data.expectedResolutionTime(LocalDateTime.now());
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());    
+    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.expectedResolutionTime(null);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
-  
+
   @Test
   @DisplayName("CommonDiscoveryStatus Mandatory Fields PARTIAL_FAILURE Status")
   void commonDiscoveryStatusMandatoryFieldsPartialFailure() {
     CommonDiscoveryStatus data = new CommonDiscoveryStatus();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.status(CommonDiscoveryStatusType.PARTIAL_FAILURE);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.explanation("Explanation for outage");
@@ -68,9 +68,11 @@ public class CommonDiscoveryStatusV1Test {
     data.updateTime(LocalDateTime.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.detectionTime(LocalDateTime.now());
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());    
+    // Should be a valid payload
+    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+
+    // Expected Resolution Time is allowed and still be valid
     data.expectedResolutionTime(LocalDateTime.now());
-    // Should be a valid payload now
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
@@ -80,39 +82,40 @@ public class CommonDiscoveryStatusV1Test {
   void commonDiscoveryStatusMandatoryFieldsUnavailable() {
     CommonDiscoveryStatus data = new CommonDiscoveryStatus();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.status(CommonDiscoveryStatusType.UNAVAILABLE);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.explanation("Explanation for outage");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.updateTime(LocalDateTime.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    data.detectionTime(LocalDateTime.now());
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());    
-    data.expectedResolutionTime(LocalDateTime.now());
     // Should be a valid payload now
+    data.detectionTime(LocalDateTime.now());
+    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    // Expected Resolution Time is allowed and still valid
+    data.expectedResolutionTime(LocalDateTime.now());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
-  
+
   @Test
   @DisplayName("CommonDiscoveryStatus Mandatory Fields SCHEDULED_OUTAGE Status")
   void commonDiscoveryStatusMandatoryFieldsScheduledOutage() {
     CommonDiscoveryStatus data = new CommonDiscoveryStatus();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.status(CommonDiscoveryStatusType.SCHEDULED_OUTAGE);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.updateTime(LocalDateTime.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.explanation("Explanation for outage");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());    
+    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.expectedResolutionTime(LocalDateTime.now());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     // Should only be present if the status property is PARTIAL_FAILURE or UNAVAILABLE
     data.detectionTime(LocalDateTime.now());
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());    
+    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.detectionTime(null);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

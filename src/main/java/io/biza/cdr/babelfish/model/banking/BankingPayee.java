@@ -14,6 +14,7 @@ package io.biza.cdr.babelfish.model.banking;
 import java.time.LocalDate;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
@@ -81,15 +82,16 @@ public abstract class BankingPayee<T> {
       required = true)
   @NonNull
   @NotNull
-  BankingPayeeType type;
+  @JsonProperty("type")
+  BankingPayeeType payeeType;
 
-  public BankingPayeeType type() {
-    return getType();
+  public BankingPayeeType payeeType() {
+    return getPayeeType();
   }
 
   @SuppressWarnings("unchecked")
-  public T type(BankingPayeeType type) {
-    setType(type);
+  public T payeeType(BankingPayeeType type) {
+    setPayeeType(type);
     return (T) this;
   }
 

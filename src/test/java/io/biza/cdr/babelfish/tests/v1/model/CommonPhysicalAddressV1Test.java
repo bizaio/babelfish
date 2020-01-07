@@ -35,7 +35,7 @@ public class CommonPhysicalAddressV1Test {
     CommonPhysicalAddress data = new CommonPhysicalAddress();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    data.addressType(PayloadTypeAddress.SIMPLE);
+    data.type(PayloadTypeAddress.SIMPLE);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
     data.simple(ModelConstants.DEFAULT_COMMON_SIMPLE_ADDRESS);
@@ -53,7 +53,7 @@ public class CommonPhysicalAddressV1Test {
     CommonPhysicalAddress data = new CommonPhysicalAddress();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    data.addressType(PayloadTypeAddress.PAF);
+    data.type(PayloadTypeAddress.PAF);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
     data.paf(ModelConstants.DEFAULT_COMMON_PAF_ADDRESS);

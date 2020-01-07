@@ -215,7 +215,7 @@ public class ModelConstants {
 
   public static final BankingPayee DEFAULT_BANKING_PAYEE =
       new BankingPayee().payeeId(UUID.randomUUID().toString()).nickname("Payee Nickname")
-          .type(BankingPayeeType.DOMESTIC);
+          .payeeType(BankingPayeeType.DOMESTIC);
 
   public static final ResponseBankingPayeeListData DEFAULT_RESPONSE_BANKING_PAYEE_LIST_DATA =
       new ResponseBankingPayeeListData().payees(List.of(DEFAULT_BANKING_PAYEE));
@@ -371,7 +371,7 @@ public class ModelConstants {
   public static final ResponseErrorList DEFAULT_RESPONSE_ERROR_LIST =
       new ResponseErrorList().errors(List.of(ModelConstants.DEFAULT_ERROR));
   public static final CommonPhysicalAddress DEFAULT_COMMON_PHYSICAL_ADDRESS =
-      new CommonPhysicalAddress().addressType(PayloadTypeAddress.SIMPLE)
+      new CommonPhysicalAddress().type(PayloadTypeAddress.SIMPLE)
           .simple(ModelConstants.DEFAULT_COMMON_SIMPLE_ADDRESS);
 
   public static final ResponseCommonDiscoveryOutagesList DEFAULT_RESPONSE_COMMON_DISCOVERY_OUTAGES_LIST =
@@ -408,7 +408,7 @@ public class ModelConstants {
 
   public static final BankingPayeeDetail DEFAULT_BANKING_PAYEE_DETAIL =
       new BankingPayeeDetail().payeeId(UUID.randomUUID().toString()).nickname("Payee Nickname")
-          .type(BankingPayeeType.DOMESTIC).payeeUType(PayloadTypeBankingPayee.DOMESTIC)
+          .payeeType(BankingPayeeType.DOMESTIC).type(PayloadTypeBankingPayee.DOMESTIC)
           .domestic(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE);
 
 }

@@ -12,10 +12,13 @@
 package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingPayee;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
@@ -26,15 +29,18 @@ public abstract class BankingPayeeDetail<T> extends BankingPayee<T> {
 
   @BabelFishModelProperty(
       description = "Type of object included that describes the payee in detail", required = true)
-  PayloadTypeBankingPayee payeeUType;
+  @JsonProperty("payeeUType")
+  @NotNull
+  @NonNull
+  PayloadTypeBankingPayee type;
 
-  public PayloadTypeBankingPayee payeeUType() {
-    return getPayeeUType();
+  public PayloadTypeBankingPayee type() {
+    return getType();
   }
 
   @SuppressWarnings("unchecked")
-  public T payeeUType(PayloadTypeBankingPayee payeeUType) {
-    setPayeeUType(payeeUType);
+  public T type(PayloadTypeBankingPayee type) {
+    setType(type);
     return (T) this;
   }
 

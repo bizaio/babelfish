@@ -100,8 +100,12 @@ public class BankingBillerPayeeV1Test {
     data.billerCode("randomtext");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    // Invalid Biller Code
-    data.billerCode("31114");
+    // Invalid Biller Code (too short)
+    data.billerCode("14");
+    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    
+    // Invalid Biller Code (too long)
+    data.billerCode("12345678901");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
         
   }
