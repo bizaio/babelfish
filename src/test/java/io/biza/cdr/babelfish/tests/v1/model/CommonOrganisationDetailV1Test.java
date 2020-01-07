@@ -29,48 +29,48 @@ public class CommonOrganisationDetailV1Test {
     assertTrue(validator.validate(ModelConstants.DEFAULT_COMMON_ORGANISATION_DETAIL).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_COMMON_ORGANISATION_DETAIL).toString());
   }
-  
+
   @Test
   @DisplayName("CommonOrganisationDetail Mandatory Fields Other Organisation")
   void commonOrganisationDetailMandatoryFieldsOther() {
     CommonOrganisationDetail data = new CommonOrganisationDetail();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.agentLastName("Last");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.businessName("Organisation Business Name");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.organisationType(CommonOrganisationType.OTHER);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.physicalAddresses(List.of(ModelConstants.DEFAULT_COMMON_PHYSICAL_ADDRESS_WITH_PURPOSE));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
-  
+
   @Test
   @DisplayName("CommonOrganisationDetail Mandatory Fields Company")
   void commonOrganisationDetailMandatoryFieldsCompany() {
     CommonOrganisationDetail data = new CommonOrganisationDetail();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.agentLastName("Last");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.businessName("Organisation Business Name");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.organisationType(CommonOrganisationType.COMPANY);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.acn("624123123");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.physicalAddresses(List.of(ModelConstants.DEFAULT_COMMON_PHYSICAL_ADDRESS_WITH_PURPOSE));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
 
 }

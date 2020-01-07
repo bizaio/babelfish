@@ -28,42 +28,42 @@ public class CommonOrganisationV1Test {
     assertTrue(validator.validate(ModelConstants.DEFAULT_COMMON_ORGANISATION).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_COMMON_ORGANISATION).toString());
   }
-  
+
   @Test
   @DisplayName("CommonOrganisation Mandatory Fields Other Organisation")
   void commonOrganisationMandatoryFieldsOther() {
     CommonOrganisation data = new CommonOrganisation();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.agentLastName("Last");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.businessName("Organisation Business Name");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.organisationType(CommonOrganisationType.OTHER);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
-  
+
   @Test
   @DisplayName("CommonOrganisation Mandatory Fields Company")
   void commonOrganisationMandatoryFieldsCompany() {
     CommonOrganisation data = new CommonOrganisation();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.agentLastName("Last");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.businessName("Organisation Business Name");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.organisationType(CommonOrganisationType.COMPANY);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.acn("624123123");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
 
 }

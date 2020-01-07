@@ -13,10 +13,13 @@ package io.biza.cdr.babelfish.response;
 
 import io.biza.cdr.babelfish.model.CDRResponse;
 import io.biza.cdr.babelfish.response.container.ResponseCommonCustomerData;
+import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,6 +27,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
+@BabelFishModel(
+    description = "Response containing a data object with customer details of either PERSON or ORGANISATION object")
 public abstract class ResponseCommonCustomer<T> extends CDRResponse<T> {
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")

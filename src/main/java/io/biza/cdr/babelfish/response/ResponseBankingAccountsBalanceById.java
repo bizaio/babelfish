@@ -18,22 +18,27 @@ import io.biza.cdr.babelfish.model.CDRResponse;
 import io.biza.cdr.babelfish.model.banking.BankingBalance;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 @BabelFishModel(description = "Response containing a Banking Accounts Balance by Identifier")
-public abstract class ResponseBankingAccountsBalanceById<T>
-    extends CDRResponse<T> {
+public abstract class ResponseBankingAccountsBalanceById<T> extends CDRResponse<T> {
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull
   @NonNull
   public BankingBalance<?> data;
-  
+
   public BankingBalance<?> data() {
     return getData();
   }

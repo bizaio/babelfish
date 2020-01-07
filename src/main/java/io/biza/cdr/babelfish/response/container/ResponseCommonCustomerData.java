@@ -17,11 +17,14 @@ package io.biza.cdr.babelfish.response.container;
 
 import io.biza.cdr.babelfish.model.common.CommonOrganisation;
 import io.biza.cdr.babelfish.model.common.CommonPerson;
+import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeCustomer;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -29,6 +32,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
+
+@BabelFishModel(
+    description = "Object containing either a CommonPerson or CommonOrganisation object defineed by a type")
 public abstract class ResponseCommonCustomerData<T> {
   @BabelFishModelProperty(description = "The type of customer object that is present",
       required = true)
@@ -50,7 +59,7 @@ public abstract class ResponseCommonCustomerData<T> {
   @BabelFishModelProperty(description = "The Person Record for the Customer")
   @JsonProperty("person")
   public CommonPerson<?> person;
-  
+
   public CommonPerson<?> person() {
     return getPerson();
   }
@@ -64,7 +73,7 @@ public abstract class ResponseCommonCustomerData<T> {
   @BabelFishModelProperty(description = "The Organisation Record for the Customer")
   @JsonProperty("organisation")
   public CommonOrganisation<?> organisation;
-  
+
   public CommonOrganisation<?> organisation() {
     return getOrganisation();
   }

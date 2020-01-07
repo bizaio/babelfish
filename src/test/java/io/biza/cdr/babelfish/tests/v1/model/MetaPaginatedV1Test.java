@@ -33,10 +33,10 @@ public class MetaPaginatedV1Test {
   void responseMetaPaginatedMandatoryFields() {
     MetaPaginated data = new MetaPaginated();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.totalRecords(100);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.totalPages(10);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }

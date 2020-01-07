@@ -28,13 +28,18 @@ import io.biza.cdr.babelfish.converters.OffsetDateTimeToDateTimeStringConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.CommonOrganisationType;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(description = "Organisation Definition in Brief")
 public abstract class CommonOrganisation<T> {
   @BabelFishModelProperty(

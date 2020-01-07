@@ -23,14 +23,19 @@ import io.biza.cdr.babelfish.converters.CurrencyToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToCurrencyConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(description = "Currency Amount")
-public abstract class CommonCurrencyAmount<T extends CommonCurrencyAmount<T>> {
+public abstract class CommonCurrencyAmount<T> {
   @BabelFishModelProperty(
       description = "The current balance of the account at this time. Should align to the current balance available via other channels such as ATM balance enquiry or Internet Banking",
       required = true, dataType = "java.lang.String")

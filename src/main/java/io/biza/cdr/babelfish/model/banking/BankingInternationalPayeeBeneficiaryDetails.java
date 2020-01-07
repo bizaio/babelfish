@@ -20,13 +20,18 @@ import io.biza.cdr.babelfish.converters.LocaleToCountryStringConverter;
 import io.biza.cdr.babelfish.converters.CountryStringToLocaleConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(description = "International Payee Beneficiary Details")
 public abstract class BankingInternationalPayeeBeneficiaryDetails<T> {
   @BabelFishModelProperty(description = "Name of the beneficiary")

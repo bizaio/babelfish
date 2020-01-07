@@ -23,13 +23,18 @@ import io.biza.cdr.babelfish.v1.enumerations.BankingPaymentNonBusinessDayTreatme
 import io.biza.cdr.babelfish.converters.LocalDateToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToLocalDateConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(
     description = "Indicates that the schedule of payments is defined by a series of intervals. Mandatory if recurrenceUType is set to intervalSchedule")
 public abstract class BankingScheduledPaymentRecurrenceIntervalSchedule<T> {
@@ -87,7 +92,7 @@ public abstract class BankingScheduledPaymentRecurrenceIntervalSchedule<T> {
   @NonNull
   @NotNull
   List<BankingScheduledPaymentInterval<?>> intervals;
-  
+
   public List<BankingScheduledPaymentInterval<?>> intervals() {
     return getIntervals();
   }

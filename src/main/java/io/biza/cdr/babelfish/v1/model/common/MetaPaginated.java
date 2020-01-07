@@ -13,8 +13,14 @@ package io.biza.cdr.babelfish.v1.model.common;
 
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class MetaPaginated extends io.biza.cdr.babelfish.model.common.MetaPaginated<MetaPaginated> {
   @AssertTrue(message = "If totalRecords is 0 totalPages MUST be 0")
   public boolean isZeroTotalRecordsMatchesZeroPages() {

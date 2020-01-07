@@ -15,13 +15,18 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(description = "International Payee Beneficiary and Bank Details")
 public abstract class BankingInternationalPayee<T> {
   @BabelFishModelProperty(required = true)

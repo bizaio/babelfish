@@ -34,34 +34,34 @@ public class CommonPhysicalAddressV1Test {
   void commonPhysicalAddressMandatoryFieldsSimple() {
     CommonPhysicalAddress data = new CommonPhysicalAddress();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.type(PayloadTypeAddress.SIMPLE);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.simple(ModelConstants.DEFAULT_COMMON_SIMPLE_ADDRESS);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     // Should only have one
     data.paf(ModelConstants.DEFAULT_COMMON_PAF_ADDRESS);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
-  
+
   @Test
   @DisplayName("CommonPhysicalAddress Mandatory Fields (PAF)")
   void commonPhysicalAddressMandatoryFieldsPAF() {
     CommonPhysicalAddress data = new CommonPhysicalAddress();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.type(PayloadTypeAddress.PAF);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.paf(ModelConstants.DEFAULT_COMMON_PAF_ADDRESS);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     // Should only have one
     data.simple(ModelConstants.DEFAULT_COMMON_SIMPLE_ADDRESS);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
 }

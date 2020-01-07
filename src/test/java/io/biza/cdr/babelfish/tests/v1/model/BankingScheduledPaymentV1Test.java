@@ -36,31 +36,31 @@ public class BankingScheduledPaymentV1Test {
   void bankingScheduledPaymentMandatoryFields() {
     BankingScheduledPayment data = new BankingScheduledPayment();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.scheduledPaymentId(UUID.randomUUID().toString());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.payerReference("Payer Reference");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.payeeReference("Payee Reference");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.status(BankingScheduledPaymentStatus.ACTIVE);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.from(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_FROM);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.paymentSet(List.of(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_SET));
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.recurrence(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE);
-    
+
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
-  
-  
+
+
 }

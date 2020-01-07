@@ -16,8 +16,14 @@ import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductDepositRateType;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class BankingProductDepositRate extends
     io.biza.cdr.babelfish.model.banking.BankingProductDepositRate<BankingProductDepositRate> {
   @AssertTrue(
@@ -26,7 +32,8 @@ public class BankingProductDepositRate extends
     return FormatChecker.isDefined(depositRateType())
         ? (Arrays.asList(new BankingProductDepositRateType[] {BankingProductDepositRateType.FIXED,
             BankingProductDepositRateType.INTRODUCTORY}).contains(depositRateType())
-                ? FormatChecker.isDefined(additionalValue()) && FormatChecker.isDuration(additionalValue())
+                ? FormatChecker.isDefined(additionalValue())
+                    && FormatChecker.isDuration(additionalValue())
                 : true)
         : true;
   }

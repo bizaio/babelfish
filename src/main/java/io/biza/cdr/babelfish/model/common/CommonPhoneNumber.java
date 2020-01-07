@@ -22,15 +22,20 @@ import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.support.TypeConstants;
 import io.biza.cdr.babelfish.v1.enumerations.CommonPhoneNumberPurpose;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(description = "Phone Number Detail")
-public abstract class CommonPhoneNumber<T extends CommonPhoneNumber<T>> {
+public abstract class CommonPhoneNumber<T> {
   @BabelFishModelProperty(
       description = "May be true for one and only one entry to indicate the preferred phone number. Assumed to be 'false' if not present")
   @JsonProperty("isPreferred")

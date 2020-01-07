@@ -12,8 +12,14 @@
 package io.biza.cdr.babelfish.v1.response;
 
 import javax.validation.Valid;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class ResponseBankingAccountListData extends
     io.biza.cdr.babelfish.response.container.ResponseBankingAccountListData<ResponseBankingAccountListData> {
 }

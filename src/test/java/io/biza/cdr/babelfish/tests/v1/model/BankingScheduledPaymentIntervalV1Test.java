@@ -25,18 +25,19 @@ public class BankingScheduledPaymentIntervalV1Test {
   @Test
   @DisplayName("Create valid BankingScheduledPaymentInterval")
   void bankingScheduledPaymentInterval() {
-    assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_INTERVAL).isEmpty(),
+    assertTrue(
+        validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_INTERVAL).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_INTERVAL).toString());
   }
-  
+
   @Test
   @DisplayName("BankingScheduledPaymentInterval Mandatory Fields")
   void bankingScheduledPaymentIntervalMandatoryFields() {
     BankingScheduledPaymentInterval data = new BankingScheduledPaymentInterval();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.interval(Period.ofDays(30));
-    
+
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

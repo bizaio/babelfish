@@ -35,17 +35,17 @@ public class BankingLoanAccountV1Test {
   void bankingLoanAccountMandatoryFields() {
     BankingLoanAccount data = new BankingLoanAccount();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.setLoanEndDate(LocalDate.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.nextInstalmentDate(LocalDate.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.repaymentFrequency(Duration.ofDays(10));
-    
+
     // Should now be valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
 }

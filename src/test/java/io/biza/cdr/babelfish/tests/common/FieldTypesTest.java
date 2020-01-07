@@ -10,23 +10,23 @@ import io.biza.cdr.babelfish.support.FormatChecker;
 public class FieldTypesTest {
   // TODO: Verify ABN
   // TODO: Verify ACN
-  
+
   @Test
   @DisplayName("Verify Phone Number")
   void verifyPhoneNumber() {
     // Verify invalid string
     assertFalse(FormatChecker.isPhoneNumber("invalid phone", false));
-    
+
     // valid Australian phone number
     assertTrue(FormatChecker.isPhoneNumber("(02) 3307 1234", false));
-    
+
     // valid Australian phone number in international format
     assertTrue(FormatChecker.isPhoneNumber("+61233071234", false));
-    
+
     // valid Australian mobile number with area code (should be valid for FNN's too)
     assertTrue(FormatChecker.isPhoneNumber("0401123123", false));
   }
-  
+
   @Test
   @DisplayName("Verify ASCII String")
   void verifyASCIIString() {
@@ -35,7 +35,7 @@ public class FieldTypesTest {
     // Check against null value
     assertFalse(FormatChecker.isASCIIString(Character.toString('\0')));
   }
-  
+
   @Test
   @DisplayName("Verify Natural Number")
   void verifyNaturalNumber() {
@@ -46,7 +46,7 @@ public class FieldTypesTest {
     // Verify invalid negative value
     assertFalse(FormatChecker.isNaturalNumber(-99));
   }
-  
+
   @Test
   @DisplayName("Verify Positive Integer")
   void verifyPositiveInteger() {
@@ -57,7 +57,7 @@ public class FieldTypesTest {
     // Verify invalid negative value
     assertFalse(FormatChecker.isPositiveInteger(-99));
   }
-  
+
   @Test
   @DisplayName("Verify Negative Integer")
   void verifyNegativeInteger() {
@@ -68,7 +68,7 @@ public class FieldTypesTest {
     // Verify valid negative value
     assertTrue(FormatChecker.isNegativeInteger(-99));
   }
-  
+
   @Test
   @DisplayName("Verify Date Time String")
   void verifyDateTimeString() {
@@ -79,7 +79,7 @@ public class FieldTypesTest {
     // Verify invalid string (missing date)
     assertFalse(FormatChecker.isDateTimeString("15:43:00"));
   }
-  
+
   @Test
   @DisplayName("Verify Date String")
   void verifyDateString() {
@@ -90,7 +90,7 @@ public class FieldTypesTest {
     // Verify invalid string (is a time value)
     assertFalse(FormatChecker.isDateString("15:43:00"));
   }
-  
+
   @Test
   @DisplayName("Verify Currency String")
   void verifyCurrencyString() {
@@ -103,7 +103,7 @@ public class FieldTypesTest {
     // Verify invalid string (wonky text)
     assertFalse(FormatChecker.isCurrencyString("Invalid Currency"));
   }
-  
+
   @Test
   @DisplayName("Verify Rate String")
   void verifyRateString() {
@@ -120,7 +120,7 @@ public class FieldTypesTest {
     // Verify invalid rate value (wonky text)
     assertFalse(FormatChecker.isRateString("Invalid"));
   }
-  
+
   @Test
   @DisplayName("Verify Amount String")
   void verifyAmountString() {
@@ -131,7 +131,7 @@ public class FieldTypesTest {
     // Verify valid amount string
     assertTrue(FormatChecker.isAmountString("1111111111111111.11"));
     // Verify valid amount string
-    assertTrue(FormatChecker.isAmountString("-111111111111111.11")); 
+    assertTrue(FormatChecker.isAmountString("-111111111111111.11"));
     // Verify valid zero amount string
     assertTrue(FormatChecker.isAmountString("0.00"));
     // Verify invalid amount string (missing right side)
@@ -143,19 +143,19 @@ public class FieldTypesTest {
     // Verify invalid amount string (wonky text)
     assertFalse(FormatChecker.isAmountString("Invalid"));
   }
-  
+
   @Test
   @DisplayName("Verify URIString")
   void verifyUriString() {
     // Verify valid uri
     assertTrue(FormatChecker.isUriString("http://google.com/"));
     // Verify valid uri
-    assertTrue(FormatChecker.isUriString("http://google.com/?query=string"));    
+    assertTrue(FormatChecker.isUriString("http://google.com/?query=string"));
     // Verify valid uri (the rfc is very broad)
     assertTrue(FormatChecker.isUriString("google.com"));
     // Verify invalid uri
     assertFalse(FormatChecker.isUriString("definitely not a valid uri"));
   }
-  
+
 
 }

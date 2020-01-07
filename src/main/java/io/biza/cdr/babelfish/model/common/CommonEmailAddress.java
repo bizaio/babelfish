@@ -18,15 +18,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.CommonEmailAddressPurpose;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(description = "Email Address Definition")
-public abstract class CommonEmailAddress<T extends CommonEmailAddress<T>> {
+public abstract class CommonEmailAddress<T> {
   @BabelFishModelProperty(
       description = "The purpose for the email, as specified by the customer (Enumeration)",
       required = true)

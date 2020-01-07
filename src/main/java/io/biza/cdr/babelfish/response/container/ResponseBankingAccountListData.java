@@ -22,13 +22,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.banking.BankingAccount;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
 @BabelFishModel(description = "Response containing a list of Banking Accounts")
 public abstract class ResponseBankingAccountListData<T> {
   @BabelFishModelProperty(
@@ -39,7 +43,7 @@ public abstract class ResponseBankingAccountListData<T> {
   @NonNull
   @Valid
   public List<BankingAccount<?>> accounts;
-  
+
   public List<BankingAccount<?>> accounts() {
     return getAccounts();
   }

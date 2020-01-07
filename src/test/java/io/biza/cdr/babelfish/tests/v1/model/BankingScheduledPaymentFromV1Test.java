@@ -28,15 +28,15 @@ public class BankingScheduledPaymentFromV1Test {
     assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_FROM).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_FROM).toString());
   }
-  
+
   @Test
   @DisplayName("BankingScheduledPaymentFrom Mandatory Fields")
   void bankingScheduledPaymentFromMandatoryFields() {
     BankingScheduledPaymentFrom data = new BankingScheduledPaymentFrom();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.accountId(UUID.randomUUID().toString());
-    
+
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

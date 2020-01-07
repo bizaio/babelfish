@@ -27,15 +27,15 @@ public class CommonPersonV1Test {
     assertTrue(validator.validate(ModelConstants.DEFAULT_COMMON_PERSON).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_COMMON_PERSON).toString());
   }
-  
+
   @Test
   @DisplayName("CommonPerson Mandatory Fields")
   void commonPersonMandatoryFields() {
     CommonPerson data = new CommonPerson();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.lastName("Last");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
 }

@@ -28,15 +28,15 @@ public class BankingBalancePurseV1Test {
     assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_BALANCE_PURSE).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_BANKING_BALANCE_PURSE).toString());
   }
-  
+
   @Test
   @DisplayName("BankingBalancePurse Mandatory Fields")
   void bankingBalanceMandatoryFields() {
     BankingBalancePurse data = new BankingBalancePurse();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.amount(new BigDecimal("100.00"));
-    
+
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

@@ -131,9 +131,9 @@ public class BankingProductFeeDiscountV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscount for Eligibility Only")
   void bankingProductFeeDiscountEligibilityOnly() {
-    BankingProductFeeDiscount data =
-        new BankingProductFeeDiscount().description("Discount Description")
-            .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.ELIGIBILITY_ONLY);
+    BankingProductFeeDiscount data = new BankingProductFeeDiscount()
+        .description("Discount Description").amount(new BigDecimal("10.00"))
+        .discountType(BankingProductDiscountType.ELIGIBILITY_ONLY);
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());

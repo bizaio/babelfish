@@ -34,25 +34,26 @@ public class BankingScheduledPaymentSetV1Test {
   void bankingScheduledPaymentMandatoryFields() {
     BankingScheduledPaymentSet data = new BankingScheduledPaymentSet();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.to(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_TO);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.amount(new BigDecimal("10.00"));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
 
   @Test
   @DisplayName("BankingScheduledPaymentSet Mandatory Fields with Amount Calculated")
   void bankingScheduledPaymentMandatoryFieldsAmountCalculated() {
-    BankingScheduledPaymentSet data = new BankingScheduledPaymentSet().to(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_TO);
+    BankingScheduledPaymentSet data =
+        new BankingScheduledPaymentSet().to(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_TO);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.isAmountCalculated(true);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
 
-  
+
 }

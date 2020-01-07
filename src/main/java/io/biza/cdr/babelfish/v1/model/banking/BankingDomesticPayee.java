@@ -14,8 +14,14 @@ package io.biza.cdr.babelfish.v1.model.banking;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingDomesticPayee;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class BankingDomesticPayee
     extends io.biza.cdr.babelfish.model.banking.BankingDomesticPayee<BankingDomesticPayee> {
   @AssertTrue(

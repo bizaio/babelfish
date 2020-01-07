@@ -22,12 +22,16 @@ import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingAccount;
 import io.biza.cdr.babelfish.v1.model.common.CommonPhysicalAddress;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
 @BabelFishModel(description = "Detailed Australian Banking Account Information",
     parent = BankingAccount.class)
 public abstract class BankingAccountDetail<T> extends BankingAccount<T> {

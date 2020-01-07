@@ -13,12 +13,17 @@ package io.biza.cdr.babelfish.model.common;
 
 import javax.validation.Valid;
 import io.biza.cdr.babelfish.support.BabelFishModel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(description = "Meta Detail")
-public abstract class Meta<T extends Meta<T>> {
+public abstract class Meta<T> {
 }

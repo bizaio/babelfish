@@ -43,6 +43,7 @@ public enum BankingProductDiscountEligibilityType implements LabelValueEnumInter
                                                   "This discount is only available during an introductory period"), OTHER(
                                                       "OTHER",
                                                       "Another eligibility criteria exists to receive this discount and is described within Additional Information");
+
   private String value;
 
   private String label;

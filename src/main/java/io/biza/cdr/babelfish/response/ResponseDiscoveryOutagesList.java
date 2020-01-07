@@ -14,9 +14,11 @@ package io.biza.cdr.babelfish.response;
 import io.biza.cdr.babelfish.model.CDRResponse;
 import io.biza.cdr.babelfish.response.container.ResponseDiscoveryOutagesListData;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,8 +26,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Getter
 @Setter
 @Valid
-public abstract class ResponseDiscoveryOutagesList<T>
-    extends CDRResponse<T> {
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
+public abstract class ResponseDiscoveryOutagesList<T> extends CDRResponse<T> {
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull

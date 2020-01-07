@@ -15,7 +15,7 @@ import io.biza.cdr.babelfish.v1.model.common.CommonEmailAddress;
 @DisplayName("CommonEmailAddress V1 Tests")
 public class CommonEmailAddressV1Test {
   private Validator validator;
-  
+
   // TODO: Verify one and only one isPreferred in set
 
   @BeforeEach
@@ -30,22 +30,22 @@ public class CommonEmailAddressV1Test {
     assertTrue(validator.validate(ModelConstants.DEFAULT_COMMON_EMAIL_ADDRESS).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_COMMON_EMAIL_ADDRESS).toString());
   }
-  
+
   @Test
   @DisplayName("CommonEmailAddress Mandatory Fields (Home)")
   void commonEmailAddressMandatoryFieldsHome() {
     CommonEmailAddress data = new CommonEmailAddress();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.purpose(CommonEmailAddressPurpose.HOME);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.address("test@test.com");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.address("invalid");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
-  
+
 }

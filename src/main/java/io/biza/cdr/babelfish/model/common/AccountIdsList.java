@@ -19,14 +19,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.ToString;
 
 @NoArgsConstructor
 @Data
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(description = "Account ID List")
-public abstract class AccountIdsList<T extends AccountIdsList<T>> {
+public abstract class AccountIdsList<T> {
   @BabelFishModelProperty(description = "List of Account Identifiers", required = true)
   @JsonProperty("accountIds")
   @NotNull

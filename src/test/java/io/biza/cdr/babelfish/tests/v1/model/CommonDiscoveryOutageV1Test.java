@@ -29,19 +29,19 @@ public class CommonDiscoveryOutageV1Test {
     assertTrue(validator.validate(ModelConstants.DEFAULT_COMMON_DISCOVERY_OUTAGE).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_COMMON_DISCOVERY_OUTAGE).toString());
   }
-  
+
   @Test
   @DisplayName("CommonDiscoveryOutage Mandatory Fields")
   void commonDiscoveryOutageMandatoryFields() {
     CommonDiscoveryOutage data = new CommonDiscoveryOutage();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.outageTime(LocalDateTime.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.duration(Duration.ofHours(1));
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.explanation("Outage Explanation");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

@@ -15,13 +15,18 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.support.BabelFishModel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(description = "Representation of a BPAY Payee")
 public abstract class BankingBillerPayee<T> {
   @BabelFishModelProperty(description = "BPAY Biller Code of the Biller", required = true)

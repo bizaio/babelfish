@@ -18,13 +18,19 @@ import io.biza.cdr.babelfish.model.CDRResponse;
 import io.biza.cdr.babelfish.model.banking.BankingPayeeDetail;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 @BabelFishModel(description = "Response containing a Banking Payee By Identifier")
 public abstract class ResponseBankingPayeeById<T> extends CDRResponse<T> {
   @BabelFishModelProperty(required = true)
@@ -32,7 +38,7 @@ public abstract class ResponseBankingPayeeById<T> extends CDRResponse<T> {
   @NotNull
   @NonNull
   public BankingPayeeDetail<?> data;
-  
+
   public BankingPayeeDetail<?> data() {
     return getData();
   }

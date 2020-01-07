@@ -38,76 +38,76 @@ public class BankingTransactionDetailV1Test {
   void BankingTransactionDetailMandatoryFieldsPosted() {
     BankingTransactionDetail data = new BankingTransactionDetail();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.accountId(UUID.randomUUID().toString());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.transactionId(UUID.randomUUID().toString());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.isDetailAvailable(false);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.type(BankingTransactionType.PAYMENT);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.status(BankingTransactionStatus.POSTED);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.description("Transaction Description");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.amount(new BigDecimal("10.00"));
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.reference("");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.postingDateTime(LocalDateTime.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.extendedData(ModelConstants.DEFAULT_BANKING_TRANSACTION_DETAIL_EXTENDED_DATA);
-    
+
     // Should now be valid
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    
+
   }
-  
+
   @Test
   @DisplayName("BankingTransactionDetail Mandatory Fields for PENDING Transactions")
   void BankingTransactionDetailMandatoryFieldsPending() {
     BankingTransactionDetail data = new BankingTransactionDetail();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.accountId(UUID.randomUUID().toString());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.transactionId(UUID.randomUUID().toString());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.isDetailAvailable(false);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.type(BankingTransactionType.PAYMENT);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.status(BankingTransactionStatus.POSTED);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.description("Transaction Description");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.amount(new BigDecimal("10.00"));
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.reference("");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.extendedData(ModelConstants.DEFAULT_BANKING_TRANSACTION_DETAIL_EXTENDED_DATA);
-    
+
     // Should now be valid
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
 }

@@ -15,13 +15,17 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
 @BabelFishModel(description = "Banking Transaction Detailed Information",
     parent = BankingTransaction.class)
 public abstract class BankingTransactionDetail<T> extends BankingTransaction<T> {

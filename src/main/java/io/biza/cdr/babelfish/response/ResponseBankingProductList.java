@@ -18,13 +18,19 @@ import io.biza.cdr.babelfish.model.CDRResponsePaginated;
 import io.biza.cdr.babelfish.response.container.ResponseBankingProductListData;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 @BabelFishModel(description = "Response containing a Product List")
 public abstract class ResponseBankingProductList<T> extends CDRResponsePaginated<T> {
   @BabelFishModelProperty(required = true)

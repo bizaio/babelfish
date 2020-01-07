@@ -17,21 +17,26 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.CDRResponse;
 import io.biza.cdr.babelfish.model.banking.BankingTransactionDetail;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
-public abstract class ResponseBankingTransactionById<T>
-    extends CDRResponse<T> {
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
+public abstract class ResponseBankingTransactionById<T> extends CDRResponse<T> {
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull
   @NonNull
   public BankingTransactionDetail<?> data;
-  
+
   public BankingTransactionDetail<?> data() {
     return getData();
   }
@@ -41,6 +46,6 @@ public abstract class ResponseBankingTransactionById<T>
     setData(transaction);
     return (T) this;
   }
-  
-  
+
+
 }

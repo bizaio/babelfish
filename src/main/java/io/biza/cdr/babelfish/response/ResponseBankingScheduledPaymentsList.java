@@ -16,16 +16,24 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.CDRResponsePaginated;
 import io.biza.cdr.babelfish.response.container.ResponseBankingScheduledPaymentsListData;
+import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
-public abstract class ResponseBankingScheduledPaymentsList<T>
-    extends CDRResponsePaginated<T> {
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
+@BabelFishModel(
+    description = "Response containing a data object with BankingScheduledPayment lists")
+public abstract class ResponseBankingScheduledPaymentsList<T> extends CDRResponsePaginated<T> {
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull

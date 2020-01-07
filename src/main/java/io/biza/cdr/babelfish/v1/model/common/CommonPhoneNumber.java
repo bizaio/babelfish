@@ -18,27 +18,38 @@ import com.google.i18n.phonenumbers.PhoneNumberUtil.PhoneNumberFormat;
 import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.support.PhoneNumberValidationResult;
 import io.biza.cdr.babelfish.v1.enumerations.CommonPhoneNumberPurpose;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class CommonPhoneNumber
     extends io.biza.cdr.babelfish.model.common.CommonPhoneNumber<CommonPhoneNumber> {
   @AssertTrue(message = "Country Code, when supplied, should be in +## format")
   private boolean isCountryCodeValid() {
     return countryCode == null ? true : FormatChecker.phoneNumberCountryCodeValid(countryCode);
   }
-  
+
   @AssertTrue(message = "Area Code must be supplied when purpose is not MOBILE")
   private boolean isAreaCodeValid() {
-    if(purpose() == null) return true;
-    if(purpose().equals(CommonPhoneNumberPurpose.MOBILE)) return true;
+    if (purpose() == null)
+      return true;
+    if (purpose().equals(CommonPhoneNumberPurpose.MOBILE))
+      return true;
     return FormatChecker.isNotEmpty(areaCode());
   }
-  
+
   @AssertTrue(message = "Area Code should not have a leading zero when Country Code is set to +61")
   private boolean isAreaCodeAustralianPrefix() {
-    if(countryCode() == null) return true;
-    if(areaCode() == null) return true;
-    if(!countryCode().equals("+61")) return true;
+    if (countryCode() == null)
+      return true;
+    if (areaCode() == null)
+      return true;
+    if (!countryCode().equals("+61"))
+      return true;
     return !areaCode().startsWith("0");
   }
 

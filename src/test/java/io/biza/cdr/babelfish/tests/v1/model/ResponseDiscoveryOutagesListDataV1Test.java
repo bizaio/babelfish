@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.cdr.babelfish.tests.v1.ModelConstants;
-import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeCustomer;
 import io.biza.cdr.babelfish.v1.response.ResponseCommonDiscoveryOutagesListData;
 
 @DisplayName("ResponseDiscoveryOutagesListData V1 Tests")
@@ -26,21 +25,22 @@ public class ResponseDiscoveryOutagesListDataV1Test {
   @Test
   @DisplayName("Create valid ResponseDiscoveryOutagesListData")
   void responseDiscoveryOutagesListData() {
-    ResponseCommonDiscoveryOutagesListData data = ModelConstants.DEFAULT_RESPONSE_COMMON_DISCOVERY_OUTAGES_LIST_DATA;
+    ResponseCommonDiscoveryOutagesListData data =
+        ModelConstants.DEFAULT_RESPONSE_COMMON_DISCOVERY_OUTAGES_LIST_DATA;
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
   @DisplayName("ResponseDiscoveryOutagesListData Mandatory Fields")
   void responseDiscoveryOutagesListDataMandatoryFields() {
-    
+
     ResponseCommonDiscoveryOutagesListData data = new ResponseCommonDiscoveryOutagesListData();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.outages(List.of(ModelConstants.DEFAULT_COMMON_DISCOVERY_OUTAGE));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
-    
+
+
   }
-  
+
 }

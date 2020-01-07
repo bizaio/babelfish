@@ -12,7 +12,11 @@
 package io.biza.cdr.babelfish.v1.model;
 
 import javax.validation.Valid;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
 public class CDRResponse extends io.biza.cdr.babelfish.model.CDRResponse<CDRResponse> {
 }

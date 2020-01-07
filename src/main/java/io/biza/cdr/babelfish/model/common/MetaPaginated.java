@@ -17,15 +17,19 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
 @BabelFishModel(description = "Paginated Meta Details", parent = Meta.class)
-public abstract class MetaPaginated<T extends MetaPaginated<T>> {
+public abstract class MetaPaginated<T> extends Meta<T> {
   @BabelFishModelProperty(description = "The total number of records in the full set.",
       required = true)
   @JsonProperty("totalRecords")

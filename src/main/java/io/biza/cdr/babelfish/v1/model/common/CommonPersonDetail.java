@@ -11,14 +11,18 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.model.common;
 
-import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.model.common.CommonPhysicalAddressWithPurpose;
-import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.AddressPurpose;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class CommonPersonDetail
     extends io.biza.cdr.babelfish.model.common.CommonPersonDetail<CommonPersonDetail> {
   @AssertTrue(
@@ -27,16 +31,22 @@ public class CommonPersonDetail
     if (physicalAddresses() == null) {
       return true;
     }
-    
+
     int registeredCount = 0;
     int mailCount = 0;
     for (CommonPhysicalAddressWithPurpose<?> oneAddress : physicalAddresses()) {
-      if(oneAddress.purpose() == null) { continue; }
-      if(oneAddress.purpose().equals(AddressPurpose.REGISTERED)) { registeredCount++; }
-      if(oneAddress.purpose().equals(AddressPurpose.MAIL)) { mailCount++; }
+      if (oneAddress.purpose() == null) {
+        continue;
+      }
+      if (oneAddress.purpose().equals(AddressPurpose.REGISTERED)) {
+        registeredCount++;
+      }
+      if (oneAddress.purpose().equals(AddressPurpose.MAIL)) {
+        mailCount++;
+      }
     }
-    
-    if(registeredCount == 1 && mailCount <= 1) {
+
+    if (registeredCount == 1 && mailCount <= 1) {
       return true;
     }
     return false;

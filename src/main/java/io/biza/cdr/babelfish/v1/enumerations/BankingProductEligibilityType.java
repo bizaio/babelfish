@@ -38,6 +38,7 @@ public enum BankingProductEligibilityType implements LabelValueEnumInterface {
                                           "The customer must be a natural person rather than another legal entity"), OTHER(
                                               "OTHER",
                                               "Another eligibility criteria exists and is described within Additional Information");
+
   private String value;
 
   private String label;

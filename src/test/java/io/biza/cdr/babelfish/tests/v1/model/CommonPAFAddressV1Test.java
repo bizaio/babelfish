@@ -15,7 +15,7 @@ import io.biza.cdr.babelfish.v1.model.common.CommonPAFAddress;
 @DisplayName("CommonPAFAddress V1 Tests")
 public class CommonPAFAddressV1Test {
   private Validator validator;
-  
+
   @BeforeEach
   public void setup() {
     ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -34,16 +34,16 @@ public class CommonPAFAddressV1Test {
   void commonPAFAddressMandatoryFieldsAustralia() {
     CommonPAFAddress data = new CommonPAFAddress();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.localityName("Cobargo");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.postcode("2550");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.state(AddressPAFStateType.NSW);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
-  
+
 }

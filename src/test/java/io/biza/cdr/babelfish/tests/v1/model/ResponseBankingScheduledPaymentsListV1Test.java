@@ -24,10 +24,13 @@ public class ResponseBankingScheduledPaymentsListV1Test {
   @Test
   @DisplayName("Create valid ResponseBankingScheduledPaymentsList")
   void responseBankingScheduledPaymentsList() {
-    assertTrue(validator.validate(ModelConstants.DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST).isEmpty(),
-        validator.validate(ModelConstants.DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST).toString());
+    assertTrue(
+        validator.validate(ModelConstants.DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST)
+            .isEmpty(),
+        validator.validate(ModelConstants.DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST)
+            .toString());
   }
-  
+
   @Test
   @DisplayName("ResponseBankingAccountList Mandatory Fields")
   void bankingScheduledPaymentsMandatoryFields() {

@@ -13,15 +13,20 @@ package io.biza.cdr.babelfish.v1.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
-import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeCustomer;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class BankingScheduledPaymentSet extends
     io.biza.cdr.babelfish.model.banking.BankingScheduledPaymentSet<BankingScheduledPaymentSet> {
-  
+
   @AssertTrue(message = "amount must be set when isAmountCalculated is FALSE")
   private boolean isAmountSet() {
-    if(isAmountCalculated() == null || !isAmountCalculated()) {
+    if (isAmountCalculated() == null || !isAmountCalculated()) {
       return amount() != null;
     } else {
       return true;

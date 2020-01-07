@@ -12,7 +12,7 @@ import io.biza.cdr.babelfish.tests.v1.ModelConstants;
 @DisplayName("BankingAuthorisedEntity V1 Tests")
 public class BankingAuthorisedEntityV1Test {
   private Validator validator;
-  
+
   @BeforeEach
   public void setup() {
     ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -25,6 +25,6 @@ public class BankingAuthorisedEntityV1Test {
     assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_AUTHORISED_ENTITY).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_BANKING_AUTHORISED_ENTITY).toString());
   }
-  
+
 
 }

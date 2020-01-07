@@ -26,21 +26,25 @@ public class BankingScheduledPaymentRecurrenceLastWeekdayV1Test {
   @Test
   @DisplayName("Create valid BankingScheduledPaymentRecurrenceLastWeekday")
   void bankingScheduledPaymentRecurrenceLastWeekday() {
-    assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_LAST_WEEKDAY).isEmpty(),
-        validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_LAST_WEEKDAY).toString());
+    assertTrue(
+        validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_LAST_WEEKDAY)
+            .isEmpty(),
+        validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_LAST_WEEKDAY)
+            .toString());
   }
-  
+
   @Test
   @DisplayName("BankingScheduledPaymentRecurrenceLastWeekday Mandatory Fields")
   void bankingScheduledPaymentRecurrenceLastWeekdayMandatoryFields() {
-    BankingScheduledPaymentRecurrenceLastWeekday data = new BankingScheduledPaymentRecurrenceLastWeekday();
+    BankingScheduledPaymentRecurrenceLastWeekday data =
+        new BankingScheduledPaymentRecurrenceLastWeekday();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.interval(Period.ofDays(30));
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.lastWeekDay(CommonWeekDay.MON);
-    
+
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

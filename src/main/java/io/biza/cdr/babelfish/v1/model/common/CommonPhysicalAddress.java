@@ -14,15 +14,23 @@ package io.biza.cdr.babelfish.v1.model.common;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeAddress;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class CommonPhysicalAddress
     extends io.biza.cdr.babelfish.model.common.CommonPhysicalAddress<CommonPhysicalAddress> {
   @AssertTrue(
       message = "One and only one of simple or paf should be populated based on addressUType")
   public boolean isAddressTypeSpecifiedIsPopulated() {
-    if(type() == null) { return true; }
-    
+    if (type() == null) {
+      return true;
+    }
+
     if (type().equals(PayloadTypeAddress.SIMPLE)) {
       return simple != null && paf == null;
     } else if (type().equals(PayloadTypeAddress.PAF)) {

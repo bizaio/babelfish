@@ -15,12 +15,16 @@ import javax.validation.Valid;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
 @BabelFishModel(modelName = "BankingAccountProductFeature",
     description = "Banking Account Product Feature", parent = BankingProductFeature.class)
 public abstract class BankingProductFeatureWithActivated<T> extends BankingProductFeature<T> {

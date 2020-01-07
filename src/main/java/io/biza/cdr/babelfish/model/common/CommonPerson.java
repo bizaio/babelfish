@@ -18,13 +18,18 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(description = "Person definition in brief")
 public abstract class CommonPerson<T> {
   @BabelFishModelProperty(
@@ -81,7 +86,7 @@ public abstract class CommonPerson<T> {
   @NonNull
   @NotNull
   public List<String> middleNames = List.of();
-  
+
   @BabelFishModelProperty(
       description = "Also known as title or salutation.  The prefix to the name (e.g. Mr, Mrs, Ms, Miss, Sir, etc)")
   @JsonProperty("prefix")

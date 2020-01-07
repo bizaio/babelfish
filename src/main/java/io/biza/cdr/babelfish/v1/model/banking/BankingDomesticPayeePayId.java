@@ -16,9 +16,14 @@ import javax.validation.constraints.AssertTrue;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingDomesticPayeePayId;
-import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingPayee;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class BankingDomesticPayeePayId extends
     io.biza.cdr.babelfish.model.banking.BankingDomesticPayeePayId<BankingDomesticPayeePayId> {
 
@@ -28,10 +33,12 @@ public class BankingDomesticPayeePayId extends
       if (identifier() == null) {
         return false;
       } else {
-        return FormatChecker.isPhoneNumber(identifier(), PhoneNumberUtil.PhoneNumberFormat.NATIONAL, false)
+        return FormatChecker.isPhoneNumber(identifier(), PhoneNumberUtil.PhoneNumberFormat.NATIONAL,
+            false)
             || FormatChecker.isPhoneNumber(identifier(),
                 PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL, false)
-            || FormatChecker.isPhoneNumber(identifier(), PhoneNumberUtil.PhoneNumberFormat.RFC3966, false);
+            || FormatChecker.isPhoneNumber(identifier(), PhoneNumberUtil.PhoneNumberFormat.RFC3966,
+                false);
       }
     }
     return true;
@@ -48,7 +55,7 @@ public class BankingDomesticPayeePayId extends
     }
     return true;
   }
-  
+
   @AssertTrue(message = "Identifier must be a valid non local email address when type is EMAIL")
   private boolean isValidEmailAddress() {
     if (type() != null && type().equals(PayloadTypeBankingDomesticPayeePayId.EMAIL)) {

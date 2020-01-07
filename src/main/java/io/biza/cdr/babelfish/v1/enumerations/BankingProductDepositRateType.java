@@ -27,6 +27,7 @@ public enum BankingProductDepositRateType implements LabelValueEnumInterface {
                       "A floating rate is relatively fixed but still adjusts under specific circumstances"), MARKET_LINKED(
                           "MARKET_LINKED",
                           "A rate that is linked to a specific market, commodity or asset class");
+
   private String value;
 
   private String label;

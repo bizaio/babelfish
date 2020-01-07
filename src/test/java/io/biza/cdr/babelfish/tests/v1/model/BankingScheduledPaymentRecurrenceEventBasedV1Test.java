@@ -24,18 +24,22 @@ public class BankingScheduledPaymentRecurrenceEventBasedV1Test {
   @Test
   @DisplayName("Create valid BankingScheduledPaymentRecurrenceEventBased")
   void bankingScheduledPaymentRecurrenceEventBased() {
-    assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_EVENT_BASED).isEmpty(),
-        validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_EVENT_BASED).toString());
+    assertTrue(
+        validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_EVENT_BASED)
+            .isEmpty(),
+        validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_EVENT_BASED)
+            .toString());
   }
-  
+
   @Test
   @DisplayName("BankingScheduledPaymentRecurrenceEventBased Mandatory Fields")
   void bankingScheduledPaymentRecurrenceEventBasedMandatoryFields() {
-    BankingScheduledPaymentRecurrenceEventBased data = new BankingScheduledPaymentRecurrenceEventBased();
+    BankingScheduledPaymentRecurrenceEventBased data =
+        new BankingScheduledPaymentRecurrenceEventBased();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.description("Event Based Payment Description");
-    
+
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

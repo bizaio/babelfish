@@ -25,18 +25,21 @@ public class BankingScheduledPaymentRecurrenceOnceOffV1Test {
   @Test
   @DisplayName("Create valid BankingScheduledPaymentRecurrenceOnceOff")
   void bankingScheduledPaymentRecurrenceOnceOff() {
-    assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_ONCE_OFF).isEmpty(),
-        validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_ONCE_OFF).toString());
+    assertTrue(
+        validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_ONCE_OFF)
+            .isEmpty(),
+        validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_ONCE_OFF)
+            .toString());
   }
-  
+
   @Test
   @DisplayName("BankingScheduledPaymentRecurrenceOnceOff Mandatory Fields")
   void bankingScheduledPaymentRecurrenceOnceOffMandatoryFields() {
     BankingScheduledPaymentRecurrenceOnceOff data = new BankingScheduledPaymentRecurrenceOnceOff();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.paymentDate(LocalDate.now());
-    
+
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

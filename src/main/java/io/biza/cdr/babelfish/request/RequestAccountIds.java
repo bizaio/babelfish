@@ -19,13 +19,18 @@ import io.biza.cdr.babelfish.model.common.AccountIdsList;
 import io.biza.cdr.babelfish.model.common.Meta;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(description = "Request containing a set of Account IDs")
 public abstract class RequestAccountIds<T> {
   @BabelFishModelProperty(required = true)

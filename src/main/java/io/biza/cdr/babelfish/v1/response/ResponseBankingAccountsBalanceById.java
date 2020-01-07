@@ -13,12 +13,18 @@ package io.biza.cdr.babelfish.v1.response;
 
 import javax.validation.Valid;
 import io.biza.cdr.babelfish.support.BabelFishModel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 @BabelFishModel(description = "Response containing a specific account balance")
 public class ResponseBankingAccountsBalanceById extends
     io.biza.cdr.babelfish.response.ResponseBankingAccountsBalanceById<ResponseBankingAccountsBalanceById> {

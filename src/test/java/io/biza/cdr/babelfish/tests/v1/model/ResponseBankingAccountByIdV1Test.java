@@ -10,7 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.cdr.babelfish.tests.v1.ModelConstants;
 import io.biza.cdr.babelfish.v1.response.ResponseBankingAccountById;
-import io.biza.cdr.babelfish.v1.response.ResponseBankingAccountList;
 
 @DisplayName("ResponseBankingAccountById V1 Tests")
 public class ResponseBankingAccountByIdV1Test {
@@ -37,7 +36,7 @@ public class ResponseBankingAccountByIdV1Test {
 
     data.setLinks(ModelConstants.DEFAULT_LINKS);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.setData(ModelConstants.DEFAULT_BANKING_ACCOUNT_DETAIL);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

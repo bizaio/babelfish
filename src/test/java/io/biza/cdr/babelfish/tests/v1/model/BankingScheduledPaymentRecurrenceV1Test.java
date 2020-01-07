@@ -38,7 +38,7 @@ public class BankingScheduledPaymentRecurrenceV1Test {
 
     data.recurrenceUType(PayloadTypeBankingScheduledPaymentRecurrence.ONCE_OFF);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.onceOff(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_ONCE_OFF);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
