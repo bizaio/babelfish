@@ -19,21 +19,22 @@ import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingScheduledPaymentT
 public class BankingScheduledPaymentTo extends
     io.biza.cdr.babelfish.model.banking.BankingScheduledPaymentTo<BankingScheduledPaymentTo> {
   @AssertTrue(
-      message = "One and only one of accountId, payeeId, domestic, biller, international should be populated based on toUType")
+      message = "One and only one of accountId, payeeId, domestic, biller, international should be populated based on type")
   private boolean isUTypePopulated() {
-    if (toUType().equals(PayloadTypeBankingScheduledPaymentTo.ACCOUNT_ID)) {
+    if(type() == null) { return true; }
+    if (type().equals(PayloadTypeBankingScheduledPaymentTo.ACCOUNT_ID)) {
       return accountId() != null && payeeId() == null && domestic() == null && biller() == null
           && international() == null;
-    } else if (toUType().equals(PayloadTypeBankingScheduledPaymentTo.PAYEE_ID)) {
+    } else if (type().equals(PayloadTypeBankingScheduledPaymentTo.PAYEE_ID)) {
       return payeeId() != null && accountId() == null && domestic() == null && biller() == null
           && international() == null;
-    } else if (toUType().equals(PayloadTypeBankingScheduledPaymentTo.DOMESTIC)) {
+    } else if (type().equals(PayloadTypeBankingScheduledPaymentTo.DOMESTIC)) {
       return domestic() != null && accountId() == null && payeeId() == null && biller() == null
           && international() == null;
-    } else if (toUType().equals(PayloadTypeBankingScheduledPaymentTo.BILLER)) {
+    } else if (type().equals(PayloadTypeBankingScheduledPaymentTo.BILLER)) {
       return biller() != null && accountId() == null && payeeId() == null && domestic() == null
           && international() == null;
-    } else if (toUType().equals(PayloadTypeBankingScheduledPaymentTo.INTERNATIONAL)) {
+    } else if (type().equals(PayloadTypeBankingScheduledPaymentTo.INTERNATIONAL)) {
       return international() != null && accountId() == null && payeeId() == null
           && domestic() == null && biller() == null;
     }

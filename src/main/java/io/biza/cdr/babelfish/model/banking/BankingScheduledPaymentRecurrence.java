@@ -51,15 +51,15 @@ public abstract class BankingScheduledPaymentRecurrence<T> {
       required = true)
   @NonNull
   @NotNull
-  private PayloadTypeBankingScheduledPaymentRecurrence recurrenceUType;
+  private PayloadTypeBankingScheduledPaymentRecurrence type;
 
-  public PayloadTypeBankingScheduledPaymentRecurrence recurrenceUType() {
-    return getRecurrenceUType();
+  public PayloadTypeBankingScheduledPaymentRecurrence type() {
+    return getType();
   }
 
   @SuppressWarnings("unchecked")
   public T recurrenceUType(PayloadTypeBankingScheduledPaymentRecurrence recurrenceUType) {
-    setRecurrenceUType(recurrenceUType);
+    setType(recurrenceUType);
     return (T) this;
   }
 

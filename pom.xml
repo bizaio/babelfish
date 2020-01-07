@@ -41,6 +41,7 @@
 		<maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
 		<apache-commons-lang.version>3.9</apache-commons-lang.version>
 		<commons-beanutils.version>1.9.4</commons-beanutils.version>
+		<commons-validator.version>1.6</commons-validator.version>
 	</properties>
 
 	<build>
@@ -71,14 +72,14 @@
 				<artifactId>maven-surefire-report-plugin</artifactId>
 				<version>${maven-surefire-report-plugin.version}</version>
 			</plugin>
-			            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>${maven-site-plugin.version}</version>
-                <configuration>
-                    <outputDirectory>${basedir}/target/surefire-reports</outputDirectory>
-                </configuration>
-            </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>${maven-site-plugin.version}</version>
+				<configuration>
+					<outputDirectory>${basedir}/target/surefire-reports</outputDirectory>
+				</configuration>
+			</plugin>
 		</plugins>
 	</reporting>
 
@@ -145,6 +146,11 @@
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 			<version>${commons-beanutils.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-validator</groupId>
+			<artifactId>commons-validator</artifactId>
+			<version>${commons-validator.version}</version>
 		</dependency>
 	</dependencies>
 </project>

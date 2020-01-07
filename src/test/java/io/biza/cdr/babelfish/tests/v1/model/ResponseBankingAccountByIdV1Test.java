@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.cdr.babelfish.tests.v1.ModelConstants;
+import io.biza.cdr.babelfish.v1.response.ResponseBankingAccountById;
 import io.biza.cdr.babelfish.v1.response.ResponseBankingAccountList;
 
 @DisplayName("ResponseBankingAccountById V1 Tests")
@@ -23,24 +24,24 @@ public class ResponseBankingAccountByIdV1Test {
 
   @Test
   @DisplayName("Create valid ResponseBankingAccountById")
-  void bankingAccountListResponse() {
-    assertTrue(validator.validate(ModelConstants.DEFAULT_RESPONSE_BANKING_ACCOUNT_LIST).isEmpty(),
-        validator.validate(ModelConstants.DEFAULT_RESPONSE_BANKING_ACCOUNT_LIST).toString());
+  void responseBankingAccountById() {
+    assertTrue(validator.validate(ModelConstants.DEFAULT_RESPONSE_BANKING_ACCOUNT_BY_ID).isEmpty(),
+        validator.validate(ModelConstants.DEFAULT_RESPONSE_BANKING_ACCOUNT_BY_ID).toString());
   }
 
   @Test
   @DisplayName("ResponseBankingAccountById Mandatory Fields")
-  void bankingAccountListMandatoryFields() {
-    ResponseBankingAccountList data = new ResponseBankingAccountList();
+  void responseBankingAccountByIdMandatoryFields() {
+    ResponseBankingAccountById data = new ResponseBankingAccountById();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.setLinks(ModelConstants.DEFAULT_LINKS_PAGINATED);
+    data.setLinks(ModelConstants.DEFAULT_LINKS);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    data.setData(ModelConstants.DEFAULT_RESPONSE_BANKING_ACCOUNT_LIST_DATA);
+    data.setData(ModelConstants.DEFAULT_BANKING_ACCOUNT_DETAIL);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.setMeta(ModelConstants.DEFAULT_META_PAGINATED);
+    data.setMeta(ModelConstants.DEFAULT_META);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }

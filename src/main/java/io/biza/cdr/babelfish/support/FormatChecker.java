@@ -22,7 +22,11 @@ import java.util.Currency;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.commons.validator.routines.EmailValidator;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.PhoneNumberUtil.PhoneNumberFormat;
@@ -51,6 +55,40 @@ public class FormatChecker {
     return StringUtils.isAsciiPrintable(inputString);
   }
 
+  public static boolean isAbn(String inputAbn) {
+    // Strip spacing
+    inputAbn = inputAbn.replaceAll(" ", "");
+    // Check if it is the right length and is all digits
+    if (NumberUtils.isDigits(inputAbn) && inputAbn.length() == 11) {
+      System.out.println("Processing input abn of " + inputAbn);
+      // "Magical" weighting factors from https://abr.business.gov.au/Help/AbnFormat
+      final int[] weightingFactors = {10, 1, 3, 5, 7, 9, 11, 13, 15, 17, 19};
+      // Use this to add up the checksums
+      int abnChecksum = 0;
+      // Iterate over each digit in the abn
+      for (int i = 0; i < inputAbn.length(); i++) {
+          int valueAtIterator = Character.digit(inputAbn.charAt(i), 10);
+          if (i == 0) {
+              valueAtIterator--;
+          }
+          abnChecksum += valueAtIterator * weightingFactors[i];
+      }
+      // Modulus 89 check 0 remainder. Why did they choose 89? 1989 perhaps? I would have preferred 42...
+      return abnChecksum % 89 == 0;
+    } else {
+      return false;
+    }
+  }
+
+  // TODO: ACN Check
+  public static boolean isAcn(String inputAcn) {
+    return true;
+  }
+
+  public static boolean isEmail(String inputEmail) {
+    return EmailValidator.getInstance().isValid(inputEmail);
+  }
+
   public static PhoneNumberValidationResult phoneNumberValidity(String fullNumber,
       PhoneNumberFormat phoneFormat) {
     if (fullNumber == null) {
@@ -70,6 +108,14 @@ public class FormatChecker {
       }
     } catch (NumberParseException e) {
       return PhoneNumberValidationResult.INVALID;
+    }
+  }
+
+  public static Boolean isPhoneNumber(String fullNumber, PhoneNumberFormat phoneFormat) {
+    if (phoneNumberValidity(fullNumber, phoneFormat).equals(PhoneNumberValidationResult.VALID)) {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -142,30 +188,6 @@ public class FormatChecker {
 
   public static boolean isDefined(LocalDateTime dateTime) {
     return dateTime != null;
-  }
-
-  public static boolean isAddressPopulated(
-      List<CommonPhysicalAddressWithPurpose<?>> physicalAddresses) {
-    if (physicalAddresses == null) {
-      return false;
-    }
-    int registeredCount = 0;
-    int mailCount = 0;
-    for (CommonPhysicalAddressWithPurpose<?> oneAddress : physicalAddresses) {
-      if (oneAddress.purpose().equals(AddressPurpose.REGISTERED)) {
-        registeredCount++;
-      }
-      if (oneAddress.purpose().equals(AddressPurpose.MAIL)) {
-        mailCount++;
-      }
-    }
-    if (registeredCount != 1) {
-      return false;
-    }
-    if (mailCount != 0 && mailCount != 1) {
-      return false;
-    }
-    return true;
   }
 
   public static HashMap<String, String> mapifyQueryString(URI uri) {

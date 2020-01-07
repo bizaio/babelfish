@@ -19,6 +19,7 @@ public class BankingDomesticPayeeCard
     extends io.biza.cdr.babelfish.model.banking.BankingDomesticPayeeCard<BankingDomesticPayeeCard> {
   @AssertTrue(message = "Card Number MUST be Masked PAN Format")
   private boolean isPanMasked() {
+    if(cardNumber() == null) { return true; }
     if (cardNumber().matches("(\\w{4} ){3}\\w{4}")) {
       if (cardNumber().matches("(x{4} ){3}\\w{4}")) {
         return true;

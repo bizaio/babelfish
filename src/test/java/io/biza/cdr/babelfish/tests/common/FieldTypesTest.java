@@ -8,6 +8,10 @@ import io.biza.cdr.babelfish.support.FormatChecker;
 
 @DisplayName("CDR Common Field Types")
 public class FieldTypesTest {
+  // TODO: Verify ABN
+  // TODO: Verify phone number
+  // TODO: Verify ACN
+  
   @Test
   @DisplayName("Verify ASCII String")
   void verifyASCIIString() {

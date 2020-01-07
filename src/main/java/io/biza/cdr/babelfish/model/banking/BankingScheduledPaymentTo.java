@@ -13,6 +13,7 @@ package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingScheduledPaymentTo;
 import io.biza.cdr.babelfish.support.BabelFishModel;
@@ -31,15 +32,16 @@ public abstract class BankingScheduledPaymentTo<T> {
       required = true)
   @NonNull
   @NotNull
-  PayloadTypeBankingScheduledPaymentTo toUType;
+  @JsonProperty("toUType")
+  PayloadTypeBankingScheduledPaymentTo type;
 
-  public PayloadTypeBankingScheduledPaymentTo toUType() {
-    return getToUType();
+  public PayloadTypeBankingScheduledPaymentTo type() {
+    return getType();
   }
 
   @SuppressWarnings("unchecked")
-  public T toUType(PayloadTypeBankingScheduledPaymentTo toUType) {
-    setToUType(toUType);
+  public T type(PayloadTypeBankingScheduledPaymentTo toUType) {
+    setType(toUType);
     return (T) this;
   }
 

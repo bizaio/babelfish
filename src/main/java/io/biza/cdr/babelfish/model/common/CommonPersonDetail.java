@@ -65,6 +65,8 @@ public abstract class CommonPersonDetail<T> extends CommonPerson<T> {
       description = "Must contain at least one address. One and only one address may have the purpose of REGISTERED. Zero or one, and no more than one, record may have the purpose of MAIL. If zero then the REGISTERED address is to be used for mail",
       required = true)
   @JsonProperty("physicalAddresses")
+  @NotNull
+  @NonNull
   public List<CommonPhysicalAddressWithPurpose<?>> physicalAddresses = List.of();
   
   public List<CommonPhysicalAddressWithPurpose<?>> physicalAddresses() {

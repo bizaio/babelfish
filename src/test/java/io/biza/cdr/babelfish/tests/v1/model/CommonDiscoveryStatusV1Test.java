@@ -115,7 +115,6 @@ public class CommonDiscoveryStatusV1Test {
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());    
     data.detectionTime(null);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
 
   }
 }

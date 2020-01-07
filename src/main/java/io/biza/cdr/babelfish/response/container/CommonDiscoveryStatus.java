@@ -41,6 +41,7 @@ public abstract class CommonDiscoveryStatus<T> {
   @JsonProperty("status")
   @NotNull
   @NonNull
+  @Valid
   public CommonDiscoveryStatusType status;
 
   public CommonDiscoveryStatusType status() {
@@ -59,6 +60,9 @@ public abstract class CommonDiscoveryStatus<T> {
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   @JsonProperty("updatedTime")
+  @NotNull
+  @NonNull
+  @Valid
   public LocalDateTime updateTime;
 
   public LocalDateTime updateTime() {

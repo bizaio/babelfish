@@ -12,8 +12,52 @@
 package io.biza.cdr.babelfish.v1.model.banking;
 
 import javax.validation.Valid;
+import javax.validation.constraints.AssertTrue;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import io.biza.cdr.babelfish.support.FormatChecker;
+import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingDomesticPayeePayId;
+import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingPayee;
 
 @Valid
 public class BankingDomesticPayeePayId extends
     io.biza.cdr.babelfish.model.banking.BankingDomesticPayeePayId<BankingDomesticPayeePayId> {
+
+  @AssertTrue(message = "Identifier must be a valid telephone number when type is TELEPHONE")
+  private boolean isValidTelephoneNumber() {
+    if (type() != null && type().equals(PayloadTypeBankingDomesticPayeePayId.TELEPHONE)) {
+      if (identifier() == null) {
+        return false;
+      } else {
+        return FormatChecker.isPhoneNumber(identifier(), PhoneNumberUtil.PhoneNumberFormat.NATIONAL)
+            || FormatChecker.isPhoneNumber(identifier(),
+                PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL)
+            || FormatChecker.isPhoneNumber(identifier(), PhoneNumberUtil.PhoneNumberFormat.RFC3966);
+      }
+    }
+    return true;
+  }
+
+  @AssertTrue(message = "Identifier must be a valid Australian Business Number when type is ABN")
+  private boolean isValidAustralianBusinessNumber() {
+    if (type() != null && type().equals(PayloadTypeBankingDomesticPayeePayId.ABN)) {
+      if (identifier() == null) {
+        return false;
+      } else {
+        return FormatChecker.isAbn(identifier());
+      }
+    }
+    return true;
+  }
+  
+  @AssertTrue(message = "Identifier must be a valid non local email address when type is EMAIL")
+  private boolean isValidEmailAddress() {
+    if (type() != null && type().equals(PayloadTypeBankingDomesticPayeePayId.EMAIL)) {
+      if (identifier() == null) {
+        return false;
+      } else {
+        return FormatChecker.isEmail(identifier());
+      }
+    }
+    return true;
+  }
 }

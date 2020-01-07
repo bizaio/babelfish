@@ -21,18 +21,20 @@ public class BankingScheduledPaymentRecurrence extends
   @AssertTrue(
       message = "One and Only One Recurrence Type Object must be populated to align with recurrencyUType")
   private boolean isRecurrenceTypeCorrect() {
-    if (recurrenceUType().equals(PayloadTypeBankingScheduledPaymentRecurrence.ONCE_OFF)) {
+    if(type() == null) { return true; }
+    
+    if (type().equals(PayloadTypeBankingScheduledPaymentRecurrence.ONCE_OFF)) {
       return onceOff() != null && intervalSchedule() == null && lastWeekDay() == null
           && eventBased() == null ? true : false;
-    } else if (recurrenceUType()
+    } else if (type()
         .equals(PayloadTypeBankingScheduledPaymentRecurrence.INTERVAL_SCHEDULE)) {
       return intervalSchedule() != null && onceOff() == null && lastWeekDay() == null
           && eventBased() == null ? true : false;
-    } else if (recurrenceUType()
+    } else if (type()
         .equals(PayloadTypeBankingScheduledPaymentRecurrence.LAST_WEEKDAY)) {
       return lastWeekDay() != null && intervalSchedule() == null && intervalSchedule() == null
           && eventBased() == null ? true : false;
-    } else if (recurrenceUType().equals(PayloadTypeBankingScheduledPaymentRecurrence.EVENT_BASED)) {
+    } else if (type().equals(PayloadTypeBankingScheduledPaymentRecurrence.EVENT_BASED)) {
       return eventBased() != null && onceOff() == null && intervalSchedule() == null
           && lastWeekDay() == null ? true : false;
     }

@@ -20,18 +20,40 @@ import io.biza.cdr.babelfish.v1.enumerations.CommonDiscoveryStatusType;
 @Valid
 public class CommonDiscoveryStatus extends
     io.biza.cdr.babelfish.response.container.CommonDiscoveryStatus<CommonDiscoveryStatus> {
+  
   @AssertTrue(
-      message = "Detection Time should only be present if status is PARTIAL_FAILURE or UNAVAILABLE")
+      message = "Explanation is MANDATORY if Status is not OK")
+  private boolean isExplanationPresent() {
+    if(status() == null) { return true; }
+    return !Arrays.asList(new CommonDiscoveryStatusType[] {CommonDiscoveryStatusType.OK})
+        .contains(status) ? FormatChecker.isNotEmpty(explanation()) : true;
+  }
+
+  @AssertTrue(
+      message = "Detection Time should be PRESENT when status is PARTIAL_FAILURE or UNAVAILABLE")
   private boolean isDetectionTimePresent() {
+    if(status() == null) { return true; }
     return Arrays.asList(new CommonDiscoveryStatusType[] {CommonDiscoveryStatusType.PARTIAL_FAILURE,
         CommonDiscoveryStatusType.UNAVAILABLE}).contains(status)
-            ? FormatChecker.isDefined(detectionTime)
+            ? FormatChecker.isDefined(detectionTime())
+            : true;
+  }
+  
+  @AssertTrue(
+      message = "Detection Time should be ABSENT when status isn't PARTIAL_FAILURE or UNAVAILABLE")
+  private boolean isDetectionTimeAbsent() {
+    if(status() == null) { return true; }
+    return !Arrays.asList(new CommonDiscoveryStatusType[] {CommonDiscoveryStatusType.PARTIAL_FAILURE,
+        CommonDiscoveryStatusType.UNAVAILABLE}).contains(status)
+            ? !FormatChecker.isDefined(detectionTime())
             : true;
   }
 
-  @AssertTrue(message = "Resolution Time should only be present if status is not OK")
-  private boolean isResolutionTimePresent() {
+  @AssertTrue(message = "Resolution Time should be ABSENT when status is OK")
+  private boolean isExpectedResolutionTimeAbsent() {
+    if(status() == null) { return true; }
     return Arrays.asList(new CommonDiscoveryStatusType[] {CommonDiscoveryStatusType.OK})
-        .contains(status) ? !FormatChecker.isDefined(detectionTime) : true;
+        .contains(status) ? !FormatChecker.isDefined(expectedResolutionTime()) : true;
   }
+
 }
