@@ -67,13 +67,14 @@ public class FormatChecker {
       int abnChecksum = 0;
       // Iterate over each digit in the abn
       for (int i = 0; i < inputAbn.length(); i++) {
-          int valueAtIterator = Character.digit(inputAbn.charAt(i), 10);
-          if (i == 0) {
-              valueAtIterator--;
-          }
-          abnChecksum += valueAtIterator * weightingFactors[i];
+        int valueAtIterator = Character.digit(inputAbn.charAt(i), 10);
+        if (i == 0) {
+          valueAtIterator--;
+        }
+        abnChecksum += valueAtIterator * weightingFactors[i];
       }
-      // Modulus 89 check 0 remainder. Why did they choose 89? 1989 perhaps? I would have preferred 42...
+      // Modulus 89 check 0 remainder. Why did they choose 89? 1989 perhaps? I would have preferred
+      // 42...
       return abnChecksum % 89 == 0;
     } else {
       return false;
@@ -117,6 +118,12 @@ public class FormatChecker {
     } else {
       return false;
     }
+  }
+
+  public static Boolean isPhoneNumber(String fullNumber) {
+    return FormatChecker.isPhoneNumber(fullNumber, PhoneNumberUtil.PhoneNumberFormat.NATIONAL)
+        || FormatChecker.isPhoneNumber(fullNumber, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL)
+        || FormatChecker.isPhoneNumber(fullNumber, PhoneNumberUtil.PhoneNumberFormat.RFC3966);
   }
 
   public static Boolean isPanNumber(String pan) {

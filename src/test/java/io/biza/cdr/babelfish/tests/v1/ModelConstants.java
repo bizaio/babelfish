@@ -31,6 +31,7 @@ import io.biza.cdr.babelfish.v1.response.ResponseErrorList;
 import io.biza.cdr.babelfish.v1.response.ResponseCommonDiscoveryOutagesList;
 import io.biza.cdr.babelfish.v1.response.ResponseCommonDiscoveryOutagesListData;
 import io.biza.cdr.babelfish.v1.enumerations.AddressPAFStateType;
+import io.biza.cdr.babelfish.v1.enumerations.AddressPurpose;
 import io.biza.cdr.babelfish.v1.enumerations.BankingPayeeType;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductCategory;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductConstraintType;
@@ -351,9 +352,7 @@ public class ModelConstants {
   public static final CommonOrganisation DEFAULT_COMMON_ORGANISATION =
       new CommonOrganisation().agentLastName("Last").businessName("Organisation Business Name")
           .organisationType(CommonOrganisationType.OTHER);
-
-  public static final CommonPhysicalAddressWithPurpose DEFAULT_COMMON_PHYSICAL_ADDRESS_WITH_PURPOSE =
-      new CommonPhysicalAddressWithPurpose();
+;
   public static final CommonPhoneNumber DEFAULT_COMMON_PHONE_NUMBER =
       new CommonPhoneNumber().purpose(CommonPhoneNumberPurpose.HOME).number("0733076000")
           .fullNumber("tel:+61-073-307-6000").areaCode("7");
@@ -363,6 +362,9 @@ public class ModelConstants {
       .addressLine1("10 McGill Street").postcode("2550").city("Cobargo").state("NSW");
   public static final CommonPAFAddress DEFAULT_COMMON_PAF_ADDRESS = new CommonPAFAddress()
       .localityName("Cobargo").postcode("2550").state(AddressPAFStateType.NSW);
+
+  public static final CommonPhysicalAddressWithPurpose DEFAULT_COMMON_PHYSICAL_ADDRESS_WITH_PURPOSE =
+      new CommonPhysicalAddressWithPurpose().purpose(AddressPurpose.REGISTERED).type(PayloadTypeAddress.SIMPLE).simple(DEFAULT_COMMON_SIMPLE_ADDRESS);
 
   public static final io.biza.cdr.babelfish.v1.model.common.Error DEFAULT_ERROR =
       new io.biza.cdr.babelfish.v1.model.common.Error().code("0001 – Account not able to be found")

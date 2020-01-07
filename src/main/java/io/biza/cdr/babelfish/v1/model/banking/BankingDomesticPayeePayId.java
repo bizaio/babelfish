@@ -28,6 +28,11 @@ public class BankingDomesticPayeePayId extends
       if (identifier() == null) {
         return false;
       } else {
+        System.out.println("Phone number check against " + identifier() + " results are " + FormatChecker.isPhoneNumber(identifier(), PhoneNumberUtil.PhoneNumberFormat.NATIONAL)
+            + FormatChecker.isPhoneNumber(identifier(),
+                PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL)
+            + FormatChecker.isPhoneNumber(identifier(), PhoneNumberUtil.PhoneNumberFormat.RFC3966));
+        
         return FormatChecker.isPhoneNumber(identifier(), PhoneNumberUtil.PhoneNumberFormat.NATIONAL)
             || FormatChecker.isPhoneNumber(identifier(),
                 PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL)

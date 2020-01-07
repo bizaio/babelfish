@@ -25,7 +25,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Physical Address Detail")
-public abstract class CommonPhysicalAddress<T extends CommonPhysicalAddress<T>> {
+public abstract class CommonPhysicalAddress<T> {
   @BabelFishModelProperty(description = "The type of address object present", required = true)
   @JsonProperty("addressUType")
   @NotNull

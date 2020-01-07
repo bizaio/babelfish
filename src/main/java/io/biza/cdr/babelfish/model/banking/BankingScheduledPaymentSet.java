@@ -14,6 +14,7 @@ package io.biza.cdr.babelfish.model.banking;
 import java.math.BigDecimal;
 import java.util.Currency;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -67,6 +68,7 @@ public abstract class BankingScheduledPaymentSet<T> {
       dataType = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
+  @Min(0)
   private BigDecimal amount;
 
   public BigDecimal amount() {

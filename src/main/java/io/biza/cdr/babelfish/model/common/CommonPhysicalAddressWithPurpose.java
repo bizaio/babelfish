@@ -26,7 +26,7 @@ import lombok.Setter;
 @Valid
 @BabelFishModel(description = "Physical Address with Purpose", parent = CommonPhysicalAddress.class)
 public abstract class CommonPhysicalAddressWithPurpose<T>
-    extends CommonPhysicalAddress<CommonPhysicalAddressWithPurpose<T>> {
+    extends CommonPhysicalAddress<T> {
   @BabelFishModelProperty(
       description = "Enumeration of values indicating the purpose of the physical address",
       required = true)

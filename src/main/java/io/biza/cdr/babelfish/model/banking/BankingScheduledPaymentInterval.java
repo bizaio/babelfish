@@ -36,7 +36,7 @@ public abstract class BankingScheduledPaymentInterval<T> {
   @NotNull
   @JsonSerialize(converter = PeriodToStringConverter.class)
   @JsonDeserialize(converter = StringToPeriodConverter.class)
-  Period interval = Period.ofDays(1);
+  Period interval;
 
   public Period interval() {
     return getInterval();

@@ -9,8 +9,23 @@ import io.biza.cdr.babelfish.support.FormatChecker;
 @DisplayName("CDR Common Field Types")
 public class FieldTypesTest {
   // TODO: Verify ABN
-  // TODO: Verify phone number
   // TODO: Verify ACN
+  
+  @Test
+  @DisplayName("Verify Phone Number")
+  void verifyPhoneNumber() {
+    // Verify valid string
+    assertTrue(FormatChecker.isPhoneNumber("invalid phone"));
+    
+    // valid Australian phone number
+    assertTrue(FormatChecker.isPhoneNumber("(02) 3307 1234"));
+    
+    // valid Australian phone number in international format
+    assertTrue(FormatChecker.isPhoneNumber("+61233071234"));
+    
+    // valid Australian mobile number with area code (should be valid for FNN's too)
+    assertTrue(FormatChecker.isPhoneNumber("0401123123"));
+  }
   
   @Test
   @DisplayName("Verify ASCII String")
