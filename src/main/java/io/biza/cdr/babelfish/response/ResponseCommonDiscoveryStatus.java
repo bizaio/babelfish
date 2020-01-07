@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.CDRResponse;
-import io.biza.cdr.babelfish.response.container.ResponseCommonDiscoveryStatusData;
+import io.biza.cdr.babelfish.response.container.CommonDiscoveryStatus;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import lombok.Getter;
@@ -33,14 +33,14 @@ public abstract class ResponseCommonDiscoveryStatus<T>
   @JsonProperty("data")
   @NotNull
   @NonNull
-  public ResponseCommonDiscoveryStatusData<?> data;
+  public CommonDiscoveryStatus<?> data;
 
-  public ResponseCommonDiscoveryStatusData<?> data() {
+  public CommonDiscoveryStatus<?> data() {
     return getData();
   }
 
   @SuppressWarnings("unchecked")
-  public T data(ResponseCommonDiscoveryStatusData<?> data) {
+  public T data(CommonDiscoveryStatus<?> data) {
     setData(data);
     return (T) this;
   }

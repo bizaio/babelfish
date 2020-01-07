@@ -17,20 +17,23 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.LabelValueEnumInterface;
 
-@BabelFishModel(description = "Payload Type: Banking Scheduled Payment Target")
-public enum PayloadTypeBankingScheduledPayment implements LabelValueEnumInterface {
+@BabelFishModel(description = "Day of Week", modelName = "CommonWeekDay")
+public enum CommonWeekDay implements LabelValueEnumInterface {
   // @formatter:off
-  ACCOUNT_ID("accountId", "Transfer to a specific Account ID"),
-  PAYEE_ID("payeeId", "Payment to a specific Payee ID"),
-  DOMESTIC("domestic", "Domestic Payment"),
-  BILLER("biller", "BPAY Payment"),
-  INTERNATIONAL("international", "International Payment");
+  MON("MON", "Monday"),
+  TUE("TUE", "Tuesday"),
+  WED("WED", "Wednesday"),
+  THU("THU", "Thursday"),
+  FRI("FRI", "Friday"),
+  SAT("SAT", "Saturday"),
+  SUN("SUN", "Sunday");
   // @formatter:on
+  
   private String value;
 
   private String label;
 
-  PayloadTypeBankingScheduledPayment(String value, String label) {
+  CommonWeekDay(String value, String label) {
     this.value = value;
     this.label = label;
   }
@@ -42,8 +45,8 @@ public enum PayloadTypeBankingScheduledPayment implements LabelValueEnumInterfac
   }
 
   @JsonCreator
-  public static PayloadTypeBankingScheduledPayment fromValue(String text) {
-    for (PayloadTypeBankingScheduledPayment b : PayloadTypeBankingScheduledPayment.values()) {
+  public static CommonWeekDay fromValue(String text) {
+    for (CommonWeekDay b : CommonWeekDay.values()) {
       if (String.valueOf(b.value).equals(text)) {
         return b;
       }

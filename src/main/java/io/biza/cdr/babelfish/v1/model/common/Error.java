@@ -17,7 +17,4 @@ import lombok.NonNull;
 @Valid
 public class Error extends io.biza.cdr.babelfish.model.common.Error<Error> {
 
-  public Error(@NonNull String code, @NonNull String title, @NonNull String detail) {
-    super(code, title, detail);
-  }
 }

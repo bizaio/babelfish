@@ -11,6 +11,7 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.model.common;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Period;
 import javax.validation.Valid;
@@ -22,7 +23,9 @@ import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.converters.OffsetDateTimeToDateTimeStringConverter;
 import io.biza.cdr.babelfish.converters.PeriodToStringConverter;
+import io.biza.cdr.babelfish.converters.StringToDurationConverter;
 import io.biza.cdr.babelfish.converters.DateTimeStringToOffsetDateTimeConverter;
+import io.biza.cdr.babelfish.converters.DurationToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToPeriodConverter;
 import lombok.Getter;
 import lombok.NonNull;
@@ -55,19 +58,19 @@ public abstract class CommonDiscoveryOutage<T extends CommonDiscoveryOutage<T>> 
   @BabelFishModelProperty(
       description = "Planned duration of the outage. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations)",
       required = true)
-  @JsonSerialize(converter = PeriodToStringConverter.class)
-  @JsonDeserialize(converter = StringToPeriodConverter.class)
+  @JsonSerialize(converter = DurationToStringConverter.class)
+  @JsonDeserialize(converter = StringToDurationConverter.class)
   @JsonProperty("duration")
   @NotNull
   @NonNull
-  public Period duration;
+  public Duration duration;
 
-  public Period duration() {
+  public Duration duration() {
     return getDuration();
   }
 
   @SuppressWarnings("unchecked")
-  public T duration(Period duration) {
+  public T duration(Duration duration) {
     setDuration(duration);
     return (T) this;
   }

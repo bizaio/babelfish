@@ -25,7 +25,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Person definition in detail", parent = CommonPerson.class)
-public abstract class CommonPersonDetail extends CommonPerson<CommonPersonDetail> {
+public abstract class CommonPersonDetail<T> extends CommonPerson<T> {
   @BabelFishModelProperty(
       description = "Array is mandatory but may be empty if no phone numbers are held",
       required = true)
@@ -33,16 +33,47 @@ public abstract class CommonPersonDetail extends CommonPerson<CommonPersonDetail
   @NonNull
   @NotNull
   public List<CommonPhoneNumber<?>> phoneNumbers = List.of();
+  
+  public List<CommonPhoneNumber<?>> phoneNumbers() {
+    return getPhoneNumbers();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T phoneNumbers(List<CommonPhoneNumber<?>> phoneNumbers) {
+    setPhoneNumbers(phoneNumbers);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "May be empty", required = true)
   @JsonProperty("emailAddresses")
   @NonNull
   @NotNull
   public List<CommonEmailAddress<?>> emailAddresses = List.of();
+  
+  public List<CommonEmailAddress<?>> emailAddresses() {
+    return getEmailAddresses();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T emailAddresses(List<CommonEmailAddress<?>> emailAddresses) {
+    setEmailAddresses(emailAddresses);
+    return (T) this;
+  }
+
 
   @BabelFishModelProperty(
       description = "Must contain at least one address. One and only one address may have the purpose of REGISTERED. Zero or one, and no more than one, record may have the purpose of MAIL. If zero then the REGISTERED address is to be used for mail",
       required = true)
   @JsonProperty("physicalAddresses")
   public List<CommonPhysicalAddressWithPurpose<?>> physicalAddresses = List.of();
+  
+  public List<CommonPhysicalAddressWithPurpose<?>> physicalAddresses() {
+    return getPhysicalAddresses();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T physicalAddresses(List<CommonPhysicalAddressWithPurpose<?>> physicalAddresses) {
+    setPhysicalAddresses(physicalAddresses);
+    return (T) this;
+  }
 }

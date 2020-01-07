@@ -18,8 +18,8 @@ import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.CommonDiscoveryStatusType;
 
 @Valid
-public class CommonDiscoveryStatusData extends
-    io.biza.cdr.babelfish.response.container.ResponseCommonDiscoveryStatusData<CommonDiscoveryStatusData> {
+public class CommonDiscoveryStatus extends
+    io.biza.cdr.babelfish.response.container.CommonDiscoveryStatus<CommonDiscoveryStatus> {
   @AssertTrue(
       message = "Detection Time should only be present if status is PARTIAL_FAILURE or UNAVAILABLE")
   private boolean isDetectionTimePresent() {

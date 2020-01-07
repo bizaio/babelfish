@@ -14,6 +14,7 @@ import io.biza.cdr.babelfish.v1.model.banking.BankingProduct;
 import io.biza.cdr.babelfish.v1.model.common.LinksPaginated;
 import io.biza.cdr.babelfish.v1.model.common.MetaPaginated;
 import io.biza.cdr.babelfish.v1.response.ResponseBankingScheduledPaymentsList;
+import io.biza.cdr.babelfish.v1.response.ResponseBankingAccountList;
 import io.biza.cdr.babelfish.v1.response.ResponseBankingProductList;
 import io.biza.cdr.babelfish.v1.response.ResponseBankingProductListData;
 
@@ -30,8 +31,25 @@ public class ResponseBankingScheduledPaymentsListV1Test {
   @Test
   @DisplayName("Create valid ResponseBankingScheduledPaymentsList")
   void responseBankingScheduledPaymentsList() {
-    assertTrue(validator.validate(ModelConstants.DEFAULT_RESPONSE_BANKING_ACCOUNT_LIST).isEmpty(),
-        validator.validate(ModelConstants.DEFAULT_RESPONSE_BANKING_ACCOUNT_LIST).toString());
+    assertTrue(validator.validate(ModelConstants.DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST).isEmpty(),
+        validator.validate(ModelConstants.DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST).toString());
+  }
+  
+  @Test
+  @DisplayName("ResponseBankingAccountList Mandatory Fields")
+  void bankingScheduledPaymentsMandatoryFields() {
+    ResponseBankingScheduledPaymentsList data = new ResponseBankingScheduledPaymentsList();
+    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+
+    data.setLinks(ModelConstants.DEFAULT_LINKS_PAGINATED);
+    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+
+    data.setMeta(ModelConstants.DEFAULT_META_PAGINATED);
+    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+
+    data.setData(ModelConstants.DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST_DATA);
+    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+
   }
 
 }

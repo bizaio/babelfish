@@ -16,7 +16,7 @@ import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.support.FormatChecker;
 
 @Valid
-public class CommonPersonDetail extends io.biza.cdr.babelfish.model.common.CommonPersonDetail {
+public class CommonPersonDetail extends io.biza.cdr.babelfish.model.common.CommonPersonDetail<CommonPersonDetail> {
   @AssertTrue(
       message = "Physical Addresses must contain one and only one address of REGISTERED purpose and zero or one addresses of MAIL purpose")
   private boolean isPhysicalAddressesCorrect() {

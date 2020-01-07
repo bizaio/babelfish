@@ -87,4 +87,14 @@ public abstract class BankingScheduledPaymentRecurrenceIntervalSchedule<T> {
   @NonNull
   @NotNull
   List<BankingScheduledPaymentInterval<?>> intervals;
+  
+  public List<BankingScheduledPaymentInterval<?>> intervals() {
+    return getIntervals();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T intervals(List<BankingScheduledPaymentInterval<?>> intervals) {
+    setIntervals(intervals);
+    return (T) this;
+  }
 }

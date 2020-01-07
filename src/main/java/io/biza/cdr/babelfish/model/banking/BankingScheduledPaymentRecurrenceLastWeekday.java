@@ -19,6 +19,8 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.biza.cdr.babelfish.v1.enumerations.BankingPaymentNonBusinessDayTreatment;
+import io.biza.cdr.babelfish.v1.enumerations.CommonWeekDay;
 import io.biza.cdr.babelfish.converters.LocalDateToStringConverter;
 import io.biza.cdr.babelfish.converters.PeriodToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToLocalDateConverter;
@@ -86,20 +88,35 @@ public abstract class BankingScheduledPaymentRecurrenceLastWeekday<T> {
   }
 
   @BabelFishModelProperty(
-      description = "The weekDay specified. The payment will occur on the last occurrence of this weekday in the interval. Value is constrained to 1 to 7 with 1 indicating Monday.",
+      description = "The weekDay specified. The payment will occur on the last occurrence of this weekday in the interval.",
       required = true)
   @NonNull
   @NotNull
-  @Min(1)
-  Integer lastWeekDay;
+  CommonWeekDay lastWeekDay;
 
-  public Integer lastWeekDay() {
+  public CommonWeekDay lastWeekDay() {
     return getLastWeekDay();
   }
 
   @SuppressWarnings("unchecked")
-  public T lastWeekDay(Integer lastWeekDay) {
+  public T lastWeekDay(CommonWeekDay lastWeekDay) {
     setLastWeekDay(lastWeekDay);
     return (T) this;
   }
+  
+  @BabelFishModelProperty(
+      description = "Enumerated field giving the treatment where a scheduled payment date is not a business day. If absent assumed to be ON"
+      )
+  BankingPaymentNonBusinessDayTreatment nonBusinessDayTreatment = BankingPaymentNonBusinessDayTreatment.ON;
+
+  public BankingPaymentNonBusinessDayTreatment nonBusinessDayTreatment() {
+    return getNonBusinessDayTreatment();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T nonBusinessDayTreatment(BankingPaymentNonBusinessDayTreatment nonBusinessDayTreatment) {
+    setNonBusinessDayTreatment(nonBusinessDayTreatment);
+    return (T) this;
+  }
+  
 }

@@ -50,8 +50,28 @@ public abstract class ResponseCommonCustomerData<T> {
   @BabelFishModelProperty(description = "The Person Record for the Customer")
   @JsonProperty("person")
   public CommonPerson<?> person;
+  
+  public CommonPerson<?> person() {
+    return getPerson();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T person(CommonPerson<?> person) {
+    setPerson(person);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(description = "The Organisation Record for the Customer")
   @JsonProperty("organisation")
   public CommonOrganisation<?> organisation;
+  
+  public CommonOrganisation<?> organisation() {
+    return getOrganisation();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T organisation(CommonOrganisation<?> organisation) {
+    setOrganisation(organisation);
+    return (T) this;
+  }
 }

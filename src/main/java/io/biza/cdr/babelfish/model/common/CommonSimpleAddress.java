@@ -14,9 +14,12 @@ package io.biza.cdr.babelfish.model.common;
 import java.util.Locale;
 import javax.validation.Valid;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.biza.cdr.babelfish.Constants;
+import io.biza.cdr.babelfish.converters.CountryStringToLocaleConverter;
 import io.biza.cdr.babelfish.converters.LocaleToCountryStringConverter;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +28,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Simple Address Detail")
-public abstract class CommonSimpleAddress<T extends CommonSimpleAddress<T>> {
+public abstract class CommonSimpleAddress<T> {
   @BabelFishModelProperty(
       description = "Name of the individual or business formatted for inclusion in an address used for physical mail")
   @JsonProperty("mailingName")
@@ -131,8 +134,9 @@ public abstract class CommonSimpleAddress<T extends CommonSimpleAddress<T>> {
   @BabelFishModelProperty(
       description = "A valid [ISO 3166 Alpha-3](https://www.iso.org/iso-3166-country-codes.html) country code. Australia (AUS) is assumed if country is not present.")
   @JsonSerialize(converter = LocaleToCountryStringConverter.class)
+  @JsonDeserialize(converter = CountryStringToLocaleConverter.class)
   @JsonProperty("country")
-  public Locale country;
+  public Locale country = new Locale(Constants.DEFAULT_LOCALE, "AU");
 
   public Locale country() {
     return getCountry();

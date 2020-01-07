@@ -127,6 +127,16 @@ public abstract class BankingScheduledPayment<T> {
   @NonNull
   @NotNull
   List<BankingScheduledPaymentSet<?>> paymentSet;
+  
+  public List<BankingScheduledPaymentSet<?>> paymentSet() {
+    return getPaymentSet();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T paymentSet(List<BankingScheduledPaymentSet<?>> paymentSet) {
+    setPaymentSet(paymentSet);
+    return (T) this;
+  }
 
   @BabelFishModelProperty(required = true)
   @NonNull

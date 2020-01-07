@@ -20,7 +20,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
-import io.biza.cdr.babelfish.v1.model.banking.BankingDirectDebit;
+import io.biza.cdr.babelfish.model.banking.BankingDirectDebit;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -33,5 +33,15 @@ public abstract class ResponseBankingDirectDebitAuthorisationListData<T> {
   @JsonProperty("directDebitAuthorisations")
   @NotNull
   @NonNull
-  public List<BankingDirectDebit> directDebitAuthorisations;
+  public List<BankingDirectDebit<?>> directDebitAuthorisations;
+
+  public List<BankingDirectDebit<?>> directDebitAuthorisations() {
+    return getDirectDebitAuthorisations();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T directDebitAuthorisations(List<BankingDirectDebit<?>> directDebitAuthorisations) {
+    setDirectDebitAuthorisations(directDebitAuthorisations);
+    return (T) this;
+  }
 }

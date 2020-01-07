@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Locale;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -28,13 +29,14 @@ import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.CommonOrganisationType;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Valid
 @BabelFishModel(description = "Organisation Definition in Brief")
-public abstract class CommonOrganisation<T extends CommonOrganisation<T>> {
+public abstract class CommonOrganisation<T> {
   @BabelFishModelProperty(
       description = "The date and time that this record was last updated by the customer. If no update has occurred then this date should reflect the initial creation date for the data")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
@@ -87,7 +89,9 @@ public abstract class CommonOrganisation<T extends CommonOrganisation<T>> {
       description = "The role of the individual identified as the agent who is providing authorisation.  Expected to be used for display.  Default to “Unspecified” if the role is not known",
       required = true)
   @JsonProperty("agentRole")
-  public String agentRole;
+  @NotNull
+  @NonNull
+  public String agentRole = "Unspecified";
 
   public String agentRole() {
     return getAgentRole();

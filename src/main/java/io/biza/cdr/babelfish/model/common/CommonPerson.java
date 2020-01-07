@@ -26,7 +26,7 @@ import lombok.Setter;
 @Setter
 @Valid
 @BabelFishModel(description = "Person definition in brief")
-public abstract class CommonPerson<T extends CommonPerson<T>> {
+public abstract class CommonPerson<T> {
   @BabelFishModelProperty(
       description = "The date and time that this record was last updated by the customer.  If no update has occurred then this date should reflect the initial creation date for the data")
   @JsonProperty("lastUpdateTime")
@@ -81,7 +81,7 @@ public abstract class CommonPerson<T extends CommonPerson<T>> {
   @NonNull
   @NotNull
   public List<String> middleNames = List.of();
-
+  
   @BabelFishModelProperty(
       description = "Also known as title or salutation.  The prefix to the name (e.g. Mr, Mrs, Ms, Miss, Sir, etc)")
   @JsonProperty("prefix")

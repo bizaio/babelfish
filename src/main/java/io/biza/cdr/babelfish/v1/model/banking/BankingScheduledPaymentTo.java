@@ -13,7 +13,7 @@ package io.biza.cdr.babelfish.v1.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
-import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingScheduledPayment;
+import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingScheduledPaymentTo;
 
 @Valid
 public class BankingScheduledPaymentTo extends
@@ -21,19 +21,19 @@ public class BankingScheduledPaymentTo extends
   @AssertTrue(
       message = "One and only one of accountId, payeeId, domestic, biller, international should be populated based on toUType")
   private boolean isUTypePopulated() {
-    if (toUType().equals(PayloadTypeBankingScheduledPayment.ACCOUNT_ID)) {
+    if (toUType().equals(PayloadTypeBankingScheduledPaymentTo.ACCOUNT_ID)) {
       return accountId() != null && payeeId() == null && domestic() == null && biller() == null
           && international() == null;
-    } else if (toUType().equals(PayloadTypeBankingScheduledPayment.PAYEE_ID)) {
+    } else if (toUType().equals(PayloadTypeBankingScheduledPaymentTo.PAYEE_ID)) {
       return payeeId() != null && accountId() == null && domestic() == null && biller() == null
           && international() == null;
-    } else if (toUType().equals(PayloadTypeBankingScheduledPayment.DOMESTIC)) {
+    } else if (toUType().equals(PayloadTypeBankingScheduledPaymentTo.DOMESTIC)) {
       return domestic() != null && accountId() == null && payeeId() == null && biller() == null
           && international() == null;
-    } else if (toUType().equals(PayloadTypeBankingScheduledPayment.BILLER)) {
+    } else if (toUType().equals(PayloadTypeBankingScheduledPaymentTo.BILLER)) {
       return biller() != null && accountId() == null && payeeId() == null && domestic() == null
           && international() == null;
-    } else if (toUType().equals(PayloadTypeBankingScheduledPayment.INTERNATIONAL)) {
+    } else if (toUType().equals(PayloadTypeBankingScheduledPaymentTo.INTERNATIONAL)) {
       return international() != null && accountId() == null && payeeId() == null
           && domestic() == null && biller() == null;
     }
