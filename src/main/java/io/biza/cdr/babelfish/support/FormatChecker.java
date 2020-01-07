@@ -112,18 +112,20 @@ public class FormatChecker {
     }
   }
 
-  public static Boolean isPhoneNumber(String fullNumber, PhoneNumberFormat phoneFormat) {
+  public static Boolean isPhoneNumber(String fullNumber, PhoneNumberFormat phoneFormat, Boolean strictMode) {
     if (phoneNumberValidity(fullNumber, phoneFormat).equals(PhoneNumberValidationResult.VALID)) {
       return true;
+    } if (phoneNumberValidity(fullNumber, phoneFormat).equals(PhoneNumberValidationResult.INCORRECT_FORMAT) && !strictMode) {
+       return true;
     } else {
       return false;
     }
   }
 
-  public static Boolean isPhoneNumber(String fullNumber) {
-    return FormatChecker.isPhoneNumber(fullNumber, PhoneNumberUtil.PhoneNumberFormat.NATIONAL)
-        || FormatChecker.isPhoneNumber(fullNumber, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL)
-        || FormatChecker.isPhoneNumber(fullNumber, PhoneNumberUtil.PhoneNumberFormat.RFC3966);
+  public static Boolean isPhoneNumber(String fullNumber, Boolean strictMode) {
+    return FormatChecker.isPhoneNumber(fullNumber, PhoneNumberUtil.PhoneNumberFormat.NATIONAL, strictMode)
+        || FormatChecker.isPhoneNumber(fullNumber, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL, strictMode)
+        || FormatChecker.isPhoneNumber(fullNumber, PhoneNumberUtil.PhoneNumberFormat.RFC3966, strictMode);
   }
 
   public static Boolean isPanNumber(String pan) {

@@ -14,17 +14,17 @@ public class FieldTypesTest {
   @Test
   @DisplayName("Verify Phone Number")
   void verifyPhoneNumber() {
-    // Verify valid string
-    assertTrue(FormatChecker.isPhoneNumber("invalid phone"));
+    // Verify invalid string
+    assertFalse(FormatChecker.isPhoneNumber("invalid phone", false));
     
     // valid Australian phone number
-    assertTrue(FormatChecker.isPhoneNumber("(02) 3307 1234"));
+    assertTrue(FormatChecker.isPhoneNumber("(02) 3307 1234", false));
     
     // valid Australian phone number in international format
-    assertTrue(FormatChecker.isPhoneNumber("+61233071234"));
+    assertTrue(FormatChecker.isPhoneNumber("+61233071234", false));
     
     // valid Australian mobile number with area code (should be valid for FNN's too)
-    assertTrue(FormatChecker.isPhoneNumber("0401123123"));
+    assertTrue(FormatChecker.isPhoneNumber("0401123123", false));
   }
   
   @Test
