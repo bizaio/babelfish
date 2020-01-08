@@ -35,34 +35,34 @@ public class ResponseCommonCustomerDetailDataV1Test {
   void responseCommonCustomerDetailDataMandatoryFieldsPerson() {
     ResponseCommonCustomerDetailData data = new ResponseCommonCustomerDetailData();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.type(PayloadTypeCustomer.PERSON);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.person(ModelConstants.DEFAULT_COMMON_PERSON_DETAIL);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     // Should only have one
     data.organisation(ModelConstants.DEFAULT_COMMON_ORGANISATION_DETAIL);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
-  
+
   @Test
   @DisplayName("ResponseCommonCustomerDetailData Mandatory Fields (Organisation)")
   void responseCommonCustomerDetailDataMandatoryFieldsOrganisation() {
     ResponseCommonCustomerDetailData data = new ResponseCommonCustomerDetailData();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.type(PayloadTypeCustomer.ORGANISATION);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.organisation(ModelConstants.DEFAULT_COMMON_ORGANISATION_DETAIL);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     // Should only have one
     data.person(ModelConstants.DEFAULT_COMMON_PERSON_DETAIL);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
 }

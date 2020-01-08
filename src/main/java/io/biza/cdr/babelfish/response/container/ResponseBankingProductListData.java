@@ -20,14 +20,22 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.banking.BankingProduct;
+import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
+
+@BabelFishModel(description = "Object containing a list of BankingProduct objects")
 public abstract class ResponseBankingProductListData<T> {
   @BabelFishModelProperty(
       description = "The list of products returned.  If the filter results in an empty set then this array may have no records",

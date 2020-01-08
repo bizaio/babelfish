@@ -14,7 +14,7 @@ import io.biza.cdr.babelfish.v1.model.banking.BankingDomesticPayeeAccount;
 @DisplayName("BankingDomesticPayeeAccount V1 Tests")
 public class BankingDomesticPayeeAccountV1Test {
   private Validator validator;
-  
+
   @BeforeEach
   public void setup() {
     ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -27,18 +27,18 @@ public class BankingDomesticPayeeAccountV1Test {
     assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE_ACCOUNT).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE_ACCOUNT).toString());
   }
-  
+
   @Test
   @DisplayName("BankingDomesticPayeeAccount Mandatory Fields for Account")
   void bankingDomesticPayeeAccountMandatoryFieldsAccount() {
     BankingDomesticPayeeAccount data = new BankingDomesticPayeeAccount();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.bsb("123-123");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.accountNumber("12341234");
-    
+
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

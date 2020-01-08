@@ -14,8 +14,14 @@ package io.biza.cdr.babelfish.v1.model.common;
 import java.util.Locale;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class CommonSimpleAddress
     extends io.biza.cdr.babelfish.model.common.CommonSimpleAddress<CommonSimpleAddress> {
   @AssertTrue(

@@ -16,8 +16,14 @@ import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductEligibilityType;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class BankingProductEligibility extends
     io.biza.cdr.babelfish.model.banking.BankingProductEligibility<BankingProductEligibility> {
   @AssertTrue(message = "Additional Information must be populated when Eligibility type is OTHER")
@@ -45,7 +51,10 @@ public class BankingProductEligibility extends
     return FormatChecker.isDefined(eligibilityType())
         ? (Arrays.asList(new BankingProductEligibilityType[] {
             BankingProductEligibilityType.MIN_INCOME, BankingProductEligibilityType.MIN_TURNOVER})
-            .contains(eligibilityType()) ? FormatChecker.isDefined(additionalValue()) && FormatChecker.isAmountString(additionalValue()) : true)
+            .contains(eligibilityType())
+                ? FormatChecker.isDefined(additionalValue())
+                    && FormatChecker.isAmountString(additionalValue())
+                : true)
         : true;
   }
 

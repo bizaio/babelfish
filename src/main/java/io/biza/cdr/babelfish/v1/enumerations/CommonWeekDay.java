@@ -28,7 +28,7 @@ public enum CommonWeekDay implements LabelValueEnumInterface {
   SAT("SAT", "Saturday"),
   SUN("SUN", "Sunday");
   // @formatter:on
-  
+
   private String value;
 
   private String label;

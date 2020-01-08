@@ -12,8 +12,12 @@
 package io.biza.cdr.babelfish.v1.model.common;
 
 import javax.validation.Valid;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
 public class CommonCurrencyAmount
     extends io.biza.cdr.babelfish.model.common.CommonCurrencyAmount<CommonCurrencyAmount> {
 }

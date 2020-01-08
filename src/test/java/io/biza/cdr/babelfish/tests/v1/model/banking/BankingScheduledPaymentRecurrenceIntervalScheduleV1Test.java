@@ -25,18 +25,24 @@ public class BankingScheduledPaymentRecurrenceIntervalScheduleV1Test {
   @Test
   @DisplayName("Create valid BankingScheduledPaymentRecurrenceIntervalSchedule")
   void bankingScheduledPaymentRecurrenceIntervalSchedule() {
-    assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_INTERVAL_SCHEDULE).isEmpty(),
-        validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_INTERVAL_SCHEDULE).toString());
+    assertTrue(
+        validator
+            .validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_INTERVAL_SCHEDULE)
+            .isEmpty(),
+        validator
+            .validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_INTERVAL_SCHEDULE)
+            .toString());
   }
-  
+
   @Test
   @DisplayName("BankingScheduledPaymentRecurrenceIntervalSchedule Mandatory Fields")
   void bankingScheduledPaymentRecurrenceIntervalScheduleMandatoryFields() {
-    BankingScheduledPaymentRecurrenceIntervalSchedule data = new BankingScheduledPaymentRecurrenceIntervalSchedule();
+    BankingScheduledPaymentRecurrenceIntervalSchedule data =
+        new BankingScheduledPaymentRecurrenceIntervalSchedule();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.intervals(List.of(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_INTERVAL));
-    
+
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

@@ -16,18 +16,26 @@ import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductDiscountType;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class BankingProductFeeDiscount extends
     io.biza.cdr.babelfish.model.banking.BankingProductFeeDiscount<BankingProductFeeDiscount> {
   @AssertTrue(
       message = "Additional Value must be an Amount String when Discount type is BALANCE, DEPOSITS or PAYMENTS")
   private boolean isValueAmount() {
-    return FormatChecker.isDefined(discountType())
-        ? (Arrays
-            .asList(new BankingProductDiscountType[] {BankingProductDiscountType.BALANCE,
-                BankingProductDiscountType.DEPOSITS, BankingProductDiscountType.PAYMENTS})
-            .contains(discountType()) ? FormatChecker.isDefined(additionalValue()) && FormatChecker.isAmountString(additionalValue()) : true)
+    return FormatChecker.isDefined(discountType()) ? (Arrays
+        .asList(new BankingProductDiscountType[] {BankingProductDiscountType.BALANCE,
+            BankingProductDiscountType.DEPOSITS, BankingProductDiscountType.PAYMENTS})
+        .contains(discountType())
+            ? FormatChecker.isDefined(additionalValue())
+                && FormatChecker.isAmountString(additionalValue())
+            : true)
         : true;
   }
 
@@ -35,20 +43,19 @@ public class BankingProductFeeDiscount extends
   private boolean isValueDuration() {
     return FormatChecker.isDefined(discountType())
         ? (Arrays.asList(new BankingProductDiscountType[] {BankingProductDiscountType.FEE_CAP})
-            .contains(discountType()) ? FormatChecker.isDefined(additionalValue()) && FormatChecker.isDuration(additionalValue()) : true)
+            .contains(discountType())
+                ? FormatChecker.isDefined(additionalValue())
+                    && FormatChecker.isDuration(additionalValue())
+                : true)
         : true;
   }
-  
-  @AssertTrue(
-      message = "Additional Value should be null when Discount Type is ELIGIBILITY_ONLY")
+
+  @AssertTrue(message = "Additional Value should be null when Discount Type is ELIGIBILITY_ONLY")
   private boolean isValueStringNull() {
-    return FormatChecker
-        .isDefined(discountType())
-            ? (Arrays
-                .asList(new BankingProductDiscountType[] {
-                    BankingProductDiscountType.ELIGIBILITY_ONLY})
-                .contains(discountType()) ? !FormatChecker.isNotEmpty(additionalValue())
-                    : true)
-            : true;
+    return FormatChecker.isDefined(discountType())
+        ? (Arrays
+            .asList(new BankingProductDiscountType[] {BankingProductDiscountType.ELIGIBILITY_ONLY})
+            .contains(discountType()) ? !FormatChecker.isNotEmpty(additionalValue()) : true)
+        : true;
   }
 }

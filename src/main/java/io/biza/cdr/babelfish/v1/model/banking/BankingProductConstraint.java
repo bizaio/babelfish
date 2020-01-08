@@ -16,20 +16,27 @@ import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductConstraintType;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class BankingProductConstraint
     extends io.biza.cdr.babelfish.model.banking.BankingProductConstraint<BankingProductConstraint> {
   @AssertTrue(
       message = "Additional Value must be an Amount String when Eligibility type is MIN_BALANCE, MAX_BALANCE, OPENING_BALANCE, MAX_LIMIT or MIN_LIMIT")
   private boolean isValueAmount() {
-    return FormatChecker.isDefined(constraintType())
-        ? (Arrays
-            .asList(new BankingProductConstraintType[] {
-                BankingProductConstraintType.MIN_BALANCE, BankingProductConstraintType.MAX_BALANCE,
-                BankingProductConstraintType.OPENING_BALANCE,
-                BankingProductConstraintType.MIN_LIMIT, BankingProductConstraintType.MAX_LIMIT})
-            .contains(constraintType()) ? FormatChecker.isDefined(additionalValue()) && FormatChecker.isAmountString(additionalValue()) : true)
+    return FormatChecker.isDefined(constraintType()) ? (Arrays
+        .asList(new BankingProductConstraintType[] {BankingProductConstraintType.MIN_BALANCE,
+            BankingProductConstraintType.MAX_BALANCE, BankingProductConstraintType.OPENING_BALANCE,
+            BankingProductConstraintType.MIN_LIMIT, BankingProductConstraintType.MAX_LIMIT})
+        .contains(constraintType())
+            ? FormatChecker.isDefined(additionalValue())
+                && FormatChecker.isAmountString(additionalValue())
+            : true)
         : true;
   }
 }

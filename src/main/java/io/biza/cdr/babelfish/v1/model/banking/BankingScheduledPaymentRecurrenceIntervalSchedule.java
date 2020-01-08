@@ -12,8 +12,14 @@
 package io.biza.cdr.babelfish.v1.model.banking;
 
 import javax.validation.Valid;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class BankingScheduledPaymentRecurrenceIntervalSchedule extends
     io.biza.cdr.babelfish.model.banking.BankingScheduledPaymentRecurrenceIntervalSchedule<BankingScheduledPaymentRecurrenceIntervalSchedule> {
 }

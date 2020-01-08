@@ -17,17 +17,20 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
 @BabelFishModel(description = "Organisation Definition in Detail",
     parent = CommonOrganisation.class)
-public abstract class CommonOrganisationDetail<T>
-    extends CommonOrganisation<T> {
+public abstract class CommonOrganisationDetail<T> extends CommonOrganisation<T> {
   @BabelFishModelProperty(
       description = "Must contain at least one address. One and only one address may have the purpose of REGISTERED. Zero or one, and no more than one, record may have the purpose of MAIL. If zero then the REGISTERED address is to be used for mail",
       required = true)
@@ -35,7 +38,7 @@ public abstract class CommonOrganisationDetail<T>
   @NotNull
   @NonNull
   public List<CommonPhysicalAddressWithPurpose<?>> physicalAddresses;
-  
+
   public List<CommonPhysicalAddressWithPurpose<?>> physicalAddresses() {
     return getPhysicalAddresses();
   }

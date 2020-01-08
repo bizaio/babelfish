@@ -35,7 +35,7 @@ public class ResponseErrorListV1Test {
   void responseErrorListMandatoryFields() {
     ResponseErrorList data = new ResponseErrorList();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.errors(List.of(ModelConstants.DEFAULT_ERROR));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }

@@ -24,6 +24,7 @@ public enum BankingProductConstraintType implements LabelValueEnumInterface {
           "OPENING_BALANCE", "An opening balance is required for the product"), MAX_LIMIT(
               "MAX_LIMIT", "A maximum credit limit applies for the product"), MIN_LIMIT("MIN_LIMIT",
                   "A minimum credit limit applies for the product");
+
   private String value;
 
   private String label;

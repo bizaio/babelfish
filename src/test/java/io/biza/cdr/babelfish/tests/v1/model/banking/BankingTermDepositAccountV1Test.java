@@ -38,12 +38,12 @@ public class BankingTermDepositAccountV1Test {
 
     data.lodgementDate(LocalDate.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.maturityDate(LocalDate.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.maturityInstructions(BankingTermDepositMaturityInstructions.ROLLED_OVER);
-        
+
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

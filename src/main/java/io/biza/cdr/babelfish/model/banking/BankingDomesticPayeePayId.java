@@ -16,13 +16,18 @@ import javax.validation.constraints.NotNull;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingDomesticPayeePayId;
 import io.biza.cdr.babelfish.support.BabelFishModel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(description = "Domestic Payee PayID Detail")
 public abstract class BankingDomesticPayeePayId<T> {
   @BabelFishModelProperty(description = "The name assigned to the PayID by the owner of the PayID")

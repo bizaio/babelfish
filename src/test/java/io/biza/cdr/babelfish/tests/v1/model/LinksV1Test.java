@@ -33,7 +33,7 @@ public class LinksV1Test {
   void responseLinksMandatoryFields() {
     Links data = new Links();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.self(ModelConstants.DEFAULT_SELF_URI);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }

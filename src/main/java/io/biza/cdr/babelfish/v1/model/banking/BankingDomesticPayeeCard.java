@@ -13,15 +13,24 @@ package io.biza.cdr.babelfish.v1.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class BankingDomesticPayeeCard
     extends io.biza.cdr.babelfish.model.banking.BankingDomesticPayeeCard<BankingDomesticPayeeCard> {
   @AssertTrue(message = "Card Number MUST be Masked PAN Format")
   private boolean isPanMasked() {
-    if(cardNumber() == null) { return true; }
+    if (cardNumber() == null) {
+      return true;
+    }
     // We check masked PAN by checking for explicit types that are unmasked
-    if(cardNumber().matches("\\d{4}-\\d{4}-\\d{4}-\\d{4}") || cardNumber().matches("\\d{4} \\d{4} \\d{4} \\d{4}") || cardNumber().matches("\\d{16}")) {
+    if (cardNumber().matches("\\d{4}-\\d{4}-\\d{4}-\\d{4}")
+        || cardNumber().matches("\\d{4} \\d{4} \\d{4} \\d{4}") || cardNumber().matches("\\d{16}")) {
       return false;
     } else {
       return true;

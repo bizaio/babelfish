@@ -28,41 +28,41 @@ public class CommonPhoneNumberV1Test {
     assertTrue(validator.validate(ModelConstants.DEFAULT_COMMON_PHONE_NUMBER).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_COMMON_PHONE_NUMBER).toString());
   }
-  
+
   @Test
   @DisplayName("CommonPhoneNumber Mandatory Fields (Home)")
   void commonPhoneNumberMandatoryFieldsHome() {
     CommonPhoneNumber data = new CommonPhoneNumber();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.purpose(CommonPhoneNumberPurpose.HOME);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.number("0733076000");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.fullNumber("tel:+61-073-307-6000");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.areaCode("7");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
-  
+
   @Test
   @DisplayName("CommonPhoneNumber Mandatory Fields (Mobile)")
   void commonPhoneNumberMandatoryFieldsMobile() {
     CommonPhoneNumber data = new CommonPhoneNumber();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.purpose(CommonPhoneNumberPurpose.MOBILE);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.number("0404839839");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.fullNumber("tel:+61-040-483-9839");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
 }

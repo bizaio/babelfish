@@ -21,13 +21,18 @@ import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingScheduledPaymentR
 import io.biza.cdr.babelfish.converters.LocalDateToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToLocalDateConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(description = "Describes the detail of the scheduled payment")
 public abstract class BankingScheduledPaymentRecurrence<T> {
   @BabelFishModelProperty(

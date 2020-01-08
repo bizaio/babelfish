@@ -344,8 +344,7 @@ public class ModelConstants {
   public static final CommonPerson DEFAULT_COMMON_PERSON = new CommonPerson().lastName("Last");
   public static final CommonOrganisation DEFAULT_COMMON_ORGANISATION =
       new CommonOrganisation().agentLastName("Last").businessName("Organisation Business Name")
-          .organisationType(CommonOrganisationType.OTHER);
-;
+          .organisationType(CommonOrganisationType.OTHER);;
   public static final CommonPhoneNumber DEFAULT_COMMON_PHONE_NUMBER =
       new CommonPhoneNumber().purpose(CommonPhoneNumberPurpose.HOME).number("0733076000")
           .fullNumber("tel:+61-073-307-6000").areaCode("7");
@@ -357,7 +356,8 @@ public class ModelConstants {
       .localityName("Cobargo").postcode("2550").state(AddressPAFStateType.NSW);
 
   public static final CommonPhysicalAddressWithPurpose DEFAULT_COMMON_PHYSICAL_ADDRESS_WITH_PURPOSE =
-      new CommonPhysicalAddressWithPurpose().purpose(AddressPurpose.REGISTERED).type(PayloadTypeAddress.SIMPLE).simple(DEFAULT_COMMON_SIMPLE_ADDRESS);
+      new CommonPhysicalAddressWithPurpose().purpose(AddressPurpose.REGISTERED)
+          .type(PayloadTypeAddress.SIMPLE).simple(DEFAULT_COMMON_SIMPLE_ADDRESS);
 
   public static final io.biza.cdr.babelfish.v1.model.common.Error DEFAULT_ERROR =
       new io.biza.cdr.babelfish.v1.model.common.Error().code("0001 – Account not able to be found")

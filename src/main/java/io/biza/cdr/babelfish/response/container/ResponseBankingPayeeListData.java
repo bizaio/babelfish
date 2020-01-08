@@ -20,21 +20,29 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.banking.BankingPayee;
+import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
+
+@BabelFishModel(description = "Object containing a list of BankingPayee objects")
 public abstract class ResponseBankingPayeeListData<T> {
   @BabelFishModelProperty(description = "The list of authorisations returned", required = true)
   @JsonProperty("payees")
   @NotNull
   @NonNull
   public List<BankingPayee<?>> payees;
-  
+
   public List<BankingPayee<?>> payees() {
     return getPayees();
   }

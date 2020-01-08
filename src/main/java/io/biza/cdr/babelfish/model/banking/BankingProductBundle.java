@@ -23,12 +23,17 @@ import io.biza.cdr.babelfish.converters.UriStringToUriConverter;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(description = "Banking Product Bundle Definition")
 public abstract class BankingProductBundle<T> {
   @BabelFishModelProperty(description = "Name of the bundle", required = true)

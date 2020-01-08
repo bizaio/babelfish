@@ -11,9 +11,15 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response.container;
 
+import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeCustomer;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
+@Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
 public class ResponseCommonCustomerDetailData extends
     io.biza.cdr.babelfish.response.container.ResponseCommonCustomerDetailData<ResponseCommonCustomerDetailData> {
 

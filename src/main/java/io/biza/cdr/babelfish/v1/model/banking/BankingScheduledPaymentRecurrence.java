@@ -14,24 +14,30 @@ package io.biza.cdr.babelfish.v1.model.banking;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingScheduledPaymentRecurrence;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class BankingScheduledPaymentRecurrence extends
     io.biza.cdr.babelfish.model.banking.BankingScheduledPaymentRecurrence<BankingScheduledPaymentRecurrence> {
   @AssertTrue(
       message = "One and Only One Recurrence Type Object must be populated to align with recurrencyUType")
   private boolean isRecurrenceTypeCorrect() {
-    if(type() == null) { return true; }
-    
+    if (type() == null) {
+      return true;
+    }
+
     if (type().equals(PayloadTypeBankingScheduledPaymentRecurrence.ONCE_OFF)) {
       return onceOff() != null && intervalSchedule() == null && lastWeekDay() == null
           && eventBased() == null ? true : false;
-    } else if (type()
-        .equals(PayloadTypeBankingScheduledPaymentRecurrence.INTERVAL_SCHEDULE)) {
+    } else if (type().equals(PayloadTypeBankingScheduledPaymentRecurrence.INTERVAL_SCHEDULE)) {
       return intervalSchedule() != null && onceOff() == null && lastWeekDay() == null
           && eventBased() == null ? true : false;
-    } else if (type()
-        .equals(PayloadTypeBankingScheduledPaymentRecurrence.LAST_WEEKDAY)) {
+    } else if (type().equals(PayloadTypeBankingScheduledPaymentRecurrence.LAST_WEEKDAY)) {
       return lastWeekDay() != null && intervalSchedule() == null && intervalSchedule() == null
           && eventBased() == null ? true : false;
     } else if (type().equals(PayloadTypeBankingScheduledPaymentRecurrence.EVENT_BASED)) {

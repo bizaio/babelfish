@@ -16,16 +16,23 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.CDRResponse;
 import io.biza.cdr.babelfish.model.banking.BankingProductDetail;
+import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
-public abstract class ResponseBankingProductById<T>
-    extends CDRResponse<T> {
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
+@BabelFishModel(description = "Response containing a single BankingProductDetail entry")
+public abstract class ResponseBankingProductById<T> extends CDRResponse<T> {
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull

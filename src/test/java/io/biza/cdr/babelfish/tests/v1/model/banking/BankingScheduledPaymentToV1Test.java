@@ -29,7 +29,7 @@ public class BankingScheduledPaymentToV1Test {
     assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_TO).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_TO).toString());
   }
-  
+
   @Test
   @DisplayName("BankingScheduledPaymentTo for AccountId")
   void bankingScheduledPaymentToMandatoryFieldsAccountId() {
@@ -38,9 +38,9 @@ public class BankingScheduledPaymentToV1Test {
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.accountId(UUID.randomUUID().toString());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
-  
+
   @Test
   @DisplayName("BankingScheduledPaymentTo for PayeeId")
   void bankingScheduledPaymentToMandatoryFieldsPayeeId() {
@@ -50,7 +50,7 @@ public class BankingScheduledPaymentToV1Test {
     data.payeeId(UUID.randomUUID().toString());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
-  
+
   @Test
   @DisplayName("BankingScheduledPaymentTo for Domestic")
   void bankingScheduledPaymentToMandatoryFieldsDomestic() {
@@ -71,7 +71,7 @@ public class BankingScheduledPaymentToV1Test {
     data.biller(ModelConstants.DEFAULT_BANKING_BILLER_PAYEE);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
-  
+
   @Test
   @DisplayName("BankingScheduledPaymentTo for International")
   void bankingScheduledPaymentToMandatoryFieldsInternational() {

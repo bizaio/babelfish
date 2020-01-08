@@ -21,6 +21,7 @@ import io.biza.cdr.babelfish.support.LabelValueEnumInterface;
 public enum CommonUnitOfMeasureType implements LabelValueEnumInterface {
   DOLLAR("DOLLAR", "Dollar Value"), PERCENT("PERCENT", "Percentage Value"), MONTH("MONTH",
       "Month"), DAY("DAY", "Day of Month");
+
   private String value;
 
   private String label;

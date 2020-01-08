@@ -17,13 +17,18 @@ import javax.validation.constraints.NotNull;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.BankingScheduledPaymentStatus;
 import io.biza.cdr.babelfish.support.BabelFishModel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(description = "Describes a Scheduled Payment")
 public abstract class BankingScheduledPayment<T> {
   @BabelFishModelProperty(
@@ -127,7 +132,7 @@ public abstract class BankingScheduledPayment<T> {
   @NonNull
   @NotNull
   List<BankingScheduledPaymentSet<?>> paymentSet;
-  
+
   public List<BankingScheduledPaymentSet<?>> paymentSet() {
     return getPaymentSet();
   }

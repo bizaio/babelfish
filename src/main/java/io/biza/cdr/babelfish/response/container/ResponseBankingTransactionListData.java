@@ -19,15 +19,23 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.model.banking.BankingTransaction;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
+
+@BabelFishModel(description = "Object containing a list of BankingTransaction objects")
 public abstract class ResponseBankingTransactionListData<T> {
   @BabelFishModelProperty(description = "The list of transactions", required = true)
   @JsonProperty("transactions")

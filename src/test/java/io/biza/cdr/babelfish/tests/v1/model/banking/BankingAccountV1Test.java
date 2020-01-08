@@ -38,18 +38,18 @@ public class BankingAccountV1Test {
 
     data.setAccountId(UUID.randomUUID().toString());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.displayName("Display Name");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.maskedNumber("XXXX XXXX XXXX 1234");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.productCategory(BankingProductCategory.BUSINESS_LOANS);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.productName("Business Loan Example");
-    
+
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

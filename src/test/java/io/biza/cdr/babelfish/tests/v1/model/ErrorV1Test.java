@@ -15,7 +15,7 @@ import io.biza.cdr.babelfish.v1.model.common.Error;
 @DisplayName("Error V1 Tests")
 public class ErrorV1Test {
   private Validator validator;
-  
+
   // TODO: Specific Error code verification
 
   @BeforeEach
@@ -36,15 +36,15 @@ public class ErrorV1Test {
   void responseErrorMandatoryFields() {
     Error data = new Error();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.code("0001 – Account not able to be found");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.title("Invalid account");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.detail(UUID.randomUUID().toString());
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());    
+    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
 }

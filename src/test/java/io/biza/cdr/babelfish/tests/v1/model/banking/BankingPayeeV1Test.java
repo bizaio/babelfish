@@ -29,21 +29,21 @@ public class BankingPayeeV1Test {
     assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_PAYEE).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_BANKING_PAYEE).toString());
   }
-  
+
   @Test
   @DisplayName("BankingPayee Mandatory Fields")
   void bankingPayeeMandatoryFields() {
     BankingPayee data = new BankingPayee();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.payeeId(UUID.randomUUID().toString());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.setNickname("Payee Nickname");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.payeeType(BankingPayeeType.DOMESTIC);
-    
+
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

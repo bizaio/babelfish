@@ -14,12 +14,17 @@ package io.biza.cdr.babelfish.model.banking;
 import javax.validation.Valid;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(description = "Authorised Entity details")
 public abstract class BankingAuthorisedEntity<T> {
   @BabelFishModelProperty(

@@ -17,15 +17,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.CDRResponsePaginated;
 import io.biza.cdr.babelfish.response.container.ResponseBankingTransactionListData;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
-public abstract class ResponseBankingTransactionList<T>
-    extends CDRResponsePaginated<T> {
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
+public abstract class ResponseBankingTransactionList<T> extends CDRResponsePaginated<T> {
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull

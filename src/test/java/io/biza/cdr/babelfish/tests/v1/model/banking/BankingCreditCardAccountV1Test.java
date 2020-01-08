@@ -38,12 +38,12 @@ public class BankingCreditCardAccountV1Test {
 
     data.minPaymentAmount(new BigDecimal("10.00"));
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.paymentDueAmount(new BigDecimal("10.00"));
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.paymentDueDate(LocalDate.now());
-    
+
     // Now a compliant payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

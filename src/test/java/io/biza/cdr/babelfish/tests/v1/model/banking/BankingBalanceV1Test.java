@@ -29,21 +29,21 @@ public class BankingBalanceV1Test {
     assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_BALANCE).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_BANKING_BALANCE).toString());
   }
-  
+
   @Test
   @DisplayName("BankingBalance Mandatory Fields")
   void bankingBalanceMandatoryFields() {
     BankingBalance data = new BankingBalance();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.setAccountId(UUID.randomUUID().toString());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.currentBalance(new BigDecimal("1000.00"));
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.availableBalance(new BigDecimal("500.00"));
-    
+
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

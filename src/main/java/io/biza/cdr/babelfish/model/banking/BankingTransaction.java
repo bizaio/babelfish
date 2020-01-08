@@ -28,13 +28,18 @@ import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.BankingTransactionStatus;
 import io.biza.cdr.babelfish.v1.enumerations.BankingTransactionType;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(description = "Banking Transaction Brief Definition")
 public abstract class BankingTransaction<T> {
   @BabelFishModelProperty(description = "ID of the account for which transactions are provided",

@@ -28,18 +28,18 @@ public class CommonPersonDetailV1Test {
     assertTrue(validator.validate(ModelConstants.DEFAULT_COMMON_PERSON_DETAIL).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_COMMON_PERSON_DETAIL).toString());
   }
-  
+
   @Test
   @DisplayName("CommonPersonDetail Mandatory Fields")
   void commonPersonDetailMandatoryFields() {
     CommonPersonDetail data = new CommonPersonDetail();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.lastName("Last");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.physicalAddresses(List.of(ModelConstants.DEFAULT_COMMON_PHYSICAL_ADDRESS_WITH_PURPOSE));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
 }

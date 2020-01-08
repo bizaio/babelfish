@@ -15,8 +15,14 @@ import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingAccount;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class BankingAccountDetail
     extends io.biza.cdr.babelfish.model.banking.BankingAccountDetail<BankingAccountDetail> {
 
@@ -28,8 +34,10 @@ public class BankingAccountDetail
   @AssertTrue(message = "Account Type must supply matching Account Type Specific Information")
   private boolean isAccountTypeCorrect() {
     // Return true if not defined, @NotNull will pick this up later
-    if(specificAccountUType() == null) { return true; }
-    
+    if (specificAccountUType() == null) {
+      return true;
+    }
+
     if (specificAccountUType().equals(PayloadTypeBankingAccount.TERM_DEPOSIT)) {
       return termDeposit() != null && creditCard() == null && loan() == null ? true : false;
     } else if (specificAccountUType().equals(PayloadTypeBankingAccount.CREDIT_CARD)) {

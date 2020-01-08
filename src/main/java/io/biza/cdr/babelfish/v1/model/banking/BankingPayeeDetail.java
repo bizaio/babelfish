@@ -14,14 +14,22 @@ package io.biza.cdr.babelfish.v1.model.banking;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingPayee;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class BankingPayeeDetail
     extends io.biza.cdr.babelfish.model.banking.BankingPayeeDetail<BankingPayeeDetail> {
   @AssertTrue(
       message = "One and only one of payeeUType specified payload of domestic, biller and international should be present")
   private boolean isUTypePopulated() {
-    if(type() == null) { return true; }
+    if (type() == null) {
+      return true;
+    }
     if (type().equals(PayloadTypeBankingPayee.DOMESTIC)) {
       return domestic() != null && biller() == null && international() == null;
     } else if (type().equals(PayloadTypeBankingPayee.BILLER)) {

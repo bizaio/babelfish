@@ -18,13 +18,18 @@ import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductRateTierApplicationMethod;
 import io.biza.cdr.babelfish.v1.enumerations.CommonUnitOfMeasureType;
 import io.biza.cdr.babelfish.support.BabelFishModel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(description = "Defines the criteria and conditions for which a rate applies")
 public abstract class BankingProductRateTier<T> {
   @BabelFishModelProperty(description = "A display name for the tier", required = true)

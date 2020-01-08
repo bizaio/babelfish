@@ -29,6 +29,7 @@ public enum BankingProductCategory implements LabelValueEnumInterface {
                           "LEASES", "Leases"), TRADE_FINANCE("TRADE_FINANCE",
                               "Trade Finance"), OVERDRAFTS("OVERDRAFTS",
                                   "Overdrafts"), BUSINESS_LOANS("BUSINESS_LOANS", "Business Loans");
+
   private String value;
 
   private String label;

@@ -13,8 +13,14 @@ package io.biza.cdr.babelfish.v1.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class BankingBillerPayee
     extends io.biza.cdr.babelfish.model.banking.BankingBillerPayee<BankingBillerPayee> {
   @AssertTrue(message = "BPAY CRN of Card Format MUST be Masked")
@@ -29,15 +35,19 @@ public class BankingBillerPayee
       return true;
     }
   }
-  
+
   @AssertTrue(message = "BPAY CRN of Card Format MUST be Masked")
   private boolean isBillerCodeCompliant() {
-    if(billerCode() == null) { return true; }
+    if (billerCode() == null) {
+      return true;
+    }
     // From BPAY's Developer site:
     // The biller code must be a numeric value with 3 to 10 digits.
-    if(billerCode().matches("\\d{3,10}")) { return true; }
+    if (billerCode().matches("\\d{3,10}")) {
+      return true;
+    }
     return false;
-    
+
   }
 
 }

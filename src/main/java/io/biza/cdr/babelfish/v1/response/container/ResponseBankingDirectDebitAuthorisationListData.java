@@ -11,6 +11,15 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response.container;
 
+import javax.validation.Valid;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+@Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class ResponseBankingDirectDebitAuthorisationListData extends
     io.biza.cdr.babelfish.response.container.ResponseBankingDirectDebitAuthorisationListData<ResponseBankingDirectDebitAuthorisationListData> {
 }

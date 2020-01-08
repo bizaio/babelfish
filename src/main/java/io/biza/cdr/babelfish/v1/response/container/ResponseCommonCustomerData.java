@@ -11,12 +11,20 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.response.container;
 
+import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeCustomer;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+@Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
 
 public class ResponseCommonCustomerData extends
     io.biza.cdr.babelfish.response.container.ResponseCommonCustomerData<ResponseCommonCustomerData> {
-  
+
   @AssertTrue(message = "Only person should be populated when customer type is set to PERSON")
   private boolean isPersonPopulated() {
     if (type() != null && type().equals(PayloadTypeCustomer.PERSON)) {

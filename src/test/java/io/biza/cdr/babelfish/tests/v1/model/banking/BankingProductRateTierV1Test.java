@@ -17,7 +17,7 @@ import io.biza.cdr.babelfish.v1.model.banking.BankingProductRateTier;
 @DisplayName("BankingProductRateTier V1 Tests")
 public class BankingProductRateTierV1Test {
   private Validator validator;
-  
+
   // TODO: Overlapping rate tier checks
 
   @BeforeEach
@@ -32,43 +32,44 @@ public class BankingProductRateTierV1Test {
     assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_PRODUCT_RATE_TIER).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_BANKING_PRODUCT_RATE_TIER).toString());
   }
-  
+
   @Test
   @DisplayName("BankingProductRateTier for Mandatory Fields")
   void bankingProductRateTierMandatoryFields()
       throws IllegalAccessException, InvocationTargetException {
     BankingProductRateTier data = new BankingProductRateTier();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     // add name, missing two others still
     data.name("Rate Tier Name");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     // add unit of measure, one missing still
     data.unitOfMeasure(CommonUnitOfMeasureType.DOLLAR);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     // add minimumValue, should validate now
     data.minimumValue(new BigDecimal("10.00"));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
-  
+
   @Test
   @DisplayName("BankingProductRateTier for Discrete Values")
   void bankingProductRateTierDiscreteValues()
       throws IllegalAccessException, InvocationTargetException {
     // Dollar value should pass
-    BankingProductRateTier data = new BankingProductRateTier().name("Test Rate Tier").unitOfMeasure(CommonUnitOfMeasureType.DOLLAR).minimumValue(new BigDecimal("10.00"));
+    BankingProductRateTier data = new BankingProductRateTier().name("Test Rate Tier")
+        .unitOfMeasure(CommonUnitOfMeasureType.DOLLAR).minimumValue(new BigDecimal("10.00"));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     // Month with no bounding should pass
     data.unitOfMeasure(CommonUnitOfMeasureType.MONTH);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     // As should day
     data.unitOfMeasure(CommonUnitOfMeasureType.DAY);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     // Including if maximum value is set
     data.unitOfMeasure(CommonUnitOfMeasureType.MONTH);
     data.maximumValue(new BigDecimal("10.00"));
@@ -80,5 +81,5 @@ public class BankingProductRateTierV1Test {
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
-  
+
 }

@@ -24,9 +24,9 @@ public class ResponseBankingAccountsBalanceByIdV1Test {
   @Test
   @DisplayName("Create valid ResponseBankingAccountsBalanceById")
   void responseBankingAccountsBalanceById() {
-    ResponseBankingAccountsBalanceById myResponse =
-        new ResponseBankingAccountsBalanceById().links(new Links().self(ModelConstants.DEFAULT_SELF_URI))
-            .data(ModelConstants.DEFAULT_BANKING_BALANCE);
+    ResponseBankingAccountsBalanceById myResponse = new ResponseBankingAccountsBalanceById()
+        .links(new Links().self(ModelConstants.DEFAULT_SELF_URI))
+        .data(ModelConstants.DEFAULT_BANKING_BALANCE);
     assertTrue(validator.validate(myResponse).isEmpty(), validator.validate(myResponse).toString());
   }
 

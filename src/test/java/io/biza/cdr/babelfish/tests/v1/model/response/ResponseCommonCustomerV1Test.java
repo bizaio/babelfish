@@ -33,16 +33,16 @@ public class ResponseCommonCustomerV1Test {
   void responseCommonCustomerMandatoryFields() {
     ResponseCommonCustomer data = new ResponseCommonCustomer();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.links(ModelConstants.DEFAULT_LINKS);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.data(ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DATA);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     // Should still validate with meta too
     data.meta(ModelConstants.DEFAULT_META);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
 }

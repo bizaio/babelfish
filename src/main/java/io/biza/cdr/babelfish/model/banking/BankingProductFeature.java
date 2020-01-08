@@ -19,11 +19,16 @@ import io.biza.cdr.babelfish.v1.enumerations.BankingProductFeatureType;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(description = "A Banking Product Feature")
 public abstract class BankingProductFeature<T> {
   @BabelFishModelProperty(description = "The type of feature described", required = true)

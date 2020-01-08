@@ -12,8 +12,12 @@
 package io.biza.cdr.babelfish.v1.request;
 
 import javax.validation.Valid;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
 public class RequestAccountIds
     extends io.biza.cdr.babelfish.request.RequestAccountIds<RequestAccountIds> {
 }

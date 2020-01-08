@@ -17,16 +17,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.AddressPurpose;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
 @BabelFishModel(description = "Physical Address with Purpose", parent = CommonPhysicalAddress.class)
-public abstract class CommonPhysicalAddressWithPurpose<T>
-    extends CommonPhysicalAddress<T> {
+public abstract class CommonPhysicalAddressWithPurpose<T> extends CommonPhysicalAddress<T> {
   @BabelFishModelProperty(
       description = "Enumeration of values indicating the purpose of the physical address",
       required = true)

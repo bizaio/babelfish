@@ -18,17 +18,22 @@ import io.biza.cdr.babelfish.model.CDRResponse;
 import io.biza.cdr.babelfish.response.container.CommonDiscoveryStatus;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 @BabelFishModel(modelName = "ResponseCommonDiscoveryStatus",
     description = "Common Discovery Status")
-public abstract class ResponseCommonDiscoveryStatus<T>
-    extends CDRResponse<T> {
+public abstract class ResponseCommonDiscoveryStatus<T> extends CDRResponse<T> {
   @BabelFishModelProperty(required = true)
   @JsonProperty("data")
   @NotNull

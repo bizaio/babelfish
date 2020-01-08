@@ -22,13 +22,17 @@ import io.biza.cdr.babelfish.v1.enumerations.BankingAccountStatus;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductCategory;
 import io.biza.cdr.babelfish.converters.LocalDateToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToLocalDateConverter;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
 @BabelFishModel(description = "An Australian Bank Account")
 public abstract class BankingAccount<T> {
   @BabelFishModelProperty(

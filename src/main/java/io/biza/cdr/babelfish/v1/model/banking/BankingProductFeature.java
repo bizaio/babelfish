@@ -16,8 +16,14 @@ import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductFeatureType;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class BankingProductFeature
     extends io.biza.cdr.babelfish.model.banking.BankingProductFeature<BankingProductFeature> {
 
@@ -92,13 +98,16 @@ public class BankingProductFeature
   @AssertTrue(
       message = "Additional Value should be null when Feature Type is UNLIMITED_TXNS, OFFSET, OVERDRAFT, REDRAW, BALANCE_TRANSFERS, DIGITAL_BANKING, NPP_PAYID, NPP_ENABLED, DONATE_INTEREST, OTHER")
   private boolean isValueStringNull() {
-    return FormatChecker.isDefined(featureType()) ? (Arrays
-        .asList(new BankingProductFeatureType[] {BankingProductFeatureType.UNLIMITED_TXNS,
-            BankingProductFeatureType.OFFSET, BankingProductFeatureType.OVERDRAFT,
-            BankingProductFeatureType.REDRAW,
-            BankingProductFeatureType.BALANCE_TRANSFERS, BankingProductFeatureType.DIGITAL_BANKING,
-            BankingProductFeatureType.NPP_PAYID, BankingProductFeatureType.NPP_ENABLED,
-            BankingProductFeatureType.DONATE_INTEREST, BankingProductFeatureType.OTHER})
-        .contains(featureType()) ? !FormatChecker.isDefined(additionalValue()) : true) : true;
+    return FormatChecker
+        .isDefined(featureType())
+            ? (Arrays
+                .asList(new BankingProductFeatureType[] {BankingProductFeatureType.UNLIMITED_TXNS,
+                    BankingProductFeatureType.OFFSET, BankingProductFeatureType.OVERDRAFT,
+                    BankingProductFeatureType.REDRAW, BankingProductFeatureType.BALANCE_TRANSFERS,
+                    BankingProductFeatureType.DIGITAL_BANKING, BankingProductFeatureType.NPP_PAYID,
+                    BankingProductFeatureType.NPP_ENABLED,
+                    BankingProductFeatureType.DONATE_INTEREST, BankingProductFeatureType.OTHER})
+                .contains(featureType()) ? !FormatChecker.isDefined(additionalValue()) : true)
+            : true;
   }
 }

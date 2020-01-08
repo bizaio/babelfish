@@ -15,13 +15,16 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.response.container;
 
+import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeCustomer;
 import io.biza.cdr.babelfish.v1.model.common.CommonOrganisationDetail;
 import io.biza.cdr.babelfish.v1.model.common.CommonPersonDetail;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -29,6 +32,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
+
+@BabelFishModel(
+    description = "Object containing either a PersonDetail or OrganisationDetail object defined by a type attribute")
 public abstract class ResponseCommonCustomerDetailData<T> {
   @BabelFishModelProperty(description = "The type of customer object that is present",
       required = true)

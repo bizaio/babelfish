@@ -16,7 +16,7 @@ import io.biza.cdr.babelfish.v1.model.common.CommonSimpleAddress;
 @DisplayName("CommonSimpleAddress V1 Tests")
 public class CommonSimpleAddressV1Test {
   private Validator validator;
-  
+
   // TODO: Validate australian states
 
   @BeforeEach
@@ -37,38 +37,43 @@ public class CommonSimpleAddressV1Test {
   void responseCommonSimpleAddressMandatoryFieldsAustralia() {
     CommonSimpleAddress data = new CommonSimpleAddress();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.addressLine1("10 McGill Street");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.postcode("2550");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.city("Cobargo");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.state("NSW");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
-  
+
   @Test
   @DisplayName("CommonSimpleAddress Mandatory Fields (International)")
   void responseCommonSimpleAddressMandatoryFieldsInternational() {
     CommonSimpleAddress data = new CommonSimpleAddress();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.addressLine1("10 McGill Street");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.city("Paris");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
+    // https://github.com/ConsumerDataStandardsAustralia/standards-maintenance/issues/88
     data.state("");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+
+    // https://github.com/ConsumerDataStandardsAustralia/standards-maintenance/issues/88
+    data.state("Île-de-France");
+    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+
     data.country(new Locale(Constants.DEFAULT_LOCALE, "FR"));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
 }

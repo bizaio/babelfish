@@ -17,13 +17,17 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
 @BabelFishModel(description = "Person definition in detail", parent = CommonPerson.class)
 public abstract class CommonPersonDetail<T> extends CommonPerson<T> {
   @BabelFishModelProperty(
@@ -33,7 +37,7 @@ public abstract class CommonPersonDetail<T> extends CommonPerson<T> {
   @NonNull
   @NotNull
   public List<CommonPhoneNumber<?>> phoneNumbers = List.of();
-  
+
   public List<CommonPhoneNumber<?>> phoneNumbers() {
     return getPhoneNumbers();
   }
@@ -49,7 +53,7 @@ public abstract class CommonPersonDetail<T> extends CommonPerson<T> {
   @NonNull
   @NotNull
   public List<CommonEmailAddress<?>> emailAddresses = List.of();
-  
+
   public List<CommonEmailAddress<?>> emailAddresses() {
     return getEmailAddresses();
   }
@@ -68,7 +72,7 @@ public abstract class CommonPersonDetail<T> extends CommonPerson<T> {
   @NotNull
   @NonNull
   public List<CommonPhysicalAddressWithPurpose<?>> physicalAddresses = List.of();
-  
+
   public List<CommonPhysicalAddressWithPurpose<?>> physicalAddresses() {
     return getPhysicalAddresses();
   }

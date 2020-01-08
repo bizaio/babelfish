@@ -14,7 +14,7 @@ import io.biza.cdr.babelfish.v1.model.banking.BankingInternationalPayee;
 @DisplayName("BankingInternationalPayee V1 Tests")
 public class BankingInternationalPayeeV1Test {
   private Validator validator;
-  
+
   @BeforeEach
   public void setup() {
     ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -27,20 +27,20 @@ public class BankingInternationalPayeeV1Test {
     assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_INTERNATIONAL_PAYEE).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_BANKING_INTERNATIONAL_PAYEE).toString());
   }
-  
+
   @Test
   @DisplayName("BankingInternationalPayee Mandatory Fields")
   void bankingInternationalPayeeMandatoryFields() {
     BankingInternationalPayee data = new BankingInternationalPayee();
     data.beneficiaryDetails(ModelConstants.DEFAULT_BANKING_INTERNATIONAL_PAYEE_BENEFICIARY_DETAILS);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.bankDetails(ModelConstants.DEFAULT_BANKING_INTERNATIONAL_PAYEE_BANK_DETAILS);
-    
+
     // Should be a valid payload now
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    
+
   }
 
 }

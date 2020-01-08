@@ -36,7 +36,7 @@ public class ResponseBankingAccountByIdV1Test {
 
     data.setLinks(ModelConstants.DEFAULT_LINKS);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.setData(ModelConstants.DEFAULT_BANKING_ACCOUNT_DETAIL);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

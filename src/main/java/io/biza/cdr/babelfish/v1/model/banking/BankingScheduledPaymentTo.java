@@ -14,14 +14,22 @@ package io.biza.cdr.babelfish.v1.model.banking;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingScheduledPaymentTo;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class BankingScheduledPaymentTo extends
     io.biza.cdr.babelfish.model.banking.BankingScheduledPaymentTo<BankingScheduledPaymentTo> {
   @AssertTrue(
       message = "One and only one of accountId, payeeId, domestic, biller, international should be populated based on type")
   private boolean isUTypePopulated() {
-    if(type() == null) { return true; }
+    if (type() == null) {
+      return true;
+    }
     if (type().equals(PayloadTypeBankingScheduledPaymentTo.ACCOUNT_ID)) {
       return accountId() != null && payeeId() == null && domestic() == null && biller() == null
           && international() == null;

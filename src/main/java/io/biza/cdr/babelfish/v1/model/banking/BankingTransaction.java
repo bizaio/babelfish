@@ -14,8 +14,14 @@ package io.biza.cdr.babelfish.v1.model.banking;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.cdr.babelfish.v1.enumerations.BankingTransactionStatus;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Valid
+@ToString
+@EqualsAndHashCode(callSuper = true)
+
+
 public class BankingTransaction
     extends io.biza.cdr.babelfish.model.banking.BankingTransaction<BankingTransaction> {
   @AssertTrue(message = "Posting Date and Time must be set when status is POSTED")

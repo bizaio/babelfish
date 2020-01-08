@@ -26,13 +26,18 @@ import io.biza.cdr.babelfish.converters.PeriodToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToLocalDateConverter;
 import io.biza.cdr.babelfish.converters.StringToPeriodConverter;
 import io.biza.cdr.babelfish.support.BabelFishModel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Valid
+@ToString
+@EqualsAndHashCode
+
 @BabelFishModel(
     description = "Indicates that the schedule of payments is defined according to the last occurrence of a specific weekday in an interval. Mandatory if recurrenceUType is set to lastWeekDay")
 public abstract class BankingScheduledPaymentRecurrenceLastWeekday<T> {
@@ -103,11 +108,11 @@ public abstract class BankingScheduledPaymentRecurrenceLastWeekday<T> {
     setLastWeekDay(lastWeekDay);
     return (T) this;
   }
-  
+
   @BabelFishModelProperty(
-      description = "Enumerated field giving the treatment where a scheduled payment date is not a business day. If absent assumed to be ON"
-      )
-  BankingPaymentNonBusinessDayTreatment nonBusinessDayTreatment = BankingPaymentNonBusinessDayTreatment.ON;
+      description = "Enumerated field giving the treatment where a scheduled payment date is not a business day. If absent assumed to be ON")
+  BankingPaymentNonBusinessDayTreatment nonBusinessDayTreatment =
+      BankingPaymentNonBusinessDayTreatment.ON;
 
   public BankingPaymentNonBusinessDayTreatment nonBusinessDayTreatment() {
     return getNonBusinessDayTreatment();
@@ -118,5 +123,5 @@ public abstract class BankingScheduledPaymentRecurrenceLastWeekday<T> {
     setNonBusinessDayTreatment(nonBusinessDayTreatment);
     return (T) this;
   }
-  
+
 }

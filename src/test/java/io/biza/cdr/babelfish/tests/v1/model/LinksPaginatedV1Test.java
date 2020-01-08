@@ -33,7 +33,7 @@ public class LinksPaginatedV1Test {
   void linksPaginatedMandatoryFieldsMiddleResult() {
     LinksPaginated data = new LinksPaginated();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.self(ModelConstants.DEFAULT_SELF_URI);
     data.first(ModelConstants.DEFAULT_FIRST_URI);
     data.prev(ModelConstants.DEFAULT_PREV_URI);
@@ -42,39 +42,39 @@ public class LinksPaginatedV1Test {
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
-  
+
   @Test
   @DisplayName("LinksPaginated Mandatory Fields (First Result)")
   void linksPaginatedMandatoryFieldsFirstResult() {
     LinksPaginated data = new LinksPaginated();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.self(ModelConstants.DEFAULT_SELF_URI);
     data.next(ModelConstants.DEFAULT_NEXT_URI);
     data.last(ModelConstants.DEFAULT_LAST_URI);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
-  
+
   @Test
   @DisplayName("LinksPaginated Mandatory Fields (Last Result)")
   void linksPaginatedMandatoryFieldsLastResult() {
     LinksPaginated data = new LinksPaginated();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.self(ModelConstants.DEFAULT_SELF_URI);
     data.first(ModelConstants.DEFAULT_FIRST_URI);
     data.prev(ModelConstants.DEFAULT_PREV_URI);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
-  
+
   @Test
   @DisplayName("LinksPaginated Mandatory Fields (First and Last)")
   void linksPaginatedMandatoryFieldsFirstAndLastPage() {
     LinksPaginated data = new LinksPaginated();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.self(ModelConstants.DEFAULT_FIRST_URI);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

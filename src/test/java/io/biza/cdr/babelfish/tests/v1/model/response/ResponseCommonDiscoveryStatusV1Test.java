@@ -33,16 +33,16 @@ public class ResponseCommonDiscoveryStatusV1Test {
   void responseCommonDiscoveryStatusMandatoryFields() {
     ResponseCommonDiscoveryStatus data = new ResponseCommonDiscoveryStatus();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.links(ModelConstants.DEFAULT_LINKS);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.data(ModelConstants.DEFAULT_COMMON_DISCOVERY_STATUS);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     // Should still validate with meta too
     data.meta(ModelConstants.DEFAULT_META);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
 }
