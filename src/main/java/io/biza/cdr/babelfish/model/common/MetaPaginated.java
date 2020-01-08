@@ -26,7 +26,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Valid
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @BabelFishModel(description = "Paginated Meta Details", parent = Meta.class)
 public abstract class MetaPaginated<T> extends Meta<T> {

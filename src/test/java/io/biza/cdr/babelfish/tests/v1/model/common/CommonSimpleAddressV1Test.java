@@ -66,11 +66,7 @@ public class CommonSimpleAddressV1Test {
 
     // https://github.com/ConsumerDataStandardsAustralia/standards-maintenance/issues/88
     data.state("");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-
-    // https://github.com/ConsumerDataStandardsAustralia/standards-maintenance/issues/88
-    data.state("Île-de-France");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.country(new Locale(Constants.DEFAULT_LOCALE, "FR"));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());

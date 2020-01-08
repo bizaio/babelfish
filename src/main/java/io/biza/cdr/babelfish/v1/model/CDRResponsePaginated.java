@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Valid
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class CDRResponsePaginated
     extends io.biza.cdr.babelfish.model.CDRResponsePaginated<CDRResponsePaginated> {

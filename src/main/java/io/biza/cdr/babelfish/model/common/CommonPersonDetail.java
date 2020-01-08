@@ -26,7 +26,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Valid
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @BabelFishModel(description = "Person definition in detail", parent = CommonPerson.class)
 public abstract class CommonPersonDetail<T> extends CommonPerson<T> {

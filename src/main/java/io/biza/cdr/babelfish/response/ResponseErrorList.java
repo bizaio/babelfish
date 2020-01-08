@@ -27,7 +27,7 @@ import io.biza.cdr.babelfish.model.common.Error;
 @Getter
 @Setter
 @Valid
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode
 @BabelFishModel(description = "CDS Error Response")
 public abstract class ResponseErrorList<T> {

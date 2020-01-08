@@ -55,7 +55,6 @@ public class FormatChecker {
     inputAbn = inputAbn.replaceAll(" ", "");
     // Check if it is the right length and is all digits
     if (NumberUtils.isDigits(inputAbn) && inputAbn.length() == 11) {
-      System.out.println("Processing input abn of " + inputAbn);
       // "Magical" weighting factors from https://abr.business.gov.au/Help/AbnFormat
       final int[] weightingFactors = {10, 1, 3, 5, 7, 9, 11, 13, 15, 17, 19};
       // Use this to add up the checksums

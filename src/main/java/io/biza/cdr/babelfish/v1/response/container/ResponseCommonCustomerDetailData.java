@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Valid
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class ResponseCommonCustomerDetailData extends
     io.biza.cdr.babelfish.response.container.ResponseCommonCustomerDetailData<ResponseCommonCustomerDetailData> {

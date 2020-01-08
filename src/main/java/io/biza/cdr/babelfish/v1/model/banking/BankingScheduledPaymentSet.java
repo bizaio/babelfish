@@ -17,7 +17,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Valid
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class BankingScheduledPaymentSet extends
     io.biza.cdr.babelfish.model.banking.BankingScheduledPaymentSet<BankingScheduledPaymentSet> {

@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Getter
 @Setter
 @Valid
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode
 
 

@@ -17,7 +17,7 @@ import lombok.ToString;
 
 
 @Valid
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class BankingProductRateTier
     extends io.biza.cdr.babelfish.model.banking.BankingProductRateTier<BankingProductRateTier> {

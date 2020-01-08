@@ -31,7 +31,6 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-
 @BabelFishModel(description = "International Payee Beneficiary Details")
 public abstract class BankingInternationalPayeeBeneficiaryDetails<T> {
   @BabelFishModelProperty(description = "Name of the beneficiary")

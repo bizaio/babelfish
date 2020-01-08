@@ -35,7 +35,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Valid
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode
 @BabelFishModel(description = "Common Discovery Status Information")
 public abstract class CommonDiscoveryStatus<T> {

@@ -31,7 +31,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Valid
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode
 @BabelFishModel(description = "Response containing a list of Banking Accounts")
 public abstract class ResponseBankingAccountListData<T> {

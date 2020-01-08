@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Valid
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class AccountIdsList
     extends io.biza.cdr.babelfish.model.common.AccountIdsList<AccountIdsList> {

@@ -27,10 +27,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @Valid
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-
-
 @BabelFishModel(description = "Response containing a single Banking Account Detail")
 public abstract class ResponseBankingAccountById<T> extends CDRResponse<T> {
   @BabelFishModelProperty(required = true)

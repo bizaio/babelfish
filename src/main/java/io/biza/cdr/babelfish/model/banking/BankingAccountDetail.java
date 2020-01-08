@@ -30,7 +30,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Valid
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @BabelFishModel(description = "Detailed Australian Banking Account Information",
     parent = BankingAccount.class)

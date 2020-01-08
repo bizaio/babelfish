@@ -26,7 +26,6 @@ public class ResponseCommonCustomerDetailDataV1Test {
   @DisplayName("Create valid ResponseCommonCustomerDetailData")
   void responseCommonCustomerDetailData() {
     ResponseCommonCustomerDetailData data = ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL_DATA;
-    System.out.println("Checking " + data.toString());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
@@ -45,7 +44,7 @@ public class ResponseCommonCustomerDetailDataV1Test {
     // Should only have one
     data.organisation(ModelConstants.DEFAULT_COMMON_ORGANISATION_DETAIL);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-
+    
   }
 
   @Test

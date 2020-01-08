@@ -26,7 +26,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Valid
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @BabelFishModel(description = "Physical Address with Purpose", parent = CommonPhysicalAddress.class)
 public abstract class CommonPhysicalAddressWithPurpose<T> extends CommonPhysicalAddress<T> {

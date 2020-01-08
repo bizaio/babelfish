@@ -28,7 +28,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Valid
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @BabelFishModel(description = "Paginated Links")
 public abstract class LinksPaginated<T> extends Links<T> {

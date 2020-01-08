@@ -32,10 +32,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Getter
 @Setter
 @Valid
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode
-
-
 @BabelFishModel(
     description = "Object containing either a PersonDetail or OrganisationDetail object defined by a type attribute")
 public abstract class ResponseCommonCustomerDetailData<T> {

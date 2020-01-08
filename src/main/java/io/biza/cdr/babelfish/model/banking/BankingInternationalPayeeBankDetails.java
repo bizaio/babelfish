@@ -33,7 +33,6 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-
 @BabelFishModel(description = "International Payee Bank Details")
 public abstract class BankingInternationalPayeeBankDetails<T> {
   @BabelFishModelProperty(

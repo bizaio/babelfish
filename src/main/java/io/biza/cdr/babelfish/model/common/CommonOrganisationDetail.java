@@ -26,7 +26,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Valid
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @BabelFishModel(description = "Organisation Definition in Detail",
     parent = CommonOrganisation.class)
