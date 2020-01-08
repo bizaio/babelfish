@@ -1,3 +1,16 @@
+<!--
+    Copyright (C) 2020 Biza Pty Ltd
+   
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+   
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+ -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -5,13 +18,19 @@
 	<groupId>io.biza</groupId>
 	<artifactId>cdr-babelfish</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
-	<name>Biza CDR: Babelfish Payload Converter</name>
+	<name>CDR Babelfish</name>
 	<description>The Babelfish Payload Converter enables the efficient translation of payloads associated with the Consumer Data Right to and from Java and JSON representations as well as between versions of various payloads.</description>
 	<url>https://github.com/bizaio/cdr-babelfish</url>
 	<organization>
-		<name>Biza.io</name>
+		<name>Biza Pty Ltd</name>
 		<url>https://biza.io/</url>
 	</organization>
+	<licenses>
+		<license>
+			<name>GNU Lesser General Public License v3.0 or later</name>
+			<url>https://www.gnu.org/licenses/lgpl-3.0.txt</url>
+		</license>
+	</licenses>
 	<scm>
 		<url>https://github.com/bizaio/cdr-babelfish</url>
 		<developerConnection>scm:git:https://github.com/bizaio/cdr-babelfish.git</developerConnection>
