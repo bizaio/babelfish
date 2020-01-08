@@ -21,18 +21,15 @@ import io.biza.cdr.babelfish.support.LabelValueEnumInterface;
 
 /**
  * Non Business Day Treatment Specification
- * 
- * TODO: Clarify descriptions of this enum:
- * https://github.com/ConsumerDataStandardsAustralia/standards-maintenance/issues/81
  */
 @BabelFishModel(
     description = "Enumerated field giving the treatment where a scheduled payment date is not a business day. If absent assumed to be ON")
 public enum BankingPaymentNonBusinessDayTreatment implements LabelValueEnumInterface {
   // @formatter:off    
-  AFTER("AFTER", "The next business day immediately following the scheduled date"),
-  BEFORE("BEFORE", "The closest business day prior to the scheduled date"),
-  ON("ON", "Execute on the Non Business Day"),
-  ONLY("ONLY", "Only execute if possible on this date");
+  AFTER("AFTER", "If a scheduled payment date is a non-business day the payment will be made on the first business day after the scheduled payment date"),
+  BEFORE("BEFORE", "If a scheduled payment date is a non-business day the payment will be made on the first business day before the scheduled payment date"),
+  ON("ON", "If a scheduled payment date is a non-business day the payment will be made on that day regardless"),
+  ONLY("ONLY", "Payments only occur on business days. If a scheduled payment date is a non-business day the payment will be ignored");
   // @formatter:on  
   private String value;
 

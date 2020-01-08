@@ -74,7 +74,7 @@ public class CommonOrganisationV1Test {
     data.organisationType(CommonOrganisationType.COMPANY);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.acn("624123123");
+    data.acn("004 499 987");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }

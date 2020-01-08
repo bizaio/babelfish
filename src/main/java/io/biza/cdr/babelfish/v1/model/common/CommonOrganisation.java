@@ -29,8 +29,6 @@ import lombok.ToString;
 public class CommonOrganisation
     extends io.biza.cdr.babelfish.model.common.CommonOrganisation<CommonOrganisation> {
 
-  // TODO: Verify ACN and ABN are correctly formatted
-
   @AssertTrue(message = "ACN must be populated when organisationType is COMPANY")
   private boolean isAcnPopulated() {
     return FormatChecker.isDefined(organisationType())
@@ -38,4 +36,15 @@ public class CommonOrganisation
             .contains(organisationType()) ? FormatChecker.isDefined(acn()) : true)
         : true;
   }
+  
+  @AssertTrue(message = "ACN when defined must pass ASIC checksum checks")
+  private boolean isAcnValidated() {
+    return FormatChecker.isDefined(acn()) ? FormatChecker.isAcn(acn()) : true;
+  }
+  
+  @AssertTrue(message = "ABN when defined must pass ABR checksum checks")
+  private boolean isAbnValidated() {
+    return FormatChecker.isDefined(abn()) ? FormatChecker.isAbn(abn()) : true;
+  }
+
 }

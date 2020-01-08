@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.support;
 
@@ -77,9 +75,27 @@ public class FormatChecker {
     }
   }
 
-  // TODO: ACN Check
   public static boolean isAcn(String inputAcn) {
-    return true;
+    // Strip spacing
+    inputAcn = inputAcn.replaceAll(" ", "");
+    // Check if it is the right length and is all digits
+    if (NumberUtils.isDigits(inputAcn) && inputAcn.length() == 9) {
+      // "Magical" weighting factors from
+      // https://asic.gov.au/for-business/registering-a-company/steps-to-register-a-company/australian-company-numbers/australian-company-number-digit-check/
+      final int[] weightingFactors = {8, 7, 6, 5, 4, 3, 2, 1};
+      // Use this to add up the checksums
+      int acnChecksum = 0;
+      // Iterate over each digit in the acn
+      for (int i = 0; i < inputAcn.length()-1; i++) {
+        int valueAtIterator = Character.digit(inputAcn.charAt(i), 10);
+        acnChecksum += valueAtIterator * weightingFactors[i];
+      }
+      int acnCheckDigit = 10 - (acnChecksum % 10);
+      if(acnCheckDigit == 10) { acnCheckDigit = 0; }
+      return Character.digit(inputAcn.charAt(8), 10) == acnCheckDigit;
+    } else {
+      return false;
+    }
   }
 
   public static boolean isEmail(String inputEmail) {

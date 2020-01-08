@@ -1,19 +1,18 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.cdr.babelfish.v1.model.banking;
 
 import javax.validation.Valid;
+import javax.validation.constraints.AssertTrue;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -24,4 +23,24 @@ import lombok.ToString;
 
 public class BankingDirectDebit
     extends io.biza.cdr.babelfish.model.banking.BankingDirectDebit<BankingDirectDebit> {
+
+  @AssertTrue(message = "If lastDebitDateTime set then lastDebitAmount should be PRESENT")
+  private boolean isLastDebitAmountPresent() {
+    if (lastDebitDateTime() == null) {
+      return true;
+    } else {
+      return lastDebitAmount() != null;
+    }
+  }
+
+  @AssertTrue(message = "If lastDebitAmount set then lastDebitDateTime should be PRESENT")
+  private boolean isLastDebitDateTimePresent() {
+    if (lastDebitAmount() == null) {
+      return true;
+    } else {
+      return lastDebitDateTime() != null;
+    }
+  }
+
+
 }

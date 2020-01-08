@@ -21,8 +21,6 @@ import io.biza.cdr.babelfish.support.FormatChecker;
 
 @DisplayName("CDR Common Field Types")
 public class FieldTypesTest {
-  // TODO: Verify ACN
-
   @Test
   @DisplayName("Verify ABN")
   void verifyAbn() {
@@ -40,6 +38,29 @@ public class FieldTypesTest {
     
     // valid abn (Biza Pty Ltd) without spaces
     assertTrue(FormatChecker.isAbn("54624797655"));
+    
+  }
+  
+  @Test
+  @DisplayName("Verify ACN")
+  void verifyAcn() {
+    // invalid acn
+    assertFalse(FormatChecker.isAcn("invalid acn"));
+    
+    // invalid length acn
+    assertFalse(FormatChecker.isAcn("1111111111"));
+    
+    // checksum failure acn
+    assertFalse(FormatChecker.isAcn("111111111"));
+    
+    // valid acn (Biza Pty Ltd) with spaces
+    assertTrue(FormatChecker.isAcn("624 797 655"));
+    
+    // valid acn (ASIC sample)
+    assertTrue(FormatChecker.isAcn("010 499 966"));
+    
+    // valid acn (Biza Pty Ltd) without spaces
+    assertTrue(FormatChecker.isAcn("624797655"));
     
   }
   

@@ -15,6 +15,8 @@ package io.biza.cdr.babelfish.tests.v1.model.banking;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -28,8 +30,6 @@ import io.biza.cdr.babelfish.v1.model.banking.BankingDirectDebit;
 @DisplayName("BankingDirectDebit V1 Tests")
 public class BankingDirectDebitV1Test {
   private Validator validator;
-
-  // TODO: Add lastDebitAmount check when lastDebitDateTime is defined
 
   @BeforeEach
   public void setup() {
@@ -57,6 +57,25 @@ public class BankingDirectDebitV1Test {
 
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+
+  }
+  
+  @Test
+  @DisplayName("BankingDirectDebit Last Debit Attributes should be present")
+  void bankingDirectDebitVerifyLastDebitAttributesPresent() {
+    BankingDirectDebit data = new BankingDirectDebit().accountId(UUID.randomUUID().toString()).authorisedEntity(ModelConstants.DEFAULT_BANKING_AUTHORISED_ENTITY);
+    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    
+    data.lastDebitDateTime(LocalDateTime.now());
+    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    
+    // If date time is set, amount should be set
+    data.lastDebitAmount(new BigDecimal("10.00"));
+    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    
+    // If amount is set date time should be set
+    data.lastDebitDateTime(null);
+    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
 
