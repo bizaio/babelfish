@@ -341,13 +341,6 @@ public class ModelConstants {
       new ResponseCommonDiscoveryOutagesListData()
           .outages(List.of(ModelConstants.DEFAULT_COMMON_DISCOVERY_OUTAGE));
 
-  public static final ResponseCommonCustomerDetailData DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL_DATA =
-      new ResponseCommonCustomerDetailData().type(PayloadTypeCustomer.PERSON)
-          .person(ModelConstants.DEFAULT_COMMON_PERSON_DETAIL);
-  public static final ResponseCommonCustomerDetail DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL =
-      new ResponseCommonCustomerDetail().links(ModelConstants.DEFAULT_LINKS)
-          .data(ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL_DATA);
-
   public static final CommonPerson DEFAULT_COMMON_PERSON = new CommonPerson().lastName("Last");
   public static final CommonOrganisation DEFAULT_COMMON_ORGANISATION =
       new CommonOrganisation().agentLastName("Last").businessName("Organisation Business Name")
@@ -420,5 +413,14 @@ public class ModelConstants {
       new BankingPayeeDetail().payeeId(UUID.randomUUID().toString()).nickname("Payee Nickname")
           .payeeType(BankingPayeeType.DOMESTIC).type(PayloadTypeBankingPayee.DOMESTIC)
           .domestic(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE);
+  
+  public static final ResponseCommonCustomerDetailData DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL_DATA =
+      new ResponseCommonCustomerDetailData().type(PayloadTypeCustomer.PERSON)
+          .person(ModelConstants.DEFAULT_COMMON_PERSON_DETAIL);
+  
+  public static final ResponseCommonCustomerDetail DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL =
+      new ResponseCommonCustomerDetail().links(ModelConstants.DEFAULT_LINKS)
+          .data(ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL_DATA);
+
 
 }

@@ -12,8 +12,6 @@
 package io.biza.cdr.babelfish.v1.model.banking;
 
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
-import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeCustomer;
 
 @Valid
 public class BankingScheduledPaymentInterval extends

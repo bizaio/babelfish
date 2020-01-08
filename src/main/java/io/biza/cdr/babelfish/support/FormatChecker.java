@@ -20,10 +20,7 @@ import java.time.Period;
 import java.time.format.DateTimeParseException;
 import java.util.Currency;
 import java.util.HashMap;
-import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -32,8 +29,6 @@ import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.PhoneNumberUtil.PhoneNumberFormat;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 import io.biza.cdr.babelfish.Constants;
-import io.biza.cdr.babelfish.model.common.CommonPhysicalAddressWithPurpose;
-import io.biza.cdr.babelfish.v1.enumerations.AddressPurpose;
 
 public class FormatChecker {
   public static boolean phoneNumberCountryCodeValid(String countryCode) {

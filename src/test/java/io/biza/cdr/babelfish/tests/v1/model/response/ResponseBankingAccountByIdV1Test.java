@@ -10,7 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.cdr.babelfish.tests.v1.ModelConstants;
 import io.biza.cdr.babelfish.v1.response.ResponseBankingAccountById;
-import io.biza.cdr.babelfish.v1.response.ResponseBankingAccountList;
 
 @DisplayName("ResponseBankingAccountById V1 Tests")
 public class ResponseBankingAccountByIdV1Test {

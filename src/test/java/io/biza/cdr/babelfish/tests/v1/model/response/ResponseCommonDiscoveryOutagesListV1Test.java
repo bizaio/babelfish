@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.cdr.babelfish.tests.v1.ModelConstants;
-import io.biza.cdr.babelfish.v1.response.ResponseBankingTransactionList;
 import io.biza.cdr.babelfish.v1.response.ResponseCommonDiscoveryOutagesList;
 
 @DisplayName("ResponseCommonDiscoveryOutagesList V1 Tests")

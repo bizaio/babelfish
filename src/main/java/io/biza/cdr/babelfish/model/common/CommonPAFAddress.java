@@ -12,6 +12,7 @@
 package io.biza.cdr.babelfish.model.common;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.support.BabelFishModel;
 import io.biza.cdr.babelfish.support.BabelFishModelProperty;
@@ -22,6 +23,7 @@ import io.biza.cdr.babelfish.v1.enumerations.AddressPAFStateType;
 import io.biza.cdr.babelfish.v1.enumerations.AddressPAFStreetSuffix;
 import io.biza.cdr.babelfish.v1.enumerations.AddressPAFStreetType;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
@@ -335,6 +337,8 @@ public abstract class CommonPAFAddress<T extends CommonPAFAddress<T>> {
 
   @BabelFishModelProperty(description = "Full name of locality", required = true)
   @JsonProperty("localityName")
+  @NotNull
+  @NonNull
   public String localityName;
 
   public String localityName() {
@@ -349,6 +353,8 @@ public abstract class CommonPAFAddress<T extends CommonPAFAddress<T>> {
 
   @BabelFishModelProperty(description = "Postcode for the locality", required = true)
   @JsonProperty("postcode")
+  @NotNull
+  @NonNull
   public String postcode;
 
   public String postcode() {
@@ -365,6 +371,8 @@ public abstract class CommonPAFAddress<T extends CommonPAFAddress<T>> {
       description = "State in which the address belongs. Valid enumeration defined by Australia Post PAF code file",
       required = true, dataType = "java.lang.String")
   @JsonProperty("state")
+  @NotNull
+  @NonNull
   public AddressPAFStateType state;
 
   public AddressPAFStateType state() {

@@ -16,7 +16,6 @@ import javax.validation.constraints.AssertTrue;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import io.biza.cdr.babelfish.support.FormatChecker;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingDomesticPayeePayId;
-import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingPayee;
 
 @Valid
 public class BankingDomesticPayeePayId extends
