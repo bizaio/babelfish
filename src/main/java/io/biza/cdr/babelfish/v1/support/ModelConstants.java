@@ -150,11 +150,11 @@ public class ModelConstants {
   public static final BankingProduct DEFAULT_BANKING_PRODUCT =
       new BankingProduct().productId("test").lastUpdated(OffsetDateTime.now())
           .productCategory(BankingProductCategory.BUSINESS_LOANS).name("Test")
-          .description("Test Description").brand("ACME").isTailored(false);
+          .description("Test Description").brand("ACME").tailored(false);
   public static final BankingProductDetail DEFAULT_BANKING_PRODUCT_DETAIL =
       new BankingProductDetail().productId("test").lastUpdated(OffsetDateTime.now())
           .productCategory(BankingProductCategory.BUSINESS_LOANS).name("Test")
-          .description("Test Description").brand("ACME").isTailored(false);
+          .description("Test Description").brand("ACME").tailored(false);
   public static final BankingProductBundle DEFAULT_BANKING_PRODUCT_BUNDLE =
       new BankingProductBundle().name("Bundle Name").description("Bundle Description");
   public static final BankingProductFeature DEFAULT_BANKING_PRODUCT_FEATURE =

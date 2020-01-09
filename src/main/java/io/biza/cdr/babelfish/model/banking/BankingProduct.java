@@ -17,6 +17,7 @@ import java.net.URI;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductCategory;
@@ -204,15 +205,16 @@ public abstract class BankingProduct<T> {
       required = true)
   @NonNull
   @NotNull
-  Boolean isTailored;
+  @JsonProperty("isTailored")
+  Boolean tailored;
 
-  public Boolean isTailored() {
-    return getIsTailored();
+  public Boolean tailored() {
+    return getTailored();
   }
 
   @SuppressWarnings("unchecked")
-  public T isTailored(Boolean isTailored) {
-    setIsTailored(isTailored);
+  public T tailored(Boolean isTailored) {
+    setTailored(isTailored);
     return (T) this;
   }
 

@@ -20,8 +20,6 @@ import lombok.ToString;
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-
-
 public class BankingProduct
     extends io.biza.cdr.babelfish.model.banking.BankingProduct<BankingProduct> {
 }
