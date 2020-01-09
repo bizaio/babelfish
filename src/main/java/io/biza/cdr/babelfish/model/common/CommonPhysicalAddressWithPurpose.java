@@ -16,8 +16,7 @@ package io.biza.cdr.babelfish.model.common;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.v1.enumerations.AddressPurpose;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -30,9 +29,9 @@ import lombok.ToString;
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@BabelFishModel(description = "Physical Address with Purpose", parent = CommonPhysicalAddress.class)
+@Schema(description = "Physical Address with Purpose")
 public abstract class CommonPhysicalAddressWithPurpose<T> extends CommonPhysicalAddress<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "Enumeration of values indicating the purpose of the physical address",
       required = true)
   @JsonProperty("purpose")

@@ -16,10 +16,10 @@ package io.biza.cdr.babelfish.v1.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.support.LabelValueEnumInterface;
 
-@BabelFishModel(description = "Banking Product: Rate Tier Application Method")
+@Schema(description = "Banking Product: Rate Tier Application Method")
 public enum BankingProductRateTierApplicationMethod implements LabelValueEnumInterface {
   // @formatter:off
   WHOLE_BALANCE("WHOLE_BALANCE", "Rate is applied to the entire balance"),

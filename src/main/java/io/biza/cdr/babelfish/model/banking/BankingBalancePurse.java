@@ -23,8 +23,7 @@ import io.biza.cdr.babelfish.converters.AmountStringToBigDecimalConverter;
 import io.biza.cdr.babelfish.converters.BigDecimalToAmountStringConverter;
 import io.biza.cdr.babelfish.converters.CurrencyToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToCurrencyConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -37,9 +36,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "An Australian Bank Account Purse Balance Representation")
+@Schema(description = "An Australian Bank Account Purse Balance Representation")
 public abstract class BankingBalancePurse<T> {
-  @BabelFishModelProperty(description = "The balance available for this additional currency purse",
+  @Schema(description = "The balance available for this additional currency purse",
       required = true)
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
@@ -57,7 +56,7 @@ public abstract class BankingBalancePurse<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "The currency for the purse")
+  @Schema(description = "The currency for the purse")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   Currency currency;

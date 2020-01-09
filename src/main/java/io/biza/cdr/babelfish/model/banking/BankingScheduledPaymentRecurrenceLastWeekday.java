@@ -20,14 +20,13 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.BankingPaymentNonBusinessDayTreatment;
 import io.biza.cdr.babelfish.v1.enumerations.CommonWeekDay;
 import io.biza.cdr.babelfish.converters.LocalDateToStringConverter;
 import io.biza.cdr.babelfish.converters.PeriodToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToLocalDateConverter;
 import io.biza.cdr.babelfish.converters.StringToPeriodConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -40,12 +39,12 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(
+@Schema(
     description = "Indicates that the schedule of payments is defined according to the last occurrence of a specific weekday in an interval. Mandatory if recurrenceUType is set to lastWeekDay")
 public abstract class BankingScheduledPaymentRecurrenceLastWeekday<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "The limit date after which no more payments should be made using this schedule. If both finalPaymentDate and paymentsRemaining are present then payments will stop according to the most constraining value. If neither field is present the payments will continue indefinitely",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   private LocalDate finalPaymentDate;
@@ -60,7 +59,7 @@ public abstract class BankingScheduledPaymentRecurrenceLastWeekday<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Indicates the number of payments remaining in the schedule. If both finalPaymentDate and paymentsRemaining are present then payments will stop according to the most constraining value. If neither field is present the payments will continue indefinitely")
   @Min(1)
   Integer paymentsRemaining;
@@ -75,9 +74,9 @@ public abstract class BankingScheduledPaymentRecurrenceLastWeekday<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The interval for the payment. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations) with components less than a day in length ignored. This duration defines the period between payments starting with nextPaymentDate",
-      required = true, dataType = "java.lang.String")
+      required = true, type = "java.lang.String")
   @NonNull
   @NotNull
   @JsonSerialize(converter = PeriodToStringConverter.class)
@@ -94,7 +93,7 @@ public abstract class BankingScheduledPaymentRecurrenceLastWeekday<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The weekDay specified. The payment will occur on the last occurrence of this weekday in the interval.",
       required = true)
   @NonNull
@@ -111,7 +110,7 @@ public abstract class BankingScheduledPaymentRecurrenceLastWeekday<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Enumerated field giving the treatment where a scheduled payment date is not a business day. If absent assumed to be ON")
   BankingPaymentNonBusinessDayTreatment nonBusinessDayTreatment =
       BankingPaymentNonBusinessDayTreatment.ON;

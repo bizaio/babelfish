@@ -16,10 +16,10 @@ package io.biza.cdr.babelfish.v1.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.support.LabelValueEnumInterface;
 
-@BabelFishModel(description = "Payload Type: Address")
+@Schema(description = "Payload Type: Address")
 public enum PayloadTypeAddress implements LabelValueEnumInterface {
   // @formatter:off    
   SIMPLE("simple", "Simple Address"),

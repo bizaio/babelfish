@@ -18,8 +18,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -32,9 +31,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Account ID List")
+@Schema(description = "Account ID List")
 public abstract class AccountIdsList<T> {
-  @BabelFishModelProperty(description = "List of Account Identifiers", required = true)
+  @Schema(description = "List of Account Identifiers", required = true)
   @JsonProperty("accountIds")
   @NotNull
   @NonNull

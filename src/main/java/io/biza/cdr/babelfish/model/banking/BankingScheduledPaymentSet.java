@@ -24,8 +24,7 @@ import io.biza.cdr.babelfish.converters.AmountStringToBigDecimalConverter;
 import io.biza.cdr.babelfish.converters.BigDecimalToAmountStringConverter;
 import io.biza.cdr.babelfish.converters.CurrencyToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToCurrencyConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -38,10 +37,10 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(
+@Schema(
     description = "The set of payment amounts and destination accounts for this payment accommodating multi-part payments. A single entry indicates a simple payment with one destination account. Must have at least one entry")
 public abstract class BankingScheduledPaymentSet<T> {
-  @BabelFishModelProperty(required = true)
+  @Schema(required = true)
   @NonNull
   @NotNull
   BankingScheduledPaymentTo<?> to;
@@ -56,7 +55,7 @@ public abstract class BankingScheduledPaymentSet<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Flag indicating whether the amount of the payment is calculated based on the context of the event. For instance a payment to reduce the balance of a credit card to zero. If absent then false is assumed")
   Boolean isAmountCalculated = false;
 
@@ -70,9 +69,9 @@ public abstract class BankingScheduledPaymentSet<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Flag indicating whether the amount of the payment is calculated based on the context of the event. For instance a payment to reduce the balance of a credit card to zero. If absent then false is assumed",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   @Min(0)
@@ -88,8 +87,8 @@ public abstract class BankingScheduledPaymentSet<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "The currency for the payment.",
-      dataType = "java.lang.String")
+  @Schema(description = "The currency for the payment.",
+      type = "java.lang.String")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   Currency currency = Currency.getInstance("AUD");

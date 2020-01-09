@@ -21,8 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.converters.LocaleToCountryStringConverter;
 import io.biza.cdr.babelfish.converters.CountryStringToLocaleConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.support.TypeConstants;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -35,9 +34,9 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-@BabelFishModel(description = "International Payee Bank Details")
+@Schema(description = "International Payee Bank Details")
 public abstract class BankingInternationalPayeeBankDetails<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "Country of the recipient institution. A valid [ISO 3166 Alpha-3](https://www.iso.org/iso-3166-country-codes.html) country code",
       required = true)
   @JsonSerialize(converter = LocaleToCountryStringConverter.class)
@@ -54,7 +53,7 @@ public abstract class BankingInternationalPayeeBankDetails<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Account Targeted for payment", required = true)
+  @Schema(description = "Account Targeted for payment", required = true)
   @NotNull
   @NonNull
   String accountNumber;
@@ -69,7 +68,7 @@ public abstract class BankingInternationalPayeeBankDetails<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty
+  @Schema(description = "International Payee Bank Address Details")
   BankingInternationalPayeeBankDetailsBankAddress<?> bankAddress;
 
   public BankingInternationalPayeeBankDetailsBankAddress<?> bankAddress() {
@@ -82,7 +81,7 @@ public abstract class BankingInternationalPayeeBankDetails<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Swift bank code.  Aligns with standard [ISO 9362](https://www.iso.org/standard/60390.html)")
   // TODO: BIC Code Validation RFC9362
   String beneficiaryBankBIC;
@@ -97,7 +96,7 @@ public abstract class BankingInternationalPayeeBankDetails<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Number for Fedwire payment (Federal Reserve Wire Network)")
+  @Schema(description = "Number for Fedwire payment (Federal Reserve Wire Network)")
   String fedWireNumber;
 
   public String fedWireNumber() {
@@ -110,7 +109,7 @@ public abstract class BankingInternationalPayeeBankDetails<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Sort code used for account identification in some jurisdictions")
   String sortCode;
 
@@ -124,7 +123,7 @@ public abstract class BankingInternationalPayeeBankDetails<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Number for the Clearing House Interbank Payments System")
+  @Schema(description = "Number for the Clearing House Interbank Payments System")
   String chipNumber;
 
   public String chipNumber() {
@@ -137,7 +136,7 @@ public abstract class BankingInternationalPayeeBankDetails<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "International bank routing number")
+  @Schema(description = "International bank routing number")
   String routingNumber;
 
   public String routingNumber() {
@@ -150,7 +149,7 @@ public abstract class BankingInternationalPayeeBankDetails<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The legal entity identifier (LEI) for the beneficiary.  Aligns with [ISO 17442](https://www.iso.org/standard/59771.html)")
   @Pattern(regexp = TypeConstants.ISO17442_PATTERN)
   String legalEntityIdentifier;

@@ -20,10 +20,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.converters.AmountStringToBigDecimalConverter;
 import io.biza.cdr.babelfish.converters.BigDecimalToAmountStringConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -36,9 +35,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "A Representation of a Banking Account Balance")
+@Schema(description = "A Representation of a Banking Account Balance")
 public abstract class BankingBalance<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "A unique ID of the account adhering to the standards for ID permanence",
       required = true)
   @NotNull
@@ -55,9 +54,9 @@ public abstract class BankingBalance<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The balance of the account at this time. Should align to the balance available via other channels such as Internet Banking. Assumed to be negative if the customer has money owing",
-      required = true, dataType = "java.lang.String")
+      required = true, type = "java.lang.String")
   @NonNull
   @NotNull
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
@@ -73,9 +72,9 @@ public abstract class BankingBalance<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Balance representing the amount of funds available for transfer. Assumed to be zero or positive",
-      required = true, dataType = "java.lang.String")
+      required = true, type = "java.lang.String")
   @NonNull
   @NotNull
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
@@ -92,9 +91,9 @@ public abstract class BankingBalance<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Object representing the maximum amount of credit that is available for this account. Assumed to be zero if absent",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   BigDecimal creditLimit;
@@ -109,9 +108,9 @@ public abstract class BankingBalance<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Object representing the available limit amortised according to payment schedule. Assumed to be zero if absent",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   BigDecimal amortisedLimit = BigDecimal.ZERO;
@@ -126,9 +125,9 @@ public abstract class BankingBalance<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The currency for the balance amounts. If absent assumed to be AUD",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   Currency currency;
@@ -143,7 +142,7 @@ public abstract class BankingBalance<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Optional array of balances for the account in other currencies. Included to support accounts that support multi-currency purses such as Travel Cards")
   List<BankingBalancePurse<?>> purses;
 }

@@ -19,12 +19,11 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductCategory;
 import io.biza.cdr.babelfish.converters.DateTimeStringToOffsetDateTimeConverter;
 import io.biza.cdr.babelfish.converters.OffsetDateTimeToDateTimeStringConverter;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -37,9 +36,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "An Australian Banking Product")
+@Schema(description = "An Australian Banking Product")
 public abstract class BankingProduct<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "A data holder specific unique identifier for this product. This identifier must be unique to a product but does not otherwise need to adhere to ID permanence guidelines.",
       required = true)
   @NonNull
@@ -56,9 +55,9 @@ public abstract class BankingProduct<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The date and time from which this product is effective (ie. is available for origination).  Used to enable the articulation of products to the regime before they are available for customers to originate",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   private OffsetDateTime effectiveFrom;
@@ -73,9 +72,9 @@ public abstract class BankingProduct<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The date and time at which this product will be retired and will no longer be offered.  Used to enable the managed deprecation of products",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   private OffsetDateTime effectiveTo;
@@ -90,9 +89,9 @@ public abstract class BankingProduct<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The last date and time that the information for this product was changed (or the creation date for the product if it has never been altered)",
-      required = true, dataType = "java.lang.String")
+      required = true, type = "java.lang.String")
   @NonNull
   @NotNull
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
@@ -109,7 +108,7 @@ public abstract class BankingProduct<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(required = true)
+  @Schema(required = true)
   @NonNull
   @NotNull
   BankingProductCategory productCategory;
@@ -124,7 +123,7 @@ public abstract class BankingProduct<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "The display name of the product", required = true)
+  @Schema(description = "The display name of the product", required = true)
   @NonNull
   @NotNull
   String name;
@@ -139,7 +138,7 @@ public abstract class BankingProduct<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "A description of the product", required = true)
+  @Schema(description = "A description of the product", required = true)
   @NonNull
   @NotNull
   String description;
@@ -154,7 +153,7 @@ public abstract class BankingProduct<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "A label of the brand for the product. Able to be used for filtering. For data holders with single brands this value is still required",
       required = true)
   @NonNull
@@ -171,7 +170,7 @@ public abstract class BankingProduct<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "An optional display name of the brand")
+  @Schema(description = "An optional display name of the brand")
   String brandName;
 
   public String brandName() {
@@ -184,9 +183,9 @@ public abstract class BankingProduct<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "A link to an application web page where this product can be applied for.",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   URI applicationUri;
 
@@ -200,7 +199,7 @@ public abstract class BankingProduct<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Indicates whether the product is specifically tailored to a circumstance.  In this case fees and prices are significantly negotiated depending on context. While all products are open to a degree of tailoring this flag indicates that tailoring is expected and thus that the provision of specific fees and rates is not applicable",
       required = true)
   @NonNull
@@ -217,7 +216,7 @@ public abstract class BankingProduct<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty
+  @Schema(description = "Additional Information for Banking Product")
   BankingProductAdditionalInformation<?> additionalInformation;
 
   public BankingProductAdditionalInformation<?> additionalInformation() {

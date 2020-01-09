@@ -16,9 +16,8 @@ package io.biza.cdr.babelfish.model.banking;
 import java.net.URI;
 import javax.validation.Valid;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,9 +29,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Defines a condition for the applicability of a tiered rate")
+@Schema(description = "Defines a condition for the applicability of a tiered rate")
 public abstract class BankingProductRateCondition<T> {
-  @BabelFishModelProperty(description = "Display text providing more information on the condition")
+  @Schema(description = "Display text providing more information on the condition")
   String additionalInfo;
 
   public String additionalInfo() {
@@ -45,9 +44,9 @@ public abstract class BankingProductRateCondition<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Link to a web page with more information on this condition",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   URI additionalInfoUri;
 

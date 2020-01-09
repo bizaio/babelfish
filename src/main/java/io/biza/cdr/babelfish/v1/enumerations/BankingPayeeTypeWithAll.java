@@ -16,10 +16,10 @@ package io.biza.cdr.babelfish.v1.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.support.LabelValueEnumInterface;
 
-@BabelFishModel(description = "Banking Payee Type with All")
+@Schema(description = "Banking Payee Type with All")
 public enum BankingPayeeTypeWithAll implements LabelValueEnumInterface {
   // @formatter:off
   ALL("ALL", "All Payee Types"),

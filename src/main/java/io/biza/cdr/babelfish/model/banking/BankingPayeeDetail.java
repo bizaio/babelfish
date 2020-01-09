@@ -16,9 +16,8 @@ package io.biza.cdr.babelfish.model.banking;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingPayee;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -30,10 +29,10 @@ import lombok.ToString;
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@BabelFishModel(description = "Banking Payee Detailed Information", parent = BankingPayee.class)
+@Schema(description = "Banking Payee Detailed Information")
 public abstract class BankingPayeeDetail<T> extends BankingPayee<T> {
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Type of object included that describes the payee in detail", required = true)
   @JsonProperty("payeeUType")
   @NotNull

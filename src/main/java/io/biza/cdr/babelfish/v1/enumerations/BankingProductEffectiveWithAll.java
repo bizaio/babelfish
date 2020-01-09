@@ -16,10 +16,10 @@ package io.biza.cdr.babelfish.v1.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.support.LabelValueEnumInterface;
 
-@BabelFishModel(description = "Banking Product Effective Filter with All")
+@Schema(description = "Banking Product Effective Filter with All")
 public enum BankingProductEffectiveWithAll implements LabelValueEnumInterface {
   // @formatter:off
   CURRENT("CURRENT", "Products Currently Available in Market"), 

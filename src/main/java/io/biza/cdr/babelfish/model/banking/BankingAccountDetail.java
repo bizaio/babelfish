@@ -20,8 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.converters.BigDecimalToRateStringConverter;
 import io.biza.cdr.babelfish.converters.RateStringToBigDecimalConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingAccount;
 import io.biza.cdr.babelfish.v1.model.common.CommonPhysicalAddress;
 import lombok.EqualsAndHashCode;
@@ -34,10 +33,9 @@ import lombok.ToString;
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@BabelFishModel(description = "Detailed Australian Banking Account Information",
-    parent = BankingAccount.class)
+@Schema(description = "Detailed Australian Banking Account Information")
 public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "The unmasked BSB for the account. Is expected to be formatted as digits only with leading zeros included and no punctuation or spaces")
   String bsb;
 
@@ -51,7 +49,7 @@ public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The unmasked account number for the account. Should not be supplied if the account number is a PAN requiring PCI compliance. Is expected to be formatted as digits only with leading zeros included and no punctuation or spaces")
   String accountNumber;
 
@@ -65,7 +63,7 @@ public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Optional field to indicate if this account is part of a bundle that is providing additional benefit for to the customer")
   String bundleName;
 
@@ -79,7 +77,7 @@ public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "The type of structure to present account specific fields.")
+  @Schema(description = "The type of structure to present account specific fields.")
   PayloadTypeBankingAccount specificAccountUType;
 
   public PayloadTypeBankingAccount specificAccountUType() {
@@ -92,7 +90,7 @@ public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Term Deposit Account Information")
+  @Schema(description = "Term Deposit Account Information")
   BankingTermDepositAccount<?> termDeposit;
 
   public BankingTermDepositAccount<?> termDeposit() {
@@ -105,7 +103,7 @@ public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Credit Card Account Information")
+  @Schema(description = "Credit Card Account Information")
   BankingCreditCardAccount<?> creditCard;
 
   public BankingCreditCardAccount<?> creditCard() {
@@ -118,7 +116,7 @@ public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Loan Account Information")
+  @Schema(description = "Loan Account Information")
   BankingLoanAccount<?> loan;
 
   public BankingLoanAccount<?> loan() {
@@ -131,7 +129,7 @@ public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "current rate to calculate interest earned being applied to deposit balances as it stands at the time of the API call")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
@@ -147,7 +145,7 @@ public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The current rate to calculate interest payable being applied to lending balances as it stands at the time of the API call")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
@@ -163,23 +161,23 @@ public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Fully described deposit rates for this account based on the equivalent structure in Product Reference")
   List<BankingProductDepositRate<?>> depositRates;
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Fully described deposit rates for this account based on the equivalent structure in Product Reference")
   List<BankingProductLendingRate<?>> lendingRates;
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Array of features of the account based on the equivalent structure in Product Reference with the following additional field")
   List<BankingProductFeatureWithActivated<?>> features;
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Fees and charges applicable to the account based on the equivalent structure in Product Reference")
   List<BankingProductFee<?>> fees;
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The addresses for the account to be used for correspondence")
   List<CommonPhysicalAddress> addresses;
 }

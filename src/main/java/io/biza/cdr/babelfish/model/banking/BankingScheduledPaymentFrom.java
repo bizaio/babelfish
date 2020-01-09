@@ -15,8 +15,7 @@ package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -29,10 +28,10 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(
+@Schema(
     description = "Object containing details of the source of the payment. Currently only specifies an account ID but provided as an object to facilitate future extensibility and consistency with the to object")
 public abstract class BankingScheduledPaymentFrom<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "ID of the account that is the source of funds for the payment",
       required = true)
   @NonNull

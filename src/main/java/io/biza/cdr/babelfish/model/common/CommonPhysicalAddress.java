@@ -16,8 +16,7 @@ package io.biza.cdr.babelfish.model.common;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeAddress;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -31,9 +30,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Physical Address Detail")
+@Schema(description = "Physical Address Detail")
 public abstract class CommonPhysicalAddress<T> {
-  @BabelFishModelProperty(description = "The type of address object present", required = true)
+  @Schema(description = "The type of address object present", required = true)
   @JsonProperty("addressUType")
   @NotNull
   @NonNull
@@ -50,7 +49,7 @@ public abstract class CommonPhysicalAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Address in Simple Address format")
+  @Schema(description = "Address in Simple Address format")
   @JsonProperty("simple")
   public CommonSimpleAddress<?> simple;
 
@@ -64,7 +63,7 @@ public abstract class CommonPhysicalAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Address in PAF Format")
+  @Schema(description = "Address in PAF Format")
   @JsonProperty("paf")
   public CommonPAFAddress<?> paf;
 

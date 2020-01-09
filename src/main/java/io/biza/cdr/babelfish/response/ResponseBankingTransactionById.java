@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.CDRResponse;
 import io.biza.cdr.babelfish.model.banking.BankingTransactionDetail;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -33,7 +33,7 @@ import lombok.ToString;
 
 
 public abstract class ResponseBankingTransactionById<T> extends CDRResponse<T> {
-  @BabelFishModelProperty(required = true)
+  @Schema(required = true)
   @JsonProperty("data")
   @NotNull
   @NonNull

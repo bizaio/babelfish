@@ -15,8 +15,7 @@ package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.v1.enumerations.BankingTransactionService;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeTransactionExtension;
 import lombok.EqualsAndHashCode;
@@ -31,9 +30,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Banking Transaction Detailed Extended Data")
+@Schema(description = "Banking Transaction Detailed Extended Data")
 public abstract class BankingTransactionDetailExtendedData<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "Label of the originating payer. Mandatory for inbound payment")
   String payer;
 
@@ -47,7 +46,7 @@ public abstract class BankingTransactionDetailExtendedData<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Label of the target PayID.  Mandatory for an outbound payment. The name assigned to the BSB/Account Number or PayID (by the owner of the PayID)")
   String payee;
 
@@ -61,7 +60,7 @@ public abstract class BankingTransactionDetailExtendedData<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Optional extended data provided specific to transaction originated via NPP")
   PayloadTypeTransactionExtension extensionUType;
 
@@ -75,7 +74,7 @@ public abstract class BankingTransactionDetailExtendedData<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty
+  @Schema(description = "X2P1.01 Payload Details")
   BankingTransactionDetailExtendedDataX2p101Payload<?> x2p101Payload;
 
   public BankingTransactionDetailExtendedDataX2p101Payload<?> x2p101Payload() {
@@ -88,7 +87,7 @@ public abstract class BankingTransactionDetailExtendedData<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Identifier of the applicable overlay service.",
+  @Schema(description = "Identifier of the applicable overlay service.",
       required = true)
   @NonNull
   @NotNull

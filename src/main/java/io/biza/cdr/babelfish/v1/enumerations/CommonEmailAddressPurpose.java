@@ -16,10 +16,10 @@ package io.biza.cdr.babelfish.v1.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.support.LabelValueEnumInterface;
 
-@BabelFishModel(description = "Common: Email Address Purpose")
+@Schema(description = "Common: Email Address Purpose")
 public enum CommonEmailAddressPurpose implements LabelValueEnumInterface {
   // @formatter:off
   HOME("HOME", "Personal Email Address"),

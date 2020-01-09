@@ -16,8 +16,7 @@ package io.biza.cdr.babelfish.model.common;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.v1.enumerations.AddressPAFFlatUnitType;
 import io.biza.cdr.babelfish.v1.enumerations.AddressPAFFloorLevelType;
 import io.biza.cdr.babelfish.v1.enumerations.AddressPAFPostalDeliveryType;
@@ -36,10 +35,10 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(
+@Schema(
     description = "Australian address formatted according to the file format defined by the [PAF file format](https://auspost.com.au/content/dam/auspost_corp/media/documents/australia-post-data-guide.pdf)")
 public abstract class CommonPAFAddress<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "Unique identifier for an address as defined by Australia Post.  Also known as Delivery Point Identifier")
   @JsonProperty("dpid")
   public String dpid;
@@ -54,7 +53,7 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Thoroughfare number for a property (first number in a property ranged address)")
   @JsonProperty("thoroughfareNumber1")
   public Integer thoroughfareNumber1;
@@ -76,7 +75,7 @@ public abstract class CommonPAFAddress<T> {
     }
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Suffix for the thoroughfare number. Only relevant is thoroughfareNumber1 is populated")
   @JsonProperty("thoroughfareNumber1Suffix")
   public String thoroughfareNumber1Suffix;
@@ -91,7 +90,7 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Second thoroughfare number (only used if the property has a ranged address eg 23-25)")
   @JsonProperty("thoroughfareNumber2")
   public Integer thoroughfareNumber2;
@@ -113,7 +112,7 @@ public abstract class CommonPAFAddress<T> {
     }
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Suffix for the second thoroughfare number. Only relevant is thoroughfareNumber2 is populated")
   @JsonProperty("thoroughfareNumber2Suffix")
   public String thoroughfareNumber2Suffix;
@@ -128,8 +127,8 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Type of flat or unit for the address",
-      dataType = "java.lang.String")
+  @Schema(description = "Type of flat or unit for the address",
+      type = "java.lang.String")
   @JsonProperty("flatUnitType")
   public AddressPAFFlatUnitType flatUnitType;
 
@@ -143,7 +142,7 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Unit number (including suffix, if applicable)")
+  @Schema(description = "Unit number (including suffix, if applicable)")
   @JsonProperty("flatUnitNumber")
   public String flatUnitNumber;
 
@@ -157,8 +156,8 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Type of floor or level for the address",
-      dataType = "java.lang.String")
+  @Schema(description = "Type of floor or level for the address",
+      type = "java.lang.String")
   @JsonProperty("floorLevelType")
   public AddressPAFFloorLevelType floorLevelType;
 
@@ -172,7 +171,7 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Floor or level number (including alpha characters)")
+  @Schema(description = "Floor or level number (including alpha characters)")
   @JsonProperty("floorLevelNumber")
   public String floorLevelNumber;
 
@@ -186,7 +185,7 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Allotment number for the address")
+  @Schema(description = "Allotment number for the address")
   @JsonProperty("lotNumber")
   public String lotNumber;
 
@@ -200,7 +199,7 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Building/Property name 1")
+  @Schema(description = "Building/Property name 1")
   @JsonProperty("buildingName1")
   public String buildingName1;
 
@@ -214,7 +213,7 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Building/Property name 2")
+  @Schema(description = "Building/Property name 2")
   @JsonProperty("buildingName2")
   public String buildingName2;
 
@@ -228,7 +227,7 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "The name of the street")
+  @Schema(description = "The name of the street")
   @JsonProperty("streetName")
   public String streetName;
 
@@ -242,9 +241,9 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The street type. Valid enumeration defined by Australia Post PAF code file",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonProperty("streetType")
   public AddressPAFStreetType streetType;
 
@@ -258,9 +257,9 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The street type suffix. Valid enumeration defined by Australia Post PAF code file",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonProperty("streetSuffix")
   public AddressPAFStreetSuffix streetSuffix;
 
@@ -274,9 +273,9 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Postal delivery type. (eg. PO BOX). Valid enumeration defined by Australia Post PAF code file",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonProperty("postalDeliveryType")
   public AddressPAFPostalDeliveryType postalDeliveryType;
 
@@ -290,7 +289,7 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Postal delivery number if the address is a postal delivery type")
   @JsonProperty("postalDeliveryNumber")
   public Integer postalDeliveryNumber;
@@ -312,7 +311,7 @@ public abstract class CommonPAFAddress<T> {
     }
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Postal delivery number prefix related to the postal delivery number")
   @JsonProperty("postalDeliveryNumberPrefix")
   public String postalDeliveryNumberPrefix;
@@ -327,7 +326,7 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Postal delivery number suffix related to the postal delivery number")
   @JsonProperty("postalDeliveryNumberSuffix")
   public String postalDeliveryNumberSuffix;
@@ -342,7 +341,7 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Full name of locality", required = true)
+  @Schema(description = "Full name of locality", required = true)
   @JsonProperty("localityName")
   @NotNull
   @NonNull
@@ -358,7 +357,7 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Postcode for the locality", required = true)
+  @Schema(description = "Postcode for the locality", required = true)
   @JsonProperty("postcode")
   @NotNull
   @NonNull
@@ -374,9 +373,9 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "State in which the address belongs. Valid enumeration defined by Australia Post PAF code file",
-      required = true, dataType = "java.lang.String")
+      required = true, type = "java.lang.String")
   @JsonProperty("state")
   @NotNull
   @NonNull

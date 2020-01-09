@@ -17,8 +17,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -31,9 +30,9 @@ import io.biza.cdr.babelfish.model.common.Error;
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode
-@BabelFishModel(description = "CDS Error Response")
+@Schema(description = "CDS Error Response")
 public abstract class ResponseErrorList<T> {
-  @BabelFishModelProperty(required = true)
+  @Schema(required = true)
   @NonNull
   @NotNull
   @JsonProperty("errors")

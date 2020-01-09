@@ -18,8 +18,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.CDRResponse;
 import io.biza.cdr.babelfish.model.banking.BankingAccountDetail;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -31,9 +30,9 @@ import lombok.ToString;
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@BabelFishModel(description = "Response containing a single Banking Account Detail")
+@Schema(description = "Response containing a single Banking Account Detail")
 public abstract class ResponseBankingAccountById<T> extends CDRResponse<T> {
-  @BabelFishModelProperty(required = true)
+  @Schema(required = true)
   @JsonProperty("data")
   @NotNull
   @NonNull

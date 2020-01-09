@@ -23,8 +23,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.converters.BigDecimalToRateStringConverter;
 import io.biza.cdr.babelfish.converters.RateStringToBigDecimalConverter;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductDiscountType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -38,10 +37,10 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(modelName = "BankingProductDiscount",
+@Schema(name = "BankingProductDiscount",
     description = "Banking Product Discount Specification")
 public abstract class BankingProductFeeDiscount<T> {
-  @BabelFishModelProperty(description = "Description of the discount", required = true)
+  @Schema(description = "Description of the discount", required = true)
   @NonNull
   @NotNull
   String description;
@@ -56,7 +55,7 @@ public abstract class BankingProductFeeDiscount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The type of discount. See the next section for an overview of valid values and their meaning",
       required = true)
   @NonNull
@@ -73,9 +72,9 @@ public abstract class BankingProductFeeDiscount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Value of the discount. When following properties include one of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   private BigDecimal amount;
@@ -90,9 +89,9 @@ public abstract class BankingProductFeeDiscount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "A discount rate calculated based on a proportion of the balance. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory. Unless noted in additionalInfo, assumes the application and calculation frequency are the same as the corresponding fee",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   private BigDecimal balanceRate;
@@ -107,9 +106,9 @@ public abstract class BankingProductFeeDiscount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "A discount rate calculated based on a proportion of a transaction. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   private BigDecimal transactionRate;
@@ -124,9 +123,9 @@ public abstract class BankingProductFeeDiscount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "A discount rate calculated based on a proportion of the calculated interest accrued on the account. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory. Unless noted in additionalInfo, assumes the application and calculation frequency are the same as the corresponding fee",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   private BigDecimal accruedRate;
@@ -141,9 +140,9 @@ public abstract class BankingProductFeeDiscount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "A discount rate calculated based on a proportion of the fee to which this discount is attached. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory. Unless noted in additionalInfo, assumes the application and calculation frequency are the same as the corresponding fee",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   private BigDecimal feeRate;
@@ -158,7 +157,7 @@ public abstract class BankingProductFeeDiscount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Generic field containing additional information relevant to the [discountType](#tocSproductdiscounttypedoc) specified. Whether mandatory or not is dependent on the value of [discountType](#tocSproductdiscounttypedoc)")
   String additionalValue;
 
@@ -172,7 +171,7 @@ public abstract class BankingProductFeeDiscount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Display text providing more information on the discount")
+  @Schema(description = "Display text providing more information on the discount")
   String additionalInfo;
 
   public String additionalInfo() {
@@ -185,8 +184,8 @@ public abstract class BankingProductFeeDiscount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Link to a web page with more information on this discount",
-      dataType = "java.lang.String")
+  @Schema(description = "Link to a web page with more information on this discount",
+      type = "java.lang.String")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   URI additionalInfoUri;
 
@@ -200,6 +199,6 @@ public abstract class BankingProductFeeDiscount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Eligibility constraints that apply to this discount")
+  @Schema(description = "Eligibility constraints that apply to this discount")
   List<BankingProductFeeDiscountEligibility<?>> eligibility;
 }

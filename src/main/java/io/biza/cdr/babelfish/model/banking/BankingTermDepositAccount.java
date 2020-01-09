@@ -26,8 +26,7 @@ import io.biza.cdr.babelfish.converters.CurrencyToStringConverter;
 import io.biza.cdr.babelfish.converters.LocalDateToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToCurrencyConverter;
 import io.biza.cdr.babelfish.converters.StringToLocalDateConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.v1.enumerations.BankingTermDepositMaturityInstructions;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -41,10 +40,10 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Term Deposit Account Description")
+@Schema(description = "Term Deposit Account Description")
 public abstract class BankingTermDepositAccount<T> {
-  @BabelFishModelProperty(description = "The lodgement date of the original deposit",
-      required = true, dataType = "java.lang.String")
+  @Schema(description = "The lodgement date of the original deposit",
+      required = true, type = "java.lang.String")
   @NonNull
   @NotNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)
@@ -61,7 +60,7 @@ public abstract class BankingTermDepositAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Maturity date for the term deposit", required = true)
+  @Schema(description = "Maturity date for the term deposit", required = true)
   @NonNull
   @NotNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)
@@ -78,9 +77,9 @@ public abstract class BankingTermDepositAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Amount to be paid upon maturity. If absent it implies the amount to paid is variable and cannot currently be calculated",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   private BigDecimal maturityAmount;
@@ -95,7 +94,7 @@ public abstract class BankingTermDepositAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Maturity Amount Currency", dataType = "java.lang.String")
+  @Schema(description = "Maturity Amount Currency", type = "java.lang.String")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   Currency maturityCurrency = Currency.getInstance("AUD");
@@ -110,7 +109,7 @@ public abstract class BankingTermDepositAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Current instructions on action to be taken at maturity",
+  @Schema(description = "Current instructions on action to be taken at maturity",
       required = true)
   @NonNull
   @NotNull

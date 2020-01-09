@@ -20,14 +20,13 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.converters.AmountStringToBigDecimalConverter;
 import io.biza.cdr.babelfish.converters.BigDecimalToAmountStringConverter;
 import io.biza.cdr.babelfish.converters.CurrencyToStringConverter;
 import io.biza.cdr.babelfish.converters.LocalDateToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToCurrencyConverter;
 import io.biza.cdr.babelfish.converters.StringToLocalDateConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -40,10 +39,10 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Credit Card Account Details")
+@Schema(description = "Credit Card Account Details")
 public abstract class BankingCreditCardAccount<T> {
-  @BabelFishModelProperty(description = "The minimum payment amount due for the next card payment",
-      required = true, dataType = "java.lang.String")
+  @Schema(description = "The minimum payment amount due for the next card payment",
+      required = true, type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   @NotNull
@@ -60,8 +59,8 @@ public abstract class BankingCreditCardAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "The amount due for the next card payment", required = true,
-      dataType = "java.lang.String")
+  @Schema(description = "The amount due for the next card payment", required = true,
+      type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   @NotNull
@@ -78,7 +77,7 @@ public abstract class BankingCreditCardAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "If absent assumes AUD", dataType = "java.lang.String")
+  @Schema(description = "If absent assumes AUD", type = "java.lang.String")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   Currency paymentCurrency = Currency.getInstance("AUD");
@@ -93,8 +92,8 @@ public abstract class BankingCreditCardAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Date that the next payment for the card is due",
-      required = true, dataType = "java.lang.String")
+  @Schema(description = "Date that the next payment for the card is due",
+      required = true, type = "java.lang.String")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   @NotNull

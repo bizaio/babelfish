@@ -13,8 +13,7 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.response.container;
 
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeCustomer;
 import io.biza.cdr.babelfish.v1.model.common.CommonOrganisationDetail;
 import io.biza.cdr.babelfish.v1.model.common.CommonPersonDetail;
@@ -32,10 +31,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode
-@BabelFishModel(
+@Schema(
     description = "Object containing either a PersonDetail or OrganisationDetail object defined by a type attribute")
 public abstract class ResponseCommonCustomerDetailData<T> {
-  @BabelFishModelProperty(description = "The type of customer object that is present",
+  @Schema(description = "The type of customer object that is present",
       required = true)
   @JsonProperty("customerUType")
   @NotNull
@@ -52,7 +51,7 @@ public abstract class ResponseCommonCustomerDetailData<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "The Person Record for the Customer")
+  @Schema(description = "The Person Record for the Customer")
   @JsonProperty("person")
   public CommonPersonDetail person;
 
@@ -66,7 +65,7 @@ public abstract class ResponseCommonCustomerDetailData<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "The Organisation Record for the Customer")
+  @Schema(description = "The Organisation Record for the Customer")
   @JsonProperty("organisation")
   public CommonOrganisationDetail organisation;
 

@@ -16,10 +16,9 @@ package io.biza.cdr.babelfish.model.banking;
 import java.net.URI;
 import javax.validation.Valid;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductFeatureType;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -31,9 +30,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "A Banking Product Feature")
+@Schema(description = "A Banking Product Feature")
 public abstract class BankingProductFeature<T> {
-  @BabelFishModelProperty(description = "The type of feature described", required = true)
+  @Schema(description = "The type of feature described", required = true)
   BankingProductFeatureType featureType;
 
   public BankingProductFeatureType featureType() {
@@ -46,7 +45,7 @@ public abstract class BankingProductFeature<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Generic field containing additional information relevant to the [featureType](#tocSproductfeaturetypedoc) specified. Whether mandatory or not is dependent on the value of the [featureType.](#tocSproductfeaturetypedoc)")
   String additionalValue;
 
@@ -60,7 +59,7 @@ public abstract class BankingProductFeature<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Display text providing more information on the feature. Mandatory if the [feature type](#tocSproductfeaturetypedoc) is set to OTHER")
   String additionalInfo;
 
@@ -74,8 +73,8 @@ public abstract class BankingProductFeature<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Link to a web page with more information on this feature",
-      dataType = "java.lang.String")
+  @Schema(description = "Link to a web page with more information on this feature",
+      type = "java.lang.String")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   URI additionalInfoUri;
 

@@ -19,11 +19,10 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.BankingPayeeType;
 import io.biza.cdr.babelfish.converters.LocalDateToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToLocalDateConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -36,9 +35,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Banking Payee Basic Information")
+@Schema(description = "Banking Payee Basic Information")
 public abstract class BankingPayee<T> {
-  @BabelFishModelProperty(description = "ID of the payee adhering to the rules of ID permanence",
+  @Schema(description = "ID of the payee adhering to the rules of ID permanence",
       required = true)
   @NonNull
   @NotNull
@@ -54,7 +53,7 @@ public abstract class BankingPayee<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The short display name of the payee as provided by the customer",
       required = true)
   @NonNull
@@ -71,7 +70,7 @@ public abstract class BankingPayee<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "A description of the payee provided by the customer")
+  @Schema(description = "A description of the payee provided by the customer")
   String description;
 
   public String description() {
@@ -84,7 +83,7 @@ public abstract class BankingPayee<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The type of payee. DOMESTIC means a registered payee for domestic payments including NPP. INTERNATIONAL means a registered payee for international payments. BILLER means a registered payee for BPAY",
       required = true)
   @NonNull
@@ -102,8 +101,8 @@ public abstract class BankingPayee<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "The date the payee was created by the customer",
-      dataType = "java.lang.String")
+  @Schema(description = "The date the payee was created by the customer",
+      type = "java.lang.String")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   private LocalDate creationDate;

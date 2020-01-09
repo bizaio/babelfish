@@ -20,8 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.converters.LocaleToCountryStringConverter;
 import io.biza.cdr.babelfish.converters.CountryStringToLocaleConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -33,9 +32,9 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-@BabelFishModel(description = "International Payee Beneficiary Details")
+@Schema(description = "International Payee Beneficiary Details")
 public abstract class BankingInternationalPayeeBeneficiaryDetails<T> {
-  @BabelFishModelProperty(description = "Name of the beneficiary")
+  @Schema(description = "Name of the beneficiary")
   String name;
 
   public String name() {
@@ -48,9 +47,9 @@ public abstract class BankingInternationalPayeeBeneficiaryDetails<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Country where the beneficiary resides. A valid [ISO 3166 Alpha-3](https://www.iso.org/iso-3166-country-codes.html) country code",
-      required = true, dataType = "java.lang.String")
+      required = true, type = "java.lang.String")
   @NonNull
   @NotNull
   @JsonSerialize(converter = LocaleToCountryStringConverter.class)
@@ -67,7 +66,7 @@ public abstract class BankingInternationalPayeeBeneficiaryDetails<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Response message for the payment")
+  @Schema(description = "Response message for the payment")
   String message;
 
   public String message() {

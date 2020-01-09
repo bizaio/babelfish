@@ -18,8 +18,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.CDRResponsePaginated;
 import io.biza.cdr.babelfish.response.container.ResponseBankingDirectDebitAuthorisationListData;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -33,10 +32,10 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 
 
-@BabelFishModel(description = "Response containing a a list of Direct Debit Authorisations")
+@Schema(description = "Response containing a a list of Direct Debit Authorisations")
 public abstract class ResponseBankingDirectDebitAuthorisationList<T>
     extends CDRResponsePaginated<T> {
-  @BabelFishModelProperty(required = true)
+  @Schema(required = true)
   @JsonProperty("data")
   @NotNull
   @NonNull

@@ -18,8 +18,7 @@ import javax.validation.Valid;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.Constants;
 import io.biza.cdr.babelfish.converters.CountryStringToLocaleConverter;
 import io.biza.cdr.babelfish.converters.LocaleToCountryStringConverter;
@@ -34,9 +33,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Simple Address Detail")
+@Schema(description = "Simple Address Detail")
 public abstract class CommonSimpleAddress<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "Name of the individual or business formatted for inclusion in an address used for physical mail")
   @JsonProperty("mailingName")
   public String mailingName;
@@ -51,7 +50,7 @@ public abstract class CommonSimpleAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "First line of the standard address object",
+  @Schema(description = "First line of the standard address object",
       required = true)
   @JsonProperty("addressLine1")
   public String addressLine1;
@@ -66,7 +65,7 @@ public abstract class CommonSimpleAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Second line of the standard address object")
+  @Schema(description = "Second line of the standard address object")
   @JsonProperty("addressLine2")
   public String addressLine2;
 
@@ -80,7 +79,7 @@ public abstract class CommonSimpleAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Third line of the standard address object")
+  @Schema(description = "Third line of the standard address object")
   @JsonProperty("addressLine3")
   public String addressLine3;
 
@@ -94,7 +93,7 @@ public abstract class CommonSimpleAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Mandatory for Australian addresses")
+  @Schema(description = "Mandatory for Australian addresses")
   @JsonProperty("postcode")
   public String postcode;
 
@@ -108,7 +107,7 @@ public abstract class CommonSimpleAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Name of the city or locality", required = true)
+  @Schema(description = "Name of the city or locality", required = true)
   @JsonProperty("city")
   public String city;
 
@@ -122,7 +121,7 @@ public abstract class CommonSimpleAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Free text if the country is not Australia. If country is Australia then must be one of the values defined by the [State Type Abbreviation](https://auspost.com.au/content/dam/auspost_corp/media/documents/australia-post-data-guide.pdf) in the PAF file format. NSW, QLD, VIC, NT, WA, SA, TAS, ACT, AAT",
       required = true)
   @JsonProperty("state")
@@ -138,7 +137,7 @@ public abstract class CommonSimpleAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "A valid [ISO 3166 Alpha-3](https://www.iso.org/iso-3166-country-codes.html) country code. Australia (AUS) is assumed if country is not present.")
   @JsonSerialize(converter = LocaleToCountryStringConverter.class)
   @JsonDeserialize(converter = CountryStringToLocaleConverter.class)

@@ -14,8 +14,7 @@
 package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,9 +26,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Authorised Entity details")
+@Schema(description = "Authorised Entity details")
 public abstract class BankingAuthorisedEntity<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "Description of the authorised entity derived from previously executed direct debits")
   String description;
 
@@ -43,7 +42,7 @@ public abstract class BankingAuthorisedEntity<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Name of the financial institution through which the direct debit will be executed. Is required unless the payment is made via a credit card scheme")
   String financialInstitution;
 
@@ -57,7 +56,7 @@ public abstract class BankingAuthorisedEntity<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Australian Business Number for the authorised entity")
+  @Schema(description = "Australian Business Number for the authorised entity")
   String abn;
 
   public String abn() {
@@ -70,7 +69,7 @@ public abstract class BankingAuthorisedEntity<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Australian Company Number for the authorised entity")
+  @Schema(description = "Australian Company Number for the authorised entity")
   String acn;
 
   public String acn() {
@@ -83,7 +82,7 @@ public abstract class BankingAuthorisedEntity<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Australian Registered Body Number for the authorised entity")
   String arbn;
 

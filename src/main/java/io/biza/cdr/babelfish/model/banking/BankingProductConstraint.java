@@ -17,10 +17,9 @@ import java.net.URI;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductConstraintType;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -33,9 +32,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Banking Product Constraint Definition")
+@Schema(description = "Banking Product Constraint Definition")
 public abstract class BankingProductConstraint<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "The type of constraint described.  See the next section for an overview of valid values and their meaning",
       required = true)
   @NonNull
@@ -52,7 +51,7 @@ public abstract class BankingProductConstraint<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Generic field containing additional information relevant to the [constraintType](#tocSproductconstrainttypedoc) specified.  Whether mandatory or not is dependent on the value of [constraintType](#tocSproductconstrainttypedoc)")
   String additionalValue;
 
@@ -66,7 +65,7 @@ public abstract class BankingProductConstraint<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Display text providing more information the constraint")
+  @Schema(description = "Display text providing more information the constraint")
   String additionalInfo;
 
   public String additionalInfo() {
@@ -79,9 +78,9 @@ public abstract class BankingProductConstraint<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Link to a web page with more information on the constraint",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   URI additionalInfoUri;
 

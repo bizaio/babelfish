@@ -19,8 +19,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.common.AccountIdsList;
 import io.biza.cdr.babelfish.model.common.Meta;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -33,9 +32,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Request containing a set of Account IDs")
+@Schema(description = "Request containing a set of Account IDs")
 public abstract class RequestAccountIds<T> {
-  @BabelFishModelProperty(required = true)
+  @Schema(required = true)
   @JsonProperty("data")
   @NotNull
   @NonNull
@@ -52,7 +51,7 @@ public abstract class RequestAccountIds<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The meta object is used to provide additional information such as second factor authorisation data, traffic management, pagination counts or other purposes that are complementary to the workings of the API.",
       required = true)
   @JsonProperty("meta")

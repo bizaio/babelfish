@@ -15,8 +15,7 @@ package io.biza.cdr.babelfish.response.container;
 
 import io.biza.cdr.babelfish.model.common.CommonOrganisation;
 import io.biza.cdr.babelfish.model.common.CommonPerson;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeCustomer;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -34,10 +33,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @EqualsAndHashCode
 
 
-@BabelFishModel(
+@Schema(
     description = "Object containing either a CommonPerson or CommonOrganisation object defineed by a type")
 public abstract class ResponseCommonCustomerData<T> {
-  @BabelFishModelProperty(description = "The type of customer object that is present",
+  @Schema(description = "The type of customer object that is present",
       required = true)
   @JsonProperty("customerUType")
   @NotNull
@@ -54,7 +53,7 @@ public abstract class ResponseCommonCustomerData<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "The Person Record for the Customer")
+  @Schema(description = "The Person Record for the Customer")
   @JsonProperty("person")
   public CommonPerson<?> person;
 
@@ -68,7 +67,7 @@ public abstract class ResponseCommonCustomerData<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "The Organisation Record for the Customer")
+  @Schema(description = "The Organisation Record for the Customer")
   @JsonProperty("organisation")
   public CommonOrganisation<?> organisation;
 

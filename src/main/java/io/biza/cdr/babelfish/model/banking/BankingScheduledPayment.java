@@ -16,9 +16,8 @@ package io.biza.cdr.babelfish.model.banking;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.BankingScheduledPaymentStatus;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -31,9 +30,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Describes a Scheduled Payment")
+@Schema(description = "Describes a Scheduled Payment")
 public abstract class BankingScheduledPayment<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "A unique ID of the scheduled payment adhering to the standards for ID permanence",
       required = true)
   @NonNull
@@ -50,7 +49,7 @@ public abstract class BankingScheduledPayment<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The short display name of the payee as provided by the customer")
   String nickname;
 
@@ -64,7 +63,7 @@ public abstract class BankingScheduledPayment<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The reference for the transaction that will be used by the originating institution for the purposes of constructing a statement narrative on the payer’s account. Empty string if no data provided",
       required = true)
   @NonNull
@@ -81,7 +80,7 @@ public abstract class BankingScheduledPayment<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The reference for the transaction that will be provided by the originating institution. Empty string if no data provided",
       required = true)
   @NonNull
@@ -98,7 +97,7 @@ public abstract class BankingScheduledPayment<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Indicates whether the schedule is currently active. The value SKIP is equivalent to ACTIVE except that the customer has requested the next normal occurrence to be skipped.",
       required = true)
   @NonNull
@@ -115,7 +114,7 @@ public abstract class BankingScheduledPayment<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(required = true)
+  @Schema(required = true)
   @NonNull
   @NotNull
   BankingScheduledPaymentFrom<?> from;
@@ -130,7 +129,7 @@ public abstract class BankingScheduledPayment<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(required = true)
+  @Schema(required = true)
   @NonNull
   @NotNull
   List<BankingScheduledPaymentSet<?>> paymentSet;
@@ -145,7 +144,7 @@ public abstract class BankingScheduledPayment<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(required = true)
+  @Schema(required = true)
   @NonNull
   @NotNull
   BankingScheduledPaymentRecurrence<?> recurrence;

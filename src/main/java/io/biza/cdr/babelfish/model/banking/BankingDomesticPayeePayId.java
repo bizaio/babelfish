@@ -15,9 +15,8 @@ package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingDomesticPayeePayId;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -30,9 +29,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Domestic Payee PayID Detail")
+@Schema(description = "Domestic Payee PayID Detail")
 public abstract class BankingDomesticPayeePayId<T> {
-  @BabelFishModelProperty(description = "The name assigned to the PayID by the owner of the PayID")
+  @Schema(description = "The name assigned to the PayID by the owner of the PayID")
   String name;
 
   public String name() {
@@ -45,7 +44,7 @@ public abstract class BankingDomesticPayeePayId<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "The identifier of the PayID (dependent on type)",
+  @Schema(description = "The identifier of the PayID (dependent on type)",
       required = true)
   @NonNull
   @NotNull
@@ -61,7 +60,7 @@ public abstract class BankingDomesticPayeePayId<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "The type of the PayID", required = true)
+  @Schema(description = "The type of the PayID", required = true)
   @NonNull
   @NotNull
   PayloadTypeBankingDomesticPayeePayId type;

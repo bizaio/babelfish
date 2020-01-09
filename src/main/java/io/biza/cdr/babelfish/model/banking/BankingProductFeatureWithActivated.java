@@ -15,8 +15,7 @@ package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,11 +26,11 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode(callSuper = true)
-@BabelFishModel(modelName = "BankingAccountProductFeature",
-    description = "Banking Account Product Feature", parent = BankingProductFeature.class)
+@Schema(name = "BankingAccountProductFeature",
+    description = "Banking Account Product Feature", allOf = { BankingProductFeature.class })
 public abstract class BankingProductFeatureWithActivated<T> extends BankingProductFeature<T> {
   @JsonUnwrapped
-  @BabelFishModelProperty(hidden = true)
+  @Schema(hidden = true)
   @Valid
   BankingProductFeature<?> bankingProductFeature;
 
@@ -45,7 +44,7 @@ public abstract class BankingProductFeatureWithActivated<T> extends BankingProdu
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "True if the feature is already activated and false if the feature is available for activation.")
   Boolean isActivated = true;
 

@@ -18,17 +18,16 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.common.Links;
 import io.biza.cdr.babelfish.model.common.Meta;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
-@BabelFishModel(description = "The CDR Response")
+@Schema(description = "The CDR Response")
 @Valid
 @Getter
 @Setter
 public abstract class CDRResponse<T> {
-  @BabelFishModelProperty(description = "The Links Object", required = true)
+  @Schema(description = "The Links Object", required = true)
   @JsonProperty("links")
   @NotNull
   @Valid
@@ -44,7 +43,7 @@ public abstract class CDRResponse<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The meta object is used to provide additional information such as second factor authorisation data, traffic management, pagination counts or other purposes that are complementary to the workings of the API.",
       required = true)
   @JsonProperty("meta")

@@ -26,8 +26,7 @@ import io.biza.cdr.babelfish.converters.CurrencyToStringConverter;
 import io.biza.cdr.babelfish.converters.OffsetDateTimeToDateTimeStringConverter;
 import io.biza.cdr.babelfish.converters.StringToCurrencyConverter;
 import io.biza.cdr.babelfish.converters.DateTimeStringToOffsetDateTimeConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.v1.enumerations.BankingTransactionStatus;
 import io.biza.cdr.babelfish.v1.enumerations.BankingTransactionType;
 import lombok.EqualsAndHashCode;
@@ -42,9 +41,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Banking Transaction Brief Definition")
+@Schema(description = "Banking Transaction Brief Definition")
 public abstract class BankingTransaction<T> {
-  @BabelFishModelProperty(description = "ID of the account for which transactions are provided",
+  @Schema(description = "ID of the account for which transactions are provided",
       required = true)
   @NonNull
   @NotNull
@@ -60,7 +59,7 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "A unique ID of the transaction adhering to the standards for ID permanence. ")
   @NonNull
   @NotNull
@@ -76,7 +75,7 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "True if extended information is available using the transaction detail end point. False if extended data is not available",
       required = true)
   @NonNull
@@ -93,7 +92,7 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "The type of the transaction", required = true)
+  @Schema(description = "The type of the transaction", required = true)
   @NonNull
   @NotNull
   BankingTransactionType type;
@@ -108,7 +107,7 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Status of the transaction whether pending or posted. Note that there is currently no provision in the standards to guarantee the ability to correlate a pending transaction with an associated posted transaction",
       required = true)
   @NonNull
@@ -125,7 +124,7 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The transaction description as applied by the financial institution",
       required = true)
   @NonNull
@@ -142,7 +141,7 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The time the transaction was posted. This field is Mandatory if the transaction has status POSTED.  This is the time that appears on a standard statement")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
@@ -158,7 +157,7 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Date and time at which assets become available to the account owner in case of a credit entry, or cease to be available to the account owner in case of a debit transaction entry")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
@@ -174,7 +173,7 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The time the transaction was executed by the originating customer, if available")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
@@ -190,9 +189,9 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The value of the transaction. Negative values mean money was outgoing from the account",
-      required = true, dataType = "java.lang.String")
+      required = true, type = "java.lang.String")
   @NonNull
   @NotNull
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
@@ -209,9 +208,9 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The currency for the transaction amount. AUD assumed if not present",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   Currency currency;
@@ -226,7 +225,7 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The reference for the transaction provided by the originating institution. Empty string if no data provided",
       required = true)
   @NonNull
@@ -243,7 +242,7 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Name of the merchant for an outgoing payment to a merchant")
   String merchantName;
 
@@ -257,7 +256,7 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The merchant category code (or MCC) for an outgoing payment to a merchant")
   String merchantCategoryCode;
 
@@ -271,7 +270,7 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "BPAY Biller Code for the transaction (if available)")
+  @Schema(description = "BPAY Biller Code for the transaction (if available)")
   String billerCode;
 
   public String billerCode() {
@@ -284,7 +283,7 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Name of the BPAY biller for the transaction (if available)")
   String billerName;
 
@@ -298,7 +297,7 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "BPAY CRN for the transaction (if available)")
+  @Schema(description = "BPAY CRN for the transaction (if available)")
   String crn;
 
   public String crn() {
@@ -311,7 +310,7 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "6 Digit APCA number for the initiating institution")
+  @Schema(description = "6 Digit APCA number for the initiating institution")
   String apcaNumber;
 
   public String apcaNumber() {

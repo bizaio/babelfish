@@ -16,8 +16,7 @@ package io.biza.cdr.babelfish.model.common;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -30,9 +29,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Error Information")
+@Schema(description = "Error Information")
 public abstract class Error<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "Must be one of the following: 0001 – Account not able to be found",
       required = true)
   @JsonProperty("code")
@@ -50,7 +49,7 @@ public abstract class Error<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Must be one of the following: Invalid account",
+  @Schema(description = "Must be one of the following: Invalid account",
       required = true)
   @JsonProperty("title")
   @NotNull
@@ -67,7 +66,7 @@ public abstract class Error<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "ID of the account not found", required = true)
+  @Schema(description = "ID of the account not found", required = true)
   @JsonProperty("detail")
   @NotNull
   @NonNull
@@ -83,7 +82,7 @@ public abstract class Error<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Optional additional data for specific error types")
+  @Schema(description = "Optional additional data for specific error types")
   @JsonProperty("meta")
   public Object meta;
 

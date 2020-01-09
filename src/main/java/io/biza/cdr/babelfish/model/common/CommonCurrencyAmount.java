@@ -23,8 +23,7 @@ import io.biza.cdr.babelfish.converters.AmountStringToBigDecimalConverter;
 import io.biza.cdr.babelfish.converters.BigDecimalToAmountStringConverter;
 import io.biza.cdr.babelfish.converters.CurrencyToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToCurrencyConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,11 +35,11 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Currency Amount")
+@Schema(description = "Currency Amount")
 public abstract class CommonCurrencyAmount<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "The current balance of the account at this time. Should align to the current balance available via other channels such as ATM balance enquiry or Internet Banking",
-      required = true, dataType = "java.lang.String")
+      required = true, type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   @JsonProperty("amount")
@@ -56,8 +55,8 @@ public abstract class CommonCurrencyAmount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Currency Amount Currency Code", required = false,
-      dataType = "java.lang.String")
+  @Schema(description = "Currency Amount Currency Code", required = false,
+      type = "java.lang.String")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   @JsonProperty("currency")

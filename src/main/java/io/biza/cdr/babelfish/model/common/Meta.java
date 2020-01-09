@@ -14,7 +14,7 @@
 package io.biza.cdr.babelfish.model.common;
 
 import javax.validation.Valid;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +26,6 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Meta Detail")
+@Schema(description = "Meta Detail")
 public abstract class Meta<T> {
 }

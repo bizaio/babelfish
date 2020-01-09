@@ -17,8 +17,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -30,9 +29,9 @@ import lombok.ToString;
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@BabelFishModel(description = "Person definition in detail", parent = CommonPerson.class)
+@Schema(description = "Person definition in detail")
 public abstract class CommonPersonDetail<T> extends CommonPerson<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "Array is mandatory but may be empty if no phone numbers are held",
       required = true)
   @JsonProperty("phoneNumbers")
@@ -50,7 +49,7 @@ public abstract class CommonPersonDetail<T> extends CommonPerson<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "May be empty", required = true)
+  @Schema(description = "May be empty", required = true)
   @JsonProperty("emailAddresses")
   @NonNull
   @NotNull
@@ -67,7 +66,7 @@ public abstract class CommonPersonDetail<T> extends CommonPerson<T> {
   }
 
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Must contain at least one address. One and only one address may have the purpose of REGISTERED. Zero or one, and no more than one, record may have the purpose of MAIL. If zero then the REGISTERED address is to be used for mail",
       required = true)
   @JsonProperty("physicalAddresses")

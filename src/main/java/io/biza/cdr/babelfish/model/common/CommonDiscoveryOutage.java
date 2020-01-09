@@ -20,8 +20,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.converters.OffsetDateTimeToDateTimeStringConverter;
 import io.biza.cdr.babelfish.converters.StringToDurationConverter;
 import io.biza.cdr.babelfish.converters.DateTimeStringToOffsetDateTimeConverter;
@@ -38,9 +37,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Outage Detail")
+@Schema(description = "Outage Detail")
 public abstract class CommonDiscoveryOutage<T> {
-  @BabelFishModelProperty(description = "Date and time that the outage is scheduled to begin",
+  @Schema(description = "Date and time that the outage is scheduled to begin",
       required = true)
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
@@ -59,7 +58,7 @@ public abstract class CommonDiscoveryOutage<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Planned duration of the outage. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations)",
       required = true)
   @JsonSerialize(converter = DurationToStringConverter.class)
@@ -79,7 +78,7 @@ public abstract class CommonDiscoveryOutage<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Flag that indicates, if present and set to true, that the outage is only partial meaning that only a subset of normally available end points will be affected by the outage")
   @JsonProperty("isPartial")
   public Boolean isPartial;
@@ -94,7 +93,7 @@ public abstract class CommonDiscoveryOutage<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Provides an explanation of the current outage that can be displayed to an end customer",
       required = true)
   @JsonProperty("explanation")

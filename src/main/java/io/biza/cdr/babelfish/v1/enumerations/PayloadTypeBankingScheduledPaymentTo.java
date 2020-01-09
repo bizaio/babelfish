@@ -16,10 +16,10 @@ package io.biza.cdr.babelfish.v1.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.support.LabelValueEnumInterface;
 
-@BabelFishModel(description = "Payload Type: Banking Scheduled Payment Target")
+@Schema(description = "Payload Type: Banking Scheduled Payment Target")
 public enum PayloadTypeBankingScheduledPaymentTo implements LabelValueEnumInterface {
   // @formatter:off
   ACCOUNT_ID("accountId", "Transfer to a specific Account ID"),

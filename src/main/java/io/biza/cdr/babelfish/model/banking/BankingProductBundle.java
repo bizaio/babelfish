@@ -20,10 +20,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.converters.UriStringToUriConverter;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -36,9 +35,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Banking Product Bundle Definition")
+@Schema(description = "Banking Product Bundle Definition", name = "BankingProductBundle")
 public abstract class BankingProductBundle<T> {
-  @BabelFishModelProperty(description = "Name of the bundle", required = true)
+  @Schema(description = "Name of the bundle", required = true)
   @NonNull
   @NotNull
   @NotBlank
@@ -55,7 +54,7 @@ public abstract class BankingProductBundle<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Description of the bundle", required = true)
+  @Schema(description = "Description of the bundle", required = true)
   @NonNull
   @NotNull
   @NotBlank
@@ -72,7 +71,7 @@ public abstract class BankingProductBundle<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Display text providing more information on the bundle")
+  @Schema(description = "Display text providing more information on the bundle")
   String additionalInfo;
 
   public String additionalInfo() {
@@ -85,9 +84,9 @@ public abstract class BankingProductBundle<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Link to a web page with more information on the bundle criteria and benefits",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   URI additionalInfoUri;
@@ -102,7 +101,7 @@ public abstract class BankingProductBundle<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Array of product IDs for products included in the bundle that are available via the product end points.  Note that this array is not intended to represent a comprehensive model of the products included in the bundle and some products available for the bundle may not be available via the product reference end points")
   List<String> productIds;
 }

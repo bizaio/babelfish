@@ -22,7 +22,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductFeeType;
 import io.biza.cdr.babelfish.converters.BigDecimalToRateStringConverter;
 import io.biza.cdr.babelfish.converters.CurrencyToStringConverter;
@@ -31,7 +30,7 @@ import io.biza.cdr.babelfish.converters.RateStringToBigDecimalConverter;
 import io.biza.cdr.babelfish.converters.StringToCurrencyConverter;
 import io.biza.cdr.babelfish.converters.StringToPeriodConverter;
 import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -44,9 +43,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Banking Product Fee Definition")
+@Schema(description = "Banking Product Fee Definition")
 public abstract class BankingProductFee<T> {
-  @BabelFishModelProperty(description = "Name of the fee", required = true)
+  @Schema(description = "Name of the fee", required = true)
   @NonNull
   @NotNull
   String name;
@@ -61,7 +60,7 @@ public abstract class BankingProductFee<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "The type of fee", required = true)
+  @Schema(description = "The type of fee", required = true)
   @NonNull
   @NotNull
   BankingProductFeeType feeType;
@@ -76,9 +75,9 @@ public abstract class BankingProductFee<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The amount charged for the fee. One of amount, balanceRate, transactionRate and accruedRate is mandatory",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   private BigDecimal amount;
@@ -93,9 +92,9 @@ public abstract class BankingProductFee<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "A fee rate calculated based on a proportion of the balance. One of amount, balanceRate, transactionRate and accruedRate is mandatory",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   private BigDecimal balanceRate;
@@ -110,9 +109,9 @@ public abstract class BankingProductFee<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "A fee rate calculated based on a proportion of a transaction. One of amount, balanceRate, transactionRate and accruedRate is mandatory",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   private BigDecimal transactionRate;
@@ -127,9 +126,9 @@ public abstract class BankingProductFee<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "A fee rate calculated based on a proportion of the calculated interest accrued on the account. One of amount, balanceRate, transactionRate and accruedRate is mandatory",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   private BigDecimal accruedRate;
@@ -144,9 +143,9 @@ public abstract class BankingProductFee<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The indicative frequency with which the fee is calculated on the account. Only applies if balanceRate or accruedRate is also present. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations)",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = PeriodToStringConverter.class)
   @JsonDeserialize(converter = StringToPeriodConverter.class)
   Period accrualFrequency;
@@ -161,7 +160,7 @@ public abstract class BankingProductFee<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "The currency the fee will be charged in")
+  @Schema(description = "The currency the fee will be charged in")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   Currency currency = Currency.getInstance("AUD");
@@ -176,7 +175,7 @@ public abstract class BankingProductFee<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Generic field containing additional information relevant to the [feeType](#tocSproductfeetypedoc) specified. Whether mandatory or not is dependent on the value of [feeType](#tocSproductfeetypedoc)")
   String additionalValue;
 
@@ -190,7 +189,7 @@ public abstract class BankingProductFee<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Display text providing more information on the fee")
+  @Schema(description = "Display text providing more information on the fee")
   String additionalInfo;
 
   public String additionalInfo() {
@@ -203,8 +202,8 @@ public abstract class BankingProductFee<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Link to a web page with more information on this fee",
-      dataType = "java.lang.String")
+  @Schema(description = "Link to a web page with more information on this fee",
+      type = "java.lang.String")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   URI additionalInfoUri;
 
@@ -218,7 +217,7 @@ public abstract class BankingProductFee<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "An optional list of discounts to this fee that may be available")
   List<BankingProductFeeDiscount<?>> discounts;
 

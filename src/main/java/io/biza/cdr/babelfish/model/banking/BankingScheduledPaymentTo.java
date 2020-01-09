@@ -16,9 +16,8 @@ package io.biza.cdr.babelfish.model.banking;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingScheduledPaymentTo;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -31,10 +30,10 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(
+@Schema(
     description = "Object containing details of the destination of the payment. Used to specify a variety of payment destination types")
 public abstract class BankingScheduledPaymentTo<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "The type of object provided that specifies the destination of the funds for the payment.",
       required = true)
   @NonNull
@@ -52,7 +51,7 @@ public abstract class BankingScheduledPaymentTo<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Present if toUType is set to accountId. Indicates that the payment is to another account that is accessible under the current consent")
   String accountId;
 
@@ -66,7 +65,7 @@ public abstract class BankingScheduledPaymentTo<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Present if toUType is set to payeeId. Indicates that the payment is to registered payee that can be accessed using the payee end point. If the Bank Payees scope has not been consented to then a payeeId should not be provided and the full payee details should be provided instead")
   String payeeId;
 

@@ -20,8 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.cdr.babelfish.converters.LocalDateToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToLocalDateConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -34,11 +33,11 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(
+@Schema(
     description = "Indicates that the payment is a once off payment on a specific future date. Mandatory if recurrenceUType is set to onceOff")
 public abstract class BankingScheduledPaymentRecurrenceOnceOff<T> {
-  @BabelFishModelProperty(description = "The scheduled date for the once off payment",
-      required = true, dataType = "java.lang.String")
+  @Schema(description = "The scheduled date for the once off payment",
+      required = true, type = "java.lang.String")
   @NonNull
   @NotNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)

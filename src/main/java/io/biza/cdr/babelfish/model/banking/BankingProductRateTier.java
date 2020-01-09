@@ -16,10 +16,9 @@ package io.biza.cdr.babelfish.model.banking;
 import java.math.BigDecimal;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductRateTierApplicationMethod;
 import io.biza.cdr.babelfish.v1.enumerations.CommonUnitOfMeasureType;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -32,9 +31,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Defines the criteria and conditions for which a rate applies")
+@Schema(description = "Defines the criteria and conditions for which a rate applies")
 public abstract class BankingProductRateTier<T> {
-  @BabelFishModelProperty(description = "A display name for the tier", required = true)
+  @Schema(description = "A display name for the tier", required = true)
   @NonNull
   @NotNull
   String name;
@@ -49,7 +48,7 @@ public abstract class BankingProductRateTier<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The unit of measure that applies to the tierValueMinimum and tierValueMaximum values e.g. 'DOLLAR', 'MONTH' (in the case of term deposit tiers), 'PERCENT' (in the case of loan-to-value ratio or LVR)",
       required = true)
   @NonNull
@@ -66,7 +65,7 @@ public abstract class BankingProductRateTier<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The number of tierUnitOfMeasure units that form the lower bound of the tier. The tier should be inclusive of this value",
       required = true)
   @NonNull
@@ -83,7 +82,7 @@ public abstract class BankingProductRateTier<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The number of tierUnitOfMeasure units that form the upper bound of the tier or band. For a tier with a discrete value (as opposed to a range of values e.g. 1 month) this must be the same as tierValueMinimum. Where this is the same as the tierValueMinimum value of the next-higher tier the referenced tier should be exclusive of this value. For example a term deposit of 2 months falls into the upper tier of the following tiers: (1 – 2 months, 2 – 3 months). If absent the tier's range has no upper bound.")
   BigDecimal maximumValue;
 
@@ -97,7 +96,7 @@ public abstract class BankingProductRateTier<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The method used to calculate the amount to be applied using one or more tiers. A single rate may be applied to the entire balance or each applicable tier rate is applied to the portion of the balance that falls into that tier (referred to as 'bands' or 'steps')")
   BankingProductRateTierApplicationMethod rateApplicationMethod;
 
@@ -111,7 +110,7 @@ public abstract class BankingProductRateTier<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty
+  @Schema(description = "Banking Product Rate Applicability Conditions")
   BankingProductRateCondition<?> applicabilityConditions;
 
   public BankingProductRateCondition<?> applicabilityConditions() {

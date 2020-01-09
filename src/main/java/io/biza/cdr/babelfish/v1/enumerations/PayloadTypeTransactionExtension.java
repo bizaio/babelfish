@@ -16,10 +16,10 @@ package io.biza.cdr.babelfish.v1.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.support.LabelValueEnumInterface;
 
-@BabelFishModel(description = "Payload Type: Transaction Extension Type")
+@Schema(description = "Payload Type: Transaction Extension Type")
 public enum PayloadTypeTransactionExtension implements LabelValueEnumInterface {
   // @formatter:off    
   X2P101("x2p101Payload", "NPP X2P1.01 Transaction Type");

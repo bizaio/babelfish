@@ -15,8 +15,7 @@ package io.biza.cdr.babelfish.model.banking;
 
 import java.util.List;
 import javax.validation.Valid;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,29 +26,29 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode(callSuper = true)
-@BabelFishModel(description = "Banking Product Detailed Information", parent = BankingProduct.class)
+@Schema(description = "Banking Product Detailed Information", allOf = { BankingProduct.class })
 public abstract class BankingProductDetail<T> extends BankingProduct<T> {
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "An array of bundles that this product participates in.  Each bundle is described by free form information but also by a list of product IDs of the other products that are included in the bundle.  It is assumed that the current product is included in the bundle also")
   List<BankingProductBundle<?>> bundles;
 
-  @BabelFishModelProperty(description = "Array of features available for the product")
+  @Schema(description = "Array of features available for the product")
   List<BankingProductFeature<?>> features;
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Constraints on the application for or operation of the product such as minimum balances or limit thresholds")
   List<BankingProductConstraint<?>> constraints;
 
-  @BabelFishModelProperty(description = "Eligibility criteria for the product")
+  @Schema(description = "Eligibility criteria for the product")
   List<BankingProductEligibility<?>> eligibility;
 
-  @BabelFishModelProperty(description = "Fees applicable for the product")
+  @Schema(description = "Fees applicable for the product")
   List<BankingProductFee<?>> fees;
 
-  @BabelFishModelProperty(description = "Interest rates available for deposits")
+  @Schema(description = "Interest rates available for deposits")
   List<BankingProductDepositRate<?>> depositRates;
 
-  @BabelFishModelProperty(description = "Interest rates charged against lending balances")
+  @Schema(description = "Interest rates charged against lending balances")
   List<BankingProductLendingRate<?>> lendingRates;
 }

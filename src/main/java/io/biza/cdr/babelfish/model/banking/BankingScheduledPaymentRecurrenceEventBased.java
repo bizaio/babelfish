@@ -15,8 +15,7 @@ package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -29,10 +28,10 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(
+@Schema(
     description = "Indicates that the schedule of payments is defined according to an external event that cannot be predetermined. Mandatory if recurrenceUType is set to eventBased")
 public abstract class BankingScheduledPaymentRecurrenceEventBased<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "Description of the event and conditions that will result in the payment. Expected to be formatted for display to a customer",
       required = true)
   @NonNull

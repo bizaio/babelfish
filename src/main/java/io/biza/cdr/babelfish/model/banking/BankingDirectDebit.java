@@ -23,8 +23,7 @@ import io.biza.cdr.babelfish.converters.AmountStringToBigDecimalConverter;
 import io.biza.cdr.babelfish.converters.BigDecimalToAmountStringConverter;
 import io.biza.cdr.babelfish.converters.OffsetDateTimeToDateTimeStringConverter;
 import io.biza.cdr.babelfish.converters.DateTimeStringToOffsetDateTimeConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -37,9 +36,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Representation of a Direct Debit Authorisation")
+@Schema(description = "Representation of a Direct Debit Authorisation")
 public abstract class BankingDirectDebit<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "A unique ID of the account adhering to the standards for ID permanence.",
       required = true)
   @NonNull
@@ -56,7 +55,7 @@ public abstract class BankingDirectDebit<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(required = true)
+  @Schema(required = true)
   @NonNull
   @NotNull
   BankingAuthorisedEntity<?> authorisedEntity;
@@ -71,9 +70,9 @@ public abstract class BankingDirectDebit<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The date and time of the last debit executed under this authorisation",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   LocalDateTime lastDebitDateTime;
@@ -88,7 +87,7 @@ public abstract class BankingDirectDebit<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The amount of the last debit executed under this authorisation")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)

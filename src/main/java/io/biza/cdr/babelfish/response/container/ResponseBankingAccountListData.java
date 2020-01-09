@@ -18,8 +18,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.banking.BankingAccount;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -31,9 +30,9 @@ import lombok.ToString;
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode
-@BabelFishModel(description = "Response containing a list of Banking Accounts")
+@Schema(description = "Response containing a list of Banking Accounts")
 public abstract class ResponseBankingAccountListData<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "The list of accounts returned. If the filter results in an empty set then this array may have no records",
       required = true)
   @JsonProperty("accounts")

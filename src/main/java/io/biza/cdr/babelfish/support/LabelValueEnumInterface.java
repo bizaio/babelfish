@@ -13,8 +13,6 @@
  *******************************************************************************/
 package io.biza.cdr.babelfish.support;
 
-import lombok.ToString;
-
 public interface LabelValueEnumInterface {
   String label();
 

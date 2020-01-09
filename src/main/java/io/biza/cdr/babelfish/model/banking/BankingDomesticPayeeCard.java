@@ -15,8 +15,7 @@ package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -29,9 +28,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Domestic Payee Card Number Details")
+@Schema(description = "Domestic Payee Card Number Details")
 public abstract class BankingDomesticPayeeCard<T> {
-  @BabelFishModelProperty(description = "Name of the account to pay to", required = true)
+  @Schema(description = "Name of the account to pay to", required = true)
   @NonNull
   @NotNull
   String cardNumber;

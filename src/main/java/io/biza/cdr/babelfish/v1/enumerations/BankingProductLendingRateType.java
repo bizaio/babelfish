@@ -16,10 +16,10 @@ package io.biza.cdr.babelfish.v1.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.support.LabelValueEnumInterface;
 
-@BabelFishModel(description = "Banking Product: Lending Rate Type")
+@Schema(description = "Banking Product: Lending Rate Type")
 public enum BankingProductLendingRateType implements LabelValueEnumInterface {
   // @formatter:off  
   FIXED("FIXED", "Fixed rate for a period of time"),

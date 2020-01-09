@@ -20,8 +20,7 @@ import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.PhoneNumberUtil.PhoneNumberFormat;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.support.TypeConstants;
 import io.biza.cdr.babelfish.v1.enumerations.CommonPhoneNumberPurpose;
 import lombok.EqualsAndHashCode;
@@ -36,14 +35,14 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Phone Number Detail")
+@Schema(description = "Phone Number Detail")
 public abstract class CommonPhoneNumber<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "May be true for one and only one entry to indicate the preferred phone number. Assumed to be 'false' if not present")
   @JsonProperty("isPreferred")
   public Boolean isPreferred = false;
 
-  @BabelFishModelProperty(description = "The purpose of the number as specified by the customer",
+  @Schema(description = "The purpose of the number as specified by the customer",
       required = true)
   @JsonProperty("purpose")
   @NotNull
@@ -60,7 +59,7 @@ public abstract class CommonPhoneNumber<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "If absent, assumed to be Australia (+61). The + should be included")
   @JsonProperty("countryCode")
   public String countryCode = "+61";
@@ -75,7 +74,7 @@ public abstract class CommonPhoneNumber<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Required for non Mobile Phones, if field is present and refers to Australian code - the leading 0 should be omitted.")
   @JsonProperty("areaCode")
   public String areaCode;
@@ -90,7 +89,7 @@ public abstract class CommonPhoneNumber<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The actual phone number, with leading zeros as appropriate", required = true)
   @JsonProperty("number")
   public String number;
@@ -105,7 +104,7 @@ public abstract class CommonPhoneNumber<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "An extension number (if applicable)")
+  @Schema(description = "An extension number (if applicable)")
   @JsonProperty("extension")
   public String extension;
 
@@ -119,7 +118,7 @@ public abstract class CommonPhoneNumber<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Fully formatted phone number with country code, area code, number and extension incorporated. Formatted according to section 5.1.4. of [RFC 3966](https://www.ietf.org/rfc/rfc3966.txt)",
       required = true)
   @JsonProperty("fullNumber")

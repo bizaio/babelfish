@@ -22,7 +22,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.BankingLoanRepaymentType;
 import io.biza.cdr.babelfish.converters.LocalDateToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToCurrencyConverter;
@@ -31,7 +30,7 @@ import io.biza.cdr.babelfish.converters.DurationToStringConverter;
 import io.biza.cdr.babelfish.converters.AmountStringToBigDecimalConverter;
 import io.biza.cdr.babelfish.converters.BigDecimalToAmountStringConverter;
 import io.biza.cdr.babelfish.converters.CurrencyToStringConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -44,9 +43,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Banking Loan Account Details")
+@Schema(description = "Banking Loan Account Details")
 public abstract class BankingLoanAccount<T> {
-  @BabelFishModelProperty(description = "Original Loan Start Date")
+  @Schema(description = "Original Loan Start Date")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   private LocalDate originalStartDate;
@@ -61,7 +60,7 @@ public abstract class BankingLoanAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Original Loan Value", dataType = "java.lang.String")
+  @Schema(description = "Original Loan Value", type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   private BigDecimal originalLoanAmount;
@@ -76,7 +75,7 @@ public abstract class BankingLoanAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Original Loan Value Currency")
+  @Schema(description = "Original Loan Value Currency")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   Currency originalLoanCurrency = Currency.getInstance("AUD");
@@ -91,8 +90,8 @@ public abstract class BankingLoanAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Date that the loan is due to be repaid in full",
-      required = true, dataType = "java.lang.String")
+  @Schema(description = "Date that the loan is due to be repaid in full",
+      required = true, type = "java.lang.String")
   @NotNull
   @NonNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)
@@ -109,7 +108,7 @@ public abstract class BankingLoanAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Next date that an instalment is required", required = true)
+  @Schema(description = "Next date that an instalment is required", required = true)
   @NotNull
   @NonNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)
@@ -126,8 +125,8 @@ public abstract class BankingLoanAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Minimum amount of next instalment",
-      dataType = "java.lang.String")
+  @Schema(description = "Minimum amount of next instalment",
+      type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   private BigDecimal minInstalmentAmount;
@@ -142,7 +141,7 @@ public abstract class BankingLoanAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Minimum amount currency", dataType = "java.lang.String")
+  @Schema(description = "Minimum amount currency", type = "java.lang.String")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   Currency minInstalmentCurrency = Currency.getInstance("AUD");
@@ -157,9 +156,9 @@ public abstract class BankingLoanAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Maximum amount of funds that can be redrawn. If not present redraw is not available even if the feature exists for the account",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   private BigDecimal maxRedraw;
@@ -174,7 +173,7 @@ public abstract class BankingLoanAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Maximum redraw amount currency")
+  @Schema(description = "Maximum redraw amount currency")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   Currency maxRedrawCurrency = Currency.getInstance("AUD");
@@ -189,7 +188,7 @@ public abstract class BankingLoanAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Minimum redraw amount", dataType = "java.lang.String")
+  @Schema(description = "Minimum redraw amount", type = "java.lang.String")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   private BigDecimal minRedraw;
@@ -204,7 +203,7 @@ public abstract class BankingLoanAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Minimum Redraw currency")
+  @Schema(description = "Minimum Redraw currency")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   Currency minRedrawCurrency = Currency.getInstance("AUD");
@@ -219,7 +218,7 @@ public abstract class BankingLoanAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Set to true if one or more offset accounts are configured for this loan account")
   Boolean offsetAccountEnabled;
 
@@ -233,11 +232,11 @@ public abstract class BankingLoanAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The accountIDs of the configured offset accounts attached to this loan. Only offset accounts that can be accessed under the current authorisation should be included. It is expected behaviour that offsetAccountEnabled is set to true but the offsetAccountIds field is absent or empty. This represents a situation where an offset account exists but details can not be accessed under the current authorisation")
   List<String> offsetAccountIds;
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Options in place for repayments. If absent defaults to PRINCIPAL_AND_INTEREST")
   BankingLoanRepaymentType repaymentType = BankingLoanRepaymentType.PRINCIPAL_AND_INTEREST;
 
@@ -251,7 +250,7 @@ public abstract class BankingLoanAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The expected or required repayment frequency. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations)",
       required = true)
   @NotNull

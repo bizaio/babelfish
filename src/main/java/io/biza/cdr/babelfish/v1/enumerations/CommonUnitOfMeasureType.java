@@ -16,10 +16,10 @@ package io.biza.cdr.babelfish.v1.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.support.LabelValueEnumInterface;
 
-@BabelFishModel(description = "Common: Unit of Measure")
+@Schema(description = "Common: Unit of Measure")
 public enum CommonUnitOfMeasureType implements LabelValueEnumInterface {
   DOLLAR("DOLLAR", "Dollar Value"), PERCENT("PERCENT", "Percentage Value"), MONTH("MONTH",
       "Month"), DAY("DAY", "Day of Month");

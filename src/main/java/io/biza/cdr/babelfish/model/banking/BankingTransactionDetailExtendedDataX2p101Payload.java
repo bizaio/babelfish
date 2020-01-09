@@ -15,8 +15,7 @@ package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -29,9 +28,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Banking Transaction Detail X2P101 Payload")
+@Schema(description = "Banking Transaction Detail X2P101 Payload")
 public abstract class BankingTransactionDetailExtendedDataX2p101Payload<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "An extended string description. Only present if specified by the extensionUType field",
       required = true)
   @NonNull
@@ -48,7 +47,7 @@ public abstract class BankingTransactionDetailExtendedDataX2p101Payload<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "An end to end ID for the payment created at initiation")
+  @Schema(description = "An end to end ID for the payment created at initiation")
   String endToEndId;
 
   public String endToEndId() {
@@ -61,7 +60,7 @@ public abstract class BankingTransactionDetailExtendedDataX2p101Payload<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Purpose of the payment.  Format is defined by NPP standards for the x2p1.01 overlay service")
   String purposeCode;
 

@@ -18,11 +18,10 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeBankingScheduledPaymentRecurrence;
 import io.biza.cdr.babelfish.converters.LocalDateToStringConverter;
 import io.biza.cdr.babelfish.converters.StringToLocalDateConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -35,11 +34,11 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Describes the detail of the scheduled payment")
+@Schema(description = "Describes the detail of the scheduled payment")
 public abstract class BankingScheduledPaymentRecurrence<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "The date of the next payment under the recurrence schedule",
-      dataType = "java.lang.String")
+      type = "java.lang.String")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   private LocalDate nextPaymentDate;
@@ -54,7 +53,7 @@ public abstract class BankingScheduledPaymentRecurrence<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "The type of recurrence used to define the schedule",
+  @Schema(description = "The type of recurrence used to define the schedule",
       required = true)
   @NonNull
   @NotNull

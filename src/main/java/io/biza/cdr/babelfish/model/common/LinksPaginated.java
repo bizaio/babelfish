@@ -20,8 +20,7 @@ import io.biza.cdr.babelfish.converters.UriToUriStringConverter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,12 +31,12 @@ import lombok.ToString;
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@BabelFishModel(description = "Paginated Links")
+@Schema(description = "Paginated Links")
 public abstract class LinksPaginated<T> extends Links<T> {
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "URI to the first page of this set. Mandatory if this response is not the first page",
-      dataType = "java.lang.String", attributeName = "first")
+      type = "java.lang.String", name = "first")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("first")
@@ -55,9 +54,9 @@ public abstract class LinksPaginated<T> extends Links<T> {
   }
 
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "URI to the previous page of this set. Mandatory if this response is not the prev page",
-      dataType = "java.lang.String", attributeName = "prev")
+      type = "java.lang.String", name = "prev")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("prev")
@@ -75,9 +74,9 @@ public abstract class LinksPaginated<T> extends Links<T> {
   }
 
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "URI to the next page of this set. Mandatory if this response is not the last page",
-      dataType = "java.lang.String", attributeName = "next")
+      type = "java.lang.String", name = "next")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("next")
@@ -95,9 +94,9 @@ public abstract class LinksPaginated<T> extends Links<T> {
   }
 
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "URI to the last page of this set. Mandatory if this response is not the last page",
-      dataType = "java.lang.String", attributeName = "last")
+      type = "java.lang.String", name = "last")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("last")

@@ -17,8 +17,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.v1.model.banking.BankingScheduledPayment;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -33,9 +32,9 @@ import lombok.ToString;
 @EqualsAndHashCode
 
 
-@BabelFishModel(description = "An object containing a list of BankingScheduledPayment objects")
+@Schema(description = "An object containing a list of BankingScheduledPayment objects")
 public abstract class ResponseBankingScheduledPaymentsListData<T> {
-  @BabelFishModelProperty(description = "The list of scheduled payments to return", required = true)
+  @Schema(description = "The list of scheduled payments to return", required = true)
   @JsonProperty("scheduledPayments")
   @NotNull
   @NonNull

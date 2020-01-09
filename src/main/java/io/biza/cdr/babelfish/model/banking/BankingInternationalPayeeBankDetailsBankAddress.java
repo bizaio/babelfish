@@ -15,8 +15,7 @@ package io.biza.cdr.babelfish.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -29,9 +28,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "International Payee Bank Address Details")
+@Schema(description = "International Payee Bank Address Details")
 public abstract class BankingInternationalPayeeBankDetailsBankAddress<T> {
-  @BabelFishModelProperty(description = "Name of the recipient Bank", required = true)
+  @Schema(description = "Name of the recipient Bank", required = true)
   @NonNull
   @NotNull
   String name;
@@ -46,7 +45,7 @@ public abstract class BankingInternationalPayeeBankDetailsBankAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Address of the recipient Bank", required = true)
+  @Schema(description = "Address of the recipient Bank", required = true)
   @NonNull
   @NotNull
   String address;

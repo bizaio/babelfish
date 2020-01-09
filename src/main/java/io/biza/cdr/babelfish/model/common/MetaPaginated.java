@@ -17,8 +17,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -30,9 +29,9 @@ import lombok.ToString;
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@BabelFishModel(description = "Paginated Meta Details", parent = Meta.class)
+@Schema(description = "Paginated Meta Details")
 public abstract class MetaPaginated<T> extends Meta<T> {
-  @BabelFishModelProperty(description = "The total number of records in the full set.",
+  @Schema(description = "The total number of records in the full set.",
       required = true)
   @JsonProperty("totalRecords")
   @NotNull
@@ -51,7 +50,7 @@ public abstract class MetaPaginated<T> extends Meta<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "The total number of pages in the full set.",
+  @Schema(description = "The total number of pages in the full set.",
       required = true)
   @JsonProperty("totalPages")
   @NotNull

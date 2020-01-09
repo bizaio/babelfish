@@ -16,10 +16,10 @@ package io.biza.cdr.babelfish.v1.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.support.LabelValueEnumInterface;
 
-@BabelFishModel(description = "Banking Product Discount Type")
+@Schema(description = "Banking Product Discount Type")
 public enum BankingProductDiscountType implements LabelValueEnumInterface {
   // @formatter:off
   BALANCE("BALANCE", "Discount on a fee for maintaining a set balance. As the discount applies to a fee the period is the same as for the fee"), 

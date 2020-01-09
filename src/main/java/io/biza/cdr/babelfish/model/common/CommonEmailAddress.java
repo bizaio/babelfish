@@ -17,8 +17,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.v1.enumerations.CommonEmailAddressPurpose;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -32,9 +31,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Email Address Definition")
+@Schema(description = "Email Address Definition")
 public abstract class CommonEmailAddress<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "The purpose for the email, as specified by the customer (Enumeration)",
       required = true)
   @JsonProperty("purpose")
@@ -52,7 +51,7 @@ public abstract class CommonEmailAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "A correctly formatted email address, as defined by the addr_spec format in [RFC 5322](https://www.ietf.org/rfc/rfc5322.txt)",
       required = true)
   @Email
@@ -71,7 +70,7 @@ public abstract class CommonEmailAddress<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "May be true for one and only one email record in the collection. Denotes the default email address")
   @JsonProperty("isPreferred")
   public Boolean isPreferred;

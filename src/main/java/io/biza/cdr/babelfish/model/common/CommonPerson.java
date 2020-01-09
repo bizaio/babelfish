@@ -18,8 +18,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -32,9 +31,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Person definition in brief")
+@Schema(description = "Person definition in brief")
 public abstract class CommonPerson<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "The date and time that this record was last updated by the customer.  If no update has occurred then this date should reflect the initial creation date for the data")
   @JsonProperty("lastUpdateTime")
   public LocalDateTime lastUpdateTime;
@@ -49,7 +48,7 @@ public abstract class CommonPerson<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "For people with single names this field need not be present.  The single name should be in the lastName field")
   @JsonProperty("firstName")
   public String firstName;
@@ -64,7 +63,7 @@ public abstract class CommonPerson<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "For people with single names the single name should be in this field",
       required = true)
   @JsonProperty("lastName")
@@ -82,14 +81,14 @@ public abstract class CommonPerson<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Field is mandatory but array may be empty",
+  @Schema(description = "Field is mandatory but array may be empty",
       required = true)
   @JsonProperty("middleNames")
   @NonNull
   @NotNull
   public List<String> middleNames = List.of();
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Also known as title or salutation.  The prefix to the name (e.g. Mr, Mrs, Ms, Miss, Sir, etc)")
   @JsonProperty("prefix")
   public String prefix;
@@ -104,7 +103,7 @@ public abstract class CommonPerson<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Used for a trailing suffix to the name (e.g. Jr)")
+  @Schema(description = "Used for a trailing suffix to the name (e.g. Jr)")
   @JsonProperty("suffix")
   public String suffix;
 
@@ -118,7 +117,7 @@ public abstract class CommonPerson<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Value is a valid [ANZCO v1.2](http://www.abs.gov.au/ANZSCO) Standard Occupation classification.")
   @JsonProperty("occupationCode")
   public String occupationCode;

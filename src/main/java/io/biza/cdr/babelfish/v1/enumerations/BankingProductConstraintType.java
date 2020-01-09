@@ -16,10 +16,10 @@ package io.biza.cdr.babelfish.v1.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.support.LabelValueEnumInterface;
 
-@BabelFishModel(description = "Banking Product Constraint Type")
+@Schema(description = "Banking Product Constraint Type")
 public enum BankingProductConstraintType implements LabelValueEnumInterface {
   MIN_BALANCE("MIN_BALANCE", "A minimum balance is required for the product"), MAX_BALANCE(
       "MAX_BALANCE", "A maximum balance is required for the product"), OPENING_BALANCE(

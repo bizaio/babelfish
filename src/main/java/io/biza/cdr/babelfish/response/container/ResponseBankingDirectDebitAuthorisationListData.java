@@ -17,8 +17,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.model.banking.BankingDirectDebit;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -33,9 +32,9 @@ import lombok.ToString;
 @EqualsAndHashCode
 
 
-@BabelFishModel(description = "Object containing a list of BankingDirectDebit objects")
+@Schema(description = "Object containing a list of BankingDirectDebit objects")
 public abstract class ResponseBankingDirectDebitAuthorisationListData<T> {
-  @BabelFishModelProperty(description = "The list of authorisations returned", required = true)
+  @Schema(description = "The list of authorisations returned", required = true)
   @JsonProperty("directDebitAuthorisations")
   @NotNull
   @NonNull

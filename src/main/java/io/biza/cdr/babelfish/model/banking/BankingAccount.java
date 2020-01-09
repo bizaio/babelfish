@@ -18,8 +18,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.v1.enumerations.BankingAccountStatus;
 import io.biza.cdr.babelfish.v1.enumerations.BankingProductCategory;
 import io.biza.cdr.babelfish.converters.LocalDateToStringConverter;
@@ -35,9 +34,9 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-@BabelFishModel(description = "An Australian Bank Account")
+@Schema(description = "An Australian Bank Account")
 public abstract class BankingAccount<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "A unique ID of the account adhering to the standards for ID permanence",
       required = true)
   @NonNull
@@ -54,8 +53,8 @@ public abstract class BankingAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Date that the account was created (if known)",
-      dataType = "java.lang.String")
+  @Schema(description = "Date that the account was created (if known)",
+      type = "java.lang.String")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   private LocalDate creationDate;
@@ -70,7 +69,7 @@ public abstract class BankingAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The display name of the account as defined by the bank. This should not incorporate account numbers or PANs. If it does the values should be masked according to the rules of the MaskedAccountString common type.",
       required = true)
   @NonNull
@@ -87,7 +86,7 @@ public abstract class BankingAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "A customer supplied nick name for the account")
+  @Schema(description = "A customer supplied nick name for the account")
   String nickname;
 
   public String nickname() {
@@ -100,7 +99,7 @@ public abstract class BankingAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Open or closed status for the account. If not present then OPEN is assumed")
   BankingAccountStatus openStatus = BankingAccountStatus.OPEN;
 
@@ -114,7 +113,7 @@ public abstract class BankingAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Flag indicating that the customer associated with the authorisation is an owner of the account. Does not indicate sole ownership, however. If not present then 'true' is assumed")
   Boolean isOwned = true;
 
@@ -128,7 +127,7 @@ public abstract class BankingAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "A masked version of the account. Whether BSB/Account Number, Credit Card PAN or another number",
       required = true)
   @NotNull
@@ -145,7 +144,7 @@ public abstract class BankingAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "The category to which a product or account belongs.",
+  @Schema(description = "The category to which a product or account belongs.",
       required = true)
   @NotNull
   @NonNull
@@ -161,7 +160,7 @@ public abstract class BankingAccount<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The unique identifier of the account as defined by the account holder (akin to model number for the account)",
       required = true)
   @NotNull

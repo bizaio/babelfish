@@ -15,8 +15,7 @@ package io.biza.cdr.babelfish.response;
 
 import io.biza.cdr.babelfish.model.CDRResponse;
 import io.biza.cdr.babelfish.response.container.ResponseCommonCustomerData;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -33,10 +32,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @EqualsAndHashCode(callSuper = true)
 
 
-@BabelFishModel(
+@Schema(
     description = "Response containing a data object with customer details of either PERSON or ORGANISATION object")
 public abstract class ResponseCommonCustomer<T> extends CDRResponse<T> {
-  @BabelFishModelProperty(required = true)
+  @Schema(required = true)
   @JsonProperty("data")
   @NotNull
   @NonNull

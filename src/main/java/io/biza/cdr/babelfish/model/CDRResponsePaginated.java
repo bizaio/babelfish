@@ -18,18 +18,17 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.cdr.babelfish.model.common.LinksPaginated;
 import io.biza.cdr.babelfish.model.common.MetaPaginated;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
-@BabelFishModel(description = "This is a Paginated CDR Response")
+@Schema(description = "This is a Paginated CDR Response")
 @Valid
 @Getter
 @Setter
 public abstract class CDRResponsePaginated<T> {
-  @BabelFishModelProperty(description = "The Links Object", required = true)
+  @Schema(description = "The Links Object", required = true)
   @JsonProperty("links")
   @NotNull
   @NonNull
@@ -46,7 +45,7 @@ public abstract class CDRResponsePaginated<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The meta object is used to provide additional information such as second factor authorisation data, traffic management, pagination counts or other purposes that are complementary to the workings of the API.",
       required = true)
   @JsonProperty("meta")

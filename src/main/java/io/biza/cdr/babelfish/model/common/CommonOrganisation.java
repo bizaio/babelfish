@@ -27,8 +27,7 @@ import io.biza.cdr.babelfish.converters.DateTimeStringToOffsetDateTimeConverter;
 import io.biza.cdr.babelfish.converters.CountryStringToLocaleConverter;
 import io.biza.cdr.babelfish.converters.LocalDateToStringConverter;
 import io.biza.cdr.babelfish.converters.OffsetDateTimeToDateTimeStringConverter;
-import io.biza.cdr.babelfish.support.BabelFishModel;
-import io.biza.cdr.babelfish.support.BabelFishModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.v1.enumerations.CommonOrganisationType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -42,9 +41,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 
-@BabelFishModel(description = "Organisation Definition in Brief")
+@Schema(description = "Organisation Definition in Brief")
 public abstract class CommonOrganisation<T> {
-  @BabelFishModelProperty(
+  @Schema(
       description = "The date and time that this record was last updated by the customer. If no update has occurred then this date should reflect the initial creation date for the data")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
@@ -61,7 +60,7 @@ public abstract class CommonOrganisation<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The first name of the individual providing access on behalf of the organisation. For people with single names this field need not be present.  The single name should be in the lastName field")
   @JsonProperty("agentFirstName")
   public String agentFirstName;
@@ -76,7 +75,7 @@ public abstract class CommonOrganisation<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The last name of the individual providing access on behalf of the organisation. For people with single names the single name should be in this field",
       required = true)
   @JsonProperty("agentLastName")
@@ -95,7 +94,7 @@ public abstract class CommonOrganisation<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "The role of the individual identified as the agent who is providing authorisation.  Expected to be used for display.  Default to “Unspecified” if the role is not known",
       required = true)
   @JsonProperty("agentRole")
@@ -114,7 +113,7 @@ public abstract class CommonOrganisation<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Name of the organisation", required = true)
+  @Schema(description = "Name of the organisation", required = true)
   @JsonProperty("businessName")
   @NonNull
   @NotNull
@@ -131,7 +130,7 @@ public abstract class CommonOrganisation<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Legal name, if different to the business name")
+  @Schema(description = "Legal name, if different to the business name")
   @JsonProperty("legalName")
   public String legalName;
 
@@ -145,7 +144,7 @@ public abstract class CommonOrganisation<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Short name used for communication, if  different to the business name")
   @JsonProperty("shortName")
   public String shortName;
@@ -160,7 +159,7 @@ public abstract class CommonOrganisation<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Australian Business Number for the organisation")
+  @Schema(description = "Australian Business Number for the organisation")
   @JsonProperty("abn")
   public String abn;
 
@@ -174,7 +173,7 @@ public abstract class CommonOrganisation<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Australian Company Number for the organisation. Required only if an ACN is applicable for the organisation type")
   @JsonProperty("acn")
   public String acn;
@@ -189,7 +188,7 @@ public abstract class CommonOrganisation<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "True if registered with the ACNC.  False if not. Absent or null if not confirmed.")
   @JsonProperty("isACNCRegistered")
   public Boolean isACNCRegistered;
@@ -204,7 +203,7 @@ public abstract class CommonOrganisation<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "[ANZSIC (2006)](http://www.abs.gov.au/anzsic) code for the organisation.")
   @JsonProperty("industryCode")
   public String industryCode;
@@ -219,7 +218,7 @@ public abstract class CommonOrganisation<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "Legal organisation type", required = true)
+  @Schema(description = "Legal organisation type", required = true)
   @JsonProperty("organisationType")
   @NonNull
   @NotNull
@@ -236,7 +235,7 @@ public abstract class CommonOrganisation<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(
+  @Schema(
       description = "Enumeration with values from [ISO 3166 Alpha-3](https://www.iso.org/iso-3166-country-codes.html) country codes.  Assumed to be AUS if absent")
   @JsonSerialize(converter = LocaleToCountryStringConverter.class)
   @JsonDeserialize(converter = CountryStringToLocaleConverter.class)
@@ -253,8 +252,8 @@ public abstract class CommonOrganisation<T> {
     return (T) this;
   }
 
-  @BabelFishModelProperty(description = "The date the organisation described was established",
-      dataType = "java.lang.String")
+  @Schema(description = "The date the organisation described was established",
+      type = "java.lang.String")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   @JsonProperty("establishmentDate")

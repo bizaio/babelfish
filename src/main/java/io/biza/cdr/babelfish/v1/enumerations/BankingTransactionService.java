@@ -16,10 +16,10 @@ package io.biza.cdr.babelfish.v1.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.biza.cdr.babelfish.support.BabelFishModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.biza.cdr.babelfish.support.LabelValueEnumInterface;
 
-@BabelFishModel(description = "Banking Transaction: NPP Service Overlay")
+@Schema(description = "Banking Transaction: NPP Service Overlay")
 public enum BankingTransactionService implements LabelValueEnumInterface {
   // @formatter:off    
   X2P101("X2P1.01", "X2P1.01 Overlay");
