@@ -23,8 +23,8 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.cdr.babelfish.tests.v1.ModelConstants;
 import io.biza.cdr.babelfish.v1.model.common.CommonDiscoveryOutage;
+import io.biza.cdr.babelfish.v1.support.ModelConstants;
 
 @DisplayName("CommonDiscoveryOutage V1 Tests")
 public class CommonDiscoveryOutageV1Test {

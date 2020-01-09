@@ -22,9 +22,9 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.cdr.babelfish.tests.v1.ModelConstants;
 import io.biza.cdr.babelfish.v1.enumerations.CommonOrganisationType;
 import io.biza.cdr.babelfish.v1.model.common.CommonOrganisationDetail;
+import io.biza.cdr.babelfish.v1.support.ModelConstants;
 
 @DisplayName("CommonOrganisationDetail V1 Tests")
 public class CommonOrganisationDetailV1Test {

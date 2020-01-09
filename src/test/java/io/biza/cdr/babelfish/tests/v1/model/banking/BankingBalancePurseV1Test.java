@@ -22,8 +22,8 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.cdr.babelfish.tests.v1.ModelConstants;
 import io.biza.cdr.babelfish.v1.model.banking.BankingBalancePurse;
+import io.biza.cdr.babelfish.v1.support.ModelConstants;
 
 @DisplayName("BankingBalancePurse V1 Tests")
 public class BankingBalancePurseV1Test {

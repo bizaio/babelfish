@@ -23,8 +23,8 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.cdr.babelfish.tests.v1.ModelConstants;
 import io.biza.cdr.babelfish.v1.model.banking.BankingProductBundle;
+import io.biza.cdr.babelfish.v1.support.ModelConstants;
 
 @DisplayName("BankingProductBundle V1 Tests")
 public class BankingProductBundleV1Test {

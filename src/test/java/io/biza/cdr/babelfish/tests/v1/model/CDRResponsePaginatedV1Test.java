@@ -21,10 +21,10 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.cdr.babelfish.tests.v1.ModelConstants;
 import io.biza.cdr.babelfish.v1.model.CDRResponsePaginated;
 import io.biza.cdr.babelfish.v1.model.common.LinksPaginated;
 import io.biza.cdr.babelfish.v1.model.common.MetaPaginated;
+import io.biza.cdr.babelfish.v1.support.ModelConstants;
 
 @DisplayName("CDR Paginated Response V1 Tests")
 public class CDRResponsePaginatedV1Test {

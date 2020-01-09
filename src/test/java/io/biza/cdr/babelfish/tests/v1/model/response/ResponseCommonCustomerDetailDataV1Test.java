@@ -21,9 +21,9 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.cdr.babelfish.tests.v1.ModelConstants;
 import io.biza.cdr.babelfish.v1.enumerations.PayloadTypeCustomer;
 import io.biza.cdr.babelfish.v1.response.container.ResponseCommonCustomerDetailData;
+import io.biza.cdr.babelfish.v1.support.ModelConstants;
 
 @DisplayName("ResponseCommonCustomerDetailData V1 Tests")
 public class ResponseCommonCustomerDetailDataV1Test {
