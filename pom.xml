@@ -10,11 +10,11 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.biza</groupId>
-    <artifactId>cdr-babelfish</artifactId>
+    <artifactId>babelfish-cdr</artifactId>
     <version>0.1.0-SNAPSHOT</version>
-    <name>CDR Babelfish</name>
-    <description>The Babelfish Payload Converter enables the efficient translation of payloads associated with the Consumer Data Right to and from Java and JSON representations as well as between versions of various payloads.</description>
-    <url>https://github.com/bizaio/cdr-babelfish</url>
+    <name>Babelfish: CDR</name>
+    <description>The Babelfish Payload Converter enables the efficient translation of payloads associated with Open Banking specifications to and from Java and JSON representations as well as between versions of various payload types. It is initially focused on the Consumer Data Right and is currently being developed by Biza.io as part of it's DataRight.io initiative.</description>
+    <url>https://github.com/bizaio/babelfish-cdr</url>
     <organization>
         <name>Biza Pty Ltd</name>
         <url>https://biza.io/</url>
@@ -26,12 +26,12 @@
         </license>
     </licenses>
     <scm>
-        <url>https://github.com/bizaio/cdr-babelfish</url>
-        <developerConnection>scm:git:https://github.com/bizaio/cdr-babelfish.git</developerConnection>
-        <connection>scm:git:https://github.com/bizaio/cdr-babelfish.git</connection>
+        <url>https://github.com/bizaio/babelfish-cdr</url>
+        <developerConnection>scm:git:https://github.com/bizaio/babelfish-cdr.git</developerConnection>
+        <connection>scm:git:https://github.com/bizaio/babelfish-cdr.git</connection>
     </scm>
     <issueManagement>
-        <url>https://github.com/bizaio/cdr-babelfish/issues</url>
+        <url>https://github.com/bizaio/babelfish-cdr/issues</url>
         <system>Github</system>
     </issueManagement>
 
