@@ -22,7 +22,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.v1.model.common.MetaPaginated;
-import io.biza.babelfish.cdr.v1.support.ModelConstants;
 
 @DisplayName("MetaPaginated V1 Tests")
 public class MetaPaginatedV1Test {

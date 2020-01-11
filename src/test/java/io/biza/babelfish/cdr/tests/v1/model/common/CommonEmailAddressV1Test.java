@@ -21,9 +21,9 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 import io.biza.babelfish.cdr.v1.enumerations.CommonEmailAddressPurpose;
 import io.biza.babelfish.cdr.v1.model.common.CommonEmailAddress;
-import io.biza.babelfish.cdr.v1.support.ModelConstants;
 
 @DisplayName("CommonEmailAddress V1 Tests")
 public class CommonEmailAddressV1Test {

@@ -22,12 +22,12 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 import io.biza.babelfish.cdr.v1.model.banking.BankingProduct;
 import io.biza.babelfish.cdr.v1.model.common.LinksPaginated;
 import io.biza.babelfish.cdr.v1.model.common.MetaPaginated;
 import io.biza.babelfish.cdr.v1.response.ResponseBankingProductList;
 import io.biza.babelfish.cdr.v1.response.container.ResponseBankingProductListData;
-import io.biza.babelfish.cdr.v1.support.ModelConstants;
 
 @DisplayName("ResponseBankingProductList V1 Tests")
 public class ResponseBankingProductListV1Test {

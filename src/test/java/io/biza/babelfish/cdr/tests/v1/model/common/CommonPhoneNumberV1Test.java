@@ -21,9 +21,9 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 import io.biza.babelfish.cdr.v1.enumerations.CommonPhoneNumberPurpose;
 import io.biza.babelfish.cdr.v1.model.common.CommonPhoneNumber;
-import io.biza.babelfish.cdr.v1.support.ModelConstants;
 
 @DisplayName("CommonPhoneNumber V1 Tests")
 public class CommonPhoneNumberV1Test {

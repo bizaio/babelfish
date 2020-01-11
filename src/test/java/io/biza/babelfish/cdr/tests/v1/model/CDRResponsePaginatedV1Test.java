@@ -24,7 +24,6 @@ import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.v1.model.CDRResponsePaginated;
 import io.biza.babelfish.cdr.v1.model.common.LinksPaginated;
 import io.biza.babelfish.cdr.v1.model.common.MetaPaginated;
-import io.biza.babelfish.cdr.v1.support.ModelConstants;
 
 @DisplayName("CDR Paginated Response V1 Tests")
 public class CDRResponsePaginatedV1Test {

@@ -11,7 +11,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *******************************************************************************/
-package io.biza.babelfish.cdr.v1.support;
+package io.biza.babelfish.cdr.tests.v1.model;
 
 import java.math.BigDecimal;
 import java.net.URI;
