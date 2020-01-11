@@ -191,7 +191,7 @@ public abstract class BankingTransaction<T> {
 
   @Schema(
       description = "The value of the transaction. Negative values mean money was outgoing from the account",
-      required = true, type = "java.lang.String")
+      required = true, type = "string")
   @NonNull
   @NotNull
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
@@ -210,7 +210,7 @@ public abstract class BankingTransaction<T> {
 
   @Schema(
       description = "The currency for the transaction amount. AUD assumed if not present",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   Currency currency;

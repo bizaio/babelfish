@@ -58,7 +58,7 @@ public abstract class BankingProduct<T> {
 
   @Schema(
       description = "The date and time from which this product is effective (ie. is available for origination).  Used to enable the articulation of products to the regime before they are available for customers to originate",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   private OffsetDateTime effectiveFrom;
@@ -75,7 +75,7 @@ public abstract class BankingProduct<T> {
 
   @Schema(
       description = "The date and time at which this product will be retired and will no longer be offered.  Used to enable the managed deprecation of products",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   private OffsetDateTime effectiveTo;
@@ -92,7 +92,7 @@ public abstract class BankingProduct<T> {
 
   @Schema(
       description = "The last date and time that the information for this product was changed (or the creation date for the product if it has never been altered)",
-      required = true, type = "java.lang.String")
+      required = true, type = "string")
   @NonNull
   @NotNull
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
@@ -186,7 +186,7 @@ public abstract class BankingProduct<T> {
 
   @Schema(
       description = "A link to an application web page where this product can be applied for.",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   URI applicationUri;
 

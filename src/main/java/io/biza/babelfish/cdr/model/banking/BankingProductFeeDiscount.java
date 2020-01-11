@@ -74,7 +74,7 @@ public abstract class BankingProductFeeDiscount<T> {
 
   @Schema(
       description = "Value of the discount. When following properties include one of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   private BigDecimal amount;
@@ -91,7 +91,7 @@ public abstract class BankingProductFeeDiscount<T> {
 
   @Schema(
       description = "A discount rate calculated based on a proportion of the balance. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory. Unless noted in additionalInfo, assumes the application and calculation frequency are the same as the corresponding fee",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   private BigDecimal balanceRate;
@@ -108,7 +108,7 @@ public abstract class BankingProductFeeDiscount<T> {
 
   @Schema(
       description = "A discount rate calculated based on a proportion of a transaction. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   private BigDecimal transactionRate;
@@ -125,7 +125,7 @@ public abstract class BankingProductFeeDiscount<T> {
 
   @Schema(
       description = "A discount rate calculated based on a proportion of the calculated interest accrued on the account. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory. Unless noted in additionalInfo, assumes the application and calculation frequency are the same as the corresponding fee",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   private BigDecimal accruedRate;
@@ -142,7 +142,7 @@ public abstract class BankingProductFeeDiscount<T> {
 
   @Schema(
       description = "A discount rate calculated based on a proportion of the fee to which this discount is attached. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory. Unless noted in additionalInfo, assumes the application and calculation frequency are the same as the corresponding fee",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   private BigDecimal feeRate;
@@ -185,7 +185,7 @@ public abstract class BankingProductFeeDiscount<T> {
   }
 
   @Schema(description = "Link to a web page with more information on this discount",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   URI additionalInfoUri;
 

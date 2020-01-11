@@ -77,7 +77,7 @@ public abstract class BankingProductFee<T> {
 
   @Schema(
       description = "The amount charged for the fee. One of amount, balanceRate, transactionRate and accruedRate is mandatory",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   private BigDecimal amount;
@@ -94,7 +94,7 @@ public abstract class BankingProductFee<T> {
 
   @Schema(
       description = "A fee rate calculated based on a proportion of the balance. One of amount, balanceRate, transactionRate and accruedRate is mandatory",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   private BigDecimal balanceRate;
@@ -111,7 +111,7 @@ public abstract class BankingProductFee<T> {
 
   @Schema(
       description = "A fee rate calculated based on a proportion of a transaction. One of amount, balanceRate, transactionRate and accruedRate is mandatory",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   private BigDecimal transactionRate;
@@ -128,7 +128,7 @@ public abstract class BankingProductFee<T> {
 
   @Schema(
       description = "A fee rate calculated based on a proportion of the calculated interest accrued on the account. One of amount, balanceRate, transactionRate and accruedRate is mandatory",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   private BigDecimal accruedRate;
@@ -145,7 +145,7 @@ public abstract class BankingProductFee<T> {
 
   @Schema(
       description = "The indicative frequency with which the fee is calculated on the account. Only applies if balanceRate or accruedRate is also present. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations)",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = PeriodToStringConverter.class)
   @JsonDeserialize(converter = StringToPeriodConverter.class)
   Period accrualFrequency;
@@ -160,7 +160,7 @@ public abstract class BankingProductFee<T> {
     return (T) this;
   }
 
-  @Schema(description = "The currency the fee will be charged in")
+  @Schema(description = "The currency the fee will be charged in", type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   Currency currency = Currency.getInstance("AUD");
@@ -203,7 +203,7 @@ public abstract class BankingProductFee<T> {
   }
 
   @Schema(description = "Link to a web page with more information on this fee",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   URI additionalInfoUri;
 

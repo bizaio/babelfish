@@ -38,7 +38,7 @@ import lombok.ToString;
 public abstract class BankingScheduledPaymentRecurrence<T> {
   @Schema(
       description = "The date of the next payment under the recurrence schedule",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   private LocalDate nextPaymentDate;

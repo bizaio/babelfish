@@ -33,7 +33,7 @@ import lombok.ToString;
     description = "Object that contains links to additional information on specific topics")
 public abstract class BankingProductAdditionalInformation<T> {
   @Schema(description = "General overview of the product",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   URI overviewUri;
 
@@ -48,7 +48,7 @@ public abstract class BankingProductAdditionalInformation<T> {
   }
 
   @Schema(description = "Terms and conditions for the product",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   URI termsUri;
 
@@ -63,7 +63,7 @@ public abstract class BankingProductAdditionalInformation<T> {
   }
 
   @Schema(description = "Eligibility rules and criteria for the product",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   URI eligibilityUri;
 
@@ -79,7 +79,7 @@ public abstract class BankingProductAdditionalInformation<T> {
 
   @Schema(
       description = "Description of fees, pricing, discounts, exemptions and bonuses for the product",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   URI feesAndPricingUri;
 
@@ -94,7 +94,7 @@ public abstract class BankingProductAdditionalInformation<T> {
   }
 
   @Schema(description = "Description of a bundle that this product can be part of",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   URI bundleUri;
 

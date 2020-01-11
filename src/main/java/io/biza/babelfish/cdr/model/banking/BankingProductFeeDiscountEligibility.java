@@ -75,7 +75,7 @@ public abstract class BankingProductFeeDiscountEligibility<T> {
 
   @Schema(
       description = "Link to a web page with more information on this eligibility constraint",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   URI additionalInfoUri;
 

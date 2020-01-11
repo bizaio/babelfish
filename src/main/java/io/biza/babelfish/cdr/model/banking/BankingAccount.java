@@ -54,7 +54,7 @@ public abstract class BankingAccount<T> {
   }
 
   @Schema(description = "Date that the account was created (if known)",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   private LocalDate creationDate;

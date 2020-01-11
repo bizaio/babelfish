@@ -253,7 +253,7 @@ public abstract class CommonOrganisation<T> {
   }
 
   @Schema(description = "The date the organisation described was established",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   @JsonProperty("establishmentDate")

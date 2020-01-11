@@ -44,7 +44,7 @@ import lombok.ToString;
 public abstract class BankingScheduledPaymentRecurrenceLastWeekday<T> {
   @Schema(
       description = "The limit date after which no more payments should be made using this schedule. If both finalPaymentDate and paymentsRemaining are present then payments will stop according to the most constraining value. If neither field is present the payments will continue indefinitely",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   private LocalDate finalPaymentDate;
@@ -76,7 +76,7 @@ public abstract class BankingScheduledPaymentRecurrenceLastWeekday<T> {
 
   @Schema(
       description = "The interval for the payment. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations) with components less than a day in length ignored. This duration defines the period between payments starting with nextPaymentDate",
-      required = true, type = "java.lang.String")
+      required = true, type = "string")
   @NonNull
   @NotNull
   @JsonSerialize(converter = PeriodToStringConverter.class)

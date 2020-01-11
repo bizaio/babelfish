@@ -128,7 +128,7 @@ public abstract class CommonPAFAddress<T> {
   }
 
   @Schema(description = "Type of flat or unit for the address",
-      type = "java.lang.String")
+      type = "string")
   @JsonProperty("flatUnitType")
   public AddressPAFFlatUnitType flatUnitType;
 
@@ -157,7 +157,7 @@ public abstract class CommonPAFAddress<T> {
   }
 
   @Schema(description = "Type of floor or level for the address",
-      type = "java.lang.String")
+      type = "string")
   @JsonProperty("floorLevelType")
   public AddressPAFFloorLevelType floorLevelType;
 
@@ -243,7 +243,7 @@ public abstract class CommonPAFAddress<T> {
 
   @Schema(
       description = "The street type. Valid enumeration defined by Australia Post PAF code file",
-      type = "java.lang.String")
+      type = "string")
   @JsonProperty("streetType")
   public AddressPAFStreetType streetType;
 
@@ -259,7 +259,7 @@ public abstract class CommonPAFAddress<T> {
 
   @Schema(
       description = "The street type suffix. Valid enumeration defined by Australia Post PAF code file",
-      type = "java.lang.String")
+      type = "string")
   @JsonProperty("streetSuffix")
   public AddressPAFStreetSuffix streetSuffix;
 
@@ -275,7 +275,7 @@ public abstract class CommonPAFAddress<T> {
 
   @Schema(
       description = "Postal delivery type. (eg. PO BOX). Valid enumeration defined by Australia Post PAF code file",
-      type = "java.lang.String")
+      type = "string")
   @JsonProperty("postalDeliveryType")
   public AddressPAFPostalDeliveryType postalDeliveryType;
 
@@ -375,7 +375,7 @@ public abstract class CommonPAFAddress<T> {
 
   @Schema(
       description = "State in which the address belongs. Valid enumeration defined by Australia Post PAF code file",
-      required = true, type = "java.lang.String")
+      required = true, type = "string")
   @JsonProperty("state")
   @NotNull
   @NonNull

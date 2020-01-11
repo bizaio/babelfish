@@ -38,7 +38,7 @@ import lombok.ToString;
 public abstract class Links<T> {
   @Schema(
       description = "Fully qualified link that generated the current response document",
-      required = true, type = "java.lang.String")
+      required = true, type = "string")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("self")

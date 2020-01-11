@@ -86,7 +86,7 @@ public abstract class BankingProductBundle<T> {
 
   @Schema(
       description = "Link to a web page with more information on the bundle criteria and benefits",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   URI additionalInfoUri;

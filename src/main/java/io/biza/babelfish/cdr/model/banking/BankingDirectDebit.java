@@ -72,7 +72,7 @@ public abstract class BankingDirectDebit<T> {
 
   @Schema(
       description = "The date and time of the last debit executed under this authorisation",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   LocalDateTime lastDebitDateTime;

@@ -74,7 +74,7 @@ public abstract class BankingProductFeature<T> {
   }
 
   @Schema(description = "Link to a web page with more information on this feature",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   URI additionalInfoUri;
 

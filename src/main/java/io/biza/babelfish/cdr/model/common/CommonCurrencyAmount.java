@@ -39,7 +39,7 @@ import lombok.ToString;
 public abstract class CommonCurrencyAmount<T> {
   @Schema(
       description = "The current balance of the account at this time. Should align to the current balance available via other channels such as ATM balance enquiry or Internet Banking",
-      required = true, type = "java.lang.String")
+      required = true, type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   @JsonProperty("amount")
@@ -56,7 +56,7 @@ public abstract class CommonCurrencyAmount<T> {
   }
 
   @Schema(description = "Currency Amount Currency Code", required = false,
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   @JsonProperty("currency")

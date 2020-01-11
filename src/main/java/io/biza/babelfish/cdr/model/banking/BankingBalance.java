@@ -56,7 +56,7 @@ public abstract class BankingBalance<T> {
 
   @Schema(
       description = "The balance of the account at this time. Should align to the balance available via other channels such as Internet Banking. Assumed to be negative if the customer has money owing",
-      required = true, type = "java.lang.String")
+      required = true, type = "string")
   @NonNull
   @NotNull
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
@@ -74,7 +74,7 @@ public abstract class BankingBalance<T> {
 
   @Schema(
       description = "Balance representing the amount of funds available for transfer. Assumed to be zero or positive",
-      required = true, type = "java.lang.String")
+      required = true, type = "string")
   @NonNull
   @NotNull
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
@@ -93,7 +93,7 @@ public abstract class BankingBalance<T> {
 
   @Schema(
       description = "Object representing the maximum amount of credit that is available for this account. Assumed to be zero if absent",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   BigDecimal creditLimit;
@@ -110,7 +110,7 @@ public abstract class BankingBalance<T> {
 
   @Schema(
       description = "Object representing the available limit amortised according to payment schedule. Assumed to be zero if absent",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   BigDecimal amortisedLimit = BigDecimal.ZERO;
@@ -127,7 +127,7 @@ public abstract class BankingBalance<T> {
 
   @Schema(
       description = "The currency for the balance amounts. If absent assumed to be AUD",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   Currency currency;

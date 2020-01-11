@@ -43,7 +43,7 @@ import lombok.ToString;
 @Schema(description = "Term Deposit Account Description")
 public abstract class BankingTermDepositAccount<T> {
   @Schema(description = "The lodgement date of the original deposit",
-      required = true, type = "java.lang.String")
+      required = true, type = "string")
   @NonNull
   @NotNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)
@@ -79,7 +79,7 @@ public abstract class BankingTermDepositAccount<T> {
 
   @Schema(
       description = "Amount to be paid upon maturity. If absent it implies the amount to paid is variable and cannot currently be calculated",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   private BigDecimal maturityAmount;
@@ -94,7 +94,7 @@ public abstract class BankingTermDepositAccount<T> {
     return (T) this;
   }
 
-  @Schema(description = "Maturity Amount Currency", type = "java.lang.String")
+  @Schema(description = "Maturity Amount Currency", type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   Currency maturityCurrency = Currency.getInstance("AUD");

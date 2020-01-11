@@ -37,7 +37,7 @@ import lombok.ToString;
     description = "Indicates that the payment is a once off payment on a specific future date. Mandatory if recurrenceUType is set to onceOff")
 public abstract class BankingScheduledPaymentRecurrenceOnceOff<T> {
   @Schema(description = "The scheduled date for the once off payment",
-      required = true, type = "java.lang.String")
+      required = true, type = "string")
   @NonNull
   @NotNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)

@@ -60,7 +60,7 @@ public abstract class BankingLoanAccount<T> {
     return (T) this;
   }
 
-  @Schema(description = "Original Loan Value", type = "java.lang.String")
+  @Schema(description = "Original Loan Value", type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   private BigDecimal originalLoanAmount;
@@ -91,7 +91,7 @@ public abstract class BankingLoanAccount<T> {
   }
 
   @Schema(description = "Date that the loan is due to be repaid in full",
-      required = true, type = "java.lang.String")
+      required = true, type = "string")
   @NotNull
   @NonNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)
@@ -126,7 +126,7 @@ public abstract class BankingLoanAccount<T> {
   }
 
   @Schema(description = "Minimum amount of next instalment",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   private BigDecimal minInstalmentAmount;
@@ -141,7 +141,7 @@ public abstract class BankingLoanAccount<T> {
     return (T) this;
   }
 
-  @Schema(description = "Minimum amount currency", type = "java.lang.String")
+  @Schema(description = "Minimum amount currency", type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   Currency minInstalmentCurrency = Currency.getInstance("AUD");
@@ -158,7 +158,7 @@ public abstract class BankingLoanAccount<T> {
 
   @Schema(
       description = "Maximum amount of funds that can be redrawn. If not present redraw is not available even if the feature exists for the account",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   private BigDecimal maxRedraw;
@@ -188,7 +188,7 @@ public abstract class BankingLoanAccount<T> {
     return (T) this;
   }
 
-  @Schema(description = "Minimum redraw amount", type = "java.lang.String")
+  @Schema(description = "Minimum redraw amount", type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   private BigDecimal minRedraw;

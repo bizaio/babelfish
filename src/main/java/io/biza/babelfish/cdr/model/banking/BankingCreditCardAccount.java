@@ -42,7 +42,7 @@ import lombok.ToString;
 @Schema(description = "Credit Card Account Details")
 public abstract class BankingCreditCardAccount<T> {
   @Schema(description = "The minimum payment amount due for the next card payment",
-      required = true, type = "java.lang.String")
+      required = true, type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   @NotNull
@@ -60,7 +60,7 @@ public abstract class BankingCreditCardAccount<T> {
   }
 
   @Schema(description = "The amount due for the next card payment", required = true,
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   @NotNull
@@ -77,7 +77,7 @@ public abstract class BankingCreditCardAccount<T> {
     return (T) this;
   }
 
-  @Schema(description = "If absent assumes AUD", type = "java.lang.String")
+  @Schema(description = "If absent assumes AUD", type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   Currency paymentCurrency = Currency.getInstance("AUD");
@@ -93,7 +93,7 @@ public abstract class BankingCreditCardAccount<T> {
   }
 
   @Schema(description = "Date that the next payment for the card is due",
-      required = true, type = "java.lang.String")
+      required = true, type = "string")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   @NotNull

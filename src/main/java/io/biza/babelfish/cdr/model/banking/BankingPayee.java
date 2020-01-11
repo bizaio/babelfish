@@ -102,7 +102,7 @@ public abstract class BankingPayee<T> {
   }
 
   @Schema(description = "The date the payee was created by the customer",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   private LocalDate creationDate;

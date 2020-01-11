@@ -46,7 +46,7 @@ public abstract class BankingProductRateCondition<T> {
 
   @Schema(
       description = "Link to a web page with more information on this condition",
-      type = "java.lang.String")
+      type = "string")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   URI additionalInfoUri;
 

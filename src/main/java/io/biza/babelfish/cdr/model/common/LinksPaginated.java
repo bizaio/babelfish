@@ -36,7 +36,7 @@ public abstract class LinksPaginated<T> extends Links<T> {
 
   @Schema(
       description = "URI to the first page of this set. Mandatory if this response is not the first page",
-      type = "java.lang.String", name = "first")
+      type = "string", name = "first")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("first")
@@ -56,7 +56,7 @@ public abstract class LinksPaginated<T> extends Links<T> {
 
   @Schema(
       description = "URI to the previous page of this set. Mandatory if this response is not the prev page",
-      type = "java.lang.String", name = "prev")
+      type = "string", name = "prev")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("prev")
@@ -76,7 +76,7 @@ public abstract class LinksPaginated<T> extends Links<T> {
 
   @Schema(
       description = "URI to the next page of this set. Mandatory if this response is not the last page",
-      type = "java.lang.String", name = "next")
+      type = "string", name = "next")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("next")
@@ -96,7 +96,7 @@ public abstract class LinksPaginated<T> extends Links<T> {
 
   @Schema(
       description = "URI to the last page of this set. Mandatory if this response is not the last page",
-      type = "java.lang.String", name = "last")
+      type = "string", name = "last")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("last")
