@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Banking Product Discount Type")
+@Schema(description = "Banking Product Discount Type", enumAsRef = true)
 public enum BankingProductDiscountType implements LabelValueEnumInterface {
   // @formatter:off
   BALANCE("BALANCE", "Discount on a fee for maintaining a set balance. As the discount applies to a fee the period is the same as for the fee"), 

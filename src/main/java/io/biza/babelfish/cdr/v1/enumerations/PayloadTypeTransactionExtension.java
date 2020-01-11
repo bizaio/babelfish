@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Payload Type: Transaction Extension Type")
+@Schema(description = "Payload Type: Transaction Extension Type", enumAsRef = true)
 public enum PayloadTypeTransactionExtension implements LabelValueEnumInterface {
   // @formatter:off    
   X2P101("x2p101Payload", "NPP X2P1.01 Transaction Type");

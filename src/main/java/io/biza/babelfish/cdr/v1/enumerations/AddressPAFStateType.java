@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Australian State for the Address")
+@Schema(description = "Australian State for the Address", enumAsRef = true)
 public enum AddressPAFStateType implements LabelValueEnumInterface {
   // @formatter:off
   AAT("AAT", "Australian Antarctic Territory"),

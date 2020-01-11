@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Payload Type: Address")
+@Schema(description = "Payload Type: Address", enumAsRef = true)
 public enum PayloadTypeAddress implements LabelValueEnumInterface {
   // @formatter:off    
   SIMPLE("simple", "Simple Address"),

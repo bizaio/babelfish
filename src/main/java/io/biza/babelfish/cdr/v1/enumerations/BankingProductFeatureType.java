@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Banking Product Feature Type")
+@Schema(description = "Banking Product Feature Type", enumAsRef = true)
 public enum BankingProductFeatureType implements LabelValueEnumInterface {
   // @formatter:off
   CARD_ACCESS("CARD_ACCESS", "Card Access"),

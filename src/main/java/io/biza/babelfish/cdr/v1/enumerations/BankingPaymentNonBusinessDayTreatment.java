@@ -23,7 +23,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * Non Business Day Treatment Specification
  */
 @Schema(
-    description = "Enumerated field giving the treatment where a scheduled payment date is not a business day. If absent assumed to be ON")
+    description = "Enumerated field giving the treatment where a scheduled payment date is not a business day. If absent assumed to be ON", enumAsRef = true)
 public enum BankingPaymentNonBusinessDayTreatment implements LabelValueEnumInterface {
   // @formatter:off    
   AFTER("AFTER", "If a scheduled payment date is a non-business day the payment will be made on the first business day after the scheduled payment date"),

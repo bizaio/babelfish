@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Floor or level type for the address")
+@Schema(description = "Floor or level type for the address", enumAsRef = true)
 public enum AddressPAFFloorLevelType implements LabelValueEnumInterface {
   // @formatter:off
   BASEMENT("B", "Basement"),

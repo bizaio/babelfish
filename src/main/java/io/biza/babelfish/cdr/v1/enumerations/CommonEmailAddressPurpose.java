@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Common: Email Address Purpose")
+@Schema(description = "Common: Email Address Purpose", enumAsRef = true)
 public enum CommonEmailAddressPurpose implements LabelValueEnumInterface {
   // @formatter:off
   HOME("HOME", "Personal Email Address"),

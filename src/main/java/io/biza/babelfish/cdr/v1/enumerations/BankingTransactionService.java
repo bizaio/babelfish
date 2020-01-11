@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Banking Transaction: NPP Service Overlay")
+@Schema(description = "Banking Transaction: NPP Service Overlay", enumAsRef = true)
 public enum BankingTransactionService implements LabelValueEnumInterface {
   // @formatter:off    
   X2P101("X2P1.01", "X2P1.01 Overlay");

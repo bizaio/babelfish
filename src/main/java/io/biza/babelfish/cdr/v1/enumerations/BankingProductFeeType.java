@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Banking Product Fee Type")
+@Schema(description = "Banking Product Fee Type", enumAsRef = true)
 public enum BankingProductFeeType implements LabelValueEnumInterface {
   // @formatter:off
   PERIODIC("PERIODIC", "A periodic fee such as a monthly account servicing fee"),

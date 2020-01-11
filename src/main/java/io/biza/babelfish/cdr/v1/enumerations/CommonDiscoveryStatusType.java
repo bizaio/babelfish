@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Common Discovery: Service Status Type")
+@Schema(description = "Common Discovery: Service Status Type", enumAsRef = true)
 public enum CommonDiscoveryStatusType implements LabelValueEnumInterface {
   // @formatter:off
   OK("OK", "Implementation is fully functional"),

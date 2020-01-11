@@ -19,13 +19,15 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Banking Product Constraint Type")
+@Schema(description = "Banking Product Constraint Type", enumAsRef = true)
 public enum BankingProductConstraintType implements LabelValueEnumInterface {
-  MIN_BALANCE("MIN_BALANCE", "A minimum balance is required for the product"), MAX_BALANCE(
-      "MAX_BALANCE", "A maximum balance is required for the product"), OPENING_BALANCE(
-          "OPENING_BALANCE", "An opening balance is required for the product"), MAX_LIMIT(
-              "MAX_LIMIT", "A maximum credit limit applies for the product"), MIN_LIMIT("MIN_LIMIT",
-                  "A minimum credit limit applies for the product");
+  // @formatter:off
+  MIN_BALANCE("MIN_BALANCE", "A minimum balance is required for the product"), 
+  MAX_BALANCE("MAX_BALANCE", "A maximum balance is required for the product"), 
+  OPENING_BALANCE("OPENING_BALANCE", "An opening balance is required for the product"), 
+  MAX_LIMIT("MAX_LIMIT", "A maximum credit limit applies for the product"), 
+  MIN_LIMIT("MIN_LIMIT","A minimum credit limit applies for the product");
+  // @formatter:on
 
   private String value;
 

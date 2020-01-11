@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Banking: Scheduled Payment Status")
+@Schema(description = "Banking: Scheduled Payment Status", enumAsRef = true)
 public enum BankingScheduledPaymentStatus implements LabelValueEnumInterface {
   // @formatter:off
   ACTIVE("ACTIVE", "Active Scheduled Payment"),

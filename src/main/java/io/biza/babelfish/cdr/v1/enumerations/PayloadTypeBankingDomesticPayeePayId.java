@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Payload Type: Domestic Payee PayID Identifier Type")
+@Schema(description = "Payload Type: Domestic Payee PayID Identifier Type", enumAsRef = true)
 public enum PayloadTypeBankingDomesticPayeePayId implements LabelValueEnumInterface {
   // @formatter:off
   EMAIL("EMAIL", "Email Address"),

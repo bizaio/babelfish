@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Banking: Transaction Type")
+@Schema(description = "Banking: Transaction Type", enumAsRef = true)
 public enum BankingTransactionType implements LabelValueEnumInterface {
   // @formatter:off  
   FEE("FEE", "Prescribed Account Fee"),

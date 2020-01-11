@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Banking: Transaction Status")
+@Schema(description = "Banking: Transaction Status", enumAsRef = true)
 public enum BankingTransactionStatus implements LabelValueEnumInterface {
   // @formatter:off    
   PENDING("PENDING", "Transaction is currently pending"),

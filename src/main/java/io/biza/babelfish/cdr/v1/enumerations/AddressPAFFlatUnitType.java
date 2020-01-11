@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Type of flat or unit for the address")
+@Schema(description = "Type of flat or unit for the address", enumAsRef = true)
 public enum AddressPAFFlatUnitType implements LabelValueEnumInterface {
   // @formatter:off  
   KIOSK("KSK", "Kiosk"), 

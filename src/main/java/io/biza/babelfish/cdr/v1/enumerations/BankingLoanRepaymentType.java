@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Banking Account Loan Repayment Type")
+@Schema(description = "Banking Account Loan Repayment Type", enumAsRef = true)
 public enum BankingLoanRepaymentType implements LabelValueEnumInterface {
   // @formatter:off
   INTEREST_ONLY("INTEREST_ONLY", "Interest Only Repayment"),

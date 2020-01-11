@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Day of Week", name = "CommonWeekDay")
+@Schema(description = "Day of Week", name = "CommonWeekDay", enumAsRef = true)
 public enum CommonWeekDay implements LabelValueEnumInterface {
   // @formatter:off
   MON("MON", "Monday"),

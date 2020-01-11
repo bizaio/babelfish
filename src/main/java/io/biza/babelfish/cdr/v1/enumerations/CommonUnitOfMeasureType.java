@@ -19,10 +19,14 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Common: Unit of Measure")
+@Schema(description = "Common: Unit of Measure", enumAsRef = true)
 public enum CommonUnitOfMeasureType implements LabelValueEnumInterface {
-  DOLLAR("DOLLAR", "Dollar Value"), PERCENT("PERCENT", "Percentage Value"), MONTH("MONTH",
-      "Month"), DAY("DAY", "Day of Month");
+  // @formatter:off
+  DOLLAR("DOLLAR", "Dollar Value"),
+  PERCENT("PERCENT", "Percentage Value"), 
+  MONTH("MONTH", "Month"), 
+  DAY("DAY", "Day of Month");
+  // @formatter:on
 
   private String value;
 

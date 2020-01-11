@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Banking Product Lending Rate Interest Payment Configuration")
+@Schema(description = "Banking Product Lending Rate Interest Payment Configuration", enumAsRef = true)
 public enum BankingProductLendingRateInterestPaymentType implements LabelValueEnumInterface {
   // @formatter:off  
   IN_ARREARS("IN_ARREARS", "Interest Paid in Arrears"),

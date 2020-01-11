@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Payload Type: Banking Account")
+@Schema(description = "Payload Type: Banking Account", enumAsRef = true)
 public enum PayloadTypeBankingAccount implements LabelValueEnumInterface {
   // @formatter:off
   TERM_DEPOSIT("termDeposit", "Term Deposit Account Type"),

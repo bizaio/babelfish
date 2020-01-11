@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Payload Type: Banking Scheduled Payment Target")
+@Schema(description = "Payload Type: Banking Scheduled Payment Target", enumAsRef = true)
 public enum PayloadTypeBankingScheduledPaymentTo implements LabelValueEnumInterface {
   // @formatter:off
   ACCOUNT_ID("accountId", "Transfer to a specific Account ID"),

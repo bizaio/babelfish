@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Postal Delivery Type for the Address")
+@Schema(description = "Postal Delivery Type for the Address", enumAsRef = true)
 public enum AddressPAFPostalDeliveryType implements LabelValueEnumInterface {
   // @formatter:off
   CARE_OF_PO("CARE PO", "Care Of Post Office"),

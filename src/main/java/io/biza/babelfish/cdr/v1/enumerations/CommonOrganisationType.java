@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Common: Organisation Type")
+@Schema(description = "Common: Organisation Type", enumAsRef = true)
 public enum CommonOrganisationType implements LabelValueEnumInterface {
   // @formatter:off
   SOLE_TRADER("SOLE_TRADER", "Sole Trader"),

@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Banking Product Effective Filter with All")
+@Schema(description = "Banking Product Effective Filter with All", enumAsRef = true)
 public enum BankingProductEffectiveWithAll implements LabelValueEnumInterface {
   // @formatter:off
   CURRENT("CURRENT", "Products Currently Available in Market"), 

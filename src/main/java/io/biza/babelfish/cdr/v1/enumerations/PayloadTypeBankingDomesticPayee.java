@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Payload Type: Domestic Payee")
+@Schema(description = "Payload Type: Domestic Payee", enumAsRef = true)
 public enum PayloadTypeBankingDomesticPayee implements LabelValueEnumInterface {
   // @formatter:off
   ACCOUNT("account", "A Standard Australian account defined by BSB/Account Number"),

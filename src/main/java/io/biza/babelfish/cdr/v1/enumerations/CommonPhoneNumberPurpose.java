@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Common: Phone Number Purpose")
+@Schema(description = "Common: Phone Number Purpose", enumAsRef = true)
 public enum CommonPhoneNumberPurpose implements LabelValueEnumInterface {
   // @formatter:off
   MOBILE("MOBILE", "Mobile Number"),

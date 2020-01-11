@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Banking Payee Type with All")
+@Schema(description = "Banking Payee Type with All", enumAsRef = true)
 public enum BankingPayeeTypeWithAll implements LabelValueEnumInterface {
   // @formatter:off
   ALL("ALL", "All Payee Types"),

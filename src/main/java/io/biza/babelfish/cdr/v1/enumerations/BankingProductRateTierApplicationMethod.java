@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Banking Product: Rate Tier Application Method")
+@Schema(description = "Banking Product: Rate Tier Application Method", enumAsRef = true)
 public enum BankingProductRateTierApplicationMethod implements LabelValueEnumInterface {
   // @formatter:off
   WHOLE_BALANCE("WHOLE_BALANCE", "Rate is applied to the entire balance"),

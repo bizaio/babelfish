@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Banking: Term Deposit Maturity Instructions")
+@Schema(description = "Banking: Term Deposit Maturity Instructions", enumAsRef = true)
 public enum BankingTermDepositMaturityInstructions implements LabelValueEnumInterface {
   // @formatter:off    
   ROLLED_OVER("ROLLED_OVER", "Rolled Over at Maturity"),

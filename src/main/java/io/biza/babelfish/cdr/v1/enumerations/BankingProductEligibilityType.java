@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Banking Product Eligibility Criteria Type")
+@Schema(description = "Banking Product Eligibility Criteria Type", enumAsRef = true)
 public enum BankingProductEligibilityType implements LabelValueEnumInterface {
   // @formatter:off
   BUSINESS("BUSINESS", "Only Business may apply to the account"), 

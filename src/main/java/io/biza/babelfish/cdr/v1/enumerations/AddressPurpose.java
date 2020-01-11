@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Purpose for the Address", name = "PhysicalAddressPurpose")
+@Schema(description = "Purpose for the Address", name = "PhysicalAddressPurpose", enumAsRef = true)
 public enum AddressPurpose implements LabelValueEnumInterface {
   // @formatter:off
   REGISTERED("REGISTERED", "Registered Mail Address"),

@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Payload Type: Banking Scheduled Payment Recurrence")
+@Schema(description = "Payload Type: Banking Scheduled Payment Recurrence", enumAsRef = true)
 public enum PayloadTypeBankingScheduledPaymentRecurrence implements LabelValueEnumInterface {
   // @formatter:off
   ONCE_OFF("onceOff", "Indicates that the payment is a once off payment on a specific future date."),

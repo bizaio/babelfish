@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Street Suffix for the Address")
+@Schema(description = "Street Suffix for the Address", enumAsRef = true)
 public enum AddressPAFStreetSuffix implements LabelValueEnumInterface {
   // @formatter:off
   NORTH_WEST("NW", "North West"),
