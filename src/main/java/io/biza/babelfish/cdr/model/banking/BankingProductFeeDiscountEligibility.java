@@ -29,7 +29,6 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-
 @Schema(description = "Banking Product Discount Eligibility Details")
 public abstract class BankingProductFeeDiscountEligibility<T> {
   @Schema(

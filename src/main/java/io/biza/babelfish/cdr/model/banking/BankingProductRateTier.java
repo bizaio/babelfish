@@ -30,7 +30,6 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-
 @Schema(description = "Defines the criteria and conditions for which a rate applies")
 public abstract class BankingProductRateTier<T> {
   @Schema(description = "A display name for the tier", required = true)
@@ -111,14 +110,14 @@ public abstract class BankingProductRateTier<T> {
   }
 
   @Schema(description = "Banking Product Rate Applicability Conditions")
-  BankingProductRateCondition<?> applicabilityConditions;
+  BankingProductRateTierApplicability<?> applicabilityConditions;
 
-  public BankingProductRateCondition<?> applicabilityConditions() {
+  public BankingProductRateTierApplicability<?> applicabilityConditions() {
     return getApplicabilityConditions();
   }
 
   @SuppressWarnings("unchecked")
-  public T applicabilityConditions(BankingProductRateCondition<?> applicabilityConditions) {
+  public T applicabilityConditions(BankingProductRateTierApplicability<?> applicabilityConditions) {
     setApplicabilityConditions(applicabilityConditions);
     return (T) this;
   }

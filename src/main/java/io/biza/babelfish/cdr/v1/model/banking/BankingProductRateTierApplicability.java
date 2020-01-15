@@ -17,11 +17,11 @@ import javax.validation.Valid;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
+public class BankingProductRateTierApplicability
+    extends io.biza.babelfish.cdr.model.banking.BankingProductRateTierApplicability<BankingProductRateTierApplicability> {
 
-
-public class BankingProductRateCondition extends
-    io.biza.babelfish.cdr.model.banking.BankingProductRateTierApplicability<BankingProductRateCondition> {
 }

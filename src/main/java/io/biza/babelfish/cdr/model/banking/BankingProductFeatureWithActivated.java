@@ -29,21 +29,6 @@ import lombok.ToString;
 @Schema(name = "BankingAccountProductFeature",
     description = "Banking Account Product Feature", allOf = { BankingProductFeature.class })
 public abstract class BankingProductFeatureWithActivated<T> extends BankingProductFeature<T> {
-  @JsonUnwrapped
-  @Schema(hidden = true)
-  @Valid
-  BankingProductFeature<?> bankingProductFeature;
-
-  public BankingProductFeature<?> bankingProductFeature() {
-    return getBankingProductFeature();
-  }
-
-  @SuppressWarnings("unchecked")
-  public T bankingProductFeature(BankingProductFeature<?> bankingProductFeature) {
-    setBankingProductFeature(bankingProductFeature);
-    return (T) this;
-  }
-
   @Schema(
       description = "True if the feature is already activated and false if the feature is available for activation.")
   Boolean isActivated = true;

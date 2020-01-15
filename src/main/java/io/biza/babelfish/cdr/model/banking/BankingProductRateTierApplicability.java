@@ -28,9 +28,8 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-
 @Schema(description = "Defines a condition for the applicability of a tiered rate")
-public abstract class BankingProductRateCondition<T> {
+public abstract class BankingProductRateTierApplicability<T> {
   @Schema(description = "Display text providing more information on the condition")
   String additionalInfo;
 
