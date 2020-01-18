@@ -11,7 +11,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *******************************************************************************/
-package io.biza.babelfish.cdr.tests.v1.model.response;
+package io.biza.babelfish.cdr.tests.v2.model.response;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import javax.validation.Validation;
@@ -25,7 +25,7 @@ import io.biza.babelfish.cdr.v1.model.common.Links;
 import io.biza.babelfish.cdr.v1.response.ResponseBankingProductById;
 
 @DisplayName("ResponseBankingProductById V1 Tests")
-public class ResponseBankingProductByIdV1Test {
+public class ResponseBankingProductByIdV2Test {
   private Validator validator;
 
   @BeforeEach
@@ -39,7 +39,7 @@ public class ResponseBankingProductByIdV1Test {
   void createValidEmptyProductList() {
     ResponseBankingProductById myResponse =
         new ResponseBankingProductById().links(new Links().self(ModelConstants.DEFAULT_SELF_URI))
-            .data(ModelConstants.DEFAULT_BANKING_PRODUCT_DETAIL_V1);
+            .data(ModelConstants.DEFAULT_BANKING_PRODUCT_DETAIL_V2);
     assertTrue(validator.validate(myResponse).isEmpty(), validator.validate(myResponse).toString());
   }
 

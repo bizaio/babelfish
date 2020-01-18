@@ -147,12 +147,20 @@ public class ModelConstants {
   public static final URI DEFAULT_NEXT_URI = URI.create("http://localhost/?page=4");
   public static final List<String> DEFAULT_ACCOUNT_IDS =
       List.of("0be1c793-87ba-4942-95bd-4c972ec43a2d", "d5305a6c-b828-4651-bbcc-b3ea7264d387");
-  public static final BankingProduct DEFAULT_BANKING_PRODUCT =
-      new BankingProduct().productId("test").lastUpdated(OffsetDateTime.now())
+  public static final io.biza.babelfish.cdr.v1.model.banking.BankingProduct DEFAULT_BANKING_PRODUCT_V1 =
+      new io.biza.babelfish.cdr.v1.model.banking.BankingProduct().productId("test").lastUpdated(OffsetDateTime.now())
           .productCategory(BankingProductCategory.BUSINESS_LOANS).name("Test")
           .description("Test Description").brand("ACME").tailored(false);
-  public static final BankingProductDetail DEFAULT_BANKING_PRODUCT_DETAIL =
-      new BankingProductDetail().productId("test").lastUpdated(OffsetDateTime.now())
+  public static final io.biza.babelfish.cdr.v2.model.banking.BankingProduct DEFAULT_BANKING_PRODUCT_V2 =
+      new io.biza.babelfish.cdr.v2.model.banking.BankingProduct().productId("test").lastUpdated(OffsetDateTime.now())
+          .productCategory(BankingProductCategory.BUSINESS_LOANS).name("Test")
+          .description("Test Description").brand("ACME").tailored(false);
+  public static final io.biza.babelfish.cdr.v1.model.banking.BankingProductDetail DEFAULT_BANKING_PRODUCT_DETAIL_V1 =
+      new io.biza.babelfish.cdr.v1.model.banking.BankingProductDetail().productId("test").lastUpdated(OffsetDateTime.now())
+          .productCategory(BankingProductCategory.BUSINESS_LOANS).name("Test")
+          .description("Test Description").brand("ACME").tailored(false);
+  public static final io.biza.babelfish.cdr.v2.model.banking.BankingProductDetail DEFAULT_BANKING_PRODUCT_DETAIL_V2 =
+      new io.biza.babelfish.cdr.v2.model.banking.BankingProductDetail().productId("test").lastUpdated(OffsetDateTime.now())
           .productCategory(BankingProductCategory.BUSINESS_LOANS).name("Test")
           .description("Test Description").brand("ACME").tailored(false);
   public static final BankingProductBundle DEFAULT_BANKING_PRODUCT_BUNDLE =

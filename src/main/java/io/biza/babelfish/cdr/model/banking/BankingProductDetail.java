@@ -32,23 +32,93 @@ public abstract class BankingProductDetail<T> extends BankingProduct<T> {
   @Schema(
       description = "An array of bundles that this product participates in.  Each bundle is described by free form information but also by a list of product IDs of the other products that are included in the bundle.  It is assumed that the current product is included in the bundle also")
   List<BankingProductBundle<?>> bundles;
+  
+  public List<BankingProductBundle<?>> bundles() {
+    return bundles;
+  }
+
+  @SuppressWarnings("unchecked")
+  public T bundles(List<BankingProductBundle<?>> bundles) {
+    this.bundles = bundles;
+    return (T) this;
+  }
 
   @Schema(description = "Array of features available for the product")
   List<BankingProductFeature<?>> features;
+  
+  public List<BankingProductFeature<?>> features() {
+    return features;
+  }
+
+  @SuppressWarnings("unchecked")
+  public T features(List<BankingProductFeature<?>> features) {
+    this.features = features;
+    return (T) this;
+  }
 
   @Schema(
       description = "Constraints on the application for or operation of the product such as minimum balances or limit thresholds")
   List<BankingProductConstraint<?>> constraints;
+  
+  public List<BankingProductConstraint<?>> constraints() {
+    return constraints;
+  }
+
+  @SuppressWarnings("unchecked")
+  public T constraints(List<BankingProductConstraint<?>> constraints) {
+    this.constraints = constraints;
+    return (T) this;
+  }
 
   @Schema(description = "Eligibility criteria for the product")
   List<BankingProductEligibility<?>> eligibility;
+  
+  public List<BankingProductEligibility<?>> eligibility() {
+    return eligibility;
+  }
+
+  @SuppressWarnings("unchecked")
+  public T eligibility(List<BankingProductEligibility<?>> eligibility) {
+    this.eligibility = eligibility;
+    return (T) this;
+  }
 
   @Schema(description = "Fees applicable for the product")
   List<BankingProductFee<?>> fees;
+  
+  public List<BankingProductFee<?>> fees() {
+    return fees;
+  }
+
+  @SuppressWarnings("unchecked")
+  public T fees(List<BankingProductFee<?>> fees) {
+    this.fees = fees;
+    return (T) this;
+  }
 
   @Schema(description = "Interest rates available for deposits")
   List<BankingProductDepositRate<?>> depositRates;
+  
+  public List<BankingProductDepositRate<?>> depositRates() {
+    return depositRates;
+  }
+
+  @SuppressWarnings("unchecked")
+  public T depositRates(List<BankingProductDepositRate<?>> depositRates) {
+    this.depositRates = depositRates;
+    return (T) this;
+  }
 
   @Schema(description = "Interest rates charged against lending balances")
   List<BankingProductLendingRate<?>> lendingRates;
+  
+  public List<BankingProductLendingRate<?>> lendingRates() {
+    return lendingRates;
+  }
+
+  @SuppressWarnings("unchecked")
+  public T lendingRates(List<BankingProductLendingRate<?>> lendingRates) {
+    this.lendingRates = lendingRates;
+    return (T) this;
+  }
 }
