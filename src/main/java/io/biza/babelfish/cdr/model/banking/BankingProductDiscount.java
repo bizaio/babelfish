@@ -39,7 +39,7 @@ import lombok.ToString;
 
 @Schema(name = "BankingProductDiscount",
     description = "Banking Product Discount Specification")
-public abstract class BankingProductFeeDiscount<T> {
+public abstract class BankingProductDiscount<T> {
   @Schema(description = "Description of the discount", required = true)
   @NonNull
   @NotNull
@@ -201,4 +201,14 @@ public abstract class BankingProductFeeDiscount<T> {
 
   @Schema(description = "Eligibility constraints that apply to this discount")
   List<BankingProductFeeDiscountEligibility<?>> eligibility;
+  
+  public List<BankingProductFeeDiscountEligibility<?>> eligibility() {
+    return getEligibility();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T eligibility(List<BankingProductFeeDiscountEligibility<?>> eligibility) {
+    setEligibility(eligibility);
+    return (T) this;
+  }
 }

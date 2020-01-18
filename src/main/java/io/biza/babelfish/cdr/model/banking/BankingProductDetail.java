@@ -24,7 +24,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Valid
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Schema(description = "Banking Product Detailed Information", allOf = { BankingProduct.class })
 public abstract class BankingProductDetail<T> extends BankingProduct<T> {

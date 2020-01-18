@@ -219,6 +219,17 @@ public abstract class BankingProductFee<T> {
 
   @Schema(
       description = "An optional list of discounts to this fee that may be available")
-  List<BankingProductFeeDiscount<?>> discounts;
+  List<BankingProductDiscount<?>> discounts;
+  
+  public List<BankingProductDiscount<?>> discounts() {
+    return getDiscounts();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T discounts(List<BankingProductDiscount<?>> discounts) {
+    setDiscounts(discounts);
+    return (T) this;
+  }
+
 
 }

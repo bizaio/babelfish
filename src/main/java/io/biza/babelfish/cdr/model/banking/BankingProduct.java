@@ -15,6 +15,7 @@ package io.biza.babelfish.cdr.model.banking;
 
 import java.net.URI;
 import java.time.OffsetDateTime;
+import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,20 +24,16 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.DateTimeStringToOffsetDateTimeConverter;
 import io.biza.babelfish.cdr.converters.OffsetDateTimeToDateTimeStringConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
+import io.biza.babelfish.cdr.exception.AttributeNotSupportedException;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductCategory;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NonNull;
-import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
 @Valid
 @ToString
 @EqualsAndHashCode
-
 @Schema(description = "An Australian Banking Product")
 public abstract class BankingProduct<T> {
   @Schema(
@@ -47,12 +44,12 @@ public abstract class BankingProduct<T> {
   private String productId;
 
   public String productId() {
-    return getProductId();
+    return productId;
   }
 
   @SuppressWarnings("unchecked")
   public T productId(String productId) {
-    setProductId(productId);
+    this.productId = productId;
     return (T) this;
   }
 
@@ -64,12 +61,12 @@ public abstract class BankingProduct<T> {
   private OffsetDateTime effectiveFrom;
 
   public OffsetDateTime effectiveFrom() {
-    return getEffectiveFrom();
+    return effectiveFrom;
   }
 
   @SuppressWarnings("unchecked")
   public T effectiveFrom(OffsetDateTime effectiveFrom) {
-    setEffectiveFrom(effectiveFrom);
+    this.effectiveFrom = effectiveFrom;
     return (T) this;
   }
 
@@ -81,12 +78,12 @@ public abstract class BankingProduct<T> {
   private OffsetDateTime effectiveTo;
 
   public OffsetDateTime effectiveTo() {
-    return getEffectiveTo();
+    return effectiveTo;
   }
 
   @SuppressWarnings("unchecked")
   public T effectiveTo(OffsetDateTime effectiveTo) {
-    setEffectiveTo(effectiveTo);
+    this.effectiveTo = effectiveTo;
     return (T) this;
   }
 
@@ -100,12 +97,12 @@ public abstract class BankingProduct<T> {
   private OffsetDateTime lastUpdated;
 
   public OffsetDateTime lastUpdated() {
-    return getLastUpdated();
+    return lastUpdated;
   }
 
   @SuppressWarnings("unchecked")
   public T lastUpdated(OffsetDateTime lastUpdated) {
-    setLastUpdated(lastUpdated);
+    this.lastUpdated = lastUpdated;
     return (T) this;
   }
 
@@ -115,12 +112,12 @@ public abstract class BankingProduct<T> {
   BankingProductCategory productCategory;
 
   public BankingProductCategory productCategory() {
-    return getProductCategory();
+    return this.productCategory;
   }
 
   @SuppressWarnings("unchecked")
   public T productCategory(BankingProductCategory productCategory) {
-    setProductCategory(productCategory);
+    this.productCategory = productCategory;
     return (T) this;
   }
 
@@ -130,12 +127,12 @@ public abstract class BankingProduct<T> {
   String name;
 
   public String name() {
-    return getName();
+    return name;
   }
 
   @SuppressWarnings("unchecked")
   public T name(String name) {
-    setName(name);
+    this.name = name;
     return (T) this;
   }
 
@@ -145,12 +142,12 @@ public abstract class BankingProduct<T> {
   String description;
 
   public String description() {
-    return getDescription();
+    return description;
   }
 
   @SuppressWarnings("unchecked")
   public T description(String description) {
-    setDescription(description);
+    this.description = description;
     return (T) this;
   }
 
@@ -162,12 +159,12 @@ public abstract class BankingProduct<T> {
   String brand;
 
   public String brand() {
-    return getBrand();
+    return this.brand;
   }
 
   @SuppressWarnings("unchecked")
   public T brand(String brand) {
-    setBrand(brand);
+    this.brand = brand;
     return (T) this;
   }
 
@@ -175,12 +172,12 @@ public abstract class BankingProduct<T> {
   String brandName;
 
   public String brandName() {
-    return getBrandName();
+    return brandName;
   }
 
   @SuppressWarnings("unchecked")
   public T brandName(String brandName) {
-    setBrandName(brandName);
+    this.brandName = brandName;
     return (T) this;
   }
 
@@ -191,12 +188,13 @@ public abstract class BankingProduct<T> {
   URI applicationUri;
 
   public URI applicationUri() {
-    return getApplicationUri();
+    return this.applicationUri;
   }
 
+  
   @SuppressWarnings("unchecked")
   public T applicationUri(URI applicationUri) {
-    setApplicationUri(applicationUri);
+    this.applicationUri = applicationUri;
     return (T) this;
   }
 
@@ -209,12 +207,12 @@ public abstract class BankingProduct<T> {
   Boolean tailored;
 
   public Boolean tailored() {
-    return getTailored();
+    return tailored;
   }
 
   @SuppressWarnings("unchecked")
   public T tailored(Boolean isTailored) {
-    setTailored(isTailored);
+    this.tailored = isTailored;
     return (T) this;
   }
 
@@ -222,12 +220,25 @@ public abstract class BankingProduct<T> {
   BankingProductAdditionalInformation<?> additionalInformation;
 
   public BankingProductAdditionalInformation<?> additionalInformation() {
-    return getAdditionalInformation();
+    return additionalInformation;
   }
 
   @SuppressWarnings("unchecked")
   public T additionalInformation(BankingProductAdditionalInformation<?> additionalInformation) {
-    setAdditionalInformation(additionalInformation);
+    this.additionalInformation = additionalInformation;
+    return (T) this;
+  }
+  
+  @Schema(description = "An array of card art images")
+  List<BankingProductCardArt<?>> cardArt;
+
+  public List<BankingProductCardArt<?>> cardArt() throws AttributeNotSupportedException {
+    return cardArt;
+  }
+
+  @SuppressWarnings("unchecked")
+  public T cardArt(List<BankingProductCardArt<?>> cardArt) throws AttributeNotSupportedException {
+    this.cardArt = cardArt;
     return (T) this;
   }
 }

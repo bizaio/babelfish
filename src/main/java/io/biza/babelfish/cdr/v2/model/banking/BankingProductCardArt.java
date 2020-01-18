@@ -11,28 +11,16 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *******************************************************************************/
-package io.biza.babelfish.cdr.v1.model.banking;
+package io.biza.babelfish.cdr.v2.model.banking;
 
-import java.util.List;
 import javax.validation.Valid;
-import io.biza.babelfish.cdr.exception.AttributeNotSupportedException;
-import io.biza.babelfish.cdr.model.banking.BankingProductCardArt;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class BankingProductDetail
-    extends io.biza.babelfish.cdr.model.banking.BankingProductDetail<BankingProductDetail> {
-  
-  @Override
-  public List<BankingProductCardArt<?>> cardArt() throws AttributeNotSupportedException {
-    throw new AttributeNotSupportedException("Card Art is not supported in Version 1 Payloads");
-  }
+public class BankingProductCardArt
+    extends io.biza.babelfish.cdr.model.banking.BankingProductCardArt<BankingProductCardArt> {
 
-  @Override
-  public BankingProductDetail cardArt(List<BankingProductCardArt<?>> cardArt) throws AttributeNotSupportedException {
-    throw new AttributeNotSupportedException("Card Art is not supported in Version 1 Payloads");
-  }
 }

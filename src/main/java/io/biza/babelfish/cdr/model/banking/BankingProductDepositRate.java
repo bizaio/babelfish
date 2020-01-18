@@ -114,6 +114,16 @@ public abstract class BankingProductDepositRate<T> {
   @Schema(description = "Rate tiers applicable for this rate")
   List<BankingProductRateTier<?>> tiers;
 
+  public List<BankingProductRateTier<?>> tiers() {
+    return getTiers();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T tiers(List<BankingProductRateTier<?>> tiers) {
+    setTiers(tiers);
+    return (T) this;
+  }
+  
   @Schema(
       description = "Generic field containing additional information relevant to the [depositRateType](#tocSproductdepositratetypedoc) specified. Whether mandatory or not is dependent on the value of [depositRateType](#tocSproductdepositratetypedoc)")
   String additionalValue;

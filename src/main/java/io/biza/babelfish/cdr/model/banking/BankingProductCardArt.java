@@ -1,0 +1,71 @@
+/*******************************************************************************
+ * Copyright (C) 2020 Biza Pty Ltd
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *******************************************************************************/
+package io.biza.babelfish.cdr.model.banking;
+
+import java.net.URI;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
+import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.ToString;
+
+@Data
+@NoArgsConstructor
+@Valid
+@ToString
+@EqualsAndHashCode
+@Schema(description = "Banking Product Card Art", name = "BankingProductCardArt")
+public abstract class BankingProductCardArt<T> {
+  @Schema(description = "Display label for the specific image", required = true)
+  @NonNull
+  @NotNull
+  @NotBlank
+  @Valid
+  String title;
+
+  public String title() {
+    return getTitle();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T title(String title) {
+    setTitle(title);
+    return (T) this;
+  }
+
+  @Schema(
+      description = "Link to a PNG, JPG or GIF image with proportions defined by ISO 7810 ID-1 and width no greater than 512 pixels",
+      type = "string")
+  @JsonSerialize(converter = UriToUriStringConverter.class)
+  @JsonDeserialize(converter = UriStringToUriConverter.class)
+  URI imageUri;
+
+  public URI imageUri() {
+    return getImageUri();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T imageUri(URI imageUri) {
+    setImageUri(imageUri);
+    return (T) this;
+  }
+}

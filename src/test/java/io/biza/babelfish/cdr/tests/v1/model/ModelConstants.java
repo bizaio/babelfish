@@ -69,15 +69,13 @@ import io.biza.babelfish.cdr.v1.model.banking.BankingInternationalPayeeBeneficia
 import io.biza.babelfish.cdr.v1.model.banking.BankingLoanAccount;
 import io.biza.babelfish.cdr.v1.model.banking.BankingPayee;
 import io.biza.babelfish.cdr.v1.model.banking.BankingPayeeDetail;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProduct;
 import io.biza.babelfish.cdr.v1.model.banking.BankingProductBundle;
 import io.biza.babelfish.cdr.v1.model.banking.BankingProductConstraint;
 import io.biza.babelfish.cdr.v1.model.banking.BankingProductDepositRate;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductDetail;
 import io.biza.babelfish.cdr.v1.model.banking.BankingProductEligibility;
 import io.biza.babelfish.cdr.v1.model.banking.BankingProductFeature;
 import io.biza.babelfish.cdr.v1.model.banking.BankingProductFee;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductFeeDiscount;
+import io.biza.babelfish.cdr.v1.model.banking.BankingProductDiscount;
 import io.biza.babelfish.cdr.v1.model.banking.BankingProductFeeDiscountEligibility;
 import io.biza.babelfish.cdr.v1.model.banking.BankingProductLendingRate;
 import io.biza.babelfish.cdr.v1.model.banking.BankingProductRateTier;
@@ -134,6 +132,8 @@ import io.biza.babelfish.cdr.v1.response.container.ResponseBankingTransactionLis
 import io.biza.babelfish.cdr.v1.response.container.ResponseCommonCustomerData;
 import io.biza.babelfish.cdr.v1.response.container.ResponseCommonCustomerDetailData;
 import io.biza.babelfish.cdr.v1.response.container.ResponseCommonDiscoveryOutagesListData;
+import io.biza.babelfish.cdr.v2.model.banking.BankingProduct;
+import io.biza.babelfish.cdr.v2.model.banking.BankingProductDetail;
 
 /**
  * ModelConstants This defines valid models for manipulation within test cases
@@ -168,8 +168,8 @@ public class ModelConstants {
   public static final BankingProductFee DEFAULT_BANKING_PRODUCT_FEE =
       new BankingProductFee().name("Fee Name").feeType(BankingProductFeeType.PERIODIC)
           .additionalValue("P1D").amount(new BigDecimal("10.00"));
-  public static final BankingProductFeeDiscount DEFAULT_BANKING_PRODUCT_FEE_DISCOUNT =
-      new BankingProductFeeDiscount().description("Discount Description")
+  public static final BankingProductDiscount DEFAULT_BANKING_PRODUCT_FEE_DISCOUNT =
+      new BankingProductDiscount().description("Discount Description")
           .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.BALANCE)
           .additionalValue("100.00");
   public static final BankingProductFeeDiscountEligibility DEFAULT_BANKING_PRODUCT_FEE_DISCOUNT_ELIGIBILITY =

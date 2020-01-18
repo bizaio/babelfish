@@ -26,8 +26,8 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 
 
-public class BankingProductFeeDiscount extends
-    io.biza.babelfish.cdr.model.banking.BankingProductFeeDiscount<BankingProductFeeDiscount> {
+public class BankingProductDiscount extends
+    io.biza.babelfish.cdr.model.banking.BankingProductDiscount<BankingProductDiscount> {
   @AssertTrue(
       message = "Additional Value must be an Amount String when Discount type is BALANCE, DEPOSITS or PAYMENTS")
   private boolean isValueAmount() {

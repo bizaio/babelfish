@@ -14,7 +14,6 @@
 package io.biza.babelfish.cdr.model.banking;
 
 import javax.validation.Valid;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
