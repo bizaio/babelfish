@@ -18,14 +18,13 @@ import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.babelfish.cdr.support.FormatChecker;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductLendingRateType;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-
-
 public class BankingProductLendingRate extends
     io.biza.babelfish.cdr.model.banking.BankingProductLendingRate<BankingProductLendingRate> {
   @AssertTrue(

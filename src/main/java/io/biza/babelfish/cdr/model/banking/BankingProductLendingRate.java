@@ -26,6 +26,7 @@ import io.biza.babelfish.cdr.converters.PeriodToStringConverter;
 import io.biza.babelfish.cdr.converters.RateStringToBigDecimalConverter;
 import io.biza.babelfish.cdr.converters.StringToPeriodConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
+import io.biza.babelfish.cdr.v1.enumerations.BankingProductLendingRateInterestPaymentType;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductLendingRateType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
@@ -39,7 +40,6 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-
 @Schema(description = "Banking Product Lending Rate Definition")
 public abstract class BankingProductLendingRate<T> {
   @Schema(
@@ -127,14 +127,14 @@ public abstract class BankingProductLendingRate<T> {
 
   @Schema(
       description = "When loan payments are due to be paid within each period. The investment benefit of earlier payments affect the rate that can be offered")
-  BankingProductLendingRateType interestPaymentDue;
+  BankingProductLendingRateInterestPaymentType interestPaymentDue;
 
-  public BankingProductLendingRateType interestPaymentDue() {
+  public BankingProductLendingRateInterestPaymentType interestPaymentDue() {
     return getInterestPaymentDue();
   }
 
   @SuppressWarnings("unchecked")
-  public T interestPaymentDue(BankingProductLendingRateType interestPaymentDue) {
+  public T interestPaymentDue(BankingProductLendingRateInterestPaymentType interestPaymentDue) {
     setInterestPaymentDue(interestPaymentDue);
     return (T) this;
   }
