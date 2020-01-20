@@ -44,7 +44,7 @@ public class Constants {
    * CDR DateTimeString
    */
   public static final DateTimeFormatter CDR_DATETIMESTRING_FORMATTER =
-      DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+      DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 
   /**
    * CDR DateString

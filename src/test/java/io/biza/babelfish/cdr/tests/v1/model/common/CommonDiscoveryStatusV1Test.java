@@ -13,7 +13,7 @@ package io.biza.babelfish.cdr.tests.v1.model.common;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -49,17 +49,17 @@ public class CommonDiscoveryStatusV1Test {
 
     data.status(CommonDiscoveryStatusType.OK);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    data.updateTime(LocalDateTime.now());
+    data.updateTime(OffsetDateTime.now());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Should only be present if the status property is PARTIAL_FAILURE or UNAVAILABLE
-    data.detectionTime(LocalDateTime.now());
+    data.detectionTime(OffsetDateTime.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.detectionTime(null);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Should not be present if the status property has a value of OK.
-    data.expectedResolutionTime(LocalDateTime.now());
+    data.expectedResolutionTime(OffsetDateTime.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.expectedResolutionTime(null);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -76,14 +76,14 @@ public class CommonDiscoveryStatusV1Test {
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.explanation("Explanation for outage");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    data.updateTime(LocalDateTime.now());
+    data.updateTime(OffsetDateTime.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    data.detectionTime(LocalDateTime.now());
+    data.detectionTime(OffsetDateTime.now());
     // Should be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Expected Resolution Time is allowed and still be valid
-    data.expectedResolutionTime(LocalDateTime.now());
+    data.expectedResolutionTime(OffsetDateTime.now());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
@@ -98,13 +98,13 @@ public class CommonDiscoveryStatusV1Test {
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.explanation("Explanation for outage");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    data.updateTime(LocalDateTime.now());
+    data.updateTime(OffsetDateTime.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     // Should be a valid payload now
-    data.detectionTime(LocalDateTime.now());
+    data.detectionTime(OffsetDateTime.now());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
     // Expected Resolution Time is allowed and still valid
-    data.expectedResolutionTime(LocalDateTime.now());
+    data.expectedResolutionTime(OffsetDateTime.now());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
@@ -117,15 +117,15 @@ public class CommonDiscoveryStatusV1Test {
 
     data.status(CommonDiscoveryStatusType.SCHEDULED_OUTAGE);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    data.updateTime(LocalDateTime.now());
+    data.updateTime(OffsetDateTime.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.explanation("Explanation for outage");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    data.expectedResolutionTime(LocalDateTime.now());
+    data.expectedResolutionTime(OffsetDateTime.now());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Should only be present if the status property is PARTIAL_FAILURE or UNAVAILABLE
-    data.detectionTime(LocalDateTime.now());
+    data.detectionTime(OffsetDateTime.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.detectionTime(null);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());

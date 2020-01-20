@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 import java.net.URI;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.OffsetDateTime;
 import java.time.Period;
 import java.util.List;
@@ -254,7 +254,7 @@ public class ModelConstants {
           .transactionId(UUID.randomUUID().toString()).isDetailAvailable(false)
           .type(BankingTransactionType.PAYMENT).status(BankingTransactionStatus.POSTED)
           .description("Transaction Description").amount(new BigDecimal("10.00")).reference("")
-          .postingDateTime(LocalDateTime.now())
+          .postingDateTime(OffsetDateTime.now())
           .extendedData(ModelConstants.DEFAULT_BANKING_TRANSACTION_DETAIL_EXTENDED_DATA);
 
   public static final ResponseBankingTransactionById DEFAULT_RESPONSE_BANKING_TRANSACTION_BY_ID =
@@ -266,7 +266,7 @@ public class ModelConstants {
       .accountId(UUID.randomUUID().toString()).transactionId(UUID.randomUUID().toString())
       .isDetailAvailable(false).type(BankingTransactionType.PAYMENT)
       .status(BankingTransactionStatus.POSTED).description("Transaction Description")
-      .amount(new BigDecimal("10.00")).reference("").postingDateTime(LocalDateTime.now());
+      .amount(new BigDecimal("10.00")).reference("").postingDateTime(OffsetDateTime.now());
 
   public static final ResponseBankingTransactionListData DEFAULT_RESPONSE_BANKING_TRANSACTION_LIST_DATA =
       new ResponseBankingTransactionListData().transactions(List.of(DEFAULT_BANKING_TRANSACTION));
@@ -346,13 +346,13 @@ public class ModelConstants {
       new BankingScheduledPaymentInterval().interval(Period.ofDays(30));
   public static final CommonDiscoveryStatus DEFAULT_COMMON_DISCOVERY_STATUS =
       new CommonDiscoveryStatus().status(CommonDiscoveryStatusType.OK)
-          .updateTime(LocalDateTime.now());
+          .updateTime(OffsetDateTime.now());
   public static final ResponseCommonDiscoveryStatus DEFAULT_RESPONSE_COMMON_DISCOVERY_STATUS =
       new ResponseCommonDiscoveryStatus().data(DEFAULT_COMMON_DISCOVERY_STATUS)
           .links(DEFAULT_LINKS);
 
   public static final CommonDiscoveryOutage DEFAULT_COMMON_DISCOVERY_OUTAGE =
-      new CommonDiscoveryOutage().outageTime(LocalDateTime.now()).duration(Duration.ofHours(1))
+      new CommonDiscoveryOutage().outageTime(OffsetDateTime.now()).duration(Duration.ofHours(1))
           .explanation("Outage Explanation");
   public static final ResponseCommonDiscoveryOutagesListData DEFAULT_RESPONSE_COMMON_DISCOVERY_OUTAGES_LIST_DATA =
       new ResponseCommonDiscoveryOutagesListData()

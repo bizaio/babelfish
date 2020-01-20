@@ -14,7 +14,7 @@ package io.biza.babelfish.cdr.tests.v1.model.banking;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -74,7 +74,7 @@ public class BankingTransactionV1Test {
     data.reference("");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.postingDateTime(LocalDateTime.now());
+    data.postingDateTime(OffsetDateTime.now());
     // Should now be valid
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

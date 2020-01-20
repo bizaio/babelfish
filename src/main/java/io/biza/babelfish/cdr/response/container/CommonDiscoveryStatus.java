@@ -11,7 +11,7 @@
  *******************************************************************************/
 package io.biza.babelfish.cdr.response.container;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -61,14 +61,14 @@ public abstract class CommonDiscoveryStatus<T> {
   @NotNull
   @NonNull
   @Valid
-  public LocalDateTime updateTime;
+  public OffsetDateTime updateTime;
 
-  public LocalDateTime updateTime() {
+  public OffsetDateTime updateTime() {
     return getUpdateTime();
   }
 
   @SuppressWarnings("unchecked")
-  public T updateTime(LocalDateTime updateTime) {
+  public T updateTime(OffsetDateTime updateTime) {
     setUpdateTime(updateTime);
     return (T) this;
   }
@@ -93,14 +93,14 @@ public abstract class CommonDiscoveryStatus<T> {
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   @JsonProperty("detectionTime")
-  public LocalDateTime detectionTime;
+  public OffsetDateTime detectionTime;
 
-  public LocalDateTime detectionTime() {
+  public OffsetDateTime detectionTime() {
     return getDetectionTime();
   }
 
   @SuppressWarnings("unchecked")
-  public T detectionTime(LocalDateTime detectionTime) {
+  public T detectionTime(OffsetDateTime detectionTime) {
     setDetectionTime(detectionTime);
     return (T) this;
   }
@@ -110,14 +110,14 @@ public abstract class CommonDiscoveryStatus<T> {
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   @JsonProperty("expectedResolutionTime")
-  public LocalDateTime expectedResolutionTime;
+  public OffsetDateTime expectedResolutionTime;
 
-  public LocalDateTime expectedResolutionTime() {
+  public OffsetDateTime expectedResolutionTime() {
     return getExpectedResolutionTime();
   }
 
   @SuppressWarnings("unchecked")
-  public T expectedResolutionTime(LocalDateTime expectedResolutionTime) {
+  public T expectedResolutionTime(OffsetDateTime expectedResolutionTime) {
     setExpectedResolutionTime(expectedResolutionTime);
     return (T) this;
   }

@@ -12,7 +12,7 @@
 package io.biza.babelfish.cdr.model.common;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -43,14 +43,14 @@ public abstract class CommonDiscoveryOutage<T> {
   @JsonProperty("outageTime")
   @NotNull
   @NonNull
-  public LocalDateTime outageTime;
+  public OffsetDateTime outageTime;
 
-  public LocalDateTime outageTime() {
+  public OffsetDateTime outageTime() {
     return getOutageTime();
   }
 
   @SuppressWarnings("unchecked")
-  public T outageTime(LocalDateTime outageTime) {
+  public T outageTime(OffsetDateTime outageTime) {
     setOutageTime(outageTime);
     return (T) this;
   }

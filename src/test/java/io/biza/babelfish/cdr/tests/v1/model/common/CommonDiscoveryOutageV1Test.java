@@ -14,7 +14,7 @@ package io.biza.babelfish.cdr.tests.v1.model.common;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -47,7 +47,7 @@ public class CommonDiscoveryOutageV1Test {
     CommonDiscoveryOutage data = new CommonDiscoveryOutage();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.outageTime(LocalDateTime.now());
+    data.outageTime(OffsetDateTime.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.duration(Duration.ofHours(1));

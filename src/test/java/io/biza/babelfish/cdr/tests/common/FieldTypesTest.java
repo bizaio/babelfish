@@ -124,7 +124,11 @@ public class FieldTypesTest {
   @DisplayName("Verify Date Time String")
   void verifyDateTimeString() {
     // Verify valid string
-    assertTrue(FormatChecker.isDateTimeString("1985-04-12T23:20:50.52"));
+    assertTrue(FormatChecker.isDateTimeString("2007-05-01T15:43:00.12345Z"));
+    // Verify valid string
+    assertTrue(FormatChecker.isDateTimeString("2012-12-25T15:43:00-08:00"));
+    // Verify valid string
+    assertTrue(FormatChecker.isDateTimeString("1997-01-12T15:43:00.121Z"));
     // Verify invalid string (missing time)
     assertFalse(FormatChecker.isDateTimeString("2007-05-01"));
     // Verify invalid string (missing date)

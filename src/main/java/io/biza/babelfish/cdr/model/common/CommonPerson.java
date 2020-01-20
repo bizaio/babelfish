@@ -11,7 +11,7 @@
  *******************************************************************************/
 package io.biza.babelfish.cdr.model.common;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -34,14 +34,14 @@ public abstract class CommonPerson<T> {
   @Schema(
       description = "The date and time that this record was last updated by the customer.  If no update has occurred then this date should reflect the initial creation date for the data")
   @JsonProperty("lastUpdateTime")
-  public LocalDateTime lastUpdateTime;
+  public OffsetDateTime lastUpdateTime;
 
-  public LocalDateTime lastUpdateTime() {
+  public OffsetDateTime lastUpdateTime() {
     return getLastUpdateTime();
   }
 
   @SuppressWarnings("unchecked")
-  public T lastUpdateTime(LocalDateTime lastUpdateTime) {
+  public T lastUpdateTime(OffsetDateTime lastUpdateTime) {
     setLastUpdateTime(lastUpdateTime);
     return (T) this;
   }

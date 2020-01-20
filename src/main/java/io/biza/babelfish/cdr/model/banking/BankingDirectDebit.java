@@ -12,7 +12,7 @@
 package io.biza.babelfish.cdr.model.banking;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -71,14 +71,14 @@ public abstract class BankingDirectDebit<T> {
       type = "string")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
-  LocalDateTime lastDebitDateTime;
+  OffsetDateTime lastDebitDateTime;
 
-  public LocalDateTime lastDebitDateTime() {
+  public OffsetDateTime lastDebitDateTime() {
     return getLastDebitDateTime();
   }
 
   @SuppressWarnings("unchecked")
-  public T lastDebitDateTime(LocalDateTime lastDebitDateTime) {
+  public T lastDebitDateTime(OffsetDateTime lastDebitDateTime) {
     setLastDebitDateTime(lastDebitDateTime);
     return (T) this;
   }

@@ -12,7 +12,7 @@
 package io.biza.babelfish.cdr.model.common;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Locale;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -46,14 +46,14 @@ public abstract class CommonOrganisation<T> {
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   @JsonProperty("lastUpdateTime")
-  public LocalDateTime lastUpdateTime;
+  public OffsetDateTime lastUpdateTime;
 
-  public LocalDateTime lastUpdateTime() {
+  public OffsetDateTime lastUpdateTime() {
     return getLastUpdateTime();
   }
 
   @SuppressWarnings("unchecked")
-  public T lastUpdateTime(LocalDateTime lastUpdateTime) {
+  public T lastUpdateTime(OffsetDateTime lastUpdateTime) {
     setLastUpdateTime(lastUpdateTime);
     return (T) this;
   }

@@ -15,8 +15,10 @@ import java.math.BigDecimal;
 import java.net.URI;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.OffsetDateTime;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Currency;
 import java.util.HashMap;
@@ -215,7 +217,7 @@ public class FormatChecker {
     return isDefined(additionalValue) && additionalValue != "";
   }
 
-  public static boolean isDefined(LocalDateTime dateTime) {
+  public static boolean isDefined(OffsetDateTime dateTime) {
     return dateTime != null;
   }
 
@@ -244,8 +246,8 @@ public class FormatChecker {
 
   public static Boolean isDateTimeString(String input) {
     try {
-      LocalDateTime localDateTime =
-          LocalDateTime.parse(input, Constants.CDR_DATETIMESTRING_FORMATTER);
+      OffsetDateTime localDateTime =
+          OffsetDateTime.parse(input);
       return input.equals(localDateTime.format(Constants.CDR_DATETIMESTRING_FORMATTER));
     } catch (Exception e) {
       return false;

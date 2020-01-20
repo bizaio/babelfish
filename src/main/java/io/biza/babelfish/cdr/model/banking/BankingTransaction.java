@@ -12,7 +12,7 @@
 package io.biza.babelfish.cdr.model.banking;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Currency;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -141,14 +141,14 @@ public abstract class BankingTransaction<T> {
       description = "The time the transaction was posted. This field is Mandatory if the transaction has status POSTED.  This is the time that appears on a standard statement")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
-  private LocalDateTime postingDateTime;
+  private OffsetDateTime postingDateTime;
 
-  public LocalDateTime postingDateTime() {
+  public OffsetDateTime postingDateTime() {
     return getPostingDateTime();
   }
 
   @SuppressWarnings("unchecked")
-  public T postingDateTime(LocalDateTime postingDateTime) {
+  public T postingDateTime(OffsetDateTime postingDateTime) {
     setPostingDateTime(postingDateTime);
     return (T) this;
   }
@@ -157,14 +157,14 @@ public abstract class BankingTransaction<T> {
       description = "Date and time at which assets become available to the account owner in case of a credit entry, or cease to be available to the account owner in case of a debit transaction entry")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
-  private LocalDateTime valueDateTime;
+  private OffsetDateTime valueDateTime;
 
-  public LocalDateTime valueDateTime() {
+  public OffsetDateTime valueDateTime() {
     return getValueDateTime();
   }
 
   @SuppressWarnings("unchecked")
-  public T valueDateTime(LocalDateTime valueDateTime) {
+  public T valueDateTime(OffsetDateTime valueDateTime) {
     setValueDateTime(valueDateTime);
     return (T) this;
   }
@@ -173,14 +173,14 @@ public abstract class BankingTransaction<T> {
       description = "The time the transaction was executed by the originating customer, if available")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
-  private LocalDateTime executionDateTime;
+  private OffsetDateTime executionDateTime;
 
-  public LocalDateTime executionDateTime() {
+  public OffsetDateTime executionDateTime() {
     return getExecutionDateTime();
   }
 
   @SuppressWarnings("unchecked")
-  public T executionDateTime(LocalDateTime executionDateTime) {
+  public T executionDateTime(OffsetDateTime executionDateTime) {
     setExecutionDateTime(executionDateTime);
     return (T) this;
   }
