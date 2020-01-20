@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.model.banking;
 
@@ -181,8 +179,7 @@ public abstract class BankingProduct<T> {
     return (T) this;
   }
 
-  @Schema(
-      description = "A link to an application web page where this product can be applied for.",
+  @Schema(description = "A link to an application web page where this product can be applied for.",
       type = "string")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   URI applicationUri;
@@ -191,7 +188,7 @@ public abstract class BankingProduct<T> {
     return this.applicationUri;
   }
 
-  
+
   @SuppressWarnings("unchecked")
   public T applicationUri(URI applicationUri) {
     this.applicationUri = applicationUri;
@@ -228,7 +225,7 @@ public abstract class BankingProduct<T> {
     this.additionalInformation = additionalInformation;
     return (T) this;
   }
-  
+
   @Schema(description = "An array of card art images")
   List<BankingProductCardArt<?>> cardArt;
 

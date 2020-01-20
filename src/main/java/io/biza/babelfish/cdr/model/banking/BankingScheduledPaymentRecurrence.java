@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.model.banking;
 
@@ -36,8 +34,7 @@ import lombok.ToString;
 
 @Schema(description = "Describes the detail of the scheduled payment")
 public abstract class BankingScheduledPaymentRecurrence<T> {
-  @Schema(
-      description = "The date of the next payment under the recurrence schedule",
+  @Schema(description = "The date of the next payment under the recurrence schedule",
       type = "string")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
@@ -53,8 +50,7 @@ public abstract class BankingScheduledPaymentRecurrence<T> {
     return (T) this;
   }
 
-  @Schema(description = "The type of recurrence used to define the schedule",
-      required = true)
+  @Schema(description = "The type of recurrence used to define the schedule", required = true)
   @NonNull
   @NotNull
   private PayloadTypeBankingScheduledPaymentRecurrence type;

@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.model.common;
 
@@ -42,8 +40,7 @@ public abstract class CommonPhoneNumber<T> {
   @JsonProperty("isPreferred")
   public Boolean isPreferred = false;
 
-  @Schema(description = "The purpose of the number as specified by the customer",
-      required = true)
+  @Schema(description = "The purpose of the number as specified by the customer", required = true)
   @JsonProperty("purpose")
   @NotNull
   @NonNull
@@ -59,8 +56,7 @@ public abstract class CommonPhoneNumber<T> {
     return (T) this;
   }
 
-  @Schema(
-      description = "If absent, assumed to be Australia (+61). The + should be included")
+  @Schema(description = "If absent, assumed to be Australia (+61). The + should be included")
   @JsonProperty("countryCode")
   public String countryCode = "+61";
 
@@ -89,8 +85,8 @@ public abstract class CommonPhoneNumber<T> {
     return (T) this;
   }
 
-  @Schema(
-      description = "The actual phone number, with leading zeros as appropriate", required = true)
+  @Schema(description = "The actual phone number, with leading zeros as appropriate",
+      required = true)
   @JsonProperty("number")
   public String number;
 

@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.model.common;
 
@@ -31,8 +29,7 @@ import lombok.ToString;
 
 @Schema(description = "Error Information")
 public abstract class Error<T> {
-  @Schema(
-      description = "Must be one of the following: 0001 – Account not able to be found",
+  @Schema(description = "Must be one of the following: 0001 – Account not able to be found",
       required = true)
   @JsonProperty("code")
   @NotNull
@@ -49,8 +46,7 @@ public abstract class Error<T> {
     return (T) this;
   }
 
-  @Schema(description = "Must be one of the following: Invalid account",
-      required = true)
+  @Schema(description = "Must be one of the following: Invalid account", required = true)
   @JsonProperty("title")
   @NotNull
   @NonNull

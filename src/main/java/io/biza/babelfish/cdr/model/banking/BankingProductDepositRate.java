@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.model.banking;
 
@@ -59,8 +57,7 @@ public abstract class BankingProductDepositRate<T> {
     return (T) this;
   }
 
-  @Schema(description = "The rate to be applied", required = true,
-      type = "string")
+  @Schema(description = "The rate to be applied", required = true, type = "string")
   @NonNull
   @NotNull
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
@@ -123,7 +120,7 @@ public abstract class BankingProductDepositRate<T> {
     setTiers(tiers);
     return (T) this;
   }
-  
+
   @Schema(
       description = "Generic field containing additional information relevant to the [depositRateType](#tocSproductdepositratetypedoc) specified. Whether mandatory or not is dependent on the value of [depositRateType](#tocSproductdepositratetypedoc)")
   String additionalValue;
@@ -151,8 +148,7 @@ public abstract class BankingProductDepositRate<T> {
     return (T) this;
   }
 
-  @Schema(description = "Link to a web page with more information on this rate",
-      type = "string")
+  @Schema(description = "Link to a web page with more information on this rate", type = "string")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   URI additionalInfoUri;
 

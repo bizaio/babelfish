@@ -86,12 +86,14 @@ public class FormatChecker {
       // Use this to add up the checksums
       int acnChecksum = 0;
       // Iterate over each digit in the acn
-      for (int i = 0; i < inputAcn.length()-1; i++) {
+      for (int i = 0; i < inputAcn.length() - 1; i++) {
         int valueAtIterator = Character.digit(inputAcn.charAt(i), 10);
         acnChecksum += valueAtIterator * weightingFactors[i];
       }
       int acnCheckDigit = 10 - (acnChecksum % 10);
-      if(acnCheckDigit == 10) { acnCheckDigit = 0; }
+      if (acnCheckDigit == 10) {
+        acnCheckDigit = 0;
+      }
       return Character.digit(inputAcn.charAt(8), 10) == acnCheckDigit;
     } else {
       return false;

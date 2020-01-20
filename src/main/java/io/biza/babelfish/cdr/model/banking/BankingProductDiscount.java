@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.model.banking;
 
@@ -36,8 +34,7 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-@Schema(name = "BankingProductDiscount",
-    description = "Banking Product Discount Specification")
+@Schema(name = "BankingProductDiscount", description = "Banking Product Discount Specification")
 public abstract class BankingProductDiscount<T> {
   @Schema(description = "Description of the discount", required = true)
   @NonNull
@@ -200,7 +197,7 @@ public abstract class BankingProductDiscount<T> {
 
   @Schema(description = "Eligibility constraints that apply to this discount")
   List<BankingProductFeeDiscountEligibility<?>> eligibility;
-  
+
   public List<BankingProductFeeDiscountEligibility<?>> eligibility() {
     return getEligibility();
   }

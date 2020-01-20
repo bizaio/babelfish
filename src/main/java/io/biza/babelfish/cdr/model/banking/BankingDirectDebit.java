@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.model.banking;
 
@@ -38,8 +36,7 @@ import lombok.ToString;
 
 @Schema(description = "Representation of a Direct Debit Authorisation")
 public abstract class BankingDirectDebit<T> {
-  @Schema(
-      description = "A unique ID of the account adhering to the standards for ID permanence.",
+  @Schema(description = "A unique ID of the account adhering to the standards for ID permanence.",
       required = true)
   @NonNull
   @NotNull
@@ -70,8 +67,7 @@ public abstract class BankingDirectDebit<T> {
     return (T) this;
   }
 
-  @Schema(
-      description = "The date and time of the last debit executed under this authorisation",
+  @Schema(description = "The date and time of the last debit executed under this authorisation",
       type = "string")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
@@ -87,8 +83,7 @@ public abstract class BankingDirectDebit<T> {
     return (T) this;
   }
 
-  @Schema(
-      description = "The amount of the last debit executed under this authorisation")
+  @Schema(description = "The amount of the last debit executed under this authorisation")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   BigDecimal lastDebitAmount;

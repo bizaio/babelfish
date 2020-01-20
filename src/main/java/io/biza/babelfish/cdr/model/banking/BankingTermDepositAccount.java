@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.model.banking;
 
@@ -42,8 +40,8 @@ import lombok.ToString;
 
 @Schema(description = "Term Deposit Account Description")
 public abstract class BankingTermDepositAccount<T> {
-  @Schema(description = "The lodgement date of the original deposit",
-      required = true, type = "string")
+  @Schema(description = "The lodgement date of the original deposit", required = true,
+      type = "string")
   @NonNull
   @NotNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)
@@ -109,8 +107,7 @@ public abstract class BankingTermDepositAccount<T> {
     return (T) this;
   }
 
-  @Schema(description = "Current instructions on action to be taken at maturity",
-      required = true)
+  @Schema(description = "Current instructions on action to be taken at maturity", required = true)
   @NonNull
   @NotNull
   BankingTermDepositMaturityInstructions maturityInstructions;

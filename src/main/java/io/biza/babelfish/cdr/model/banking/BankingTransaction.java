@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.model.banking;
 
@@ -43,8 +41,7 @@ import lombok.ToString;
 
 @Schema(description = "Banking Transaction Brief Definition")
 public abstract class BankingTransaction<T> {
-  @Schema(description = "ID of the account for which transactions are provided",
-      required = true)
+  @Schema(description = "ID of the account for which transactions are provided", required = true)
   @NonNull
   @NotNull
   String accountId;
@@ -124,8 +121,7 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @Schema(
-      description = "The transaction description as applied by the financial institution",
+  @Schema(description = "The transaction description as applied by the financial institution",
       required = true)
   @NonNull
   @NotNull
@@ -208,8 +204,7 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @Schema(
-      description = "The currency for the transaction amount. AUD assumed if not present",
+  @Schema(description = "The currency for the transaction amount. AUD assumed if not present",
       type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
@@ -242,8 +237,7 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @Schema(
-      description = "Name of the merchant for an outgoing payment to a merchant")
+  @Schema(description = "Name of the merchant for an outgoing payment to a merchant")
   String merchantName;
 
   public String merchantName() {
@@ -256,8 +250,7 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @Schema(
-      description = "The merchant category code (or MCC) for an outgoing payment to a merchant")
+  @Schema(description = "The merchant category code (or MCC) for an outgoing payment to a merchant")
   String merchantCategoryCode;
 
   public String merchantCategoryCode() {
@@ -283,8 +276,7 @@ public abstract class BankingTransaction<T> {
     return (T) this;
   }
 
-  @Schema(
-      description = "Name of the BPAY biller for the transaction (if available)")
+  @Schema(description = "Name of the BPAY biller for the transaction (if available)")
   String billerName;
 
   public String billerName() {

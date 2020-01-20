@@ -14,8 +14,9 @@ public class StaticObjectMapper {
       return "Unable to serialize supplied object: " + e.getMessage();
     }
   }
-  
-  public static <T> T fromJSON(String inputJSON, Class<T> inputClass) throws JsonMappingException, JsonProcessingException {
+
+  public static <T> T fromJSON(String inputJSON, Class<T> inputClass)
+      throws JsonMappingException, JsonProcessingException {
     ObjectMapper mapper = new ObjectMapper();
     return mapper.readValue(inputJSON, inputClass);
   }

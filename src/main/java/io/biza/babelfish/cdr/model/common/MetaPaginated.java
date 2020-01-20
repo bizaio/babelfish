@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.model.common;
 
@@ -31,8 +29,7 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @Schema(description = "Paginated Meta Details")
 public abstract class MetaPaginated<T> extends Meta<T> {
-  @Schema(description = "The total number of records in the full set.",
-      required = true)
+  @Schema(description = "The total number of records in the full set.", required = true)
   @JsonProperty("totalRecords")
   @NotNull
   @NonNull
@@ -50,8 +47,7 @@ public abstract class MetaPaginated<T> extends Meta<T> {
     return (T) this;
   }
 
-  @Schema(description = "The total number of pages in the full set.",
-      required = true)
+  @Schema(description = "The total number of pages in the full set.", required = true)
   @JsonProperty("totalPages")
   @NotNull
   @NonNull

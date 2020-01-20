@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.model.banking;
 
@@ -32,8 +30,7 @@ import lombok.ToString;
 
 @Schema(description = "Banking Transaction Detailed Extended Data")
 public abstract class BankingTransactionDetailExtendedData<T> {
-  @Schema(
-      description = "Label of the originating payer. Mandatory for inbound payment")
+  @Schema(description = "Label of the originating payer. Mandatory for inbound payment")
   String payer;
 
   public String payer() {
@@ -87,8 +84,7 @@ public abstract class BankingTransactionDetailExtendedData<T> {
     return (T) this;
   }
 
-  @Schema(description = "Identifier of the applicable overlay service.",
-      required = true)
+  @Schema(description = "Identifier of the applicable overlay service.", required = true)
   @NonNull
   @NotNull
   BankingTransactionService service;

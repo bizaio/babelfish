@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.model.banking;
 
@@ -37,8 +35,7 @@ import lombok.ToString;
 
 @Schema(description = "Banking Payee Basic Information")
 public abstract class BankingPayee<T> {
-  @Schema(description = "ID of the payee adhering to the rules of ID permanence",
-      required = true)
+  @Schema(description = "ID of the payee adhering to the rules of ID permanence", required = true)
   @NonNull
   @NotNull
   String payeeId;
@@ -53,8 +50,7 @@ public abstract class BankingPayee<T> {
     return (T) this;
   }
 
-  @Schema(
-      description = "The short display name of the payee as provided by the customer",
+  @Schema(description = "The short display name of the payee as provided by the customer",
       required = true)
   @NonNull
   @NotNull
@@ -101,8 +97,7 @@ public abstract class BankingPayee<T> {
     return (T) this;
   }
 
-  @Schema(description = "The date the payee was created by the customer",
-      type = "string")
+  @Schema(description = "The date the payee was created by the customer", type = "string")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   private LocalDate creationDate;

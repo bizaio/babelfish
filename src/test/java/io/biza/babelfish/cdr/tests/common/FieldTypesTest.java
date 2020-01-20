@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.tests.common;
 
@@ -26,44 +24,44 @@ public class FieldTypesTest {
   void verifyAbn() {
     // invalid abn
     assertFalse(FormatChecker.isAbn("invalid abn"));
-    
+
     // invalid length abn
     assertFalse(FormatChecker.isAbn("12341234"));
-    
+
     // checksum failure abn
     assertFalse(FormatChecker.isAbn("12345678901"));
-    
+
     // valid abn (Biza Pty Ltd) with spaces
     assertTrue(FormatChecker.isAbn("54 624 797 655"));
-    
+
     // valid abn (Biza Pty Ltd) without spaces
     assertTrue(FormatChecker.isAbn("54624797655"));
-    
+
   }
-  
+
   @Test
   @DisplayName("Verify ACN")
   void verifyAcn() {
     // invalid acn
     assertFalse(FormatChecker.isAcn("invalid acn"));
-    
+
     // invalid length acn
     assertFalse(FormatChecker.isAcn("1111111111"));
-    
+
     // checksum failure acn
     assertFalse(FormatChecker.isAcn("111111111"));
-    
+
     // valid acn (Biza Pty Ltd) with spaces
     assertTrue(FormatChecker.isAcn("624 797 655"));
-    
+
     // valid acn (ASIC sample)
     assertTrue(FormatChecker.isAcn("010 499 966"));
-    
+
     // valid acn (Biza Pty Ltd) without spaces
     assertTrue(FormatChecker.isAcn("624797655"));
-    
+
   }
-  
+
   @Test
   @DisplayName("Verify Phone Number")
   void verifyPhoneNumber() {

@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.model.banking;
 
@@ -36,8 +34,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 @Schema(description = "An Australian Bank Account")
 public abstract class BankingAccount<T> {
-  @Schema(
-      description = "A unique ID of the account adhering to the standards for ID permanence",
+  @Schema(description = "A unique ID of the account adhering to the standards for ID permanence",
       required = true)
   @NonNull
   @NotNull
@@ -53,8 +50,7 @@ public abstract class BankingAccount<T> {
     return (T) this;
   }
 
-  @Schema(description = "Date that the account was created (if known)",
-      type = "string")
+  @Schema(description = "Date that the account was created (if known)", type = "string")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   private LocalDate creationDate;
@@ -144,8 +140,7 @@ public abstract class BankingAccount<T> {
     return (T) this;
   }
 
-  @Schema(description = "The category to which a product or account belongs.",
-      required = true)
+  @Schema(description = "The category to which a product or account belongs.", required = true)
   @NotNull
   @NonNull
   BankingProductCategory productCategory;

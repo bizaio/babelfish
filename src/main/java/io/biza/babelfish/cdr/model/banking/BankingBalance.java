@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.model.banking;
 
@@ -37,8 +35,7 @@ import lombok.ToString;
 
 @Schema(description = "A Representation of a Banking Account Balance")
 public abstract class BankingBalance<T> {
-  @Schema(
-      description = "A unique ID of the account adhering to the standards for ID permanence",
+  @Schema(description = "A unique ID of the account adhering to the standards for ID permanence",
       required = true)
   @NotNull
   @NonNull
@@ -125,8 +122,7 @@ public abstract class BankingBalance<T> {
     return (T) this;
   }
 
-  @Schema(
-      description = "The currency for the balance amounts. If absent assumed to be AUD",
+  @Schema(description = "The currency for the balance amounts. If absent assumed to be AUD",
       type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)

@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.tests.v1.model.response;
 
@@ -38,7 +36,8 @@ public class ResponseCommonCustomerDetailDataV1Test {
   @Test
   @DisplayName("Create valid ResponseCommonCustomerDetailData")
   void responseCommonCustomerDetailData() {
-    ResponseCommonCustomerDetailData data = ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL_DATA;
+    ResponseCommonCustomerDetailData data =
+        ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL_DATA;
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
@@ -57,7 +56,7 @@ public class ResponseCommonCustomerDetailDataV1Test {
     // Should only have one
     data.organisation(ModelConstants.DEFAULT_COMMON_ORGANISATION_DETAIL);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
   }
 
   @Test

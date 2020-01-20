@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.tests.v1.model.banking;
 
@@ -50,9 +48,8 @@ public class BankingProductFeeDiscountV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscount for Balance")
   void bankingProductFeeDiscountBalance() {
-    BankingProductDiscount data =
-        new BankingProductDiscount().description("Discount Description")
-            .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.BALANCE);
+    BankingProductDiscount data = new BankingProductDiscount().description("Discount Description")
+        .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.BALANCE);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -74,9 +71,8 @@ public class BankingProductFeeDiscountV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscount for Deposits")
   void bankingProductFeeDiscountDeposits() {
-    BankingProductDiscount data =
-        new BankingProductDiscount().description("Discount Description")
-            .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.DEPOSITS);
+    BankingProductDiscount data = new BankingProductDiscount().description("Discount Description")
+        .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.DEPOSITS);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -98,9 +94,8 @@ public class BankingProductFeeDiscountV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscount for Payments")
   void bankingProductFeeDiscountPayments() {
-    BankingProductDiscount data =
-        new BankingProductDiscount().description("Discount Description")
-            .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.PAYMENTS);
+    BankingProductDiscount data = new BankingProductDiscount().description("Discount Description")
+        .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.PAYMENTS);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -122,9 +117,8 @@ public class BankingProductFeeDiscountV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscount for Fee Cap")
   void bankingProductFeeDiscountFeeCap() {
-    BankingProductDiscount data =
-        new BankingProductDiscount().description("Discount Description")
-            .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.FEE_CAP);
+    BankingProductDiscount data = new BankingProductDiscount().description("Discount Description")
+        .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.FEE_CAP);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -144,9 +138,8 @@ public class BankingProductFeeDiscountV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscount for Eligibility Only")
   void bankingProductFeeDiscountEligibilityOnly() {
-    BankingProductDiscount data = new BankingProductDiscount()
-        .description("Discount Description").amount(new BigDecimal("10.00"))
-        .discountType(BankingProductDiscountType.ELIGIBILITY_ONLY);
+    BankingProductDiscount data = new BankingProductDiscount().description("Discount Description")
+        .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.ELIGIBILITY_ONLY);
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());

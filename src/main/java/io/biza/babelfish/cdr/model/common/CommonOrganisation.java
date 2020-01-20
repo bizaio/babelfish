@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.model.common;
 
@@ -144,8 +142,7 @@ public abstract class CommonOrganisation<T> {
     return (T) this;
   }
 
-  @Schema(
-      description = "Short name used for communication, if  different to the business name")
+  @Schema(description = "Short name used for communication, if  different to the business name")
   @JsonProperty("shortName")
   public String shortName;
 
@@ -203,8 +200,7 @@ public abstract class CommonOrganisation<T> {
     return (T) this;
   }
 
-  @Schema(
-      description = "[ANZSIC (2006)](http://www.abs.gov.au/anzsic) code for the organisation.")
+  @Schema(description = "[ANZSIC (2006)](http://www.abs.gov.au/anzsic) code for the organisation.")
   @JsonProperty("industryCode")
   public String industryCode;
 
@@ -252,8 +248,7 @@ public abstract class CommonOrganisation<T> {
     return (T) this;
   }
 
-  @Schema(description = "The date the organisation described was established",
-      type = "string")
+  @Schema(description = "The date the organisation described was established", type = "string")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   @JsonProperty("establishmentDate")

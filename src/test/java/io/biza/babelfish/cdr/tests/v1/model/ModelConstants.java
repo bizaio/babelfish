@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.tests.v1.model;
 
@@ -132,8 +130,6 @@ import io.biza.babelfish.cdr.v1.response.container.ResponseBankingTransactionLis
 import io.biza.babelfish.cdr.v1.response.container.ResponseCommonCustomerData;
 import io.biza.babelfish.cdr.v1.response.container.ResponseCommonCustomerDetailData;
 import io.biza.babelfish.cdr.v1.response.container.ResponseCommonDiscoveryOutagesListData;
-import io.biza.babelfish.cdr.v2.model.banking.BankingProduct;
-import io.biza.babelfish.cdr.v2.model.banking.BankingProductDetail;
 
 /**
  * ModelConstants This defines valid models for manipulation within test cases
@@ -148,21 +144,21 @@ public class ModelConstants {
   public static final List<String> DEFAULT_ACCOUNT_IDS =
       List.of("0be1c793-87ba-4942-95bd-4c972ec43a2d", "d5305a6c-b828-4651-bbcc-b3ea7264d387");
   public static final io.biza.babelfish.cdr.v1.model.banking.BankingProduct DEFAULT_BANKING_PRODUCT_V1 =
-      new io.biza.babelfish.cdr.v1.model.banking.BankingProduct().productId("test").lastUpdated(OffsetDateTime.now())
-          .productCategory(BankingProductCategory.BUSINESS_LOANS).name("Test")
-          .description("Test Description").brand("ACME").tailored(false);
+      new io.biza.babelfish.cdr.v1.model.banking.BankingProduct().productId("test")
+          .lastUpdated(OffsetDateTime.now()).productCategory(BankingProductCategory.BUSINESS_LOANS)
+          .name("Test").description("Test Description").brand("ACME").tailored(false);
   public static final io.biza.babelfish.cdr.v2.model.banking.BankingProduct DEFAULT_BANKING_PRODUCT_V2 =
-      new io.biza.babelfish.cdr.v2.model.banking.BankingProduct().productId("test").lastUpdated(OffsetDateTime.now())
-          .productCategory(BankingProductCategory.BUSINESS_LOANS).name("Test")
-          .description("Test Description").brand("ACME").tailored(false);
+      new io.biza.babelfish.cdr.v2.model.banking.BankingProduct().productId("test")
+          .lastUpdated(OffsetDateTime.now()).productCategory(BankingProductCategory.BUSINESS_LOANS)
+          .name("Test").description("Test Description").brand("ACME").tailored(false);
   public static final io.biza.babelfish.cdr.v1.model.banking.BankingProductDetail DEFAULT_BANKING_PRODUCT_DETAIL_V1 =
-      new io.biza.babelfish.cdr.v1.model.banking.BankingProductDetail().productId("test").lastUpdated(OffsetDateTime.now())
-          .productCategory(BankingProductCategory.BUSINESS_LOANS).name("Test")
-          .description("Test Description").brand("ACME").tailored(false);
+      new io.biza.babelfish.cdr.v1.model.banking.BankingProductDetail().productId("test")
+          .lastUpdated(OffsetDateTime.now()).productCategory(BankingProductCategory.BUSINESS_LOANS)
+          .name("Test").description("Test Description").brand("ACME").tailored(false);
   public static final io.biza.babelfish.cdr.v2.model.banking.BankingProductDetail DEFAULT_BANKING_PRODUCT_DETAIL_V2 =
-      new io.biza.babelfish.cdr.v2.model.banking.BankingProductDetail().productId("test").lastUpdated(OffsetDateTime.now())
-          .productCategory(BankingProductCategory.BUSINESS_LOANS).name("Test")
-          .description("Test Description").brand("ACME").tailored(false);
+      new io.biza.babelfish.cdr.v2.model.banking.BankingProductDetail().productId("test")
+          .lastUpdated(OffsetDateTime.now()).productCategory(BankingProductCategory.BUSINESS_LOANS)
+          .name("Test").description("Test Description").brand("ACME").tailored(false);
   public static final BankingProductBundle DEFAULT_BANKING_PRODUCT_BUNDLE =
       new BankingProductBundle().name("Bundle Name").description("Bundle Description");
   public static final BankingProductFeature DEFAULT_BANKING_PRODUCT_FEATURE =
@@ -434,11 +430,11 @@ public class ModelConstants {
       new BankingPayeeDetail().payeeId(UUID.randomUUID().toString()).nickname("Payee Nickname")
           .payeeType(BankingPayeeType.DOMESTIC).type(PayloadTypeBankingPayee.DOMESTIC)
           .domestic(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE);
-  
+
   public static final ResponseCommonCustomerDetailData DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL_DATA =
       new ResponseCommonCustomerDetailData().type(PayloadTypeCustomer.PERSON)
           .person(ModelConstants.DEFAULT_COMMON_PERSON_DETAIL);
-  
+
   public static final ResponseCommonCustomerDetail DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL =
       new ResponseCommonCustomerDetail().links(ModelConstants.DEFAULT_LINKS)
           .data(ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL_DATA);

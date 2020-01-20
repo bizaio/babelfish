@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.model.common;
 
@@ -127,8 +125,7 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @Schema(description = "Type of flat or unit for the address",
-      type = "string")
+  @Schema(description = "Type of flat or unit for the address", type = "string")
   @JsonProperty("flatUnitType")
   public AddressPAFFlatUnitType flatUnitType;
 
@@ -156,8 +153,7 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @Schema(description = "Type of floor or level for the address",
-      type = "string")
+  @Schema(description = "Type of floor or level for the address", type = "string")
   @JsonProperty("floorLevelType")
   public AddressPAFFloorLevelType floorLevelType;
 
@@ -289,8 +285,7 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @Schema(
-      description = "Postal delivery number if the address is a postal delivery type")
+  @Schema(description = "Postal delivery number if the address is a postal delivery type")
   @JsonProperty("postalDeliveryNumber")
   public Integer postalDeliveryNumber;
 
@@ -311,8 +306,7 @@ public abstract class CommonPAFAddress<T> {
     }
   }
 
-  @Schema(
-      description = "Postal delivery number prefix related to the postal delivery number")
+  @Schema(description = "Postal delivery number prefix related to the postal delivery number")
   @JsonProperty("postalDeliveryNumberPrefix")
   public String postalDeliveryNumberPrefix;
 
@@ -326,8 +320,7 @@ public abstract class CommonPAFAddress<T> {
     return (T) this;
   }
 
-  @Schema(
-      description = "Postal delivery number suffix related to the postal delivery number")
+  @Schema(description = "Postal delivery number suffix related to the postal delivery number")
   @JsonProperty("postalDeliveryNumberSuffix")
   public String postalDeliveryNumberSuffix;
 

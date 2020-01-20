@@ -1,15 +1,13 @@
 /*******************************************************************************
  * Copyright (C) 2020 Biza Pty Ltd
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *******************************************************************************/
 package io.biza.babelfish.cdr.tests.v1.model.banking;
 
@@ -59,20 +57,21 @@ public class BankingDirectDebitV1Test {
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
-  
+
   @Test
   @DisplayName("BankingDirectDebit Last Debit Attributes should be present")
   void bankingDirectDebitVerifyLastDebitAttributesPresent() {
-    BankingDirectDebit data = new BankingDirectDebit().accountId(UUID.randomUUID().toString()).authorisedEntity(ModelConstants.DEFAULT_BANKING_AUTHORISED_ENTITY);
+    BankingDirectDebit data = new BankingDirectDebit().accountId(UUID.randomUUID().toString())
+        .authorisedEntity(ModelConstants.DEFAULT_BANKING_AUTHORISED_ENTITY);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     data.lastDebitDateTime(LocalDateTime.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     // If date time is set, amount should be set
     data.lastDebitAmount(new BigDecimal("10.00"));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
+
     // If amount is set date time should be set
     data.lastDebitDateTime(null);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
