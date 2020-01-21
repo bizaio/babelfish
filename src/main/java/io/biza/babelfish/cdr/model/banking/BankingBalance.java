@@ -16,6 +16,7 @@ import java.util.Currency;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.AmountStringToBigDecimalConverter;
@@ -39,6 +40,7 @@ public abstract class BankingBalance<T> {
       required = true)
   @NotNull
   @NonNull
+  @JsonProperty("accountId")
   String accountId;
 
   public String accountId() {
@@ -57,6 +59,7 @@ public abstract class BankingBalance<T> {
   @NonNull
   @NotNull
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
+  @JsonProperty("currentBalance")
   BigDecimal currentBalance;
 
   public BigDecimal currentBalance() {
@@ -76,6 +79,7 @@ public abstract class BankingBalance<T> {
   @NotNull
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
+  @JsonProperty("availableBalance")
   BigDecimal availableBalance;
 
   public BigDecimal availableBalance() {
@@ -93,6 +97,7 @@ public abstract class BankingBalance<T> {
       type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
+  @JsonProperty("creditLimit")
   BigDecimal creditLimit;
 
   public BigDecimal creditLimit() {
@@ -110,6 +115,7 @@ public abstract class BankingBalance<T> {
       type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
+  @JsonProperty("amortisedLimit")
   BigDecimal amortisedLimit = BigDecimal.ZERO;
 
   public BigDecimal amortisedLimit() {
@@ -126,6 +132,7 @@ public abstract class BankingBalance<T> {
       type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
+  @JsonProperty("currency")
   Currency currency;
 
   public Currency currency() {
@@ -140,5 +147,7 @@ public abstract class BankingBalance<T> {
 
   @Schema(
       description = "Optional array of balances for the account in other currencies. Included to support accounts that support multi-currency purses such as Travel Cards")
+  @JsonProperty("purses")
+  @Valid
   List<BankingBalancePurse<?>> purses;
 }

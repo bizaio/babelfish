@@ -12,6 +12,7 @@
 package io.biza.babelfish.cdr.model.banking;
 
 import javax.validation.Valid;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -28,6 +29,7 @@ import lombok.ToString;
 public abstract class BankingProductFeatureWithActivated<T> extends BankingProductFeature<T> {
   @Schema(
       description = "True if the feature is already activated and false if the feature is available for activation.")
+  @JsonProperty("isActivated")
   Boolean isActivated = true;
 
   public Boolean isActivated() {

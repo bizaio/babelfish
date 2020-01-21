@@ -38,7 +38,8 @@ public abstract class ResponseCommonCustomerData<T> {
   @JsonProperty("customerUType")
   @NotNull
   @NonNull
-  public PayloadTypeCustomer type;
+  @Valid
+  PayloadTypeCustomer type;
 
   public PayloadTypeCustomer type() {
     return getType();

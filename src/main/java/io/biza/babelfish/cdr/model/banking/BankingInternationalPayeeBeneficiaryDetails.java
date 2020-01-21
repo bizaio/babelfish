@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr.model.banking;
 import java.util.Locale;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.CountryStringToLocaleConverter;
@@ -33,6 +34,7 @@ import lombok.ToString;
 @Schema(description = "International Payee Beneficiary Details")
 public abstract class BankingInternationalPayeeBeneficiaryDetails<T> {
   @Schema(description = "Name of the beneficiary")
+  @JsonProperty("name")
   String name;
 
   public String name() {
@@ -52,6 +54,7 @@ public abstract class BankingInternationalPayeeBeneficiaryDetails<T> {
   @NotNull
   @JsonSerialize(converter = LocaleToCountryStringConverter.class)
   @JsonDeserialize(converter = CountryStringToLocaleConverter.class)
+  @JsonProperty("country")
   Locale country;
 
   public Locale country() {
@@ -65,6 +68,7 @@ public abstract class BankingInternationalPayeeBeneficiaryDetails<T> {
   }
 
   @Schema(description = "Response message for the payment")
+  @JsonProperty("message")
   String message;
 
   public String message() {

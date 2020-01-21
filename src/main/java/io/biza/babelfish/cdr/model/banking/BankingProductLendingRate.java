@@ -17,12 +17,14 @@ import java.time.Period;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.BigDecimalToRateStringConverter;
 import io.biza.babelfish.cdr.converters.PeriodToStringConverter;
 import io.biza.babelfish.cdr.converters.RateStringToBigDecimalConverter;
 import io.biza.babelfish.cdr.converters.StringToPeriodConverter;
+import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductLendingRateInterestPaymentType;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductLendingRateType;
@@ -45,6 +47,7 @@ public abstract class BankingProductLendingRate<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("lendingRateType")
   BankingProductLendingRateType lendingRateType;
 
   public BankingProductLendingRateType lendingRateType() {
@@ -62,6 +65,7 @@ public abstract class BankingProductLendingRate<T> {
   @NotNull
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
+  @JsonProperty("rate")
   BigDecimal rate;
 
   public BigDecimal rate() {
@@ -77,6 +81,7 @@ public abstract class BankingProductLendingRate<T> {
   @Schema(description = "A comparison rate equivalent for this rate")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
+  @JsonProperty("comparisonRate")
   BigDecimal comparisonRate;
 
   public BigDecimal comparisonRate() {
@@ -94,6 +99,7 @@ public abstract class BankingProductLendingRate<T> {
       type = "string")
   @JsonSerialize(converter = PeriodToStringConverter.class)
   @JsonDeserialize(converter = StringToPeriodConverter.class)
+  @JsonProperty("calculationFrequency")
   Period calculationFrequency;
 
   public Period calculationFrequency() {
@@ -111,6 +117,7 @@ public abstract class BankingProductLendingRate<T> {
       type = "string")
   @JsonSerialize(converter = PeriodToStringConverter.class)
   @JsonDeserialize(converter = StringToPeriodConverter.class)
+  @JsonProperty("applicationFrequency")
   Period applicationFrequency;
 
   public Period applicationFrequency() {
@@ -125,6 +132,7 @@ public abstract class BankingProductLendingRate<T> {
 
   @Schema(
       description = "When loan payments are due to be paid within each period. The investment benefit of earlier payments affect the rate that can be offered")
+  @JsonProperty("interestPaymentDue")
   BankingProductLendingRateInterestPaymentType interestPaymentDue;
 
   public BankingProductLendingRateInterestPaymentType interestPaymentDue() {
@@ -138,6 +146,8 @@ public abstract class BankingProductLendingRate<T> {
   }
 
   @Schema(description = "Rate tiers applicable for this rate")
+  @JsonProperty("tiers")
+  @Valid
   List<BankingProductRateTier<?>> tiers;
 
   public List<BankingProductRateTier<?>> tiers() {
@@ -153,6 +163,7 @@ public abstract class BankingProductLendingRate<T> {
 
   @Schema(
       description = "Generic field containing additional information relevant to the [lendingRateType](#tocSproductlendingratetypedoc) specified. Whether mandatory or not is dependent on the value of [lendingRateType](#tocSproductlendingratetypedoc)")
+  @JsonProperty("additionalValue")
   String additionalValue;
 
   public String additionalValue() {
@@ -166,6 +177,7 @@ public abstract class BankingProductLendingRate<T> {
   }
 
   @Schema(description = "Display text providing more information on the rate.")
+  @JsonProperty("additionalInfo")
   String additionalInfo;
 
   public String additionalInfo() {
@@ -178,8 +190,10 @@ public abstract class BankingProductLendingRate<T> {
     return (T) this;
   }
 
-  @Schema(description = "Link to a web page with more information on this rate", type = "string")
+  @Schema(description = "Link to a web page with more information on this rate", type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
+  @JsonDeserialize(converter = UriStringToUriConverter.class)
+  @JsonProperty("additionalInfoUri")
   URI additionalInfoUri;
 
   public URI additionalInfoUri() {

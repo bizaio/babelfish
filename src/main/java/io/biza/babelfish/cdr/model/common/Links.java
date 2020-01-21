@@ -35,14 +35,14 @@ import lombok.ToString;
 @Schema(description = "CDS Links")
 public abstract class Links<T> {
   @Schema(description = "Fully qualified link that generated the current response document",
-      required = true, type = "string")
+      required = true, type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("self")
   @NotNull
   @NonNull
   @Valid
-  public URI self;
+  URI self;
 
   public URI self() {
     return getSelf();

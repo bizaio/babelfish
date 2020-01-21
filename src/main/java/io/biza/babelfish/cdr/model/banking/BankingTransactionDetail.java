@@ -13,6 +13,7 @@ package io.biza.babelfish.cdr.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -32,6 +33,8 @@ public abstract class BankingTransactionDetail<T> extends BankingTransaction<T> 
   @Schema(required = true)
   @NonNull
   @NotNull
+  @JsonProperty("extendedData")
+  @Valid
   BankingTransactionDetailExtendedData<?> extendedData;
 
   public BankingTransactionDetailExtendedData<?> extendedData() {

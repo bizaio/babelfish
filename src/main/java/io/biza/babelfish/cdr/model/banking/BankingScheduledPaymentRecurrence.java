@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr.model.banking;
 import java.time.LocalDate;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.LocalDateToStringConverter;
@@ -31,14 +32,14 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-
 @Schema(description = "Describes the detail of the scheduled payment")
 public abstract class BankingScheduledPaymentRecurrence<T> {
   @Schema(description = "The date of the next payment under the recurrence schedule",
-      type = "string")
+      type = "string", format = "date")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
-  private LocalDate nextPaymentDate;
+  @JsonProperty("nextPaymentDate")
+  LocalDate nextPaymentDate;
 
   public LocalDate nextPaymentDate() {
     return getNextPaymentDate();
@@ -53,7 +54,8 @@ public abstract class BankingScheduledPaymentRecurrence<T> {
   @Schema(description = "The type of recurrence used to define the schedule", required = true)
   @NonNull
   @NotNull
-  private PayloadTypeBankingScheduledPaymentRecurrence type;
+  @JsonProperty("type")
+  PayloadTypeBankingScheduledPaymentRecurrence type;
 
   public PayloadTypeBankingScheduledPaymentRecurrence type() {
     return getType();
@@ -65,7 +67,10 @@ public abstract class BankingScheduledPaymentRecurrence<T> {
     return (T) this;
   }
 
-  private BankingScheduledPaymentRecurrenceOnceOff<?> onceOff;
+  @JsonProperty("onceOff")
+  @Schema(description = "Scheduled Payment Once Off Recurrence Details")
+  @Valid
+  BankingScheduledPaymentRecurrenceOnceOff<?> onceOff;
 
   public BankingScheduledPaymentRecurrenceOnceOff<?> onceOff() {
     return getOnceOff();
@@ -77,7 +82,10 @@ public abstract class BankingScheduledPaymentRecurrence<T> {
     return (T) this;
   }
 
-  private BankingScheduledPaymentRecurrenceIntervalSchedule<?> intervalSchedule;
+  @JsonProperty("intervalSchedule")
+  @Schema(description = "Scheduled Payment Interval Recurrence Details")
+  @Valid
+  BankingScheduledPaymentRecurrenceIntervalSchedule<?> intervalSchedule;
 
   public BankingScheduledPaymentRecurrenceIntervalSchedule<?> intervalSchedule() {
     return getIntervalSchedule();
@@ -89,7 +97,10 @@ public abstract class BankingScheduledPaymentRecurrence<T> {
     return (T) this;
   }
 
-  private BankingScheduledPaymentRecurrenceLastWeekday<?> lastWeekDay;
+  @JsonProperty("lastWeekDay")
+  @Schema(description = "Scheduled Payment Last Weekday Recurrence Details")
+  @Valid
+  BankingScheduledPaymentRecurrenceLastWeekday<?> lastWeekDay;
 
   public BankingScheduledPaymentRecurrenceLastWeekday<?> lastWeekDay() {
     return getLastWeekDay();
@@ -101,7 +112,10 @@ public abstract class BankingScheduledPaymentRecurrence<T> {
     return (T) this;
   }
 
-  private BankingScheduledPaymentRecurrenceEventBased<?> eventBased;
+  @JsonProperty("eventBased")
+  @Schema(description = "Scheduled Payment Event Based Recurrence Details")
+  @Valid
+  BankingScheduledPaymentRecurrenceEventBased<?> eventBased;
 
   public BankingScheduledPaymentRecurrenceEventBased<?> eventBased() {
     return getEventBased();

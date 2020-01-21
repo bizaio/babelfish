@@ -46,7 +46,9 @@ public abstract class BankingDomesticPayee<T> {
     return (T) this;
   }
 
-  private BankingDomesticPayeeAccount<?> account;
+  @JsonProperty("account")
+  @Valid
+  BankingDomesticPayeeAccount<?> account;
 
   public BankingDomesticPayeeAccount<?> account() {
     return getAccount();
@@ -58,7 +60,9 @@ public abstract class BankingDomesticPayee<T> {
     return (T) this;
   }
 
-  private BankingDomesticPayeeCard<?> card;
+  @JsonProperty("card")
+  @Valid
+  BankingDomesticPayeeCard<?> card;
 
   public BankingDomesticPayeeCard<?> card() {
     return getCard();
@@ -70,7 +74,9 @@ public abstract class BankingDomesticPayee<T> {
     return (T) this;
   }
 
-  private BankingDomesticPayeePayId<?> payId;
+  @JsonProperty("payId")
+  @Valid
+  BankingDomesticPayeePayId<?> payId;
 
   public BankingDomesticPayeePayId<?> payId() {
     return getPayId();

@@ -34,7 +34,7 @@ public abstract class CommonPhysicalAddressWithPurpose<T> extends CommonPhysical
   @JsonProperty("purpose")
   @NotNull
   @NonNull
-  public AddressPurpose purpose;
+  AddressPurpose purpose;
 
   public AddressPurpose purpose() {
     return getPurpose();

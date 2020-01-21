@@ -14,7 +14,10 @@ package io.biza.babelfish.cdr.model.banking;
 import java.net.URI;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductConstraintType;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -29,7 +32,6 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-
 @Schema(description = "Banking Product Constraint Definition")
 public abstract class BankingProductConstraint<T> {
   @Schema(
@@ -37,6 +39,7 @@ public abstract class BankingProductConstraint<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("constraintType")
   BankingProductConstraintType constraintType;
 
   public BankingProductConstraintType constraintType() {
@@ -51,6 +54,7 @@ public abstract class BankingProductConstraint<T> {
 
   @Schema(
       description = "Generic field containing additional information relevant to the [constraintType](#tocSproductconstrainttypedoc) specified.  Whether mandatory or not is dependent on the value of [constraintType](#tocSproductconstrainttypedoc)")
+  @JsonProperty("additionalValue")
   String additionalValue;
 
   public String additionalValue() {
@@ -64,6 +68,7 @@ public abstract class BankingProductConstraint<T> {
   }
 
   @Schema(description = "Display text providing more information the constraint")
+  @JsonProperty("additionalInfo")
   String additionalInfo;
 
   public String additionalInfo() {
@@ -77,8 +82,10 @@ public abstract class BankingProductConstraint<T> {
   }
 
   @Schema(description = "Link to a web page with more information on the constraint",
-      type = "string")
+      type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
+  @JsonDeserialize(converter = UriStringToUriConverter.class)
+  @JsonProperty("additionalInfoUri")
   URI additionalInfoUri;
 
   public URI additionalInfoUri() {

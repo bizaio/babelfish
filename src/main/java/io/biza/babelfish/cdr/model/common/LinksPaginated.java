@@ -34,12 +34,12 @@ public abstract class LinksPaginated<T> extends Links<T> {
 
   @Schema(
       description = "URI to the first page of this set. Mandatory if this response is not the first page",
-      type = "string", name = "first")
+      type = "string", name = "first", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("first")
   @Valid
-  public URI first;
+  URI first;
 
   public URI first() {
     return getFirst();
@@ -54,12 +54,12 @@ public abstract class LinksPaginated<T> extends Links<T> {
 
   @Schema(
       description = "URI to the previous page of this set. Mandatory if this response is not the prev page",
-      type = "string", name = "prev")
+      type = "string", name = "prev", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("prev")
   @Valid
-  public URI prev;
+  URI prev;
 
   public URI prev() {
     return getPrev();
@@ -74,12 +74,12 @@ public abstract class LinksPaginated<T> extends Links<T> {
 
   @Schema(
       description = "URI to the next page of this set. Mandatory if this response is not the last page",
-      type = "string", name = "next")
+      type = "string", name = "next", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("next")
   @Valid
-  public URI next;
+  URI next;
 
   public URI next() {
     return getNext();
@@ -94,12 +94,12 @@ public abstract class LinksPaginated<T> extends Links<T> {
 
   @Schema(
       description = "URI to the last page of this set. Mandatory if this response is not the last page",
-      type = "string", name = "last")
+      type = "string", name = "last", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("last")
   @Valid
-  public URI last;
+  URI last;
 
   public URI last() {
     return getLast();

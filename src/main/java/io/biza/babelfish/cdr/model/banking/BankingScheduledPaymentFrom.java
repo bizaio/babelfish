@@ -13,6 +13,7 @@ package io.biza.babelfish.cdr.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,7 +26,6 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-
 @Schema(
     description = "Object containing details of the source of the payment. Currently only specifies an account ID but provided as an object to facilitate future extensibility and consistency with the to object")
 public abstract class BankingScheduledPaymentFrom<T> {
@@ -33,6 +33,7 @@ public abstract class BankingScheduledPaymentFrom<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("accountId")
   String accountId;
 
   public String accountId() {

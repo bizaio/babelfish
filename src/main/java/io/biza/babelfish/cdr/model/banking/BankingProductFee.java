@@ -18,6 +18,7 @@ import java.util.Currency;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.BigDecimalToRateStringConverter;
@@ -26,6 +27,7 @@ import io.biza.babelfish.cdr.converters.PeriodToStringConverter;
 import io.biza.babelfish.cdr.converters.RateStringToBigDecimalConverter;
 import io.biza.babelfish.cdr.converters.StringToCurrencyConverter;
 import io.biza.babelfish.cdr.converters.StringToPeriodConverter;
+import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductFeeType;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -46,6 +48,7 @@ public abstract class BankingProductFee<T> {
   @Schema(description = "Name of the fee", required = true)
   @NonNull
   @NotNull
+  @JsonProperty("name")
   String name;
 
   public String name() {
@@ -61,6 +64,7 @@ public abstract class BankingProductFee<T> {
   @Schema(description = "The type of fee", required = true)
   @NonNull
   @NotNull
+  @JsonProperty("feeType")
   BankingProductFeeType feeType;
 
   public BankingProductFeeType feeType() {
@@ -78,6 +82,7 @@ public abstract class BankingProductFee<T> {
       type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
+  @JsonProperty("amount")
   private BigDecimal amount;
 
   public BigDecimal amount() {
@@ -95,6 +100,7 @@ public abstract class BankingProductFee<T> {
       type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
+  @JsonProperty("balanceRate")
   private BigDecimal balanceRate;
 
   public BigDecimal balanceRate() {
@@ -112,6 +118,7 @@ public abstract class BankingProductFee<T> {
       type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
+  @JsonProperty("transactionRate")
   private BigDecimal transactionRate;
 
   public BigDecimal transactionRate() {
@@ -129,6 +136,7 @@ public abstract class BankingProductFee<T> {
       type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
+  @JsonProperty("accruedRate")
   private BigDecimal accruedRate;
 
   public BigDecimal accruedRate() {
@@ -146,6 +154,7 @@ public abstract class BankingProductFee<T> {
       type = "string")
   @JsonSerialize(converter = PeriodToStringConverter.class)
   @JsonDeserialize(converter = StringToPeriodConverter.class)
+  @JsonProperty("accrualFrequency")
   Period accrualFrequency;
 
   public Period accrualFrequency() {
@@ -161,6 +170,7 @@ public abstract class BankingProductFee<T> {
   @Schema(description = "The currency the fee will be charged in", type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
+  @JsonProperty("currency")
   Currency currency = Currency.getInstance("AUD");
 
   public Currency currency() {
@@ -175,6 +185,7 @@ public abstract class BankingProductFee<T> {
 
   @Schema(
       description = "Generic field containing additional information relevant to the [feeType](#tocSproductfeetypedoc) specified. Whether mandatory or not is dependent on the value of [feeType](#tocSproductfeetypedoc)")
+  @JsonProperty("additionalValue")
   String additionalValue;
 
   public String additionalValue() {
@@ -188,6 +199,7 @@ public abstract class BankingProductFee<T> {
   }
 
   @Schema(description = "Display text providing more information on the fee")
+  @JsonProperty("additionalInfo")
   String additionalInfo;
 
   public String additionalInfo() {
@@ -200,8 +212,10 @@ public abstract class BankingProductFee<T> {
     return (T) this;
   }
 
-  @Schema(description = "Link to a web page with more information on this fee", type = "string")
+  @Schema(description = "Link to a web page with more information on this fee", type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
+  @JsonDeserialize(converter = UriStringToUriConverter.class)
+  @JsonProperty("additionalInfoUri")
   URI additionalInfoUri;
 
   public URI additionalInfoUri() {
@@ -215,6 +229,8 @@ public abstract class BankingProductFee<T> {
   }
 
   @Schema(description = "An optional list of discounts to this fee that may be available")
+  @JsonProperty("discounts")
+  @Valid
   List<BankingProductDiscount<?>> discounts;
 
   public List<BankingProductDiscount<?>> discounts() {

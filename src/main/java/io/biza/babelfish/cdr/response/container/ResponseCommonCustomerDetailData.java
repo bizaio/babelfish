@@ -36,7 +36,8 @@ public abstract class ResponseCommonCustomerDetailData<T> {
   @JsonProperty("customerUType")
   @NotNull
   @NonNull
-  public PayloadTypeCustomer type;
+  @Valid
+  PayloadTypeCustomer type;
 
   public PayloadTypeCustomer type() {
     return getType();
@@ -50,7 +51,8 @@ public abstract class ResponseCommonCustomerDetailData<T> {
 
   @Schema(description = "The Person Record for the Customer")
   @JsonProperty("person")
-  public CommonPersonDetail person;
+  @Valid
+  CommonPersonDetail person;
 
   public CommonPersonDetail person() {
     return getPerson();
@@ -64,7 +66,8 @@ public abstract class ResponseCommonCustomerDetailData<T> {
 
   @Schema(description = "The Organisation Record for the Customer")
   @JsonProperty("organisation")
-  public CommonOrganisationDetail organisation;
+  @Valid
+  CommonOrganisationDetail organisation;
 
   public CommonOrganisationDetail organisation() {
     return getOrganisation();

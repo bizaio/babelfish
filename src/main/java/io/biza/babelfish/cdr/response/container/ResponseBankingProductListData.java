@@ -39,7 +39,7 @@ public abstract class ResponseBankingProductListData<T> {
   @NotNull
   @NonNull
   @Valid
-  public List<BankingProduct<?>> products;
+  List<BankingProduct<?>> products;
 
   public List<BankingProduct<?>> products() {
     return getProducts();

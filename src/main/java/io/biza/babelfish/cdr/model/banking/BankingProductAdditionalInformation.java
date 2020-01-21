@@ -13,8 +13,11 @@ package io.biza.babelfish.cdr.model.banking;
 
 import java.net.URI;
 import javax.validation.Valid;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
+import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,11 +29,12 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-
 @Schema(description = "Object that contains links to additional information on specific topics")
 public abstract class BankingProductAdditionalInformation<T> {
-  @Schema(description = "General overview of the product", type = "string")
+  @Schema(description = "General overview of the product", type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
+  @JsonDeserialize(converter = UriStringToUriConverter.class)
+  @JsonProperty("overviewUri")
   URI overviewUri;
 
   public URI overviewUri() {
@@ -43,8 +47,10 @@ public abstract class BankingProductAdditionalInformation<T> {
     return (T) this;
   }
 
-  @Schema(description = "Terms and conditions for the product", type = "string")
+  @Schema(description = "Terms and conditions for the product", type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
+  @JsonDeserialize(converter = UriStringToUriConverter.class)
+  @JsonProperty("termsUri")  
   URI termsUri;
 
   public URI termsUri() {
@@ -57,8 +63,10 @@ public abstract class BankingProductAdditionalInformation<T> {
     return (T) this;
   }
 
-  @Schema(description = "Eligibility rules and criteria for the product", type = "string")
+  @Schema(description = "Eligibility rules and criteria for the product", type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
+  @JsonDeserialize(converter = UriStringToUriConverter.class)
+  @JsonProperty("eligibilityUri")
   URI eligibilityUri;
 
   public URI eligibilityUri() {
@@ -73,8 +81,10 @@ public abstract class BankingProductAdditionalInformation<T> {
 
   @Schema(
       description = "Description of fees, pricing, discounts, exemptions and bonuses for the product",
-      type = "string")
+      type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
+  @JsonDeserialize(converter = UriStringToUriConverter.class)
+  @JsonProperty("feesAndPricingUri")
   URI feesAndPricingUri;
 
   public URI feesAndPricingUri() {
@@ -87,8 +97,10 @@ public abstract class BankingProductAdditionalInformation<T> {
     return (T) this;
   }
 
-  @Schema(description = "Description of a bundle that this product can be part of", type = "string")
+  @Schema(description = "Description of a bundle that this product can be part of", type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
+  @JsonDeserialize(converter = UriStringToUriConverter.class)
+  @JsonProperty("bundleUri")
   URI bundleUri;
 
   public URI bundleUri() {

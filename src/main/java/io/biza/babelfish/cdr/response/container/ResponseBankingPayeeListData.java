@@ -36,7 +36,8 @@ public abstract class ResponseBankingPayeeListData<T> {
   @JsonProperty("payees")
   @NotNull
   @NonNull
-  public List<BankingPayee<?>> payees;
+  @Valid
+  List<BankingPayee<?>> payees;
 
   public List<BankingPayee<?>> payees() {
     return getPayees();

@@ -36,7 +36,8 @@ public abstract class ResponseBankingDirectDebitAuthorisationListData<T> {
   @JsonProperty("directDebitAuthorisations")
   @NotNull
   @NonNull
-  public List<BankingDirectDebit<?>> directDebitAuthorisations;
+  @Valid
+  List<BankingDirectDebit<?>> directDebitAuthorisations;
 
   public List<BankingDirectDebit<?>> directDebitAuthorisations() {
     return getDirectDebitAuthorisations();

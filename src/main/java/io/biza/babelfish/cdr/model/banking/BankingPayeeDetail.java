@@ -46,7 +46,9 @@ public abstract class BankingPayeeDetail<T> extends BankingPayee<T> {
     setType(type);
     return (T) this;
   }
-
+  
+  @JsonProperty("domestic")
+  @Valid
   BankingDomesticPayee<?> domestic;
 
   public BankingDomesticPayee<?> domestic() {
@@ -58,7 +60,9 @@ public abstract class BankingPayeeDetail<T> extends BankingPayee<T> {
     setDomestic(domestic);
     return (T) this;
   }
-
+  
+  @JsonProperty("biller")
+  @Valid
   BankingBillerPayee<?> biller;
 
   public BankingBillerPayee<?> biller() {
@@ -71,6 +75,8 @@ public abstract class BankingPayeeDetail<T> extends BankingPayee<T> {
     return (T) this;
   }
 
+  @JsonProperty("international")
+  @Valid
   BankingInternationalPayee<?> international;
 
   public BankingInternationalPayee<?> international() {

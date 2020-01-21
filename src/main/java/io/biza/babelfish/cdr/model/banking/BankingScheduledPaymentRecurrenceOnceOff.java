@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr.model.banking;
 import java.time.LocalDate;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.LocalDateToStringConverter;
@@ -30,17 +31,17 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-
 @Schema(
     description = "Indicates that the payment is a once off payment on a specific future date. Mandatory if recurrenceUType is set to onceOff")
 public abstract class BankingScheduledPaymentRecurrenceOnceOff<T> {
   @Schema(description = "The scheduled date for the once off payment", required = true,
-      type = "string")
+      type = "string", format = "date")
   @NonNull
   @NotNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
-  private LocalDate paymentDate;
+  @JsonProperty("nonBusinessDayTreatment")  
+  LocalDate paymentDate;
 
   public LocalDate paymentDate() {
     return getPaymentDate();

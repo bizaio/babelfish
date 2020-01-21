@@ -13,7 +13,10 @@ package io.biza.babelfish.cdr.model.banking;
 
 import java.net.URI;
 import javax.validation.Valid;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductFeatureType;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -31,6 +34,7 @@ import lombok.ToString;
 @Schema(description = "A Banking Product Feature")
 public abstract class BankingProductFeature<T> {
   @Schema(description = "The type of feature described", required = true)
+  @JsonProperty("featureType")
   BankingProductFeatureType featureType;
 
   public BankingProductFeatureType featureType() {
@@ -45,6 +49,7 @@ public abstract class BankingProductFeature<T> {
 
   @Schema(
       description = "Generic field containing additional information relevant to the [featureType](#tocSproductfeaturetypedoc) specified. Whether mandatory or not is dependent on the value of the [featureType.](#tocSproductfeaturetypedoc)")
+  @JsonProperty("additionalValue")
   String additionalValue;
 
   public String additionalValue() {
@@ -59,6 +64,7 @@ public abstract class BankingProductFeature<T> {
 
   @Schema(
       description = "Display text providing more information on the feature. Mandatory if the [feature type](#tocSproductfeaturetypedoc) is set to OTHER")
+  @JsonProperty("additionalInfo")
   String additionalInfo;
 
   public String additionalInfo() {
@@ -71,8 +77,10 @@ public abstract class BankingProductFeature<T> {
     return (T) this;
   }
 
-  @Schema(description = "Link to a web page with more information on this feature", type = "string")
+  @Schema(description = "Link to a web page with more information on this feature", type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
+  @JsonDeserialize(converter = UriStringToUriConverter.class)
+  @JsonProperty("additionalInfoUri")
   URI additionalInfoUri;
 
   public URI additionalInfoUri() {

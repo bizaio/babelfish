@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr.model.banking;
 import java.time.Period;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.PeriodToStringConverter;
@@ -30,7 +31,6 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-
 @Schema(description = "Scheduled Payment Interval Description")
 public abstract class BankingScheduledPaymentInterval<T> {
   @Schema(
@@ -40,6 +40,7 @@ public abstract class BankingScheduledPaymentInterval<T> {
   @NotNull
   @JsonSerialize(converter = PeriodToStringConverter.class)
   @JsonDeserialize(converter = StringToPeriodConverter.class)
+  @JsonProperty("interval")
   Period interval;
 
   public Period interval() {
@@ -58,6 +59,7 @@ public abstract class BankingScheduledPaymentInterval<T> {
   @JsonSerialize(converter = PeriodToStringConverter.class)
   @JsonDeserialize(converter = StringToPeriodConverter.class)
   // TODO: This is a day of week but uses a duration?
+  @JsonProperty("dayInInterval")
   Period dayInInterval = Period.ofDays(1);
 
   public Period dayInInterval() {

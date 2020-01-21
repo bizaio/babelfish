@@ -36,6 +36,7 @@ public abstract class ResponseBankingAccountList<T> extends CDRResponsePaginated
   @JsonProperty("data")
   @NotNull
   @NonNull
+  @Valid
   public ResponseBankingAccountListData<?> data;
 
   public ResponseBankingAccountListData<?> data() {

@@ -17,12 +17,14 @@ import java.time.Period;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.BigDecimalToRateStringConverter;
 import io.biza.babelfish.cdr.converters.PeriodToStringConverter;
 import io.biza.babelfish.cdr.converters.RateStringToBigDecimalConverter;
 import io.biza.babelfish.cdr.converters.StringToPeriodConverter;
+import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductDepositRateType;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -45,6 +47,7 @@ public abstract class BankingProductDepositRate<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("depositRateType")
   BankingProductDepositRateType depositRateType;
 
   public BankingProductDepositRateType depositRateType() {
@@ -62,6 +65,7 @@ public abstract class BankingProductDepositRate<T> {
   @NotNull
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
+  @JsonProperty("rate")
   BigDecimal rate;
 
   public BigDecimal rate() {
@@ -79,6 +83,7 @@ public abstract class BankingProductDepositRate<T> {
       type = "string")
   @JsonSerialize(converter = PeriodToStringConverter.class)
   @JsonDeserialize(converter = StringToPeriodConverter.class)
+  @JsonProperty("calculationFrequency")
   Period calculationFrequency;
 
   public Period calculationFrequency() {
@@ -96,6 +101,7 @@ public abstract class BankingProductDepositRate<T> {
       type = "string")
   @JsonSerialize(converter = PeriodToStringConverter.class)
   @JsonDeserialize(converter = StringToPeriodConverter.class)
+  @JsonProperty("applicationFrequency")
   Period applicationFrequency;
 
   public Period applicationFrequency() {
@@ -109,6 +115,8 @@ public abstract class BankingProductDepositRate<T> {
   }
 
   @Schema(description = "Rate tiers applicable for this rate")
+  @JsonProperty("tiers")
+  @Valid
   List<BankingProductRateTier<?>> tiers;
 
   public List<BankingProductRateTier<?>> tiers() {
@@ -123,6 +131,7 @@ public abstract class BankingProductDepositRate<T> {
 
   @Schema(
       description = "Generic field containing additional information relevant to the [depositRateType](#tocSproductdepositratetypedoc) specified. Whether mandatory or not is dependent on the value of [depositRateType](#tocSproductdepositratetypedoc)")
+  @JsonProperty("additionalValue")
   String additionalValue;
 
   public String additionalValue() {
@@ -136,6 +145,7 @@ public abstract class BankingProductDepositRate<T> {
   }
 
   @Schema(description = "Display text providing more information on the rate")
+  @JsonProperty("additionalInfo")
   String additionalInfo;
 
   public String additionalInfo() {
@@ -148,8 +158,10 @@ public abstract class BankingProductDepositRate<T> {
     return (T) this;
   }
 
-  @Schema(description = "Link to a web page with more information on this rate", type = "string")
+  @Schema(description = "Link to a web page with more information on this rate", type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
+  @JsonDeserialize(converter = UriStringToUriConverter.class)
+  @JsonProperty("additionalInfoUri")
   URI additionalInfoUri;
 
   public URI additionalInfoUri() {

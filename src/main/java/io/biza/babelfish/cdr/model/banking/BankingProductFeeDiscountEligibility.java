@@ -13,7 +13,10 @@ package io.biza.babelfish.cdr.model.banking;
 
 import java.net.URI;
 import javax.validation.Valid;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductDiscountEligibilityType;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -31,6 +34,7 @@ import lombok.ToString;
 public abstract class BankingProductFeeDiscountEligibility<T> {
   @Schema(description = "The type of the specific eligibility constraint for a discount",
       required = true)
+  @JsonProperty("discountEligibilityType")
   BankingProductDiscountEligibilityType discountEligibilityType;
 
   public BankingProductDiscountEligibilityType discountEligibilityType() {
@@ -43,6 +47,8 @@ public abstract class BankingProductFeeDiscountEligibility<T> {
     return (T) this;
   }
 
+  @Schema(description = "Additional Value for Eligibility Constraint related to Discount")
+  @JsonProperty("additionalValue")
   String additionalValue;
 
   public String additionalValue() {
@@ -56,6 +62,7 @@ public abstract class BankingProductFeeDiscountEligibility<T> {
   }
 
   @Schema(description = "Display text providing more information on this eligibility constraint")
+  @JsonProperty("additionalInfo")
   String additionalInfo;
 
   public String additionalInfo() {
@@ -69,8 +76,10 @@ public abstract class BankingProductFeeDiscountEligibility<T> {
   }
 
   @Schema(description = "Link to a web page with more information on this eligibility constraint",
-      type = "string")
+      type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
+  @JsonDeserialize(converter = UriStringToUriConverter.class)
+  @JsonProperty("additionalInfoUri")
   URI additionalInfoUri;
 
   public URI additionalInfoUri() {

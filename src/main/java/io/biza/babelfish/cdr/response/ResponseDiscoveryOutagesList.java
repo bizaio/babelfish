@@ -35,7 +35,8 @@ public abstract class ResponseDiscoveryOutagesList<T> extends CDRResponse<T> {
   @JsonProperty("data")
   @NotNull
   @NonNull
-  public ResponseDiscoveryOutagesListData<?> data;
+  @Valid
+  ResponseDiscoveryOutagesListData<?> data;
 
   public ResponseDiscoveryOutagesListData<?> data() {
     return getData();

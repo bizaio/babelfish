@@ -38,7 +38,8 @@ public abstract class ResponseDiscoveryOutagesListData<T> {
   @JsonProperty("outages")
   @NotNull
   @NonNull
-  public List<CommonDiscoveryOutage> outages;
+  @Valid
+  List<CommonDiscoveryOutage> outages;
 
   public List<CommonDiscoveryOutage> outages() {
     return getOutages();

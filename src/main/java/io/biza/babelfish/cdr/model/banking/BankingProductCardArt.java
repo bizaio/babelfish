@@ -15,6 +15,7 @@ import java.net.URI;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
@@ -38,6 +39,7 @@ public abstract class BankingProductCardArt<T> {
   @NotNull
   @NotBlank
   @Valid
+  @JsonProperty("title")
   String title;
 
   public String title() {
@@ -52,9 +54,10 @@ public abstract class BankingProductCardArt<T> {
 
   @Schema(
       description = "Link to a PNG, JPG or GIF image with proportions defined by ISO 7810 ID-1 and width no greater than 512 pixels",
-      type = "string")
+      type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
+  @JsonProperty("imageUri")
   URI imageUri;
 
   public URI imageUri() {

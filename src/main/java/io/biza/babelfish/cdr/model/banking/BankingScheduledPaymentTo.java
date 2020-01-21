@@ -51,6 +51,7 @@ public abstract class BankingScheduledPaymentTo<T> {
 
   @Schema(
       description = "Present if toUType is set to accountId. Indicates that the payment is to another account that is accessible under the current consent")
+  @JsonProperty("accountId")
   String accountId;
 
   public String accountId() {
@@ -65,6 +66,7 @@ public abstract class BankingScheduledPaymentTo<T> {
 
   @Schema(
       description = "Present if toUType is set to payeeId. Indicates that the payment is to registered payee that can be accessed using the payee end point. If the Bank Payees scope has not been consented to then a payeeId should not be provided and the full payee details should be provided instead")
+  @JsonProperty("payeeId")
   String payeeId;
 
   public String payeeId() {
@@ -77,6 +79,9 @@ public abstract class BankingScheduledPaymentTo<T> {
     return (T) this;
   }
 
+  @Schema(description = "Domestic Payee Details")
+  @JsonProperty("domestic")
+  @Valid
   BankingDomesticPayee<?> domestic;
 
   public BankingDomesticPayee<?> domestic() {
@@ -89,6 +94,9 @@ public abstract class BankingScheduledPaymentTo<T> {
     return (T) this;
   }
 
+  @Schema(description = "BPAY Biller Payee Details")
+  @JsonProperty("biller")
+  @Valid
   BankingBillerPayee<?> biller;
 
   public BankingBillerPayee<?> biller() {
@@ -101,6 +109,9 @@ public abstract class BankingScheduledPaymentTo<T> {
     return (T) this;
   }
 
+  @Schema(description = "International Payee Details")
+  @JsonProperty("international")
+  @Valid
   BankingInternationalPayee<?> international;
 
   public BankingInternationalPayee<?> international() {

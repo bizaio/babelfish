@@ -28,15 +28,14 @@ import lombok.ToString;
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-
-
 @Schema(description = "Response containing a Banking Accounts Balance by Identifier")
 public abstract class ResponseBankingAccountsBalanceById<T> extends CDRResponse<T> {
   @Schema(required = true)
   @JsonProperty("data")
   @NotNull
   @NonNull
-  public BankingBalance<?> data;
+  @Valid
+  BankingBalance<?> data;
 
   public BankingBalance<?> data() {
     return getData();

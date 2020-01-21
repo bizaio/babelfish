@@ -38,7 +38,7 @@ public abstract class ResponseBankingAccountsBalanceListData<T> {
   @JsonProperty("balances")
   @NotNull
   @NonNull
-  public List<BankingBalance<?>> balances;
+  List<BankingBalance<?>> balances;
 
   public List<BankingBalance<?>> balances() {
     return getBalances();

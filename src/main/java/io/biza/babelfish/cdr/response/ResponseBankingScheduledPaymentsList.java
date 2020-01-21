@@ -36,7 +36,8 @@ public abstract class ResponseBankingScheduledPaymentsList<T> extends CDRRespons
   @JsonProperty("data")
   @NotNull
   @NonNull
-  public ResponseBankingScheduledPaymentsListData<?> data;
+  @Valid
+  ResponseBankingScheduledPaymentsListData<?> data;
 
   public ResponseBankingScheduledPaymentsListData<?> data() {
     return getData();

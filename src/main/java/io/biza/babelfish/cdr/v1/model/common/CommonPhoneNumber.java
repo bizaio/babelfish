@@ -30,7 +30,7 @@ public class CommonPhoneNumber
     extends io.biza.babelfish.cdr.model.common.CommonPhoneNumber<CommonPhoneNumber> {
   @AssertTrue(message = "Country Code, when supplied, should be in +## format")
   private boolean isCountryCodeValid() {
-    return countryCode == null ? true : FormatChecker.phoneNumberCountryCodeValid(countryCode);
+    return countryCode() == null ? true : FormatChecker.phoneNumberCountryCodeValid(countryCode());
   }
 
   @AssertTrue(message = "Area Code must be supplied when purpose is not MOBILE")
@@ -58,7 +58,7 @@ public class CommonPhoneNumber
     return Arrays
         .asList(new PhoneNumberValidationResult[] {PhoneNumberValidationResult.VALID,
             PhoneNumberValidationResult.INCORRECT_FORMAT})
-        .contains(FormatChecker.phoneNumberValidity(fullNumber, PhoneNumberFormat.RFC3966));
+        .contains(FormatChecker.phoneNumberValidity(fullNumber(), PhoneNumberFormat.RFC3966));
   }
 
   @AssertTrue(
@@ -66,6 +66,6 @@ public class CommonPhoneNumber
   private boolean isFullPhoneNumberCorrectlyFormatted() {
     return Arrays
         .asList(new PhoneNumberValidationResult[] {PhoneNumberValidationResult.INCORRECT_FORMAT})
-        .contains(FormatChecker.phoneNumberValidity(fullNumber, PhoneNumberFormat.RFC3966));
+        .contains(FormatChecker.phoneNumberValidity(fullNumber(), PhoneNumberFormat.RFC3966));
   }
 }

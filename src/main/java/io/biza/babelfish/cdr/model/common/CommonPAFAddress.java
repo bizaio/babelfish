@@ -39,7 +39,7 @@ public abstract class CommonPAFAddress<T> {
   @Schema(
       description = "Unique identifier for an address as defined by Australia Post.  Also known as Delivery Point Identifier")
   @JsonProperty("dpid")
-  public String dpid;
+  String dpid;
 
   public String dpid() {
     return getDpid();
@@ -54,7 +54,7 @@ public abstract class CommonPAFAddress<T> {
   @Schema(
       description = "Thoroughfare number for a property (first number in a property ranged address)")
   @JsonProperty("thoroughfareNumber1")
-  public Integer thoroughfareNumber1;
+  Integer thoroughfareNumber1;
 
   public Integer thoroughfareNumber1() {
     return getThoroughfareNumber1();
@@ -76,7 +76,7 @@ public abstract class CommonPAFAddress<T> {
   @Schema(
       description = "Suffix for the thoroughfare number. Only relevant is thoroughfareNumber1 is populated")
   @JsonProperty("thoroughfareNumber1Suffix")
-  public String thoroughfareNumber1Suffix;
+  String thoroughfareNumber1Suffix;
 
   public String thoroughfareNumber1Suffix() {
     return getThoroughfareNumber1Suffix();
@@ -91,7 +91,7 @@ public abstract class CommonPAFAddress<T> {
   @Schema(
       description = "Second thoroughfare number (only used if the property has a ranged address eg 23-25)")
   @JsonProperty("thoroughfareNumber2")
-  public Integer thoroughfareNumber2;
+  Integer thoroughfareNumber2;
 
   public Integer thoroughfareNumber2() {
     return getThoroughfareNumber2();
@@ -113,7 +113,7 @@ public abstract class CommonPAFAddress<T> {
   @Schema(
       description = "Suffix for the second thoroughfare number. Only relevant is thoroughfareNumber2 is populated")
   @JsonProperty("thoroughfareNumber2Suffix")
-  public String thoroughfareNumber2Suffix;
+  String thoroughfareNumber2Suffix;
 
   public String thoroughfareNumber2Suffix() {
     return getThoroughfareNumber2Suffix();
@@ -127,7 +127,7 @@ public abstract class CommonPAFAddress<T> {
 
   @Schema(description = "Type of flat or unit for the address", type = "string")
   @JsonProperty("flatUnitType")
-  public AddressPAFFlatUnitType flatUnitType;
+  AddressPAFFlatUnitType flatUnitType;
 
   public AddressPAFFlatUnitType flatUnitType() {
     return getFlatUnitType();
@@ -141,7 +141,7 @@ public abstract class CommonPAFAddress<T> {
 
   @Schema(description = "Unit number (including suffix, if applicable)")
   @JsonProperty("flatUnitNumber")
-  public String flatUnitNumber;
+  String flatUnitNumber;
 
   public String flatUnitNumber() {
     return getFlatUnitNumber();
@@ -155,7 +155,7 @@ public abstract class CommonPAFAddress<T> {
 
   @Schema(description = "Type of floor or level for the address", type = "string")
   @JsonProperty("floorLevelType")
-  public AddressPAFFloorLevelType floorLevelType;
+  AddressPAFFloorLevelType floorLevelType;
 
   public AddressPAFFloorLevelType floorLevelType() {
     return getFloorLevelType();
@@ -169,7 +169,7 @@ public abstract class CommonPAFAddress<T> {
 
   @Schema(description = "Floor or level number (including alpha characters)")
   @JsonProperty("floorLevelNumber")
-  public String floorLevelNumber;
+  String floorLevelNumber;
 
   public String floorLevelNumber() {
     return getFloorLevelNumber();
@@ -183,7 +183,7 @@ public abstract class CommonPAFAddress<T> {
 
   @Schema(description = "Allotment number for the address")
   @JsonProperty("lotNumber")
-  public String lotNumber;
+  String lotNumber;
 
   public String lotNumber() {
     return getLotNumber();
@@ -197,7 +197,7 @@ public abstract class CommonPAFAddress<T> {
 
   @Schema(description = "Building/Property name 1")
   @JsonProperty("buildingName1")
-  public String buildingName1;
+  String buildingName1;
 
   public String buildingName1() {
     return getBuildingName1();
@@ -211,7 +211,7 @@ public abstract class CommonPAFAddress<T> {
 
   @Schema(description = "Building/Property name 2")
   @JsonProperty("buildingName2")
-  public String buildingName2;
+  String buildingName2;
 
   public String buildingName2() {
     return getBuildingName2();
@@ -225,7 +225,7 @@ public abstract class CommonPAFAddress<T> {
 
   @Schema(description = "The name of the street")
   @JsonProperty("streetName")
-  public String streetName;
+  String streetName;
 
   public String streetName() {
     return getStreetName();
@@ -241,7 +241,7 @@ public abstract class CommonPAFAddress<T> {
       description = "The street type. Valid enumeration defined by Australia Post PAF code file",
       type = "string")
   @JsonProperty("streetType")
-  public AddressPAFStreetType streetType;
+  AddressPAFStreetType streetType;
 
   public AddressPAFStreetType streetType() {
     return getStreetType();
@@ -257,7 +257,7 @@ public abstract class CommonPAFAddress<T> {
       description = "The street type suffix. Valid enumeration defined by Australia Post PAF code file",
       type = "string")
   @JsonProperty("streetSuffix")
-  public AddressPAFStreetSuffix streetSuffix;
+  AddressPAFStreetSuffix streetSuffix;
 
   public AddressPAFStreetSuffix streetSuffix() {
     return getStreetSuffix();
@@ -273,7 +273,7 @@ public abstract class CommonPAFAddress<T> {
       description = "Postal delivery type. (eg. PO BOX). Valid enumeration defined by Australia Post PAF code file",
       type = "string")
   @JsonProperty("postalDeliveryType")
-  public AddressPAFPostalDeliveryType postalDeliveryType;
+  AddressPAFPostalDeliveryType postalDeliveryType;
 
   public AddressPAFPostalDeliveryType postalDeliveryType() {
     return getPostalDeliveryType();
@@ -287,7 +287,7 @@ public abstract class CommonPAFAddress<T> {
 
   @Schema(description = "Postal delivery number if the address is a postal delivery type")
   @JsonProperty("postalDeliveryNumber")
-  public Integer postalDeliveryNumber;
+  Integer postalDeliveryNumber;
 
   public Integer postalDeliveryNumber() {
     return getPostalDeliveryNumber();
@@ -308,7 +308,7 @@ public abstract class CommonPAFAddress<T> {
 
   @Schema(description = "Postal delivery number prefix related to the postal delivery number")
   @JsonProperty("postalDeliveryNumberPrefix")
-  public String postalDeliveryNumberPrefix;
+  String postalDeliveryNumberPrefix;
 
   public String postalDeliveryNumberPrefix() {
     return getPostalDeliveryNumberPrefix();
@@ -322,7 +322,7 @@ public abstract class CommonPAFAddress<T> {
 
   @Schema(description = "Postal delivery number suffix related to the postal delivery number")
   @JsonProperty("postalDeliveryNumberSuffix")
-  public String postalDeliveryNumberSuffix;
+  String postalDeliveryNumberSuffix;
 
   public String postalDeliveryNumberSuffix() {
     return getPostalDeliveryNumberSuffix();
@@ -338,7 +338,7 @@ public abstract class CommonPAFAddress<T> {
   @JsonProperty("localityName")
   @NotNull
   @NonNull
-  public String localityName;
+  String localityName;
 
   public String localityName() {
     return getLocalityName();
@@ -354,7 +354,7 @@ public abstract class CommonPAFAddress<T> {
   @JsonProperty("postcode")
   @NotNull
   @NonNull
-  public String postcode;
+  String postcode;
 
   public String postcode() {
     return getPostcode();
@@ -372,7 +372,7 @@ public abstract class CommonPAFAddress<T> {
   @JsonProperty("state")
   @NotNull
   @NonNull
-  public AddressPAFStateType state;
+  AddressPAFStateType state;
 
   public AddressPAFStateType state() {
     return getState();

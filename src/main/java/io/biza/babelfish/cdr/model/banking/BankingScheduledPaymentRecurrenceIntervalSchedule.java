@@ -16,6 +16,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.LocalDateToStringConverter;
@@ -33,16 +34,16 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-
 @Schema(
     description = "Indicates that the schedule of payments is defined by a series of intervals. Mandatory if recurrenceUType is set to intervalSchedule")
 public abstract class BankingScheduledPaymentRecurrenceIntervalSchedule<T> {
   @Schema(
       description = "The limit date after which no more payments should be made using this schedule. If both finalPaymentDate and paymentsRemaining are present then payments will stop according to the most constraining value. If neither field is present the payments will continue indefinitely",
-      type = "string")
+      type = "string", format = "date")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
-  private LocalDate finalPaymentDate;
+  @JsonProperty("finalPaymentDate")
+  LocalDate finalPaymentDate;
 
   public LocalDate finalPaymentDate() {
     return getFinalPaymentDate();
@@ -57,6 +58,7 @@ public abstract class BankingScheduledPaymentRecurrenceIntervalSchedule<T> {
   @Schema(
       description = "Indicates the number of payments remaining in the schedule. If both finalPaymentDate and paymentsRemaining are present then payments will stop according to the most constraining value, If neither field is present the payments will continue indefinitely")
   @Min(1)
+  @JsonProperty("paymentsRemaining")
   Integer paymentsRemaining;
 
   public Integer paymentsRemaining() {
@@ -71,6 +73,7 @@ public abstract class BankingScheduledPaymentRecurrenceIntervalSchedule<T> {
 
   @Schema(
       description = "Enumerated field giving the treatment where a scheduled payment date is not a business day.  If absent assumed to be ON")
+  @JsonProperty("nonBusinessDayTreatment")
   BankingPaymentNonBusinessDayTreatment nonBusinessDayTreatment =
       BankingPaymentNonBusinessDayTreatment.ON;
 
@@ -90,6 +93,8 @@ public abstract class BankingScheduledPaymentRecurrenceIntervalSchedule<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("intervals")
+  @Valid
   List<BankingScheduledPaymentInterval<?>> intervals;
 
   public List<BankingScheduledPaymentInterval<?>> intervals() {

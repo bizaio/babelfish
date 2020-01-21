@@ -33,7 +33,7 @@ public class CommonDiscoveryStatus
       return true;
     }
     return !Arrays.asList(new CommonDiscoveryStatusType[] {CommonDiscoveryStatusType.OK})
-        .contains(status) ? FormatChecker.isNotEmpty(explanation()) : true;
+        .contains(status()) ? FormatChecker.isNotEmpty(explanation()) : true;
   }
 
   @AssertTrue(
@@ -43,7 +43,7 @@ public class CommonDiscoveryStatus
       return true;
     }
     return Arrays.asList(new CommonDiscoveryStatusType[] {CommonDiscoveryStatusType.PARTIAL_FAILURE,
-        CommonDiscoveryStatusType.UNAVAILABLE}).contains(status)
+        CommonDiscoveryStatusType.UNAVAILABLE}).contains(status())
             ? FormatChecker.isDefined(detectionTime())
             : true;
   }
@@ -56,7 +56,7 @@ public class CommonDiscoveryStatus
     }
     return !Arrays.asList(new CommonDiscoveryStatusType[] {
         CommonDiscoveryStatusType.PARTIAL_FAILURE, CommonDiscoveryStatusType.UNAVAILABLE})
-        .contains(status) ? !FormatChecker.isDefined(detectionTime()) : true;
+        .contains(status()) ? !FormatChecker.isDefined(detectionTime()) : true;
   }
 
   @AssertTrue(message = "Resolution Time should be ABSENT when status is OK")
@@ -65,7 +65,7 @@ public class CommonDiscoveryStatus
       return true;
     }
     return Arrays.asList(new CommonDiscoveryStatusType[] {CommonDiscoveryStatusType.OK})
-        .contains(status) ? !FormatChecker.isDefined(expectedResolutionTime()) : true;
+        .contains(status()) ? !FormatChecker.isDefined(expectedResolutionTime()) : true;
   }
 
 }

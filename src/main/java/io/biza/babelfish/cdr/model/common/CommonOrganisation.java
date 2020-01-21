@@ -42,11 +42,11 @@ import lombok.ToString;
 @Schema(description = "Organisation Definition in Brief")
 public abstract class CommonOrganisation<T> {
   @Schema(
-      description = "The date and time that this record was last updated by the customer. If no update has occurred then this date should reflect the initial creation date for the data")
+      description = "The date and time that this record was last updated by the customer. If no update has occurred then this date should reflect the initial creation date for the data", format = "date-time")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   @JsonProperty("lastUpdateTime")
-  public OffsetDateTime lastUpdateTime;
+  OffsetDateTime lastUpdateTime;
 
   public OffsetDateTime lastUpdateTime() {
     return getLastUpdateTime();
@@ -61,7 +61,7 @@ public abstract class CommonOrganisation<T> {
   @Schema(
       description = "The first name of the individual providing access on behalf of the organisation. For people with single names this field need not be present.  The single name should be in the lastName field")
   @JsonProperty("agentFirstName")
-  public String agentFirstName;
+  String agentFirstName;
 
   public String agentFirstName() {
     return getAgentFirstName();
@@ -80,7 +80,7 @@ public abstract class CommonOrganisation<T> {
   @NonNull
   @NotNull
   @Valid
-  public String agentLastName;
+  String agentLastName;
 
   public String agentLastName() {
     return getAgentLastName();
@@ -99,7 +99,7 @@ public abstract class CommonOrganisation<T> {
   @NotNull
   @NonNull
   @Valid
-  public String agentRole = "Unspecified";
+  String agentRole = "Unspecified";
 
   public String agentRole() {
     return getAgentRole();
@@ -116,7 +116,7 @@ public abstract class CommonOrganisation<T> {
   @NonNull
   @NotNull
   @Valid
-  public String businessName;
+  String businessName;
 
   public String businessName() {
     return getBusinessName();
@@ -130,7 +130,7 @@ public abstract class CommonOrganisation<T> {
 
   @Schema(description = "Legal name, if different to the business name")
   @JsonProperty("legalName")
-  public String legalName;
+  String legalName;
 
   public String legalName() {
     return getLegalName();
@@ -144,7 +144,7 @@ public abstract class CommonOrganisation<T> {
 
   @Schema(description = "Short name used for communication, if  different to the business name")
   @JsonProperty("shortName")
-  public String shortName;
+  String shortName;
 
   public String shortName() {
     return getShortName();
@@ -158,7 +158,7 @@ public abstract class CommonOrganisation<T> {
 
   @Schema(description = "Australian Business Number for the organisation")
   @JsonProperty("abn")
-  public String abn;
+  String abn;
 
   public String abn() {
     return getAbn();
@@ -173,7 +173,7 @@ public abstract class CommonOrganisation<T> {
   @Schema(
       description = "Australian Company Number for the organisation. Required only if an ACN is applicable for the organisation type")
   @JsonProperty("acn")
-  public String acn;
+  String acn;
 
   public String acn() {
     return getAcn();
@@ -188,7 +188,7 @@ public abstract class CommonOrganisation<T> {
   @Schema(
       description = "True if registered with the ACNC.  False if not. Absent or null if not confirmed.")
   @JsonProperty("isACNCRegistered")
-  public Boolean isACNCRegistered;
+  Boolean isACNCRegistered;
 
   public Boolean isACNCRegistered() {
     return getIsACNCRegistered();
@@ -202,7 +202,7 @@ public abstract class CommonOrganisation<T> {
 
   @Schema(description = "[ANZSIC (2006)](http://www.abs.gov.au/anzsic) code for the organisation.")
   @JsonProperty("industryCode")
-  public String industryCode;
+  String industryCode;
 
   public String industryCode() {
     return getIndustryCode();
@@ -219,7 +219,7 @@ public abstract class CommonOrganisation<T> {
   @NonNull
   @NotNull
   @Valid
-  public CommonOrganisationType organisationType;
+  CommonOrganisationType organisationType;
 
   public CommonOrganisationType organisationType() {
     return getOrganisationType();
@@ -236,7 +236,7 @@ public abstract class CommonOrganisation<T> {
   @JsonSerialize(converter = LocaleToCountryStringConverter.class)
   @JsonDeserialize(converter = CountryStringToLocaleConverter.class)
   @JsonProperty("registeredCountry")
-  public Locale registeredCountry;
+  Locale registeredCountry;
 
   public Locale registeredCountry() {
     return getRegisteredCountry();
@@ -252,7 +252,7 @@ public abstract class CommonOrganisation<T> {
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   @JsonProperty("establishmentDate")
-  public LocalDate establishmentDate;
+  LocalDate establishmentDate;
 
   public LocalDate establishmentDate() {
     return getEstablishmentDate();

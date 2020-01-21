@@ -36,7 +36,8 @@ public abstract class ResponseCommonDiscoveryStatus<T> extends CDRResponse<T> {
   @JsonProperty("data")
   @NotNull
   @NonNull
-  public CommonDiscoveryStatus<?> data;
+  @Valid
+  CommonDiscoveryStatus<?> data;
 
   public CommonDiscoveryStatus<?> data() {
     return getData();

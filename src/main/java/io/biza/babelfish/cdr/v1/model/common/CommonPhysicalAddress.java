@@ -32,9 +32,9 @@ public class CommonPhysicalAddress
     }
 
     if (type().equals(PayloadTypeAddress.SIMPLE)) {
-      return simple != null && paf == null;
+      return simple() != null && paf() == null;
     } else if (type().equals(PayloadTypeAddress.PAF)) {
-      return paf != null && simple == null;
+      return paf() != null && simple() == null;
     }
     return false;
   }

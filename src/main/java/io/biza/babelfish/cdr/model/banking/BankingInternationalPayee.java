@@ -13,6 +13,7 @@ package io.biza.babelfish.cdr.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -31,6 +32,8 @@ public abstract class BankingInternationalPayee<T> {
   @Schema(required = true)
   @NonNull
   @NotNull
+  @JsonProperty("beneficiaryDetails")
+  @Valid
   BankingInternationalPayeeBeneficiaryDetails<?> beneficiaryDetails;
 
   public BankingInternationalPayeeBeneficiaryDetails<?> beneficiaryDetails() {
@@ -46,6 +49,8 @@ public abstract class BankingInternationalPayee<T> {
   @Schema(required = true)
   @NonNull
   @NotNull
+  @JsonProperty("bankDetails")
+  @Valid
   BankingInternationalPayeeBankDetails<?> bankDetails;
 
   public BankingInternationalPayeeBankDetails<?> bankDetails() {

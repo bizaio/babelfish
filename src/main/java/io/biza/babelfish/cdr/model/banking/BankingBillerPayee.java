@@ -13,6 +13,7 @@ package io.biza.babelfish.cdr.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -31,6 +32,7 @@ public abstract class BankingBillerPayee<T> {
   @Schema(description = "BPAY Biller Code of the Biller", required = true)
   @NotNull
   @NonNull
+  @JsonProperty("billerCode")
   String billerCode;
 
   public String billerCode() {
@@ -47,6 +49,7 @@ public abstract class BankingBillerPayee<T> {
       description = "BPAY CRN of the Biller. If the contents of the CRN match the format of a Credit Card PAN then it should be masked using the rules applicable for the MaskedPANString common type")
   @NotNull
   @NonNull
+  @JsonProperty("crn")
   String crn;
 
   public String crn() {
@@ -62,6 +65,7 @@ public abstract class BankingBillerPayee<T> {
   @Schema(description = "Name of the Biller", required = true)
   @NotNull
   @NonNull
+  @JsonProperty("billerName")
   String billerName;
 
   public String billerName() {

@@ -36,7 +36,7 @@ public abstract class CommonSimpleAddress<T> {
   @Schema(
       description = "Name of the individual or business formatted for inclusion in an address used for physical mail")
   @JsonProperty("mailingName")
-  public String mailingName;
+  String mailingName;
 
   public String mailingName() {
     return getMailingName();
@@ -50,7 +50,7 @@ public abstract class CommonSimpleAddress<T> {
 
   @Schema(description = "First line of the standard address object", required = true)
   @JsonProperty("addressLine1")
-  public String addressLine1;
+  String addressLine1;
 
   public String addressLine1() {
     return getAddressLine1();
@@ -64,7 +64,7 @@ public abstract class CommonSimpleAddress<T> {
 
   @Schema(description = "Second line of the standard address object")
   @JsonProperty("addressLine2")
-  public String addressLine2;
+  String addressLine2;
 
   public String addressLine2() {
     return getAddressLine2();
@@ -78,7 +78,7 @@ public abstract class CommonSimpleAddress<T> {
 
   @Schema(description = "Third line of the standard address object")
   @JsonProperty("addressLine3")
-  public String addressLine3;
+  String addressLine3;
 
   public String addressLine3() {
     return getAddressLine3();
@@ -92,7 +92,7 @@ public abstract class CommonSimpleAddress<T> {
 
   @Schema(description = "Mandatory for Australian addresses")
   @JsonProperty("postcode")
-  public String postcode;
+  String postcode;
 
   public String postcode() {
     return getPostcode();
@@ -106,7 +106,7 @@ public abstract class CommonSimpleAddress<T> {
 
   @Schema(description = "Name of the city or locality", required = true)
   @JsonProperty("city")
-  public String city;
+  String city;
 
   public String city() {
     return getCity();
@@ -122,7 +122,7 @@ public abstract class CommonSimpleAddress<T> {
       description = "Free text if the country is not Australia. If country is Australia then must be one of the values defined by the [State Type Abbreviation](https://auspost.com.au/content/dam/auspost_corp/media/documents/australia-post-data-guide.pdf) in the PAF file format. NSW, QLD, VIC, NT, WA, SA, TAS, ACT, AAT",
       required = true)
   @JsonProperty("state")
-  public String state;
+  String state;
 
   public String state() {
     return getState();
@@ -139,7 +139,7 @@ public abstract class CommonSimpleAddress<T> {
   @JsonSerialize(converter = LocaleToCountryStringConverter.class)
   @JsonDeserialize(converter = CountryStringToLocaleConverter.class)
   @JsonProperty("country")
-  public Locale country = new Locale(Constants.DEFAULT_LOCALE, "AU");
+  Locale country = new Locale(Constants.DEFAULT_LOCALE, "AU");
 
   public Locale country() {
     return getCountry();

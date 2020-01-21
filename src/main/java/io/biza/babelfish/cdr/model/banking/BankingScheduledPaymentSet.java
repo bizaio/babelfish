@@ -16,6 +16,7 @@ import java.util.Currency;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.AmountStringToBigDecimalConverter;
@@ -41,8 +42,9 @@ public abstract class BankingScheduledPaymentSet<T> {
   @Schema(required = true)
   @NonNull
   @NotNull
+  @JsonProperty("to")
+  @Valid
   BankingScheduledPaymentTo<?> to;
-
   public BankingScheduledPaymentTo<?> to() {
     return getTo();
   }
@@ -55,6 +57,7 @@ public abstract class BankingScheduledPaymentSet<T> {
 
   @Schema(
       description = "Flag indicating whether the amount of the payment is calculated based on the context of the event. For instance a payment to reduce the balance of a credit card to zero. If absent then false is assumed")
+  @JsonProperty("isAmountCalculated")
   Boolean isAmountCalculated = false;
 
   public Boolean isAmountCalculated() {
@@ -73,7 +76,8 @@ public abstract class BankingScheduledPaymentSet<T> {
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   @Min(0)
-  private BigDecimal amount;
+  @JsonProperty("amount")
+  BigDecimal amount;
 
   public BigDecimal amount() {
     return getAmount();
@@ -88,6 +92,7 @@ public abstract class BankingScheduledPaymentSet<T> {
   @Schema(description = "The currency for the payment.", type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
+  @JsonProperty("currency")
   Currency currency = Currency.getInstance("AUD");
 
   public Currency currency() {

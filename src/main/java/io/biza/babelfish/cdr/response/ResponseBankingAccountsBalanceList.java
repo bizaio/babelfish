@@ -36,7 +36,8 @@ public abstract class ResponseBankingAccountsBalanceList<T> extends CDRResponseP
   @JsonProperty("data")
   @NotNull
   @NonNull
-  public ResponseBankingAccountsBalanceListData<?> data;
+  @Valid
+  ResponseBankingAccountsBalanceListData<?> data;
 
   public ResponseBankingAccountsBalanceListData<?> data() {
     return getData();

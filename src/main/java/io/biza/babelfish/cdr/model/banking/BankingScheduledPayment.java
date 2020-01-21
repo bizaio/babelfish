@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr.model.banking;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.babelfish.cdr.v1.enumerations.BankingScheduledPaymentStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
@@ -27,7 +28,6 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-
 @Schema(description = "Describes a Scheduled Payment")
 public abstract class BankingScheduledPayment<T> {
   @Schema(
@@ -35,6 +35,7 @@ public abstract class BankingScheduledPayment<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("scheduledPaymentId")
   String scheduledPaymentId;
 
   public String scheduledPaymentId() {
@@ -48,6 +49,7 @@ public abstract class BankingScheduledPayment<T> {
   }
 
   @Schema(description = "The short display name of the payee as provided by the customer")
+  @JsonProperty("nickname")
   String nickname;
 
   public String nickname() {
@@ -65,6 +67,7 @@ public abstract class BankingScheduledPayment<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("payerReference")
   String payerReference;
 
   public String payerReference() {
@@ -82,6 +85,7 @@ public abstract class BankingScheduledPayment<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("payeeReference")
   String payeeReference;
 
   public String payeeReference() {
@@ -99,6 +103,7 @@ public abstract class BankingScheduledPayment<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("status")
   BankingScheduledPaymentStatus status;
 
   public BankingScheduledPaymentStatus status() {
@@ -114,6 +119,8 @@ public abstract class BankingScheduledPayment<T> {
   @Schema(required = true)
   @NonNull
   @NotNull
+  @JsonProperty("from")
+  @Valid
   BankingScheduledPaymentFrom<?> from;
 
   public BankingScheduledPaymentFrom<?> from() {
@@ -129,6 +136,8 @@ public abstract class BankingScheduledPayment<T> {
   @Schema(required = true)
   @NonNull
   @NotNull
+  @JsonProperty("paymentSet")
+  @Valid
   List<BankingScheduledPaymentSet<?>> paymentSet;
 
   public List<BankingScheduledPaymentSet<?>> paymentSet() {
@@ -144,6 +153,8 @@ public abstract class BankingScheduledPayment<T> {
   @Schema(required = true)
   @NonNull
   @NotNull
+  @JsonProperty("recurrence")
+  @Valid
   BankingScheduledPaymentRecurrence<?> recurrence;
 
   public BankingScheduledPaymentRecurrence<?> recurrence() {

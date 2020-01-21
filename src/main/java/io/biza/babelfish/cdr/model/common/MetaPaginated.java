@@ -35,7 +35,7 @@ public abstract class MetaPaginated<T> extends Meta<T> {
   @NonNull
   @Min(0)
   @Valid
-  public Integer totalRecords;
+  Integer totalRecords;
 
   public Integer totalRecords() {
     return getTotalRecords();
@@ -53,7 +53,7 @@ public abstract class MetaPaginated<T> extends Meta<T> {
   @NonNull
   @Min(0)
   @Valid
-  public Integer totalPages;
+  Integer totalPages;
 
   public Integer totalPages() {
     return getTotalPages();

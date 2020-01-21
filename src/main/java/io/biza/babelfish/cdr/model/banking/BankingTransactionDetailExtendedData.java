@@ -13,6 +13,7 @@ package io.biza.babelfish.cdr.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.babelfish.cdr.v1.enumerations.BankingTransactionService;
 import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeTransactionExtension;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -31,6 +32,7 @@ import lombok.ToString;
 @Schema(description = "Banking Transaction Detailed Extended Data")
 public abstract class BankingTransactionDetailExtendedData<T> {
   @Schema(description = "Label of the originating payer. Mandatory for inbound payment")
+  @JsonProperty("payer")
   String payer;
 
   public String payer() {
@@ -45,6 +47,7 @@ public abstract class BankingTransactionDetailExtendedData<T> {
 
   @Schema(
       description = "Label of the target PayID.  Mandatory for an outbound payment. The name assigned to the BSB/Account Number or PayID (by the owner of the PayID)")
+  @JsonProperty("payee")
   String payee;
 
   public String payee() {
@@ -59,6 +62,7 @@ public abstract class BankingTransactionDetailExtendedData<T> {
 
   @Schema(
       description = "Optional extended data provided specific to transaction originated via NPP")
+  @JsonProperty("extensionUType")
   PayloadTypeTransactionExtension extensionUType;
 
   public PayloadTypeTransactionExtension extensionUType() {
@@ -72,6 +76,8 @@ public abstract class BankingTransactionDetailExtendedData<T> {
   }
 
   @Schema(description = "X2P1.01 Payload Details")
+  @JsonProperty("x2p101Payload")
+  @Valid
   BankingTransactionDetailExtendedDataX2p101Payload<?> x2p101Payload;
 
   public BankingTransactionDetailExtendedDataX2p101Payload<?> x2p101Payload() {
@@ -87,6 +93,8 @@ public abstract class BankingTransactionDetailExtendedData<T> {
   @Schema(description = "Identifier of the applicable overlay service.", required = true)
   @NonNull
   @NotNull
+  @JsonProperty("service")
+  @Valid
   BankingTransactionService service;
 
   public BankingTransactionService service() {

@@ -37,7 +37,7 @@ public abstract class ResponseBankingProductList<T> extends CDRResponsePaginated
   @NotNull
   @NonNull
   @Valid
-  public ResponseBankingProductListData<?> data;
+  ResponseBankingProductListData<?> data;
 
   public ResponseBankingProductListData<?> data() {
     return getData();

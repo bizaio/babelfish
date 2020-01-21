@@ -16,10 +16,12 @@ import java.net.URI;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.BigDecimalToRateStringConverter;
 import io.biza.babelfish.cdr.converters.RateStringToBigDecimalConverter;
+import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductDiscountType;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -39,6 +41,7 @@ public abstract class BankingProductDiscount<T> {
   @Schema(description = "Description of the discount", required = true)
   @NonNull
   @NotNull
+  @JsonProperty("description")
   String description;
 
   public String description() {
@@ -56,6 +59,7 @@ public abstract class BankingProductDiscount<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("discountType")
   BankingProductDiscountType discountType;
 
   public BankingProductDiscountType discountType() {
@@ -73,7 +77,8 @@ public abstract class BankingProductDiscount<T> {
       type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
-  private BigDecimal amount;
+  @JsonProperty("amount")
+  BigDecimal amount;
 
   public BigDecimal amount() {
     return getAmount();
@@ -90,7 +95,8 @@ public abstract class BankingProductDiscount<T> {
       type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
-  private BigDecimal balanceRate;
+  @JsonProperty("balanceRate")
+  BigDecimal balanceRate;
 
   public BigDecimal balanceRate() {
     return getBalanceRate();
@@ -107,7 +113,8 @@ public abstract class BankingProductDiscount<T> {
       type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
-  private BigDecimal transactionRate;
+  @JsonProperty("transactionRate")
+  BigDecimal transactionRate;
 
   public BigDecimal transactionRate() {
     return getTransactionRate();
@@ -124,7 +131,8 @@ public abstract class BankingProductDiscount<T> {
       type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
-  private BigDecimal accruedRate;
+  @JsonProperty("accruedRate")
+  BigDecimal accruedRate;
 
   public BigDecimal accruedRate() {
     return getAccruedRate();
@@ -141,7 +149,8 @@ public abstract class BankingProductDiscount<T> {
       type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
-  private BigDecimal feeRate;
+  @JsonProperty("feeRate")
+  BigDecimal feeRate;
 
   public BigDecimal feeRate() {
     return getFeeRate();
@@ -155,6 +164,7 @@ public abstract class BankingProductDiscount<T> {
 
   @Schema(
       description = "Generic field containing additional information relevant to the [discountType](#tocSproductdiscounttypedoc) specified. Whether mandatory or not is dependent on the value of [discountType](#tocSproductdiscounttypedoc)")
+  @JsonProperty("additionalValue")
   String additionalValue;
 
   public String additionalValue() {
@@ -168,6 +178,7 @@ public abstract class BankingProductDiscount<T> {
   }
 
   @Schema(description = "Display text providing more information on the discount")
+  @JsonProperty("additionalInfo")
   String additionalInfo;
 
   public String additionalInfo() {
@@ -181,8 +192,10 @@ public abstract class BankingProductDiscount<T> {
   }
 
   @Schema(description = "Link to a web page with more information on this discount",
-      type = "string")
+      type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
+  @JsonDeserialize(converter = UriStringToUriConverter.class)
+  @JsonProperty("additionalInfoUri")
   URI additionalInfoUri;
 
   public URI additionalInfoUri() {
@@ -196,6 +209,8 @@ public abstract class BankingProductDiscount<T> {
   }
 
   @Schema(description = "Eligibility constraints that apply to this discount")
+  @JsonProperty("eligibility")
+  @Valid
   List<BankingProductFeeDiscountEligibility<?>> eligibility;
 
   public List<BankingProductFeeDiscountEligibility<?>> eligibility() {

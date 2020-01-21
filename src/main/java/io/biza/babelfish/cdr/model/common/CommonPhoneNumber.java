@@ -38,13 +38,13 @@ public abstract class CommonPhoneNumber<T> {
   @Schema(
       description = "May be true for one and only one entry to indicate the preferred phone number. Assumed to be 'false' if not present")
   @JsonProperty("isPreferred")
-  public Boolean isPreferred = false;
+  Boolean isPreferred = false;
 
   @Schema(description = "The purpose of the number as specified by the customer", required = true)
   @JsonProperty("purpose")
   @NotNull
   @NonNull
-  public CommonPhoneNumberPurpose purpose;
+  CommonPhoneNumberPurpose purpose;
 
   public CommonPhoneNumberPurpose purpose() {
     return getPurpose();
@@ -58,7 +58,7 @@ public abstract class CommonPhoneNumber<T> {
 
   @Schema(description = "If absent, assumed to be Australia (+61). The + should be included")
   @JsonProperty("countryCode")
-  public String countryCode = "+61";
+  String countryCode = "+61";
 
   public String countryCode() {
     return getCountryCode();
@@ -73,7 +73,7 @@ public abstract class CommonPhoneNumber<T> {
   @Schema(
       description = "Required for non Mobile Phones, if field is present and refers to Australian code - the leading 0 should be omitted.")
   @JsonProperty("areaCode")
-  public String areaCode;
+  String areaCode;
 
   public String areaCode() {
     return getAreaCode();
@@ -88,7 +88,7 @@ public abstract class CommonPhoneNumber<T> {
   @Schema(description = "The actual phone number, with leading zeros as appropriate",
       required = true)
   @JsonProperty("number")
-  public String number;
+  String number;
 
   public String number() {
     return getNumber();
@@ -102,7 +102,7 @@ public abstract class CommonPhoneNumber<T> {
 
   @Schema(description = "An extension number (if applicable)")
   @JsonProperty("extension")
-  public String extension;
+  String extension;
 
   public String extension() {
     return getExtension();
@@ -118,7 +118,7 @@ public abstract class CommonPhoneNumber<T> {
       description = "Fully formatted phone number with country code, area code, number and extension incorporated. Formatted according to section 5.1.4. of [RFC 3966](https://www.ietf.org/rfc/rfc3966.txt)",
       required = true)
   @JsonProperty("fullNumber")
-  public String fullNumber;
+  String fullNumber;
 
   public String fullNumber() {
     return getFullNumber();

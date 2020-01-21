@@ -37,7 +37,7 @@ public abstract class ResponseBankingAccountListData<T> {
   @NotNull
   @NonNull
   @Valid
-  public List<BankingAccount<?>> accounts;
+  List<BankingAccount<?>> accounts;
 
   public List<BankingAccount<?>> accounts() {
     return getAccounts();

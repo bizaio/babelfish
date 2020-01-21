@@ -41,7 +41,7 @@ public abstract class CommonCurrencyAmount<T> {
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   @JsonProperty("amount")
-  public BigDecimal amount;
+  BigDecimal amount;
 
   public BigDecimal amount() {
     return getAmount();
@@ -57,7 +57,7 @@ public abstract class CommonCurrencyAmount<T> {
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   @JsonProperty("currency")
-  public Currency currency;
+  Currency currency;
 
   public Currency currency() {
     return getCurrency();

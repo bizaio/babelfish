@@ -35,7 +35,7 @@ public abstract class CommonOrganisationDetail<T> extends CommonOrganisation<T> 
   @JsonProperty("physicalAddresses")
   @NotNull
   @NonNull
-  public List<CommonPhysicalAddressWithPurpose<?>> physicalAddresses;
+  List<CommonPhysicalAddressWithPurpose<?>> physicalAddresses;
 
   public List<CommonPhysicalAddressWithPurpose<?>> physicalAddresses() {
     return getPhysicalAddresses();

@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr.model.banking;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.validation.Valid;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.BigDecimalToRateStringConverter;
@@ -35,6 +36,7 @@ import lombok.ToString;
 public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
   @Schema(
       description = "The unmasked BSB for the account. Is expected to be formatted as digits only with leading zeros included and no punctuation or spaces")
+  @JsonProperty("bsb")
   String bsb;
 
   public String bsb() {
@@ -49,6 +51,7 @@ public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
 
   @Schema(
       description = "The unmasked account number for the account. Should not be supplied if the account number is a PAN requiring PCI compliance. Is expected to be formatted as digits only with leading zeros included and no punctuation or spaces")
+  @JsonProperty("accountNumber")
   String accountNumber;
 
   public String accountNumber() {
@@ -63,6 +66,7 @@ public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
 
   @Schema(
       description = "Optional field to indicate if this account is part of a bundle that is providing additional benefit for to the customer")
+  @JsonProperty("bundleName")
   String bundleName;
 
   public String bundleName() {
@@ -76,6 +80,7 @@ public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
   }
 
   @Schema(description = "The type of structure to present account specific fields.")
+  @JsonProperty("specificAccountUType")
   PayloadTypeBankingAccount specificAccountUType;
 
   public PayloadTypeBankingAccount specificAccountUType() {
@@ -89,6 +94,8 @@ public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
   }
 
   @Schema(description = "Term Deposit Account Information")
+  @JsonProperty("termDeposit")
+  @Valid
   BankingTermDepositAccount<?> termDeposit;
 
   public BankingTermDepositAccount<?> termDeposit() {
@@ -102,6 +109,8 @@ public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
   }
 
   @Schema(description = "Credit Card Account Information")
+  @JsonProperty("creditCard")
+  @Valid
   BankingCreditCardAccount<?> creditCard;
 
   public BankingCreditCardAccount<?> creditCard() {
@@ -115,6 +124,8 @@ public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
   }
 
   @Schema(description = "Loan Account Information")
+  @JsonProperty("loan")
+  @Valid
   BankingLoanAccount<?> loan;
 
   public BankingLoanAccount<?> loan() {
@@ -131,6 +142,8 @@ public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
       description = "current rate to calculate interest earned being applied to deposit balances as it stands at the time of the API call")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
+  @JsonProperty("depositRate")
+  @Valid
   BigDecimal depositRate;
 
   public BigDecimal depositRate() {
@@ -147,6 +160,8 @@ public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
       description = "The current rate to calculate interest payable being applied to lending balances as it stands at the time of the API call")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
+  @JsonProperty("lendingRate")
+  @Valid
   BigDecimal lendingRate;
 
   public BigDecimal lendingRate() {
@@ -161,20 +176,30 @@ public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
 
   @Schema(
       description = "Fully described deposit rates for this account based on the equivalent structure in Product Reference")
+  @JsonProperty("depositRates")
+  @Valid
   List<BankingProductDepositRate<?>> depositRates;
 
   @Schema(
       description = "Fully described deposit rates for this account based on the equivalent structure in Product Reference")
+  @JsonProperty("lendingRates")
+  @Valid
   List<BankingProductLendingRate<?>> lendingRates;
 
   @Schema(
       description = "Array of features of the account based on the equivalent structure in Product Reference with the following additional field")
+  @JsonProperty("features")
+  @Valid
   List<BankingProductFeatureWithActivated<?>> features;
 
   @Schema(
       description = "Fees and charges applicable to the account based on the equivalent structure in Product Reference")
+  @JsonProperty("fees")
+  @Valid
   List<BankingProductFee<?>> fees;
 
   @Schema(description = "The addresses for the account to be used for correspondence")
+  @JsonProperty("addresses")
+  @Valid
   List<CommonPhysicalAddress> addresses;
 }

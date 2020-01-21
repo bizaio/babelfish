@@ -35,7 +35,8 @@ public abstract class ResponseBankingTransactionById<T> extends CDRResponse<T> {
   @JsonProperty("data")
   @NotNull
   @NonNull
-  public BankingTransactionDetail<?> data;
+  @Valid
+  BankingTransactionDetail<?> data;
 
   public BankingTransactionDetail<?> data() {
     return getData();

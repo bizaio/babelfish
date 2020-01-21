@@ -32,9 +32,9 @@ import lombok.ToString;
 @Schema(description = "Person definition in brief")
 public abstract class CommonPerson<T> {
   @Schema(
-      description = "The date and time that this record was last updated by the customer.  If no update has occurred then this date should reflect the initial creation date for the data")
+      description = "The date and time that this record was last updated by the customer.  If no update has occurred then this date should reflect the initial creation date for the data", format = "date-time")
   @JsonProperty("lastUpdateTime")
-  public OffsetDateTime lastUpdateTime;
+  OffsetDateTime lastUpdateTime;
 
   public OffsetDateTime lastUpdateTime() {
     return getLastUpdateTime();
@@ -49,7 +49,7 @@ public abstract class CommonPerson<T> {
   @Schema(
       description = "For people with single names this field need not be present.  The single name should be in the lastName field")
   @JsonProperty("firstName")
-  public String firstName;
+  String firstName;
 
   public String firstName() {
     return getFirstName();
@@ -66,7 +66,7 @@ public abstract class CommonPerson<T> {
   @JsonProperty("lastName")
   @NotNull
   @NonNull
-  public String lastName;
+  String lastName;
 
   public String lastName() {
     return getLastName();
@@ -82,12 +82,12 @@ public abstract class CommonPerson<T> {
   @JsonProperty("middleNames")
   @NonNull
   @NotNull
-  public List<String> middleNames = List.of();
+  List<String> middleNames = List.of();
 
   @Schema(
       description = "Also known as title or salutation.  The prefix to the name (e.g. Mr, Mrs, Ms, Miss, Sir, etc)")
   @JsonProperty("prefix")
-  public String prefix;
+  String prefix;
 
   public String prefix() {
     return getPrefix();
@@ -101,7 +101,7 @@ public abstract class CommonPerson<T> {
 
   @Schema(description = "Used for a trailing suffix to the name (e.g. Jr)")
   @JsonProperty("suffix")
-  public String suffix;
+  String suffix;
 
   public String suffix() {
     return getSuffix();
@@ -116,7 +116,7 @@ public abstract class CommonPerson<T> {
   @Schema(
       description = "Value is a valid [ANZCO v1.2](http://www.abs.gov.au/ANZSCO) Standard Occupation classification.")
   @JsonProperty("occupationCode")
-  public String occupationCode;
+  String occupationCode;
 
   public String occupationCode() {
     return getOccupationCode();

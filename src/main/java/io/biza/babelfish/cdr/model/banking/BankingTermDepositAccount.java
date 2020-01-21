@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.Currency;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.AmountStringToBigDecimalConverter;
@@ -41,11 +42,12 @@ import lombok.ToString;
 @Schema(description = "Term Deposit Account Description")
 public abstract class BankingTermDepositAccount<T> {
   @Schema(description = "The lodgement date of the original deposit", required = true,
-      type = "string")
+      type = "string", format = "date")
   @NonNull
   @NotNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
+  @JsonProperty("lodgementDate")
   private LocalDate lodgementDate;
 
   public LocalDate lodgementDate() {
@@ -58,12 +60,13 @@ public abstract class BankingTermDepositAccount<T> {
     return (T) this;
   }
 
-  @Schema(description = "Maturity date for the term deposit", required = true)
+  @Schema(description = "Maturity date for the term deposit", required = true, format = "date")
   @NonNull
   @NotNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
-  private LocalDate maturityDate;
+  @JsonProperty("maturityDate")
+  LocalDate maturityDate;
 
   public LocalDate maturityDate() {
     return getMaturityDate();
@@ -80,7 +83,8 @@ public abstract class BankingTermDepositAccount<T> {
       type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
-  private BigDecimal maturityAmount;
+  @JsonProperty("maturityAmount")
+  BigDecimal maturityAmount;
 
   public BigDecimal maturityAmount() {
     return getMaturityAmount();
@@ -95,6 +99,7 @@ public abstract class BankingTermDepositAccount<T> {
   @Schema(description = "Maturity Amount Currency", type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
+  @JsonProperty("maturityCurrency")
   Currency maturityCurrency = Currency.getInstance("AUD");
 
   public Currency maturityCurrency() {
@@ -110,6 +115,8 @@ public abstract class BankingTermDepositAccount<T> {
   @Schema(description = "Current instructions on action to be taken at maturity", required = true)
   @NonNull
   @NotNull
+  @Valid
+  @JsonProperty("maturityInstructions")
   BankingTermDepositMaturityInstructions maturityInstructions;
 
   public BankingTermDepositMaturityInstructions maturityInstructions() {

@@ -13,6 +13,7 @@ package io.biza.babelfish.cdr.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,7 +26,6 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-
 @Schema(
     description = "Indicates that the schedule of payments is defined according to an external event that cannot be predetermined. Mandatory if recurrenceUType is set to eventBased")
 public abstract class BankingScheduledPaymentRecurrenceEventBased<T> {
@@ -34,6 +34,7 @@ public abstract class BankingScheduledPaymentRecurrenceEventBased<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("description")
   String description;
 
   public String description() {

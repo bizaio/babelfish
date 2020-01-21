@@ -16,6 +16,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
@@ -40,6 +41,7 @@ public abstract class BankingProductBundle<T> {
   @NotNull
   @NotBlank
   @Valid
+  @JsonProperty("name")
   String name;
 
   public String name() {
@@ -57,6 +59,7 @@ public abstract class BankingProductBundle<T> {
   @NotNull
   @NotBlank
   @Valid
+  @JsonProperty("description")
   String description;
 
   public String description() {
@@ -70,6 +73,7 @@ public abstract class BankingProductBundle<T> {
   }
 
   @Schema(description = "Display text providing more information on the bundle")
+  @JsonProperty("additionalInfo")
   String additionalInfo;
 
   public String additionalInfo() {
@@ -84,9 +88,10 @@ public abstract class BankingProductBundle<T> {
 
   @Schema(
       description = "Link to a web page with more information on the bundle criteria and benefits",
-      type = "string")
+      type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
+  @JsonProperty("additionalInfoUri")
   URI additionalInfoUri;
 
   public URI additionalInfoUri() {
@@ -101,5 +106,6 @@ public abstract class BankingProductBundle<T> {
 
   @Schema(
       description = "Array of product IDs for products included in the bundle that are available via the product end points.  Note that this array is not intended to represent a comprehensive model of the products included in the bundle and some products available for the bundle may not be available via the product reference end points")
+  @JsonProperty("productIds")
   List<String> productIds;
 }

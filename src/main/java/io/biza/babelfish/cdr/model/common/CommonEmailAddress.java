@@ -36,7 +36,7 @@ public abstract class CommonEmailAddress<T> {
   @JsonProperty("purpose")
   @NotNull
   @NonNull
-  public CommonEmailAddressPurpose purpose;
+  CommonEmailAddressPurpose purpose;
 
   public CommonEmailAddressPurpose purpose() {
     return getPurpose();
@@ -55,7 +55,7 @@ public abstract class CommonEmailAddress<T> {
   @JsonProperty("address")
   @NotNull
   @NonNull
-  public String address;
+  String address;
 
   public String address() {
     return getAddress();
@@ -70,7 +70,7 @@ public abstract class CommonEmailAddress<T> {
   @Schema(
       description = "May be true for one and only one email record in the collection. Denotes the default email address")
   @JsonProperty("isPreferred")
-  public Boolean isPreferred;
+  Boolean isPreferred;
 
   public Boolean isPreferred() {
     return getIsPreferred();

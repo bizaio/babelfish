@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr.model.banking;
 import java.time.LocalDate;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.LocalDateToStringConverter;
@@ -38,6 +39,7 @@ public abstract class BankingAccount<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("accountId")
   String accountId;
 
   public String accountId() {
@@ -50,10 +52,11 @@ public abstract class BankingAccount<T> {
     return (T) this;
   }
 
-  @Schema(description = "Date that the account was created (if known)", type = "string")
+  @Schema(description = "Date that the account was created (if known)", type = "string", format = "date")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
-  private LocalDate creationDate;
+  @JsonProperty("creationDate")
+  LocalDate creationDate;
 
   public LocalDate creationDate() {
     return getCreationDate();
@@ -70,6 +73,7 @@ public abstract class BankingAccount<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("displayName")
   String displayName;
 
   public String displayName() {
@@ -83,6 +87,7 @@ public abstract class BankingAccount<T> {
   }
 
   @Schema(description = "A customer supplied nick name for the account")
+  @JsonProperty("nickname")
   String nickname;
 
   public String nickname() {
@@ -97,6 +102,7 @@ public abstract class BankingAccount<T> {
 
   @Schema(
       description = "Open or closed status for the account. If not present then OPEN is assumed")
+  @JsonProperty("openStatus")
   BankingAccountStatus openStatus = BankingAccountStatus.OPEN;
 
   public BankingAccountStatus openStatus() {
@@ -111,6 +117,7 @@ public abstract class BankingAccount<T> {
 
   @Schema(
       description = "Flag indicating that the customer associated with the authorisation is an owner of the account. Does not indicate sole ownership, however. If not present then 'true' is assumed")
+  @JsonProperty("isOwned")
   Boolean isOwned = true;
 
   public Boolean isOwned() {
@@ -128,6 +135,7 @@ public abstract class BankingAccount<T> {
       required = true)
   @NotNull
   @NonNull
+  @JsonProperty("maskedNumber")
   String maskedNumber;
 
   public String maskedNumber() {
@@ -143,6 +151,7 @@ public abstract class BankingAccount<T> {
   @Schema(description = "The category to which a product or account belongs.", required = true)
   @NotNull
   @NonNull
+  @JsonProperty("productCategory")
   BankingProductCategory productCategory;
 
   public BankingProductCategory productCategory() {
@@ -160,6 +169,7 @@ public abstract class BankingAccount<T> {
       required = true)
   @NotNull
   @NonNull
+  @JsonProperty("productName")
   String productName;
 
   public String productName() {

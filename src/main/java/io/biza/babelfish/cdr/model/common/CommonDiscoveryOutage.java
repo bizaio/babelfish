@@ -37,13 +37,13 @@ import lombok.ToString;
 
 @Schema(description = "Outage Detail")
 public abstract class CommonDiscoveryOutage<T> {
-  @Schema(description = "Date and time that the outage is scheduled to begin", required = true)
+  @Schema(description = "Date and time that the outage is scheduled to begin", required = true, format = "date-time")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   @JsonProperty("outageTime")
   @NotNull
   @NonNull
-  public OffsetDateTime outageTime;
+  OffsetDateTime outageTime;
 
   public OffsetDateTime outageTime() {
     return getOutageTime();
@@ -63,7 +63,7 @@ public abstract class CommonDiscoveryOutage<T> {
   @JsonProperty("duration")
   @NotNull
   @NonNull
-  public Duration duration;
+  Duration duration;
 
   public Duration duration() {
     return getDuration();
@@ -78,7 +78,7 @@ public abstract class CommonDiscoveryOutage<T> {
   @Schema(
       description = "Flag that indicates, if present and set to true, that the outage is only partial meaning that only a subset of normally available end points will be affected by the outage")
   @JsonProperty("isPartial")
-  public Boolean isPartial;
+  Boolean isPartial;
 
   public Boolean isPartial() {
     return getIsPartial();
@@ -96,7 +96,7 @@ public abstract class CommonDiscoveryOutage<T> {
   @JsonProperty("explanation")
   @NotNull
   @NonNull
-  public String explanation;
+  String explanation;
 
   public String explanation() {
     return getExplanation();

@@ -13,6 +13,7 @@ package io.biza.babelfish.cdr.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeBankingDomesticPayeePayId;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
@@ -30,6 +31,7 @@ import lombok.ToString;
 @Schema(description = "Domestic Payee PayID Detail")
 public abstract class BankingDomesticPayeePayId<T> {
   @Schema(description = "The name assigned to the PayID by the owner of the PayID")
+  @JsonProperty("name")
   String name;
 
   public String name() {
@@ -45,6 +47,7 @@ public abstract class BankingDomesticPayeePayId<T> {
   @Schema(description = "The identifier of the PayID (dependent on type)", required = true)
   @NonNull
   @NotNull
+  @JsonProperty("identifier")
   String identifier;
 
   public String identifier() {
@@ -60,6 +63,8 @@ public abstract class BankingDomesticPayeePayId<T> {
   @Schema(description = "The type of the PayID", required = true)
   @NonNull
   @NotNull
+  @JsonProperty("type")
+  @Valid
   PayloadTypeBankingDomesticPayeePayId type;
 
   public PayloadTypeBankingDomesticPayeePayId type() {

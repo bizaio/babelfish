@@ -36,7 +36,8 @@ public abstract class ResponseBankingScheduledPaymentsListData<T> {
   @JsonProperty("scheduledPayments")
   @NotNull
   @NonNull
-  public List<BankingScheduledPayment> scheduledPayments;
+  @Valid
+  List<BankingScheduledPayment> scheduledPayments;
 
   public List<BankingScheduledPayment> scheduledPayments() {
     return getScheduledPayments();

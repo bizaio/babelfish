@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr.model.banking;
 import java.math.BigDecimal;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductRateTierApplicationMethod;
 import io.biza.babelfish.cdr.v1.enumerations.CommonUnitOfMeasureType;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -33,6 +34,7 @@ public abstract class BankingProductRateTier<T> {
   @Schema(description = "A display name for the tier", required = true)
   @NonNull
   @NotNull
+  @JsonProperty("name")
   String name;
 
   public String name() {
@@ -50,6 +52,7 @@ public abstract class BankingProductRateTier<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("unitOfMeasure")
   CommonUnitOfMeasureType unitOfMeasure;
 
   public CommonUnitOfMeasureType unitOfMeasure() {
@@ -67,6 +70,7 @@ public abstract class BankingProductRateTier<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("minimumValue")
   BigDecimal minimumValue;
 
   public BigDecimal minimumValue() {
@@ -81,6 +85,7 @@ public abstract class BankingProductRateTier<T> {
 
   @Schema(
       description = "The number of tierUnitOfMeasure units that form the upper bound of the tier or band. For a tier with a discrete value (as opposed to a range of values e.g. 1 month) this must be the same as tierValueMinimum. Where this is the same as the tierValueMinimum value of the next-higher tier the referenced tier should be exclusive of this value. For example a term deposit of 2 months falls into the upper tier of the following tiers: (1 – 2 months, 2 – 3 months). If absent the tier's range has no upper bound.")
+  @JsonProperty("maximumValue")
   BigDecimal maximumValue;
 
   public BigDecimal maximumValue() {
@@ -95,6 +100,7 @@ public abstract class BankingProductRateTier<T> {
 
   @Schema(
       description = "The method used to calculate the amount to be applied using one or more tiers. A single rate may be applied to the entire balance or each applicable tier rate is applied to the portion of the balance that falls into that tier (referred to as 'bands' or 'steps')")
+  @JsonProperty("rateApplicationMethod")
   BankingProductRateTierApplicationMethod rateApplicationMethod;
 
   public BankingProductRateTierApplicationMethod rateApplicationMethod() {
@@ -108,6 +114,8 @@ public abstract class BankingProductRateTier<T> {
   }
 
   @Schema(description = "Banking Product Rate Applicability Conditions")
+  @JsonProperty("applicabilityConditions")
+  @Valid
   BankingProductRateTierApplicability<?> applicabilityConditions;
 
   public BankingProductRateTierApplicability<?> applicabilityConditions() {

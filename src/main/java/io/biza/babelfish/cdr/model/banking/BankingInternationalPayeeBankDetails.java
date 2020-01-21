@@ -15,6 +15,7 @@ import java.util.Locale;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.CountryStringToLocaleConverter;
@@ -39,6 +40,7 @@ public abstract class BankingInternationalPayeeBankDetails<T> {
       required = true)
   @JsonSerialize(converter = LocaleToCountryStringConverter.class)
   @JsonDeserialize(converter = CountryStringToLocaleConverter.class)
+  @JsonProperty("country")
   Locale country;
 
   public Locale country() {
@@ -54,6 +56,7 @@ public abstract class BankingInternationalPayeeBankDetails<T> {
   @Schema(description = "Account Targeted for payment", required = true)
   @NotNull
   @NonNull
+  @JsonProperty("accountNumber")
   String accountNumber;
 
   public String accountNumber() {
@@ -67,6 +70,8 @@ public abstract class BankingInternationalPayeeBankDetails<T> {
   }
 
   @Schema(description = "International Payee Bank Address Details")
+  @JsonProperty("bankAddress")
+  @Valid
   BankingInternationalPayeeBankDetailsBankAddress<?> bankAddress;
 
   public BankingInternationalPayeeBankDetailsBankAddress<?> bankAddress() {
@@ -82,6 +87,7 @@ public abstract class BankingInternationalPayeeBankDetails<T> {
   @Schema(
       description = "Swift bank code.  Aligns with standard [ISO 9362](https://www.iso.org/standard/60390.html)")
   // TODO: BIC Code Validation RFC9362
+  @JsonProperty("beneficiaryBankBIC")
   String beneficiaryBankBIC;
 
   public String beneficiaryBankBIC() {
@@ -95,6 +101,7 @@ public abstract class BankingInternationalPayeeBankDetails<T> {
   }
 
   @Schema(description = "Number for Fedwire payment (Federal Reserve Wire Network)")
+  @JsonProperty("fedWireNumber")
   String fedWireNumber;
 
   public String fedWireNumber() {
@@ -108,6 +115,7 @@ public abstract class BankingInternationalPayeeBankDetails<T> {
   }
 
   @Schema(description = "Sort code used for account identification in some jurisdictions")
+  @JsonProperty("sortCode")
   String sortCode;
 
   public String sortCode() {
@@ -121,6 +129,7 @@ public abstract class BankingInternationalPayeeBankDetails<T> {
   }
 
   @Schema(description = "Number for the Clearing House Interbank Payments System")
+  @JsonProperty("chipNumber")
   String chipNumber;
 
   public String chipNumber() {
@@ -134,6 +143,7 @@ public abstract class BankingInternationalPayeeBankDetails<T> {
   }
 
   @Schema(description = "International bank routing number")
+  @JsonProperty("routingNumber")
   String routingNumber;
 
   public String routingNumber() {
@@ -149,6 +159,7 @@ public abstract class BankingInternationalPayeeBankDetails<T> {
   @Schema(
       description = "The legal entity identifier (LEI) for the beneficiary.  Aligns with [ISO 17442](https://www.iso.org/standard/59771.html)")
   @Pattern(regexp = TypeConstants.ISO17442_PATTERN)
+  @JsonProperty("legalEntityIdentifier")
   String legalEntityIdentifier;
 
   public String legalEntityIdentifier() {

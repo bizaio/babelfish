@@ -13,6 +13,7 @@ package io.biza.babelfish.cdr.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -33,6 +34,7 @@ public abstract class BankingTransactionDetailExtendedDataX2p101Payload<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("extendedDescription")
   String extendedDescription;
 
   public String extendedDescription() {
@@ -46,6 +48,7 @@ public abstract class BankingTransactionDetailExtendedDataX2p101Payload<T> {
   }
 
   @Schema(description = "An end to end ID for the payment created at initiation")
+  @JsonProperty("endToEndId")
   String endToEndId;
 
   public String endToEndId() {
@@ -60,6 +63,7 @@ public abstract class BankingTransactionDetailExtendedDataX2p101Payload<T> {
 
   @Schema(
       description = "Purpose of the payment.  Format is defined by NPP standards for the x2p1.01 overlay service")
+  @JsonProperty("purposeCode")
   String purposeCode;
 
   public String purposeCode() {

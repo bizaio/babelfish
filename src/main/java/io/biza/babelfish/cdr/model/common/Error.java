@@ -34,7 +34,7 @@ public abstract class Error<T> {
   @JsonProperty("code")
   @NotNull
   @NonNull
-  public String code;
+  String code;
 
   public String code() {
     return getCode();
@@ -50,7 +50,7 @@ public abstract class Error<T> {
   @JsonProperty("title")
   @NotNull
   @NonNull
-  public String title;
+  String title;
 
   public String title() {
     return getTitle();
@@ -66,7 +66,7 @@ public abstract class Error<T> {
   @JsonProperty("detail")
   @NotNull
   @NonNull
-  public String detail;
+  String detail;
 
   public String detail() {
     return getDetail();
@@ -80,7 +80,7 @@ public abstract class Error<T> {
 
   @Schema(description = "Optional additional data for specific error types")
   @JsonProperty("meta")
-  public Object meta;
+  Object meta;
 
   public Object meta() {
     return getMeta();

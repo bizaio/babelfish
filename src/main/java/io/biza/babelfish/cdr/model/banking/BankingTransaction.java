@@ -16,6 +16,7 @@ import java.time.OffsetDateTime;
 import java.util.Currency;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.AmountStringToBigDecimalConverter;
@@ -44,6 +45,7 @@ public abstract class BankingTransaction<T> {
   @Schema(description = "ID of the account for which transactions are provided", required = true)
   @NonNull
   @NotNull
+  @JsonProperty("accountId")
   String accountId;
 
   public String accountId() {
@@ -60,6 +62,7 @@ public abstract class BankingTransaction<T> {
       description = "A unique ID of the transaction adhering to the standards for ID permanence. ")
   @NonNull
   @NotNull
+  @JsonProperty("transactionId")
   String transactionId;
 
   public String transactionId() {
@@ -77,6 +80,7 @@ public abstract class BankingTransaction<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("isDetailAvailable")
   Boolean isDetailAvailable;
 
   public Boolean isDetailAvailable() {
@@ -92,6 +96,7 @@ public abstract class BankingTransaction<T> {
   @Schema(description = "The type of the transaction", required = true)
   @NonNull
   @NotNull
+  @JsonProperty("type")
   BankingTransactionType type;
 
   public BankingTransactionType type() {
@@ -109,6 +114,7 @@ public abstract class BankingTransaction<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("status")
   BankingTransactionStatus status;
 
   public BankingTransactionStatus status() {
@@ -125,6 +131,7 @@ public abstract class BankingTransaction<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("description")
   String description;
 
   public String description() {
@@ -138,10 +145,11 @@ public abstract class BankingTransaction<T> {
   }
 
   @Schema(
-      description = "The time the transaction was posted. This field is Mandatory if the transaction has status POSTED.  This is the time that appears on a standard statement")
+      description = "The time the transaction was posted. This field is Mandatory if the transaction has status POSTED.  This is the time that appears on a standard statement", format = "date-time")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
-  private OffsetDateTime postingDateTime;
+  @JsonProperty("postingDateTime")
+  OffsetDateTime postingDateTime;
 
   public OffsetDateTime postingDateTime() {
     return getPostingDateTime();
@@ -154,10 +162,11 @@ public abstract class BankingTransaction<T> {
   }
 
   @Schema(
-      description = "Date and time at which assets become available to the account owner in case of a credit entry, or cease to be available to the account owner in case of a debit transaction entry")
+      description = "Date and time at which assets become available to the account owner in case of a credit entry, or cease to be available to the account owner in case of a debit transaction entry", format = "date-time")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
-  private OffsetDateTime valueDateTime;
+  @JsonProperty("valueDateTime")
+  OffsetDateTime valueDateTime;
 
   public OffsetDateTime valueDateTime() {
     return getValueDateTime();
@@ -170,10 +179,11 @@ public abstract class BankingTransaction<T> {
   }
 
   @Schema(
-      description = "The time the transaction was executed by the originating customer, if available")
+      description = "The time the transaction was executed by the originating customer, if available", format = "date-time")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
-  private OffsetDateTime executionDateTime;
+  @JsonProperty("executionDateTime")
+  OffsetDateTime executionDateTime;
 
   public OffsetDateTime executionDateTime() {
     return getExecutionDateTime();
@@ -192,7 +202,8 @@ public abstract class BankingTransaction<T> {
   @NotNull
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
-  private BigDecimal amount;
+  @JsonProperty("amount")
+  BigDecimal amount;
 
   public BigDecimal amount() {
     return getAmount();
@@ -208,6 +219,7 @@ public abstract class BankingTransaction<T> {
       type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
+  @JsonProperty("currency")
   Currency currency;
 
   public Currency currency() {
@@ -225,6 +237,7 @@ public abstract class BankingTransaction<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("reference")
   String reference;
 
   public String reference() {
@@ -238,6 +251,7 @@ public abstract class BankingTransaction<T> {
   }
 
   @Schema(description = "Name of the merchant for an outgoing payment to a merchant")
+  @JsonProperty("merchantName")
   String merchantName;
 
   public String merchantName() {
@@ -251,6 +265,7 @@ public abstract class BankingTransaction<T> {
   }
 
   @Schema(description = "The merchant category code (or MCC) for an outgoing payment to a merchant")
+  @JsonProperty("merchantCategoryCode")
   String merchantCategoryCode;
 
   public String merchantCategoryCode() {
@@ -264,6 +279,7 @@ public abstract class BankingTransaction<T> {
   }
 
   @Schema(description = "BPAY Biller Code for the transaction (if available)")
+  @JsonProperty("billerCode")
   String billerCode;
 
   public String billerCode() {
@@ -277,6 +293,7 @@ public abstract class BankingTransaction<T> {
   }
 
   @Schema(description = "Name of the BPAY biller for the transaction (if available)")
+  @JsonProperty("billerName")
   String billerName;
 
   public String billerName() {
@@ -290,6 +307,7 @@ public abstract class BankingTransaction<T> {
   }
 
   @Schema(description = "BPAY CRN for the transaction (if available)")
+  @JsonProperty("crn")
   String crn;
 
   public String crn() {
@@ -303,6 +321,7 @@ public abstract class BankingTransaction<T> {
   }
 
   @Schema(description = "6 Digit APCA number for the initiating institution")
+  @JsonProperty("apcaNumber")
   String apcaNumber;
 
   public String apcaNumber() {

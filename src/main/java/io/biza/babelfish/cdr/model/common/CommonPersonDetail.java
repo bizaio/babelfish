@@ -34,7 +34,8 @@ public abstract class CommonPersonDetail<T> extends CommonPerson<T> {
   @JsonProperty("phoneNumbers")
   @NonNull
   @NotNull
-  public List<CommonPhoneNumber<?>> phoneNumbers = List.of();
+  @Valid
+  List<CommonPhoneNumber<?>> phoneNumbers = List.of();
 
   public List<CommonPhoneNumber<?>> phoneNumbers() {
     return getPhoneNumbers();
@@ -50,7 +51,8 @@ public abstract class CommonPersonDetail<T> extends CommonPerson<T> {
   @JsonProperty("emailAddresses")
   @NonNull
   @NotNull
-  public List<CommonEmailAddress<?>> emailAddresses = List.of();
+  @Valid
+  List<CommonEmailAddress<?>> emailAddresses = List.of();
 
   public List<CommonEmailAddress<?>> emailAddresses() {
     return getEmailAddresses();
@@ -69,7 +71,8 @@ public abstract class CommonPersonDetail<T> extends CommonPerson<T> {
   @JsonProperty("physicalAddresses")
   @NotNull
   @NonNull
-  public List<CommonPhysicalAddressWithPurpose<?>> physicalAddresses = List.of();
+  @Valid
+  List<CommonPhysicalAddressWithPurpose<?>> physicalAddresses = List.of();
 
   public List<CommonPhysicalAddressWithPurpose<?>> physicalAddresses() {
     return getPhysicalAddresses();

@@ -35,7 +35,7 @@ public abstract class CommonPhysicalAddress<T> {
   @NotNull
   @NonNull
   @Valid
-  public PayloadTypeAddress type;
+  PayloadTypeAddress type;
 
   public PayloadTypeAddress type() {
     return getType();
@@ -49,7 +49,8 @@ public abstract class CommonPhysicalAddress<T> {
 
   @Schema(description = "Address in Simple Address format")
   @JsonProperty("simple")
-  public CommonSimpleAddress<?> simple;
+  @Valid
+  CommonSimpleAddress<?> simple;
 
   public CommonSimpleAddress<?> simple() {
     return getSimple();
@@ -63,7 +64,8 @@ public abstract class CommonPhysicalAddress<T> {
 
   @Schema(description = "Address in PAF Format")
   @JsonProperty("paf")
-  public CommonPAFAddress<?> paf;
+  @Valid
+  CommonPAFAddress<?> paf;
 
   public CommonPAFAddress<?> paf() {
     return getPaf();

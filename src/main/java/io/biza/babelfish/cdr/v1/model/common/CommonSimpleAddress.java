@@ -27,8 +27,8 @@ public class CommonSimpleAddress
   @AssertTrue(
       message = "Postcode and State must be correct when Country is defined as Australia (en-AU)")
   private boolean isAustralianFieldChecks() {
-    if (country.equals(Locale.forLanguageTag("en-AU"))) {
-      return postcode != null && state != null ? true : false;
+    if (country().equals(Locale.forLanguageTag("en-AU"))) {
+      return postcode() != null && state() != null ? true : false;
     }
     return true;
   }

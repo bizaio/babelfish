@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.AmountStringToBigDecimalConverter;
@@ -40,6 +41,7 @@ public abstract class BankingDirectDebit<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("accountId")
   String accountId;
 
   public String accountId() {
@@ -55,6 +57,7 @@ public abstract class BankingDirectDebit<T> {
   @Schema(required = true)
   @NonNull
   @NotNull
+  @JsonProperty("authorisedEntity")
   BankingAuthorisedEntity<?> authorisedEntity;
 
   public BankingAuthorisedEntity<?> authorisedEntity() {
@@ -68,9 +71,10 @@ public abstract class BankingDirectDebit<T> {
   }
 
   @Schema(description = "The date and time of the last debit executed under this authorisation",
-      type = "string")
+      type = "string", format = "date-time")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
+  @JsonProperty("lastDebitDateTime")
   OffsetDateTime lastDebitDateTime;
 
   public OffsetDateTime lastDebitDateTime() {
@@ -86,6 +90,7 @@ public abstract class BankingDirectDebit<T> {
   @Schema(description = "The amount of the last debit executed under this authorisation")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
+  @JsonProperty("lastDebitAmount")
   BigDecimal lastDebitAmount;
 
   public BigDecimal lastDebitAmount() {

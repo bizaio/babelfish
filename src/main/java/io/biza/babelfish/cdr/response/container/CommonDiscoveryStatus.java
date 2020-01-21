@@ -41,7 +41,7 @@ public abstract class CommonDiscoveryStatus<T> {
   @NotNull
   @NonNull
   @Valid
-  public CommonDiscoveryStatusType status;
+  CommonDiscoveryStatusType status;
 
   public CommonDiscoveryStatusType status() {
     return getStatus();
@@ -54,14 +54,14 @@ public abstract class CommonDiscoveryStatus<T> {
   }
 
   @Schema(description = "The date and time that this status was last updated by the Data Holder.",
-      required = true)
+      required = true, format = "date-time")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   @JsonProperty("updatedTime")
   @NotNull
   @NonNull
   @Valid
-  public OffsetDateTime updateTime;
+  OffsetDateTime updateTime;
 
   public OffsetDateTime updateTime() {
     return getUpdateTime();
@@ -76,7 +76,7 @@ public abstract class CommonDiscoveryStatus<T> {
   @Schema(
       description = "Provides an explanation of the current outage that can be displayed to an end customer. Mandatory if the status property is any value other than OK")
   @JsonProperty("explanation")
-  public String explanation;
+  String explanation;
 
   public String explanation() {
     return getExplanation();
@@ -89,11 +89,11 @@ public abstract class CommonDiscoveryStatus<T> {
   }
 
   @Schema(
-      description = "The date and time that the current outage was detected. Should only be present if the status property is PARTIAL_FAILURE or UNAVAILABLE")
+      description = "The date and time that the current outage was detected. Should only be present if the status property is PARTIAL_FAILURE or UNAVAILABLE", format = "date-time")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   @JsonProperty("detectionTime")
-  public OffsetDateTime detectionTime;
+  OffsetDateTime detectionTime;
 
   public OffsetDateTime detectionTime() {
     return getDetectionTime();
@@ -106,11 +106,11 @@ public abstract class CommonDiscoveryStatus<T> {
   }
 
   @Schema(
-      description = "The date and time that full service is expected to resume (if known). Should not be present if the status property has a value of OK.")
+      description = "The date and time that full service is expected to resume (if known). Should not be present if the status property has a value of OK.", format = "date-time")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   @JsonProperty("expectedResolutionTime")
-  public OffsetDateTime expectedResolutionTime;
+  OffsetDateTime expectedResolutionTime;
 
   public OffsetDateTime expectedResolutionTime() {
     return getExpectedResolutionTime();

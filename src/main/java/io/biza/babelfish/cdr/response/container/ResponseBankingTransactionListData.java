@@ -36,7 +36,8 @@ public abstract class ResponseBankingTransactionListData<T> {
   @JsonProperty("transactions")
   @NotNull
   @NonNull
-  public List<BankingTransaction> transactions;
+  @Valid
+  List<BankingTransaction> transactions;
 
   public List<BankingTransaction> transactions() {
     return getTransactions();

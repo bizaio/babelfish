@@ -14,7 +14,10 @@ package io.biza.babelfish.cdr.model.banking;
 import java.net.URI;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductEligibilityType;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -29,7 +32,6 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-
 @Schema(description = "Eligibility criteria to obtain a particular banking product")
 public abstract class BankingProductEligibility<T> {
   @Schema(
@@ -37,6 +39,7 @@ public abstract class BankingProductEligibility<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("eligibilityType")
   BankingProductEligibilityType eligibilityType;
 
   public BankingProductEligibilityType eligibilityType() {
@@ -51,6 +54,7 @@ public abstract class BankingProductEligibility<T> {
 
   @Schema(
       description = "Generic field containing additional information relevant to the [eligibilityType](#tocSproducteligibilitytypedoc) specified.  Whether mandatory or not is dependent on the value of [eligibilityType](#tocSproducteligibilitytypedoc)")
+  @JsonProperty("additionalValue")
   String additionalValue;
 
   public String additionalValue() {
@@ -65,6 +69,7 @@ public abstract class BankingProductEligibility<T> {
 
   @Schema(
       description = "Display text providing more information on the eligibility criteria. Mandatory if the [eligibilityType](#tocSproducteligibilitytypedoc) field is set to OTHER")
+  @JsonProperty("additionalInfo")
   String additionalInfo;
 
   public String additionalInfo() {
@@ -78,8 +83,10 @@ public abstract class BankingProductEligibility<T> {
   }
 
   @Schema(description = "Link to a web page with more information on this eligibility criteria",
-      type = "string")
+      type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
+  @JsonDeserialize(converter = UriStringToUriConverter.class)
+  @JsonProperty("additionalInfoUri")
   URI additionalInfoUri;
 
   public URI additionalInfoUri() {

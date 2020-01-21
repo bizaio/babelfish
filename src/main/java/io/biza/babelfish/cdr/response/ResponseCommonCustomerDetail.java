@@ -35,7 +35,8 @@ public abstract class ResponseCommonCustomerDetail<T> extends CDRResponse<T> {
   @JsonProperty("data")
   @NotNull
   @NonNull
-  public ResponseCommonCustomerDetailData<?> data;
+  @Valid
+  ResponseCommonCustomerDetailData<?> data;
 
   public ResponseCommonCustomerDetailData<?> data() {
     return getData();

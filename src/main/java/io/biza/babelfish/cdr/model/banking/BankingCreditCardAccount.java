@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.Currency;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.AmountStringToBigDecimalConverter;
@@ -45,6 +46,7 @@ public abstract class BankingCreditCardAccount<T> {
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   @NotNull
   @NonNull
+  @JsonProperty("minPaymentAmount")
   BigDecimal minPaymentAmount;
 
   public BigDecimal minPaymentAmount() {
@@ -63,6 +65,7 @@ public abstract class BankingCreditCardAccount<T> {
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   @NotNull
   @NonNull
+  @JsonProperty("paymentDueAmount")
   BigDecimal paymentDueAmount;
 
   public BigDecimal paymentDueAmount() {
@@ -78,6 +81,7 @@ public abstract class BankingCreditCardAccount<T> {
   @Schema(description = "If absent assumes AUD", type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
+  @JsonProperty("paymentCurrency")
   Currency paymentCurrency = Currency.getInstance("AUD");
 
   public Currency paymentCurrency() {
@@ -91,11 +95,12 @@ public abstract class BankingCreditCardAccount<T> {
   }
 
   @Schema(description = "Date that the next payment for the card is due", required = true,
-      type = "string")
+      type = "string", format = "date")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   @NotNull
   @NonNull
+  @JsonProperty("paymentDueDate")
   LocalDate paymentDueDate;
 
   public LocalDate paymentDueDate() {

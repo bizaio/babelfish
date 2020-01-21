@@ -3,3 +3,8 @@ The Babelfish Payload Converter enables the efficient translation of payloads as
 
 ## Unsupported Components
 BankingProductRateTier.subTier - We believe this is being deprecated at the moment.
+
+## TODO
+
+Add tests to do JSON -> POJO -> JSON verification beyond static object generate and compare
+

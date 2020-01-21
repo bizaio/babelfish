@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.util.Currency;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.AmountStringToBigDecimalConverter;
@@ -41,6 +42,7 @@ public abstract class BankingBalancePurse<T> {
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   @NonNull
   @NotNull
+  @JsonProperty("amount")
   BigDecimal amount;
 
   public BigDecimal amount() {
@@ -56,6 +58,7 @@ public abstract class BankingBalancePurse<T> {
   @Schema(description = "The currency for the purse")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
+  @JsonProperty("currency")
   Currency currency;
 
   public Currency currency() {

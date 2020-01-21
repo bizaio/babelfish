@@ -32,12 +32,12 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-
 @Schema(description = "Banking Payee Basic Information")
 public abstract class BankingPayee<T> {
   @Schema(description = "ID of the payee adhering to the rules of ID permanence", required = true)
   @NonNull
   @NotNull
+  @JsonProperty("payeeId")
   String payeeId;
 
   public String payeeId() {
@@ -54,6 +54,7 @@ public abstract class BankingPayee<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("nickname")
   String nickname;
 
   public String nickname() {
@@ -67,6 +68,7 @@ public abstract class BankingPayee<T> {
   }
 
   @Schema(description = "A description of the payee provided by the customer")
+  @JsonProperty("description")
   String description;
 
   public String description() {
@@ -97,9 +99,10 @@ public abstract class BankingPayee<T> {
     return (T) this;
   }
 
-  @Schema(description = "The date the payee was created by the customer", type = "string")
+  @Schema(description = "The date the payee was created by the customer", type = "string", format = "date")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
+  @JsonProperty("creationDate")
   private LocalDate creationDate;
 
   public LocalDate creationDate() {

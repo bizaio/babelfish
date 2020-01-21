@@ -12,6 +12,7 @@
 package io.biza.babelfish.cdr.model.banking;
 
 import javax.validation.Valid;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -28,6 +29,7 @@ import lombok.ToString;
 public abstract class BankingAuthorisedEntity<T> {
   @Schema(
       description = "Description of the authorised entity derived from previously executed direct debits")
+  @JsonProperty("description")
   String description;
 
   public String description() {
@@ -42,6 +44,7 @@ public abstract class BankingAuthorisedEntity<T> {
 
   @Schema(
       description = "Name of the financial institution through which the direct debit will be executed. Is required unless the payment is made via a credit card scheme")
+  @JsonProperty("financialInstitution")
   String financialInstitution;
 
   public String financialInstitution() {
@@ -55,6 +58,7 @@ public abstract class BankingAuthorisedEntity<T> {
   }
 
   @Schema(description = "Australian Business Number for the authorised entity")
+  @JsonProperty("abn")
   String abn;
 
   public String abn() {
@@ -68,6 +72,7 @@ public abstract class BankingAuthorisedEntity<T> {
   }
 
   @Schema(description = "Australian Company Number for the authorised entity")
+  @JsonProperty("acn")
   String acn;
 
   public String acn() {
@@ -81,6 +86,7 @@ public abstract class BankingAuthorisedEntity<T> {
   }
 
   @Schema(description = "Australian Registered Body Number for the authorised entity")
+  @JsonProperty("arbn")
   String arbn;
 
   public String arbn() {

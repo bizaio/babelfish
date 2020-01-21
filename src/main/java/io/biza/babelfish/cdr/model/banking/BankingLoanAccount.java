@@ -18,6 +18,7 @@ import java.util.Currency;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.AmountStringToBigDecimalConverter;
@@ -43,10 +44,11 @@ import lombok.ToString;
 
 @Schema(description = "Banking Loan Account Details")
 public abstract class BankingLoanAccount<T> {
-  @Schema(description = "Original Loan Start Date")
+  @Schema(description = "Original Loan Start Date", format = "date")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
-  private LocalDate originalStartDate;
+  @JsonProperty("originalStartDate")
+  LocalDate originalStartDate;
 
   public LocalDate originalStartDate() {
     return getOriginalStartDate();
@@ -61,7 +63,8 @@ public abstract class BankingLoanAccount<T> {
   @Schema(description = "Original Loan Value", type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
-  private BigDecimal originalLoanAmount;
+  @JsonProperty("originalLoanAmount")
+  BigDecimal originalLoanAmount;
 
   public BigDecimal originalLoanAmount() {
     return getOriginalLoanAmount();
@@ -76,6 +79,7 @@ public abstract class BankingLoanAccount<T> {
   @Schema(description = "Original Loan Value Currency")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
+  @JsonProperty("originalLoanCurrency")
   Currency originalLoanCurrency = Currency.getInstance("AUD");
 
   public Currency originalLoanCurrency() {
@@ -89,12 +93,13 @@ public abstract class BankingLoanAccount<T> {
   }
 
   @Schema(description = "Date that the loan is due to be repaid in full", required = true,
-      type = "string")
+      type = "string", format = "date")
   @NotNull
   @NonNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
-  private LocalDate loanEndDate;
+  @JsonProperty("loanEndDate")
+  LocalDate loanEndDate;
 
   public LocalDate loanEndDate() {
     return getLoanEndDate();
@@ -106,12 +111,13 @@ public abstract class BankingLoanAccount<T> {
     return (T) this;
   }
 
-  @Schema(description = "Next date that an instalment is required", required = true)
+  @Schema(description = "Next date that an instalment is required", required = true, format = "date")
   @NotNull
   @NonNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
-  private LocalDate nextInstalmentDate;
+  @JsonProperty("nextInstalmentDate")
+  LocalDate nextInstalmentDate;
 
   public LocalDate nextInstalmentDate() {
     return getNextInstalmentDate();
@@ -126,7 +132,8 @@ public abstract class BankingLoanAccount<T> {
   @Schema(description = "Minimum amount of next instalment", type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
-  private BigDecimal minInstalmentAmount;
+  @JsonProperty("minInstalmentAmount")
+  BigDecimal minInstalmentAmount;
 
   public BigDecimal minInstalmentAmount() {
     return getMinInstalmentAmount();
@@ -141,6 +148,7 @@ public abstract class BankingLoanAccount<T> {
   @Schema(description = "Minimum amount currency", type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
+  @JsonProperty("minInstalmentCurrency")
   Currency minInstalmentCurrency = Currency.getInstance("AUD");
 
   public Currency minInstalmentCurrency() {
@@ -158,7 +166,8 @@ public abstract class BankingLoanAccount<T> {
       type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
-  private BigDecimal maxRedraw;
+  @JsonProperty("maxRedraw")
+  BigDecimal maxRedraw;
 
   public BigDecimal maxRedraw() {
     return getMaxRedraw();
@@ -173,6 +182,7 @@ public abstract class BankingLoanAccount<T> {
   @Schema(description = "Maximum redraw amount currency")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
+  @JsonProperty("maxRedrawCurrency")
   Currency maxRedrawCurrency = Currency.getInstance("AUD");
 
   public Currency maxRedrawCurrency() {
@@ -188,6 +198,7 @@ public abstract class BankingLoanAccount<T> {
   @Schema(description = "Minimum redraw amount", type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
+  @JsonProperty("minRedraw")
   private BigDecimal minRedraw;
 
   public BigDecimal minRedraw() {
@@ -203,6 +214,7 @@ public abstract class BankingLoanAccount<T> {
   @Schema(description = "Minimum Redraw currency")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
+  @JsonProperty("minRedrawCurrency")
   Currency minRedrawCurrency = Currency.getInstance("AUD");
 
   public Currency minRedrawCurrency() {
@@ -217,6 +229,7 @@ public abstract class BankingLoanAccount<T> {
 
   @Schema(
       description = "Set to true if one or more offset accounts are configured for this loan account")
+  @JsonProperty("offsetAccountEnabled")
   Boolean offsetAccountEnabled;
 
   public Boolean offsetAccountEnabled() {
@@ -231,10 +244,12 @@ public abstract class BankingLoanAccount<T> {
 
   @Schema(
       description = "The accountIDs of the configured offset accounts attached to this loan. Only offset accounts that can be accessed under the current authorisation should be included. It is expected behaviour that offsetAccountEnabled is set to true but the offsetAccountIds field is absent or empty. This represents a situation where an offset account exists but details can not be accessed under the current authorisation")
+  @JsonProperty("offsetAccountIds")
   List<String> offsetAccountIds;
 
   @Schema(
       description = "Options in place for repayments. If absent defaults to PRINCIPAL_AND_INTEREST")
+  @JsonProperty("repaymentType")
   BankingLoanRepaymentType repaymentType = BankingLoanRepaymentType.PRINCIPAL_AND_INTEREST;
 
   public BankingLoanRepaymentType repaymentType() {
@@ -253,6 +268,7 @@ public abstract class BankingLoanAccount<T> {
   @NotNull
   @NonNull
   @JsonSerialize(converter = DurationToStringConverter.class)
+  @JsonProperty("repaymentFrequency")
   Duration repaymentFrequency;
 
   public Duration repaymentFrequency() {

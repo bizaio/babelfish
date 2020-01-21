@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.DateTimeStringToOffsetDateTimeConverter;
 import io.biza.babelfish.cdr.converters.OffsetDateTimeToDateTimeStringConverter;
+import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.exception.AttributeNotSupportedException;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductCategory;
@@ -39,6 +40,7 @@ public abstract class BankingProduct<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("productId")
   private String productId;
 
   public String productId() {
@@ -53,9 +55,10 @@ public abstract class BankingProduct<T> {
 
   @Schema(
       description = "The date and time from which this product is effective (ie. is available for origination).  Used to enable the articulation of products to the regime before they are available for customers to originate",
-      type = "string")
+      type = "string", format = "date-time")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
+  @JsonProperty("effectiveFrom")
   private OffsetDateTime effectiveFrom;
 
   public OffsetDateTime effectiveFrom() {
@@ -70,9 +73,10 @@ public abstract class BankingProduct<T> {
 
   @Schema(
       description = "The date and time at which this product will be retired and will no longer be offered.  Used to enable the managed deprecation of products",
-      type = "string")
+      type = "string", format = "date-time")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
+  @JsonProperty("effectiveTo")
   private OffsetDateTime effectiveTo;
 
   public OffsetDateTime effectiveTo() {
@@ -87,11 +91,12 @@ public abstract class BankingProduct<T> {
 
   @Schema(
       description = "The last date and time that the information for this product was changed (or the creation date for the product if it has never been altered)",
-      required = true, type = "string")
+      required = true, type = "string", format = "date-time")
   @NonNull
   @NotNull
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
+  @JsonProperty("lastUpdated")
   private OffsetDateTime lastUpdated;
 
   public OffsetDateTime lastUpdated() {
@@ -107,6 +112,7 @@ public abstract class BankingProduct<T> {
   @Schema(required = true)
   @NonNull
   @NotNull
+  @JsonProperty("productCategory")
   BankingProductCategory productCategory;
 
   public BankingProductCategory productCategory() {
@@ -122,6 +128,7 @@ public abstract class BankingProduct<T> {
   @Schema(description = "The display name of the product", required = true)
   @NonNull
   @NotNull
+  @JsonProperty("name")
   String name;
 
   public String name() {
@@ -137,6 +144,7 @@ public abstract class BankingProduct<T> {
   @Schema(description = "A description of the product", required = true)
   @NonNull
   @NotNull
+  @JsonProperty("description")
   String description;
 
   public String description() {
@@ -154,6 +162,7 @@ public abstract class BankingProduct<T> {
       required = true)
   @NonNull
   @NotNull
+  @JsonProperty("brand")
   String brand;
 
   public String brand() {
@@ -167,6 +176,7 @@ public abstract class BankingProduct<T> {
   }
 
   @Schema(description = "An optional display name of the brand")
+  @JsonProperty("brandName")
   String brandName;
 
   public String brandName() {
@@ -180,8 +190,10 @@ public abstract class BankingProduct<T> {
   }
 
   @Schema(description = "A link to an application web page where this product can be applied for.",
-      type = "string")
+      type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
+  @JsonDeserialize(converter = UriStringToUriConverter.class)
+  @JsonProperty("applicationUri")
   URI applicationUri;
 
   public URI applicationUri() {
@@ -214,6 +226,8 @@ public abstract class BankingProduct<T> {
   }
 
   @Schema(description = "Additional Information for Banking Product")
+  @JsonProperty("additionalInformation")
+  @Valid
   BankingProductAdditionalInformation<?> additionalInformation;
 
   public BankingProductAdditionalInformation<?> additionalInformation() {
@@ -227,6 +241,8 @@ public abstract class BankingProduct<T> {
   }
 
   @Schema(description = "An array of card art images")
+  @JsonProperty("cardArt")
+  @Valid
   List<BankingProductCardArt<?>> cardArt;
 
   public List<BankingProductCardArt<?>> cardArt() throws AttributeNotSupportedException {

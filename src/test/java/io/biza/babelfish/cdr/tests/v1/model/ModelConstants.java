@@ -19,6 +19,7 @@ import java.time.OffsetDateTime;
 import java.time.OffsetDateTime;
 import java.time.Period;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 import io.biza.babelfish.cdr.v1.enumerations.AddressPAFStateType;
 import io.biza.babelfish.cdr.v1.enumerations.AddressPurpose;
@@ -34,6 +35,7 @@ import io.biza.babelfish.cdr.v1.enumerations.BankingProductFeeType;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductLendingRateType;
 import io.biza.babelfish.cdr.v1.enumerations.BankingScheduledPaymentStatus;
 import io.biza.babelfish.cdr.v1.enumerations.BankingTermDepositMaturityInstructions;
+import io.biza.babelfish.cdr.v1.enumerations.BankingTransactionService;
 import io.biza.babelfish.cdr.v1.enumerations.BankingTransactionStatus;
 import io.biza.babelfish.cdr.v1.enumerations.BankingTransactionType;
 import io.biza.babelfish.cdr.v1.enumerations.CommonDiscoveryStatusType;
@@ -49,6 +51,7 @@ import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeBankingPayee;
 import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeBankingScheduledPaymentRecurrence;
 import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeBankingScheduledPaymentTo;
 import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeCustomer;
+import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeTransactionExtension;
 import io.biza.babelfish.cdr.v1.model.banking.BankingAccount;
 import io.biza.babelfish.cdr.v1.model.banking.BankingAccountDetail;
 import io.biza.babelfish.cdr.v1.model.banking.BankingAuthorisedEntity;
@@ -225,13 +228,6 @@ public class ModelConstants {
       new ResponseBankingAccountList().links(DEFAULT_LINKS_PAGINATED).meta(DEFAULT_META_PAGINATED)
           .data(DEFAULT_RESPONSE_BANKING_ACCOUNT_LIST_DATA);
 
-  public static final ResponseBankingScheduledPaymentsListData DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST_DATA =
-      new ResponseBankingScheduledPaymentsListData();
-
-  public static final ResponseBankingScheduledPaymentsList DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST =
-      new ResponseBankingScheduledPaymentsList().links(DEFAULT_LINKS_PAGINATED)
-          .meta(DEFAULT_META_PAGINATED).data(DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST_DATA);
-
   public static final BankingPayee DEFAULT_BANKING_PAYEE =
       new BankingPayee().payeeId(UUID.randomUUID().toString()).nickname("Payee Nickname")
           .payeeType(BankingPayeeType.DOMESTIC);
@@ -247,7 +243,7 @@ public class ModelConstants {
       new ResponseBankingAccountById().links(DEFAULT_LINKS).meta(DEFAULT_META)
           .data(DEFAULT_BANKING_ACCOUNT_DETAIL);
   public static final BankingTransactionDetailExtendedData DEFAULT_BANKING_TRANSACTION_DETAIL_EXTENDED_DATA =
-      new BankingTransactionDetailExtendedData();
+      new BankingTransactionDetailExtendedData().service(BankingTransactionService.X2P101);
 
   public static final BankingTransactionDetail DEFAULT_BANKING_TRANSACTION_DETAIL =
       new BankingTransactionDetail().accountId(UUID.randomUUID().toString())
@@ -286,9 +282,6 @@ public class ModelConstants {
       new ResponseBankingAccountsBalanceList().meta(DEFAULT_META_PAGINATED)
           .links(DEFAULT_LINKS_PAGINATED).data(DEFAULT_BANKING_ACCOUNTS_BALANCE_LIST_DATA);
 
-  public static final BankingPayeeDetail DEFAULT_PAYEE_DETAIL = new BankingPayeeDetail();
-  public static final ResponseBankingPayeeById DEFAULT_RESPONSE_BANKING_PAYEE_BY_ID =
-      new ResponseBankingPayeeById().links(DEFAULT_LINKS).data(DEFAULT_PAYEE_DETAIL);
 
   public static final BankingBalancePurse DEFAULT_BANKING_BALANCE_PURSE =
       new BankingBalancePurse().amount(new BigDecimal("100.00"));
@@ -304,9 +297,9 @@ public class ModelConstants {
           .identifier("valid@email.com");
 
   public static final BankingInternationalPayeeBeneficiaryDetails DEFAULT_BANKING_INTERNATIONAL_PAYEE_BENEFICIARY_DETAILS =
-      new BankingInternationalPayeeBeneficiaryDetails();
+      new BankingInternationalPayeeBeneficiaryDetails().country(Locale.forLanguageTag("en-AU"));
   public static final BankingInternationalPayeeBankDetails DEFAULT_BANKING_INTERNATIONAL_PAYEE_BANK_DETAILS =
-      new BankingInternationalPayeeBankDetails();
+      new BankingInternationalPayeeBankDetails().accountNumber("1234123412341234");
   public static final BankingAuthorisedEntity DEFAULT_BANKING_AUTHORISED_ENTITY =
       new BankingAuthorisedEntity();
 
@@ -439,5 +432,17 @@ public class ModelConstants {
       new ResponseCommonCustomerDetail().links(ModelConstants.DEFAULT_LINKS)
           .data(ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL_DATA);
 
+  public static final BankingPayeeDetail DEFAULT_PAYEE_DETAIL = new BankingPayeeDetail()
+      .type(PayloadTypeBankingPayee.DOMESTIC).payeeId(UUID.randomUUID().toString()).nickname("Default Payee Detail")
+      .payeeType(BankingPayeeType.DOMESTIC).domestic(DEFAULT_BANKING_DOMESTIC_PAYEE);
+  public static final ResponseBankingPayeeById DEFAULT_RESPONSE_BANKING_PAYEE_BY_ID =
+      new ResponseBankingPayeeById().links(DEFAULT_LINKS).data(DEFAULT_PAYEE_DETAIL);
+
+  public static final ResponseBankingScheduledPaymentsListData DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST_DATA =
+      new ResponseBankingScheduledPaymentsListData().scheduledPayments(List.of(DEFAULT_BANKING_SCHEDULED_PAYMENT));
+  
+  public static final ResponseBankingScheduledPaymentsList DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST =
+      new ResponseBankingScheduledPaymentsList().links(DEFAULT_LINKS_PAGINATED)
+          .meta(DEFAULT_META_PAGINATED).data(DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST_DATA);
 
 }

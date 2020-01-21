@@ -37,7 +37,7 @@ public abstract class RequestAccountIds<T> {
   @NotNull
   @NonNull
   @Valid
-  public AccountIdsList<?> data;
+  AccountIdsList<?> data;
 
   public AccountIdsList<?> data() {
     return getData();

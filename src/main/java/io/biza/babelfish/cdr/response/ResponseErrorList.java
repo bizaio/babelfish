@@ -34,8 +34,8 @@ public abstract class ResponseErrorList<T> {
   @NonNull
   @NotNull
   @JsonProperty("errors")
+  @Valid
   List<Error<?>> errors;
-
 
   public List<Error<?>> errors() {
     return getErrors();
