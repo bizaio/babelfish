@@ -33,7 +33,7 @@ import io.biza.babelfish.cdr.v1.enumerations.BankingProductFeeType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NonNull;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -42,6 +42,7 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
+@NoArgsConstructor
 @Schema(description = "Banking Product Fee Definition")
 public abstract class BankingProductFee<T> {
   @Schema(description = "Name of the fee", required = true)

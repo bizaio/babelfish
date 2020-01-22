@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr.v1.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
+import io.biza.babelfish.cdr.exception.LabelValueEnumValueNotSupportedException;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -46,13 +47,17 @@ public enum BankingPaymentNonBusinessDayTreatment implements LabelValueEnumInter
   }
 
   @JsonCreator
-  public static BankingPaymentNonBusinessDayTreatment fromValue(String text) {
+  public static BankingPaymentNonBusinessDayTreatment fromValue(String text)
+      throws LabelValueEnumValueNotSupportedException {
     for (BankingPaymentNonBusinessDayTreatment b : BankingPaymentNonBusinessDayTreatment.values()) {
       if (String.valueOf(b.value).equals(text)) {
         return b;
       }
     }
-    return null;
+    throw new LabelValueEnumValueNotSupportedException(
+        "Unable to identify value of BankingPaymentNonBusinessDayTreatment from " + text,
+        BankingPaymentNonBusinessDayTreatment.class.getSimpleName(),
+        BankingPaymentNonBusinessDayTreatment.values(), text);
   }
 
   @Override

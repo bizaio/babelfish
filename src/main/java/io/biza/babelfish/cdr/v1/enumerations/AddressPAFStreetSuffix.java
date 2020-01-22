@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr.v1.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
+import io.biza.babelfish.cdr.exception.LabelValueEnumValueNotSupportedException;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -49,13 +50,16 @@ public enum AddressPAFStreetSuffix implements LabelValueEnumInterface {
   }
 
   @JsonCreator
-  public static AddressPAFStreetSuffix fromValue(String text) {
+  public static AddressPAFStreetSuffix fromValue(String text)
+      throws LabelValueEnumValueNotSupportedException {
     for (AddressPAFStreetSuffix b : AddressPAFStreetSuffix.values()) {
       if (String.valueOf(b.value).equals(text)) {
         return b;
       }
     }
-    return null;
+    throw new LabelValueEnumValueNotSupportedException(
+        "Unable to identify value of AddressPAFStreetSuffix from " + text,
+        AddressPAFStreetSuffix.class.getSimpleName(), AddressPAFStreetSuffix.values(), text);
   }
 
   @Override

@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr.tests.v1.model.banking;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.math.BigDecimal;
+import java.util.List;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -140,15 +141,19 @@ public class BankingProductFeeDiscountV1Test {
   void bankingProductFeeDiscountEligibilityOnly() {
     BankingProductDiscount data = new BankingProductDiscount().description("Discount Description")
         .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.ELIGIBILITY_ONLY);
-
-    // Null Value is correct
+    
+    // No eligibility criteria is invalid
+    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    
+    data.eligibility(List.of(ModelConstants.DEFAULT_BANKING_PRODUCT_FEE_DISCOUNT_ELIGIBILITY));
+    
+    // With Eligibility is valid
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Any value specified is invalid
     data.additionalValue("Invalid");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    // TODO: Add tests for associated eligibility field population
 
   }
 

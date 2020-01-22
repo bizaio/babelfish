@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr.v1.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
+import io.biza.babelfish.cdr.exception.LabelValueEnumValueNotSupportedException;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -38,13 +39,16 @@ public enum BankingTransactionService implements LabelValueEnumInterface {
   }
 
   @JsonCreator
-  public static BankingTransactionService fromValue(String text) {
+  public static BankingTransactionService fromValue(String text)
+      throws LabelValueEnumValueNotSupportedException {
     for (BankingTransactionService b : BankingTransactionService.values()) {
       if (String.valueOf(b.value).equals(text)) {
         return b;
       }
     }
-    return null;
+    throw new LabelValueEnumValueNotSupportedException(
+        "Unable to identify value of BankingTransactionService from " + text,
+        BankingTransactionService.class.getSimpleName(), BankingTransactionService.values(), text);
   }
 
   @Override

@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr.v1.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
+import io.biza.babelfish.cdr.exception.LabelValueEnumValueNotSupportedException;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -51,13 +52,17 @@ public enum BankingProductDiscountEligibilityType implements LabelValueEnumInter
   }
 
   @JsonCreator
-  public static BankingProductDiscountEligibilityType fromValue(String text) {
+  public static BankingProductDiscountEligibilityType fromValue(String text)
+      throws LabelValueEnumValueNotSupportedException {
     for (BankingProductDiscountEligibilityType b : BankingProductDiscountEligibilityType.values()) {
       if (String.valueOf(b.value).equals(text)) {
         return b;
       }
     }
-    return null;
+    throw new LabelValueEnumValueNotSupportedException(
+        "Unable to identify value of BankingProductDiscountEligibilityType from " + text,
+        BankingProductDiscountEligibilityType.class.getSimpleName(),
+        BankingProductDiscountEligibilityType.values(), text);
   }
 
   @Override

@@ -32,6 +32,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 @Schema(description = "Banking Product Discount Eligibility Details")
+@JsonDeserialize(as = io.biza.babelfish.cdr.v1.model.banking.BankingProductFeeDiscountEligibility.class)
 public abstract class BankingProductFeeDiscountEligibility<T> {
   @Schema(description = "The type of the specific eligibility constraint for a discount",
       required = true)

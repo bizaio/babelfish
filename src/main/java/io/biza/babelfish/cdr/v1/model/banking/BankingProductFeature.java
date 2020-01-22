@@ -65,7 +65,7 @@ public class BankingProductFeature
         ? (Arrays.asList(new BankingProductFeatureType[] {BankingProductFeatureType.INTEREST_FREE,
             BankingProductFeatureType.INTEREST_FREE_TRANSFERS}).contains(featureType())
                 ? FormatChecker.isDefined(additionalValue())
-                    && FormatChecker.isDuration(additionalValue())
+                    && FormatChecker.isDurationString(additionalValue())
                 : true)
         : true;
   }

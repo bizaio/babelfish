@@ -65,7 +65,7 @@ public class BankingProductFeeDiscountEligibility extends
                 BankingProductDiscountEligibilityType.INTRODUCTORY})
             .contains(discountEligibilityType())
                 ? FormatChecker.isDefined(additionalValue())
-                    && FormatChecker.isDuration(additionalValue())
+                    && FormatChecker.isDurationString(additionalValue())
                 : true)
         : true;
   }

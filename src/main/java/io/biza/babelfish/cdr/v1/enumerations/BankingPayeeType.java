@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr.v1.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
+import io.biza.babelfish.cdr.exception.LabelValueEnumValueNotSupportedException;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -40,13 +41,16 @@ public enum BankingPayeeType implements LabelValueEnumInterface {
   }
 
   @JsonCreator
-  public static BankingPayeeType fromValue(String text) {
+  public static BankingPayeeType fromValue(String text)
+      throws LabelValueEnumValueNotSupportedException {
     for (BankingPayeeType b : BankingPayeeType.values()) {
       if (String.valueOf(b.value).equals(text)) {
         return b;
       }
     }
-    return null;
+    throw new LabelValueEnumValueNotSupportedException(
+        "Unable to identify value of BankingPayeeType from " + text,
+        BankingPayeeType.class.getSimpleName(), BankingPayeeType.values(), text);
   }
 
   @Override

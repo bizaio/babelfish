@@ -30,7 +30,7 @@ public class BankingProductFee
         ? (Arrays.asList(new BankingProductFeeType[] {BankingProductFeeType.PERIODIC})
             .contains(feeType())
                 ? FormatChecker.isDefined(additionalValue())
-                    && FormatChecker.isDuration(additionalValue())
+                    && FormatChecker.isDurationString(additionalValue())
                 : true)
         : true;
   }

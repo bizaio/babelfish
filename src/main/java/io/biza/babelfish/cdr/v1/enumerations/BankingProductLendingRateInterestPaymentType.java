@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr.v1.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
+import io.biza.babelfish.cdr.exception.LabelValueEnumValueNotSupportedException;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -40,14 +41,18 @@ public enum BankingProductLendingRateInterestPaymentType implements LabelValueEn
   }
 
   @JsonCreator
-  public static BankingProductLendingRateInterestPaymentType fromValue(String text) {
+  public static BankingProductLendingRateInterestPaymentType fromValue(String text)
+      throws LabelValueEnumValueNotSupportedException {
     for (BankingProductLendingRateInterestPaymentType b : BankingProductLendingRateInterestPaymentType
         .values()) {
       if (String.valueOf(b.value).equals(text)) {
         return b;
       }
     }
-    return null;
+    throw new LabelValueEnumValueNotSupportedException(
+        "Unable to identify value of BankingProductLendingRateInterestPaymentType from " + text,
+        BankingProductLendingRateInterestPaymentType.class.getSimpleName(),
+        BankingProductLendingRateInterestPaymentType.values(), text);
   }
 
   @Override

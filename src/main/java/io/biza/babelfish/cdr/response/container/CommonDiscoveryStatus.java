@@ -23,7 +23,6 @@ import io.biza.babelfish.cdr.v1.enumerations.CommonDiscoveryStatusType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 

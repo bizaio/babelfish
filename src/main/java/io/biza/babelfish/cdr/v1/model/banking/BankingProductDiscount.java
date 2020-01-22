@@ -26,6 +26,17 @@ import lombok.ToString;
 
 public class BankingProductDiscount
     extends io.biza.babelfish.cdr.model.banking.BankingProductDiscount<BankingProductDiscount> {
+  
+  @AssertTrue(message = "Eligibility Criteria must be populated when Discount type is ELIGIBILITY_ONLY")
+  private boolean isEligibilityPopulated() {
+    return FormatChecker.isDefined(discountType()) ? (Arrays
+        .asList(new BankingProductDiscountType[] {BankingProductDiscountType.ELIGIBILITY_ONLY})
+        .contains(discountType())
+            ? (eligibility() != null && eligibility().size() > 0)
+            : true)
+        : true;
+  }
+  
   @AssertTrue(
       message = "Additional Value must be an Amount String when Discount type is BALANCE, DEPOSITS or PAYMENTS")
   private boolean isValueAmount() {
@@ -45,7 +56,7 @@ public class BankingProductDiscount
         ? (Arrays.asList(new BankingProductDiscountType[] {BankingProductDiscountType.FEE_CAP})
             .contains(discountType())
                 ? FormatChecker.isDefined(additionalValue())
-                    && FormatChecker.isDuration(additionalValue())
+                    && FormatChecker.isDurationString(additionalValue())
                 : true)
         : true;
   }

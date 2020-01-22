@@ -175,6 +175,21 @@ public class FieldTypesTest {
     // Verify invalid rate value (wonky text)
     assertFalse(FormatChecker.isRateString("Invalid"));
   }
+  
+  @Test
+  @DisplayName("Verify Duration String")
+  void verifyDurationString() {
+    // Verify valid duration string
+    assertTrue(FormatChecker.isDurationString("P1M"));
+    // Negative durations are not allowed
+    assertFalse(FormatChecker.isDurationString("-P1M"));
+    // Zero durations are not allowed
+    assertFalse(FormatChecker.isDurationString("P0M"));
+    // Invalid duration string
+    assertFalse(FormatChecker.isDurationString("Invalid"));
+    // Invalid empty duration
+    assertFalse(FormatChecker.isDurationString(""));
+  }
 
   @Test
   @DisplayName("Verify Amount String")

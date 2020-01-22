@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr.v1.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
+import io.biza.babelfish.cdr.exception.LabelValueEnumValueNotSupportedException;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -45,13 +46,16 @@ public enum CommonWeekDay implements LabelValueEnumInterface {
   }
 
   @JsonCreator
-  public static CommonWeekDay fromValue(String text) {
+  public static CommonWeekDay fromValue(String text)
+      throws LabelValueEnumValueNotSupportedException {
     for (CommonWeekDay b : CommonWeekDay.values()) {
       if (String.valueOf(b.value).equals(text)) {
         return b;
       }
     }
-    return null;
+    throw new LabelValueEnumValueNotSupportedException(
+        "Unable to identify value of CommonWeekDay from " + text,
+        CommonWeekDay.class.getSimpleName(), CommonWeekDay.values(), text);
   }
 
   @Override

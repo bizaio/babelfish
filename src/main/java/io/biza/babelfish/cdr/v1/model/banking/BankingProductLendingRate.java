@@ -32,7 +32,7 @@ public class BankingProductLendingRate extends
             BankingProductLendingRateType.INTRODUCTORY, BankingProductLendingRateType.FIXED})
             .contains(lendingRateType())
                 ? FormatChecker.isDefined(additionalValue())
-                    && FormatChecker.isDuration(additionalValue())
+                    && FormatChecker.isDurationString(additionalValue())
                 : true)
         : true;
   }

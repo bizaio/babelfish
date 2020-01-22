@@ -167,10 +167,10 @@ public class FormatChecker {
     }
   }
 
-  public static Boolean isDuration(String duration) {
+  public static Boolean isDurationString(String duration) {
     try {
-      Duration.parse(duration);
-      return true;
+      Period period = Period.parse(duration);
+      return !period.isNegative() && !period.isZero();
     } catch (DateTimeParseException e) {
       return false;
     }

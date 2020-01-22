@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr.v1.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
+import io.biza.babelfish.cdr.exception.LabelValueEnumValueNotSupportedException;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -60,13 +61,16 @@ public enum BankingProductFeatureType implements LabelValueEnumInterface {
   }
 
   @JsonCreator
-  public static BankingProductFeatureType fromValue(String text) {
+  public static BankingProductFeatureType fromValue(String text) throws Exception {
     for (BankingProductFeatureType b : BankingProductFeatureType.values()) {
       if (String.valueOf(b.value).equals(text)) {
         return b;
       }
     }
-    return null;
+    throw new LabelValueEnumValueNotSupportedException(
+        "Unable to identify value of BankingProductFeatureType from " + text,
+        BankingProductFeatureType.class.getSimpleName(), BankingProductFeatureType.values(), text);
+
   }
 
   @Override

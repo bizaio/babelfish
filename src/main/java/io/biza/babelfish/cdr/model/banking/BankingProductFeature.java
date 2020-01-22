@@ -24,7 +24,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.ToString;
 
 @Data
@@ -32,7 +31,6 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-
 @Schema(description = "A Banking Product Feature")
 public abstract class BankingProductFeature<T> {
   @Schema(description = "The type of feature described", required = true)

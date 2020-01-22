@@ -27,7 +27,6 @@ import io.biza.babelfish.cdr.exception.AttributeNotSupportedException;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductCategory;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
 import lombok.ToString;
 
 @Valid

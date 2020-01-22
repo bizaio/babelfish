@@ -18,7 +18,6 @@ import io.biza.babelfish.cdr.model.common.LinksPaginated;
 import io.biza.babelfish.cdr.model.common.MetaPaginated;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 
 @Schema(description = "This is a Paginated CDR Response")

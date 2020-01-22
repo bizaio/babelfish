@@ -33,7 +33,7 @@ public class BankingProductDepositRate extends
         ? (Arrays.asList(new BankingProductDepositRateType[] {BankingProductDepositRateType.FIXED,
             BankingProductDepositRateType.INTRODUCTORY}).contains(depositRateType())
                 ? FormatChecker.isDefined(additionalValue())
-                    && FormatChecker.isDuration(additionalValue())
+                    && FormatChecker.isDurationString(additionalValue())
                 : true)
         : true;
   }
