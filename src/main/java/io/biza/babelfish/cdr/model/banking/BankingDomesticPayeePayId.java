@@ -45,7 +45,6 @@ public abstract class BankingDomesticPayeePayId<T> {
   }
 
   @Schema(description = "The identifier of the PayID (dependent on type)", required = true)
-  @NonNull
   @NotNull
   @JsonProperty("identifier")
   String identifier;
@@ -61,7 +60,6 @@ public abstract class BankingDomesticPayeePayId<T> {
   }
 
   @Schema(description = "The type of the PayID", required = true)
-  @NonNull
   @NotNull
   @JsonProperty("type")
   @Valid

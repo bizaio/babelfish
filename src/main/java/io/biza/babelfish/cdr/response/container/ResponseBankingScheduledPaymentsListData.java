@@ -35,7 +35,6 @@ public abstract class ResponseBankingScheduledPaymentsListData<T> {
   @Schema(description = "The list of scheduled payments to return", required = true)
   @JsonProperty("scheduledPayments")
   @NotNull
-  @NonNull
   @Valid
   List<BankingScheduledPayment> scheduledPayments;
 

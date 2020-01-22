@@ -35,7 +35,6 @@ public abstract class ResponseBankingTransactionListData<T> {
   @Schema(description = "The list of transactions", required = true)
   @JsonProperty("transactions")
   @NotNull
-  @NonNull
   @Valid
   List<BankingTransaction> transactions;
 

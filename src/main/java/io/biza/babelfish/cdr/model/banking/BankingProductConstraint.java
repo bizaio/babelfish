@@ -37,7 +37,6 @@ public abstract class BankingProductConstraint<T> {
   @Schema(
       description = "The type of constraint described.  See the next section for an overview of valid values and their meaning",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("constraintType")
   BankingProductConstraintType constraintType;

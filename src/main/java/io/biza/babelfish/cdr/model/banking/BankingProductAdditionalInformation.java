@@ -50,7 +50,7 @@ public abstract class BankingProductAdditionalInformation<T> {
   @Schema(description = "Terms and conditions for the product", type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
-  @JsonProperty("termsUri")  
+  @JsonProperty("termsUri")
   URI termsUri;
 
   public URI termsUri() {
@@ -63,7 +63,8 @@ public abstract class BankingProductAdditionalInformation<T> {
     return (T) this;
   }
 
-  @Schema(description = "Eligibility rules and criteria for the product", type = "string", format = "uri")
+  @Schema(description = "Eligibility rules and criteria for the product", type = "string",
+      format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("eligibilityUri")
@@ -97,7 +98,8 @@ public abstract class BankingProductAdditionalInformation<T> {
     return (T) this;
   }
 
-  @Schema(description = "Description of a bundle that this product can be part of", type = "string", format = "uri")
+  @Schema(description = "Description of a bundle that this product can be part of", type = "string",
+      format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("bundleUri")

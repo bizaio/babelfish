@@ -33,7 +33,6 @@ public abstract class CommonPhysicalAddress<T> {
   @Schema(description = "The type of address object present", required = true)
   @JsonProperty("addressUType")
   @NotNull
-  @NonNull
   @Valid
   PayloadTypeAddress type;
 

@@ -43,7 +43,6 @@ public abstract class CommonPhoneNumber<T> {
   @Schema(description = "The purpose of the number as specified by the customer", required = true)
   @JsonProperty("purpose")
   @NotNull
-  @NonNull
   CommonPhoneNumberPurpose purpose;
 
   public CommonPhoneNumberPurpose purpose() {

@@ -35,7 +35,6 @@ public abstract class ResponseCommonCustomerDetailData<T> {
   @Schema(description = "The type of customer object that is present", required = true)
   @JsonProperty("customerUType")
   @NotNull
-  @NonNull
   @Valid
   PayloadTypeCustomer type;
 

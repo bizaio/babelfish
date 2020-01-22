@@ -91,7 +91,6 @@ public abstract class BankingTransactionDetailExtendedData<T> {
   }
 
   @Schema(description = "Identifier of the applicable overlay service.", required = true)
-  @NonNull
   @NotNull
   @JsonProperty("service")
   @Valid

@@ -13,6 +13,7 @@ package io.biza.babelfish.cdr.model.banking;
 
 import java.net.URI;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -23,6 +24,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.ToString;
 
 @Data
@@ -35,6 +37,8 @@ import lombok.ToString;
 public abstract class BankingProductFeature<T> {
   @Schema(description = "The type of feature described", required = true)
   @JsonProperty("featureType")
+  @Valid
+  @NotNull
   BankingProductFeatureType featureType;
 
   public BankingProductFeatureType featureType() {
@@ -77,7 +81,8 @@ public abstract class BankingProductFeature<T> {
     return (T) this;
   }
 
-  @Schema(description = "Link to a web page with more information on this feature", type = "string", format = "uri")
+  @Schema(description = "Link to a web page with more information on this feature", type = "string",
+      format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("additionalInfoUri")

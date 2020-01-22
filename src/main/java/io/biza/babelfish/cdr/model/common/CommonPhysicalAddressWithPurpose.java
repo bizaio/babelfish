@@ -33,7 +33,6 @@ public abstract class CommonPhysicalAddressWithPurpose<T> extends CommonPhysical
       required = true)
   @JsonProperty("purpose")
   @NotNull
-  @NonNull
   AddressPurpose purpose;
 
   public AddressPurpose purpose() {

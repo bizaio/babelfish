@@ -35,7 +35,6 @@ public abstract class ResponseBankingDirectDebitAuthorisationListData<T> {
   @Schema(description = "The list of authorisations returned", required = true)
   @JsonProperty("directDebitAuthorisations")
   @NotNull
-  @NonNull
   @Valid
   List<BankingDirectDebit<?>> directDebitAuthorisations;
 

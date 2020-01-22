@@ -32,7 +32,8 @@ import lombok.ToString;
 @Schema(description = "Person definition in brief")
 public abstract class CommonPerson<T> {
   @Schema(
-      description = "The date and time that this record was last updated by the customer.  If no update has occurred then this date should reflect the initial creation date for the data", format = "date-time")
+      description = "The date and time that this record was last updated by the customer.  If no update has occurred then this date should reflect the initial creation date for the data",
+      format = "date-time")
   @JsonProperty("lastUpdateTime")
   OffsetDateTime lastUpdateTime;
 
@@ -65,7 +66,6 @@ public abstract class CommonPerson<T> {
       required = true)
   @JsonProperty("lastName")
   @NotNull
-  @NonNull
   String lastName;
 
   public String lastName() {
@@ -80,7 +80,6 @@ public abstract class CommonPerson<T> {
 
   @Schema(description = "Field is mandatory but array may be empty", required = true)
   @JsonProperty("middleNames")
-  @NonNull
   @NotNull
   List<String> middleNames = List.of();
 

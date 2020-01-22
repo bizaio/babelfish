@@ -29,7 +29,6 @@ public abstract class CDRResponsePaginated<T> {
   @Schema(description = "The Links Object", required = true)
   @JsonProperty("links")
   @NotNull
-  @NonNull
   @Valid
   LinksPaginated<?> links;
 
@@ -48,7 +47,6 @@ public abstract class CDRResponsePaginated<T> {
       required = true)
   @JsonProperty("meta")
   @NotNull
-  @NonNull
   @Valid
   MetaPaginated<?> meta;
 

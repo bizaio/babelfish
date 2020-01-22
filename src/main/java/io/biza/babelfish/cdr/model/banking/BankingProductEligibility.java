@@ -37,7 +37,6 @@ public abstract class BankingProductEligibility<T> {
   @Schema(
       description = "The type of eligibility criteria described.  See the next section for an overview of valid values and their meaning",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("eligibilityType")
   BankingProductEligibilityType eligibilityType;

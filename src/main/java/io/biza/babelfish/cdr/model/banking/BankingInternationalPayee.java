@@ -30,7 +30,6 @@ import lombok.ToString;
 @Schema(description = "International Payee Beneficiary and Bank Details")
 public abstract class BankingInternationalPayee<T> {
   @Schema(required = true)
-  @NonNull
   @NotNull
   @JsonProperty("beneficiaryDetails")
   @Valid
@@ -47,7 +46,6 @@ public abstract class BankingInternationalPayee<T> {
   }
 
   @Schema(required = true)
-  @NonNull
   @NotNull
   @JsonProperty("bankDetails")
   @Valid

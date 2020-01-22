@@ -32,7 +32,6 @@ import lombok.ToString;
 @Schema(description = "Defines the criteria and conditions for which a rate applies")
 public abstract class BankingProductRateTier<T> {
   @Schema(description = "A display name for the tier", required = true)
-  @NonNull
   @NotNull
   @JsonProperty("name")
   String name;
@@ -50,7 +49,6 @@ public abstract class BankingProductRateTier<T> {
   @Schema(
       description = "The unit of measure that applies to the tierValueMinimum and tierValueMaximum values e.g. 'DOLLAR', 'MONTH' (in the case of term deposit tiers), 'PERCENT' (in the case of loan-to-value ratio or LVR)",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("unitOfMeasure")
   CommonUnitOfMeasureType unitOfMeasure;
@@ -68,7 +66,6 @@ public abstract class BankingProductRateTier<T> {
   @Schema(
       description = "The number of tierUnitOfMeasure units that form the lower bound of the tier. The tier should be inclusive of this value",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("minimumValue")
   BigDecimal minimumValue;

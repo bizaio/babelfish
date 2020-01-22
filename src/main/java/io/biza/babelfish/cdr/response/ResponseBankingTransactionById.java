@@ -34,7 +34,6 @@ public abstract class ResponseBankingTransactionById<T> extends CDRResponse<T> {
   @Schema(required = true)
   @JsonProperty("data")
   @NotNull
-  @NonNull
   @Valid
   BankingTransactionDetail<?> data;
 

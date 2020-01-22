@@ -32,7 +32,6 @@ import lombok.ToString;
 public abstract class BankingDomesticPayee<T> {
   @Schema(description = "Type of account object included.", required = true)
   @NotNull
-  @NonNull
   @JsonProperty("payeeAccountUType")
   PayloadTypeBankingDomesticPayee payeeAccountType;
 

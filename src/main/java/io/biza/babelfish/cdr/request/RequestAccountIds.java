@@ -35,7 +35,6 @@ public abstract class RequestAccountIds<T> {
   @Schema(required = true)
   @JsonProperty("data")
   @NotNull
-  @NonNull
   @Valid
   AccountIdsList<?> data;
 

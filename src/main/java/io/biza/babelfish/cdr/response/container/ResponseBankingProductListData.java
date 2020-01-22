@@ -37,7 +37,6 @@ public abstract class ResponseBankingProductListData<T> {
       required = true)
   @JsonProperty("products")
   @NotNull
-  @NonNull
   @Valid
   List<BankingProduct<?>> products;
 

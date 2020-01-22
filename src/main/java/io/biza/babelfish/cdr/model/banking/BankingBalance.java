@@ -39,7 +39,6 @@ public abstract class BankingBalance<T> {
   @Schema(description = "A unique ID of the account adhering to the standards for ID permanence",
       required = true)
   @NotNull
-  @NonNull
   @JsonProperty("accountId")
   String accountId;
 
@@ -56,7 +55,6 @@ public abstract class BankingBalance<T> {
   @Schema(
       description = "The balance of the account at this time. Should align to the balance available via other channels such as Internet Banking. Assumed to be negative if the customer has money owing",
       required = true, type = "string")
-  @NonNull
   @NotNull
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonProperty("currentBalance")
@@ -75,7 +73,6 @@ public abstract class BankingBalance<T> {
   @Schema(
       description = "Balance representing the amount of funds available for transfer. Assumed to be zero or positive",
       required = true, type = "string")
-  @NonNull
   @NotNull
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)

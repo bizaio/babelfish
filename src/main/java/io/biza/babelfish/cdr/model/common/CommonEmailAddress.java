@@ -35,7 +35,6 @@ public abstract class CommonEmailAddress<T> {
       required = true)
   @JsonProperty("purpose")
   @NotNull
-  @NonNull
   CommonEmailAddressPurpose purpose;
 
   public CommonEmailAddressPurpose purpose() {
@@ -54,7 +53,6 @@ public abstract class CommonEmailAddress<T> {
   @Email
   @JsonProperty("address")
   @NotNull
-  @NonNull
   String address;
 
   public String address() {

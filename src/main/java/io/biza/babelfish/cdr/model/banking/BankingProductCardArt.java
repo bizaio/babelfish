@@ -35,7 +35,6 @@ import lombok.ToString;
 @Schema(description = "Banking Product Card Art", name = "BankingProductCardArt")
 public abstract class BankingProductCardArt<T> {
   @Schema(description = "Display label for the specific image", required = true)
-  @NonNull
   @NotNull
   @NotBlank
   @Valid

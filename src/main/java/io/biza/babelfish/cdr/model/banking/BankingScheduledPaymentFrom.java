@@ -31,7 +31,6 @@ import lombok.ToString;
 public abstract class BankingScheduledPaymentFrom<T> {
   @Schema(description = "ID of the account that is the source of funds for the payment",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("accountId")
   String accountId;

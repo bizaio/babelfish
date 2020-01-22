@@ -21,5 +21,5 @@ import lombok.ToString;
 
 
 public class BankingProductAdditionalInformation extends
-io.biza.babelfish.cdr.model.banking.BankingProductAdditionalInformation<BankingProductAdditionalInformation> {
+    io.biza.babelfish.cdr.model.banking.BankingProductAdditionalInformation<BankingProductAdditionalInformation> {
 }

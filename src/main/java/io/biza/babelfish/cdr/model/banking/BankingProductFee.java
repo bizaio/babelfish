@@ -45,7 +45,6 @@ import lombok.ToString;
 @Schema(description = "Banking Product Fee Definition")
 public abstract class BankingProductFee<T> {
   @Schema(description = "Name of the fee", required = true)
-  @NonNull
   @NotNull
   @JsonProperty("name")
   String name;
@@ -61,7 +60,6 @@ public abstract class BankingProductFee<T> {
   }
 
   @Schema(description = "The type of fee", required = true)
-  @NonNull
   @NotNull
   @JsonProperty("feeType")
   BankingProductFeeType feeType;
@@ -211,7 +209,8 @@ public abstract class BankingProductFee<T> {
     return (T) this;
   }
 
-  @Schema(description = "Link to a web page with more information on this fee", type = "string", format = "uri")
+  @Schema(description = "Link to a web page with more information on this fee", type = "string",
+      format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("additionalInfoUri")

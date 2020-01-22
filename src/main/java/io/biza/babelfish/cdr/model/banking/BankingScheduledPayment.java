@@ -33,7 +33,6 @@ public abstract class BankingScheduledPayment<T> {
   @Schema(
       description = "A unique ID of the scheduled payment adhering to the standards for ID permanence",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("scheduledPaymentId")
   String scheduledPaymentId;
@@ -65,7 +64,6 @@ public abstract class BankingScheduledPayment<T> {
   @Schema(
       description = "The reference for the transaction that will be used by the originating institution for the purposes of constructing a statement narrative on the payer’s account. Empty string if no data provided",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("payerReference")
   String payerReference;
@@ -83,7 +81,6 @@ public abstract class BankingScheduledPayment<T> {
   @Schema(
       description = "The reference for the transaction that will be provided by the originating institution. Empty string if no data provided",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("payeeReference")
   String payeeReference;
@@ -101,7 +98,6 @@ public abstract class BankingScheduledPayment<T> {
   @Schema(
       description = "Indicates whether the schedule is currently active. The value SKIP is equivalent to ACTIVE except that the customer has requested the next normal occurrence to be skipped.",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("status")
   BankingScheduledPaymentStatus status;
@@ -117,7 +113,6 @@ public abstract class BankingScheduledPayment<T> {
   }
 
   @Schema(required = true)
-  @NonNull
   @NotNull
   @JsonProperty("from")
   @Valid
@@ -134,7 +129,6 @@ public abstract class BankingScheduledPayment<T> {
   }
 
   @Schema(required = true)
-  @NonNull
   @NotNull
   @JsonProperty("paymentSet")
   @Valid
@@ -151,7 +145,6 @@ public abstract class BankingScheduledPayment<T> {
   }
 
   @Schema(required = true)
-  @NonNull
   @NotNull
   @JsonProperty("recurrence")
   @Valid

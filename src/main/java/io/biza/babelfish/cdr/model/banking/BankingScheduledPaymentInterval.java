@@ -36,7 +36,6 @@ public abstract class BankingScheduledPaymentInterval<T> {
   @Schema(
       description = "An interval for the payment. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations) with components less than a day in length ignored. This duration defines the period between payments starting with nextPaymentDate",
       required = true, type = "string")
-  @NonNull
   @NotNull
   @JsonSerialize(converter = PeriodToStringConverter.class)
   @JsonDeserialize(converter = StringToPeriodConverter.class)

@@ -45,7 +45,6 @@ public abstract class BankingProductDepositRate<T> {
   @Schema(
       description = "The type of rate (base, bonus, etc). See the next section for an overview of valid values and their meaning",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("depositRateType")
   BankingProductDepositRateType depositRateType;
@@ -61,7 +60,6 @@ public abstract class BankingProductDepositRate<T> {
   }
 
   @Schema(description = "The rate to be applied", required = true, type = "string")
-  @NonNull
   @NotNull
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
@@ -158,7 +156,8 @@ public abstract class BankingProductDepositRate<T> {
     return (T) this;
   }
 
-  @Schema(description = "Link to a web page with more information on this rate", type = "string", format = "uri")
+  @Schema(description = "Link to a web page with more information on this rate", type = "string",
+      format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("additionalInfoUri")

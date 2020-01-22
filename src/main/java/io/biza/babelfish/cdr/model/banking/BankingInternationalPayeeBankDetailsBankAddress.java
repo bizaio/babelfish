@@ -30,7 +30,6 @@ import lombok.ToString;
 @Schema(description = "International Payee Bank Address Details")
 public abstract class BankingInternationalPayeeBankDetailsBankAddress<T> {
   @Schema(description = "Name of the recipient Bank", required = true)
-  @NonNull
   @NotNull
   @JsonProperty("name")
   String name;
@@ -46,7 +45,6 @@ public abstract class BankingInternationalPayeeBankDetailsBankAddress<T> {
   }
 
   @Schema(description = "Address of the recipient Bank", required = true)
-  @NonNull
   @NotNull
   @JsonProperty("address")
   String address;

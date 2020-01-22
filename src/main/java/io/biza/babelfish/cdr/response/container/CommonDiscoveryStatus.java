@@ -39,7 +39,6 @@ public abstract class CommonDiscoveryStatus<T> {
       required = true)
   @JsonProperty("status")
   @NotNull
-  @NonNull
   @Valid
   CommonDiscoveryStatusType status;
 
@@ -59,7 +58,6 @@ public abstract class CommonDiscoveryStatus<T> {
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   @JsonProperty("updatedTime")
   @NotNull
-  @NonNull
   @Valid
   OffsetDateTime updateTime;
 
@@ -89,7 +87,8 @@ public abstract class CommonDiscoveryStatus<T> {
   }
 
   @Schema(
-      description = "The date and time that the current outage was detected. Should only be present if the status property is PARTIAL_FAILURE or UNAVAILABLE", format = "date-time")
+      description = "The date and time that the current outage was detected. Should only be present if the status property is PARTIAL_FAILURE or UNAVAILABLE",
+      format = "date-time")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   @JsonProperty("detectionTime")
@@ -106,7 +105,8 @@ public abstract class CommonDiscoveryStatus<T> {
   }
 
   @Schema(
-      description = "The date and time that full service is expected to resume (if known). Should not be present if the status property has a value of OK.", format = "date-time")
+      description = "The date and time that full service is expected to resume (if known). Should not be present if the status property has a value of OK.",
+      format = "date-time")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   @JsonProperty("expectedResolutionTime")

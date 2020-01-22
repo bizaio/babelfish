@@ -32,7 +32,6 @@ public abstract class CommonPersonDetail<T> extends CommonPerson<T> {
   @Schema(description = "Array is mandatory but may be empty if no phone numbers are held",
       required = true)
   @JsonProperty("phoneNumbers")
-  @NonNull
   @NotNull
   @Valid
   List<CommonPhoneNumber<?>> phoneNumbers = List.of();
@@ -49,7 +48,6 @@ public abstract class CommonPersonDetail<T> extends CommonPerson<T> {
 
   @Schema(description = "May be empty", required = true)
   @JsonProperty("emailAddresses")
-  @NonNull
   @NotNull
   @Valid
   List<CommonEmailAddress<?>> emailAddresses = List.of();
@@ -70,7 +68,6 @@ public abstract class CommonPersonDetail<T> extends CommonPerson<T> {
       required = true)
   @JsonProperty("physicalAddresses")
   @NotNull
-  @NonNull
   @Valid
   List<CommonPhysicalAddressWithPurpose<?>> physicalAddresses = List.of();
 

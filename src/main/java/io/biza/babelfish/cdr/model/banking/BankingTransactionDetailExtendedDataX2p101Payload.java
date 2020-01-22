@@ -32,7 +32,6 @@ public abstract class BankingTransactionDetailExtendedDataX2p101Payload<T> {
   @Schema(
       description = "An extended string description. Only present if specified by the extensionUType field",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("extendedDescription")
   String extendedDescription;

@@ -43,7 +43,6 @@ import lombok.ToString;
 @Schema(description = "Banking Transaction Brief Definition")
 public abstract class BankingTransaction<T> {
   @Schema(description = "ID of the account for which transactions are provided", required = true)
-  @NonNull
   @NotNull
   @JsonProperty("accountId")
   String accountId;
@@ -60,7 +59,6 @@ public abstract class BankingTransaction<T> {
 
   @Schema(
       description = "A unique ID of the transaction adhering to the standards for ID permanence. ")
-  @NonNull
   @NotNull
   @JsonProperty("transactionId")
   String transactionId;
@@ -78,7 +76,6 @@ public abstract class BankingTransaction<T> {
   @Schema(
       description = "True if extended information is available using the transaction detail end point. False if extended data is not available",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("isDetailAvailable")
   Boolean isDetailAvailable;
@@ -94,7 +91,6 @@ public abstract class BankingTransaction<T> {
   }
 
   @Schema(description = "The type of the transaction", required = true)
-  @NonNull
   @NotNull
   @JsonProperty("type")
   BankingTransactionType type;
@@ -112,7 +108,6 @@ public abstract class BankingTransaction<T> {
   @Schema(
       description = "Status of the transaction whether pending or posted. Note that there is currently no provision in the standards to guarantee the ability to correlate a pending transaction with an associated posted transaction",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("status")
   BankingTransactionStatus status;
@@ -129,7 +124,6 @@ public abstract class BankingTransaction<T> {
 
   @Schema(description = "The transaction description as applied by the financial institution",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("description")
   String description;
@@ -145,7 +139,8 @@ public abstract class BankingTransaction<T> {
   }
 
   @Schema(
-      description = "The time the transaction was posted. This field is Mandatory if the transaction has status POSTED.  This is the time that appears on a standard statement", format = "date-time")
+      description = "The time the transaction was posted. This field is Mandatory if the transaction has status POSTED.  This is the time that appears on a standard statement",
+      format = "date-time")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   @JsonProperty("postingDateTime")
@@ -162,7 +157,8 @@ public abstract class BankingTransaction<T> {
   }
 
   @Schema(
-      description = "Date and time at which assets become available to the account owner in case of a credit entry, or cease to be available to the account owner in case of a debit transaction entry", format = "date-time")
+      description = "Date and time at which assets become available to the account owner in case of a credit entry, or cease to be available to the account owner in case of a debit transaction entry",
+      format = "date-time")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   @JsonProperty("valueDateTime")
@@ -179,7 +175,8 @@ public abstract class BankingTransaction<T> {
   }
 
   @Schema(
-      description = "The time the transaction was executed by the originating customer, if available", format = "date-time")
+      description = "The time the transaction was executed by the originating customer, if available",
+      format = "date-time")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   @JsonProperty("executionDateTime")
@@ -198,7 +195,6 @@ public abstract class BankingTransaction<T> {
   @Schema(
       description = "The value of the transaction. Negative values mean money was outgoing from the account",
       required = true, type = "string")
-  @NonNull
   @NotNull
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
@@ -235,7 +231,6 @@ public abstract class BankingTransaction<T> {
   @Schema(
       description = "The reference for the transaction provided by the originating institution. Empty string if no data provided",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("reference")
   String reference;

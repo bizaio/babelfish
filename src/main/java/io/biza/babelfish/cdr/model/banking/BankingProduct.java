@@ -38,7 +38,6 @@ public abstract class BankingProduct<T> {
   @Schema(
       description = "A data holder specific unique identifier for this product. This identifier must be unique to a product but does not otherwise need to adhere to ID permanence guidelines.",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("productId")
   private String productId;
@@ -92,7 +91,6 @@ public abstract class BankingProduct<T> {
   @Schema(
       description = "The last date and time that the information for this product was changed (or the creation date for the product if it has never been altered)",
       required = true, type = "string", format = "date-time")
-  @NonNull
   @NotNull
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
@@ -110,7 +108,6 @@ public abstract class BankingProduct<T> {
   }
 
   @Schema(required = true)
-  @NonNull
   @NotNull
   @JsonProperty("productCategory")
   BankingProductCategory productCategory;
@@ -126,7 +123,6 @@ public abstract class BankingProduct<T> {
   }
 
   @Schema(description = "The display name of the product", required = true)
-  @NonNull
   @NotNull
   @JsonProperty("name")
   String name;
@@ -142,7 +138,6 @@ public abstract class BankingProduct<T> {
   }
 
   @Schema(description = "A description of the product", required = true)
-  @NonNull
   @NotNull
   @JsonProperty("description")
   String description;
@@ -160,7 +155,6 @@ public abstract class BankingProduct<T> {
   @Schema(
       description = "A label of the brand for the product. Able to be used for filtering. For data holders with single brands this value is still required",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("brand")
   String brand;
@@ -210,7 +204,6 @@ public abstract class BankingProduct<T> {
   @Schema(
       description = "Indicates whether the product is specifically tailored to a circumstance.  In this case fees and prices are significantly negotiated depending on context. While all products are open to a degree of tailoring this flag indicates that tailoring is expected and thus that the provision of specific fees and rates is not applicable",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("isTailored")
   Boolean tailored;

@@ -34,7 +34,6 @@ public abstract class AccountIdsList<T> {
   @Schema(description = "List of Account Identifiers", required = true)
   @JsonProperty("accountIds")
   @NotNull
-  @NonNull
   @NotEmpty(message = "At least one account identifier is required")
   @Valid
   List<String> accountIds;

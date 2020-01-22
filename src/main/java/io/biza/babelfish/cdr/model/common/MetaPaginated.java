@@ -32,7 +32,6 @@ public abstract class MetaPaginated<T> extends Meta<T> {
   @Schema(description = "The total number of records in the full set.", required = true)
   @JsonProperty("totalRecords")
   @NotNull
-  @NonNull
   @Min(0)
   @Valid
   Integer totalRecords;
@@ -50,7 +49,6 @@ public abstract class MetaPaginated<T> extends Meta<T> {
   @Schema(description = "The total number of pages in the full set.", required = true)
   @JsonProperty("totalPages")
   @NotNull
-  @NonNull
   @Min(0)
   @Valid
   Integer totalPages;

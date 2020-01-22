@@ -35,7 +35,6 @@ public abstract class ResponseBankingPayeeListData<T> {
   @Schema(description = "The list of authorisations returned", required = true)
   @JsonProperty("payees")
   @NotNull
-  @NonNull
   @Valid
   List<BankingPayee<?>> payees;
 

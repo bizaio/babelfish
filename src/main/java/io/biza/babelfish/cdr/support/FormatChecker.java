@@ -244,8 +244,7 @@ public class FormatChecker {
 
   public static Boolean isDateTimeString(String input) {
     try {
-      OffsetDateTime localDateTime =
-          OffsetDateTime.parse(input);
+      OffsetDateTime localDateTime = OffsetDateTime.parse(input);
       return input.equals(localDateTime.format(Constants.CDR_DATETIMESTRING_FORMATTER));
     } catch (Exception e) {
       return false;

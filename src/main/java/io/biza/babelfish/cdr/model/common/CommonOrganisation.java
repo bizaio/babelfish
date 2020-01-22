@@ -42,7 +42,8 @@ import lombok.ToString;
 @Schema(description = "Organisation Definition in Brief")
 public abstract class CommonOrganisation<T> {
   @Schema(
-      description = "The date and time that this record was last updated by the customer. If no update has occurred then this date should reflect the initial creation date for the data", format = "date-time")
+      description = "The date and time that this record was last updated by the customer. If no update has occurred then this date should reflect the initial creation date for the data",
+      format = "date-time")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   @JsonProperty("lastUpdateTime")
@@ -77,7 +78,6 @@ public abstract class CommonOrganisation<T> {
       description = "The last name of the individual providing access on behalf of the organisation. For people with single names the single name should be in this field",
       required = true)
   @JsonProperty("agentLastName")
-  @NonNull
   @NotNull
   @Valid
   String agentLastName;
@@ -97,7 +97,6 @@ public abstract class CommonOrganisation<T> {
       required = true)
   @JsonProperty("agentRole")
   @NotNull
-  @NonNull
   @Valid
   String agentRole = "Unspecified";
 
@@ -113,7 +112,6 @@ public abstract class CommonOrganisation<T> {
 
   @Schema(description = "Name of the organisation", required = true)
   @JsonProperty("businessName")
-  @NonNull
   @NotNull
   @Valid
   String businessName;
@@ -216,7 +214,6 @@ public abstract class CommonOrganisation<T> {
 
   @Schema(description = "Legal organisation type", required = true)
   @JsonProperty("organisationType")
-  @NonNull
   @NotNull
   @Valid
   CommonOrganisationType organisationType;

@@ -44,7 +44,6 @@ public abstract class BankingDomesticPayeeAccount<T> {
   }
 
   @Schema(description = "BSB of the account to pay to", required = true)
-  @NonNull
   @NotNull
   @JsonProperty("bsb")
   String bsb;
@@ -60,7 +59,6 @@ public abstract class BankingDomesticPayeeAccount<T> {
   }
 
   @Schema(description = "Number of the account to pay to", required = true)
-  @NonNull
   @NotNull
   @JsonProperty("accountNumber")
   String accountNumber;

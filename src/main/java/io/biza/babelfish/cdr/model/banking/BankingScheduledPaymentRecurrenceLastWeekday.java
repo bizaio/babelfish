@@ -46,7 +46,7 @@ public abstract class BankingScheduledPaymentRecurrenceLastWeekday<T> {
       type = "string", format = "date")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
-  @JsonProperty("finalPaymentDate")  
+  @JsonProperty("finalPaymentDate")
   LocalDate finalPaymentDate;
 
   public LocalDate finalPaymentDate() {
@@ -62,7 +62,7 @@ public abstract class BankingScheduledPaymentRecurrenceLastWeekday<T> {
   @Schema(
       description = "Indicates the number of payments remaining in the schedule. If both finalPaymentDate and paymentsRemaining are present then payments will stop according to the most constraining value. If neither field is present the payments will continue indefinitely")
   @Min(1)
-  @JsonProperty("paymentsRemaining")  
+  @JsonProperty("paymentsRemaining")
   Integer paymentsRemaining;
 
   public Integer paymentsRemaining() {
@@ -78,11 +78,10 @@ public abstract class BankingScheduledPaymentRecurrenceLastWeekday<T> {
   @Schema(
       description = "The interval for the payment. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations) with components less than a day in length ignored. This duration defines the period between payments starting with nextPaymentDate",
       required = true, type = "string")
-  @NonNull
   @NotNull
   @JsonSerialize(converter = PeriodToStringConverter.class)
   @JsonDeserialize(converter = StringToPeriodConverter.class)
-  @JsonProperty("interval")  
+  @JsonProperty("interval")
   Period interval;
 
   public Period interval() {
@@ -98,9 +97,8 @@ public abstract class BankingScheduledPaymentRecurrenceLastWeekday<T> {
   @Schema(
       description = "The weekDay specified. The payment will occur on the last occurrence of this weekday in the interval.",
       required = true)
-  @NonNull
   @NotNull
-  @JsonProperty("lastWeekDay")  
+  @JsonProperty("lastWeekDay")
   CommonWeekDay lastWeekDay;
 
   public CommonWeekDay lastWeekDay() {
@@ -115,7 +113,7 @@ public abstract class BankingScheduledPaymentRecurrenceLastWeekday<T> {
 
   @Schema(
       description = "Enumerated field giving the treatment where a scheduled payment date is not a business day. If absent assumed to be ON")
-  @JsonProperty("nonBusinessDayTreatment")  
+  @JsonProperty("nonBusinessDayTreatment")
   BankingPaymentNonBusinessDayTreatment nonBusinessDayTreatment =
       BankingPaymentNonBusinessDayTreatment.ON;
 

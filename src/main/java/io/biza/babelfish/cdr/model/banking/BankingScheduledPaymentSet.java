@@ -40,11 +40,11 @@ import lombok.ToString;
     description = "The set of payment amounts and destination accounts for this payment accommodating multi-part payments. A single entry indicates a simple payment with one destination account. Must have at least one entry")
 public abstract class BankingScheduledPaymentSet<T> {
   @Schema(required = true)
-  @NonNull
   @NotNull
   @JsonProperty("to")
   @Valid
   BankingScheduledPaymentTo<?> to;
+
   public BankingScheduledPaymentTo<?> to() {
     return getTo();
   }

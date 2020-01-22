@@ -32,7 +32,6 @@ public abstract class BankingScheduledPaymentRecurrenceEventBased<T> {
   @Schema(
       description = "Description of the event and conditions that will result in the payment. Expected to be formatted for display to a customer",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("description")
   String description;

@@ -36,11 +36,10 @@ import lombok.ToString;
 public abstract class BankingScheduledPaymentRecurrenceOnceOff<T> {
   @Schema(description = "The scheduled date for the once off payment", required = true,
       type = "string", format = "date")
-  @NonNull
   @NotNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
-  @JsonProperty("nonBusinessDayTreatment")  
+  @JsonProperty("nonBusinessDayTreatment")
   LocalDate paymentDate;
 
   public LocalDate paymentDate() {

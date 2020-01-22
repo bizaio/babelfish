@@ -31,7 +31,6 @@ import lombok.ToString;
 public abstract class BankingTransactionDetail<T> extends BankingTransaction<T> {
 
   @Schema(required = true)
-  @NonNull
   @NotNull
   @JsonProperty("extendedData")
   @Valid

@@ -39,7 +39,6 @@ import lombok.ToString;
 @Schema(name = "BankingProductDiscount", description = "Banking Product Discount Specification")
 public abstract class BankingProductDiscount<T> {
   @Schema(description = "Description of the discount", required = true)
-  @NonNull
   @NotNull
   @JsonProperty("description")
   String description;
@@ -57,7 +56,6 @@ public abstract class BankingProductDiscount<T> {
   @Schema(
       description = "The type of discount. See the next section for an overview of valid values and their meaning",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("discountType")
   BankingProductDiscountType discountType;

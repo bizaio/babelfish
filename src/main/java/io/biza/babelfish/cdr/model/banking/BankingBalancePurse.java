@@ -40,7 +40,6 @@ public abstract class BankingBalancePurse<T> {
   @Schema(description = "The balance available for this additional currency purse", required = true)
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
-  @NonNull
   @NotNull
   @JsonProperty("amount")
   BigDecimal amount;

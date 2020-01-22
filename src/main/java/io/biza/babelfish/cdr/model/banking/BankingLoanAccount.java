@@ -95,7 +95,6 @@ public abstract class BankingLoanAccount<T> {
   @Schema(description = "Date that the loan is due to be repaid in full", required = true,
       type = "string", format = "date")
   @NotNull
-  @NonNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   @JsonProperty("loanEndDate")
@@ -111,9 +110,9 @@ public abstract class BankingLoanAccount<T> {
     return (T) this;
   }
 
-  @Schema(description = "Next date that an instalment is required", required = true, format = "date")
+  @Schema(description = "Next date that an instalment is required", required = true,
+      format = "date")
   @NotNull
-  @NonNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   @JsonProperty("nextInstalmentDate")
@@ -266,7 +265,6 @@ public abstract class BankingLoanAccount<T> {
       description = "The expected or required repayment frequency. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations)",
       required = true)
   @NotNull
-  @NonNull
   @JsonSerialize(converter = DurationToStringConverter.class)
   @JsonProperty("repaymentFrequency")
   Duration repaymentFrequency;

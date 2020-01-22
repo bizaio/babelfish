@@ -337,7 +337,6 @@ public abstract class CommonPAFAddress<T> {
   @Schema(description = "Full name of locality", required = true)
   @JsonProperty("localityName")
   @NotNull
-  @NonNull
   String localityName;
 
   public String localityName() {
@@ -353,7 +352,6 @@ public abstract class CommonPAFAddress<T> {
   @Schema(description = "Postcode for the locality", required = true)
   @JsonProperty("postcode")
   @NotNull
-  @NonNull
   String postcode;
 
   public String postcode() {
@@ -371,7 +369,6 @@ public abstract class CommonPAFAddress<T> {
       required = true, type = "string")
   @JsonProperty("state")
   @NotNull
-  @NonNull
   AddressPAFStateType state;
 
   public AddressPAFStateType state() {

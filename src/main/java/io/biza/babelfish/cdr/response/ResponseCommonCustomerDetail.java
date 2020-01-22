@@ -34,7 +34,6 @@ public abstract class ResponseCommonCustomerDetail<T> extends CDRResponse<T> {
   @Schema(required = true)
   @JsonProperty("data")
   @NotNull
-  @NonNull
   @Valid
   ResponseCommonCustomerDetailData<?> data;
 

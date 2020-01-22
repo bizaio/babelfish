@@ -35,7 +35,6 @@ public abstract class ResponseBankingProductList<T> extends CDRResponsePaginated
   @Schema(required = true)
   @JsonProperty("data")
   @NotNull
-  @NonNull
   @Valid
   ResponseBankingProductListData<?> data;
 

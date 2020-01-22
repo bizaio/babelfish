@@ -40,7 +40,6 @@ public abstract class Links<T> {
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("self")
   @NotNull
-  @NonNull
   @Valid
   URI self;
 

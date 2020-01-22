@@ -33,7 +33,6 @@ public abstract class Error<T> {
       required = true)
   @JsonProperty("code")
   @NotNull
-  @NonNull
   String code;
 
   public String code() {
@@ -49,7 +48,6 @@ public abstract class Error<T> {
   @Schema(description = "Must be one of the following: Invalid account", required = true)
   @JsonProperty("title")
   @NotNull
-  @NonNull
   String title;
 
   public String title() {
@@ -65,7 +63,6 @@ public abstract class Error<T> {
   @Schema(description = "ID of the account not found", required = true)
   @JsonProperty("detail")
   @NotNull
-  @NonNull
   String detail;
 
   public String detail() {

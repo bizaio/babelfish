@@ -45,7 +45,6 @@ public abstract class BankingProductLendingRate<T> {
   @Schema(
       description = "The type of rate (fixed, variable, etc). See the next section for an overview of valid values and their meaning",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("lendingRateType")
   BankingProductLendingRateType lendingRateType;
@@ -61,7 +60,6 @@ public abstract class BankingProductLendingRate<T> {
   }
 
   @Schema(description = "The rate to be applied", required = true)
-  @NonNull
   @NotNull
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
@@ -190,7 +188,8 @@ public abstract class BankingProductLendingRate<T> {
     return (T) this;
   }
 
-  @Schema(description = "Link to a web page with more information on this rate", type = "string", format = "uri")
+  @Schema(description = "Link to a web page with more information on this rate", type = "string",
+      format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("additionalInfoUri")

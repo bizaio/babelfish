@@ -55,7 +55,6 @@ public abstract class BankingInternationalPayeeBankDetails<T> {
 
   @Schema(description = "Account Targeted for payment", required = true)
   @NotNull
-  @NonNull
   @JsonProperty("accountNumber")
   String accountNumber;
 

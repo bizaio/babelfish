@@ -31,7 +31,6 @@ import lombok.ToString;
 @Schema(description = "CDS Error Response")
 public abstract class ResponseErrorList<T> {
   @Schema(required = true)
-  @NonNull
   @NotNull
   @JsonProperty("errors")
   @Valid

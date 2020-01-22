@@ -13,6 +13,7 @@ package io.biza.babelfish.cdr.model.banking;
 
 import java.net.URI;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -35,6 +36,7 @@ public abstract class BankingProductFeeDiscountEligibility<T> {
   @Schema(description = "The type of the specific eligibility constraint for a discount",
       required = true)
   @JsonProperty("discountEligibilityType")
+  @NotNull
   BankingProductDiscountEligibilityType discountEligibilityType;
 
   public BankingProductDiscountEligibilityType discountEligibilityType() {

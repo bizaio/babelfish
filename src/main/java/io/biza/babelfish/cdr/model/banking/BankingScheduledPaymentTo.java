@@ -34,7 +34,6 @@ public abstract class BankingScheduledPaymentTo<T> {
   @Schema(
       description = "The type of object provided that specifies the destination of the funds for the payment.",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("toUType")
   PayloadTypeBankingScheduledPaymentTo type;

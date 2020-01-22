@@ -52,7 +52,6 @@ public abstract class BankingScheduledPaymentRecurrence<T> {
   }
 
   @Schema(description = "The type of recurrence used to define the schedule", required = true)
-  @NonNull
   @NotNull
   @JsonProperty("type")
   PayloadTypeBankingScheduledPaymentRecurrence type;

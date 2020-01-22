@@ -37,7 +37,6 @@ import lombok.ToString;
 public abstract class BankingAccount<T> {
   @Schema(description = "A unique ID of the account adhering to the standards for ID permanence",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("accountId")
   String accountId;
@@ -52,7 +51,8 @@ public abstract class BankingAccount<T> {
     return (T) this;
   }
 
-  @Schema(description = "Date that the account was created (if known)", type = "string", format = "date")
+  @Schema(description = "Date that the account was created (if known)", type = "string",
+      format = "date")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   @JsonProperty("creationDate")
@@ -71,7 +71,6 @@ public abstract class BankingAccount<T> {
   @Schema(
       description = "The display name of the account as defined by the bank. This should not incorporate account numbers or PANs. If it does the values should be masked according to the rules of the MaskedAccountString common type.",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("displayName")
   String displayName;
@@ -134,7 +133,6 @@ public abstract class BankingAccount<T> {
       description = "A masked version of the account. Whether BSB/Account Number, Credit Card PAN or another number",
       required = true)
   @NotNull
-  @NonNull
   @JsonProperty("maskedNumber")
   String maskedNumber;
 
@@ -150,7 +148,6 @@ public abstract class BankingAccount<T> {
 
   @Schema(description = "The category to which a product or account belongs.", required = true)
   @NotNull
-  @NonNull
   @JsonProperty("productCategory")
   BankingProductCategory productCategory;
 
@@ -168,7 +165,6 @@ public abstract class BankingAccount<T> {
       description = "The unique identifier of the account as defined by the account holder (akin to model number for the account)",
       required = true)
   @NotNull
-  @NonNull
   @JsonProperty("productName")
   String productName;
 

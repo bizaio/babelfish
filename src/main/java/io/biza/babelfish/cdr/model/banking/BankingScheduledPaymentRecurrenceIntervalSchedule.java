@@ -91,7 +91,6 @@ public abstract class BankingScheduledPaymentRecurrenceIntervalSchedule<T> {
   @Schema(
       description = "An array of interval objects defining the payment schedule.  Each entry in the array is additive, in that it adds payments to the overall payment schedule.  If multiple intervals result in a payment on the same day then only one payment will be made. Must have at least one entry",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("intervals")
   @Valid

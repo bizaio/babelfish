@@ -43,7 +43,6 @@ import lombok.ToString;
 public abstract class BankingTermDepositAccount<T> {
   @Schema(description = "The lodgement date of the original deposit", required = true,
       type = "string", format = "date")
-  @NonNull
   @NotNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
@@ -61,7 +60,6 @@ public abstract class BankingTermDepositAccount<T> {
   }
 
   @Schema(description = "Maturity date for the term deposit", required = true, format = "date")
-  @NonNull
   @NotNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
@@ -113,7 +111,6 @@ public abstract class BankingTermDepositAccount<T> {
   }
 
   @Schema(description = "Current instructions on action to be taken at maturity", required = true)
-  @NonNull
   @NotNull
   @Valid
   @JsonProperty("maturityInstructions")

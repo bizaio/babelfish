@@ -39,7 +39,6 @@ import lombok.ToString;
 public abstract class BankingDirectDebit<T> {
   @Schema(description = "A unique ID of the account adhering to the standards for ID permanence.",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("accountId")
   String accountId;
@@ -55,7 +54,6 @@ public abstract class BankingDirectDebit<T> {
   }
 
   @Schema(required = true)
-  @NonNull
   @NotNull
   @JsonProperty("authorisedEntity")
   BankingAuthorisedEntity<?> authorisedEntity;

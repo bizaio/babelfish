@@ -37,12 +37,12 @@ import lombok.ToString;
 
 @Schema(description = "Outage Detail")
 public abstract class CommonDiscoveryOutage<T> {
-  @Schema(description = "Date and time that the outage is scheduled to begin", required = true, format = "date-time")
+  @Schema(description = "Date and time that the outage is scheduled to begin", required = true,
+      format = "date-time")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
   @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
   @JsonProperty("outageTime")
   @NotNull
-  @NonNull
   OffsetDateTime outageTime;
 
   public OffsetDateTime outageTime() {
@@ -62,7 +62,6 @@ public abstract class CommonDiscoveryOutage<T> {
   @JsonDeserialize(converter = StringToDurationConverter.class)
   @JsonProperty("duration")
   @NotNull
-  @NonNull
   Duration duration;
 
   public Duration duration() {
@@ -95,7 +94,6 @@ public abstract class CommonDiscoveryOutage<T> {
       required = true)
   @JsonProperty("explanation")
   @NotNull
-  @NonNull
   String explanation;
 
   public String explanation() {

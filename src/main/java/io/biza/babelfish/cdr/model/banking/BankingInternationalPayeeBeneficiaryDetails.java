@@ -50,7 +50,6 @@ public abstract class BankingInternationalPayeeBeneficiaryDetails<T> {
   @Schema(
       description = "Country where the beneficiary resides. A valid [ISO 3166 Alpha-3](https://www.iso.org/iso-3166-country-codes.html) country code",
       required = true, type = "string")
-  @NonNull
   @NotNull
   @JsonSerialize(converter = LocaleToCountryStringConverter.class)
   @JsonDeserialize(converter = CountryStringToLocaleConverter.class)

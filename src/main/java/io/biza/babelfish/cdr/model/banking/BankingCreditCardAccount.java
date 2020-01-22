@@ -45,7 +45,6 @@ public abstract class BankingCreditCardAccount<T> {
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   @NotNull
-  @NonNull
   @JsonProperty("minPaymentAmount")
   BigDecimal minPaymentAmount;
 
@@ -64,7 +63,6 @@ public abstract class BankingCreditCardAccount<T> {
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   @NotNull
-  @NonNull
   @JsonProperty("paymentDueAmount")
   BigDecimal paymentDueAmount;
 
@@ -99,7 +97,6 @@ public abstract class BankingCreditCardAccount<T> {
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   @NotNull
-  @NonNull
   @JsonProperty("paymentDueDate")
   LocalDate paymentDueDate;
 

@@ -34,7 +34,6 @@ public abstract class BankingPayeeDetail<T> extends BankingPayee<T> {
       required = true)
   @JsonProperty("payeeUType")
   @NotNull
-  @NonNull
   PayloadTypeBankingPayee type;
 
   public PayloadTypeBankingPayee type() {
@@ -46,7 +45,7 @@ public abstract class BankingPayeeDetail<T> extends BankingPayee<T> {
     setType(type);
     return (T) this;
   }
-  
+
   @JsonProperty("domestic")
   @Valid
   BankingDomesticPayee<?> domestic;
@@ -60,7 +59,7 @@ public abstract class BankingPayeeDetail<T> extends BankingPayee<T> {
     setDomestic(domestic);
     return (T) this;
   }
-  
+
   @JsonProperty("biller")
   @Valid
   BankingBillerPayee<?> biller;

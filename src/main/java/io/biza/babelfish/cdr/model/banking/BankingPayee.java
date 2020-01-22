@@ -35,7 +35,6 @@ import lombok.ToString;
 @Schema(description = "Banking Payee Basic Information")
 public abstract class BankingPayee<T> {
   @Schema(description = "ID of the payee adhering to the rules of ID permanence", required = true)
-  @NonNull
   @NotNull
   @JsonProperty("payeeId")
   String payeeId;
@@ -52,7 +51,6 @@ public abstract class BankingPayee<T> {
 
   @Schema(description = "The short display name of the payee as provided by the customer",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("nickname")
   String nickname;
@@ -84,7 +82,6 @@ public abstract class BankingPayee<T> {
   @Schema(
       description = "The type of payee. DOMESTIC means a registered payee for domestic payments including NPP. INTERNATIONAL means a registered payee for international payments. BILLER means a registered payee for BPAY",
       required = true)
-  @NonNull
   @NotNull
   @JsonProperty("type")
   BankingPayeeType payeeType;
@@ -99,7 +96,8 @@ public abstract class BankingPayee<T> {
     return (T) this;
   }
 
-  @Schema(description = "The date the payee was created by the customer", type = "string", format = "date")
+  @Schema(description = "The date the payee was created by the customer", type = "string",
+      format = "date")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   @JsonProperty("creationDate")

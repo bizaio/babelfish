@@ -30,7 +30,6 @@ import lombok.ToString;
 @Schema(description = "Domestic Payee Card Number Details")
 public abstract class BankingDomesticPayeeCard<T> {
   @Schema(description = "Name of the account to pay to", required = true)
-  @NonNull
   @NotNull
   @JsonProperty("cardNumber")
   String cardNumber;

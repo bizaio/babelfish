@@ -37,7 +37,6 @@ import lombok.ToString;
 @Schema(description = "Banking Product Bundle Definition", name = "BankingProductBundle")
 public abstract class BankingProductBundle<T> {
   @Schema(description = "Name of the bundle", required = true)
-  @NonNull
   @NotNull
   @NotBlank
   @Valid
@@ -55,7 +54,6 @@ public abstract class BankingProductBundle<T> {
   }
 
   @Schema(description = "Description of the bundle", required = true)
-  @NonNull
   @NotNull
   @NotBlank
   @Valid

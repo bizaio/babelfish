@@ -34,7 +34,6 @@ public abstract class ResponseBankingTransactionList<T> extends CDRResponsePagin
   @Schema(required = true)
   @JsonProperty("data")
   @NotNull
-  @NonNull
   @Valid
   ResponseBankingTransactionListData<?> data;
 

@@ -31,7 +31,6 @@ import lombok.ToString;
 public abstract class BankingBillerPayee<T> {
   @Schema(description = "BPAY Biller Code of the Biller", required = true)
   @NotNull
-  @NonNull
   @JsonProperty("billerCode")
   String billerCode;
 
@@ -48,7 +47,6 @@ public abstract class BankingBillerPayee<T> {
   @Schema(
       description = "BPAY CRN of the Biller. If the contents of the CRN match the format of a Credit Card PAN then it should be masked using the rules applicable for the MaskedPANString common type")
   @NotNull
-  @NonNull
   @JsonProperty("crn")
   String crn;
 
@@ -64,7 +62,6 @@ public abstract class BankingBillerPayee<T> {
 
   @Schema(description = "Name of the Biller", required = true)
   @NotNull
-  @NonNull
   @JsonProperty("billerName")
   String billerName;
 
