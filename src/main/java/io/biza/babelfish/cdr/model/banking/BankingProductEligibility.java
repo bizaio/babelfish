@@ -87,6 +87,7 @@ public abstract class BankingProductEligibility<T> {
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("additionalInfoUri")
+  @Valid
   URI additionalInfoUri;
 
   public URI additionalInfoUri() {
