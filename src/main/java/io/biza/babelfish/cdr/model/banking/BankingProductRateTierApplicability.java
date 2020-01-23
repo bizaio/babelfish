@@ -30,6 +30,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 @Schema(description = "Defines a condition for the applicability of a tiered rate")
+@JsonDeserialize(as = io.biza.babelfish.cdr.v1.model.banking.BankingProductRateTierApplicability.class)
 public abstract class BankingProductRateTierApplicability<T> {
   @Schema(description = "Display text providing more information on the condition")
   @JsonProperty("additionalInfo")

@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductRateTierApplicationMethod;
 import io.biza.babelfish.cdr.v1.enumerations.CommonUnitOfMeasureType;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -29,6 +30,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 @Schema(description = "Defines the criteria and conditions for which a rate applies")
+@JsonDeserialize(as = io.biza.babelfish.cdr.v1.model.banking.BankingProductRateTier.class)
 public abstract class BankingProductRateTier<T> {
   @Schema(description = "A display name for the tier", required = true)
   @NotNull

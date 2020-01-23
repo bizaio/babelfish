@@ -21,14 +21,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(description = "Banking Product Deposit Rate Type", enumAsRef = true)
 public enum BankingProductDepositRateType implements LabelValueEnumInterface {
   // @formatter: off
-  FIXED("FIXED", "Fixed rate for a period of time"), BONUS("BONUS",
-      "A bonus rate available by meeting a specific criteria"), BUNDLE_BONUS("BUNDLE_BONUS",
-          "A bonus rate obtained by originating a bundle instead of a standalone product"), VARIABLE(
-              "VARIABLE", "A variable base rate for the product"), INTRODUCTORY("INTRODUCTORY",
-                  "An introductory bonus that will expire after a set period"), FLOATING("FLOATING",
-                      "A floating rate is relatively fixed but still adjusts under specific circumstances"), MARKET_LINKED(
-                          "MARKET_LINKED",
-                          "A rate that is linked to a specific market, commodity or asset class");
+  FIXED("FIXED", "Fixed rate for a period of time"), 
+  BONUS("BONUS", "A bonus rate available by meeting a specific criteria"),
+  BUNDLE_BONUS("BUNDLE_BONUS","A bonus rate obtained by originating a bundle instead of a standalone product"),
+  VARIABLE("VARIABLE", "A variable base rate for the product"), 
+  INTRODUCTORY("INTRODUCTORY", "An introductory bonus that will expire after a set period"), 
+  FLOATING("FLOATING", "A floating rate is relatively fixed but still adjusts under specific circumstances"), 
+  MARKET_LINKED("MARKET_LINKED","A rate that is linked to a specific market, commodity or asset class");
   // @formatter: on
 
   private String value;
