@@ -9,67 +9,64 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *******************************************************************************/
-package io.biza.babelfish.cdr.model.banking;
+package io.biza.babelfish.cdr.model.banking.product;
 
 import java.net.URI;
-import java.util.List;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
+import io.biza.babelfish.cdr.v1.enumerations.BankingProductEligibilityType;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 @Valid
 @ToString
 @EqualsAndHashCode
-
-@Schema(description = "Banking Product Bundle Definition", name = "BankingProductBundle")
-public abstract class BankingProductBundle<T> {
-  @Schema(description = "Name of the bundle", required = true)
+@Schema(description = "Eligibility criteria to obtain a particular banking product")
+public abstract class BankingProductEligibility<T> {
+  @Schema(
+      description = "The type of eligibility criteria described.  See the next section for an overview of valid values and their meaning",
+      required = true)
   @NotNull
-  @NotBlank
-  @Valid
-  @JsonProperty("name")
-  String name;
+  @JsonProperty("eligibilityType")
+  BankingProductEligibilityType eligibilityType;
 
-  public String name() {
-    return getName();
+  public BankingProductEligibilityType eligibilityType() {
+    return getEligibilityType();
   }
 
   @SuppressWarnings("unchecked")
-  public T name(String name) {
-    setName(name);
+  public T eligibilityType(BankingProductEligibilityType eligibilityType) {
+    setEligibilityType(eligibilityType);
     return (T) this;
   }
 
-  @Schema(description = "Description of the bundle", required = true)
-  @NotNull
-  @NotBlank
-  @Valid
-  @JsonProperty("description")
-  String description;
+  @Schema(
+      description = "Generic field containing additional information relevant to the [eligibilityType](#tocSproducteligibilitytypedoc) specified.  Whether mandatory or not is dependent on the value of [eligibilityType](#tocSproducteligibilitytypedoc)")
+  @JsonProperty("additionalValue")
+  String additionalValue;
 
-  public String description() {
-    return getDescription();
+  public String additionalValue() {
+    return getAdditionalValue();
   }
 
   @SuppressWarnings("unchecked")
-  public T description(String description) {
-    setDescription(description);
+  public T additionalValue(String additionalValue) {
+    setAdditionalValue(additionalValue);
     return (T) this;
   }
 
-  @Schema(description = "Display text providing more information on the bundle")
+  @Schema(
+      description = "Display text providing more information on the eligibility criteria. Mandatory if the [eligibilityType](#tocSproducteligibilitytypedoc) field is set to OTHER")
   @JsonProperty("additionalInfo")
   String additionalInfo;
 
@@ -83,12 +80,12 @@ public abstract class BankingProductBundle<T> {
     return (T) this;
   }
 
-  @Schema(
-      description = "Link to a web page with more information on the bundle criteria and benefits",
+  @Schema(description = "Link to a web page with more information on this eligibility criteria",
       type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("additionalInfoUri")
+  @Valid
   URI additionalInfoUri;
 
   public URI additionalInfoUri() {
@@ -100,9 +97,4 @@ public abstract class BankingProductBundle<T> {
     setAdditionalInfoUri(additionalInfoUri);
     return (T) this;
   }
-
-  @Schema(
-      description = "Array of product IDs for products included in the bundle that are available via the product end points.  Note that this array is not intended to represent a comprehensive model of the products included in the bundle and some products available for the bundle may not be available via the product reference end points")
-  @JsonProperty("productIds")
-  List<String> productIds;
 }

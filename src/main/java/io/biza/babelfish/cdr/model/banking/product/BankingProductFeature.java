@@ -9,7 +9,7 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *******************************************************************************/
-package io.biza.babelfish.cdr.model.banking;
+package io.biza.babelfish.cdr.model.banking.product;
 
 import java.net.URI;
 import javax.validation.Valid;
@@ -19,39 +19,38 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductConstraintType;
+import io.biza.babelfish.cdr.v1.enumerations.BankingProductFeatureType;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 @Valid
 @ToString
 @EqualsAndHashCode
-@Schema(description = "Banking Product Constraint Definition")
-public abstract class BankingProductConstraint<T> {
-  @Schema(
-      description = "The type of constraint described.  See the next section for an overview of valid values and their meaning",
-      required = true)
+@Schema(description = "A Banking Product Feature")
+public abstract class BankingProductFeature<T> {
+  @Schema(description = "The type of feature described", required = true)
+  @JsonProperty("featureType")
+  @Valid
   @NotNull
-  @JsonProperty("constraintType")
-  BankingProductConstraintType constraintType;
+  BankingProductFeatureType featureType;
 
-  public BankingProductConstraintType constraintType() {
-    return getConstraintType();
+  public BankingProductFeatureType featureType() {
+    return getFeatureType();
   }
 
   @SuppressWarnings("unchecked")
-  public T constraintType(BankingProductConstraintType constraintType) {
-    setConstraintType(constraintType);
+  public T featureType(BankingProductFeatureType featureType) {
+    setFeatureType(featureType);
     return (T) this;
   }
 
   @Schema(
-      description = "Generic field containing additional information relevant to the [constraintType](#tocSproductconstrainttypedoc) specified.  Whether mandatory or not is dependent on the value of [constraintType](#tocSproductconstrainttypedoc)")
+      description = "Generic field containing additional information relevant to the [featureType](#tocSproductfeaturetypedoc) specified. Whether mandatory or not is dependent on the value of the [featureType.](#tocSproductfeaturetypedoc)")
   @JsonProperty("additionalValue")
   String additionalValue;
 
@@ -65,7 +64,8 @@ public abstract class BankingProductConstraint<T> {
     return (T) this;
   }
 
-  @Schema(description = "Display text providing more information the constraint")
+  @Schema(
+      description = "Display text providing more information on the feature. Mandatory if the [feature type](#tocSproductfeaturetypedoc) is set to OTHER")
   @JsonProperty("additionalInfo")
   String additionalInfo;
 
@@ -79,8 +79,8 @@ public abstract class BankingProductConstraint<T> {
     return (T) this;
   }
 
-  @Schema(description = "Link to a web page with more information on the constraint",
-      type = "string", format = "uri")
+  @Schema(description = "Link to a web page with more information on this feature", type = "string",
+      format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("additionalInfoUri")

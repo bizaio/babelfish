@@ -9,57 +9,62 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *******************************************************************************/
-package io.biza.babelfish.cdr.model.banking;
+package io.biza.babelfish.cdr.model.banking.product;
 
 import java.net.URI;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 @Valid
 @ToString
 @EqualsAndHashCode
-@Schema(description = "Defines a condition for the applicability of a tiered rate")
-@JsonDeserialize(as = io.biza.babelfish.cdr.v1.model.banking.BankingProductRateTierApplicability.class)
-public abstract class BankingProductRateTierApplicability<T> {
-  @Schema(description = "Display text providing more information on the condition")
-  @JsonProperty("additionalInfo")
-  String additionalInfo;
+@Schema(description = "Banking Product Card Art", name = "BankingProductCardArt")
+public abstract class BankingProductCardArt<T> {
+  @Schema(description = "Display label for the specific image", required = true)
+  @NotNull
+  @NotBlank
+  @Valid
+  @JsonProperty("title")
+  String title;
 
-  public String additionalInfo() {
-    return getAdditionalInfo();
+  public String title() {
+    return getTitle();
   }
 
   @SuppressWarnings("unchecked")
-  public T additionalInfo(String additionalInfo) {
-    setAdditionalInfo(additionalInfo);
+  public T title(String title) {
+    setTitle(title);
     return (T) this;
   }
 
-  @Schema(description = "Link to a web page with more information on this condition",
+  @Schema(
+      description = "Link to a PNG, JPG or GIF image with proportions defined by ISO 7810 ID-1 and width no greater than 512 pixels",
       type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
-  @JsonProperty("additionalInfoUri")
-  URI additionalInfoUri;
+  @JsonProperty("imageUri")
+  URI imageUri;
 
-  public URI additionalInfoUri() {
-    return getAdditionalInfoUri();
+  public URI imageUri() {
+    return getImageUri();
   }
 
   @SuppressWarnings("unchecked")
-  public T additionalInfoUri(URI additionalInfoUri) {
-    setAdditionalInfoUri(additionalInfoUri);
+  public T imageUri(URI imageUri) {
+    setImageUri(imageUri);
     return (T) this;
   }
 }

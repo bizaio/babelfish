@@ -25,7 +25,7 @@ import lombok.ToString;
 
 
 public class BankingProductFeeDiscountEligibility extends
-    io.biza.babelfish.cdr.model.banking.BankingProductFeeDiscountEligibility<BankingProductFeeDiscountEligibility> {
+    io.biza.babelfish.cdr.model.banking.product.BankingProductFeeDiscountEligibility<BankingProductFeeDiscountEligibility> {
   @AssertTrue(
       message = "Additional Value must be a Positive Integer when Eligibility type is MIN_AGE or MAX_AGE")
   private boolean isValuePositiveInteger() {

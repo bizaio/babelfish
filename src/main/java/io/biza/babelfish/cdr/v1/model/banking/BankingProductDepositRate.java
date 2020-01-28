@@ -25,7 +25,7 @@ import lombok.ToString;
 
 
 public class BankingProductDepositRate extends
-    io.biza.babelfish.cdr.model.banking.BankingProductDepositRate<BankingProductDepositRate> {
+    io.biza.babelfish.cdr.model.banking.product.BankingProductDepositRate<BankingProductDepositRate> {
   @AssertTrue(
       message = "Additional Value must be a Duration String when Fee type is FIXED or INTRODUCTORY")
   private boolean isValueDuration() {

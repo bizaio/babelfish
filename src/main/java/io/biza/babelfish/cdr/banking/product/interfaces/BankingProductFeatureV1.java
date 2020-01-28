@@ -9,90 +9,96 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *******************************************************************************/
-package io.biza.babelfish.cdr.model.banking;
+package io.biza.babelfish.cdr.banking.product.interfaces;
 
 import java.net.URI;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductFeatureType;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-@Data
-@NoArgsConstructor
 @Valid
-@ToString
-@EqualsAndHashCode
 @Schema(description = "A Banking Product Feature")
-public abstract class BankingProductFeature<T> {
+public interface BankingProductFeatureV1 {
   @Schema(description = "The type of feature described", required = true)
-  @JsonProperty("featureType")
   @Valid
   @NotNull
-  BankingProductFeatureType featureType;
+  @JsonGetter("featureType")
+  public BankingProductFeatureType getType();
 
-  public BankingProductFeatureType featureType() {
-    return getFeatureType();
+  public default BankingProductFeatureType type() {
+    return getType();
   }
 
-  @SuppressWarnings("unchecked")
-  public T featureType(BankingProductFeatureType featureType) {
-    setFeatureType(featureType);
-    return (T) this;
+  /**
+   * Set the type of constraint
+   * 
+   * @param type of constraint to set
+   */
+  @JsonSetter("featureType")
+  public void setType(BankingProductFeatureType type);
+
+  public default BankingProductFeatureV1 type(BankingProductFeatureType featureType) {
+    setType(featureType);
+    return this;
   }
 
   @Schema(
       description = "Generic field containing additional information relevant to the [featureType](#tocSproductfeaturetypedoc) specified. Whether mandatory or not is dependent on the value of the [featureType.](#tocSproductfeaturetypedoc)")
-  @JsonProperty("additionalValue")
-  String additionalValue;
+  @JsonGetter("additionalValue")
+  public String getAdditionalValue();
 
-  public String additionalValue() {
+  public default String additionalValue() {
     return getAdditionalValue();
   }
 
-  @SuppressWarnings("unchecked")
-  public T additionalValue(String additionalValue) {
+  @JsonSetter("additionalValue")
+  public void setAdditionalValue(String additionalValue);
+
+  public default BankingProductFeatureV1 additionalValue(String additionalValue) {
     setAdditionalValue(additionalValue);
-    return (T) this;
+    return this;
   }
 
   @Schema(
       description = "Display text providing more information on the feature. Mandatory if the [feature type](#tocSproductfeaturetypedoc) is set to OTHER")
-  @JsonProperty("additionalInfo")
-  String additionalInfo;
+  @JsonGetter("additionalInfo")
+  public String getAdditionalInfo();
 
-  public String additionalInfo() {
+  public default String additionalInfo() {
     return getAdditionalInfo();
   }
 
-  @SuppressWarnings("unchecked")
-  public T additionalInfo(String additionalInfo) {
+  @JsonSetter("additionalInfo")
+  public void setAdditionalInfo(String additionalInfo);
+
+  public default BankingProductFeatureV1 additionalInfo(String additionalInfo) {
     setAdditionalInfo(additionalInfo);
-    return (T) this;
+    return this;
   }
 
   @Schema(description = "Link to a web page with more information on this feature", type = "string",
       format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
-  @JsonProperty("additionalInfoUri")
-  URI additionalInfoUri;
+  @JsonGetter("additionalInfoUri")
+  public URI getAdditionalInfoUri();
 
-  public URI additionalInfoUri() {
+  public default URI additionalInfoUri() {
     return getAdditionalInfoUri();
   }
 
-  @SuppressWarnings("unchecked")
-  public T additionalInfoUri(URI additionalInfoUri) {
+  @JsonSetter("additionalInfoUri")
+  public void setAdditionalInfoUri(URI additionalInfoUri);
+
+  public default BankingProductFeatureV1 additionalInfoUri(URI additionalInfoUri) {
     setAdditionalInfoUri(additionalInfoUri);
-    return (T) this;
+    return this;
   }
 }

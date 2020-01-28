@@ -25,7 +25,7 @@ import lombok.ToString;
 
 
 public class BankingProductConstraint
-    extends io.biza.babelfish.cdr.model.banking.BankingProductConstraint<BankingProductConstraint> {
+    extends io.biza.babelfish.cdr.model.banking.product.BankingProductConstraint<BankingProductConstraint> {
   @AssertTrue(
       message = "Additional Value must be an Amount String when Eligibility type is MIN_BALANCE, MAX_BALANCE, OPENING_BALANCE, MAX_LIMIT or MIN_LIMIT")
   private boolean isValueAmount() {

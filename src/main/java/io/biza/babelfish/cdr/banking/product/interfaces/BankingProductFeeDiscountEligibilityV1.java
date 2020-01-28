@@ -9,89 +9,89 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *******************************************************************************/
-package io.biza.babelfish.cdr.model.banking;
+package io.biza.babelfish.cdr.banking.product.interfaces;
 
 import java.net.URI;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductDiscountEligibilityType;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
 @Valid
-@ToString
-@EqualsAndHashCode
 @Schema(description = "Banking Product Discount Eligibility Details")
-@JsonDeserialize(as = io.biza.babelfish.cdr.v1.model.banking.BankingProductFeeDiscountEligibility.class)
-public abstract class BankingProductFeeDiscountEligibility<T> {
+public interface BankingProductFeeDiscountEligibilityV1 {
   @Schema(description = "The type of the specific eligibility constraint for a discount",
       required = true)
-  @JsonProperty("discountEligibilityType")
   @NotNull
-  BankingProductDiscountEligibilityType discountEligibilityType;
+  @JsonGetter("discountEligibilityType")
+  public BankingProductDiscountEligibilityType getType();
 
-  public BankingProductDiscountEligibilityType discountEligibilityType() {
-    return getDiscountEligibilityType();
+  public default BankingProductDiscountEligibilityType type() {
+    return getType();
   }
+  
+  @JsonSetter("discountEligibilityType")
+  public void setType(BankingProductDiscountEligibilityType type);
 
-  @SuppressWarnings("unchecked")
-  public T discountEligibilityType(BankingProductDiscountEligibilityType discountEligibilityType) {
-    setDiscountEligibilityType(discountEligibilityType);
-    return (T) this;
+  public default BankingProductFeeDiscountEligibilityV1 type(BankingProductDiscountEligibilityType feeType) {
+    setType(feeType);
+    return this;
   }
 
   @Schema(description = "Additional Value for Eligibility Constraint related to Discount")
-  @JsonProperty("additionalValue")
-  String additionalValue;
+  @JsonGetter("additionalValue")
+  public String getAdditionalValue();
 
-  public String additionalValue() {
+  public default String additionalValue() {
     return getAdditionalValue();
   }
 
-  @SuppressWarnings("unchecked")
-  public T additionalValue(String additionalValue) {
+  @JsonSetter("additionalValue")
+  public void setAdditionalValue(String additionalValue);
+
+  public default BankingProductFeeDiscountEligibilityV1 additionalValue(String additionalValue) {
     setAdditionalValue(additionalValue);
-    return (T) this;
+    return this;
   }
 
   @Schema(description = "Display text providing more information on this eligibility constraint")
-  @JsonProperty("additionalInfo")
-  String additionalInfo;
+  @JsonGetter("additionalInfo")
+  public String getAdditionalInfo();
 
-  public String additionalInfo() {
+  public default String additionalInfo() {
     return getAdditionalInfo();
   }
 
-  @SuppressWarnings("unchecked")
-  public T additionalInfo(String additionalInfo) {
+  @JsonSetter("additionalInfo")
+  public void setAdditionalInfo(String additionalInfo);
+
+  public default BankingProductFeeDiscountEligibilityV1 additionalInfo(String additionalInfo) {
     setAdditionalInfo(additionalInfo);
-    return (T) this;
+    return this;
   }
 
   @Schema(description = "Link to a web page with more information on this eligibility constraint",
       type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
-  @JsonProperty("additionalInfoUri")
-  URI additionalInfoUri;
+  @JsonGetter("additionalInfoUri")
+  public URI getAdditionalInfoUri();
 
-  public URI additionalInfoUri() {
+  public default URI additionalInfoUri() {
     return getAdditionalInfoUri();
   }
 
-  @SuppressWarnings("unchecked")
-  public T additionalInfoUri(URI additionalInfoUri) {
+  @JsonSetter("additionalInfoUri")
+  public void setAdditionalInfoUri(URI additionalInfoUri);
+
+  public default BankingProductFeeDiscountEligibilityV1 additionalInfoUri(URI additionalInfoUri) {
     setAdditionalInfoUri(additionalInfoUri);
-    return (T) this;
+    return this;
   }
 }

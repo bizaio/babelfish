@@ -9,7 +9,7 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *******************************************************************************/
-package io.biza.babelfish.cdr.model.banking;
+package io.biza.babelfish.cdr.banking.product.interfaces;
 
 import java.math.BigDecimal;
 import java.net.URI;
@@ -17,7 +17,8 @@ import java.time.Period;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.BigDecimalToRateStringConverter;
@@ -29,66 +30,64 @@ import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductLendingRateInterestPaymentType;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductLendingRateType;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
 @Valid
-@ToString
-@EqualsAndHashCode
 @Schema(description = "Banking Product Lending Rate Definition")
-public abstract class BankingProductLendingRate<T> {
+public interface BankingProductLendingRateV1 {
   @Schema(
       description = "The type of rate (fixed, variable, etc). See the next section for an overview of valid values and their meaning",
       required = true)
   @NotNull
-  @JsonProperty("lendingRateType")
-  BankingProductLendingRateType lendingRateType;
+  @JsonGetter("lendingRateType")
+  public BankingProductLendingRateType getType();
 
-  public BankingProductLendingRateType lendingRateType() {
-    return getLendingRateType();
+  public default BankingProductLendingRateType type() {
+    return getType();
   }
 
-  @SuppressWarnings("unchecked")
-  public T lendingRateType(BankingProductLendingRateType lendingRateType) {
-    setLendingRateType(lendingRateType);
-    return (T) this;
+  @JsonSetter("lendingRateType")
+  public void setType(BankingProductLendingRateType type);
+
+  public default BankingProductLendingRateV1 type(BankingProductLendingRateType rateType) {
+    setType(rateType);
+    return this;
   }
 
   @Schema(description = "The rate to be applied", required = true)
   @NotNull
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
-  @JsonProperty("rate")
-  BigDecimal rate;
+  @JsonGetter("rate")
+  public BigDecimal getRate();
 
-  public BigDecimal rate() {
+  public default BigDecimal rate() {
     return getRate();
   }
 
-  @SuppressWarnings("unchecked")
-  public T rate(BigDecimal rate) {
+  @JsonSetter("rate")
+  public void setRate(BigDecimal rate);
+
+  public default BankingProductLendingRateV1 rate(BigDecimal rate) {
     setRate(rate);
-    return (T) this;
+    return this;
   }
 
   @Schema(description = "A comparison rate equivalent for this rate")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
-  @JsonProperty("comparisonRate")
-  BigDecimal comparisonRate;
+  @JsonGetter("comparisonRate")
+  public BigDecimal getComparisonRate();
 
-  public BigDecimal comparisonRate() {
+  public default BigDecimal comparisonRate() {
     return getComparisonRate();
   }
 
-  @SuppressWarnings("unchecked")
-  public T comparisonRate(BigDecimal comparisonRate) {
-    setComparisonRate(comparisonRate);
-    return (T) this;
+  @JsonSetter("comparisonRate")
+  public void setComparisonRate(BigDecimal rate);
+
+  public default BankingProductLendingRateV1 comparisonRate(BigDecimal rate) {
+    setComparisonRate(rate);
+    return this;
   }
 
   @Schema(
@@ -96,111 +95,127 @@ public abstract class BankingProductLendingRate<T> {
       type = "string")
   @JsonSerialize(converter = PeriodToStringConverter.class)
   @JsonDeserialize(converter = StringToPeriodConverter.class)
-  @JsonProperty("calculationFrequency")
-  Period calculationFrequency;
+  @JsonGetter("calculationFrequency")
+  public Period getCalculationFrequency();
 
-  public Period calculationFrequency() {
+  public default Period calculationFrequency() {
     return getCalculationFrequency();
   }
 
-  @SuppressWarnings("unchecked")
-  public T calculationFrequency(Period calculationFrequency) {
+  @JsonSetter("calculationFrequency")
+  public void setCalculationFrequency(Period calculationFrequency);
+
+  public default BankingProductLendingRateV1 calculationFrequency(Period calculationFrequency) {
     setCalculationFrequency(calculationFrequency);
-    return (T) this;
+    return this;
   }
+
 
   @Schema(
       description = "The period after which the calculated amount(s) (see calculationFrequency) are 'applied' (i.e. debited or credited) to the account. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations)",
       type = "string")
   @JsonSerialize(converter = PeriodToStringConverter.class)
   @JsonDeserialize(converter = StringToPeriodConverter.class)
-  @JsonProperty("applicationFrequency")
-  Period applicationFrequency;
+  @JsonGetter("applicationFrequency")
+  public Period getApplicationFrequency();
 
-  public Period applicationFrequency() {
+  public default Period applicationFrequency() {
     return getApplicationFrequency();
   }
 
-  @SuppressWarnings("unchecked")
-  public T applicationFrequency(Period applicationFrequency) {
+  @JsonSetter("applicationFrequency")
+  public void setApplicationFrequency(Period applicationFrequency);
+
+  public default BankingProductLendingRateV1 applicationFrequency(Period applicationFrequency) {
     setApplicationFrequency(applicationFrequency);
-    return (T) this;
+    return this;
   }
 
   @Schema(
       description = "When loan payments are due to be paid within each period. The investment benefit of earlier payments affect the rate that can be offered")
-  @JsonProperty("interestPaymentDue")
-  BankingProductLendingRateInterestPaymentType interestPaymentDue;
+  @JsonGetter("interestPaymentDue")
+  public BankingProductLendingRateInterestPaymentType getInterestPaymentDue();
 
-  public BankingProductLendingRateInterestPaymentType interestPaymentDue() {
+  public default BankingProductLendingRateInterestPaymentType interestPaymentDue() {
     return getInterestPaymentDue();
   }
 
-  @SuppressWarnings("unchecked")
-  public T interestPaymentDue(BankingProductLendingRateInterestPaymentType interestPaymentDue) {
+  @JsonSetter("interestPaymentDue")
+  public void setInterestPaymentDue(
+      BankingProductLendingRateInterestPaymentType interestPaymentDue);
+
+  public default BankingProductLendingRateV1 interestPaymentDue(
+      BankingProductLendingRateInterestPaymentType interestPaymentDue) {
     setInterestPaymentDue(interestPaymentDue);
-    return (T) this;
+    return this;
   }
 
   @Schema(description = "Rate tiers applicable for this rate")
-  @JsonProperty("tiers")
   @Valid
-  List<BankingProductRateTier<?>> tiers;
+  @JsonGetter("tiers")
+  public List<BankingProductRateTierV1> getTiers();
 
-  public List<BankingProductRateTier<?>> tiers() {
+  public default List<BankingProductRateTierV1> tiers() {
     return getTiers();
   }
 
-  @SuppressWarnings("unchecked")
-  public T tiers(List<BankingProductRateTier<?>> tiers) {
-    setTiers(tiers);
-    return (T) this;
-  }
+  @JsonSetter("tiers")
+  public void setTiers(List<BankingProductRateTierV1> tiers);
 
+  public default BankingProductLendingRateV1 tiers(List<BankingProductRateTierV1> tiers) {
+    setTiers(tiers);
+    return this;
+  }
 
   @Schema(
       description = "Generic field containing additional information relevant to the [lendingRateType](#tocSproductlendingratetypedoc) specified. Whether mandatory or not is dependent on the value of [lendingRateType](#tocSproductlendingratetypedoc)")
-  @JsonProperty("additionalValue")
-  String additionalValue;
+  @JsonGetter("additionalValue")
+  public String getAdditionalValue();
 
-  public String additionalValue() {
+  public default String additionalValue() {
     return getAdditionalValue();
   }
 
-  @SuppressWarnings("unchecked")
-  public T additionalValue(String additionalValue) {
+  @JsonSetter("additionalValue")
+  public void setAdditionalValue(String additionalValue);
+
+  public default BankingProductLendingRateV1 additionalValue(String additionalValue) {
     setAdditionalValue(additionalValue);
-    return (T) this;
+    return this;
   }
 
   @Schema(description = "Display text providing more information on the rate.")
-  @JsonProperty("additionalInfo")
-  String additionalInfo;
+  @JsonGetter("additionalInfo")
+  public String getAdditionalInfo();
 
-  public String additionalInfo() {
+  public default String additionalInfo() {
     return getAdditionalInfo();
   }
 
-  @SuppressWarnings("unchecked")
-  public T additionalInfo(String additionalInfo) {
+  @JsonSetter("additionalInfo")
+  public void setAdditionalInfo(String additionalInfo);
+
+  public default BankingProductLendingRateV1 additionalInfo(String additionalInfo) {
     setAdditionalInfo(additionalInfo);
-    return (T) this;
+    return this;
   }
 
   @Schema(description = "Link to a web page with more information on this rate", type = "string",
       format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
-  @JsonProperty("additionalInfoUri")
-  URI additionalInfoUri;
+  @JsonGetter("additionalInfoUri")
+  public URI getAdditionalInfoUri();
 
-  public URI additionalInfoUri() {
+  public default URI additionalInfoUri() {
     return getAdditionalInfoUri();
   }
 
-  @SuppressWarnings("unchecked")
-  public T additionalInfoUri(URI additionalInfoUri) {
+  @JsonSetter
+  public void setAdditionalInfoUri(URI additionalInfoUri);
+
+  public default BankingProductLendingRateV1 additionalInfoUri(URI additionalInfoUri) {
     setAdditionalInfoUri(additionalInfoUri);
-    return (T) this;
+    return this;
   }
 }

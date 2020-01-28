@@ -9,45 +9,48 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *******************************************************************************/
-package io.biza.babelfish.cdr.model.banking;
+package io.biza.babelfish.cdr.banking.product.interfaces;
 
 import java.net.URI;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-@Data
-@NoArgsConstructor
 @Valid
-@ToString
-@EqualsAndHashCode
 @Schema(description = "Banking Product Card Art", name = "BankingProductCardArt")
-public abstract class BankingProductCardArt<T> {
+public interface BankingProductCardArtV1 {
+  /**
+   * Get the display label for the card art
+   * @return a String containing the label
+   */
   @Schema(description = "Display label for the specific image", required = true)
   @NotNull
   @NotBlank
   @Valid
-  @JsonProperty("title")
-  String title;
-
-  public String title() {
+  @JsonGetter("title")
+  public String getTitle();
+  
+  public default String title() {
     return getTitle();
   }
-
-  @SuppressWarnings("unchecked")
-  public T title(String title) {
+  
+  /**
+   * Set the display label on the card
+   * @param title to set the display label
+   */
+  @JsonSetter("title")
+  public void setTitle(String title);
+  
+  public default BankingProductCardArtV1 title(String title) {
     setTitle(title);
-    return (T) this;
+    return this;
   }
 
   @Schema(
@@ -55,16 +58,18 @@ public abstract class BankingProductCardArt<T> {
       type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
-  @JsonProperty("imageUri")
-  URI imageUri;
-
-  public URI imageUri() {
-    return getImageUri();
+  @JsonGetter("imageUri")
+  public URI getImage();
+  
+  public default URI imageUri() {
+    return getImage();
   }
-
-  @SuppressWarnings("unchecked")
-  public T imageUri(URI imageUri) {
-    setImageUri(imageUri);
-    return (T) this;
+  
+  @JsonSetter("imageUri")
+  public void setImage(URI imageUri);
+  
+  public default BankingProductCardArtV1 imageUri(URI imageUri) {
+    setImage(imageUri);
+    return this;
   }
 }

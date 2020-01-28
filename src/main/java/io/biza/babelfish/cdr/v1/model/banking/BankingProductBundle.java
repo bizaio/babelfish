@@ -21,6 +21,6 @@ import lombok.ToString;
 
 
 public class BankingProductBundle
-    extends io.biza.babelfish.cdr.model.banking.BankingProductBundle<BankingProductBundle> {
+    extends io.biza.babelfish.cdr.model.banking.product.BankingProductBundle<BankingProductBundle> {
 
 }

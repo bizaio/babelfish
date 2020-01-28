@@ -23,7 +23,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class BankingProductFee
-    extends io.biza.babelfish.cdr.model.banking.BankingProductFee<BankingProductFee> {
+    extends io.biza.babelfish.cdr.model.banking.product.BankingProductFee<BankingProductFee> {
   @AssertTrue(message = "Additional Value must be a Duration String when Fee type is PERIODIC")
   private boolean isValueDuration() {
     return FormatChecker.isDefined(feeType())

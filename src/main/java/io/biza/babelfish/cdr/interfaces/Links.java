@@ -9,41 +9,46 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *******************************************************************************/
-package io.biza.babelfish.cdr.response;
+package io.biza.babelfish.cdr.interfaces;
 
+import java.net.URI;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.babelfish.cdr.model.CDRResponse;
-import io.biza.babelfish.cdr.model.banking.product.BankingProductDetail;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
+import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
 @Valid
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
-
-
-@Schema(description = "Response containing a single BankingProductDetail entry")
-public abstract class ResponseBankingProductById<T> extends CDRResponse<T> {
-  @Schema(required = true)
-  @JsonProperty("data")
+@Schema(description = "CDS Links")
+public interface Links {
+  @Schema(description = "Fully qualified link that generated the current response document",
+      required = true, type = "string", format = "uri")
+  @JsonSerialize(converter = UriToUriStringConverter.class)
+  @JsonDeserialize(converter = UriStringToUriConverter.class)
   @NotNull
   @Valid
-  BankingProductDetail<?> data;
+  @JsonGetter("self")
+  public URI getSelf();
 
-  public BankingProductDetail<?> data() {
-    return getData();
+  public default URI self() {
+    return getSelf();
   }
+  
+  @JsonSetter("self")
+  public void setSelf(URI self);
 
   @SuppressWarnings("unchecked")
-  public T data(BankingProductDetail<?> data) {
-    setData(data);
-    return (T) this;
+  public default Links self(URI self) {
+    setSelf(self);
+    return this;
   }
 }

@@ -21,5 +21,5 @@ import lombok.ToString;
 
 
 public class BankingProductRateCondition extends
-    io.biza.babelfish.cdr.model.banking.BankingProductRateTierApplicability<BankingProductRateCondition> {
+    io.biza.babelfish.cdr.model.banking.product.BankingProductRateTierApplicability<BankingProductRateCondition> {
 }

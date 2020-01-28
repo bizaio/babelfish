@@ -9,7 +9,7 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *******************************************************************************/
-package io.biza.babelfish.cdr.model.banking;
+package io.biza.babelfish.cdr.model.banking.product;
 
 import java.net.URI;
 import javax.validation.Valid;
@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductEligibilityType;
+import io.biza.babelfish.cdr.v1.enumerations.BankingProductConstraintType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -31,27 +31,27 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-@Schema(description = "Eligibility criteria to obtain a particular banking product")
-public abstract class BankingProductEligibility<T> {
+@Schema(description = "Banking Product Constraint Definition")
+public abstract class BankingProductConstraint<T> {
   @Schema(
-      description = "The type of eligibility criteria described.  See the next section for an overview of valid values and their meaning",
+      description = "The type of constraint described.  See the next section for an overview of valid values and their meaning",
       required = true)
   @NotNull
-  @JsonProperty("eligibilityType")
-  BankingProductEligibilityType eligibilityType;
+  @JsonProperty("constraintType")
+  BankingProductConstraintType constraintType;
 
-  public BankingProductEligibilityType eligibilityType() {
-    return getEligibilityType();
+  public BankingProductConstraintType constraintType() {
+    return getConstraintType();
   }
 
   @SuppressWarnings("unchecked")
-  public T eligibilityType(BankingProductEligibilityType eligibilityType) {
-    setEligibilityType(eligibilityType);
+  public T constraintType(BankingProductConstraintType constraintType) {
+    setConstraintType(constraintType);
     return (T) this;
   }
 
   @Schema(
-      description = "Generic field containing additional information relevant to the [eligibilityType](#tocSproducteligibilitytypedoc) specified.  Whether mandatory or not is dependent on the value of [eligibilityType](#tocSproducteligibilitytypedoc)")
+      description = "Generic field containing additional information relevant to the [constraintType](#tocSproductconstrainttypedoc) specified.  Whether mandatory or not is dependent on the value of [constraintType](#tocSproductconstrainttypedoc)")
   @JsonProperty("additionalValue")
   String additionalValue;
 
@@ -65,8 +65,7 @@ public abstract class BankingProductEligibility<T> {
     return (T) this;
   }
 
-  @Schema(
-      description = "Display text providing more information on the eligibility criteria. Mandatory if the [eligibilityType](#tocSproducteligibilitytypedoc) field is set to OTHER")
+  @Schema(description = "Display text providing more information the constraint")
   @JsonProperty("additionalInfo")
   String additionalInfo;
 
@@ -80,12 +79,11 @@ public abstract class BankingProductEligibility<T> {
     return (T) this;
   }
 
-  @Schema(description = "Link to a web page with more information on this eligibility criteria",
+  @Schema(description = "Link to a web page with more information on the constraint",
       type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("additionalInfoUri")
-  @Valid
   URI additionalInfoUri;
 
   public URI additionalInfoUri() {

@@ -20,7 +20,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class BankingProductRateTier
-    extends io.biza.babelfish.cdr.model.banking.BankingProductRateTier<BankingProductRateTier> {
+    extends io.biza.babelfish.cdr.model.banking.product.BankingProductRateTier<BankingProductRateTier> {
 
   // TODO: Avoid overlapping rate tiers
 }

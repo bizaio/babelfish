@@ -9,7 +9,7 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *******************************************************************************/
-package io.biza.babelfish.cdr.model.banking;
+package io.biza.babelfish.cdr.banking.product.interfaces;
 
 import java.math.BigDecimal;
 import java.net.URI;
@@ -18,7 +18,8 @@ import java.util.Currency;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.BigDecimalToRateStringConverter;
@@ -31,48 +32,42 @@ import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.v1.enumerations.BankingProductFeeType;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
 @Valid
-@ToString
-@EqualsAndHashCode
-@NoArgsConstructor
 @Schema(description = "Banking Product Fee Definition")
-public abstract class BankingProductFee<T> {
+public interface BankingProductFeeV1 {
   @Schema(description = "Name of the fee", required = true)
   @NotNull
-  @JsonProperty("name")
-  String name;
+  @JsonGetter("name")
+  public String getName();
 
-  public String name() {
+  public default String name() {
     return getName();
   }
-
-  @SuppressWarnings("unchecked")
-  public T name(String name) {
+  
+  @JsonSetter("name")
+  public void setName(String name);
+  
+  public default BankingProductFeeV1 name(String name) {
     setName(name);
-    return (T) this;
+    return this;
   }
 
   @Schema(description = "The type of fee", required = true)
   @NotNull
-  @JsonProperty("feeType")
-  BankingProductFeeType feeType;
+  @JsonGetter("feeType")
+  public BankingProductFeeType getType();
 
-  public BankingProductFeeType feeType() {
-    return getFeeType();
+  public default BankingProductFeeType type() {
+    return getType();
   }
+  
+  @JsonSetter("feeType")
+  public void setType(BankingProductFeeType type);
 
-  @SuppressWarnings("unchecked")
-  public T feeType(BankingProductFeeType feeType) {
-    setFeeType(feeType);
-    return (T) this;
+  public default BankingProductFeeV1 type(BankingProductFeeType feeType) {
+    setType(feeType);
+    return this;
   }
 
   @Schema(
@@ -80,17 +75,19 @@ public abstract class BankingProductFee<T> {
       type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
-  @JsonProperty("amount")
-  private BigDecimal amount;
+  @JsonGetter("amount")
+  public BigDecimal getAmount();
 
-  public BigDecimal amount() {
+  public default BigDecimal amount() {
     return getAmount();
   }
 
-  @SuppressWarnings("unchecked")
-  public T amount(BigDecimal amount) {
+  @JsonSetter("amount")
+  public void setAmount(BigDecimal amount);
+  
+  public default BankingProductFeeV1 amount(BigDecimal amount) {
     setAmount(amount);
-    return (T) this;
+    return this;
   }
 
   @Schema(
@@ -98,17 +95,19 @@ public abstract class BankingProductFee<T> {
       type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
-  @JsonProperty("balanceRate")
-  private BigDecimal balanceRate;
+  @JsonGetter("balanceRate")
+  public BigDecimal getBalanceRate();
 
-  public BigDecimal balanceRate() {
+  public default BigDecimal balanceRate() {
     return getBalanceRate();
   }
-
-  @SuppressWarnings("unchecked")
-  public T balanceRate(BigDecimal balanceRate) {
+  
+  @JsonSetter("balanceRate")
+  public void setBalanceRate(BigDecimal balanceRate);
+  
+  public default BankingProductFeeV1 balanceRate(BigDecimal balanceRate) {
     setBalanceRate(balanceRate);
-    return (T) this;
+    return this;
   }
 
   @Schema(
@@ -116,17 +115,19 @@ public abstract class BankingProductFee<T> {
       type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
-  @JsonProperty("transactionRate")
-  private BigDecimal transactionRate;
+  @JsonGetter("transactionRate")
+  public BigDecimal getTransactionRate();
 
-  public BigDecimal transactionRate() {
+  public default BigDecimal transactionRate() {
     return getTransactionRate();
   }
+  
+  @JsonSetter("transactionRate")
+  public void setTransactionRate(BigDecimal transactionRate);
 
-  @SuppressWarnings("unchecked")
-  public T transactionRate(BigDecimal transactionRate) {
+  public default BankingProductFeeV1 transactionRate(BigDecimal transactionRate) {
     setTransactionRate(transactionRate);
-    return (T) this;
+    return this;
   }
 
   @Schema(
@@ -134,17 +135,19 @@ public abstract class BankingProductFee<T> {
       type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
-  @JsonProperty("accruedRate")
-  private BigDecimal accruedRate;
+  @JsonGetter("accruedRate")
+  public BigDecimal getAccruedRate();
 
-  public BigDecimal accruedRate() {
+  public default BigDecimal accruedRate() {
     return getAccruedRate();
   }
 
-  @SuppressWarnings("unchecked")
-  public T accruedRate(BigDecimal accruedRate) {
+  @JsonSetter("accruedRate")
+  public void setAccruedRate(BigDecimal accruedRate);
+  
+  public default BankingProductFeeV1 accruedRate(BigDecimal accruedRate) {
     setAccruedRate(accruedRate);
-    return (T) this;
+    return this;
   }
 
   @Schema(
@@ -152,94 +155,105 @@ public abstract class BankingProductFee<T> {
       type = "string")
   @JsonSerialize(converter = PeriodToStringConverter.class)
   @JsonDeserialize(converter = StringToPeriodConverter.class)
-  @JsonProperty("accrualFrequency")
-  Period accrualFrequency;
+  @JsonGetter("accrualFrequency")
+  public Period getAccrualFrequency();
 
-  public Period accrualFrequency() {
+  public default Period accrualFrequency() {
     return getAccrualFrequency();
   }
+  
+  @JsonSetter("accrualFrequency")
+  public void setAccrualFrequency(Period accrualFrequency);
 
-  @SuppressWarnings("unchecked")
-  public T accrualFrequency(Period accrualFrequency) {
+  public default BankingProductFeeV1 accrualFrequency(Period accrualFrequency) {
     setAccrualFrequency(accrualFrequency);
-    return (T) this;
+    return this;
   }
 
   @Schema(description = "The currency the fee will be charged in", type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
-  @JsonProperty("currency")
-  Currency currency = Currency.getInstance("AUD");
+  @JsonGetter("currency")
+  public Currency getCurrency();
 
-  public Currency currency() {
+  public default Currency currency() {
     return getCurrency();
   }
 
-  @SuppressWarnings("unchecked")
-  public T currency(Currency currency) {
+  public void setCurrency(Currency currency);
+  
+  public default BankingProductFeeV1 currency(Currency currency) {
     setCurrency(currency);
-    return (T) this;
+    return this;
   }
 
   @Schema(
       description = "Generic field containing additional information relevant to the [feeType](#tocSproductfeetypedoc) specified. Whether mandatory or not is dependent on the value of [feeType](#tocSproductfeetypedoc)")
-  @JsonProperty("additionalValue")
-  String additionalValue;
+  @JsonGetter("additionalValue")
+  public String getAdditionalValue();
 
-  public String additionalValue() {
+  public default String additionalValue() {
     return getAdditionalValue();
   }
 
-  @SuppressWarnings("unchecked")
-  public T additionalValue(String additionalValue) {
+  @JsonSetter("additionalValue")
+  public void setAdditionalValue(String additionalValue);
+
+  public default BankingProductFeeV1 additionalValue(String additionalValue) {
     setAdditionalValue(additionalValue);
-    return (T) this;
+    return this;
   }
 
   @Schema(description = "Display text providing more information on the fee")
-  @JsonProperty("additionalInfo")
-  String additionalInfo;
+  @JsonGetter("additionalInfo")
+  public String getAdditionalInfo();
 
-  public String additionalInfo() {
+  public default String additionalInfo() {
     return getAdditionalInfo();
   }
 
-  @SuppressWarnings("unchecked")
-  public T additionalInfo(String additionalInfo) {
+  @JsonSetter("additionalInfo")
+  public void setAdditionalInfo(String additionalInfo);
+
+  public default BankingProductFeeV1 additionalInfo(String additionalInfo) {
     setAdditionalInfo(additionalInfo);
-    return (T) this;
+    return this;
   }
 
   @Schema(description = "Link to a web page with more information on this fee", type = "string",
       format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
-  @JsonProperty("additionalInfoUri")
-  URI additionalInfoUri;
+  @JsonGetter("additionalInfoUri")
+  public URI getAdditionalInfoUri();
 
-  public URI additionalInfoUri() {
+  public default URI additionalInfoUri() {
     return getAdditionalInfoUri();
   }
 
-  @SuppressWarnings("unchecked")
-  public T additionalInfoUri(URI additionalInfoUri) {
+  @JsonSetter("additionalInfoUri")
+  public void setAdditionalInfoUri(URI additionalInfoUri);
+
+  public default BankingProductFeeV1 additionalInfoUri(URI additionalInfoUri) {
     setAdditionalInfoUri(additionalInfoUri);
-    return (T) this;
+    return this;
   }
 
   @Schema(description = "An optional list of discounts to this fee that may be available")
-  @JsonProperty("discounts")
   @Valid
-  List<BankingProductDiscount<?>> discounts;
+  @JsonGetter("discounts")
+  public List<BankingProductDiscountV1> getDiscounts();
 
-  public List<BankingProductDiscount<?>> discounts() {
+  public default List<BankingProductDiscountV1> discounts() {
     return getDiscounts();
   }
 
-  @SuppressWarnings("unchecked")
-  public T discounts(List<BankingProductDiscount<?>> discounts) {
+  @JsonSetter("discounts")
+  public void setDiscounts(List<BankingProductDiscountV1> discounts);
+  
+  public default BankingProductFeeV1 discounts(List<BankingProductDiscountV1> discounts) {
     setDiscounts(discounts);
-    return (T) this;
+    return this;
   }
 
 

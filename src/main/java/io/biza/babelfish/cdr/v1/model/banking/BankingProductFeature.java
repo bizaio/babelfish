@@ -23,7 +23,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class BankingProductFeature
-    extends io.biza.babelfish.cdr.model.banking.BankingProductFeature<BankingProductFeature> {
+    extends io.biza.babelfish.cdr.model.banking.product.BankingProductFeature<BankingProductFeature> {
 
   @AssertTrue(message = "Additional Information must be populated when Feature type is OTHER")
   private boolean isInfoDefined() {

@@ -14,7 +14,7 @@ package io.biza.babelfish.cdr.v1.model.banking;
 import java.util.List;
 import javax.validation.Valid;
 import io.biza.babelfish.cdr.exception.AttributeNotSupportedException;
-import io.biza.babelfish.cdr.model.banking.BankingProductCardArt;
+import io.biza.babelfish.cdr.model.banking.product.BankingProductCardArt;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -22,7 +22,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class BankingProduct
-    extends io.biza.babelfish.cdr.model.banking.BankingProduct<BankingProduct> {
+    extends io.biza.babelfish.cdr.model.banking.product.BankingProduct<BankingProduct> {
 
   @Override
   public List<BankingProductCardArt<?>> cardArt() throws AttributeNotSupportedException {

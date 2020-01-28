@@ -23,7 +23,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class BankingProductEligibility extends
-    io.biza.babelfish.cdr.model.banking.BankingProductEligibility<BankingProductEligibility> {
+    io.biza.babelfish.cdr.model.banking.product.BankingProductEligibility<BankingProductEligibility> {
   @AssertTrue(message = "Additional Information must be populated when Eligibility type is OTHER")
   private boolean isInfoDefined() {
     return FormatChecker.isDefined(eligibilityType())

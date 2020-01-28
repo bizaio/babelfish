@@ -9,10 +9,12 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *******************************************************************************/
-package io.biza.babelfish.cdr.model.banking;
+package io.biza.babelfish.cdr.model.banking.product;
 
 import java.math.BigDecimal;
 import java.net.URI;
+import java.time.Period;
+import java.util.Currency;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -20,10 +22,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.BigDecimalToRateStringConverter;
+import io.biza.babelfish.cdr.converters.CurrencyToStringConverter;
+import io.biza.babelfish.cdr.converters.PeriodToStringConverter;
 import io.biza.babelfish.cdr.converters.RateStringToBigDecimalConverter;
+import io.biza.babelfish.cdr.converters.StringToCurrencyConverter;
+import io.biza.babelfish.cdr.converters.StringToPeriodConverter;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductDiscountType;
+import io.biza.babelfish.cdr.v1.enumerations.BankingProductFeeType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -37,48 +43,45 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
-@Schema(name = "BankingProductDiscount", description = "Banking Product Discount Specification")
-@JsonDeserialize(as = io.biza.babelfish.cdr.v1.model.banking.BankingProductDiscount.class)
-public abstract class BankingProductDiscount<T> {
-  @Schema(description = "Description of the discount", required = true)
+@Schema(description = "Banking Product Fee Definition")
+public abstract class BankingProductFee<T> {
+  @Schema(description = "Name of the fee", required = true)
   @NotNull
-  @JsonProperty("description")
-  String description;
+  @JsonProperty("name")
+  String name;
 
-  public String description() {
-    return getDescription();
+  public String name() {
+    return getName();
   }
 
   @SuppressWarnings("unchecked")
-  public T description(String description) {
-    setDescription(description);
+  public T name(String name) {
+    setName(name);
+    return (T) this;
+  }
+
+  @Schema(description = "The type of fee", required = true)
+  @NotNull
+  @JsonProperty("feeType")
+  BankingProductFeeType feeType;
+
+  public BankingProductFeeType feeType() {
+    return getFeeType();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T feeType(BankingProductFeeType feeType) {
+    setFeeType(feeType);
     return (T) this;
   }
 
   @Schema(
-      description = "The type of discount. See the next section for an overview of valid values and their meaning",
-      required = true)
-  @NotNull
-  @JsonProperty("discountType")
-  BankingProductDiscountType discountType;
-
-  public BankingProductDiscountType discountType() {
-    return getDiscountType();
-  }
-
-  @SuppressWarnings("unchecked")
-  public T discountType(BankingProductDiscountType discountType) {
-    setDiscountType(discountType);
-    return (T) this;
-  }
-
-  @Schema(
-      description = "Value of the discount. When following properties include one of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory",
+      description = "The amount charged for the fee. One of amount, balanceRate, transactionRate and accruedRate is mandatory",
       type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   @JsonProperty("amount")
-  BigDecimal amount;
+  private BigDecimal amount;
 
   public BigDecimal amount() {
     return getAmount();
@@ -91,12 +94,12 @@ public abstract class BankingProductDiscount<T> {
   }
 
   @Schema(
-      description = "A discount rate calculated based on a proportion of the balance. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory. Unless noted in additionalInfo, assumes the application and calculation frequency are the same as the corresponding fee",
+      description = "A fee rate calculated based on a proportion of the balance. One of amount, balanceRate, transactionRate and accruedRate is mandatory",
       type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   @JsonProperty("balanceRate")
-  BigDecimal balanceRate;
+  private BigDecimal balanceRate;
 
   public BigDecimal balanceRate() {
     return getBalanceRate();
@@ -109,12 +112,12 @@ public abstract class BankingProductDiscount<T> {
   }
 
   @Schema(
-      description = "A discount rate calculated based on a proportion of a transaction. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory",
+      description = "A fee rate calculated based on a proportion of a transaction. One of amount, balanceRate, transactionRate and accruedRate is mandatory",
       type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   @JsonProperty("transactionRate")
-  BigDecimal transactionRate;
+  private BigDecimal transactionRate;
 
   public BigDecimal transactionRate() {
     return getTransactionRate();
@@ -127,12 +130,12 @@ public abstract class BankingProductDiscount<T> {
   }
 
   @Schema(
-      description = "A discount rate calculated based on a proportion of the calculated interest accrued on the account. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory. Unless noted in additionalInfo, assumes the application and calculation frequency are the same as the corresponding fee",
+      description = "A fee rate calculated based on a proportion of the calculated interest accrued on the account. One of amount, balanceRate, transactionRate and accruedRate is mandatory",
       type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   @JsonProperty("accruedRate")
-  BigDecimal accruedRate;
+  private BigDecimal accruedRate;
 
   public BigDecimal accruedRate() {
     return getAccruedRate();
@@ -145,25 +148,41 @@ public abstract class BankingProductDiscount<T> {
   }
 
   @Schema(
-      description = "A discount rate calculated based on a proportion of the fee to which this discount is attached. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory. Unless noted in additionalInfo, assumes the application and calculation frequency are the same as the corresponding fee",
+      description = "The indicative frequency with which the fee is calculated on the account. Only applies if balanceRate or accruedRate is also present. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations)",
       type = "string")
-  @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
-  @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
-  @JsonProperty("feeRate")
-  BigDecimal feeRate;
+  @JsonSerialize(converter = PeriodToStringConverter.class)
+  @JsonDeserialize(converter = StringToPeriodConverter.class)
+  @JsonProperty("accrualFrequency")
+  Period accrualFrequency;
 
-  public BigDecimal feeRate() {
-    return getFeeRate();
+  public Period accrualFrequency() {
+    return getAccrualFrequency();
   }
 
   @SuppressWarnings("unchecked")
-  public T feeRate(BigDecimal feeRate) {
-    setFeeRate(feeRate);
+  public T accrualFrequency(Period accrualFrequency) {
+    setAccrualFrequency(accrualFrequency);
+    return (T) this;
+  }
+
+  @Schema(description = "The currency the fee will be charged in", type = "string")
+  @JsonSerialize(converter = CurrencyToStringConverter.class)
+  @JsonDeserialize(converter = StringToCurrencyConverter.class)
+  @JsonProperty("currency")
+  Currency currency = Currency.getInstance("AUD");
+
+  public Currency currency() {
+    return getCurrency();
+  }
+
+  @SuppressWarnings("unchecked")
+  public T currency(Currency currency) {
+    setCurrency(currency);
     return (T) this;
   }
 
   @Schema(
-      description = "Generic field containing additional information relevant to the [discountType](#tocSproductdiscounttypedoc) specified. Whether mandatory or not is dependent on the value of [discountType](#tocSproductdiscounttypedoc)")
+      description = "Generic field containing additional information relevant to the [feeType](#tocSproductfeetypedoc) specified. Whether mandatory or not is dependent on the value of [feeType](#tocSproductfeetypedoc)")
   @JsonProperty("additionalValue")
   String additionalValue;
 
@@ -177,7 +196,7 @@ public abstract class BankingProductDiscount<T> {
     return (T) this;
   }
 
-  @Schema(description = "Display text providing more information on the discount")
+  @Schema(description = "Display text providing more information on the fee")
   @JsonProperty("additionalInfo")
   String additionalInfo;
 
@@ -191,8 +210,8 @@ public abstract class BankingProductDiscount<T> {
     return (T) this;
   }
 
-  @Schema(description = "Link to a web page with more information on this discount",
-      type = "string", format = "uri")
+  @Schema(description = "Link to a web page with more information on this fee", type = "string",
+      format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("additionalInfoUri")
@@ -208,18 +227,20 @@ public abstract class BankingProductDiscount<T> {
     return (T) this;
   }
 
-  @Schema(description = "Eligibility constraints that apply to this discount")
-  @JsonProperty("eligibility")
+  @Schema(description = "An optional list of discounts to this fee that may be available")
+  @JsonProperty("discounts")
   @Valid
-  List<BankingProductFeeDiscountEligibility<?>> eligibility;
+  List<BankingProductDiscount<?>> discounts;
 
-  public List<BankingProductFeeDiscountEligibility<?>> eligibility() {
-    return getEligibility();
+  public List<BankingProductDiscount<?>> discounts() {
+    return getDiscounts();
   }
 
   @SuppressWarnings("unchecked")
-  public T eligibility(List<BankingProductFeeDiscountEligibility<?>> eligibility) {
-    setEligibility(eligibility);
+  public T discounts(List<BankingProductDiscount<?>> discounts) {
+    setDiscounts(discounts);
     return (T) this;
   }
+
+
 }

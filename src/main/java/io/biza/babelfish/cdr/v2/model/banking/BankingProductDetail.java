@@ -19,5 +19,5 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class BankingProductDetail
-    extends io.biza.babelfish.cdr.model.banking.BankingProductDetail<BankingProductDetail> {
+    extends io.biza.babelfish.cdr.model.banking.product.BankingProductDetail<BankingProductDetail> {
 }

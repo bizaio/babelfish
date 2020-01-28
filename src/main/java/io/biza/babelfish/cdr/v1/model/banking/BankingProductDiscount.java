@@ -25,7 +25,7 @@ import lombok.ToString;
 
 
 public class BankingProductDiscount
-    extends io.biza.babelfish.cdr.model.banking.BankingProductDiscount<BankingProductDiscount> {
+    extends io.biza.babelfish.cdr.model.banking.product.BankingProductDiscount<BankingProductDiscount> {
   
   @AssertTrue(message = "Eligibility Criteria must be populated when Discount type is ELIGIBILITY_ONLY")
   private boolean isEligibilityPopulated() {

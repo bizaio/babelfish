@@ -23,7 +23,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class BankingProductLendingRate extends
-    io.biza.babelfish.cdr.model.banking.BankingProductLendingRate<BankingProductLendingRate> {
+    io.biza.babelfish.cdr.model.banking.product.BankingProductLendingRate<BankingProductLendingRate> {
   @AssertTrue(
       message = "Additional Value must be an Duration String when Lending Rate Type INTRODUCTORY or FIXED")
   private boolean isValueDuration() {
