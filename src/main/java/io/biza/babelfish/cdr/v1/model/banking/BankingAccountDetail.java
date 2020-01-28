@@ -13,8 +13,8 @@ package io.biza.babelfish.cdr.v1.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
-import io.biza.babelfish.cdr.support.FormatChecker;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeBankingAccount;
+import io.biza.babelfish.enumerations.cdr.PayloadTypeBankingAccount;
+import io.biza.babelfish.support.FormatChecker;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

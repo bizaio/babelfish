@@ -13,8 +13,8 @@ package io.biza.babelfish.cdr.v1.model.banking;
 
 import java.util.List;
 import javax.validation.Valid;
-import io.biza.babelfish.cdr.exception.AttributeNotSupportedException;
 import io.biza.babelfish.cdr.model.banking.product.BankingProductCardArt;
+import io.biza.babelfish.exception.AttributeNotSupportedException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

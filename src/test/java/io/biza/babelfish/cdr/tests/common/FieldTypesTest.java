@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.support.FormatChecker;
+import io.biza.babelfish.support.FormatChecker;
 
 @DisplayName("CDR Common Field Types")
 public class FieldTypesTest {

@@ -18,5 +18,5 @@ import lombok.ToString;
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class CDRResponse extends io.biza.babelfish.cdr.model.CDRResponse<CDRResponse> {
+public class CDRResponse extends io.biza.babelfish.deprecated.cdr.model.CDRResponse<CDRResponse> {
 }

@@ -13,7 +13,7 @@ package io.biza.babelfish.cdr.v1.model.banking;
 
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeBankingScheduledPaymentTo;
+import io.biza.babelfish.enumerations.cdr.PayloadTypeBankingScheduledPaymentTo;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

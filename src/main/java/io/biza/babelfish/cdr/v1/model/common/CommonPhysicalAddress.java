@@ -13,7 +13,7 @@ package io.biza.babelfish.cdr.v1.model.common;
 
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeAddress;
+import io.biza.babelfish.enumerations.cdr.PayloadTypeAddress;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

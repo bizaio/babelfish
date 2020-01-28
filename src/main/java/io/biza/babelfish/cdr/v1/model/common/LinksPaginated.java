@@ -13,7 +13,7 @@ package io.biza.babelfish.cdr.v1.model.common;
 
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
-import io.biza.babelfish.cdr.support.FormatChecker;
+import io.biza.babelfish.support.FormatChecker;
 
 @Valid
 public class LinksPaginated

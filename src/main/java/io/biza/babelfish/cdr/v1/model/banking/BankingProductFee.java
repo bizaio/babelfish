@@ -14,8 +14,8 @@ package io.biza.babelfish.cdr.v1.model.banking;
 import java.util.Arrays;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
-import io.biza.babelfish.cdr.support.FormatChecker;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductFeeType;
+import io.biza.babelfish.enumerations.cdr.BankingProductFeeType;
+import io.biza.babelfish.support.FormatChecker;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

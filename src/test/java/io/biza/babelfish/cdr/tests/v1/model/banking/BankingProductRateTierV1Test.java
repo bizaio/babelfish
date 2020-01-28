@@ -22,8 +22,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
-import io.biza.babelfish.cdr.v1.enumerations.CommonUnitOfMeasureType;
 import io.biza.babelfish.cdr.v1.model.banking.BankingProductRateTier;
+import io.biza.babelfish.enumerations.cdr.CommonUnitOfMeasureType;
 
 @DisplayName("BankingProductRateTier V1 Tests")
 public class BankingProductRateTierV1Test {

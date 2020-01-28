@@ -11,8 +11,8 @@
  *******************************************************************************/
 package io.biza.babelfish.cdr.response;
 
-import io.biza.babelfish.cdr.model.CDRResponse;
 import io.biza.babelfish.cdr.response.container.ResponseDiscoveryOutagesListData;
+import io.biza.babelfish.deprecated.cdr.model.CDRResponse;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

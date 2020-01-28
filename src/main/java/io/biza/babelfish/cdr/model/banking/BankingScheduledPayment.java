@@ -15,7 +15,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.babelfish.cdr.v1.enumerations.BankingScheduledPaymentStatus;
+import io.biza.babelfish.enumerations.cdr.BankingScheduledPaymentStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

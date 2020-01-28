@@ -15,9 +15,9 @@ import java.util.Arrays;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import com.google.i18n.phonenumbers.PhoneNumberUtil.PhoneNumberFormat;
-import io.biza.babelfish.cdr.support.FormatChecker;
-import io.biza.babelfish.cdr.support.PhoneNumberValidationResult;
-import io.biza.babelfish.cdr.v1.enumerations.CommonPhoneNumberPurpose;
+import io.biza.babelfish.enumerations.cdr.CommonPhoneNumberPurpose;
+import io.biza.babelfish.support.FormatChecker;
+import io.biza.babelfish.support.PhoneNumberValidationResult;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

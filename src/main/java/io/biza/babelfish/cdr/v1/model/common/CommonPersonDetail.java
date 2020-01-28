@@ -14,7 +14,7 @@ package io.biza.babelfish.cdr.v1.model.common;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.babelfish.cdr.model.common.CommonPhysicalAddressWithPurpose;
-import io.biza.babelfish.cdr.v1.enumerations.AddressPurpose;
+import io.biza.babelfish.enumerations.cdr.AddressPurpose;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

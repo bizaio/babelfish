@@ -11,9 +11,9 @@
  *******************************************************************************/
 package io.biza.babelfish.cdr.response.container;
 
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeCustomer;
 import io.biza.babelfish.cdr.v1.model.common.CommonOrganisationDetail;
 import io.biza.babelfish.cdr.v1.model.common.CommonPersonDetail;
+import io.biza.babelfish.enumerations.cdr.PayloadTypeCustomer;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

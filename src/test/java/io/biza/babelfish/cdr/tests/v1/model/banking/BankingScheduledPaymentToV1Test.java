@@ -21,8 +21,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeBankingScheduledPaymentTo;
 import io.biza.babelfish.cdr.v1.model.banking.BankingScheduledPaymentTo;
+import io.biza.babelfish.enumerations.cdr.PayloadTypeBankingScheduledPaymentTo;
 
 @DisplayName("BankingScheduledPaymentTo V1 Tests")
 public class BankingScheduledPaymentToV1Test {

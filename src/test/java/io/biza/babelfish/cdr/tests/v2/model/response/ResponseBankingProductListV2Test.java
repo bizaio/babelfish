@@ -25,7 +25,7 @@ import io.biza.babelfish.cdr.v1.model.common.LinksPaginated;
 import io.biza.babelfish.cdr.v1.model.common.MetaPaginated;
 import io.biza.babelfish.cdr.v1.response.ResponseBankingProductList;
 import io.biza.babelfish.cdr.v1.response.container.ResponseBankingProductListData;
-import io.biza.babelfish.cdr.v2.model.banking.BankingProduct;
+import io.biza.babelfish.model.cdr.banking.product.BankingProductV2;
 
 @DisplayName("ResponseBankingProductList V1 Tests")
 public class ResponseBankingProductListV2Test {
@@ -70,7 +70,7 @@ public class ResponseBankingProductListV2Test {
             .first(ModelConstants.DEFAULT_FIRST_URI).next(ModelConstants.DEFAULT_NEXT_URI)
             .last(ModelConstants.DEFAULT_LAST_URI).prev(ModelConstants.DEFAULT_PREV_URI))
         .meta(new MetaPaginated().totalPages(10).totalRecords(100))
-        .data(new ResponseBankingProductListData().products(List.of(new BankingProduct())));
+        .data(new ResponseBankingProductListData().products(List.of(new BankingProductV2())));
     assertFalse(validator.validate(myResponse).isEmpty(),
         validator.validate(myResponse).toString());
   }

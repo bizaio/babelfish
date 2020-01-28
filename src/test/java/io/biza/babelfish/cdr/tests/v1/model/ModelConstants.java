@@ -16,42 +16,11 @@ import java.net.URI;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import java.time.OffsetDateTime;
 import java.time.Period;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
-import io.biza.babelfish.cdr.v1.enumerations.AddressPAFStateType;
-import io.biza.babelfish.cdr.v1.enumerations.AddressPurpose;
-import io.biza.babelfish.cdr.v1.enumerations.BankingPayeeType;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductCategory;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductConstraintType;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductDepositRateType;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductDiscountEligibilityType;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductDiscountType;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductEligibilityType;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductFeatureType;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductFeeType;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductLendingRateType;
-import io.biza.babelfish.cdr.v1.enumerations.BankingScheduledPaymentStatus;
-import io.biza.babelfish.cdr.v1.enumerations.BankingTermDepositMaturityInstructions;
-import io.biza.babelfish.cdr.v1.enumerations.BankingTransactionService;
-import io.biza.babelfish.cdr.v1.enumerations.BankingTransactionStatus;
-import io.biza.babelfish.cdr.v1.enumerations.BankingTransactionType;
-import io.biza.babelfish.cdr.v1.enumerations.CommonDiscoveryStatusType;
-import io.biza.babelfish.cdr.v1.enumerations.CommonEmailAddressPurpose;
-import io.biza.babelfish.cdr.v1.enumerations.CommonOrganisationType;
-import io.biza.babelfish.cdr.v1.enumerations.CommonPhoneNumberPurpose;
-import io.biza.babelfish.cdr.v1.enumerations.CommonUnitOfMeasureType;
-import io.biza.babelfish.cdr.v1.enumerations.CommonWeekDay;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeAddress;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeBankingDomesticPayee;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeBankingDomesticPayeePayId;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeBankingPayee;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeBankingScheduledPaymentRecurrence;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeBankingScheduledPaymentTo;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeCustomer;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeTransactionExtension;
+import io.biza.babelfish.cdr.model.banking.product.BankingProductFeature;
 import io.biza.babelfish.cdr.v1.model.banking.BankingAccount;
 import io.biza.babelfish.cdr.v1.model.banking.BankingAccountDetail;
 import io.biza.babelfish.cdr.v1.model.banking.BankingAuthorisedEntity;
@@ -70,16 +39,6 @@ import io.biza.babelfish.cdr.v1.model.banking.BankingInternationalPayeeBeneficia
 import io.biza.babelfish.cdr.v1.model.banking.BankingLoanAccount;
 import io.biza.babelfish.cdr.v1.model.banking.BankingPayee;
 import io.biza.babelfish.cdr.v1.model.banking.BankingPayeeDetail;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductBundle;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductConstraint;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductDepositRate;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductEligibility;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductFeature;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductFee;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductDiscount;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductFeeDiscountEligibility;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductLendingRate;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductRateTier;
 import io.biza.babelfish.cdr.v1.model.banking.BankingScheduledPayment;
 import io.biza.babelfish.cdr.v1.model.banking.BankingScheduledPaymentFrom;
 import io.biza.babelfish.cdr.v1.model.banking.BankingScheduledPaymentInterval;
@@ -133,6 +92,39 @@ import io.biza.babelfish.cdr.v1.response.container.ResponseBankingTransactionLis
 import io.biza.babelfish.cdr.v1.response.container.ResponseCommonCustomerData;
 import io.biza.babelfish.cdr.v1.response.container.ResponseCommonCustomerDetailData;
 import io.biza.babelfish.cdr.v1.response.container.ResponseCommonDiscoveryOutagesListData;
+import io.biza.babelfish.enumerations.cdr.AddressPAFStateType;
+import io.biza.babelfish.enumerations.cdr.AddressPurpose;
+import io.biza.babelfish.enumerations.cdr.BankingPayeeType;
+import io.biza.babelfish.enumerations.cdr.BankingProductCategory;
+import io.biza.babelfish.enumerations.cdr.BankingProductConstraintType;
+import io.biza.babelfish.enumerations.cdr.BankingProductDepositRateType;
+import io.biza.babelfish.enumerations.cdr.BankingProductDiscountEligibilityType;
+import io.biza.babelfish.enumerations.cdr.BankingProductDiscountType;
+import io.biza.babelfish.enumerations.cdr.BankingProductEligibilityType;
+import io.biza.babelfish.enumerations.cdr.BankingProductFeatureType;
+import io.biza.babelfish.enumerations.cdr.BankingProductFeeType;
+import io.biza.babelfish.enumerations.cdr.BankingProductLendingRateType;
+import io.biza.babelfish.enumerations.cdr.BankingScheduledPaymentStatus;
+import io.biza.babelfish.enumerations.cdr.BankingTermDepositMaturityInstructions;
+import io.biza.babelfish.enumerations.cdr.BankingTransactionService;
+import io.biza.babelfish.enumerations.cdr.BankingTransactionStatus;
+import io.biza.babelfish.enumerations.cdr.BankingTransactionType;
+import io.biza.babelfish.enumerations.cdr.CommonDiscoveryStatusType;
+import io.biza.babelfish.enumerations.cdr.CommonEmailAddressPurpose;
+import io.biza.babelfish.enumerations.cdr.CommonOrganisationType;
+import io.biza.babelfish.enumerations.cdr.CommonPhoneNumberPurpose;
+import io.biza.babelfish.enumerations.cdr.CommonUnitOfMeasureType;
+import io.biza.babelfish.enumerations.cdr.CommonWeekDay;
+import io.biza.babelfish.enumerations.cdr.PayloadTypeAddress;
+import io.biza.babelfish.enumerations.cdr.PayloadTypeBankingDomesticPayee;
+import io.biza.babelfish.enumerations.cdr.PayloadTypeBankingDomesticPayeePayId;
+import io.biza.babelfish.enumerations.cdr.PayloadTypeBankingPayee;
+import io.biza.babelfish.enumerations.cdr.PayloadTypeBankingScheduledPaymentRecurrence;
+import io.biza.babelfish.enumerations.cdr.PayloadTypeBankingScheduledPaymentTo;
+import io.biza.babelfish.enumerations.cdr.PayloadTypeCustomer;
+import io.biza.babelfish.interfaces.cdr.banking.product.BankingProductDetailV2;
+import io.biza.babelfish.interfaces.cdr.banking.product.BankingProductV1;
+import io.biza.babelfish.interfaces.cdr.banking.product.BankingProductV2;
 
 /**
  * ModelConstants This defines valid models for manipulation within test cases
@@ -146,50 +138,50 @@ public class ModelConstants {
   public static final URI DEFAULT_NEXT_URI = URI.create("http://localhost/?page=4");
   public static final List<String> DEFAULT_ACCOUNT_IDS =
       List.of("0be1c793-87ba-4942-95bd-4c972ec43a2d", "d5305a6c-b828-4651-bbcc-b3ea7264d387");
-  public static final io.biza.babelfish.cdr.v1.model.banking.BankingProduct DEFAULT_BANKING_PRODUCT_V1 =
-      new io.biza.babelfish.cdr.v1.model.banking.BankingProduct().productId("test")
+  public static final BankingProductV1 DEFAULT_BANKING_PRODUCT_V1 =
+      new io.biza.babelfish.model.cdr.banking.product.BankingProductV1().productId("test")
           .lastUpdated(OffsetDateTime.now()).productCategory(BankingProductCategory.BUSINESS_LOANS)
           .name("Test").description("Test Description").brand("ACME").tailored(false);
-  public static final io.biza.babelfish.cdr.v2.model.banking.BankingProduct DEFAULT_BANKING_PRODUCT_V2 =
-      new io.biza.babelfish.cdr.v2.model.banking.BankingProduct().productId("test")
+  public static final BankingProductV2 DEFAULT_BANKING_PRODUCT_V2 =
+      new io.biza.babelfish.model.cdr.banking.product.BankingProductV2().productId("test")
           .lastUpdated(OffsetDateTime.now()).productCategory(BankingProductCategory.BUSINESS_LOANS)
           .name("Test").description("Test Description").brand("ACME").tailored(false);
-  public static final io.biza.babelfish.cdr.v1.model.banking.BankingProductDetail DEFAULT_BANKING_PRODUCT_DETAIL_V1 =
-      new io.biza.babelfish.cdr.v1.model.banking.BankingProductDetail().productId("test")
+  public static final BankingProductDetailV2 DEFAULT_BANKING_PRODUCT_DETAIL_V1 =
+      new io.biza.babelfish.model.cdr.banking.product.BankingProductDetailV2().productId("test")
           .lastUpdated(OffsetDateTime.now()).productCategory(BankingProductCategory.BUSINESS_LOANS)
           .name("Test").description("Test Description").brand("ACME").tailored(false);
-  public static final io.biza.babelfish.cdr.v2.model.banking.BankingProductDetail DEFAULT_BANKING_PRODUCT_DETAIL_V2 =
-      new io.biza.babelfish.cdr.v2.model.banking.BankingProductDetail().productId("test")
+  public static final BankingProductDetailV2 DEFAULT_BANKING_PRODUCT_DETAIL_V2 =
+      new io.biza.babelfish.model.cdr.banking.product.BankingProductDetailV2().productId("test")
           .lastUpdated(OffsetDateTime.now()).productCategory(BankingProductCategory.BUSINESS_LOANS)
           .name("Test").description("Test Description").brand("ACME").tailored(false);
-  public static final BankingProductBundle DEFAULT_BANKING_PRODUCT_BUNDLE =
-      new BankingProductBundle().name("Bundle Name").description("Bundle Description");
-  public static final BankingProductFeature DEFAULT_BANKING_PRODUCT_FEATURE =
-      new BankingProductFeature().featureType(BankingProductFeatureType.ADDITIONAL_CARDS)
+  public static final BankingProductBundleV1 DEFAULT_BANKING_PRODUCT_BUNDLE =
+      new BankingProductBundleV1().name("Bundle Name").description("Bundle Description");
+  public static final BankingProductFeatureV1 DEFAULT_BANKING_PRODUCT_FEATURE =
+      new BankingProductFeatureV1().type(BankingProductFeatureType.ADDITIONAL_CARDS)
           .additionalValue("10");
-  public static final BankingProductConstraint DEFAULT_BANKING_PRODUCT_CONSTRAINT =
-      new BankingProductConstraint().constraintType(BankingProductConstraintType.MAX_BALANCE)
+  public static final BankingProductConstraintV1 DEFAULT_BANKING_PRODUCT_CONSTRAINT =
+      new BankingProductConstraintV1().constraintType(BankingProductConstraintType.MAX_BALANCE)
           .additionalValue("10.00");
-  public static final BankingProductEligibility DEFAULT_BANKING_PRODUCT_ELIGIBILITY =
-      new BankingProductEligibility().eligibilityType(BankingProductEligibilityType.BUSINESS);
-  public static final BankingProductFee DEFAULT_BANKING_PRODUCT_FEE =
-      new BankingProductFee().name("Fee Name").feeType(BankingProductFeeType.PERIODIC)
+  public static final BankingProductEligibilityV1 DEFAULT_BANKING_PRODUCT_ELIGIBILITY =
+      new BankingProductEligibilityV1().type(BankingProductEligibilityType.BUSINESS);
+  public static final BankingProductFeeV1 DEFAULT_BANKING_PRODUCT_FEE =
+      new BankingProductFeeV1().name("Fee Name").type(BankingProductFeeType.PERIODIC)
           .additionalValue("P1D").amount(new BigDecimal("10.00"));
-  public static final BankingProductDiscount DEFAULT_BANKING_PRODUCT_FEE_DISCOUNT =
-      new BankingProductDiscount().description("Discount Description")
-          .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.BALANCE)
+  public static final BankingProductDiscountV1 DEFAULT_BANKING_PRODUCT_FEE_DISCOUNT =
+      new BankingProductDiscountV1().description("Discount Description")
+          .amount(new BigDecimal("10.00")).type(BankingProductDiscountType.BALANCE)
           .additionalValue("100.00");
-  public static final BankingProductFeeDiscountEligibility DEFAULT_BANKING_PRODUCT_FEE_DISCOUNT_ELIGIBILITY =
-      new BankingProductFeeDiscountEligibility()
+  public static final BankingProductFeeDiscountEligibilityV1 DEFAULT_BANKING_PRODUCT_FEE_DISCOUNT_ELIGIBILITY =
+      new BankingProductFeeDiscountEligibilityV1()
           .discountEligibilityType(BankingProductDiscountEligibilityType.BUSINESS);
-  public static final BankingProductDepositRate DEFAULT_BANKING_PRODUCT_DEPOSIT_RATE =
-      new BankingProductDepositRate().depositRateType(BankingProductDepositRateType.VARIABLE)
+  public static final BankingProductDepositRateV1 DEFAULT_BANKING_PRODUCT_DEPOSIT_RATE =
+      new BankingProductDepositRateV1().depositRateType(BankingProductDepositRateType.VARIABLE)
           .rate(new BigDecimal("0.05"));
-  public static final BankingProductLendingRate DEFAULT_BANKING_PRODUCT_LENDING_RATE =
-      new BankingProductLendingRate().lendingRateType(BankingProductLendingRateType.VARIABLE)
+  public static final BankingProductLendingRateV1 DEFAULT_BANKING_PRODUCT_LENDING_RATE =
+      new BankingProductLendingRateV1().lendingRateType(BankingProductLendingRateType.VARIABLE)
           .rate(new BigDecimal("0.05"));
-  public static final BankingProductRateTier DEFAULT_BANKING_PRODUCT_RATE_TIER =
-      new BankingProductRateTier().name("Rate Tier Name")
+  public static final BankingProductRateTierV1 DEFAULT_BANKING_PRODUCT_RATE_TIER =
+      new BankingProductRateTierV1().name("Rate Tier Name")
           .unitOfMeasure(CommonUnitOfMeasureType.DOLLAR).minimumValue(new BigDecimal("100.00"));
 
   public static final LinksPaginated DEFAULT_LINKS_PAGINATED =

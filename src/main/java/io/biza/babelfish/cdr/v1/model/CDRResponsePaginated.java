@@ -13,7 +13,7 @@ package io.biza.babelfish.cdr.v1.model;
 
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
-import io.biza.babelfish.cdr.support.FormatChecker;
+import io.biza.babelfish.support.FormatChecker;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -21,7 +21,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class CDRResponsePaginated
-    extends io.biza.babelfish.cdr.model.CDRResponsePaginated<CDRResponsePaginated> {
+    extends io.biza.babelfish.deprecated.cdr.model.CDRResponsePaginated<CDRResponsePaginated> {
 
   @AssertTrue(message = "First and Last Page Detected but Total Pages is >1")
   public boolean isTotalPagesBiggerThanLinks() {
