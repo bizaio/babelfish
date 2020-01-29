@@ -21,15 +21,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductFee;
 import io.biza.babelfish.enumerations.cdr.BankingProductFeeType;
+import io.biza.babelfish.interfaces.cdr.banking.product.BankingProductFeeV1;
+import io.biza.babelfish.interfaces.cdr.banking.product.BankingProductFeeV1;
 
-@DisplayName("BankingProductFee V1 Tests")
+@DisplayName("BankingProductFeeV1 V1 Tests")
 public class BankingProductFeeV1Test {
   private Validator validator;
 
   // TODO: Enforce different value types
-  // TODO: Enforce name and feeType mandatory field
+  // TODO: Enforce name and type mandatory field
 
   @BeforeEach
   public void setup() {
@@ -38,141 +39,207 @@ public class BankingProductFeeV1Test {
   }
 
   @Test
-  @DisplayName("Valid BankingProductFee")
+  @DisplayName("Valid BankingProductFeeV1")
   void bankingProductFee() {
     assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_PRODUCT_FEE).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_BANKING_PRODUCT_FEE).toString());
   }
 
   @Test
-  @DisplayName("BankingProductFee for Periodic")
+  @DisplayName("BankingProductFeeV1 for Periodic")
   void bankingProductFeeUnlimitedTransactions() {
-    BankingProductFee data = new BankingProductFee().name("Fee Name")
-        .feeType(BankingProductFeeType.PERIODIC).amount(new BigDecimal("10.00"));
+    BankingProductFeeV1 data = new BankingProductFeeV1.Builder().name("Fee Name")
+        .type(BankingProductFeeType.PERIODIC).amount(new BigDecimal("10.00")).buildPartial();
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Invalid String
-    data.additionalValue("Not a Duration");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(
+            BankingProductFeeV1.Builder.from(data).additionalValue("Not a Duration").build())
+            .isEmpty(),
+        validator.validate(
+            BankingProductFeeV1.Builder.from(data).additionalValue("Not a Duration").build())
+            .toString());
 
     // Duration String formatted value is valid
-    data.additionalValue("P1D");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator
+            .validate(BankingProductFeeV1.Builder.from(data).additionalValue("P1D").build())
+            .isEmpty(),
+        validator
+            .validate(BankingProductFeeV1.Builder.from(data).additionalValue("P1D").build())
+            .toString());
   }
 
 
   @Test
-  @DisplayName("BankingProductFee for Transaction")
+  @DisplayName("BankingProductFeeV1 for Transaction")
   void bankingProductFeeTransaction() {
-    BankingProductFee data = new BankingProductFee().name("Fee Name")
-        .feeType(BankingProductFeeType.TRANSACTION).amount(new BigDecimal("10.00"));
+    BankingProductFeeV1 data = new BankingProductFeeV1.Builder().name("Fee Name")
+        .type(BankingProductFeeType.TRANSACTION).amount(new BigDecimal("10.00")).buildPartial();
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Any value specified is invalid
-    data.additionalValue("Invalid");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(
+                BankingProductFeeV1.Builder.from(data).additionalValue("Invalid").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductFeeV1.Builder.from(data).additionalValue("Invalid").build())
+            .toString());
   }
 
   @Test
-  @DisplayName("BankingProductFee for Withdrawal")
+  @DisplayName("BankingProductFeeV1 for Withdrawal")
   void bankingProductFeeWithdrawal() {
-    BankingProductFee data = new BankingProductFee().name("Fee Name")
-        .feeType(BankingProductFeeType.WITHDRAWAL).amount(new BigDecimal("10.00"));
+    BankingProductFeeV1 data = new BankingProductFeeV1.Builder().name("Fee Name")
+        .type(BankingProductFeeType.WITHDRAWAL).amount(new BigDecimal("10.00")).buildPartial();
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Any value specified is invalid
-    data.additionalValue("Invalid");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(
+                BankingProductFeeV1.Builder.from(data).additionalValue("Invalid").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductFeeV1.Builder.from(data).additionalValue("Invalid").build())
+            .toString());
   }
 
   @Test
-  @DisplayName("BankingProductFee for Deposit")
+  @DisplayName("BankingProductFeeV1 for Deposit")
   void bankingProductFeeDeposit() {
-    BankingProductFee data = new BankingProductFee().name("Fee Name")
-        .feeType(BankingProductFeeType.DEPOSIT).amount(new BigDecimal("10.00"));
+    BankingProductFeeV1 data = new BankingProductFeeV1.Builder().name("Fee Name")
+        .type(BankingProductFeeType.DEPOSIT).amount(new BigDecimal("10.00")).buildPartial();
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Any value specified is invalid
-    data.additionalValue("Invalid");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(
+                BankingProductFeeV1.Builder.from(data).additionalValue("Invalid").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductFeeV1.Builder.from(data).additionalValue("Invalid").build())
+            .toString());
   }
 
   @Test
-  @DisplayName("BankingProductFee for Payment")
+  @DisplayName("BankingProductFeeV1 for Payment")
   void bankingProductFeePayment() {
-    BankingProductFee data = new BankingProductFee().name("Fee Name")
-        .feeType(BankingProductFeeType.PAYMENT).amount(new BigDecimal("10.00"));
+    BankingProductFeeV1 data = new BankingProductFeeV1.Builder().name("Fee Name")
+        .type(BankingProductFeeType.PAYMENT).amount(new BigDecimal("10.00")).buildPartial();
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Any value specified is invalid
-    data.additionalValue("Invalid");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(
+                BankingProductFeeV1.Builder.from(data).additionalValue("Invalid").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductFeeV1.Builder.from(data).additionalValue("Invalid").build())
+            .toString());
   }
 
   @Test
-  @DisplayName("BankingProductFee for Purchase")
+  @DisplayName("BankingProductFeeV1 for Purchase")
   void bankingProductFeePurchase() {
-    BankingProductFee data = new BankingProductFee().name("Fee Name")
-        .feeType(BankingProductFeeType.PURCHASE).amount(new BigDecimal("10.00"));
+    BankingProductFeeV1 data = new BankingProductFeeV1.Builder().name("Fee Name")
+        .type(BankingProductFeeType.PURCHASE).amount(new BigDecimal("10.00")).buildPartial();
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Any value specified is invalid
-    data.additionalValue("Invalid");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(
+                BankingProductFeeV1.Builder.from(data).additionalValue("Invalid").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductFeeV1.Builder.from(data).additionalValue("Invalid").build())
+            .toString());
   }
 
   @Test
-  @DisplayName("BankingProductFee for Event")
+  @DisplayName("BankingProductFeeV1 for Event")
   void bankingProductFeeEvent() {
-    BankingProductFee data = new BankingProductFee().name("Fee Name")
-        .feeType(BankingProductFeeType.EVENT).amount(new BigDecimal("10.00"));
+    BankingProductFeeV1 data = new BankingProductFeeV1.Builder().name("Fee Name")
+        .type(BankingProductFeeType.EVENT).amount(new BigDecimal("10.00")).buildPartial();
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Any value specified is invalid
-    data.additionalValue("Invalid");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(
+                BankingProductFeeV1.Builder.from(data).additionalValue("Invalid").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductFeeV1.Builder.from(data).additionalValue("Invalid").build())
+            .toString());
   }
 
   @Test
-  @DisplayName("BankingProductFee for Upfront")
+  @DisplayName("BankingProductFeeV1 for Upfront")
   void bankingProductFeeUpfront() {
-    BankingProductFee data = new BankingProductFee().name("Fee Name")
-        .feeType(BankingProductFeeType.UPFRONT).amount(new BigDecimal("10.00"));
+    BankingProductFeeV1 data = new BankingProductFeeV1.Builder().name("Fee Name")
+        .type(BankingProductFeeType.UPFRONT).amount(new BigDecimal("10.00")).buildPartial();
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Any value specified is invalid
-    data.additionalValue("Invalid");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(
+                BankingProductFeeV1.Builder.from(data).additionalValue("Invalid").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductFeeV1.Builder.from(data).additionalValue("Invalid").build())
+            .toString());
   }
 
   @Test
-  @DisplayName("BankingProductFee for Exit")
+  @DisplayName("BankingProductFeeV1 for Exit")
   void bankingProductFeeExit() {
-    BankingProductFee data = new BankingProductFee().name("Fee Name")
-        .feeType(BankingProductFeeType.EXIT).amount(new BigDecimal("10.00"));
+    BankingProductFeeV1 data = new BankingProductFeeV1.Builder().name("Fee Name")
+        .type(BankingProductFeeType.EXIT).amount(new BigDecimal("10.00")).buildPartial();
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Any value specified is invalid
-    data.additionalValue("Invalid");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(
+                BankingProductFeeV1.Builder.from(data).additionalValue("Invalid").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductFeeV1.Builder.from(data).additionalValue("Invalid").build())
+            .toString());
   }
 
 }

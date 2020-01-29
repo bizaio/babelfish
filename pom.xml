@@ -57,6 +57,7 @@
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-validator.version>1.6</commons-validator.version>
         <swagger-core.version>2.1.1</swagger-core.version>
+        <freebuilder.version>2.5.0</freebuilder.version>
     </properties>
 
     <build>
@@ -184,6 +185,11 @@
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-core</artifactId>
             <version>${swagger-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.inferred</groupId>
+            <artifactId>freebuilder</artifactId>
+            <version>${freebuilder.version}</version>
         </dependency>
     </dependencies>
 </project>

@@ -17,13 +17,14 @@ import javax.validation.Valid;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.babelfish.cdr.model.banking.product.BankingProductDepositRate;
-import io.biza.babelfish.cdr.model.banking.product.BankingProductFee;
-import io.biza.babelfish.cdr.model.banking.product.BankingProductLendingRate;
 import io.biza.babelfish.cdr.v1.model.common.CommonPhysicalAddress;
 import io.biza.babelfish.converter.cdr.BigDecimalToRateStringConverter;
 import io.biza.babelfish.converter.cdr.RateStringToBigDecimalConverter;
 import io.biza.babelfish.enumerations.cdr.PayloadTypeBankingAccount;
+import io.biza.babelfish.interfaces.cdr.banking.product.BankingProductDepositRateV1;
+import io.biza.babelfish.interfaces.cdr.banking.product.BankingProductFeatureWithActivatedV1;
+import io.biza.babelfish.interfaces.cdr.banking.product.BankingProductFeeV1;
+import io.biza.babelfish.interfaces.cdr.banking.product.BankingProductLendingRateV1;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -181,25 +182,25 @@ public abstract class BankingAccountDetail<T> extends BankingAccount<T> {
       description = "Fully described deposit rates for this account based on the equivalent structure in Product Reference")
   @JsonProperty("depositRates")
   @Valid
-  List<BankingProductDepositRate<?>> depositRates;
+  List<BankingProductDepositRateV1> depositRates;
 
   @Schema(
       description = "Fully described deposit rates for this account based on the equivalent structure in Product Reference")
   @JsonProperty("lendingRates")
   @Valid
-  List<BankingProductLendingRate<?>> lendingRates;
+  List<BankingProductLendingRateV1> lendingRates;
 
   @Schema(
       description = "Array of features of the account based on the equivalent structure in Product Reference with the following additional field")
   @JsonProperty("features")
   @Valid
-  List<BankingProductFeatureWithActivated<?>> features;
+  List<BankingProductFeatureWithActivatedV1> features;
 
   @Schema(
       description = "Fees and charges applicable to the account based on the equivalent structure in Product Reference")
   @JsonProperty("fees")
   @Valid
-  List<BankingProductFee<?>> fees;
+  List<BankingProductFeeV1> fees;
 
   @Schema(description = "The addresses for the account to be used for correspondence")
   @JsonProperty("addresses")

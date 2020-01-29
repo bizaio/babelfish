@@ -24,3 +24,5 @@ hs_err_pid*
 
 # maven filter
 target/
+/.apt_generated/
+/.apt_generated_tests/

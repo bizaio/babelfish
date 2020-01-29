@@ -21,10 +21,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductLendingRate;
 import io.biza.babelfish.enumerations.cdr.BankingProductLendingRateType;
+import io.biza.babelfish.interfaces.cdr.banking.product.BankingProductLendingRateV1;
+import io.biza.babelfish.interfaces.cdr.banking.product.BankingProductLendingRateV1;
 
-@DisplayName("BankingProductLendingRate V1 Tests")
+@DisplayName("BankingProductLendingRateV1 V1 Tests")
 public class BankingProductLendingRateV1Test {
   private Validator validator;
 
@@ -35,7 +36,7 @@ public class BankingProductLendingRateV1Test {
   }
 
   @Test
-  @DisplayName("Valid BankingProductLendingRate")
+  @DisplayName("Valid BankingProductLendingRateV1")
   void bankingProductLendingRate() {
     assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_PRODUCT_LENDING_RATE).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_BANKING_PRODUCT_LENDING_RATE).toString());
@@ -44,162 +45,217 @@ public class BankingProductLendingRateV1Test {
 
 
   @Test
-  @DisplayName("BankingProductLendingRate for Fixed")
+  @DisplayName("BankingProductLendingRateV1 for Fixed")
   void bankingProductLendingRateFixed() {
-    BankingProductLendingRate data = new BankingProductLendingRate()
-        .lendingRateType(BankingProductLendingRateType.FIXED).rate(new BigDecimal("0.05"));
+    BankingProductLendingRateV1 data = new BankingProductLendingRateV1.Builder()
+        .type(BankingProductLendingRateType.FIXED).rate(new BigDecimal("0.05")).buildPartial();
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Invalid String
-    data.additionalValue("Not a Duration");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(BankingProductLendingRateV1.Builder.from(data)
+            .additionalValue("Not a Duration").build()).isEmpty(),
+        validator.validate(BankingProductLendingRateV1.Builder.from(data)
+            .additionalValue("Not a Duration").build()).toString());
 
     // Duration String formatted value is valid
-    data.additionalValue("P1D");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator
+            .validate(BankingProductLendingRateV1.Builder.from(data).additionalValue("P1D").build())
+            .isEmpty(),
+        validator
+            .validate(BankingProductLendingRateV1.Builder.from(data).additionalValue("P1D").build())
+            .toString());
   }
 
 
   @Test
-  @DisplayName("BankingProductLendingRate for Variable")
+  @DisplayName("BankingProductLendingRateV1 for Variable")
   void bankingProductLendingRateTransaction() {
-    BankingProductLendingRate data = new BankingProductLendingRate()
-        .lendingRateType(BankingProductLendingRateType.VARIABLE).rate(new BigDecimal("0.05"));
+    BankingProductLendingRateV1 data = new BankingProductLendingRateV1.Builder()
+        .type(BankingProductLendingRateType.VARIABLE).rate(new BigDecimal("0.05")).buildPartial();
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Any value specified is invalid
-    data.additionalValue("Invalid");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(
+                BankingProductLendingRateV1.Builder.from(data).additionalValue("Invalid").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductLendingRateV1.Builder.from(data).additionalValue("Invalid").build())
+            .toString());
   }
 
   @Test
-  @DisplayName("BankingProductLendingRate for Introductory")
+  @DisplayName("BankingProductLendingRateV1 for Introductory")
   void bankingProductLendingRateIntroductory() {
-    BankingProductLendingRate data = new BankingProductLendingRate()
-        .lendingRateType(BankingProductLendingRateType.INTRODUCTORY).rate(new BigDecimal("0.05"));
+    BankingProductLendingRateV1 data = new BankingProductLendingRateV1.Builder()
+        .type(BankingProductLendingRateType.INTRODUCTORY).rate(new BigDecimal("0.05")).buildPartial();
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Invalid String
-    data.additionalValue("Not a Duration");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(BankingProductLendingRateV1.Builder.from(data)
+            .additionalValue("Not a Duration").build()).isEmpty(),
+        validator.validate(BankingProductLendingRateV1.Builder.from(data)
+            .additionalValue("Not a Duration").build()).toString());
 
     // Duration String formatted value is valid
-    data.additionalValue("P1D");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator
+            .validate(BankingProductLendingRateV1.Builder.from(data).additionalValue("P1D").build())
+            .isEmpty(),
+        validator
+            .validate(BankingProductLendingRateV1.Builder.from(data).additionalValue("P1D").build())
+            .toString());
   }
 
   @Test
-  @DisplayName("BankingProductLendingRate for Discount")
+  @DisplayName("BankingProductLendingRateV1 for Discount")
   void bankingProductLendingRateDiscount() {
-    BankingProductLendingRate data = new BankingProductLendingRate()
-        .lendingRateType(BankingProductLendingRateType.DISCOUNT).rate(new BigDecimal("0.05"));
+    BankingProductLendingRateV1 data = new BankingProductLendingRateV1.Builder()
+        .type(BankingProductLendingRateType.DISCOUNT).rate(new BigDecimal("0.05")).buildPartial();
 
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with Description
-    data.setAdditionalValue("Description text");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(BankingProductLendingRateV1.Builder.from(data)
+            .additionalValue("Description Text").build()).isEmpty(),
+        validator.validate(BankingProductLendingRateV1.Builder.from(data)
+            .additionalValue("Description Text").build()).toString());
   }
 
   @Test
-  @DisplayName("BankingProductLendingRate for Penalty")
+  @DisplayName("BankingProductLendingRateV1 for Penalty")
   void bankingProductLendingRatePenalty() {
-    BankingProductLendingRate data = new BankingProductLendingRate()
-        .lendingRateType(BankingProductLendingRateType.PENALTY).rate(new BigDecimal("0.05"));
+    BankingProductLendingRateV1 data = new BankingProductLendingRateV1.Builder()
+        .type(BankingProductLendingRateType.PENALTY).rate(new BigDecimal("0.05")).buildPartial();
 
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with Description
-    data.setAdditionalValue("Description text");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(BankingProductLendingRateV1.Builder.from(data)
+            .additionalValue("Description Text").build()).isEmpty(),
+        validator.validate(BankingProductLendingRateV1.Builder.from(data)
+            .additionalValue("Description Text").build()).toString());
   }
 
   @Test
-  @DisplayName("BankingProductLendingRate for Floating")
+  @DisplayName("BankingProductLendingRateV1 for Floating")
   void bankingProductLendingRateFloating() {
-    BankingProductLendingRate data = new BankingProductLendingRate()
-        .lendingRateType(BankingProductLendingRateType.FLOATING).rate(new BigDecimal("0.05"));
+    BankingProductLendingRateV1 data = new BankingProductLendingRateV1.Builder()
+        .type(BankingProductLendingRateType.FLOATING).rate(new BigDecimal("0.05")).buildPartial();
 
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with Description
-    data.setAdditionalValue("Description text");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(BankingProductLendingRateV1.Builder.from(data)
+            .additionalValue("Description Text").build()).isEmpty(),
+        validator.validate(BankingProductLendingRateV1.Builder.from(data)
+            .additionalValue("Description Text").build()).toString());
   }
 
   @Test
-  @DisplayName("BankingProductLendingRate for Market Linked")
+  @DisplayName("BankingProductLendingRateV1 for Market Linked")
   void bankingProductLendingRateMarketLinked() {
-    BankingProductLendingRate data = new BankingProductLendingRate()
-        .lendingRateType(BankingProductLendingRateType.MARKET_LINKED).rate(new BigDecimal("0.05"));
+    BankingProductLendingRateV1 data = new BankingProductLendingRateV1.Builder()
+        .type(BankingProductLendingRateType.MARKET_LINKED).rate(new BigDecimal("0.05")).buildPartial();
 
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with Description
-    data.setAdditionalValue("Description text");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(BankingProductLendingRateV1.Builder.from(data)
+            .additionalValue("Description Text").build()).isEmpty(),
+        validator.validate(BankingProductLendingRateV1.Builder.from(data)
+            .additionalValue("Description Text").build()).toString());
   }
 
   @Test
-  @DisplayName("BankingProductLendingRate for Cash Advance")
+  @DisplayName("BankingProductLendingRateV1 for Cash Advance")
   void bankingProductLendingRateCashAdvance() {
-    BankingProductLendingRate data = new BankingProductLendingRate()
-        .lendingRateType(BankingProductLendingRateType.CASH_ADVANCE).rate(new BigDecimal("0.05"));
+    BankingProductLendingRateV1 data = new BankingProductLendingRateV1.Builder()
+        .type(BankingProductLendingRateType.CASH_ADVANCE).rate(new BigDecimal("0.05")).buildPartial();
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Any value specified is invalid
-    data.additionalValue("Invalid");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(
+                BankingProductLendingRateV1.Builder.from(data).additionalValue("Invalid").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductLendingRateV1.Builder.from(data).additionalValue("Invalid").build())
+            .toString());
   }
 
   @Test
-  @DisplayName("BankingProductLendingRate for Purchase")
+  @DisplayName("BankingProductLendingRateV1 for Purchase")
   void bankingProductLendingRatePurchase() {
-    BankingProductLendingRate data = new BankingProductLendingRate()
-        .lendingRateType(BankingProductLendingRateType.PURCHASE).rate(new BigDecimal("0.05"));
+    BankingProductLendingRateV1 data = new BankingProductLendingRateV1.Builder()
+        .type(BankingProductLendingRateType.PURCHASE).rate(new BigDecimal("0.05")).buildPartial();
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Any value specified is invalid
-    data.additionalValue("Invalid");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(
+                BankingProductLendingRateV1.Builder.from(data).additionalValue("Invalid").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductLendingRateV1.Builder.from(data).additionalValue("Invalid").build())
+            .toString());
   }
 
   @Test
-  @DisplayName("BankingProductLendingRate for Bundle Discount Fixed")
+  @DisplayName("BankingProductLendingRateV1 for Bundle Discount Fixed")
   void bankingProductLendingRateBundleDiscountFixed() {
-    BankingProductLendingRate data = new BankingProductLendingRate()
-        .lendingRateType(BankingProductLendingRateType.BUNDLE_DISCOUNT_FIXED)
-        .rate(new BigDecimal("0.05"));
+    BankingProductLendingRateV1 data = new BankingProductLendingRateV1.Builder()
+        .type(BankingProductLendingRateType.BUNDLE_DISCOUNT_FIXED)
+        .rate(new BigDecimal("0.05")).buildPartial();
 
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with Description
-    data.setAdditionalValue("Description text");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(BankingProductLendingRateV1.Builder.from(data)
+            .additionalValue("Description Text").build()).isEmpty(),
+        validator.validate(BankingProductLendingRateV1.Builder.from(data)
+            .additionalValue("Description Text").build()).toString());
   }
 
   @Test
-  @DisplayName("BankingProductLendingRate for Bundle Discount Variable")
+  @DisplayName("BankingProductLendingRateV1 for Bundle Discount Variable")
   void bankingProductLendingRateBundleDiscountVariable() {
-    BankingProductLendingRate data = new BankingProductLendingRate()
-        .lendingRateType(BankingProductLendingRateType.BUNDLE_DISCOUNT_VARIABLE)
-        .rate(new BigDecimal("0.05"));
+    BankingProductLendingRateV1 data = new BankingProductLendingRateV1.Builder()
+        .type(BankingProductLendingRateType.BUNDLE_DISCOUNT_VARIABLE)
+        .rate(new BigDecimal("0.05")).buildPartial();
 
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with Description
-    data.setAdditionalValue("Description text");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(BankingProductLendingRateV1.Builder.from(data)
+            .additionalValue("Description Text").build()).isEmpty(),
+        validator.validate(BankingProductLendingRateV1.Builder.from(data)
+            .additionalValue("Description Text").build()).toString());
   }
 
 }

@@ -22,7 +22,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductBundle;
+import io.biza.babelfish.interfaces.cdr.banking.product.BankingProductBundleV1;
 
 @DisplayName("BankingProductBundle V1 Tests")
 public class BankingProductBundleV1Test {
@@ -45,20 +45,30 @@ public class BankingProductBundleV1Test {
   @DisplayName("Create valid BankingProductBundle with empty name")
   void createBankingProductBundleWithEmptyName()
       throws IllegalAccessException, InvocationTargetException {
-    BankingProductBundle data = new BankingProductBundle();
-    BeanUtils.copyProperties(data, ModelConstants.DEFAULT_BANKING_PRODUCT_BUNDLE);
-    data.name("");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(BankingProductBundleV1.Builder
+                .from(ModelConstants.DEFAULT_BANKING_PRODUCT_BUNDLE).name("").buildPartial())
+            .isEmpty(),
+        validator
+            .validate(BankingProductBundleV1.Builder
+                .from(ModelConstants.DEFAULT_BANKING_PRODUCT_BUNDLE).name("").buildPartial())
+            .toString());
   }
 
   @Test
   @DisplayName("Create valid BankingProductBundle with empty description")
   void createBankingProductBundleWithEmptyDescription()
       throws IllegalAccessException, InvocationTargetException {
-    BankingProductBundle data = new BankingProductBundle();
-    BeanUtils.copyProperties(data, ModelConstants.DEFAULT_BANKING_PRODUCT_BUNDLE);
-    data.description("");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(BankingProductBundleV1.Builder
+                .from(ModelConstants.DEFAULT_BANKING_PRODUCT_BUNDLE).description("").buildPartial())
+            .isEmpty(),
+        validator
+            .validate(BankingProductBundleV1.Builder
+                .from(ModelConstants.DEFAULT_BANKING_PRODUCT_BUNDLE).description("").buildPartial())
+            .toString());
   }
 
 }

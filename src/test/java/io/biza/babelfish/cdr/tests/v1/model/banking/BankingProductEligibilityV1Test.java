@@ -20,10 +20,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductEligibility;
+import io.biza.babelfish.enumerations.cdr.BankingProductEligibilityType;
+import io.biza.babelfish.enumerations.cdr.BankingProductEligibilityType;
+import io.biza.babelfish.interfaces.cdr.banking.product.BankingProductEligibilityV1;
 import io.biza.babelfish.enumerations.cdr.BankingProductEligibilityType;
 
-@DisplayName("BankingProductEligibility V1 Tests")
+@DisplayName("BankingProductEligibilityV1 V1 Tests")
 public class BankingProductEligibilityV1Test {
   private Validator validator;
 
@@ -34,218 +36,288 @@ public class BankingProductEligibilityV1Test {
   }
 
   @Test
-  @DisplayName("Valid BankingProductEligibility")
+  @DisplayName("Valid BankingProductEligibilityV1")
   void bankingProductEligibility() {
     assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_PRODUCT_ELIGIBILITY).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_BANKING_PRODUCT_ELIGIBILITY).toString());
   }
 
   @Test
-  @DisplayName("BankingProductEligibility for Business")
+  @DisplayName("BankingProductEligibilityV1 for Business")
   void bankingProductEligibilityBusiness() {
-    BankingProductEligibility data =
-        new BankingProductEligibility().eligibilityType(BankingProductEligibilityType.BUSINESS);
+    BankingProductEligibilityV1 data =
+        new BankingProductEligibilityV1.Builder().type(BankingProductEligibilityType.BUSINESS).buildPartial();
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Any value specified is invalid
-    data.additionalValue("Invalid");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Invalid").build()).isEmpty(),
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Invalid").build()).toString());
   }
 
   @Test
-  @DisplayName("BankingProductEligibility for Pension Recipient")
+  @DisplayName("BankingProductEligibilityV1 for Pension Recipient")
   void bankingProductEligibilityPensionRecipient() {
-    BankingProductEligibility data = new BankingProductEligibility()
-        .eligibilityType(BankingProductEligibilityType.PENSION_RECIPIENT);
+    BankingProductEligibilityV1 data = new BankingProductEligibilityV1.Builder()
+        .type(BankingProductEligibilityType.PENSION_RECIPIENT).buildPartial();
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    // Any value specified is invalid
-    data.additionalValue("Invalid");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    // Any value specified is also correct
+    assertTrue(
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Pension Recipient Explanation").build()).isEmpty(),
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Pension Recipient Explanation").build()).toString());
   }
 
   @Test
-  @DisplayName("BankingProductEligibility for Minimum Age")
+  @DisplayName("BankingProductEligibilityV1 for Minimum Age")
   void bankingProductEligibilityMinAge() {
-    BankingProductEligibility data =
-        new BankingProductEligibility().eligibilityType(BankingProductEligibilityType.MIN_AGE);
+    BankingProductEligibilityV1 data =
+        new BankingProductEligibilityV1.Builder().type(BankingProductEligibilityType.MIN_AGE).buildPartial();
 
-    // Null Value is invalid
+ // Null Value is invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Invalid number
-    data.additionalValue("Not A Number");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Not a Number").build()).isEmpty(),
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Not a Number").build()).toString());
 
     // A decimal is invalid
-    data.additionalValue("5.00");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("5.00").build()).isEmpty(),
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("5.00").build()).toString());
 
     // A single integer is valid
-    data.additionalValue("18");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(
+            BankingProductEligibilityV1.Builder.from(data).additionalValue("18").build())
+            .isEmpty(),
+        validator.validate(
+            BankingProductEligibilityV1.Builder.from(data).additionalValue("18").build())
+            .toString());
 
   }
 
   @Test
-  @DisplayName("BankingProductEligibility for Maximum Age")
+  @DisplayName("BankingProductEligibilityV1 for Maximum Age")
   void bankingProductEligibilityMaxAge() {
-    BankingProductEligibility data =
-        new BankingProductEligibility().eligibilityType(BankingProductEligibilityType.MAX_AGE);
+    BankingProductEligibilityV1 data =
+        new BankingProductEligibilityV1.Builder().type(BankingProductEligibilityType.MAX_AGE).buildPartial();
 
-    // Null Value is invalid
+ // Null Value is invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Invalid number
-    data.additionalValue("Not A Number");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Not a Number").build()).isEmpty(),
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Not a Number").build()).toString());
 
     // A decimal is invalid
-    data.additionalValue("5.00");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("5.00").build()).isEmpty(),
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("5.00").build()).toString());
 
     // A single integer is valid
-    data.additionalValue("25");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(
+            BankingProductEligibilityV1.Builder.from(data).additionalValue("18").build())
+            .isEmpty(),
+        validator.validate(
+            BankingProductEligibilityV1.Builder.from(data).additionalValue("18").build())
+            .toString());
 
   }
 
   @Test
-  @DisplayName("BankingProductEligibility for Minimum Income")
+  @DisplayName("BankingProductEligibilityV1 for Minimum Income")
   void bankingProductEligibilityMinIncome() {
-    BankingProductEligibility data =
-        new BankingProductEligibility().eligibilityType(BankingProductEligibilityType.MIN_INCOME);
+    BankingProductEligibilityV1 data =
+        new BankingProductEligibilityV1.Builder().type(BankingProductEligibilityType.MIN_INCOME).buildPartial();
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Invalid number
-    data.additionalValue("Not A Number");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Not a Number").build()).isEmpty(),
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Not a Number").build()).toString());
 
     // A number value which is not in AmountString format is invalid
-    data.additionalValue("10");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(
+            BankingProductEligibilityV1.Builder.from(data).additionalValue("18").build())
+            .isEmpty(),
+        validator.validate(
+            BankingProductEligibilityV1.Builder.from(data).additionalValue("18").build())
+            .toString());
 
     // AmountString formatted value is valid
-    data.additionalValue("10.00");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("5.00").build()).isEmpty(),
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("5.00").build()).toString());
 
   }
 
   @Test
-  @DisplayName("BankingProductEligibility for Minimum Turnover")
+  @DisplayName("BankingProductEligibilityV1 for Minimum Turnover")
   void bankingProductEligibilityMinTurnover() {
-    BankingProductEligibility data =
-        new BankingProductEligibility().eligibilityType(BankingProductEligibilityType.MIN_TURNOVER);
+    BankingProductEligibilityV1 data =
+        new BankingProductEligibilityV1.Builder().type(BankingProductEligibilityType.MIN_TURNOVER).buildPartial();
 
-    // Null Value invalid
+ // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    // Invalid number
-    data.additionalValue("Not A Number");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+ // Invalid number
+    assertFalse(
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Not a Number").build()).isEmpty(),
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Not a Number").build()).toString());
 
     // A number value which is not in AmountString format is invalid
-    data.additionalValue("10");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(
+            BankingProductEligibilityV1.Builder.from(data).additionalValue("18").build())
+            .isEmpty(),
+        validator.validate(
+            BankingProductEligibilityV1.Builder.from(data).additionalValue("18").build())
+            .toString());
 
     // AmountString formatted value is valid
-    data.additionalValue("10.00");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("5.00").build()).isEmpty(),
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("5.00").build()).toString());
 
   }
 
   @Test
-  @DisplayName("BankingProductEligibility for Staff")
+  @DisplayName("BankingProductEligibilityV1 for Staff")
   void bankingProductEligibilityStaff() {
-    BankingProductEligibility data =
-        new BankingProductEligibility().eligibilityType(BankingProductEligibilityType.STAFF);
+    BankingProductEligibilityV1 data =
+        new BankingProductEligibilityV1.Builder().type(BankingProductEligibilityType.STAFF).buildPartial();
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Any value specified is invalid
-    data.additionalValue("Invalid");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Invalid").build()).isEmpty(),
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Invalid").build()).toString());
   }
 
   @Test
-  @DisplayName("BankingProductEligibility for Student")
+  @DisplayName("BankingProductEligibilityV1 for Student")
   void bankingProductEligibilityStudent() {
-    BankingProductEligibility data =
-        new BankingProductEligibility().eligibilityType(BankingProductEligibilityType.STUDENT);
+    BankingProductEligibilityV1 data =
+        new BankingProductEligibilityV1.Builder().type(BankingProductEligibilityType.STUDENT).buildPartial();
 
-    // Null Value is correct
+ // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    // Any value specified is invalid
-    data.additionalValue("Invalid");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    // Any value specified is ok for discount eligibility
+    assertTrue(
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Explanation about the Student conditions for discount eligibility").build()).isEmpty(),
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Explanation about the Student conditions for discount eligibility").build()).toString());
   }
 
 
   @Test
-  @DisplayName("BankingProductEligibility for Employment Status")
+  @DisplayName("BankingProductEligibilityV1 for Employment Status")
   void bankingProductEligibilityEmploymentStatus() {
 
-    // Missing description
-    BankingProductEligibility data = new BankingProductEligibility()
-        .eligibilityType(BankingProductEligibilityType.EMPLOYMENT_STATUS);
+ // Missing description
+    BankingProductEligibilityV1 data =
+        new BankingProductEligibilityV1.Builder()
+            .type(BankingProductEligibilityType.EMPLOYMENT_STATUS).buildPartial();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with name
-    data.setAdditionalValue("Employment Status Description");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Employment Status Description").build()).isEmpty(),
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Employment Status Description").build()).toString());
 
   }
 
   @Test
-  @DisplayName("BankingProductEligibility for Residency Status")
+  @DisplayName("BankingProductEligibilityV1 for Residency Status")
   void bankingProductEligibilityResidencyStatus() {
 
     // Missing description
-    BankingProductEligibility data = new BankingProductEligibility()
-        .eligibilityType(BankingProductEligibilityType.RESIDENCY_STATUS);
+    BankingProductEligibilityV1 data =
+        new BankingProductEligibilityV1.Builder()
+            .type(BankingProductEligibilityType.RESIDENCY_STATUS).buildPartial();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with name
-    data.setAdditionalValue("Residency Status Description");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Residency Status Description").build()).isEmpty(),
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Residency Status Description").build()).toString());
 
   }
 
 
   @Test
-  @DisplayName("BankingProductEligibility for Natural Person")
+  @DisplayName("BankingProductEligibilityV1 for Natural Person")
   void bankingProductEligibilityNaturalPerson() {
-    BankingProductEligibility data = new BankingProductEligibility()
-        .eligibilityType(BankingProductEligibilityType.NATURAL_PERSON);
+    BankingProductEligibilityV1 data = new BankingProductEligibilityV1.Builder()
+        .type(BankingProductEligibilityType.NATURAL_PERSON).buildPartial();
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Any value specified is invalid
-    data.additionalValue("Invalid");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Invalid").build()).isEmpty(),
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Invalid").build()).toString());
   }
 
 
 
   @Test
-  @DisplayName("BankingProductEligibility for Other")
+  @DisplayName("BankingProductEligibilityV1 for Other")
   void bankingProductEligibilityOther() {
-    BankingProductEligibility data =
-        new BankingProductEligibility().eligibilityType(BankingProductEligibilityType.OTHER);
+    BankingProductEligibilityV1 data =
+        new BankingProductEligibilityV1.Builder().type(BankingProductEligibilityType.OTHER).buildPartial();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    // Correct with additional information defined
-    data.setAdditionalInfo("Additional Information on Other feature");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+ // Correct with additional information defined
+    assertTrue(
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalInfo("Additional Information on Other Feature").build()).isEmpty(),
+        validator.validate(BankingProductEligibilityV1.Builder.from(data)
+            .additionalValue("Additional Information on Other Feature").build()).toString());
   }
 
 }

@@ -14,8 +14,8 @@ package io.biza.babelfish.cdr.response;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.babelfish.cdr.model.banking.product.BankingProductDetail;
 import io.biza.babelfish.deprecated.cdr.model.CDRResponse;
+import io.biza.babelfish.interfaces.cdr.banking.product.BankingProductDetailV2;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,22 +27,20 @@ import lombok.ToString;
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-
-
 @Schema(description = "Response containing a single BankingProductDetail entry")
 public abstract class ResponseBankingProductById<T> extends CDRResponse<T> {
   @Schema(required = true)
   @JsonProperty("data")
   @NotNull
   @Valid
-  BankingProductDetail<?> data;
+  BankingProductDetailV2 data;
 
-  public BankingProductDetail<?> data() {
+  public BankingProductDetailV2 data() {
     return getData();
   }
 
   @SuppressWarnings("unchecked")
-  public T data(BankingProductDetail<?> data) {
+  public T data(BankingProductDetailV2 data) {
     setData(data);
     return (T) this;
   }

@@ -22,8 +22,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductDiscount;
 import io.biza.babelfish.enumerations.cdr.BankingProductDiscountType;
+import io.biza.babelfish.interfaces.cdr.banking.product.BankingProductDiscountV1;
 
 @DisplayName("BankingProductFeeDiscount V1 Tests")
 public class BankingProductFeeDiscountV1Test {
@@ -49,88 +49,153 @@ public class BankingProductFeeDiscountV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscount for Balance")
   void bankingProductFeeDiscountBalance() {
-    BankingProductDiscount data = new BankingProductDiscount().description("Discount Description")
-        .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.BALANCE);
+    BankingProductDiscountV1 data =
+        new BankingProductDiscountV1.Builder().description("Discount Description")
+            .amount(new BigDecimal("10.00")).type(BankingProductDiscountType.BALANCE).build();
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Invalid number
-    data.additionalValue("Not A Number");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(
+                BankingProductDiscountV1.Builder.from(data).additionalValue("Not A Number").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductDiscountV1.Builder.from(data).additionalValue("Not A Number").build())
+            .toString());
 
     // A number value which is not in AmountString format is invalid
-    data.additionalValue("10");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(BankingProductDiscountV1.Builder.from(data).additionalValue("10").build())
+            .isEmpty(),
+        validator
+            .validate(BankingProductDiscountV1.Builder.from(data).additionalValue("10").build())
+            .toString());
 
     // AmountString formatted value is valid
-    data.additionalValue("10.00");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator
+            .validate(BankingProductDiscountV1.Builder.from(data).additionalValue("10.00").build())
+            .isEmpty(),
+        validator
+            .validate(BankingProductDiscountV1.Builder.from(data).additionalValue("10.00").build())
+            .toString());
 
   }
 
   @Test
   @DisplayName("BankingProductFeeDiscount for Deposits")
   void bankingProductFeeDiscountDeposits() {
-    BankingProductDiscount data = new BankingProductDiscount().description("Discount Description")
-        .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.DEPOSITS);
+    BankingProductDiscountV1 data =
+        new BankingProductDiscountV1.Builder().description("Discount Description")
+            .amount(new BigDecimal("10.00")).type(BankingProductDiscountType.DEPOSITS).build();
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Invalid number
-    data.additionalValue("Not A Number");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(
+                BankingProductDiscountV1.Builder.from(data).additionalValue("Not A Number").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductDiscountV1.Builder.from(data).additionalValue("Not A Number").build())
+            .toString());
 
     // A number value which is not in AmountString format is invalid
-    data.additionalValue("10");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(BankingProductDiscountV1.Builder.from(data).additionalValue("10").build())
+            .isEmpty(),
+        validator
+            .validate(BankingProductDiscountV1.Builder.from(data).additionalValue("10").build())
+            .toString());
 
     // AmountString formatted value is valid
-    data.additionalValue("10.00");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator
+            .validate(BankingProductDiscountV1.Builder.from(data).additionalValue("10.00").build())
+            .isEmpty(),
+        validator
+            .validate(BankingProductDiscountV1.Builder.from(data).additionalValue("10.00").build())
+            .toString());
 
   }
 
   @Test
   @DisplayName("BankingProductFeeDiscount for Payments")
   void bankingProductFeeDiscountPayments() {
-    BankingProductDiscount data = new BankingProductDiscount().description("Discount Description")
-        .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.PAYMENTS);
+    BankingProductDiscountV1 data =
+        new BankingProductDiscountV1.Builder().description("Discount Description")
+            .amount(new BigDecimal("10.00")).type(BankingProductDiscountType.PAYMENTS).build();
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Invalid number
-    data.additionalValue("Not A Number");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(
+                BankingProductDiscountV1.Builder.from(data).additionalValue("Not A Number").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductDiscountV1.Builder.from(data).additionalValue("Not A Number").build())
+            .toString());
 
     // A number value which is not in AmountString format is invalid
-    data.additionalValue("10");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(BankingProductDiscountV1.Builder.from(data).additionalValue("10").build())
+            .isEmpty(),
+        validator
+            .validate(BankingProductDiscountV1.Builder.from(data).additionalValue("10").build())
+            .toString());
 
     // AmountString formatted value is valid
-    data.additionalValue("10.00");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator
+            .validate(BankingProductDiscountV1.Builder.from(data).additionalValue("10.00").build())
+            .isEmpty(),
+        validator
+            .validate(BankingProductDiscountV1.Builder.from(data).additionalValue("10.00").build())
+            .toString());
 
   }
 
   @Test
   @DisplayName("BankingProductFeeDiscount for Fee Cap")
   void bankingProductFeeDiscountFeeCap() {
-    BankingProductDiscount data = new BankingProductDiscount().description("Discount Description")
-        .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.FEE_CAP);
+    BankingProductDiscountV1 data =
+        new BankingProductDiscountV1.Builder().description("Discount Description")
+            .amount(new BigDecimal("10.00")).type(BankingProductDiscountType.FEE_CAP).build();
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Invalid String
-    data.additionalValue("Not a Duration");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(
+            BankingProductDiscountV1.Builder.from(data).additionalValue("Not a Duration").build())
+            .isEmpty(),
+        validator.validate(
+            BankingProductDiscountV1.Builder.from(data).additionalValue("Not a Duration").build())
+            .toString());
 
     // Duration String formatted value is valid
-    data.additionalValue("P1D");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator
+            .validate(BankingProductDiscountV1.Builder.from(data).additionalValue("P1D").build())
+            .isEmpty(),
+        validator
+            .validate(BankingProductDiscountV1.Builder.from(data).additionalValue("P1D").build())
+            .toString());
 
     // TODO: Add tests for associated rate entry fields
 
@@ -139,21 +204,34 @@ public class BankingProductFeeDiscountV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscount for Eligibility Only")
   void bankingProductFeeDiscountEligibilityOnly() {
-    BankingProductDiscount data = new BankingProductDiscount().description("Discount Description")
-        .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.ELIGIBILITY_ONLY);
-    
+    BankingProductDiscountV1 data = new BankingProductDiscountV1.Builder()
+        .description("Discount Description").amount(new BigDecimal("10.00"))
+        .type(BankingProductDiscountType.ELIGIBILITY_ONLY).build();
+
     // No eligibility criteria is invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    
-    data.eligibility(List.of(ModelConstants.DEFAULT_BANKING_PRODUCT_FEE_DISCOUNT_ELIGIBILITY));
-    
+
     // With Eligibility is valid
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(BankingProductDiscountV1.Builder.from(data)
+            .addAllEligibility(
+                List.of(ModelConstants.DEFAULT_BANKING_PRODUCT_FEE_DISCOUNT_ELIGIBILITY))
+            .build()).isEmpty(),
+        validator.validate(BankingProductDiscountV1.Builder.from(data)
+            .addAllEligibility(
+                List.of(ModelConstants.DEFAULT_BANKING_PRODUCT_FEE_DISCOUNT_ELIGIBILITY))
+            .build()).toString());
 
     // Any value specified is invalid
-    data.additionalValue("Invalid");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-
+    assertFalse(
+        validator
+            .validate(
+                BankingProductDiscountV1.Builder.from(data).additionalValue("Invalid").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductDiscountV1.Builder.from(data).additionalValue("Invalid").build())
+            .toString());
 
   }
 

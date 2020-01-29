@@ -23,21 +23,4 @@ import lombok.ToString;
 public class CDRResponsePaginated
     extends io.biza.babelfish.deprecated.cdr.model.CDRResponsePaginated<CDRResponsePaginated> {
 
-  @AssertTrue(message = "First and Last Page Detected but Total Pages is >1")
-  public boolean isTotalPagesBiggerThanLinks() {
-    return (links() != null && links().next() == null && links().prev() == null)
-        ? (meta() != null && meta().totalPages() > 1 ? false : true)
-        : true;
-  }
-
-  @AssertTrue(message = "Last Page URI page parameter should match totalPages")
-  public boolean isLastPagePageParamValid() {
-    return (links() != null && links().last() != null && meta() != null
-        && meta().totalPages() != null)
-            ? ((Integer.parseInt(
-                FormatChecker.mapifyQueryString(links().last()).get("page")) != meta().totalPages())
-                    ? false
-                    : true)
-            : true;
-  }
 }

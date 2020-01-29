@@ -15,7 +15,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.babelfish.cdr.model.banking.product.BankingProduct;
+import io.biza.babelfish.interfaces.cdr.banking.product.BankingProductV2;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,8 +27,6 @@ import lombok.ToString;
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode
-
-
 @Schema(description = "Object containing a list of BankingProduct objects")
 public abstract class ResponseBankingProductListData<T> {
   @Schema(
@@ -37,14 +35,14 @@ public abstract class ResponseBankingProductListData<T> {
   @JsonProperty("products")
   @NotNull
   @Valid
-  List<BankingProduct<?>> products;
+  List<BankingProductV2> products;
 
-  public List<BankingProduct<?>> products() {
+  public List<BankingProductV2> products() {
     return getProducts();
   }
 
   @SuppressWarnings("unchecked")
-  public T products(List<BankingProduct<?>> products) {
+  public T products(List<BankingProductV2> products) {
     setProducts(products);
     return (T) this;
   }

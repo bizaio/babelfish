@@ -21,8 +21,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductDepositRate;
 import io.biza.babelfish.enumerations.cdr.BankingProductDepositRateType;
+import io.biza.babelfish.interfaces.cdr.banking.product.BankingProductDepositRateV1;
 
 @DisplayName("BankingProductDepositRate V1 Tests")
 public class BankingProductDepositRateV1Test {
@@ -46,104 +46,141 @@ public class BankingProductDepositRateV1Test {
   @Test
   @DisplayName("BankingProductDepositRate for Fixed")
   void bankingProductDepositRateFixed() {
-    BankingProductDepositRate data = new BankingProductDepositRate()
-        .depositRateType(BankingProductDepositRateType.FIXED).rate(new BigDecimal("0.05"));
+    BankingProductDepositRateV1 data = new BankingProductDepositRateV1.Builder()
+        .type(BankingProductDepositRateType.FIXED).rate(new BigDecimal("0.05")).buildPartial();
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Invalid String
-    data.additionalValue("Not a Duration");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(BankingProductDepositRateV1.Builder.from(data)
+            .additionalValue("Not a Duration").build()).isEmpty(),
+        validator.validate(BankingProductDepositRateV1.Builder.from(data)
+            .additionalValue("Not a Duration").build()).toString());
 
     // Duration String formatted value is valid
-    data.additionalValue("P1D");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator
+            .validate(BankingProductDepositRateV1.Builder.from(data).additionalValue("P1D").build())
+            .isEmpty(),
+        validator
+            .validate(BankingProductDepositRateV1.Builder.from(data).additionalValue("P1D").build())
+            .toString());
   }
 
   @Test
   @DisplayName("BankingProductDepositRate for Bonus")
   void bankingProductDepositRateBonus() {
-    BankingProductDepositRate data = new BankingProductDepositRate()
-        .depositRateType(BankingProductDepositRateType.BONUS).rate(new BigDecimal("0.05"));
+    BankingProductDepositRateV1 data = new BankingProductDepositRateV1.Builder()
+        .type(BankingProductDepositRateType.BONUS).rate(new BigDecimal("0.05")).build();
 
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with Description
-    data.setAdditionalValue("Description text");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(BankingProductDepositRateV1.Builder.from(data)
+            .additionalValue("Description Text").build()).isEmpty(),
+        validator.validate(BankingProductDepositRateV1.Builder.from(data)
+            .additionalValue("Description Text").build()).toString());
   }
 
   @Test
   @DisplayName("BankingProductDepositRate for Bundle Bonus")
   void bankingProductDepositRateBundleBonus() {
-    BankingProductDepositRate data = new BankingProductDepositRate()
-        .depositRateType(BankingProductDepositRateType.BUNDLE_BONUS).rate(new BigDecimal("0.05"));
+    BankingProductDepositRateV1 data = new BankingProductDepositRateV1.Builder()
+        .type(BankingProductDepositRateType.BUNDLE_BONUS).rate(new BigDecimal("0.05")).build();
 
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with Description
-    data.setAdditionalValue("Description text");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(BankingProductDepositRateV1.Builder.from(data)
+            .additionalValue("Description Text").build()).isEmpty(),
+        validator.validate(BankingProductDepositRateV1.Builder.from(data)
+            .additionalValue("Description Text").build()).toString());
   }
 
   @Test
   @DisplayName("BankingProductDepositRate for Variable")
   void bankingProductDepositRateTransaction() {
-    BankingProductDepositRate data = new BankingProductDepositRate()
-        .depositRateType(BankingProductDepositRateType.VARIABLE).rate(new BigDecimal("0.05"));
+    BankingProductDepositRateV1 data = new BankingProductDepositRateV1.Builder()
+        .type(BankingProductDepositRateType.VARIABLE).rate(new BigDecimal("0.05")).build();
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Any value specified is invalid
-    data.additionalValue("Invalid");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(
+                BankingProductDepositRateV1.Builder.from(data).additionalValue("Invalid").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductDepositRateV1.Builder.from(data).additionalValue("Invalid").build())
+            .toString());
   }
 
   @Test
   @DisplayName("BankingProductDepositRate for Introductory")
   void bankingProductDepositRateIntroductory() {
-    BankingProductDepositRate data = new BankingProductDepositRate()
-        .depositRateType(BankingProductDepositRateType.INTRODUCTORY).rate(new BigDecimal("0.05"));
+    BankingProductDepositRateV1 data = new BankingProductDepositRateV1.Builder()
+        .type(BankingProductDepositRateType.INTRODUCTORY).rate(new BigDecimal("0.05")).build();
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Invalid String
-    data.additionalValue("Not a Duration");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(BankingProductDepositRateV1.Builder.from(data)
+            .additionalValue("Not a Duration").build()).isEmpty(),
+        validator.validate(BankingProductDepositRateV1.Builder.from(data)
+            .additionalValue("Not a Duration").build()).toString());
 
     // Duration String formatted value is valid
-    data.additionalValue("P1D");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(BankingProductDepositRateV1.Builder.from(data).additionalValue("P1D").build())
+            .isEmpty(),
+        validator
+            .validate(BankingProductDepositRateV1.Builder.from(data).additionalValue("P1D").build())
+            .toString());
+
   }
 
 
   @Test
   @DisplayName("BankingProductDepositRate for Floating")
   void bankingProductDepositRateFloating() {
-    BankingProductDepositRate data = new BankingProductDepositRate()
-        .depositRateType(BankingProductDepositRateType.FLOATING).rate(new BigDecimal("0.05"));
+    BankingProductDepositRateV1 data = new BankingProductDepositRateV1.Builder()
+        .type(BankingProductDepositRateType.FLOATING).rate(new BigDecimal("0.05")).build();
 
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with Description
-    data.setAdditionalValue("Description text");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(BankingProductDepositRateV1.Builder.from(data)
+            .additionalValue("Description Text").build()).isEmpty(),
+        validator.validate(BankingProductDepositRateV1.Builder.from(data)
+            .additionalValue("Description Text").build()).toString());
   }
 
   @Test
   @DisplayName("BankingProductDepositRate for Market Linked")
   void bankingProductDepositRateMarketLinked() {
-    BankingProductDepositRate data = new BankingProductDepositRate()
-        .depositRateType(BankingProductDepositRateType.MARKET_LINKED).rate(new BigDecimal("0.05"));
+    BankingProductDepositRateV1 data =
+        new BankingProductDepositRateV1.Builder().type(BankingProductDepositRateType.MARKET_LINKED)
+            .rate(new BigDecimal("0.05")).buildPartial();
 
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with Description
-    data.setAdditionalValue("Description text");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(BankingProductDepositRateV1.Builder.from(data)
+            .additionalValue("Description Text").build()).isEmpty(),
+        validator.validate(BankingProductDepositRateV1.Builder.from(data)
+            .additionalValue("Description Text").build()).toString());
   }
 
 }

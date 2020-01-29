@@ -22,10 +22,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductRateTier;
 import io.biza.babelfish.enumerations.cdr.CommonUnitOfMeasureType;
+import io.biza.babelfish.interfaces.cdr.banking.product.BankingProductRateTierV1;
 
-@DisplayName("BankingProductRateTier V1 Tests")
+@DisplayName("BankingProductRateTierV1 V1 Tests")
 public class BankingProductRateTierV1Test {
   private Validator validator;
 
@@ -38,58 +38,92 @@ public class BankingProductRateTierV1Test {
   }
 
   @Test
-  @DisplayName("Create valid BankingProductRateTier")
+  @DisplayName("Create valid BankingProductRateTierV1")
   void bankingProductRateTier() {
     assertTrue(validator.validate(ModelConstants.DEFAULT_BANKING_PRODUCT_RATE_TIER).isEmpty(),
         validator.validate(ModelConstants.DEFAULT_BANKING_PRODUCT_RATE_TIER).toString());
   }
 
   @Test
-  @DisplayName("BankingProductRateTier for Mandatory Fields")
+  @DisplayName("BankingProductRateTierV1 for Mandatory Fields")
   void bankingProductRateTierMandatoryFields()
       throws IllegalAccessException, InvocationTargetException {
-    BankingProductRateTier data = new BankingProductRateTier();
+    BankingProductRateTierV1 data = new BankingProductRateTierV1.Builder().buildPartial();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // add name, missing two others still
-    data.name("Rate Tier Name");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(
+                BankingProductRateTierV1.Builder.from(data).name("Rate Tier Name").buildPartial())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductRateTierV1.Builder.from(data).name("Rate Tier Name").buildPartial())
+            .toString());
 
     // add unit of measure, one missing still
-    data.unitOfMeasure(CommonUnitOfMeasureType.DOLLAR);
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(BankingProductRateTierV1.Builder.from(data).name("Rate Tier Name")
+            .unitOfMeasure(CommonUnitOfMeasureType.DOLLAR).buildPartial()).isEmpty(),
+        validator.validate(BankingProductRateTierV1.Builder.from(data).name("Rate Tier Name")
+            .unitOfMeasure(CommonUnitOfMeasureType.DOLLAR).buildPartial()).toString());
 
     // add minimumValue, should validate now
-    data.minimumValue(new BigDecimal("10.00"));
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(BankingProductRateTierV1.Builder.from(data).name("Rate Tier Name")
+            .unitOfMeasure(CommonUnitOfMeasureType.DOLLAR).minimumValue(new BigDecimal("10.00"))
+            .buildPartial()).isEmpty(),
+        validator.validate(BankingProductRateTierV1.Builder.from(data).name("Rate Tier Name")
+            .unitOfMeasure(CommonUnitOfMeasureType.DOLLAR).minimumValue(new BigDecimal("10.00"))
+            .buildPartial()).toString());
   }
 
   @Test
-  @DisplayName("BankingProductRateTier for Discrete Values")
+  @DisplayName("BankingProductRateTierV1 for Discrete Values")
   void bankingProductRateTierDiscreteValues()
       throws IllegalAccessException, InvocationTargetException {
     // Dollar value should pass
-    BankingProductRateTier data = new BankingProductRateTier().name("Test Rate Tier")
-        .unitOfMeasure(CommonUnitOfMeasureType.DOLLAR).minimumValue(new BigDecimal("10.00"));
+    BankingProductRateTierV1 data = new BankingProductRateTierV1.Builder().name("Test Rate Tier")
+        .unitOfMeasure(CommonUnitOfMeasureType.DOLLAR).minimumValue(new BigDecimal("10.00"))
+        .buildPartial();
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Month with no bounding should pass
-    data.unitOfMeasure(CommonUnitOfMeasureType.MONTH);
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(BankingProductRateTierV1.Builder.from(data)
+            .unitOfMeasure(CommonUnitOfMeasureType.MONTH).buildPartial()).isEmpty(),
+        validator.validate(BankingProductRateTierV1.Builder.from(data)
+            .unitOfMeasure(CommonUnitOfMeasureType.MONTH).buildPartial()).toString());
 
     // As should day
-    data.unitOfMeasure(CommonUnitOfMeasureType.DAY);
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(BankingProductRateTierV1.Builder.from(data)
+            .unitOfMeasure(CommonUnitOfMeasureType.DAY).buildPartial()).isEmpty(),
+        validator.validate(BankingProductRateTierV1.Builder.from(data)
+            .unitOfMeasure(CommonUnitOfMeasureType.DAY).buildPartial()).toString());
 
     // Including if maximum value is set
-    data.unitOfMeasure(CommonUnitOfMeasureType.MONTH);
-    data.maximumValue(new BigDecimal("10.00"));
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(
+            BankingProductRateTierV1.Builder.from(data).unitOfMeasure(CommonUnitOfMeasureType.MONTH)
+                .maximumValue(new BigDecimal("10.00")).buildPartial())
+            .isEmpty(),
+        validator.validate(
+            BankingProductRateTierV1.Builder.from(data).unitOfMeasure(CommonUnitOfMeasureType.MONTH)
+                .maximumValue(new BigDecimal("10.00")).buildPartial())
+            .toString());
 
     // For Day too
-    data.unitOfMeasure(CommonUnitOfMeasureType.DAY);
-    data.maximumValue(new BigDecimal("10.00"));
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator.validate(
+            BankingProductRateTierV1.Builder.from(data).unitOfMeasure(CommonUnitOfMeasureType.DAY)
+                .maximumValue(new BigDecimal("10.00")).buildPartial())
+            .isEmpty(),
+        validator.validate(
+            BankingProductRateTierV1.Builder.from(data).unitOfMeasure(CommonUnitOfMeasureType.DAY)
+                .maximumValue(new BigDecimal("10.00")).buildPartial())
+            .toString());
 
   }
 

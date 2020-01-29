@@ -20,8 +20,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductConstraint;
 import io.biza.babelfish.enumerations.cdr.BankingProductConstraintType;
+import io.biza.babelfish.interfaces.cdr.banking.product.BankingProductConstraintV1;
 
 @DisplayName("BankingProductConstraint V1 Tests")
 public class BankingProductConstraintV1Test {
@@ -43,69 +43,120 @@ public class BankingProductConstraintV1Test {
   @Test
   @DisplayName("BankingProductConstraint for Minimum Balance")
   void bankingProductConstraintMinBalance() {
-    BankingProductConstraint data =
-        new BankingProductConstraint().constraintType(BankingProductConstraintType.MIN_BALANCE);
+    BankingProductConstraintV1 data = new BankingProductConstraintV1.Builder()
+        .type(BankingProductConstraintType.MIN_BALANCE).build();
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Invalid number
-    data.additionalValue("Not A Number");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(
+            BankingProductConstraintV1.Builder.from(data).additionalValue("Not A Number").build())
+            .isEmpty(),
+        validator.validate(
+            BankingProductConstraintV1.Builder.from(data).additionalValue("Not A Number").build())
+            .toString());
 
     // A number value which is not in AmountString format is invalid
-    data.additionalValue("10");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(BankingProductConstraintV1.Builder.from(data).additionalValue("10").build())
+            .isEmpty(),
+        validator
+            .validate(BankingProductConstraintV1.Builder.from(data).additionalValue("10").build())
+            .toString());
 
     // AmountString formatted value is valid
-    data.additionalValue("10.00");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator
+            .validate(
+                BankingProductConstraintV1.Builder.from(data).additionalValue("10.00").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductConstraintV1.Builder.from(data).additionalValue("10.00").build())
+            .toString());
 
   }
 
   @Test
   @DisplayName("BankingProductConstraint for Maximum Balance")
   void bankingProductConstraintMaxBalance() {
-    BankingProductConstraint data =
-        new BankingProductConstraint().constraintType(BankingProductConstraintType.MAX_BALANCE);
+    BankingProductConstraintV1 data = new BankingProductConstraintV1.Builder()
+        .type(BankingProductConstraintType.MAX_BALANCE).buildPartial();
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Invalid number
-    data.additionalValue("Not A Number");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(
+            BankingProductConstraintV1.Builder.from(data).additionalValue("Not A Number").build())
+            .isEmpty(),
+        validator.validate(
+            BankingProductConstraintV1.Builder.from(data).additionalValue("Not A Number").build())
+            .toString());
 
     // A number value which is not in AmountString format is invalid
-    data.additionalValue("10");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(BankingProductConstraintV1.Builder.from(data).additionalValue("10").build())
+            .isEmpty(),
+        validator
+            .validate(BankingProductConstraintV1.Builder.from(data).additionalValue("10").build())
+            .toString());
 
     // AmountString formatted value is valid
-    data.additionalValue("10.00");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator
+            .validate(
+                BankingProductConstraintV1.Builder.from(data).additionalValue("10.00").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductConstraintV1.Builder.from(data).additionalValue("10.00").build())
+            .toString());
 
   }
 
   @Test
   @DisplayName("BankingProductConstraint for Opening Balance")
   void bankingProductConstraintOpeningBalance() {
-    BankingProductConstraint data =
-        new BankingProductConstraint().constraintType(BankingProductConstraintType.OPENING_BALANCE);
+    BankingProductConstraintV1 data = new BankingProductConstraintV1.Builder()
+        .type(BankingProductConstraintType.OPENING_BALANCE).buildPartial();
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Invalid number
-    data.additionalValue("Not A Number");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(
+            BankingProductConstraintV1.Builder.from(data).additionalValue("Not A Number").build())
+            .isEmpty(),
+        validator.validate(
+            BankingProductConstraintV1.Builder.from(data).additionalValue("Not A Number").build())
+            .toString());
 
     // A number value which is not in AmountString format is invalid
-    data.additionalValue("10");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(BankingProductConstraintV1.Builder.from(data).additionalValue("10").build())
+            .isEmpty(),
+        validator
+            .validate(BankingProductConstraintV1.Builder.from(data).additionalValue("10").build())
+            .toString());
 
     // AmountString formatted value is valid
-    data.additionalValue("10.00");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator
+            .validate(
+                BankingProductConstraintV1.Builder.from(data).additionalValue("10.00").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductConstraintV1.Builder.from(data).additionalValue("10.00").build())
+            .toString());
 
   }
 
@@ -113,46 +164,80 @@ public class BankingProductConstraintV1Test {
   @Test
   @DisplayName("BankingProductConstraint for Max Limit")
   void bankingProductConstraintMaxLimit() {
-    BankingProductConstraint data =
-        new BankingProductConstraint().constraintType(BankingProductConstraintType.MAX_LIMIT);
+    BankingProductConstraintV1 data = new BankingProductConstraintV1.Builder()
+        .type(BankingProductConstraintType.MAX_LIMIT).build();
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Invalid number
-    data.additionalValue("Not A Number");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(
+            BankingProductConstraintV1.Builder.from(data).additionalValue("Not A Number").build())
+            .isEmpty(),
+        validator.validate(
+            BankingProductConstraintV1.Builder.from(data).additionalValue("Not A Number").build())
+            .toString());
 
     // A number value which is not in AmountString format is invalid
-    data.additionalValue("10");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(BankingProductConstraintV1.Builder.from(data).additionalValue("10").build())
+            .isEmpty(),
+        validator
+            .validate(BankingProductConstraintV1.Builder.from(data).additionalValue("10").build())
+            .toString());
 
     // AmountString formatted value is valid
-    data.additionalValue("10.00");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator
+            .validate(
+                BankingProductConstraintV1.Builder.from(data).additionalValue("10.00").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductConstraintV1.Builder.from(data).additionalValue("10.00").build())
+            .toString());
 
   }
 
   @Test
   @DisplayName("BankingProductConstraint for Min Limit")
   void bankingProductConstraintMinLimit() {
-    BankingProductConstraint data =
-        new BankingProductConstraint().constraintType(BankingProductConstraintType.MIN_LIMIT);
+    BankingProductConstraintV1 data = new BankingProductConstraintV1.Builder()
+        .type(BankingProductConstraintType.MIN_LIMIT).build();
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Invalid number
-    data.additionalValue("Not A Number");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator.validate(
+            BankingProductConstraintV1.Builder.from(data).additionalValue("Not A Number").build())
+            .isEmpty(),
+        validator.validate(
+            BankingProductConstraintV1.Builder.from(data).additionalValue("Not A Number").build())
+            .toString());
 
     // A number value which is not in AmountString format is invalid
-    data.additionalValue("10");
-    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertFalse(
+        validator
+            .validate(BankingProductConstraintV1.Builder.from(data).additionalValue("10").build())
+            .isEmpty(),
+        validator
+            .validate(BankingProductConstraintV1.Builder.from(data).additionalValue("10").build())
+            .toString());
 
     // AmountString formatted value is valid
-    data.additionalValue("10.00");
-    assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    assertTrue(
+        validator
+            .validate(
+                BankingProductConstraintV1.Builder.from(data).additionalValue("10.00").build())
+            .isEmpty(),
+        validator
+            .validate(
+                BankingProductConstraintV1.Builder.from(data).additionalValue("10.00").build())
+            .toString());
 
   }
 }
