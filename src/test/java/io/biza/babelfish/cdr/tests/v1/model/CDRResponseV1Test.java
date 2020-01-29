@@ -20,9 +20,9 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.v1.model.CDRResponse;
-import io.biza.babelfish.cdr.v1.model.common.Links;
-import io.biza.babelfish.cdr.v1.model.common.Meta;
+import io.biza.babelfish.cdr.models.payloads.CDRResponse;
+import io.biza.babelfish.cdr.models.payloads.common.Links;
+import io.biza.babelfish.cdr.models.payloads.common.Meta;
 
 @DisplayName("CDR Response V1 Tests")
 public class CDRResponseV1Test {

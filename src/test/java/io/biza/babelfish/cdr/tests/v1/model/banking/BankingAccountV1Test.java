@@ -20,9 +20,9 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import io.biza.babelfish.cdr.enumerations.BankingProductCategory;
+import io.biza.babelfish.cdr.models.payloads.banking.account.BankingAccount;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductCategory;
-import io.biza.babelfish.cdr.v1.model.banking.BankingAccount;
 
 @DisplayName("Banking V1 Tests")
 public class BankingAccountV1Test {

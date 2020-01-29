@@ -20,12 +20,12 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductV2;
+import io.biza.babelfish.cdr.models.payloads.common.LinksPaginated;
+import io.biza.babelfish.cdr.models.payloads.common.MetaPaginated;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingProductList;
+import io.biza.babelfish.cdr.models.responses.container.ResponseBankingProductListData;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
-import io.biza.babelfish.cdr.v1.model.common.LinksPaginated;
-import io.biza.babelfish.cdr.v1.model.common.MetaPaginated;
-import io.biza.babelfish.cdr.v1.response.ResponseBankingProductList;
-import io.biza.babelfish.cdr.v1.response.container.ResponseBankingProductListData;
-import io.biza.babelfish.cdr.v2.model.banking.BankingProduct;
 
 @DisplayName("ResponseBankingProductList V1 Tests")
 public class ResponseBankingProductListV1Test {
@@ -70,7 +70,7 @@ public class ResponseBankingProductListV1Test {
             .first(ModelConstants.DEFAULT_FIRST_URI).next(ModelConstants.DEFAULT_NEXT_URI)
             .last(ModelConstants.DEFAULT_LAST_URI).prev(ModelConstants.DEFAULT_PREV_URI))
         .meta(new MetaPaginated().totalPages(10).totalRecords(100))
-        .data(new ResponseBankingProductListData().products(List.of(new BankingProduct())));
+        .data(new ResponseBankingProductListData().products(List.of(new BankingProductV2())));
     assertFalse(validator.validate(myResponse).isEmpty(),
         validator.validate(myResponse).toString());
   }

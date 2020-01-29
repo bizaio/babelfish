@@ -19,7 +19,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.v1.model.common.Links;
+import io.biza.babelfish.cdr.models.payloads.common.Links;
 
 @DisplayName("Links V1 Tests")
 public class LinksV1Test {

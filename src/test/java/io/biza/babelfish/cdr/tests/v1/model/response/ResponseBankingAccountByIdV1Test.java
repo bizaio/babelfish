@@ -19,8 +19,8 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingAccountById;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
-import io.biza.babelfish.cdr.v1.response.ResponseBankingAccountById;
 
 @DisplayName("ResponseBankingAccountById V1 Tests")
 public class ResponseBankingAccountByIdV1Test {

@@ -22,8 +22,8 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import io.biza.babelfish.cdr.models.payloads.banking.account.directdebit.BankingDirectDebit;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
-import io.biza.babelfish.cdr.v1.model.banking.BankingDirectDebit;
 
 @DisplayName("BankingDirectDebit V1 Tests")
 public class BankingDirectDebitV1Test {

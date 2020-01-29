@@ -21,118 +21,118 @@ import java.time.Period;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
-import io.biza.babelfish.cdr.v1.enumerations.AddressPAFStateType;
-import io.biza.babelfish.cdr.v1.enumerations.AddressPurpose;
-import io.biza.babelfish.cdr.v1.enumerations.BankingPayeeType;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductCategory;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductConstraintType;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductDepositRateType;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductDiscountEligibilityType;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductDiscountType;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductEligibilityType;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductFeatureType;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductFeeType;
-import io.biza.babelfish.cdr.v1.enumerations.BankingProductLendingRateType;
-import io.biza.babelfish.cdr.v1.enumerations.BankingScheduledPaymentStatus;
-import io.biza.babelfish.cdr.v1.enumerations.BankingTermDepositMaturityInstructions;
-import io.biza.babelfish.cdr.v1.enumerations.BankingTransactionService;
-import io.biza.babelfish.cdr.v1.enumerations.BankingTransactionStatus;
-import io.biza.babelfish.cdr.v1.enumerations.BankingTransactionType;
-import io.biza.babelfish.cdr.v1.enumerations.CommonDiscoveryStatusType;
-import io.biza.babelfish.cdr.v1.enumerations.CommonEmailAddressPurpose;
-import io.biza.babelfish.cdr.v1.enumerations.CommonOrganisationType;
-import io.biza.babelfish.cdr.v1.enumerations.CommonPhoneNumberPurpose;
-import io.biza.babelfish.cdr.v1.enumerations.CommonUnitOfMeasureType;
-import io.biza.babelfish.cdr.v1.enumerations.CommonWeekDay;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeAddress;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeBankingDomesticPayee;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeBankingDomesticPayeePayId;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeBankingPayee;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeBankingScheduledPaymentRecurrence;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeBankingScheduledPaymentTo;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeCustomer;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeTransactionExtension;
-import io.biza.babelfish.cdr.v1.model.banking.BankingAccount;
-import io.biza.babelfish.cdr.v1.model.banking.BankingAccountDetail;
-import io.biza.babelfish.cdr.v1.model.banking.BankingAuthorisedEntity;
-import io.biza.babelfish.cdr.v1.model.banking.BankingBalance;
-import io.biza.babelfish.cdr.v1.model.banking.BankingBalancePurse;
-import io.biza.babelfish.cdr.v1.model.banking.BankingBillerPayee;
-import io.biza.babelfish.cdr.v1.model.banking.BankingCreditCardAccount;
-import io.biza.babelfish.cdr.v1.model.banking.BankingDirectDebit;
-import io.biza.babelfish.cdr.v1.model.banking.BankingDomesticPayee;
-import io.biza.babelfish.cdr.v1.model.banking.BankingDomesticPayeeAccount;
-import io.biza.babelfish.cdr.v1.model.banking.BankingDomesticPayeeCard;
-import io.biza.babelfish.cdr.v1.model.banking.BankingDomesticPayeePayId;
-import io.biza.babelfish.cdr.v1.model.banking.BankingInternationalPayee;
-import io.biza.babelfish.cdr.v1.model.banking.BankingInternationalPayeeBankDetails;
-import io.biza.babelfish.cdr.v1.model.banking.BankingInternationalPayeeBeneficiaryDetails;
-import io.biza.babelfish.cdr.v1.model.banking.BankingLoanAccount;
-import io.biza.babelfish.cdr.v1.model.banking.BankingPayee;
-import io.biza.babelfish.cdr.v1.model.banking.BankingPayeeDetail;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductBundle;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductConstraint;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductDepositRate;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductEligibility;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductFeature;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductFee;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductDiscount;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductFeeDiscountEligibility;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductLendingRate;
-import io.biza.babelfish.cdr.v1.model.banking.BankingProductRateTier;
-import io.biza.babelfish.cdr.v1.model.banking.BankingScheduledPayment;
-import io.biza.babelfish.cdr.v1.model.banking.BankingScheduledPaymentFrom;
-import io.biza.babelfish.cdr.v1.model.banking.BankingScheduledPaymentInterval;
-import io.biza.babelfish.cdr.v1.model.banking.BankingScheduledPaymentRecurrence;
-import io.biza.babelfish.cdr.v1.model.banking.BankingScheduledPaymentRecurrenceEventBased;
-import io.biza.babelfish.cdr.v1.model.banking.BankingScheduledPaymentRecurrenceIntervalSchedule;
-import io.biza.babelfish.cdr.v1.model.banking.BankingScheduledPaymentRecurrenceLastWeekday;
-import io.biza.babelfish.cdr.v1.model.banking.BankingScheduledPaymentRecurrenceOnceOff;
-import io.biza.babelfish.cdr.v1.model.banking.BankingScheduledPaymentSet;
-import io.biza.babelfish.cdr.v1.model.banking.BankingScheduledPaymentTo;
-import io.biza.babelfish.cdr.v1.model.banking.BankingTermDepositAccount;
-import io.biza.babelfish.cdr.v1.model.banking.BankingTransaction;
-import io.biza.babelfish.cdr.v1.model.banking.BankingTransactionDetail;
-import io.biza.babelfish.cdr.v1.model.banking.BankingTransactionDetailExtendedData;
-import io.biza.babelfish.cdr.v1.model.common.CommonDiscoveryOutage;
-import io.biza.babelfish.cdr.v1.model.common.CommonDiscoveryStatus;
-import io.biza.babelfish.cdr.v1.model.common.CommonEmailAddress;
-import io.biza.babelfish.cdr.v1.model.common.CommonOrganisation;
-import io.biza.babelfish.cdr.v1.model.common.CommonOrganisationDetail;
-import io.biza.babelfish.cdr.v1.model.common.CommonPAFAddress;
-import io.biza.babelfish.cdr.v1.model.common.CommonPerson;
-import io.biza.babelfish.cdr.v1.model.common.CommonPersonDetail;
-import io.biza.babelfish.cdr.v1.model.common.CommonPhoneNumber;
-import io.biza.babelfish.cdr.v1.model.common.CommonPhysicalAddress;
-import io.biza.babelfish.cdr.v1.model.common.CommonPhysicalAddressWithPurpose;
-import io.biza.babelfish.cdr.v1.model.common.CommonSimpleAddress;
-import io.biza.babelfish.cdr.v1.model.common.Links;
-import io.biza.babelfish.cdr.v1.model.common.LinksPaginated;
-import io.biza.babelfish.cdr.v1.model.common.Meta;
-import io.biza.babelfish.cdr.v1.model.common.MetaPaginated;
-import io.biza.babelfish.cdr.v1.response.ResponseBankingAccountById;
-import io.biza.babelfish.cdr.v1.response.ResponseBankingAccountList;
-import io.biza.babelfish.cdr.v1.response.ResponseBankingAccountsBalanceList;
-import io.biza.babelfish.cdr.v1.response.ResponseBankingDirectDebitAuthorisationList;
-import io.biza.babelfish.cdr.v1.response.ResponseBankingPayeeById;
-import io.biza.babelfish.cdr.v1.response.ResponseBankingPayeeList;
-import io.biza.babelfish.cdr.v1.response.ResponseBankingScheduledPaymentsList;
-import io.biza.babelfish.cdr.v1.response.ResponseBankingTransactionById;
-import io.biza.babelfish.cdr.v1.response.ResponseBankingTransactionList;
-import io.biza.babelfish.cdr.v1.response.ResponseCommonCustomer;
-import io.biza.babelfish.cdr.v1.response.ResponseCommonCustomerDetail;
-import io.biza.babelfish.cdr.v1.response.ResponseCommonDiscoveryOutagesList;
-import io.biza.babelfish.cdr.v1.response.ResponseCommonDiscoveryStatus;
-import io.biza.babelfish.cdr.v1.response.ResponseErrorList;
-import io.biza.babelfish.cdr.v1.response.container.ResponseBankingAccountListData;
-import io.biza.babelfish.cdr.v1.response.container.ResponseBankingAccountsBalanceListData;
-import io.biza.babelfish.cdr.v1.response.container.ResponseBankingDirectDebitAuthorisationListData;
-import io.biza.babelfish.cdr.v1.response.container.ResponseBankingPayeeListData;
-import io.biza.babelfish.cdr.v1.response.container.ResponseBankingScheduledPaymentsListData;
-import io.biza.babelfish.cdr.v1.response.container.ResponseBankingTransactionListData;
-import io.biza.babelfish.cdr.v1.response.container.ResponseCommonCustomerData;
-import io.biza.babelfish.cdr.v1.response.container.ResponseCommonCustomerDetailData;
-import io.biza.babelfish.cdr.v1.response.container.ResponseCommonDiscoveryOutagesListData;
+import io.biza.babelfish.cdr.enumerations.AddressPAFStateType;
+import io.biza.babelfish.cdr.enumerations.AddressPurpose;
+import io.biza.babelfish.cdr.enumerations.BankingPayeeType;
+import io.biza.babelfish.cdr.enumerations.BankingProductCategory;
+import io.biza.babelfish.cdr.enumerations.BankingProductConstraintType;
+import io.biza.babelfish.cdr.enumerations.BankingProductDepositRateType;
+import io.biza.babelfish.cdr.enumerations.BankingProductDiscountEligibilityType;
+import io.biza.babelfish.cdr.enumerations.BankingProductDiscountType;
+import io.biza.babelfish.cdr.enumerations.BankingProductEligibilityType;
+import io.biza.babelfish.cdr.enumerations.BankingProductFeatureType;
+import io.biza.babelfish.cdr.enumerations.BankingProductFeeType;
+import io.biza.babelfish.cdr.enumerations.BankingProductLendingRateType;
+import io.biza.babelfish.cdr.enumerations.BankingScheduledPaymentStatus;
+import io.biza.babelfish.cdr.enumerations.BankingTermDepositMaturityInstructions;
+import io.biza.babelfish.cdr.enumerations.BankingTransactionService;
+import io.biza.babelfish.cdr.enumerations.BankingTransactionStatus;
+import io.biza.babelfish.cdr.enumerations.BankingTransactionType;
+import io.biza.babelfish.cdr.enumerations.CommonDiscoveryStatusType;
+import io.biza.babelfish.cdr.enumerations.CommonEmailAddressPurpose;
+import io.biza.babelfish.cdr.enumerations.CommonOrganisationType;
+import io.biza.babelfish.cdr.enumerations.CommonPhoneNumberPurpose;
+import io.biza.babelfish.cdr.enumerations.CommonUnitOfMeasureType;
+import io.biza.babelfish.cdr.enumerations.CommonWeekDay;
+import io.biza.babelfish.cdr.enumerations.PayloadTypeAddress;
+import io.biza.babelfish.cdr.enumerations.PayloadTypeBankingDomesticPayee;
+import io.biza.babelfish.cdr.enumerations.PayloadTypeBankingDomesticPayeePayId;
+import io.biza.babelfish.cdr.enumerations.PayloadTypeBankingPayee;
+import io.biza.babelfish.cdr.enumerations.PayloadTypeBankingScheduledPaymentRecurrence;
+import io.biza.babelfish.cdr.enumerations.PayloadTypeBankingScheduledPaymentTo;
+import io.biza.babelfish.cdr.enumerations.PayloadTypeCustomer;
+import io.biza.babelfish.cdr.enumerations.PayloadTypeTransactionExtension;
+import io.biza.babelfish.cdr.models.payloads.banking.account.BankingAccount;
+import io.biza.babelfish.cdr.models.payloads.banking.account.BankingAccountDetail;
+import io.biza.babelfish.cdr.models.payloads.banking.account.BankingCreditCardAccount;
+import io.biza.babelfish.cdr.models.payloads.banking.account.BankingLoanAccount;
+import io.biza.babelfish.cdr.models.payloads.banking.account.BankingTermDepositAccount;
+import io.biza.babelfish.cdr.models.payloads.banking.account.balance.BankingBalance;
+import io.biza.babelfish.cdr.models.payloads.banking.account.balance.BankingBalancePurse;
+import io.biza.babelfish.cdr.models.payloads.banking.account.directdebit.BankingAuthorisedEntity;
+import io.biza.babelfish.cdr.models.payloads.banking.account.directdebit.BankingDirectDebit;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.BankingPayee;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.BankingPayeeDetail;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.bpay.BankingBillerPayee;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.domestic.BankingDomesticPayee;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.domestic.BankingDomesticPayeeAccount;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.domestic.BankingDomesticPayeeCard;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.domestic.BankingDomesticPayeePayId;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.international.BankingInternationalPayee;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.international.BankingInternationalPayeeBankDetails;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.international.BankingInternationalPayeeBeneficiaryDetails;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPayment;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentFrom;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentInterval;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentRecurrence;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentRecurrenceEventBased;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentRecurrenceIntervalSchedule;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentRecurrenceLastWeekday;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentRecurrenceOnceOff;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentSet;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentTo;
+import io.biza.babelfish.cdr.models.payloads.banking.account.transaction.BankingTransaction;
+import io.biza.babelfish.cdr.models.payloads.banking.account.transaction.BankingTransactionDetail;
+import io.biza.babelfish.cdr.models.payloads.banking.account.transaction.BankingTransactionDetailExtendedData;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductBundle;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductConstraint;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductDepositRate;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductDiscount;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductEligibility;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductFeature;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductFee;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductFeeDiscountEligibility;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductLendingRate;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductRateTier;
+import io.biza.babelfish.cdr.models.payloads.common.CommonDiscoveryOutage;
+import io.biza.babelfish.cdr.models.payloads.common.CommonDiscoveryStatus;
+import io.biza.babelfish.cdr.models.payloads.common.CommonEmailAddress;
+import io.biza.babelfish.cdr.models.payloads.common.CommonOrganisation;
+import io.biza.babelfish.cdr.models.payloads.common.CommonOrganisationDetail;
+import io.biza.babelfish.cdr.models.payloads.common.CommonPAFAddress;
+import io.biza.babelfish.cdr.models.payloads.common.CommonPerson;
+import io.biza.babelfish.cdr.models.payloads.common.CommonPersonDetail;
+import io.biza.babelfish.cdr.models.payloads.common.CommonPhoneNumber;
+import io.biza.babelfish.cdr.models.payloads.common.CommonPhysicalAddress;
+import io.biza.babelfish.cdr.models.payloads.common.CommonPhysicalAddressWithPurpose;
+import io.biza.babelfish.cdr.models.payloads.common.CommonSimpleAddress;
+import io.biza.babelfish.cdr.models.payloads.common.Links;
+import io.biza.babelfish.cdr.models.payloads.common.LinksPaginated;
+import io.biza.babelfish.cdr.models.payloads.common.Meta;
+import io.biza.babelfish.cdr.models.payloads.common.MetaPaginated;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingAccountById;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingAccountList;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingAccountsBalanceList;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingDirectDebitAuthorisationList;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingPayeeById;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingPayeeList;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingScheduledPaymentsList;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingTransactionById;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingTransactionList;
+import io.biza.babelfish.cdr.models.responses.ResponseCommonCustomer;
+import io.biza.babelfish.cdr.models.responses.ResponseCommonCustomerDetail;
+import io.biza.babelfish.cdr.models.responses.ResponseCommonDiscoveryOutagesList;
+import io.biza.babelfish.cdr.models.responses.ResponseCommonDiscoveryStatus;
+import io.biza.babelfish.cdr.models.responses.ResponseErrorList;
+import io.biza.babelfish.cdr.models.responses.container.ResponseBankingAccountListData;
+import io.biza.babelfish.cdr.models.responses.container.ResponseBankingAccountsBalanceListData;
+import io.biza.babelfish.cdr.models.responses.container.ResponseBankingDirectDebitAuthorisationListData;
+import io.biza.babelfish.cdr.models.responses.container.ResponseBankingPayeeListData;
+import io.biza.babelfish.cdr.models.responses.container.ResponseBankingScheduledPaymentsListData;
+import io.biza.babelfish.cdr.models.responses.container.ResponseBankingTransactionListData;
+import io.biza.babelfish.cdr.models.responses.container.ResponseCommonCustomerData;
+import io.biza.babelfish.cdr.models.responses.container.ResponseCommonCustomerDetailData;
+import io.biza.babelfish.cdr.models.responses.container.ResponseCommonDiscoveryOutagesListData;
 
 /**
  * ModelConstants This defines valid models for manipulation within test cases
@@ -146,20 +146,20 @@ public class ModelConstants {
   public static final URI DEFAULT_NEXT_URI = URI.create("http://localhost/?page=4");
   public static final List<String> DEFAULT_ACCOUNT_IDS =
       List.of("0be1c793-87ba-4942-95bd-4c972ec43a2d", "d5305a6c-b828-4651-bbcc-b3ea7264d387");
-  public static final io.biza.babelfish.cdr.v1.model.banking.BankingProduct DEFAULT_BANKING_PRODUCT_V1 =
-      new io.biza.babelfish.cdr.v1.model.banking.BankingProduct().productId("test")
+  public static final io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductV1 DEFAULT_BANKING_PRODUCT_V1 =
+      new io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductV1().productId("test")
           .lastUpdated(OffsetDateTime.now()).productCategory(BankingProductCategory.BUSINESS_LOANS)
           .name("Test").description("Test Description").brand("ACME").tailored(false);
-  public static final io.biza.babelfish.cdr.v2.model.banking.BankingProduct DEFAULT_BANKING_PRODUCT_V2 =
-      new io.biza.babelfish.cdr.v2.model.banking.BankingProduct().productId("test")
+  public static final io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductV2 DEFAULT_BANKING_PRODUCT_V2 =
+      new io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductV2().productId("test")
           .lastUpdated(OffsetDateTime.now()).productCategory(BankingProductCategory.BUSINESS_LOANS)
           .name("Test").description("Test Description").brand("ACME").tailored(false);
-  public static final io.biza.babelfish.cdr.v1.model.banking.BankingProductDetail DEFAULT_BANKING_PRODUCT_DETAIL_V1 =
-      new io.biza.babelfish.cdr.v1.model.banking.BankingProductDetail().productId("test")
+  public static final io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductDetailV1 DEFAULT_BANKING_PRODUCT_DETAIL_V1 =
+      new io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductDetailV1().productId("test")
           .lastUpdated(OffsetDateTime.now()).productCategory(BankingProductCategory.BUSINESS_LOANS)
           .name("Test").description("Test Description").brand("ACME").tailored(false);
-  public static final io.biza.babelfish.cdr.v2.model.banking.BankingProductDetail DEFAULT_BANKING_PRODUCT_DETAIL_V2 =
-      new io.biza.babelfish.cdr.v2.model.banking.BankingProductDetail().productId("test")
+  public static final io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductDetailV2 DEFAULT_BANKING_PRODUCT_DETAIL_V2 =
+      new io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductDetailV2().productId("test")
           .lastUpdated(OffsetDateTime.now()).productCategory(BankingProductCategory.BUSINESS_LOANS)
           .name("Test").description("Test Description").brand("ACME").tailored(false);
   public static final BankingProductBundle DEFAULT_BANKING_PRODUCT_BUNDLE =
@@ -369,8 +369,8 @@ public class ModelConstants {
       new CommonPhysicalAddressWithPurpose().purpose(AddressPurpose.REGISTERED)
           .type(PayloadTypeAddress.SIMPLE).simple(DEFAULT_COMMON_SIMPLE_ADDRESS);
 
-  public static final io.biza.babelfish.cdr.v1.model.common.Error DEFAULT_ERROR =
-      new io.biza.babelfish.cdr.v1.model.common.Error().code("0001 – Account not able to be found")
+  public static final io.biza.babelfish.cdr.models.payloads.common.Error DEFAULT_ERROR =
+      new io.biza.babelfish.cdr.models.payloads.common.Error().code("0001 – Account not able to be found")
           .title("Invalid account").detail(UUID.randomUUID().toString());
   public static final BankingInternationalPayee DEFAULT_BANKING_INTERNATIONAL_PAYEE =
       new BankingInternationalPayee()

@@ -19,9 +19,9 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import io.biza.babelfish.cdr.enumerations.PayloadTypeBankingScheduledPaymentRecurrence;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentRecurrence;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
-import io.biza.babelfish.cdr.v1.enumerations.PayloadTypeBankingScheduledPaymentRecurrence;
-import io.biza.babelfish.cdr.v1.model.banking.BankingScheduledPaymentRecurrence;
 
 @DisplayName("BankingScheduledPaymentRecurrence V1 Tests")
 public class BankingScheduledPaymentRecurrenceV1Test {
