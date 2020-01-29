@@ -18,8 +18,6 @@ import lombok.ToString;
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-
-
 public class ResponseBankingProductById
     extends io.biza.babelfish.cdr.abstracts.responses.ResponseBankingProductById<ResponseBankingProductById> {
 }

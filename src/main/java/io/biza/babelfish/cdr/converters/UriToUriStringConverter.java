@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.util.StdConverter;
 public class UriToUriStringConverter extends StdConverter<URI, String> {
   @Override
   public String convert(URI value) {
-    if (value == null)
+    if (null == value)
       return null;
     return value.toString();
   }

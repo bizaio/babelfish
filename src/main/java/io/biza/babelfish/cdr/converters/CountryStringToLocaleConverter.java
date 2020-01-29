@@ -23,7 +23,7 @@ import io.biza.babelfish.cdr.Constants;
 public class CountryStringToLocaleConverter extends StdConverter<String, Locale> {
   @Override
   public Locale convert(String value) {
-    if (value == null)
+    if (value == null || value == "")
       return null;
     for (String twoLetterCode : Locale.getISOCountries()) {
       Locale testLocale = new Locale(Constants.DEFAULT_LOCALE, twoLetterCode);

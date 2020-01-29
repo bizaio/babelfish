@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.util.StdConverter;
 public class DateTimeStringToOffsetDateTimeConverter extends StdConverter<String, OffsetDateTime> {
   @Override
   public OffsetDateTime convert(String value) {
-    if (value == null)
+    if (value == null || value == "")
       return null;
     return OffsetDateTime.parse(value);
   }

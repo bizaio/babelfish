@@ -23,6 +23,8 @@ import io.biza.babelfish.cdr.Constants;
 public class StringToLocalDateConverter extends StdConverter<String, LocalDate> {
   @Override
   public LocalDate convert(String value) {
+    if (null == value || value == "")
+      return null;
     return LocalDate.parse(value, Constants.CDR_DATESTRING_FORMATTER);
   }
 }

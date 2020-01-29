@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.util.StdConverter;
 public class StringToCurrencyConverter extends StdConverter<String, Currency> {
   @Override
   public Currency convert(String value) {
-    if (value == null)
+    if (value == null || value == "")
       return null;
     return Currency.getInstance(value);
   }

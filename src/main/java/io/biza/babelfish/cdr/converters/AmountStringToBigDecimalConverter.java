@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.util.StdConverter;
 public class AmountStringToBigDecimalConverter extends StdConverter<String, BigDecimal> {
   @Override
   public BigDecimal convert(String value) {
-    if (value == null)
+    if (value == null || value == "")
       return null;
     return new BigDecimal(value);
   }

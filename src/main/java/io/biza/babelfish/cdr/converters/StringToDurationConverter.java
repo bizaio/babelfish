@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.util.StdConverter;
 public class StringToDurationConverter extends StdConverter<String, Duration> {
   @Override
   public Duration convert(String value) {
-    if (null == value)
+    if (null == value || value == "")
       return null;
     return Duration.parse(value);
   }

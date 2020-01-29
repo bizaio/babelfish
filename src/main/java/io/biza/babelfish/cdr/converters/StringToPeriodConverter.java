@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.util.StdConverter;
 public class StringToPeriodConverter extends StdConverter<String, Period> {
   @Override
   public Period convert(String value) {
-    if (value == null)
+    if (null == value || value == "")
       return null;
     return Period.parse(value);
   }

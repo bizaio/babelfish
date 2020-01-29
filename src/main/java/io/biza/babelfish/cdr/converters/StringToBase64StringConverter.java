@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.util.StdConverter;
 public class StringToBase64StringConverter extends StdConverter<String, String> {
   @Override
   public String convert(String value) {
-    if (value == null)
+    if (value == null || value == "")
       return null;
     return Base64.getEncoder().encodeToString(value.getBytes());
   }
