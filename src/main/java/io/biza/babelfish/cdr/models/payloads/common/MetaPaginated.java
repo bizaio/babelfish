@@ -23,14 +23,14 @@ import lombok.ToString;
 
 public class MetaPaginated extends io.biza.babelfish.cdr.abstracts.payloads.MetaPaginated<MetaPaginated> {
   @AssertTrue(message = "If totalRecords is 0 totalPages MUST be 0")
-  public boolean isZeroTotalRecordsMatchesZeroPages() {
+  private boolean isZeroTotalRecordsMatchesZeroPages() {
     return (totalRecords() != null && totalRecords() == 0)
         ? ((totalPages() != null && totalPages() == 0) ? true : false)
         : true;
   }
 
   @AssertTrue(message = "If totalPages is 0 then totalRecords should be 0")
-  public boolean isZeroTotalPagesButNotZeroRecords() {
+  private boolean isZeroTotalPagesButNotZeroRecords() {
     return (totalPages() != null && totalPages() == 0)
         ? ((totalRecords() != null && totalRecords() == 0) ? true : false)
         : true;

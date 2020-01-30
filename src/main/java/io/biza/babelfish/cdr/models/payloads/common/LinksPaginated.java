@@ -13,6 +13,7 @@ package io.biza.babelfish.cdr.models.payloads.common;
 
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.biza.babelfish.cdr.support.FormatChecker;
 
 @Valid
@@ -24,25 +25,26 @@ public class LinksPaginated
    * No, No ] First and Last Page: [ Yes, No, No, No, No ] Page not First or Last: [ Yes, Yes, Yes,
    * Yes, Yes ]
    */
+  @JsonIgnore
   @AssertTrue(message = "Previous page set but First Page not set")
-  public boolean isFirstSetWhenPrevExists() {
+  private boolean isFirstSetWhenPrevExists() {
     return prev() != null && first() == null ? false : true;
   }
 
   @AssertTrue(message = "Next page set but Last Page not set")
-  public boolean isLastSetWhenNextExists() {
+  private boolean isLastSetWhenNextExists() {
     return next() != null && last() == null ? false : true;
   }
 
   @AssertTrue(
       message = "While on first and last page (next & prev null), zero links should be defined outside of self")
-  public boolean isFirstAndLastPage() {
+  private boolean isFirstAndLastPage() {
     return (next() == null && prev() == null) ? ((first() != null || last() != null) ? false : true)
         : true;
   }
 
   @AssertTrue(message = "First Page URI should contain a parameter of page == 1")
-  public boolean isFirstPagePageParamValid() {
+  private boolean isFirstPagePageParamValid() {
     return first() != null
         ? (FormatChecker.mapifyQueryString(first()).get("page") != null
             && FormatChecker.mapifyQueryString(first()).get("page").equals("1"))
@@ -50,7 +52,7 @@ public class LinksPaginated
   }
 
   @AssertTrue(message = "Next Page URI should have a page equal to current page plus 1")
-  public boolean isNextPageParamValid() {
+  private boolean isNextPageParamValid() {
     if (self() != null && next() != null) {
       int selfPage = Integer.parseInt(FormatChecker.mapifyQueryString(self()).get("page"));
       int nextPage = Integer.parseInt(FormatChecker.mapifyQueryString(next()).get("page"));
@@ -67,7 +69,7 @@ public class LinksPaginated
   }
 
   @AssertTrue(message = "Prev Page URI should have a page equal to current page minus 1")
-  public boolean isPrevPageParamValid() {
+  private boolean isPrevPageParamValid() {
     if (self() != null && prev() != null) {
       int selfPage = Integer.parseInt(FormatChecker.mapifyQueryString(self()).get("page"));
       int prevPage = Integer.parseInt(FormatChecker.mapifyQueryString(prev()).get("page"));

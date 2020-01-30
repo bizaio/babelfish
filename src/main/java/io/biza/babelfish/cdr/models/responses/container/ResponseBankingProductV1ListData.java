@@ -9,41 +9,38 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *******************************************************************************/
-package io.biza.babelfish.cdr.abstracts.responses;
+package io.biza.babelfish.cdr.models.responses.container;
 
+import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.babelfish.cdr.abstracts.payloads.CDRResponsePaginated;
-import io.biza.babelfish.cdr.abstracts.responses.container.ResponseBankingProductListData;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductV1;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
 @Valid
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
+@Builder
+@Data
+public class ResponseBankingProductV1ListData {
 
-
-@Schema(description = "Response containing a Product List")
-public abstract class ResponseBankingProductList<T> extends CDRResponsePaginated<T> {
-  @Schema(required = true)
-  @JsonProperty("data")
+  @Schema(
+      description = "The list of products returned.  If the filter results in an empty set then this array may have no records",
+      required = true)
+  @JsonProperty("products")
   @NotNull
   @Valid
-  ResponseBankingProductListData<?> data;
+  List<BankingProductV1> products;
 
-  public ResponseBankingProductListData<?> data() {
-    return getData();
+  public List<BankingProductV1> products() {
+    return getProducts();
   }
 
-  @SuppressWarnings("unchecked")
-  public T data(ResponseBankingProductListData<?> data) {
-    setData(data);
-    return (T) this;
+  public ResponseBankingProductV1ListData products(List<BankingProductV1> products) {
+    setProducts(products);
+    return this;
   }
 }

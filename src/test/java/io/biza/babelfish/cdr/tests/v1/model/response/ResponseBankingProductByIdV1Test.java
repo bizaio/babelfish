@@ -19,7 +19,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.models.payloads.common.Links;
-import io.biza.babelfish.cdr.models.responses.ResponseBankingProductById;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingProductV1ById;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("ResponseBankingProductById V1 Tests")
@@ -35,8 +35,8 @@ public class ResponseBankingProductByIdV1Test {
   @Test
   @DisplayName("Create valid ResponseBankingProductById with empty Products")
   void createValidEmptyProductList() {
-    ResponseBankingProductById myResponse =
-        new ResponseBankingProductById().links(new Links().self(ModelConstants.DEFAULT_SELF_URI))
+    ResponseBankingProductV1ById myResponse =
+        new ResponseBankingProductV1ById().links(new Links().self(ModelConstants.DEFAULT_SELF_URI))
             .data(ModelConstants.DEFAULT_BANKING_PRODUCT_DETAIL_V1);
     assertTrue(validator.validate(myResponse).isEmpty(), validator.validate(myResponse).toString());
   }

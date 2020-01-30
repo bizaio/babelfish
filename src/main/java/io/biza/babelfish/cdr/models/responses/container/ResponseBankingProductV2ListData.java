@@ -11,15 +11,36 @@
  *******************************************************************************/
 package io.biza.babelfish.cdr.models.responses.container;
 
+import java.util.List;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductV2;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Valid
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
+@Builder
+@Data
+public class ResponseBankingProductV2ListData {
 
+  @Schema(
+      description = "The list of products returned.  If the filter results in an empty set then this array may have no records",
+      required = true)
+  @JsonProperty("products")
+  @NotNull
+  @Valid
+  List<BankingProductV2> products;
 
-public class ResponseBankingProductListData extends
-    io.biza.babelfish.cdr.abstracts.responses.container.ResponseBankingProductListData<ResponseBankingProductListData> {
+  public List<BankingProductV2> products() {
+    return getProducts();
+  }
+
+  public ResponseBankingProductV2ListData products(List<BankingProductV2> products) {
+    setProducts(products);
+    return this;
+  }
 }
