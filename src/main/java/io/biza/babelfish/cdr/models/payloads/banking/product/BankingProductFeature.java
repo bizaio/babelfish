@@ -15,6 +15,7 @@ import java.util.Arrays;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.babelfish.cdr.enumerations.BankingProductFeatureType;
+import io.biza.babelfish.cdr.support.AssertTrueBabelfish;
 import io.biza.babelfish.cdr.support.FormatChecker;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -22,10 +23,12 @@ import lombok.ToString;
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class BankingProductFeature
-    extends io.biza.babelfish.cdr.abstracts.payloads.banking.product.BankingProductFeature<BankingProductFeature> {
+public class BankingProductFeature extends
+    io.biza.babelfish.cdr.abstracts.payloads.banking.product.BankingProductFeature<BankingProductFeature> {
 
-  @AssertTrue(message = "Additional Information must be populated when Feature type is OTHER")
+  @AssertTrueBabelfish(
+      message = "Additional Information must be populated when Feature type is OTHER",
+      fields = {"additionalValue"})
   private boolean isInfoDefined() {
     return FormatChecker.isDefined(featureType())
         ? (Arrays.asList(new BankingProductFeatureType[] {BankingProductFeatureType.OTHER})
@@ -33,8 +36,9 @@ public class BankingProductFeature
         : true;
   }
 
-  @AssertTrue(
-      message = "Additional Value should be null or an integer when Feature Type is ADDITIONAL_CARDS")
+  @AssertTrueBabelfish(
+      message = "Additional Value should be null or an integer when Feature Type is ADDITIONAL_CARDS",
+      fields = {"additionalValue"})
   private boolean isValueNullOrInteger() {
     return FormatChecker.isDefined(featureType()) ? (Arrays
         .asList(new BankingProductFeatureType[] {BankingProductFeatureType.ADDITIONAL_CARDS})
@@ -45,8 +49,9 @@ public class BankingProductFeature
         : true;
   }
 
-  @AssertTrue(
-      message = "Additional Value must be populated with a String when Feature type is CARD_ACCESS, INSURANCE, COMPLEMENTARY_PRODUCT_DISCOUNTS, LOYALTY_PROGRAM, DIGITAL_WALLET or NOTIFICATIONS")
+  @AssertTrueBabelfish(
+      message = "Additional Value must be populated with a String when Feature type is CARD_ACCESS, INSURANCE, COMPLEMENTARY_PRODUCT_DISCOUNTS, LOYALTY_PROGRAM, DIGITAL_WALLET or NOTIFICATIONS",
+      fields = {"additionalValue"})
   private boolean isValueString() {
     return FormatChecker.isDefined(featureType())
         ? (Arrays
@@ -58,8 +63,9 @@ public class BankingProductFeature
         : true;
   }
 
-  @AssertTrue(
-      message = "Additional Value must be an Duration String when Feature type is INTEREST_FREE or INTEREST_FREE_TRANSFERS")
+  @AssertTrueBabelfish(
+      message = "Additional Value must be an Duration String when Feature type is INTEREST_FREE or INTEREST_FREE_TRANSFERS",
+      fields = {"additionalValue"})
   private boolean isValueDuration() {
     return FormatChecker.isDefined(featureType())
         ? (Arrays.asList(new BankingProductFeatureType[] {BankingProductFeatureType.INTEREST_FREE,
@@ -70,8 +76,9 @@ public class BankingProductFeature
         : true;
   }
 
-  @AssertTrue(
-      message = "Additional Value must be a Positive Integer when Feature type is FREE_TXNS or BONUS_REWARDS")
+  @AssertTrueBabelfish(
+      message = "Additional Value must be a Positive Integer when Feature type is FREE_TXNS or BONUS_REWARDS",
+      fields = {"additionalValue"})
   private boolean isValuePositiveInteger() {
     return FormatChecker.isDefined(featureType())
         ? (Arrays.asList(new BankingProductFeatureType[] {BankingProductFeatureType.FREE_TXNS,
@@ -81,8 +88,9 @@ public class BankingProductFeature
         : true;
   }
 
-  @AssertTrue(
-      message = "Additional Value must be an Amount String when Feature type is FREE_TXNS_ALLOWANCE")
+  @AssertTrueBabelfish(
+      message = "Additional Value must be an Amount String when Feature type is FREE_TXNS_ALLOWANCE",
+      fields = {"additionalValue"})
   private boolean isValueAmount() {
     return FormatChecker.isDefined(featureType()) ? (Arrays
         .asList(new BankingProductFeatureType[] {BankingProductFeatureType.FREE_TXNS_ALLOWANCE})
@@ -93,8 +101,9 @@ public class BankingProductFeature
         : true;
   }
 
-  @AssertTrue(
-      message = "Additional Value should be null when Feature Type is UNLIMITED_TXNS, OFFSET, OVERDRAFT, REDRAW, BALANCE_TRANSFERS, DIGITAL_BANKING, NPP_PAYID, NPP_ENABLED, DONATE_INTEREST, OTHER")
+  @AssertTrueBabelfish(
+      message = "Additional Value should be null when Feature Type is UNLIMITED_TXNS, OFFSET, OVERDRAFT, REDRAW, BALANCE_TRANSFERS, DIGITAL_BANKING, NPP_PAYID, NPP_ENABLED, DONATE_INTEREST, OTHER",
+      fields = {"additionalValue"})
   private boolean isValueStringNull() {
     return FormatChecker
         .isDefined(featureType())

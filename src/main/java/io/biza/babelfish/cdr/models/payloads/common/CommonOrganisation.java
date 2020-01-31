@@ -15,6 +15,7 @@ import java.util.Arrays;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.babelfish.cdr.enumerations.CommonOrganisationType;
+import io.biza.babelfish.cdr.support.AssertTrueBabelfish;
 import io.biza.babelfish.cdr.support.FormatChecker;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -24,10 +25,11 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 
 
-public class CommonOrganisation
-    extends io.biza.babelfish.cdr.abstracts.payloads.common.organisation.CommonOrganisation<CommonOrganisation> {
+public class CommonOrganisation extends
+    io.biza.babelfish.cdr.abstracts.payloads.common.organisation.CommonOrganisation<CommonOrganisation> {
 
-  @AssertTrue(message = "ACN must be populated when organisationType is COMPANY")
+  @AssertTrueBabelfish(message = "ACN must be populated when organisationType is COMPANY",
+      fields = {"acn"})
   private boolean isAcnPopulated() {
     return FormatChecker.isDefined(organisationType())
         ? (Arrays.asList(new CommonOrganisationType[] {CommonOrganisationType.COMPANY})
@@ -35,12 +37,13 @@ public class CommonOrganisation
         : true;
   }
 
-  @AssertTrue(message = "ACN when defined must pass ASIC checksum checks")
+  @AssertTrueBabelfish(message = "ACN when defined must pass ASIC checksum checks",
+      fields = {"acn"})
   private boolean isAcnValidated() {
     return FormatChecker.isDefined(acn()) ? FormatChecker.isAcn(acn()) : true;
   }
 
-  @AssertTrue(message = "ABN when defined must pass ABR checksum checks")
+  @AssertTrueBabelfish(message = "ABN when defined must pass ABR checksum checks", fields = {"abn"})
   private boolean isAbnValidated() {
     return FormatChecker.isDefined(abn()) ? FormatChecker.isAbn(abn()) : true;
   }

@@ -16,6 +16,7 @@ import java.net.URI;
 import java.time.Period;
 import java.util.List;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -59,7 +60,7 @@ public abstract class BankingProductDepositRate<T> {
   }
 
   @Schema(description = "The rate to be applied", required = true, type = "string")
-  @NotNull
+  @NotNull(message = "Rate to be applied is required")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   @JsonProperty("rate")

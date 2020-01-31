@@ -17,6 +17,7 @@ import java.time.Period;
 import java.util.Currency;
 import java.util.List;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -46,7 +47,7 @@ import lombok.ToString;
 @Schema(description = "Banking Product Fee Definition")
 public abstract class BankingProductFee<T> {
   @Schema(description = "Name of the fee", required = true)
-  @NotNull
+  @NotEmpty(message = "Name is Required")
   @JsonProperty("name")
   String name;
 

@@ -15,6 +15,7 @@ import java.util.Arrays;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.babelfish.cdr.enumerations.BankingProductLendingRateType;
+import io.biza.babelfish.cdr.support.AssertTrueBabelfish;
 import io.biza.babelfish.cdr.support.FormatChecker;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -24,8 +25,9 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 public class BankingProductLendingRate extends
     io.biza.babelfish.cdr.abstracts.payloads.banking.product.BankingProductLendingRate<BankingProductLendingRate> {
-  @AssertTrue(
-      message = "Additional Value must be an Duration String when Lending Rate Type INTRODUCTORY or FIXED")
+  @AssertTrueBabelfish(
+      message = "Additional Value must be an Duration String when Lending Rate Type INTRODUCTORY or FIXED",
+      fields = {"additionalValue"})
   private boolean isValueDuration() {
     return FormatChecker.isDefined(lendingRateType())
         ? (Arrays.asList(new BankingProductLendingRateType[] {
@@ -37,8 +39,9 @@ public class BankingProductLendingRate extends
         : true;
   }
 
-  @AssertTrue(
-      message = "Additional Value must be String when Lending Rate Type is DISCOUNT, PENALTY, FLOATING, MARKET_LINKED, BUNDLE_DISCOUNT_FIXED or BUNDLE_DISCOUNT_VARIABLE")
+  @AssertTrueBabelfish(
+      message = "Additional Value must be String when Lending Rate Type is DISCOUNT, PENALTY, FLOATING, MARKET_LINKED, BUNDLE_DISCOUNT_FIXED or BUNDLE_DISCOUNT_VARIABLE",
+      fields = {"additionalValue"})
   private boolean isValueString() {
     return FormatChecker
         .isDefined(lendingRateType())
@@ -52,8 +55,9 @@ public class BankingProductLendingRate extends
             : true;
   }
 
-  @AssertTrue(
-      message = "Additional Value should be null when Lending Rate Type is VARIABLE, CASH_ADVANCE or PURCHASE")
+  @AssertTrueBabelfish(
+      message = "Additional Value should be null when Lending Rate Type is VARIABLE, CASH_ADVANCE or PURCHASE",
+      fields = {"additionalValue"})
   private boolean isValueStringNull() {
     return FormatChecker.isDefined(lendingRateType())
         ? (Arrays

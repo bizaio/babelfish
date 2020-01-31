@@ -15,6 +15,7 @@ import java.util.Arrays;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.babelfish.cdr.enumerations.BankingProductDepositRateType;
+import io.biza.babelfish.cdr.support.AssertTrueBabelfish;
 import io.biza.babelfish.cdr.support.FormatChecker;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -22,12 +23,11 @@ import lombok.ToString;
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-
-
 public class BankingProductDepositRate extends
     io.biza.babelfish.cdr.abstracts.payloads.banking.product.BankingProductDepositRate<BankingProductDepositRate> {
-  @AssertTrue(
-      message = "Additional Value must be a Duration String when Fee type is FIXED or INTRODUCTORY")
+  @AssertTrueBabelfish(
+      message = "Additional Value must be a Duration String when Fee type is FIXED or INTRODUCTORY",
+      fields = {"additionalValue"})
   private boolean isValueDuration() {
     return FormatChecker.isDefined(depositRateType())
         ? (Arrays.asList(new BankingProductDepositRateType[] {BankingProductDepositRateType.FIXED,
@@ -38,8 +38,9 @@ public class BankingProductDepositRate extends
         : true;
   }
 
-  @AssertTrue(
-      message = "Additional Value must String when Deposit Rate Type is BONUS, BUNDLE_BONUS, FLOATING or MARKET_LINKED")
+  @AssertTrueBabelfish(
+      message = "Additional Value must String when Deposit Rate Type is BONUS, BUNDLE_BONUS, FLOATING or MARKET_LINKED",
+      fields = {"additionalValue"})
   private boolean isValueString() {
     return FormatChecker.isDefined(depositRateType())
         ? (Arrays.asList(new BankingProductDepositRateType[] {BankingProductDepositRateType.BONUS,
@@ -50,7 +51,9 @@ public class BankingProductDepositRate extends
         : true;
   }
 
-  @AssertTrue(message = "Additional Value should be null when Deposit Rate Type is VARIABLE")
+  @AssertTrueBabelfish(
+      message = "Additional Value should be null when Deposit Rate Type is VARIABLE",
+      fields = {"additionalValue"})
   private boolean isValueStringNull() {
     return FormatChecker.isDefined(depositRateType())
         ? (Arrays

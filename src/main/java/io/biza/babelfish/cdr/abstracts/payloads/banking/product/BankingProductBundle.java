@@ -15,6 +15,7 @@ import java.net.URI;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -36,8 +37,7 @@ import lombok.ToString;
 @Schema(description = "Banking Product Bundle Definition", name = "BankingProductBundle")
 public abstract class BankingProductBundle<T> {
   @Schema(description = "Name of the bundle", required = true)
-  @NotNull
-  @NotBlank
+  @NotEmpty(message = "Name is Required")
   @Valid
   @JsonProperty("name")
   String name;
@@ -53,8 +53,7 @@ public abstract class BankingProductBundle<T> {
   }
 
   @Schema(description = "Description of the bundle", required = true)
-  @NotNull
-  @NotBlank
+  @NotEmpty(message = "Description is Required")
   @Valid
   @JsonProperty("description")
   String description;

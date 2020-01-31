@@ -15,6 +15,8 @@ import java.util.Arrays;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.babelfish.cdr.enumerations.BankingProductFeeType;
+import io.biza.babelfish.cdr.support.AssertTrueBabelfish;
+import io.biza.babelfish.cdr.support.BabelfishValidationPayload;
 import io.biza.babelfish.cdr.support.FormatChecker;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -22,9 +24,12 @@ import lombok.ToString;
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class BankingProductFee
-    extends io.biza.babelfish.cdr.abstracts.payloads.banking.product.BankingProductFee<BankingProductFee> {
-  @AssertTrue(message = "Additional Value must be a Duration String when Fee type is PERIODIC")
+public class BankingProductFee extends
+    io.biza.babelfish.cdr.abstracts.payloads.banking.product.BankingProductFee<BankingProductFee> {
+
+  @AssertTrueBabelfish(
+      message = "Additional Value must be a Duration String when Fee type is PERIODIC",
+      fields = {"additionalValue"})
   private boolean isValueDuration() {
     return FormatChecker.isDefined(feeType())
         ? (Arrays.asList(new BankingProductFeeType[] {BankingProductFeeType.PERIODIC})
@@ -35,14 +40,17 @@ public class BankingProductFee
         : true;
   }
 
-  @AssertTrue(message = "One of amount, balanceRate, transactionRate or accruedRate is mandatory")
+  @AssertTrueBabelfish(
+      message = "One of amount, balanceRate, transactionRate or accruedRate is MANDATORY",
+      fields = {"amount", "balanceRate", "accruedRate", "transactionRate"})
   private boolean isAmountOrRateSet() {
     return FormatChecker.isDefined(amount()) || FormatChecker.isDefined(balanceRate())
         || FormatChecker.isDefined(transactionRate()) || FormatChecker.isDefined(accruedRate());
   }
 
-  @AssertTrue(
-      message = "Additional Value should be null when Fee Type is TRANSACTION, WITHDRAWAL, DEPOSIT, PAYMENT, PURCHASE, EVENT, UPFRONT or EXIT")
+  @AssertTrueBabelfish(
+      message = "Additional Value should be null when Fee Type is TRANSACTION, WITHDRAWAL, DEPOSIT, PAYMENT, PURCHASE, EVENT, UPFRONT or EXIT",
+      fields = {"additionalValue"})
   private boolean isValueStringNull() {
     return FormatChecker.isDefined(feeType()) ? (Arrays
         .asList(new BankingProductFeeType[] {BankingProductFeeType.TRANSACTION,

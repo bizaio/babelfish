@@ -15,6 +15,7 @@ import java.util.Arrays;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import io.biza.babelfish.cdr.enumerations.BankingProductConstraintType;
+import io.biza.babelfish.cdr.support.AssertTrueBabelfish;
 import io.biza.babelfish.cdr.support.FormatChecker;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -26,8 +27,9 @@ import lombok.ToString;
 
 public class BankingProductConstraint
     extends io.biza.babelfish.cdr.abstracts.payloads.banking.product.BankingProductConstraint<BankingProductConstraint> {
-  @AssertTrue(
-      message = "Additional Value must be an Amount String when Eligibility type is MIN_BALANCE, MAX_BALANCE, OPENING_BALANCE, MAX_LIMIT or MIN_LIMIT")
+  @AssertTrueBabelfish(
+      message = "Additional Value must be an Amount String when Eligibility type is MIN_BALANCE, MAX_BALANCE, OPENING_BALANCE, MAX_LIMIT or MIN_LIMIT",
+      fields = { "additionalValue" })
   private boolean isValueAmount() {
     return FormatChecker.isDefined(constraintType()) ? (Arrays
         .asList(new BankingProductConstraintType[] {BankingProductConstraintType.MIN_BALANCE,
