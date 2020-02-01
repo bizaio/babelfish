@@ -16,6 +16,8 @@ import java.net.URI;
 import java.time.Period;
 import java.util.List;
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -64,6 +66,8 @@ public abstract class BankingProductDepositRate<T> {
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   @JsonProperty("rate")
+  @Min(0)
+  @Max(2)
   BigDecimal rate;
 
   public BigDecimal rate() {
