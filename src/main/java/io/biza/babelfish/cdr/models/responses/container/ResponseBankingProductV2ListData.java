@@ -19,8 +19,6 @@ import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductV2;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Valid
 @Builder

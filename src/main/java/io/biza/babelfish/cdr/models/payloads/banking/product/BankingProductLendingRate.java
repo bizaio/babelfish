@@ -13,7 +13,6 @@ package io.biza.babelfish.cdr.models.payloads.banking.product;
 
 import java.util.Arrays;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import io.biza.babelfish.cdr.enumerations.BankingProductLendingRateType;
 import io.biza.babelfish.cdr.support.AssertTrueBabelfish;
 import io.biza.babelfish.cdr.support.FormatChecker;

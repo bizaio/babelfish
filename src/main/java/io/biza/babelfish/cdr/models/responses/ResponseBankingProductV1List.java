@@ -11,19 +11,13 @@
  *******************************************************************************/
 package io.biza.babelfish.cdr.models.responses;
 
-import java.util.List;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.babelfish.cdr.abstracts.payloads.CDRResponsePaginated;
-import io.biza.babelfish.cdr.abstracts.payloads.banking.product.BankingProduct;
-import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductV1;
 import io.biza.babelfish.cdr.models.responses.container.ResponseBankingProductV1ListData;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 @Valid
