@@ -33,8 +33,8 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Response containing Customer Detail", name = "ResponseCommonCustomerDetail")
-public class ResponseCommonCustomerDetail extends CDRResponseV1 {
+@Schema(description = "Response containing Customer Detail", name = "ResponseCommonCustomerDetailV1")
+public class ResponseCommonCustomerDetailV1 extends CDRResponseV1 {
   @Schema(required = true)
   @JsonProperty("data")
   @NotNull

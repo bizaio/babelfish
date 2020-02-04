@@ -25,6 +25,6 @@ import lombok.ToString;
 @Builder
 @Data
 @NoArgsConstructor
-@Schema(description = "Meta Detail")
+@Schema(description = "Meta Detail", name = "MetaV1")
 public class MetaV1 {
 }

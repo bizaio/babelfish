@@ -37,7 +37,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "BankingScheduledPaymentRecurrenceIntervalSchedule",
+@Schema(name = "BankingScheduledPaymentRecurrenceIntervalScheduleV1",
     description = "Indicates that the schedule of payments is defined by a series of intervals. Mandatory if recurrenceUType is set to intervalSchedule")
 public class BankingScheduledPaymentRecurrenceIntervalScheduleV1 {
   @Schema(

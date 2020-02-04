@@ -35,7 +35,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Banking Product Card Art", name = "BankingProductCardArt")
+@Schema(description = "Banking Product Card Art", name = "BankingProductCardArtV1")
 public class BankingProductCardArtV1 {
   @Schema(description = "Display label for the specific image", required = true)
   @NotNull

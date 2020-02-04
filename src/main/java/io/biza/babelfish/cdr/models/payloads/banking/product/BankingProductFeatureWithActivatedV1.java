@@ -27,7 +27,7 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
-@Schema(name = "BankingAccountProductFeature", description = "Banking Account Product Feature",
+@Schema(name = "BankingAccountProductFeatureV1", description = "Banking Account Product Feature",
     allOf = {BankingProductFeatureV1.class})
 public class BankingProductFeatureWithActivatedV1 extends BankingProductFeatureV1 {
   @Schema(

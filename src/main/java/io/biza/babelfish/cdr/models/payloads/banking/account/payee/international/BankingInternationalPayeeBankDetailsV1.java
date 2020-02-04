@@ -36,7 +36,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "International Payee Bank Details")
+@Schema(description = "International Payee Bank Details", name = "BankingInternationalPayeeBankDetailsV1")
 public class BankingInternationalPayeeBankDetailsV1 {
   @Schema(
       description = "Country of the recipient institution. A valid [ISO 3166 Alpha-3](https://www.iso.org/iso-3166-country-codes.html) country code",

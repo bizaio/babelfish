@@ -29,7 +29,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Error Information")
+@Schema(description = "Error Information", name = "ErrorV1")
 public class ErrorV1 {
   @Schema(description = "Must be one of the following: 0001 – Account not able to be found",
       required = true)

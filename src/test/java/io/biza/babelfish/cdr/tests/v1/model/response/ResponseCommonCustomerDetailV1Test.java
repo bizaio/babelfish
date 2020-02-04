@@ -19,7 +19,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.responses.ResponseCommonCustomerDetail;
+import io.biza.babelfish.cdr.models.responses.ResponseCommonCustomerDetailV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("ResponseCommonCustomerDetail V1 Tests")
@@ -35,14 +35,14 @@ public class ResponseCommonCustomerDetailV1Test {
   @Test
   @DisplayName("Create valid ResponseCommonCustomerDetail")
   void responseCommonCustomerDetail() {
-    ResponseCommonCustomerDetail data = ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL;
+    ResponseCommonCustomerDetailV1 data = ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL;
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
   @DisplayName("ResponseCommonCustomerDetail Mandatory Fields")
   void responseCommonCustomerDetailMandatoryFields() {
-    ResponseCommonCustomerDetail data = new ResponseCommonCustomerDetail();
+    ResponseCommonCustomerDetailV1 data = new ResponseCommonCustomerDetailV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.links(ModelConstants.DEFAULT_LINKS);

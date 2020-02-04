@@ -37,7 +37,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(
-    description = "Australian address formatted according to the file format defined by the [PAF file format](https://auspost.com.au/content/dam/auspost_corp/media/documents/australia-post-data-guide.pdf)")
+    description = "Australian address formatted according to the file format defined by the [PAF file format](https://auspost.com.au/content/dam/auspost_corp/media/documents/australia-post-data-guide.pdf)",
+    name = "CommonPAFAddressV1"
+    )
 public class CommonPAFAddressV1 {
   @Schema(
       description = "Unique identifier for an address as defined by Australia Post.  Also known as Delivery Point Identifier")
@@ -127,7 +129,7 @@ public class CommonPAFAddressV1 {
       type = "string")
   @JsonProperty("postalDeliveryType")
   AddressPAFPostalDeliveryType postalDeliveryType;
-  
+
   @Schema(description = "Postal delivery number if the address is a postal delivery type")
   @JsonProperty("postalDeliveryNumber")
   Integer postalDeliveryNumber;

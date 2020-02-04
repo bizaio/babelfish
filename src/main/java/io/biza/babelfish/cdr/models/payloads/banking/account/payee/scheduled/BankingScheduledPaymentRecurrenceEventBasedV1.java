@@ -30,7 +30,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(
-    description = "Indicates that the schedule of payments is defined according to an external event that cannot be predetermined. Mandatory if recurrenceUType is set to eventBased", name = "BankingScheduledPaymentRecurrenceEventBased")
+    description = "Indicates that the schedule of payments is defined according to an external event that cannot be predetermined. Mandatory if recurrenceUType is set to eventBased",
+    name = "BankingScheduledPaymentRecurrenceEventBasedV1")
 public class BankingScheduledPaymentRecurrenceEventBasedV1 {
   @Schema(
       description = "Description of the event and conditions that will result in the payment. Expected to be formatted for display to a customer",

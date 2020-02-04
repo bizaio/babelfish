@@ -32,7 +32,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Person definition in detail")
+@Schema(description = "Person definition in detail", name = "CommonPersonDetailV1")
 public class CommonPersonDetailV1 extends io.biza.babelfish.cdr.abstracts.models.common.CommonPersonDetailV1 {
   
   @Schema(

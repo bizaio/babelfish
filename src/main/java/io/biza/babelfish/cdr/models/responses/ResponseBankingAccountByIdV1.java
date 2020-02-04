@@ -33,7 +33,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Response containing a single Banking Account Detail")
+@Schema(description = "Response containing a single Banking Account Detail", name = "ResponseBankingAccountByIdV1")
 public class ResponseBankingAccountByIdV1 extends CDRResponseV1 {
   @Schema(required = true)
   @JsonProperty("data")

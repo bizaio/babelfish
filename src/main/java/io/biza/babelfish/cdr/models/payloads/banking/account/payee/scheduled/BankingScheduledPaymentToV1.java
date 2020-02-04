@@ -35,7 +35,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(
-    description = "Object containing details of the destination of the payment. Used to specify a variety of payment destination types", name = "BankingScheduledPaymentTo")
+    description = "Object containing details of the destination of the payment. Used to specify a variety of payment destination types",
+    name = "BankingScheduledPaymentToV1")
 public class BankingScheduledPaymentToV1 {
   @Schema(
       description = "The type of object provided that specifies the destination of the funds for the payment.",
@@ -68,7 +69,7 @@ public class BankingScheduledPaymentToV1 {
   @JsonProperty("international")
   @Valid
   BankingInternationalPayeeV1 international;
-  
+
   @AssertTrue(
       message = "One and only one of accountId, payeeId, domestic, biller, international should be populated based on type")
   private boolean isUTypePopulated() {

@@ -31,7 +31,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Object containing a list of BankingTransaction objects")
+@Schema(description = "Object containing a list of BankingTransaction objects", name = "ResponseBankingTransactionListDataV1")
 public class ResponseBankingTransactionListDataV1 {
   @Schema(description = "The list of transactions", required = true)
   @JsonProperty("transactions")

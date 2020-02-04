@@ -38,7 +38,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Eligibility criteria to obtain a particular banking product", name = "BankingProductEligibility")
+@Schema(description = "Eligibility criteria to obtain a particular banking product", name = "BankingProductEligibilityV1")
 public class BankingProductEligibilityV1 {
   @Schema(
       description = "The type of eligibility criteria described.  See the next section for an overview of valid values and their meaning",

@@ -22,20 +22,19 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Valid
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(
-    description = "Object containing either a CommonPerson or CommonOrganisation object defineed by a type", name = "ResponseCommonCustomerData")
-public class ResponseCommonCustomerDataV1 {
+    description = "Object containing either a CommonPerson or CommonOrganisation object defineed by a type", name = "ResponseCommonCustomerDataV1")
+public class ResponseCommonCustomerDataV1 extends io.biza.babelfish.cdr.abstracts.responses.container.ResponseCommonCustomerDataV1 {
   @Schema(description = "The type of customer object that is present", required = true)
   @JsonProperty("customerUType")
   @NotNull
@@ -50,22 +49,4 @@ public class ResponseCommonCustomerDataV1 {
   @JsonProperty("organisation")
   public CommonOrganisationV1 organisation;
   
-  @AssertTrue(message = "Only person should be populated when customer type is set to PERSON")
-  private boolean isPersonPopulated() {
-    if (type() != null && type().equals(PayloadTypeCustomer.PERSON)) {
-      return person() != null && organisation() == null;
-    } else {
-      return true;
-    }
-  }
-
-  @AssertTrue(
-      message = "Only organisation should be populated when customer type is set to ORGANISATION")
-  private boolean isOrganisationPopulated() {
-    if (type() != null && type().equals(PayloadTypeCustomer.ORGANISATION)) {
-      return organisation() != null && person() == null;
-    } else {
-      return true;
-    }
-  }
 }

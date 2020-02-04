@@ -38,7 +38,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "A single Discovery Status entry", name = "CommonDiscoveryStatus")
+@Schema(description = "A single Discovery Status entry", name = "CommonDiscoveryStatusV1")
 public class CommonDiscoveryStatusV1 {
   @Schema(
       description = "Enumeration with values. OK (implementation is fully functional). PARTIAL_FAILURE (one or more end points are unexpectedly unavailable). UNAVAILABLE (the full implementation is unexpectedly unavailable). SCHEDULED_OUTAGE (an advertised outage is in effect)",

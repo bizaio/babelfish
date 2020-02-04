@@ -27,7 +27,7 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-@Schema(description = "Paginated Meta Details")
+@Schema(description = "Paginated Meta Details", name = "MetaPaginatedV1")
 public class MetaPaginatedV1 {
   @Schema(description = "The total number of records in the full set.", required = true)
   @JsonProperty("totalRecords")

@@ -33,7 +33,7 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode
-@Schema(description = "Paginated Links")
+@Schema(description = "Paginated Links", name = "LinksPaginatedV1")
 public class LinksPaginatedV1 {
 
   @Schema(description = "Fully qualified link that generated the current response document",

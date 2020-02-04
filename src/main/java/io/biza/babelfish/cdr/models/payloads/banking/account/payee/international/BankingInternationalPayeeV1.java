@@ -29,7 +29,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "International Payee Beneficiary and Bank Details", name = "BankingInternationalPayee")
+@Schema(description = "International Payee Beneficiary and Bank Details", name = "BankingInternationalPayeeV1")
 public class BankingInternationalPayeeV1 {
   @Schema(required = true)
   @NotNull

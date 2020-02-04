@@ -42,7 +42,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Banking Transaction Brief Definition", name = "BankingTransaction")
+@Schema(description = "Banking Transaction Brief Definition", name = "BankingTransactionV1")
 public class BankingTransactionV1 extends io.biza.babelfish.cdr.abstracts.models.banking.BankingTransactionV1 {
   @Schema(description = "ID of the account for which transactions are provided", required = true)
   @NotNull

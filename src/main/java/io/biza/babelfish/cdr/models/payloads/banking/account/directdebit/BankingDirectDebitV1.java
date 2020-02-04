@@ -38,7 +38,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Representation of a Direct Debit Authorisation", name = "BankingDirectDebit")
+@Schema(description = "Representation of a Direct Debit Authorisation", name = "BankingDirectDebitV1")
 public class BankingDirectDebitV1 {
   @Schema(description = "A unique ID of the account adhering to the standards for ID permanence.",
       required = true)

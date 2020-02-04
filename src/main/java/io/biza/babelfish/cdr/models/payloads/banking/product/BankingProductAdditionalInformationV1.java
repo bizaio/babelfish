@@ -33,7 +33,8 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Object that contains links to additional information on specific topics", name = "BankingProductAdditionalInformation")
+@Schema(description = "Object that contains links to additional information on specific topics",
+    name = "BankingProductAdditionalInformationV1")
 public class BankingProductAdditionalInformationV1 {
   @Schema(description = "General overview of the product", type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)

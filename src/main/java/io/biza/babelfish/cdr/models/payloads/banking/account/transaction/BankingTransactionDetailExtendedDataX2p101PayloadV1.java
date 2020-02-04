@@ -29,7 +29,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Banking Transaction Detail X2P101 Payload", name = "BankingTransactionDetailExtendedDataX2p101Payload")
+@Schema(description = "Banking Transaction Detail X2P101 Payload", name = "BankingTransactionDetailExtendedDataX2p101PayloadV1")
 public class BankingTransactionDetailExtendedDataX2p101PayloadV1 {
   @Schema(
       description = "An extended string description. Only present if specified by the extensionUType field",

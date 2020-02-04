@@ -42,7 +42,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Organisation Definition in Detail", name = "CommonOrganisationDetail")
+@Schema(description = "Organisation Definition in Detail", name = "CommonOrganisationDetailV1")
 public class CommonOrganisationDetail extends io.biza.babelfish.cdr.abstracts.models.common.CommonOrganisationDetailV1 {
   
   @Schema(

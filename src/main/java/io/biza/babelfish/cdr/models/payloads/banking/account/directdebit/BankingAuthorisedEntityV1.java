@@ -28,7 +28,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Authorised Entity details", name = "BankingAuthorisedEntity")
+@Schema(description = "Authorised Entity details", name = "BankingAuthorisedEntityV1")
 public class BankingAuthorisedEntityV1 {
   @Schema(
       description = "Description of the authorised entity derived from previously executed direct debits")

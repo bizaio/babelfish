@@ -32,7 +32,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Defines the criteria and conditions for which a rate applies", name = "BankingProductRateTier")
+@Schema(description = "Defines the criteria and conditions for which a rate applies", name = "BankingProductRateTierV1")
 public class BankingProductRateTierV1 {
   @Schema(description = "A display name for the tier", required = true)
   @NotNull

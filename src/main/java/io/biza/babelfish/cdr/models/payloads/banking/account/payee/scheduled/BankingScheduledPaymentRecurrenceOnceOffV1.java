@@ -35,7 +35,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(
-    description = "Indicates that the payment is a once off payment on a specific future date. Mandatory if recurrenceUType is set to onceOff", name = "BankingScheduledPaymentRecurrenceOnceOff")
+    description = "Indicates that the payment is a once off payment on a specific future date. Mandatory if recurrenceUType is set to onceOff",
+    name = "BankingScheduledPaymentRecurrenceOnceOffV1")
 public class BankingScheduledPaymentRecurrenceOnceOffV1 {
   @Schema(description = "The scheduled date for the once off payment", required = true,
       type = "string", format = "date")

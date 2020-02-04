@@ -39,7 +39,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Banking Product Detailed Information", allOf = {BankingProductV2.class}, name = "BankingProductDetail")
+@Schema(description = "Banking Product Detailed Information", name = "BankingProductDetailV2")
 public class BankingProductDetailV2 {
   
   @Schema(

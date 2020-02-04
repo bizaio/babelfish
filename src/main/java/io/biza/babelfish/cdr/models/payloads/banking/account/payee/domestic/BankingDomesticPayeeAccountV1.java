@@ -29,7 +29,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Domestic Payment Payee Details")
+@Schema(description = "Domestic Payment Payee Details", name = "BankingDomesticPayeeAccountV1")
 public class BankingDomesticPayeeAccountV1 {
   @Schema(description = "Name of the account to pay to")
   @JsonProperty("accountName")

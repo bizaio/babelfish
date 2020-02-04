@@ -35,7 +35,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Banking Product Bundle Definition", name = "BankingProductBundle")
+@Schema(description = "Banking Product Bundle Definition", name = "BankingProductBundleV1")
 public class BankingProductBundleV1 {
   @Schema(description = "Name of the bundle", required = true)
   @NotEmpty(message = "Name is Required")

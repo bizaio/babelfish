@@ -39,7 +39,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Banking Payee Detailed Information", name = "BankingPayeeDetail")
+@Schema(description = "Banking Payee Detailed Information", name = "BankingPayeeDetailV1")
 public class BankingPayeeDetailV1 extends io.biza.babelfish.cdr.abstracts.models.banking.BankingPayeeDetailV1 {
   
   @Schema(description = "ID of the payee adhering to the rules of ID permanence", required = true)

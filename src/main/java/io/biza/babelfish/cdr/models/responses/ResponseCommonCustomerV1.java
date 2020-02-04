@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(
-    description = "Response containing a data object with customer details of either PERSON or ORGANISATION object", name = "ResponseCommonCustomer")
+    description = "Response containing a data object with customer details of either PERSON or ORGANISATION object", name = "ResponseCommonCustomerV1")
 public class ResponseCommonCustomerV1 extends CDRResponseV1 {
   @Schema(required = true)
   @JsonProperty("data")

@@ -33,7 +33,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "ResponseCommonDiscoveryStatus", description = "Common Discovery Status")
+@Schema(name = "ResponseCommonDiscoveryStatusV1", description = "Common Discovery Status")
 public class ResponseCommonDiscoveryStatusV1 extends CDRResponseV1 {
   @Schema(required = true)
   @JsonProperty("data")

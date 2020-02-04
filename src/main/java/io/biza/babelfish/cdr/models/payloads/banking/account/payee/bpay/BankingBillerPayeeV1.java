@@ -30,7 +30,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Representation of a BPAY Payee", name = "BankingBillerPayee")
+@Schema(description = "Representation of a BPAY Payee", name = "BankingBillerPayeeV1")
 public class BankingBillerPayeeV1 {
   @Schema(description = "BPAY Biller Code of the Biller", required = true)
   @NotNull

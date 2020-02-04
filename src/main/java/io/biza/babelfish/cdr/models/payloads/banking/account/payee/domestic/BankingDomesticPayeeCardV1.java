@@ -30,7 +30,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Domestic Payee Card Number Details")
+@Schema(description = "Domestic Payee Card Number Details", name = "BankingDomesticPayeeCardV1")
 public class BankingDomesticPayeeCardV1 {
   @Schema(description = "Name of the account to pay to", required = true)
   @NotNull

@@ -33,7 +33,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Defines a condition for the applicability of a tiered rate", name = "BankingRateTierApplicability")
+@Schema(description = "Defines a condition for the applicability of a tiered rate", name = "BankingRateTierApplicabilityV1")
 public class BankingProductRateTierApplicabilityV1 {
   @Schema(description = "Display text providing more information on the condition")
   @JsonProperty("additionalInfo")

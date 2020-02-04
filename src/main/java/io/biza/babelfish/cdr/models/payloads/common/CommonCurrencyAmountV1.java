@@ -36,7 +36,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Currency Amount", name = "CommonCurrencyAmount")
+@Schema(description = "Currency Amount", name = "CommonCurrencyAmountV1")
 public class CommonCurrencyAmountV1 {
   @Schema(
       description = "The current balance of the account at this time. Should align to the current balance available via other channels such as ATM balance enquiry or Internet Banking",

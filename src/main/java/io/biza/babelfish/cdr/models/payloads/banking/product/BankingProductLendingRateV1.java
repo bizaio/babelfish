@@ -48,7 +48,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Banking Product Lending Rate Definition", name = "BankingProductLendingRate")
+@Schema(description = "Banking Product Lending Rate Definition", name = "BankingProductLendingRateV1")
 public class BankingProductLendingRateV1 {
   @Schema(
       description = "The type of rate (fixed, variable, etc). See the next section for an overview of valid values and their meaning",

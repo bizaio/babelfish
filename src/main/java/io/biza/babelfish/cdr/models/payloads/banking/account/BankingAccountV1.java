@@ -37,7 +37,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "An Australian Bank Account", name = "BankingAccount")
+@Schema(description = "An Australian Bank Account", name = "BankingAccountV1")
 public class BankingAccountV1 {
   @Schema(description = "A unique ID of the account adhering to the standards for ID permanence",
       required = true)

@@ -31,7 +31,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Representation of a Domestic Payee Detail")
+@Schema(description = "Representation of a Domestic Payee Detail", name = "BankingDomesticPayeeV1")
 public class BankingDomesticPayeeV1 {
   @Schema(description = "Type of account object included.", required = true)
   @NotNull

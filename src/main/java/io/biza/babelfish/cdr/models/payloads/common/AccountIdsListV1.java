@@ -31,7 +31,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Account ID List", name = "AccountIdsList")
+@Schema(description = "Account ID List", name = "AccountIdsListV1")
 public class AccountIdsListV1 {
   @Schema(description = "List of Account Identifiers", required = true)
   @JsonProperty("accountIds")

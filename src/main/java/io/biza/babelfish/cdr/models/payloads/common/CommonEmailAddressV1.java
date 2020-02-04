@@ -31,7 +31,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Email Address Definition", name = "CommonEmailAddress")
+@Schema(description = "Email Address Definition", name = "CommonEmailAddressV1")
 public class CommonEmailAddressV1 {
   @Schema(description = "The purpose for the email, as specified by the customer (Enumeration)",
       required = true)

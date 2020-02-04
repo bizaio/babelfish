@@ -38,7 +38,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Banking Product Constraint Definition")
+@Schema(description = "Banking Product Constraint Definition", name = "BankingProductConstraintV1")
 public class BankingProductConstraintV1 {
   @Schema(
       description = "The type of constraint described.  See the next section for an overview of valid values and their meaning",

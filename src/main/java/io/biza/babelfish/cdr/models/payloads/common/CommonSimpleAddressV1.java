@@ -36,7 +36,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Simple Address Detail", name = "CommonSimpleAddress")
+@Schema(description = "Simple Address Detail", name = "CommonSimpleAddressV1")
 public class CommonSimpleAddressV1 {
   @Schema(
       description = "Name of the individual or business formatted for inclusion in an address used for physical mail")

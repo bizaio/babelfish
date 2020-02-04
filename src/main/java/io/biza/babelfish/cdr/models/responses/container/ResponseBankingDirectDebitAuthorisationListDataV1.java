@@ -31,7 +31,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Object containing a list of BankingDirectDebit objects")
+@Schema(description = "Object containing a list of BankingDirectDebit objects", name = "ResponseBankingDirectDebitAuthorisationListDataV1")
 public class ResponseBankingDirectDebitAuthorisationListDataV1 {
   @Schema(description = "The list of authorisations returned", required = true)
   @JsonProperty("directDebitAuthorisations")

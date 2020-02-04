@@ -39,7 +39,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Banking Product Detailed Information", allOf = {BankingProductV2.class}, name = "BankingProductDetail")
+@Schema(description = "Banking Product Detailed Information", name = "BankingProductDetailV1")
 public class BankingProductDetailV1 {
   
   @Schema(

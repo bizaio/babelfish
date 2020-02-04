@@ -40,7 +40,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Credit Card Account Details", name = "BankingCreditCardAccount")
+@Schema(description = "Credit Card Account Details", name = "BankingCreditCardAccountV1")
 public class BankingCreditCardAccountV1 {
   @Schema(description = "The minimum payment amount due for the next card payment", required = true,
       type = "string")

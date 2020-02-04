@@ -49,7 +49,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Banking Product Fee Definition", name = "BankingProductFee")
+@Schema(description = "Banking Product Fee Definition", name = "BankingProductFeeV1")
 public class BankingProductFeeV1 {
   @Schema(description = "Name of the fee", required = true)
   @NotEmpty(message = "Name is Required")

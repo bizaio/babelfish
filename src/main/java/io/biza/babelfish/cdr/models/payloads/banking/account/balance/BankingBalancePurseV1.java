@@ -37,7 +37,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "An Australian Bank Account Purse Balance Representation", name = "BankingBalancePurse")
+@Schema(description = "An Australian Bank Account Purse Balance Representation", name = "BankingBalancePurseV1")
 public class BankingBalancePurseV1 {
   @Schema(description = "The balance available for this additional currency purse", required = true)
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)

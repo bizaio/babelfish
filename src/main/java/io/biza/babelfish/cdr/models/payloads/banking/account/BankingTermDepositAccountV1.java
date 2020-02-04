@@ -41,7 +41,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Term Deposit Account Description", name = "BankingTermDepositAccount")
+@Schema(description = "Term Deposit Account Description", name = "BankingTermDepositAccountV1")
 public class BankingTermDepositAccountV1 {
   @Schema(description = "The lodgement date of the original deposit", required = true,
       type = "string", format = "date")

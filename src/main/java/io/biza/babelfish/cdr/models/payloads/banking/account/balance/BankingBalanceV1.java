@@ -36,7 +36,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "A Representation of a Banking Account Balance", name = "BankingBalance")
+@Schema(description = "A Representation of a Banking Account Balance", name = "BankingBalanceV1")
 public class BankingBalanceV1 {
   @Schema(description = "A unique ID of the account adhering to the standards for ID permanence",
       required = true)

@@ -40,7 +40,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(
-    description = "The set of payment amounts and destination accounts for this payment accommodating multi-part payments. A single entry indicates a simple payment with one destination account. Must have at least one entry", name = "BankingScheduledPaymentSet")
+    description = "The set of payment amounts and destination accounts for this payment accommodating multi-part payments. A single entry indicates a simple payment with one destination account. Must have at least one entry",
+    name = "BankingScheduledPaymentSetV1")
 public class BankingScheduledPaymentSetV1 {
   @Schema(required = true)
   @NotNull
@@ -69,7 +70,7 @@ public class BankingScheduledPaymentSetV1 {
   @JsonProperty("currency")
   @Builder.Default
   Currency currency = Currency.getInstance("AUD");
-  
+
   @AssertTrue(message = "amount must be set when isAmountCalculated is FALSE")
   private boolean isAmountSet() {
     if (isAmountCalculated() == null || !isAmountCalculated()) {

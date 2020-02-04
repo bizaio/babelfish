@@ -35,7 +35,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Banking Payee Basic Information", name = "BankingPayee")
+@Schema(description = "Banking Payee Basic Information", name = "BankingPayeeV1")
 public class BankingPayeeV1 {
   @Schema(description = "ID of the payee adhering to the rules of ID permanence", required = true)
   @NotNull

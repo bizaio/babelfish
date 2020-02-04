@@ -29,7 +29,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "International Payee Bank Address Details", name = "BankingInternationalPayeeBankDetailsBankAddress")
+@Schema(description = "International Payee Bank Address Details", name = "BankingInternationalPayeeBankDetailsBankAddressV1")
 public class BankingInternationalPayeeBankDetailsBankAddressV1 {
   @Schema(description = "Name of the recipient Bank", required = true)
   @NotNull

@@ -38,7 +38,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "A Banking Product Feature", name = "BankingProductFeature")
+@Schema(description = "A Banking Product Feature", name = "BankingProductFeatureV1")
 public class BankingProductFeatureV1 {
   @Schema(description = "The type of feature described", required = true)
   @JsonProperty("featureType")

@@ -34,7 +34,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "International Payee Beneficiary Details")
+@Schema(description = "International Payee Beneficiary Details", name = "BankingInternationalPayeeBeneficiaryDetailsV1")
 public class BankingInternationalPayeeBeneficiaryDetailsV1 {
   @Schema(description = "Name of the beneficiary")
   @JsonProperty("name")

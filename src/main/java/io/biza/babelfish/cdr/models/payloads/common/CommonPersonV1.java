@@ -33,7 +33,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Person definition in brief", name = "CommonPerson")
+@Schema(description = "Person definition in brief", name = "CommonPersonV1")
 public class CommonPersonV1 {
   @Schema(
       description = "The date and time that this record was last updated by the customer.  If no update has occurred then this date should reflect the initial creation date for the data",

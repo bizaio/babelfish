@@ -38,7 +38,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Banking Product Discount Eligibility Details")
+@Schema(description = "Banking Product Discount Eligibility Details", name = "BankingProductFeeDiscountEligibilityV1")
 public class BankingProductFeeDiscountEligibilityV1 {
   @Schema(description = "The type of the specific eligibility constraint for a discount",
       required = true)

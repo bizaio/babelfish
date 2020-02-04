@@ -44,7 +44,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Banking Loan Account Details", name = "BankingLoanAccount")
+@Schema(description = "Banking Loan Account Details", name = "BankingLoanAccountV1")
 public class BankingLoanAccountV1 {
   @Schema(description = "Original Loan Start Date", format = "date")
   @JsonSerialize(converter = LocalDateToStringConverter.class)

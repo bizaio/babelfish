@@ -31,7 +31,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Physical Address with Purpose", name = "CommonPhysicalAddressWithPurpose")
+@Schema(description = "Physical Address with Purpose", name = "CommonPhysicalAddressWithPurposeV1")
 public class CommonPhysicalAddressWithPurposeV1 extends io.biza.babelfish.cdr.abstracts.models.common.CommonPhysicalAddressV1 {
   
   @Schema(description = "The type of address object present", required = true)

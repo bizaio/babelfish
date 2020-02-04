@@ -39,7 +39,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "An Australian Banking Product", name = "BankingProduct")
+@Schema(description = "An Australian Banking Product", name = "BankingProductV2")
 public class BankingProductV2 {
   @Schema(
       description = "A data holder specific unique identifier for this product. This identifier must be unique to a product but does not otherwise need to adhere to ID permanence guidelines.",

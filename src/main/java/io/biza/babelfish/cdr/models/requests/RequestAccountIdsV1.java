@@ -32,7 +32,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Request containing a set of Account IDs", name = "RequestAccountIds")
+@Schema(description = "Request containing a set of Account IDs", name = "RequestAccountIdsV1")
 public class RequestAccountIdsV1 {
   @Schema(required = true)
   @JsonProperty("data")

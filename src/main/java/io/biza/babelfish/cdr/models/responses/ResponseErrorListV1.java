@@ -31,7 +31,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "CDS Error Response")
+@Schema(description = "CDS Error Response", name = "ResponseErrorListV1")
 public class ResponseErrorListV1 {
   @Schema(required = true)
   @NotNull

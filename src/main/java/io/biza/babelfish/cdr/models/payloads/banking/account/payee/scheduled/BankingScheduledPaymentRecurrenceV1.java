@@ -36,7 +36,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Describes the detail of the scheduled payment")
+@Schema(description = "Describes the detail of the scheduled payment", name = "BankingScheduledPaymentRecurrenceV1")
 public class BankingScheduledPaymentRecurrenceV1 {
   @Schema(description = "The date of the next payment under the recurrence schedule",
       type = "string", format = "date")

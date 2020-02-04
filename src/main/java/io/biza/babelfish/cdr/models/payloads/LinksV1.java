@@ -33,7 +33,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "CDS Links")
+@Schema(description = "CDS Links", name = "LinksV1")
 public class LinksV1 {
   @Schema(description = "Fully qualified link that generated the current response document",
       required = true, type = "string", format = "uri")

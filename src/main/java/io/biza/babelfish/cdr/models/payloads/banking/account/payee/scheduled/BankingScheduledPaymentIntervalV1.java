@@ -34,7 +34,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Scheduled Payment Interval Description", name = "BankingScheduledPaymentInterval")
+@Schema(description = "Scheduled Payment Interval Description", name = "BankingScheduledPaymentIntervalV1")
 public class BankingScheduledPaymentIntervalV1 {
   @Schema(
       description = "An interval for the payment. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations) with components less than a day in length ignored. This duration defines the period between payments starting with nextPaymentDate",

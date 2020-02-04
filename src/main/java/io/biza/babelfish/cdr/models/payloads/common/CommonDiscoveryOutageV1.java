@@ -37,7 +37,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Outage Detail", name = "CommonDiscoveryOutage")
+@Schema(description = "Outage Detail", name = "CommonDiscoveryOutageV1")
 public class CommonDiscoveryOutageV1 {
   @Schema(description = "Date and time that the outage is scheduled to begin", required = true,
       format = "date-time")

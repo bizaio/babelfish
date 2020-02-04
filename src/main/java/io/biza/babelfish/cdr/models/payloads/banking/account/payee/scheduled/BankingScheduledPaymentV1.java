@@ -31,7 +31,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Describes a Scheduled Payment", name = "BankingScheduledPayment")
+@Schema(description = "Describes a Scheduled Payment", name = "BankingScheduledPaymentV1")
 public class BankingScheduledPaymentV1 {
   @Schema(
       description = "A unique ID of the scheduled payment adhering to the standards for ID permanence",

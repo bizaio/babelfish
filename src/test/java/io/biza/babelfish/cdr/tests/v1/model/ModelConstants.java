@@ -121,7 +121,7 @@ import io.biza.babelfish.cdr.models.responses.ResponseBankingScheduledPaymentsLi
 import io.biza.babelfish.cdr.models.responses.ResponseBankingTransactionByIdV1;
 import io.biza.babelfish.cdr.models.responses.ResponseBankingTransactionListV1;
 import io.biza.babelfish.cdr.models.responses.ResponseCommonCustomerV1;
-import io.biza.babelfish.cdr.models.responses.ResponseCommonCustomerDetail;
+import io.biza.babelfish.cdr.models.responses.ResponseCommonCustomerDetailV1;
 import io.biza.babelfish.cdr.models.responses.ResponseCommonDiscoveryOutagesListV1;
 import io.biza.babelfish.cdr.models.responses.ResponseCommonDiscoveryStatusV1;
 import io.biza.babelfish.cdr.models.responses.ResponseErrorListV1;
@@ -429,8 +429,8 @@ public class ModelConstants {
       new ResponseCommonCustomerDetailDataV1().type(PayloadTypeCustomer.PERSON)
           .person(ModelConstants.DEFAULT_COMMON_PERSON_DETAIL);
 
-  public static final ResponseCommonCustomerDetail DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL =
-      new ResponseCommonCustomerDetail().links(ModelConstants.DEFAULT_LINKS)
+  public static final ResponseCommonCustomerDetailV1 DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL =
+      new ResponseCommonCustomerDetailV1().links(ModelConstants.DEFAULT_LINKS)
           .data(ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL_DATA);
 
   public static final BankingPayeeDetailV1 DEFAULT_PAYEE_DETAIL = new BankingPayeeDetailV1()
