@@ -21,7 +21,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductBundle;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductBundleV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingProductBundle V1 Tests")
@@ -45,7 +45,7 @@ public class BankingProductBundleV1Test {
   @DisplayName("Create valid BankingProductBundle with empty name")
   void createBankingProductBundleWithEmptyName()
       throws IllegalAccessException, InvocationTargetException {
-    BankingProductBundle data = new BankingProductBundle();
+    BankingProductBundleV1 data = new BankingProductBundleV1();
     BeanUtils.copyProperties(data, ModelConstants.DEFAULT_BANKING_PRODUCT_BUNDLE);
     data.name("");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -55,7 +55,7 @@ public class BankingProductBundleV1Test {
   @DisplayName("Create valid BankingProductBundle with empty description")
   void createBankingProductBundleWithEmptyDescription()
       throws IllegalAccessException, InvocationTargetException {
-    BankingProductBundle data = new BankingProductBundle();
+    BankingProductBundleV1 data = new BankingProductBundleV1();
     BeanUtils.copyProperties(data, ModelConstants.DEFAULT_BANKING_PRODUCT_BUNDLE);
     data.description("");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());

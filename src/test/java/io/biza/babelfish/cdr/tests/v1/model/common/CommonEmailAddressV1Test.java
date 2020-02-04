@@ -20,7 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.CommonEmailAddressPurpose;
-import io.biza.babelfish.cdr.models.payloads.common.CommonEmailAddress;
+import io.biza.babelfish.cdr.models.payloads.common.CommonEmailAddressV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("CommonEmailAddress V1 Tests")
@@ -45,7 +45,7 @@ public class CommonEmailAddressV1Test {
   @Test
   @DisplayName("CommonEmailAddress Mandatory Fields (Home)")
   void commonEmailAddressMandatoryFieldsHome() {
-    CommonEmailAddress data = new CommonEmailAddress();
+    CommonEmailAddressV1 data = new CommonEmailAddressV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.purpose(CommonEmailAddressPurpose.HOME);

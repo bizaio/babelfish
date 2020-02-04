@@ -20,7 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.AddressPAFStateType;
-import io.biza.babelfish.cdr.models.payloads.common.CommonPAFAddress;
+import io.biza.babelfish.cdr.models.payloads.common.CommonPAFAddressV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("CommonPAFAddress V1 Tests")
@@ -36,14 +36,14 @@ public class CommonPAFAddressV1Test {
   @Test
   @DisplayName("Create valid CommonPAFAddress")
   void commonPAFAddress() {
-    CommonPAFAddress data = ModelConstants.DEFAULT_COMMON_PAF_ADDRESS;
+    CommonPAFAddressV1 data = ModelConstants.DEFAULT_COMMON_PAF_ADDRESS;
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
   @DisplayName("CommonPAFAddress Mandatory Fields")
   void commonPAFAddressMandatoryFieldsAustralia() {
-    CommonPAFAddress data = new CommonPAFAddress();
+    CommonPAFAddressV1 data = new CommonPAFAddressV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.localityName("Cobargo");

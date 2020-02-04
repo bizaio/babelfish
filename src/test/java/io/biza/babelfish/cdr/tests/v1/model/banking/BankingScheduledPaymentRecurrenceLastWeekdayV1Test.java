@@ -21,7 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.CommonWeekDay;
-import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentRecurrenceLastWeekday;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentRecurrenceLastWeekdayV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingScheduledPaymentRecurrenceLastWeekday V1 Tests")
@@ -47,8 +47,8 @@ public class BankingScheduledPaymentRecurrenceLastWeekdayV1Test {
   @Test
   @DisplayName("BankingScheduledPaymentRecurrenceLastWeekday Mandatory Fields")
   void bankingScheduledPaymentRecurrenceLastWeekdayMandatoryFields() {
-    BankingScheduledPaymentRecurrenceLastWeekday data =
-        new BankingScheduledPaymentRecurrenceLastWeekday();
+    BankingScheduledPaymentRecurrenceLastWeekdayV1 data =
+        new BankingScheduledPaymentRecurrenceLastWeekdayV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.interval(Period.ofDays(30));

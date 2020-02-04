@@ -20,7 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.BankingProductConstraintType;
-import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductConstraint;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductConstraintV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingProductConstraint V1 Tests")
@@ -43,8 +43,8 @@ public class BankingProductConstraintV1Test {
   @Test
   @DisplayName("BankingProductConstraint for Minimum Balance")
   void bankingProductConstraintMinBalance() {
-    BankingProductConstraint data =
-        new BankingProductConstraint().constraintType(BankingProductConstraintType.MIN_BALANCE);
+    BankingProductConstraintV1 data =
+        new BankingProductConstraintV1().constraintType(BankingProductConstraintType.MIN_BALANCE);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -66,8 +66,8 @@ public class BankingProductConstraintV1Test {
   @Test
   @DisplayName("BankingProductConstraint for Maximum Balance")
   void bankingProductConstraintMaxBalance() {
-    BankingProductConstraint data =
-        new BankingProductConstraint().constraintType(BankingProductConstraintType.MAX_BALANCE);
+    BankingProductConstraintV1 data =
+        new BankingProductConstraintV1().constraintType(BankingProductConstraintType.MAX_BALANCE);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -89,8 +89,8 @@ public class BankingProductConstraintV1Test {
   @Test
   @DisplayName("BankingProductConstraint for Opening Balance")
   void bankingProductConstraintOpeningBalance() {
-    BankingProductConstraint data =
-        new BankingProductConstraint().constraintType(BankingProductConstraintType.OPENING_BALANCE);
+    BankingProductConstraintV1 data =
+        new BankingProductConstraintV1().constraintType(BankingProductConstraintType.OPENING_BALANCE);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -113,8 +113,8 @@ public class BankingProductConstraintV1Test {
   @Test
   @DisplayName("BankingProductConstraint for Max Limit")
   void bankingProductConstraintMaxLimit() {
-    BankingProductConstraint data =
-        new BankingProductConstraint().constraintType(BankingProductConstraintType.MAX_LIMIT);
+    BankingProductConstraintV1 data =
+        new BankingProductConstraintV1().constraintType(BankingProductConstraintType.MAX_LIMIT);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -136,8 +136,8 @@ public class BankingProductConstraintV1Test {
   @Test
   @DisplayName("BankingProductConstraint for Min Limit")
   void bankingProductConstraintMinLimit() {
-    BankingProductConstraint data =
-        new BankingProductConstraint().constraintType(BankingProductConstraintType.MIN_LIMIT);
+    BankingProductConstraintV1 data =
+        new BankingProductConstraintV1().constraintType(BankingProductConstraintType.MIN_LIMIT);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());

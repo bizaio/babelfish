@@ -20,7 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.BankingProductFeatureType;
-import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductFeature;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductFeatureV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingProductBundle V1 Tests")
@@ -45,12 +45,12 @@ public class BankingProductFeatureV1Test {
   void bankingProductFeatureCardAccess() {
 
     // Missing description
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.CARD_ACCESS);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.CARD_ACCESS);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with Description
-    data.setAdditionalValue("Description text for card access");
+    data.additionalValue("Description text for card access");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
@@ -58,8 +58,8 @@ public class BankingProductFeatureV1Test {
   @Test
   @DisplayName("BankingProductFeature for Additional Cards")
   void bankingProductFeatureAdditionalCards() {
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.ADDITIONAL_CARDS);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.ADDITIONAL_CARDS);
 
     // Null Value is unlimited cards
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -76,8 +76,8 @@ public class BankingProductFeatureV1Test {
   @Test
   @DisplayName("BankingProductFeature for Unlimited Transactions")
   void bankingProductFeatureUnlimitedTransactions() {
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.UNLIMITED_TXNS);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.UNLIMITED_TXNS);
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -90,8 +90,8 @@ public class BankingProductFeatureV1Test {
   @Test
   @DisplayName("BankingProductFeature for Free Transactions")
   void bankingProductFeatureFreeTransactions() {
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.FREE_TXNS);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.FREE_TXNS);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -109,8 +109,8 @@ public class BankingProductFeatureV1Test {
   @Test
   @DisplayName("BankingProductFeature for Free Transaction Allowance with Value")
   void bankingProductFeatureFreeTransactionsAllowance() {
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.FREE_TXNS_ALLOWANCE);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.FREE_TXNS_ALLOWANCE);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -134,12 +134,12 @@ public class BankingProductFeatureV1Test {
   void bankingProductFeatureLoyaltyProgram() {
 
     // Missing description
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.LOYALTY_PROGRAM);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.LOYALTY_PROGRAM);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with name
-    data.setAdditionalValue("Loyalty Program Name");
+    data.additionalValue("Loyalty Program Name");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
@@ -147,8 +147,8 @@ public class BankingProductFeatureV1Test {
   @Test
   @DisplayName("BankingProductFeature for Offset")
   void bankingProductFeatureOffset() {
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.OFFSET);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.OFFSET);
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -161,8 +161,8 @@ public class BankingProductFeatureV1Test {
   @Test
   @DisplayName("BankingProductFeature for Overdraft")
   void bankingProductFeatureOverdraft() {
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.OVERDRAFT);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.OVERDRAFT);
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -177,12 +177,12 @@ public class BankingProductFeatureV1Test {
   void bankingProductFeatureInsurance() {
 
     // Missing description
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.INSURANCE);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.INSURANCE);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with name
-    data.setAdditionalValue("Insurance Description");
+    data.additionalValue("Insurance Description");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
@@ -191,8 +191,8 @@ public class BankingProductFeatureV1Test {
   @Test
   @DisplayName("BankingProductFeature for Balance Transfers")
   void bankingProductFeatureBalanceTransfers() {
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.BALANCE_TRANSFERS);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.BALANCE_TRANSFERS);
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -205,8 +205,8 @@ public class BankingProductFeatureV1Test {
   @Test
   @DisplayName("BankingProductFeature for Interest Free")
   void bankingProductFeatureInterestFree() {
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.INTEREST_FREE);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.INTEREST_FREE);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -224,8 +224,8 @@ public class BankingProductFeatureV1Test {
   @Test
   @DisplayName("BankingProductFeature for Interest Free Transfers")
   void bankingProductFeatureInterestFreeTransfers() {
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.INTEREST_FREE_TRANSFERS);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.INTEREST_FREE_TRANSFERS);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -245,12 +245,12 @@ public class BankingProductFeatureV1Test {
   void bankingProductFeatureDigitalWallet() {
 
     // Missing description
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.DIGITAL_WALLET);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.DIGITAL_WALLET);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with name
-    data.setAdditionalValue("Digital Wallet Description");
+    data.additionalValue("Digital Wallet Description");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
@@ -258,8 +258,8 @@ public class BankingProductFeatureV1Test {
   @Test
   @DisplayName("BankingProductFeature for Digital Banking")
   void bankingProductFeatureDigitalBanking() {
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.DIGITAL_BANKING);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.DIGITAL_BANKING);
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -272,8 +272,8 @@ public class BankingProductFeatureV1Test {
   @Test
   @DisplayName("BankingProductFeature for NPP PayID")
   void bankingProductFeaturePayID() {
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.NPP_PAYID);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.NPP_PAYID);
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -286,8 +286,8 @@ public class BankingProductFeatureV1Test {
   @Test
   @DisplayName("BankingProductFeature for NPP Enabled")
   void bankingProductFeatureNPPEnabled() {
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.NPP_ENABLED);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.NPP_ENABLED);
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -300,8 +300,8 @@ public class BankingProductFeatureV1Test {
   @Test
   @DisplayName("BankingProductFeature for Donate Interest")
   void bankingProductFeatureDonateInterest() {
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.DONATE_INTEREST);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.DONATE_INTEREST);
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -316,12 +316,12 @@ public class BankingProductFeatureV1Test {
   void bankingProductFeatureBillPayment() {
 
     // Null Value is correct
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.BILL_PAYMENT);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.BILL_PAYMENT);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with name
-    data.setAdditionalValue("Payment Service Description");
+    data.additionalValue("Payment Service Description");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
@@ -329,12 +329,12 @@ public class BankingProductFeatureV1Test {
   @Test
   @DisplayName("BankingProductFeature for Complementary Product Discounts")
   void bankingProductFeatureComplementaryProductDiscounts() {
-    BankingProductFeature data = new BankingProductFeature()
+    BankingProductFeatureV1 data = new BankingProductFeatureV1()
         .featureType(BankingProductFeatureType.COMPLEMENTARY_PRODUCT_DISCOUNTS);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with name
-    data.setAdditionalValue("Digital Wallet Description");
+    data.additionalValue("Digital Wallet Description");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
@@ -342,32 +342,32 @@ public class BankingProductFeatureV1Test {
   @Test
   @DisplayName("BankingProductFeature for Notifications")
   void bankingProductFeatureNotifications() {
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.NOTIFICATIONS);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.NOTIFICATIONS);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with name
-    data.setAdditionalValue("Notifications description");
+    data.additionalValue("Notifications description");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
   @DisplayName("BankingProductFeature for Other")
   void bankingProductFeatureOther() {
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.OTHER);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.OTHER);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with additional information defined
-    data.setAdditionalInfo("Additional Information on Other feature");
+    data.additionalInfo("Additional Information on Other feature");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
   @DisplayName("BankingProductFeature for Bonus Rewards")
   void bankingProductFeatureBonusRewards() {
-    BankingProductFeature data =
-        new BankingProductFeature().featureType(BankingProductFeatureType.BONUS_REWARDS);
+    BankingProductFeatureV1 data =
+        new BankingProductFeatureV1().featureType(BankingProductFeatureType.BONUS_REWARDS);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());

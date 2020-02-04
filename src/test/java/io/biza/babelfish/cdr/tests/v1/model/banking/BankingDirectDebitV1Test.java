@@ -22,7 +22,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.payloads.banking.account.directdebit.BankingDirectDebit;
+import io.biza.babelfish.cdr.models.payloads.banking.account.directdebit.BankingDirectDebitV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingDirectDebit V1 Tests")
@@ -45,7 +45,7 @@ public class BankingDirectDebitV1Test {
   @Test
   @DisplayName("BankingDirectDebit Mandatory Fields")
   void bankingDirectDebitMandatoryFields() {
-    BankingDirectDebit data = new BankingDirectDebit();
+    BankingDirectDebitV1 data = new BankingDirectDebitV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.accountId(UUID.randomUUID().toString());
@@ -61,7 +61,7 @@ public class BankingDirectDebitV1Test {
   @Test
   @DisplayName("BankingDirectDebit Last Debit Attributes should be present")
   void bankingDirectDebitVerifyLastDebitAttributesPresent() {
-    BankingDirectDebit data = new BankingDirectDebit().accountId(UUID.randomUUID().toString())
+    BankingDirectDebitV1 data = new BankingDirectDebitV1().accountId(UUID.randomUUID().toString())
         .authorisedEntity(ModelConstants.DEFAULT_BANKING_AUTHORISED_ENTITY);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

@@ -22,7 +22,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.BankingPayeeType;
 import io.biza.babelfish.cdr.enumerations.PayloadTypeBankingPayee;
-import io.biza.babelfish.cdr.models.payloads.banking.account.payee.BankingPayeeDetail;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.BankingPayeeDetailV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingPayeeDetail V1 Tests")
@@ -47,7 +47,7 @@ public class BankingPayeeDetailV1Test {
   @Test
   @DisplayName("BankingPayeeDetail Mandatory Fields for Domestic")
   void bankingPayeeDetailMandatoryFieldsDomestic() {
-    BankingPayeeDetail data = new BankingPayeeDetail();
+    BankingPayeeDetailV1 data = new BankingPayeeDetailV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.payeeId(UUID.randomUUID().toString());
@@ -72,7 +72,7 @@ public class BankingPayeeDetailV1Test {
   @Test
   @DisplayName("BankingPayeeDetail Mandatory Fields for Biller")
   void bankingPayeeDetailMandatoryFieldsBiller() {
-    BankingPayeeDetail data = new BankingPayeeDetail();
+    BankingPayeeDetailV1 data = new BankingPayeeDetailV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.payeeId(UUID.randomUUID().toString());
@@ -97,7 +97,7 @@ public class BankingPayeeDetailV1Test {
   @Test
   @DisplayName("BankingPayeeDetail Mandatory Fields for International")
   void bankingPayeeDetailMandatoryFieldsInternational() {
-    BankingPayeeDetail data = new BankingPayeeDetail();
+    BankingPayeeDetailV1 data = new BankingPayeeDetailV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.payeeId(UUID.randomUUID().toString());

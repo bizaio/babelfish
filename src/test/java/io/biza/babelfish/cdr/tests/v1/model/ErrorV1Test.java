@@ -20,7 +20,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.payloads.common.Error;
+import io.biza.babelfish.cdr.models.payloads.ErrorV1;
 
 @DisplayName("Error V1 Tests")
 public class ErrorV1Test {
@@ -37,14 +37,14 @@ public class ErrorV1Test {
   @Test
   @DisplayName("Create valid Error")
   void responseError() {
-    Error data = ModelConstants.DEFAULT_ERROR;
+    ErrorV1 data = ModelConstants.DEFAULT_ERROR;
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
   @DisplayName("Error Mandatory Fields")
   void responseErrorMandatoryFields() {
-    Error data = new Error();
+    ErrorV1 data = new ErrorV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.code("0001 – Account not able to be found");

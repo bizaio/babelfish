@@ -22,7 +22,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.CommonUnitOfMeasureType;
-import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductRateTier;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductRateTierV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingProductRateTier V1 Tests")
@@ -48,7 +48,7 @@ public class BankingProductRateTierV1Test {
   @DisplayName("BankingProductRateTier for Mandatory Fields")
   void bankingProductRateTierMandatoryFields()
       throws IllegalAccessException, InvocationTargetException {
-    BankingProductRateTier data = new BankingProductRateTier();
+    BankingProductRateTierV1 data = new BankingProductRateTierV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // add name, missing two others still
@@ -69,7 +69,7 @@ public class BankingProductRateTierV1Test {
   void bankingProductRateTierDiscreteValues()
       throws IllegalAccessException, InvocationTargetException {
     // Dollar value should pass
-    BankingProductRateTier data = new BankingProductRateTier().name("Test Rate Tier")
+    BankingProductRateTierV1 data = new BankingProductRateTierV1().name("Test Rate Tier")
         .unitOfMeasure(CommonUnitOfMeasureType.DOLLAR).minimumValue(new BigDecimal("10.00"));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

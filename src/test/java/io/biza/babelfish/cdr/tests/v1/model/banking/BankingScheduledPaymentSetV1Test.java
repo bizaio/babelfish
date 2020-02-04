@@ -20,7 +20,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentSet;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentSetV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingScheduledPaymentSet V1 Tests")
@@ -43,7 +43,7 @@ public class BankingScheduledPaymentSetV1Test {
   @Test
   @DisplayName("BankingScheduledPaymentSet Mandatory Fields")
   void bankingScheduledPaymentMandatoryFields() {
-    BankingScheduledPaymentSet data = new BankingScheduledPaymentSet();
+    BankingScheduledPaymentSetV1 data = new BankingScheduledPaymentSetV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.to(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_TO);
@@ -57,8 +57,8 @@ public class BankingScheduledPaymentSetV1Test {
   @Test
   @DisplayName("BankingScheduledPaymentSet Mandatory Fields with Amount Calculated")
   void bankingScheduledPaymentMandatoryFieldsAmountCalculated() {
-    BankingScheduledPaymentSet data =
-        new BankingScheduledPaymentSet().to(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_TO);
+    BankingScheduledPaymentSetV1 data =
+        new BankingScheduledPaymentSetV1().to(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_TO);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.isAmountCalculated(true);

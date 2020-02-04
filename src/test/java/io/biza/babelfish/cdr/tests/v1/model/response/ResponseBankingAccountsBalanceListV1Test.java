@@ -18,7 +18,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.responses.ResponseBankingAccountsBalanceList;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingAccountsBalanceListV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("ResponseBankingAccountsBalanceList V1 Tests")
@@ -34,7 +34,7 @@ public class ResponseBankingAccountsBalanceListV1Test {
   @Test
   @DisplayName("Create valid ResponseBankingAccountsBalanceList")
   void responseBankingAccountsBalanceList() {
-    ResponseBankingAccountsBalanceList data =
+    ResponseBankingAccountsBalanceListV1 data =
         ModelConstants.DEFAULT_RESPONSE_BANKING_ACCOUNTS_BALANCE_LIST;
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }

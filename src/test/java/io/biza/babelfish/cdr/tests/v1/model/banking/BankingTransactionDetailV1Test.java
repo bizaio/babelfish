@@ -24,7 +24,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.BankingTransactionStatus;
 import io.biza.babelfish.cdr.enumerations.BankingTransactionType;
-import io.biza.babelfish.cdr.models.payloads.banking.account.transaction.BankingTransactionDetail;
+import io.biza.babelfish.cdr.models.payloads.banking.account.transaction.BankingTransactionDetailV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingTransactionDetail V1 Tests")
@@ -47,7 +47,7 @@ public class BankingTransactionDetailV1Test {
   @Test
   @DisplayName("BankingTransactionDetail Mandatory Fields for POSTED Transactions")
   void BankingTransactionDetailMandatoryFieldsPosted() {
-    BankingTransactionDetail data = new BankingTransactionDetail();
+    BankingTransactionDetailV1 data = new BankingTransactionDetailV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.accountId(UUID.randomUUID().toString());
@@ -88,7 +88,7 @@ public class BankingTransactionDetailV1Test {
   @Test
   @DisplayName("BankingTransactionDetail Mandatory Fields for PENDING Transactions")
   void BankingTransactionDetailMandatoryFieldsPending() {
-    BankingTransactionDetail data = new BankingTransactionDetail();
+    BankingTransactionDetailV1 data = new BankingTransactionDetailV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.accountId(UUID.randomUUID().toString());
@@ -116,6 +116,10 @@ public class BankingTransactionDetailV1Test {
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.extendedData(ModelConstants.DEFAULT_BANKING_TRANSACTION_DETAIL_EXTENDED_DATA);
+    
+    // 2020-02-04: Must supply posting data and time as well
+    assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
+    data.postingDateTime(OffsetDateTime.now());
 
     // Should now be valid
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());

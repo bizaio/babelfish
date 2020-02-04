@@ -21,7 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.PayloadTypeBankingScheduledPaymentTo;
-import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentTo;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentToV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingScheduledPaymentTo V1 Tests")
@@ -44,7 +44,7 @@ public class BankingScheduledPaymentToV1Test {
   @Test
   @DisplayName("BankingScheduledPaymentTo for AccountId")
   void bankingScheduledPaymentToMandatoryFieldsAccountId() {
-    BankingScheduledPaymentTo data = new BankingScheduledPaymentTo();
+    BankingScheduledPaymentToV1 data = new BankingScheduledPaymentToV1();
     data.type(PayloadTypeBankingScheduledPaymentTo.ACCOUNT_ID);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.accountId(UUID.randomUUID().toString());
@@ -55,7 +55,7 @@ public class BankingScheduledPaymentToV1Test {
   @Test
   @DisplayName("BankingScheduledPaymentTo for PayeeId")
   void bankingScheduledPaymentToMandatoryFieldsPayeeId() {
-    BankingScheduledPaymentTo data = new BankingScheduledPaymentTo();
+    BankingScheduledPaymentToV1 data = new BankingScheduledPaymentToV1();
     data.type(PayloadTypeBankingScheduledPaymentTo.PAYEE_ID);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.payeeId(UUID.randomUUID().toString());
@@ -65,7 +65,7 @@ public class BankingScheduledPaymentToV1Test {
   @Test
   @DisplayName("BankingScheduledPaymentTo for Domestic")
   void bankingScheduledPaymentToMandatoryFieldsDomestic() {
-    BankingScheduledPaymentTo data = new BankingScheduledPaymentTo();
+    BankingScheduledPaymentToV1 data = new BankingScheduledPaymentToV1();
     data.type(PayloadTypeBankingScheduledPaymentTo.DOMESTIC);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.domestic(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE);
@@ -76,7 +76,7 @@ public class BankingScheduledPaymentToV1Test {
   @Test
   @DisplayName("BankingScheduledPaymentTo for Biller")
   void bankingScheduledPaymentToMandatoryFieldsBiller() {
-    BankingScheduledPaymentTo data = new BankingScheduledPaymentTo();
+    BankingScheduledPaymentToV1 data = new BankingScheduledPaymentToV1();
     data.type(PayloadTypeBankingScheduledPaymentTo.BILLER);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.biller(ModelConstants.DEFAULT_BANKING_BILLER_PAYEE);
@@ -86,7 +86,7 @@ public class BankingScheduledPaymentToV1Test {
   @Test
   @DisplayName("BankingScheduledPaymentTo for International")
   void bankingScheduledPaymentToMandatoryFieldsInternational() {
-    BankingScheduledPaymentTo data = new BankingScheduledPaymentTo();
+    BankingScheduledPaymentToV1 data = new BankingScheduledPaymentToV1();
     data.type(PayloadTypeBankingScheduledPaymentTo.INTERNATIONAL);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     data.international(ModelConstants.DEFAULT_BANKING_INTERNATIONAL_PAYEE);

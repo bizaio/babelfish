@@ -19,7 +19,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.responses.ResponseCommonDiscoveryStatus;
+import io.biza.babelfish.cdr.models.responses.ResponseCommonDiscoveryStatusV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("ResponseCommonDiscoveryStatus V1 Tests")
@@ -35,14 +35,14 @@ public class ResponseCommonDiscoveryStatusV1Test {
   @Test
   @DisplayName("Create valid ResponseCommonDiscoveryStatus")
   void responseCommonDiscoveryStatus() {
-    ResponseCommonDiscoveryStatus data = ModelConstants.DEFAULT_RESPONSE_COMMON_DISCOVERY_STATUS;
+    ResponseCommonDiscoveryStatusV1 data = ModelConstants.DEFAULT_RESPONSE_COMMON_DISCOVERY_STATUS;
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
   @DisplayName("ResponseCommonDiscoveryStatus Mandatory Fields")
   void responseCommonDiscoveryStatusMandatoryFields() {
-    ResponseCommonDiscoveryStatus data = new ResponseCommonDiscoveryStatus();
+    ResponseCommonDiscoveryStatusV1 data = new ResponseCommonDiscoveryStatusV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.links(ModelConstants.DEFAULT_LINKS);

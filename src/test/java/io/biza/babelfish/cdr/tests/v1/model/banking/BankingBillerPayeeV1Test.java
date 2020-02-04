@@ -19,7 +19,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.payloads.banking.account.payee.bpay.BankingBillerPayee;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.bpay.BankingBillerPayeeV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingBillerPayee V1 Tests")
@@ -42,7 +42,7 @@ public class BankingBillerPayeeV1Test {
   @Test
   @DisplayName("BankingBillerPayee Mandatory Fields")
   void bankingBillerPayeeMandatoryFields() {
-    BankingBillerPayee data = new BankingBillerPayee();
+    BankingBillerPayeeV1 data = new BankingBillerPayeeV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Biller Name
@@ -63,8 +63,8 @@ public class BankingBillerPayeeV1Test {
   @Test
   @DisplayName("BankingBillerPayee CRN Validation")
   void bankingBillerPayeeCRN() {
-    BankingBillerPayee data =
-        new BankingBillerPayee().billerName("Energy Australia").billerCode("3111");
+    BankingBillerPayeeV1 data =
+        new BankingBillerPayeeV1().billerName("Energy Australia").billerCode("3111");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Valid CRN for MOD09V02
@@ -101,8 +101,8 @@ public class BankingBillerPayeeV1Test {
   @Test
   @DisplayName("BankingBillerPayee Biller Code Validation")
   void bankingBillerPayeeBillerCode() {
-    BankingBillerPayee data =
-        new BankingBillerPayee().billerName("Energy Australia").crn("81752861");
+    BankingBillerPayeeV1 data =
+        new BankingBillerPayeeV1().billerName("Energy Australia").crn("81752861");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Valid Biller Code (Energy Australia)

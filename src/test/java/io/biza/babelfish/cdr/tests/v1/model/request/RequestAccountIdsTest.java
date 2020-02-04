@@ -20,9 +20,9 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.payloads.common.AccountIdsList;
-import io.biza.babelfish.cdr.models.payloads.common.Meta;
-import io.biza.babelfish.cdr.models.requests.RequestAccountIds;
+import io.biza.babelfish.cdr.models.payloads.common.AccountIdsListV1;
+import io.biza.babelfish.cdr.models.payloads.MetaV1;
+import io.biza.babelfish.cdr.models.requests.RequestAccountIdsV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("RequestAccountIds V1 Tests")
@@ -38,24 +38,24 @@ public class RequestAccountIdsTest {
   @Test
   @DisplayName("Create valid RequestAccountIds")
   void createValidRequestAccountIds() {
-    RequestAccountIds data = new RequestAccountIds()
-        .data(new AccountIdsList().accountIds(ModelConstants.DEFAULT_ACCOUNT_IDS));
+    RequestAccountIdsV1 data = new RequestAccountIdsV1()
+        .data(new AccountIdsListV1().accountIds(ModelConstants.DEFAULT_ACCOUNT_IDS));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
   @DisplayName("Create valid RequestAccountIds with Meta")
-  void createValidRequestAccountIdsWithMeta() {
-    RequestAccountIds data = new RequestAccountIds()
-        .data(new AccountIdsList().accountIds(ModelConstants.DEFAULT_ACCOUNT_IDS)).meta(new Meta());
+  void createValidRequestAccountIdsWithMetaV1() {
+    RequestAccountIdsV1 data = new RequestAccountIdsV1()
+        .data(new AccountIdsListV1().accountIds(ModelConstants.DEFAULT_ACCOUNT_IDS)).meta(new MetaV1());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
   @DisplayName("Create invalid RequestAccountIds with empty AccountIds")
   void createInvalidRequestAccountIds() {
-    RequestAccountIds data =
-        new RequestAccountIds().data(new AccountIdsList().accountIds(List.of())).meta(new Meta());
+    RequestAccountIdsV1 data =
+        new RequestAccountIdsV1().data(new AccountIdsListV1().accountIds(List.of())).meta(new MetaV1());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 

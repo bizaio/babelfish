@@ -18,8 +18,8 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.payloads.common.Links;
-import io.biza.babelfish.cdr.models.responses.ResponseBankingAccountsBalanceById;
+import io.biza.babelfish.cdr.models.payloads.LinksV1;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingAccountsBalanceByIdV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("ResponseBankingAccountsBalanceById V1 Tests")
@@ -35,8 +35,8 @@ public class ResponseBankingAccountsBalanceByIdV1Test {
   @Test
   @DisplayName("Create valid ResponseBankingAccountsBalanceById")
   void responseBankingAccountsBalanceById() {
-    ResponseBankingAccountsBalanceById myResponse = new ResponseBankingAccountsBalanceById()
-        .links(new Links().self(ModelConstants.DEFAULT_SELF_URI))
+    ResponseBankingAccountsBalanceByIdV1 myResponse = new ResponseBankingAccountsBalanceByIdV1()
+        .links(new LinksV1().self(ModelConstants.DEFAULT_SELF_URI))
         .data(ModelConstants.DEFAULT_BANKING_BALANCE);
     assertTrue(validator.validate(myResponse).isEmpty(), validator.validate(myResponse).toString());
   }

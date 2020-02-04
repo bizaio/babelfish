@@ -19,7 +19,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.payloads.common.MetaPaginated;
+import io.biza.babelfish.cdr.models.payloads.MetaPaginatedV1;
 
 @DisplayName("MetaPaginated V1 Tests")
 public class MetaPaginatedV1Test {
@@ -33,15 +33,15 @@ public class MetaPaginatedV1Test {
 
   @Test
   @DisplayName("Create valid MetaPaginated")
-  void responseMetaPaginated() {
-    MetaPaginated data = ModelConstants.DEFAULT_META_PAGINATED;
+  void responseMetaPaginatedV1() {
+    MetaPaginatedV1 data = ModelConstants.DEFAULT_META_PAGINATED;
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
   @DisplayName("MetaPaginated Mandatory Fields")
   void responseMetaPaginatedMandatoryFields() {
-    MetaPaginated data = new MetaPaginated();
+    MetaPaginatedV1 data = new MetaPaginatedV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.totalRecords(100);

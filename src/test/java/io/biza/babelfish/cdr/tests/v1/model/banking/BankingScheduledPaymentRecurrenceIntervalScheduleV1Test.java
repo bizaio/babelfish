@@ -20,7 +20,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentRecurrenceIntervalSchedule;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentRecurrenceIntervalScheduleV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingScheduledPaymentRecurrenceIntervalSchedule V1 Tests")
@@ -48,8 +48,8 @@ public class BankingScheduledPaymentRecurrenceIntervalScheduleV1Test {
   @Test
   @DisplayName("BankingScheduledPaymentRecurrenceIntervalSchedule Mandatory Fields")
   void bankingScheduledPaymentRecurrenceIntervalScheduleMandatoryFields() {
-    BankingScheduledPaymentRecurrenceIntervalSchedule data =
-        new BankingScheduledPaymentRecurrenceIntervalSchedule();
+    BankingScheduledPaymentRecurrenceIntervalScheduleV1 data =
+        new BankingScheduledPaymentRecurrenceIntervalScheduleV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.intervals(List.of(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_INTERVAL));

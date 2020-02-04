@@ -21,10 +21,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductV1;
-import io.biza.babelfish.cdr.models.payloads.common.LinksPaginated;
-import io.biza.babelfish.cdr.models.payloads.common.MetaPaginated;
-import io.biza.babelfish.cdr.models.responses.ResponseBankingProductV1List;
-import io.biza.babelfish.cdr.models.responses.container.ResponseBankingProductV1ListData;
+import io.biza.babelfish.cdr.models.payloads.LinksPaginatedV1;
+import io.biza.babelfish.cdr.models.payloads.MetaPaginatedV1;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingProductListV1;
+import io.biza.babelfish.cdr.models.responses.container.ResponseBankingProductListDataV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("ResponseBankingProductList V1 Tests")
@@ -40,24 +40,24 @@ public class ResponseBankingProductListV1Test {
   @Test
   @DisplayName("Create valid ResponseBankingProductList with empty Products")
   void createValidEmptyProductList() {
-    ResponseBankingProductV1List myResponse = new ResponseBankingProductV1List()
-        .links(new LinksPaginated().self(ModelConstants.DEFAULT_SELF_URI)
+    ResponseBankingProductListV1 myResponse = new ResponseBankingProductListV1()
+        .links(new LinksPaginatedV1().self(ModelConstants.DEFAULT_SELF_URI)
             .first(ModelConstants.DEFAULT_FIRST_URI).next(ModelConstants.DEFAULT_NEXT_URI)
             .last(ModelConstants.DEFAULT_LAST_URI).prev(ModelConstants.DEFAULT_PREV_URI))
-        .meta(new MetaPaginated().totalPages(10).totalRecords(100))
-        .data(ResponseBankingProductV1ListData.builder().products(List.of()).build());
+        .meta(new MetaPaginatedV1().totalPages(10).totalRecords(100))
+        .data(ResponseBankingProductListDataV1.builder().products(List.of()).build());
     assertTrue(validator.validate(myResponse).isEmpty(), validator.validate(myResponse).toString());
   }
 
   @Test
   @DisplayName("Create valid ResponseBankingProductList with empty Products")
   void createValidProductList() {
-    ResponseBankingProductV1List myResponse = new ResponseBankingProductV1List()
-        .links(new LinksPaginated().self(ModelConstants.DEFAULT_SELF_URI)
+    ResponseBankingProductListV1 myResponse = new ResponseBankingProductListV1()
+        .links(new LinksPaginatedV1().self(ModelConstants.DEFAULT_SELF_URI)
             .first(ModelConstants.DEFAULT_FIRST_URI).next(ModelConstants.DEFAULT_NEXT_URI)
             .last(ModelConstants.DEFAULT_LAST_URI).prev(ModelConstants.DEFAULT_PREV_URI))
-        .meta(new MetaPaginated().totalPages(10).totalRecords(100))
-        .data(ResponseBankingProductV1ListData.builder()
+        .meta(new MetaPaginatedV1().totalPages(10).totalRecords(100))
+        .data(ResponseBankingProductListDataV1.builder()
             .products(List.of(ModelConstants.DEFAULT_BANKING_PRODUCT_V1)).build());
     assertTrue(validator.validate(myResponse).isEmpty(), validator.validate(myResponse).toString());
   }
@@ -65,12 +65,12 @@ public class ResponseBankingProductListV1Test {
   @Test
   @DisplayName("Create valid ResponseBankingProductList with Invalid Product Data")
   void createValidProductListWithInvalidProduct() {
-    ResponseBankingProductV1List myResponse = new ResponseBankingProductV1List()
-        .links(new LinksPaginated().self(ModelConstants.DEFAULT_SELF_URI)
+    ResponseBankingProductListV1 myResponse = new ResponseBankingProductListV1()
+        .links(new LinksPaginatedV1().self(ModelConstants.DEFAULT_SELF_URI)
             .first(ModelConstants.DEFAULT_FIRST_URI).next(ModelConstants.DEFAULT_NEXT_URI)
             .last(ModelConstants.DEFAULT_LAST_URI).prev(ModelConstants.DEFAULT_PREV_URI))
-        .meta(new MetaPaginated().totalPages(10).totalRecords(100))
-        .data(ResponseBankingProductV1ListData.builder().products(List.of(new BankingProductV1())).build());
+        .meta(new MetaPaginatedV1().totalPages(10).totalRecords(100))
+        .data(ResponseBankingProductListDataV1.builder().products(List.of(new BankingProductV1())).build());
     assertFalse(validator.validate(myResponse).isEmpty(),
         validator.validate(myResponse).toString());
   }

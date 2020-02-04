@@ -19,7 +19,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.payloads.banking.account.payee.domestic.BankingDomesticPayeeCard;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.domestic.BankingDomesticPayeeCardV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingDomesticPayeeCard V1 Tests")
@@ -42,7 +42,7 @@ public class BankingDomesticPayeeCardV1Test {
   @Test
   @DisplayName("BankingDomesticPayeeCard Mandatory Fields")
   void bankingDomesticPayeeCardMandatoryFieldsAccount() {
-    BankingDomesticPayeeCard data = new BankingDomesticPayeeCard();
+    BankingDomesticPayeeCardV1 data = new BankingDomesticPayeeCardV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Unmasked PAN First

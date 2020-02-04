@@ -20,7 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.BankingProductEligibilityType;
-import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductEligibility;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductEligibilityV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingProductEligibility V1 Tests")
@@ -43,8 +43,8 @@ public class BankingProductEligibilityV1Test {
   @Test
   @DisplayName("BankingProductEligibility for Business")
   void bankingProductEligibilityBusiness() {
-    BankingProductEligibility data =
-        new BankingProductEligibility().eligibilityType(BankingProductEligibilityType.BUSINESS);
+    BankingProductEligibilityV1 data =
+        new BankingProductEligibilityV1().eligibilityType(BankingProductEligibilityType.BUSINESS);
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -57,7 +57,7 @@ public class BankingProductEligibilityV1Test {
   @Test
   @DisplayName("BankingProductEligibility for Pension Recipient")
   void bankingProductEligibilityPensionRecipient() {
-    BankingProductEligibility data = new BankingProductEligibility()
+    BankingProductEligibilityV1 data = new BankingProductEligibilityV1()
         .eligibilityType(BankingProductEligibilityType.PENSION_RECIPIENT);
 
     // Null Value is correct
@@ -71,8 +71,8 @@ public class BankingProductEligibilityV1Test {
   @Test
   @DisplayName("BankingProductEligibility for Minimum Age")
   void bankingProductEligibilityMinAge() {
-    BankingProductEligibility data =
-        new BankingProductEligibility().eligibilityType(BankingProductEligibilityType.MIN_AGE);
+    BankingProductEligibilityV1 data =
+        new BankingProductEligibilityV1().eligibilityType(BankingProductEligibilityType.MIN_AGE);
 
     // Null Value is invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -94,8 +94,8 @@ public class BankingProductEligibilityV1Test {
   @Test
   @DisplayName("BankingProductEligibility for Maximum Age")
   void bankingProductEligibilityMaxAge() {
-    BankingProductEligibility data =
-        new BankingProductEligibility().eligibilityType(BankingProductEligibilityType.MAX_AGE);
+    BankingProductEligibilityV1 data =
+        new BankingProductEligibilityV1().eligibilityType(BankingProductEligibilityType.MAX_AGE);
 
     // Null Value is invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -117,8 +117,8 @@ public class BankingProductEligibilityV1Test {
   @Test
   @DisplayName("BankingProductEligibility for Minimum Income")
   void bankingProductEligibilityMinIncome() {
-    BankingProductEligibility data =
-        new BankingProductEligibility().eligibilityType(BankingProductEligibilityType.MIN_INCOME);
+    BankingProductEligibilityV1 data =
+        new BankingProductEligibilityV1().eligibilityType(BankingProductEligibilityType.MIN_INCOME);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -140,8 +140,8 @@ public class BankingProductEligibilityV1Test {
   @Test
   @DisplayName("BankingProductEligibility for Minimum Turnover")
   void bankingProductEligibilityMinTurnover() {
-    BankingProductEligibility data =
-        new BankingProductEligibility().eligibilityType(BankingProductEligibilityType.MIN_TURNOVER);
+    BankingProductEligibilityV1 data =
+        new BankingProductEligibilityV1().eligibilityType(BankingProductEligibilityType.MIN_TURNOVER);
 
     // Null Value invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -163,8 +163,8 @@ public class BankingProductEligibilityV1Test {
   @Test
   @DisplayName("BankingProductEligibility for Staff")
   void bankingProductEligibilityStaff() {
-    BankingProductEligibility data =
-        new BankingProductEligibility().eligibilityType(BankingProductEligibilityType.STAFF);
+    BankingProductEligibilityV1 data =
+        new BankingProductEligibilityV1().eligibilityType(BankingProductEligibilityType.STAFF);
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -177,8 +177,8 @@ public class BankingProductEligibilityV1Test {
   @Test
   @DisplayName("BankingProductEligibility for Student")
   void bankingProductEligibilityStudent() {
-    BankingProductEligibility data =
-        new BankingProductEligibility().eligibilityType(BankingProductEligibilityType.STUDENT);
+    BankingProductEligibilityV1 data =
+        new BankingProductEligibilityV1().eligibilityType(BankingProductEligibilityType.STUDENT);
 
     // Null Value is correct
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -194,12 +194,12 @@ public class BankingProductEligibilityV1Test {
   void bankingProductEligibilityEmploymentStatus() {
 
     // Missing description
-    BankingProductEligibility data = new BankingProductEligibility()
+    BankingProductEligibilityV1 data = new BankingProductEligibilityV1()
         .eligibilityType(BankingProductEligibilityType.EMPLOYMENT_STATUS);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with name
-    data.setAdditionalValue("Employment Status Description");
+    data.additionalValue("Employment Status Description");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
@@ -209,12 +209,12 @@ public class BankingProductEligibilityV1Test {
   void bankingProductEligibilityResidencyStatus() {
 
     // Missing description
-    BankingProductEligibility data = new BankingProductEligibility()
+    BankingProductEligibilityV1 data = new BankingProductEligibilityV1()
         .eligibilityType(BankingProductEligibilityType.RESIDENCY_STATUS);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with name
-    data.setAdditionalValue("Residency Status Description");
+    data.additionalValue("Residency Status Description");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
@@ -223,7 +223,7 @@ public class BankingProductEligibilityV1Test {
   @Test
   @DisplayName("BankingProductEligibility for Natural Person")
   void bankingProductEligibilityNaturalPerson() {
-    BankingProductEligibility data = new BankingProductEligibility()
+    BankingProductEligibilityV1 data = new BankingProductEligibilityV1()
         .eligibilityType(BankingProductEligibilityType.NATURAL_PERSON);
 
     // Null Value is correct
@@ -239,12 +239,12 @@ public class BankingProductEligibilityV1Test {
   @Test
   @DisplayName("BankingProductEligibility for Other")
   void bankingProductEligibilityOther() {
-    BankingProductEligibility data =
-        new BankingProductEligibility().eligibilityType(BankingProductEligibilityType.OTHER);
+    BankingProductEligibilityV1 data =
+        new BankingProductEligibilityV1().eligibilityType(BankingProductEligibilityType.OTHER);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with additional information defined
-    data.setAdditionalInfo("Additional Information on Other feature");
+    data.additionalInfo("Additional Information on Other feature");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 

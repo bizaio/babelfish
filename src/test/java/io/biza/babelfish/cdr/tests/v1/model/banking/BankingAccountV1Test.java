@@ -21,7 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.BankingProductCategory;
-import io.biza.babelfish.cdr.models.payloads.banking.account.BankingAccount;
+import io.biza.babelfish.cdr.models.payloads.banking.account.BankingAccountV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("Banking V1 Tests")
@@ -44,10 +44,10 @@ public class BankingAccountV1Test {
   @Test
   @DisplayName("BankingAccount Mandatory Fields")
   void bankingAccountMandatoryFields() {
-    BankingAccount data = new BankingAccount();
+    BankingAccountV1 data = new BankingAccountV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.setAccountId(UUID.randomUUID().toString());
+    data.accountId(UUID.randomUUID().toString());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.displayName("Display Name");

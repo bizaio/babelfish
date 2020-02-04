@@ -21,7 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.BankingProductFeeType;
-import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductFee;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductFeeV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingProductFee V1 Tests")
@@ -47,7 +47,7 @@ public class BankingProductFeeV1Test {
   @Test
   @DisplayName("BankingProductFee for Periodic")
   void bankingProductFeeUnlimitedTransactions() {
-    BankingProductFee data = new BankingProductFee().name("Fee Name")
+    BankingProductFeeV1 data = new BankingProductFeeV1().name("Fee Name")
         .feeType(BankingProductFeeType.PERIODIC).amount(new BigDecimal("10.00"));
 
     // Null Value invalid
@@ -66,7 +66,7 @@ public class BankingProductFeeV1Test {
   @Test
   @DisplayName("BankingProductFee for Transaction")
   void bankingProductFeeTransaction() {
-    BankingProductFee data = new BankingProductFee().name("Fee Name")
+    BankingProductFeeV1 data = new BankingProductFeeV1().name("Fee Name")
         .feeType(BankingProductFeeType.TRANSACTION).amount(new BigDecimal("10.00"));
 
     // Null Value is correct
@@ -80,7 +80,7 @@ public class BankingProductFeeV1Test {
   @Test
   @DisplayName("BankingProductFee for Withdrawal")
   void bankingProductFeeWithdrawal() {
-    BankingProductFee data = new BankingProductFee().name("Fee Name")
+    BankingProductFeeV1 data = new BankingProductFeeV1().name("Fee Name")
         .feeType(BankingProductFeeType.WITHDRAWAL).amount(new BigDecimal("10.00"));
 
     // Null Value is correct
@@ -94,7 +94,7 @@ public class BankingProductFeeV1Test {
   @Test
   @DisplayName("BankingProductFee for Deposit")
   void bankingProductFeeDeposit() {
-    BankingProductFee data = new BankingProductFee().name("Fee Name")
+    BankingProductFeeV1 data = new BankingProductFeeV1().name("Fee Name")
         .feeType(BankingProductFeeType.DEPOSIT).amount(new BigDecimal("10.00"));
 
     // Null Value is correct
@@ -108,7 +108,7 @@ public class BankingProductFeeV1Test {
   @Test
   @DisplayName("BankingProductFee for Payment")
   void bankingProductFeePayment() {
-    BankingProductFee data = new BankingProductFee().name("Fee Name")
+    BankingProductFeeV1 data = new BankingProductFeeV1().name("Fee Name")
         .feeType(BankingProductFeeType.PAYMENT).amount(new BigDecimal("10.00"));
 
     // Null Value is correct
@@ -122,7 +122,7 @@ public class BankingProductFeeV1Test {
   @Test
   @DisplayName("BankingProductFee for Purchase")
   void bankingProductFeePurchase() {
-    BankingProductFee data = new BankingProductFee().name("Fee Name")
+    BankingProductFeeV1 data = new BankingProductFeeV1().name("Fee Name")
         .feeType(BankingProductFeeType.PURCHASE).amount(new BigDecimal("10.00"));
 
     // Null Value is correct
@@ -136,7 +136,7 @@ public class BankingProductFeeV1Test {
   @Test
   @DisplayName("BankingProductFee for Event")
   void bankingProductFeeEvent() {
-    BankingProductFee data = new BankingProductFee().name("Fee Name")
+    BankingProductFeeV1 data = new BankingProductFeeV1().name("Fee Name")
         .feeType(BankingProductFeeType.EVENT).amount(new BigDecimal("10.00"));
 
     // Null Value is correct
@@ -150,7 +150,7 @@ public class BankingProductFeeV1Test {
   @Test
   @DisplayName("BankingProductFee for Upfront")
   void bankingProductFeeUpfront() {
-    BankingProductFee data = new BankingProductFee().name("Fee Name")
+    BankingProductFeeV1 data = new BankingProductFeeV1().name("Fee Name")
         .feeType(BankingProductFeeType.UPFRONT).amount(new BigDecimal("10.00"));
 
     // Null Value is correct
@@ -164,7 +164,7 @@ public class BankingProductFeeV1Test {
   @Test
   @DisplayName("BankingProductFee for Exit")
   void bankingProductFeeExit() {
-    BankingProductFee data = new BankingProductFee().name("Fee Name")
+    BankingProductFeeV1 data = new BankingProductFeeV1().name("Fee Name")
         .feeType(BankingProductFeeType.EXIT).amount(new BigDecimal("10.00"));
 
     // Null Value is correct

@@ -22,7 +22,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.BankingProductDiscountType;
-import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductDiscount;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductDiscountV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingProductFeeDiscount V1 Tests")
@@ -49,7 +49,7 @@ public class BankingProductFeeDiscountV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscount for Balance")
   void bankingProductFeeDiscountBalance() {
-    BankingProductDiscount data = new BankingProductDiscount().description("Discount Description")
+    BankingProductDiscountV1 data = new BankingProductDiscountV1().description("Discount Description")
         .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.BALANCE);
 
     // Null Value invalid
@@ -72,7 +72,7 @@ public class BankingProductFeeDiscountV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscount for Deposits")
   void bankingProductFeeDiscountDeposits() {
-    BankingProductDiscount data = new BankingProductDiscount().description("Discount Description")
+    BankingProductDiscountV1 data = new BankingProductDiscountV1().description("Discount Description")
         .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.DEPOSITS);
 
     // Null Value invalid
@@ -95,7 +95,7 @@ public class BankingProductFeeDiscountV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscount for Payments")
   void bankingProductFeeDiscountPayments() {
-    BankingProductDiscount data = new BankingProductDiscount().description("Discount Description")
+    BankingProductDiscountV1 data = new BankingProductDiscountV1().description("Discount Description")
         .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.PAYMENTS);
 
     // Null Value invalid
@@ -118,7 +118,7 @@ public class BankingProductFeeDiscountV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscount for Fee Cap")
   void bankingProductFeeDiscountFeeCap() {
-    BankingProductDiscount data = new BankingProductDiscount().description("Discount Description")
+    BankingProductDiscountV1 data = new BankingProductDiscountV1().description("Discount Description")
         .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.FEE_CAP);
 
     // Null Value invalid
@@ -139,7 +139,7 @@ public class BankingProductFeeDiscountV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscount for Eligibility Only")
   void bankingProductFeeDiscountEligibilityOnly() {
-    BankingProductDiscount data = new BankingProductDiscount().description("Discount Description")
+    BankingProductDiscountV1 data = new BankingProductDiscountV1().description("Discount Description")
         .amount(new BigDecimal("10.00")).discountType(BankingProductDiscountType.ELIGIBILITY_ONLY);
     
     // No eligibility criteria is invalid

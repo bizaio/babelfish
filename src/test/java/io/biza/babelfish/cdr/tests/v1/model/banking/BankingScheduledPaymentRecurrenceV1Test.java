@@ -20,7 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.PayloadTypeBankingScheduledPaymentRecurrence;
-import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentRecurrence;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentRecurrenceV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingScheduledPaymentRecurrence V1 Tests")
@@ -44,10 +44,10 @@ public class BankingScheduledPaymentRecurrenceV1Test {
   @Test
   @DisplayName("BankingScheduledPaymentRecurrence Mandatory Fields Once Off")
   void bankingScheduledPaymentRecurrenceMandatoryFieldsOnceOff() {
-    BankingScheduledPaymentRecurrence data = new BankingScheduledPaymentRecurrence();
+    BankingScheduledPaymentRecurrenceV1 data = new BankingScheduledPaymentRecurrenceV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.recurrenceUType(PayloadTypeBankingScheduledPaymentRecurrence.ONCE_OFF);
+    data.type(PayloadTypeBankingScheduledPaymentRecurrence.ONCE_OFF);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.onceOff(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_ONCE_OFF);
@@ -59,10 +59,10 @@ public class BankingScheduledPaymentRecurrenceV1Test {
   @Test
   @DisplayName("BankingScheduledPaymentRecurrence Mandatory Fields Interval Schedule")
   void bankingScheduledPaymentRecurrenceMandatoryFieldsIntervalSchedule() {
-    BankingScheduledPaymentRecurrence data = new BankingScheduledPaymentRecurrence();
+    BankingScheduledPaymentRecurrenceV1 data = new BankingScheduledPaymentRecurrenceV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.recurrenceUType(PayloadTypeBankingScheduledPaymentRecurrence.INTERVAL_SCHEDULE);
+    data.type(PayloadTypeBankingScheduledPaymentRecurrence.INTERVAL_SCHEDULE);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.intervalSchedule(
@@ -74,10 +74,10 @@ public class BankingScheduledPaymentRecurrenceV1Test {
   @Test
   @DisplayName("BankingScheduledPaymentRecurrence Mandatory Fields Last Week Day")
   void bankingScheduledPaymentRecurrenceMandatoryFieldsLastWeekDay() {
-    BankingScheduledPaymentRecurrence data = new BankingScheduledPaymentRecurrence();
+    BankingScheduledPaymentRecurrenceV1 data = new BankingScheduledPaymentRecurrenceV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.recurrenceUType(PayloadTypeBankingScheduledPaymentRecurrence.LAST_WEEKDAY);
+    data.type(PayloadTypeBankingScheduledPaymentRecurrence.LAST_WEEKDAY);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.lastWeekDay(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_LAST_WEEKDAY);
@@ -88,10 +88,10 @@ public class BankingScheduledPaymentRecurrenceV1Test {
   @Test
   @DisplayName("BankingScheduledPaymentRecurrence Mandatory Fields Event Based")
   void bankingScheduledPaymentRecurrenceMandatoryFieldsEventBased() {
-    BankingScheduledPaymentRecurrence data = new BankingScheduledPaymentRecurrence();
+    BankingScheduledPaymentRecurrenceV1 data = new BankingScheduledPaymentRecurrenceV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.recurrenceUType(PayloadTypeBankingScheduledPaymentRecurrence.EVENT_BASED);
+    data.type(PayloadTypeBankingScheduledPaymentRecurrence.EVENT_BASED);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.eventBased(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_EVENT_BASED);

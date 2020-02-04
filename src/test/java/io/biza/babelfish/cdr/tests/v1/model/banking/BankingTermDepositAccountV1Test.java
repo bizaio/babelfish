@@ -21,7 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.BankingTermDepositMaturityInstructions;
-import io.biza.babelfish.cdr.models.payloads.banking.account.BankingTermDepositAccount;
+import io.biza.babelfish.cdr.models.payloads.banking.account.BankingTermDepositAccountV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingTermDeposit V1 Tests")
@@ -44,7 +44,7 @@ public class BankingTermDepositAccountV1Test {
   @Test
   @DisplayName("BankingTermDeposit Mandatory Fields")
   void bankingTermDepositMandatoryFields() {
-    BankingTermDepositAccount data = new BankingTermDepositAccount();
+    BankingTermDepositAccountV1 data = new BankingTermDepositAccountV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.lodgementDate(LocalDate.now());

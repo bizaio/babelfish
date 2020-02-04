@@ -19,7 +19,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.responses.ResponseBankingAccountList;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingAccountListV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("ResponseBankingAccountList V1 Tests")
@@ -42,16 +42,16 @@ public class ResponseBankingAccountListV1Test {
   @Test
   @DisplayName("ResponseBankingAccountList Mandatory Fields")
   void bankingAccountListMandatoryFields() {
-    ResponseBankingAccountList data = new ResponseBankingAccountList();
+    ResponseBankingAccountListV1 data = new ResponseBankingAccountListV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.setLinks(ModelConstants.DEFAULT_LINKS_PAGINATED);
+    data.links(ModelConstants.DEFAULT_LINKS_PAGINATED);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.setMeta(ModelConstants.DEFAULT_META_PAGINATED);
+    data.meta(ModelConstants.DEFAULT_META_PAGINATED);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.setData(ModelConstants.DEFAULT_RESPONSE_BANKING_ACCOUNT_LIST_DATA);
+    data.data(ModelConstants.DEFAULT_RESPONSE_BANKING_ACCOUNT_LIST_DATA);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }

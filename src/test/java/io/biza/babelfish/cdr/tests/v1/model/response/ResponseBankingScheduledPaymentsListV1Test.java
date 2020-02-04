@@ -19,7 +19,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.responses.ResponseBankingScheduledPaymentsList;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingScheduledPaymentsListV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("ResponseBankingScheduledPaymentsList V1 Tests")
@@ -45,16 +45,16 @@ public class ResponseBankingScheduledPaymentsListV1Test {
   @Test
   @DisplayName("ResponseBankingAccountList Mandatory Fields")
   void bankingScheduledPaymentsMandatoryFields() {
-    ResponseBankingScheduledPaymentsList data = new ResponseBankingScheduledPaymentsList();
+    ResponseBankingScheduledPaymentsListV1 data = new ResponseBankingScheduledPaymentsListV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.setLinks(ModelConstants.DEFAULT_LINKS_PAGINATED);
+    data.links(ModelConstants.DEFAULT_LINKS_PAGINATED);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.setMeta(ModelConstants.DEFAULT_META_PAGINATED);
+    data.meta(ModelConstants.DEFAULT_META_PAGINATED);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.setData(ModelConstants.DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST_DATA);
+    data.data(ModelConstants.DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST_DATA);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }

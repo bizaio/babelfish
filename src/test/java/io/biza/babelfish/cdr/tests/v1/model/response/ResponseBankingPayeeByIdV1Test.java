@@ -18,7 +18,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.responses.ResponseBankingPayeeById;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingPayeeByIdV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("ResponseBankingTransactionById V1 Tests")
@@ -34,7 +34,7 @@ public class ResponseBankingPayeeByIdV1Test {
   @Test
   @DisplayName("Create valid ResponseBankingPayeeById")
   void responseBankingPayeeById() {
-    ResponseBankingPayeeById data = ModelConstants.DEFAULT_RESPONSE_BANKING_PAYEE_BY_ID;
+    ResponseBankingPayeeByIdV1 data = ModelConstants.DEFAULT_RESPONSE_BANKING_PAYEE_BY_ID;
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 

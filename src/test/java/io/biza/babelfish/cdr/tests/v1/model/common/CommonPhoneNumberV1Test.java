@@ -20,7 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.CommonPhoneNumberPurpose;
-import io.biza.babelfish.cdr.models.payloads.common.CommonPhoneNumber;
+import io.biza.babelfish.cdr.models.payloads.common.CommonPhoneNumberV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("CommonPhoneNumber V1 Tests")
@@ -43,7 +43,7 @@ public class CommonPhoneNumberV1Test {
   @Test
   @DisplayName("CommonPhoneNumber Mandatory Fields (Home)")
   void commonPhoneNumberMandatoryFieldsHome() {
-    CommonPhoneNumber data = new CommonPhoneNumber();
+    CommonPhoneNumberV1 data = new CommonPhoneNumberV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.purpose(CommonPhoneNumberPurpose.HOME);
@@ -63,7 +63,7 @@ public class CommonPhoneNumberV1Test {
   @Test
   @DisplayName("CommonPhoneNumber Mandatory Fields (Mobile)")
   void commonPhoneNumberMandatoryFieldsMobile() {
-    CommonPhoneNumber data = new CommonPhoneNumber();
+    CommonPhoneNumberV1 data = new CommonPhoneNumberV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.purpose(CommonPhoneNumberPurpose.MOBILE);

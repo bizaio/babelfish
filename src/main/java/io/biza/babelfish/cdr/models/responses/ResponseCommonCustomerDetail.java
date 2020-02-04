@@ -12,14 +12,46 @@
 package io.biza.babelfish.cdr.models.responses;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.biza.babelfish.cdr.abstracts.responses.CDRResponseV1;
+import io.biza.babelfish.cdr.models.payloads.LinksV1;
+import io.biza.babelfish.cdr.models.payloads.MetaV1;
+import io.biza.babelfish.cdr.models.responses.container.ResponseCommonCustomerDetailDataV1;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Schema(description = "Response containing Customer Detail", name = "ResponseCommonCustomerDetail")
+public class ResponseCommonCustomerDetail extends CDRResponseV1 {
+  @Schema(required = true)
+  @JsonProperty("data")
+  @NotNull
+  @Valid
+  ResponseCommonCustomerDetailDataV1 data;
+  
+  @Schema(description = "The Links Object", required = true)
+  @JsonProperty("links")
+  @NotNull
+  @Valid
+  LinksV1 links;
 
+  @Schema(
+      description = "The meta object is used to provide additional information such as second factor authorisation data, traffic management, pagination counts or other purposes that are complementary to the workings of the API.",
+      required = true)
+  @JsonProperty("meta")
+  @Valid
+  MetaV1 meta;
 
-public class ResponseCommonCustomerDetail extends
-    io.biza.babelfish.cdr.abstracts.responses.ResponseCommonCustomerDetail<ResponseCommonCustomerDetail> {
 }
