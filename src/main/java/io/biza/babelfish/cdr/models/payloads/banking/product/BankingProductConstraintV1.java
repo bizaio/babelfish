@@ -39,7 +39,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Banking Product Constraint Definition", name = "BankingProductConstraintV1")
-public class BankingProductConstraintV1 {
+public class BankingProductConstraintV1 extends io.biza.babelfish.cdr.abstracts.payloads.banking.product.BankingProductConstraintV1 {
   @Schema(
       description = "The type of constraint described.  See the next section for an overview of valid values and their meaning",
       required = true)
@@ -63,18 +63,4 @@ public class BankingProductConstraintV1 {
   @JsonProperty("additionalInfoUri")
   URI additionalInfoUri;
   
-  @AssertTrueBabelfish(
-      message = "Additional Value must be an Amount String when Eligibility type is MIN_BALANCE, MAX_BALANCE, OPENING_BALANCE, MAX_LIMIT or MIN_LIMIT",
-      fields = { "additionalValue" })
-  private boolean isValueAmount() {
-    return FormatChecker.isDefined(constraintType()) ? (Arrays
-        .asList(new BankingProductConstraintType[] {BankingProductConstraintType.MIN_BALANCE,
-            BankingProductConstraintType.MAX_BALANCE, BankingProductConstraintType.OPENING_BALANCE,
-            BankingProductConstraintType.MIN_LIMIT, BankingProductConstraintType.MAX_LIMIT})
-        .contains(constraintType())
-            ? FormatChecker.isDefined(additionalValue())
-                && FormatChecker.isAmountString(additionalValue())
-            : true)
-        : true;
-  }
 }
