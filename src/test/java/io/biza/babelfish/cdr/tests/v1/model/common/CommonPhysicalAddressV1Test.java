@@ -20,7 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.PayloadTypeAddress;
-import io.biza.babelfish.cdr.models.payloads.common.CommonPhysicalAddress;
+import io.biza.babelfish.cdr.models.payloads.common.CommonPhysicalAddressV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("CommonPhysicalAddress V1 Tests")
@@ -36,14 +36,14 @@ public class CommonPhysicalAddressV1Test {
   @Test
   @DisplayName("Create valid CommonPhysicalAddress")
   void commonPhysicalAddress() {
-    CommonPhysicalAddress data = ModelConstants.DEFAULT_COMMON_PHYSICAL_ADDRESS;
+    CommonPhysicalAddressV1 data = ModelConstants.DEFAULT_COMMON_PHYSICAL_ADDRESS;
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
   @DisplayName("CommonPhysicalAddress Mandatory Fields (Simple)")
   void commonPhysicalAddressMandatoryFieldsSimple() {
-    CommonPhysicalAddress data = new CommonPhysicalAddress();
+    CommonPhysicalAddressV1 data = new CommonPhysicalAddressV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.type(PayloadTypeAddress.SIMPLE);
@@ -61,7 +61,7 @@ public class CommonPhysicalAddressV1Test {
   @Test
   @DisplayName("CommonPhysicalAddress Mandatory Fields (PAF)")
   void commonPhysicalAddressMandatoryFieldsPAF() {
-    CommonPhysicalAddress data = new CommonPhysicalAddress();
+    CommonPhysicalAddressV1 data = new CommonPhysicalAddressV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.type(PayloadTypeAddress.PAF);

@@ -21,7 +21,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.payloads.banking.account.BankingLoanAccount;
+import io.biza.babelfish.cdr.models.payloads.banking.account.BankingLoanAccountV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingLoanAccount V1 Tests")
@@ -44,10 +44,10 @@ public class BankingLoanAccountV1Test {
   @Test
   @DisplayName("BankingLoanAccount Mandatory Fields")
   void bankingLoanAccountMandatoryFields() {
-    BankingLoanAccount data = new BankingLoanAccount();
+    BankingLoanAccountV1 data = new BankingLoanAccountV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.setLoanEndDate(LocalDate.now());
+    data.loanEndDate(LocalDate.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.nextInstalmentDate(LocalDate.now());

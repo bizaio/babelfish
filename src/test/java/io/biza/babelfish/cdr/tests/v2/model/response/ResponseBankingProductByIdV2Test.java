@@ -18,8 +18,10 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.payloads.common.Links;
-import io.biza.babelfish.cdr.models.responses.ResponseBankingProductV2ById;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.biza.babelfish.cdr.models.payloads.LinksV1;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingProductByIdV2;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("ResponseBankingProductById V1 Tests")
@@ -35,10 +37,27 @@ public class ResponseBankingProductByIdV2Test {
   @Test
   @DisplayName("Create valid ResponseBankingProductById with empty Products")
   void createValidEmptyProductList() {
-    ResponseBankingProductV2ById myResponse =
-        new ResponseBankingProductV2ById().links(new Links().self(ModelConstants.DEFAULT_SELF_URI))
+    ResponseBankingProductByIdV2 myResponse =
+        new ResponseBankingProductByIdV2().links(new LinksV1().self(ModelConstants.DEFAULT_SELF_URI))
             .data(ModelConstants.DEFAULT_BANKING_PRODUCT_DETAIL_V2);
     assertTrue(validator.validate(myResponse).isEmpty(), validator.validate(myResponse).toString());
+  }
+
+  @Test
+  @DisplayName("Raw JSON parse and validate")
+  void parseProductJsonAndValidate() {
+    ObjectMapper mapper = new ObjectMapper();
+    try {
+      ResponseBankingProductByIdV2 productResponse = mapper.readValue(
+          "{\"links\":{\"self\":\"http://localhost/cds-au/v1/banking/products/073e7e70-357d-4858-8f52-92283f4edd6f\"},\"meta\":{},"
+          + "\"data\":{\"productId\":\"073e7e70-357d-4858-8f52-92283f4edd6f\",\"lastUpdated\":\"2020-02-03T06:32:27Z\","
+          + "\"productCategory\":\"TRANS_AND_SAVINGS_ACCOUNTS\",\"name\":\"Example Product\",\"description\":\"Example Product Description\","
+          + "\"brand\":\"Test\",\"brandName\":\"Test\",\"isTailored\":false,\"additionalInformation\":{}}}",
+          ResponseBankingProductByIdV2.class);
+      Validation.buildDefaultValidatorFactory().getValidator().validate(productResponse);
+    } catch (JsonProcessingException e) {
+      e.printStackTrace();
+    }
   }
 
 }

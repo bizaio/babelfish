@@ -19,7 +19,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.payloads.common.Links;
+import io.biza.babelfish.cdr.models.payloads.LinksV1;
 
 @DisplayName("Links V1 Tests")
 public class LinksV1Test {
@@ -33,15 +33,15 @@ public class LinksV1Test {
 
   @Test
   @DisplayName("Create valid Links")
-  void responseLinks() {
-    Links data = ModelConstants.DEFAULT_LINKS;
+  void responseLinksV1() {
+    LinksV1 data = ModelConstants.DEFAULT_LINKS;
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
   @DisplayName("Links Mandatory Fields")
   void responseLinksMandatoryFields() {
-    Links data = new Links();
+    LinksV1 data = new LinksV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.self(ModelConstants.DEFAULT_SELF_URI);

@@ -20,7 +20,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.responses.container.ResponseCommonDiscoveryOutagesListData;
+import io.biza.babelfish.cdr.models.responses.container.ResponseCommonDiscoveryOutagesListDataV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("ResponseDiscoveryOutagesListData V1 Tests")
@@ -36,7 +36,7 @@ public class ResponseDiscoveryOutagesListDataV1Test {
   @Test
   @DisplayName("Create valid ResponseDiscoveryOutagesListData")
   void responseDiscoveryOutagesListData() {
-    ResponseCommonDiscoveryOutagesListData data =
+    ResponseCommonDiscoveryOutagesListDataV1 data =
         ModelConstants.DEFAULT_RESPONSE_COMMON_DISCOVERY_OUTAGES_LIST_DATA;
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
@@ -45,7 +45,7 @@ public class ResponseDiscoveryOutagesListDataV1Test {
   @DisplayName("ResponseDiscoveryOutagesListData Mandatory Fields")
   void responseDiscoveryOutagesListDataMandatoryFields() {
 
-    ResponseCommonDiscoveryOutagesListData data = new ResponseCommonDiscoveryOutagesListData();
+    ResponseCommonDiscoveryOutagesListDataV1 data = new ResponseCommonDiscoveryOutagesListDataV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.outages(List.of(ModelConstants.DEFAULT_COMMON_DISCOVERY_OUTAGE));

@@ -11,46 +11,126 @@
  *******************************************************************************/
 package io.biza.babelfish.cdr.models.payloads.common;
 
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.List;
+import java.util.Locale;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
-import io.biza.babelfish.cdr.abstracts.payloads.common.address.CommonPhysicalAddressWithPurpose;
-import io.biza.babelfish.cdr.enumerations.AddressPurpose;
+import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.biza.babelfish.cdr.converters.CountryStringToLocaleConverter;
+import io.biza.babelfish.cdr.converters.DateTimeStringToOffsetDateTimeConverter;
+import io.biza.babelfish.cdr.converters.LocalDateToStringConverter;
+import io.biza.babelfish.cdr.converters.LocaleToCountryStringConverter;
+import io.biza.babelfish.cdr.converters.OffsetDateTimeToDateTimeStringConverter;
+import io.biza.babelfish.cdr.converters.StringToLocalDateConverter;
+import io.biza.babelfish.cdr.enumerations.CommonOrganisationType;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Schema(description = "Organisation Definition in Detail", name = "CommonOrganisationDetailV1")
+public class CommonOrganisationDetail extends io.biza.babelfish.cdr.abstracts.models.common.CommonOrganisationDetailV1 {
+  
+  @Schema(
+      description = "The date and time that this record was last updated by the customer. If no update has occurred then this date should reflect the initial creation date for the data",
+      format = "date-time")
+  @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
+  @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)
+  @JsonProperty("lastUpdateTime")
+  OffsetDateTime lastUpdateTime;
 
+  @Schema(
+      description = "The first name of the individual providing access on behalf of the organisation. For people with single names this field need not be present.  The single name should be in the lastName field")
+  @JsonProperty("agentFirstName")
+  String agentFirstName;
 
-public class CommonOrganisationDetail
-    extends io.biza.babelfish.cdr.abstracts.payloads.common.organisation.CommonOrganisationDetail<CommonOrganisationDetail> {
+  @Schema(
+      description = "The last name of the individual providing access on behalf of the organisation. For people with single names the single name should be in this field",
+      required = true)
+  @JsonProperty("agentLastName")
+  @NotNull
+  @Valid
+  String agentLastName;
 
-  @AssertTrue(
-      message = "Physical Addresses must contain one and only one address of REGISTERED purpose and zero or one addresses of MAIL purpose")
-  private boolean isPhysicalAddressesCorrect() {
-    if (physicalAddresses() == null) {
-      return true;
-    }
+  @Schema(
+      description = "The role of the individual identified as the agent who is providing authorisation.  Expected to be used for display.  Default to “Unspecified” if the role is not known",
+      required = true)
+  @JsonProperty("agentRole")
+  @NotNull
+  @Valid
+  @Builder.Default
+  String agentRole = "Unspecified";
 
-    int registeredCount = 0;
-    int mailCount = 0;
-    for (CommonPhysicalAddressWithPurpose<?> oneAddress : physicalAddresses()) {
-      if (oneAddress.purpose() == null) {
-        continue;
-      }
-      if (oneAddress.purpose().equals(AddressPurpose.REGISTERED)) {
-        registeredCount++;
-      }
-      if (oneAddress.purpose().equals(AddressPurpose.MAIL)) {
-        mailCount++;
-      }
-    }
+  @Schema(description = "Name of the organisation", required = true)
+  @JsonProperty("businessName")
+  @NotNull
+  @Valid
+  String businessName;
 
-    if (registeredCount == 1 && mailCount <= 1) {
-      return true;
-    }
-    return false;
-  }
+  @Schema(description = "Legal name, if different to the business name")
+  @JsonProperty("legalName")
+  String legalName;
 
+  @Schema(description = "Short name used for communication, if  different to the business name")
+  @JsonProperty("shortName")
+  String shortName;
+
+  @Schema(description = "Australian Business Number for the organisation")
+  @JsonProperty("abn")
+  String abn;
+
+  @Schema(
+      description = "Australian Company Number for the organisation. Required only if an ACN is applicable for the organisation type")
+  @JsonProperty("acn")
+  String acn;
+
+  @Schema(
+      description = "True if registered with the ACNC.  False if not. Absent or null if not confirmed.")
+  @JsonProperty("isACNCRegistered")
+  Boolean isACNCRegistered;
+
+  @Schema(description = "[ANZSIC (2006)](http://www.abs.gov.au/anzsic) code for the organisation.")
+  @JsonProperty("industryCode")
+  String industryCode;
+
+  @Schema(description = "Legal organisation type", required = true)
+  @JsonProperty("organisationType")
+  @NotNull
+  @Valid
+  CommonOrganisationType organisationType;
+
+  @Schema(
+      description = "Enumeration with values from [ISO 3166 Alpha-3](https://www.iso.org/iso-3166-country-codes.html) country codes.  Assumed to be AUS if absent")
+  @JsonSerialize(converter = LocaleToCountryStringConverter.class)
+  @JsonDeserialize(converter = CountryStringToLocaleConverter.class)
+  @JsonProperty("registeredCountry")
+  Locale registeredCountry;
+
+  @Schema(description = "The date the organisation described was established", type = "string")
+  @JsonSerialize(converter = LocalDateToStringConverter.class)
+  @JsonDeserialize(converter = StringToLocalDateConverter.class)
+  @JsonProperty("establishmentDate")
+  LocalDate establishmentDate;
+  
+  @Schema(
+      description = "Must contain at least one address. One and only one address may have the purpose of REGISTERED. Zero or one, and no more than one, record may have the purpose of MAIL. If zero then the REGISTERED address is to be used for mail",
+      required = true)
+  @JsonProperty("physicalAddresses")
+  @NotNull
+  List<CommonPhysicalAddressWithPurposeV1> physicalAddresses;
+  
 }

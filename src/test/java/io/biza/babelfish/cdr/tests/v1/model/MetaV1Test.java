@@ -18,7 +18,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.payloads.common.Meta;
+import io.biza.babelfish.cdr.models.payloads.MetaV1;
 
 @DisplayName("Meta V1 Tests")
 public class MetaV1Test {
@@ -32,8 +32,8 @@ public class MetaV1Test {
 
   @Test
   @DisplayName("Create valid Meta")
-  void responseMeta() {
-    Meta data = ModelConstants.DEFAULT_META;
+  void responseMetaV1() {
+    MetaV1 data = ModelConstants.DEFAULT_META;
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 

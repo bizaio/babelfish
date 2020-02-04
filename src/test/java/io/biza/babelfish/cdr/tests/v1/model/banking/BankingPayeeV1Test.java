@@ -21,7 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.BankingPayeeType;
-import io.biza.babelfish.cdr.models.payloads.banking.account.payee.BankingPayee;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.BankingPayeeV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingPayee V1 Tests")
@@ -44,13 +44,13 @@ public class BankingPayeeV1Test {
   @Test
   @DisplayName("BankingPayee Mandatory Fields")
   void bankingPayeeMandatoryFields() {
-    BankingPayee data = new BankingPayee();
+    BankingPayeeV1 data = new BankingPayeeV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.payeeId(UUID.randomUUID().toString());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.setNickname("Payee Nickname");
+    data.nickname("Payee Nickname");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.payeeType(BankingPayeeType.DOMESTIC);

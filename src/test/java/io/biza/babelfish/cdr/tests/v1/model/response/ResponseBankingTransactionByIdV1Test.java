@@ -19,7 +19,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.responses.ResponseBankingTransactionById;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingTransactionByIdV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("ResponseBankingTransactionById V1 Tests")
@@ -35,23 +35,23 @@ public class ResponseBankingTransactionByIdV1Test {
   @Test
   @DisplayName("Create valid ResponseBankingTransactionById")
   void responseBankingTransactionById() {
-    ResponseBankingTransactionById data = ModelConstants.DEFAULT_RESPONSE_BANKING_TRANSACTION_BY_ID;
+    ResponseBankingTransactionByIdV1 data = ModelConstants.DEFAULT_RESPONSE_BANKING_TRANSACTION_BY_ID;
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
   @DisplayName("ResponseBankingTransactionById Mandatory Fields")
   void responseBankingTransactionByIdRequiredFields() {
-    ResponseBankingTransactionById data = new ResponseBankingTransactionById();
+    ResponseBankingTransactionByIdV1 data = new ResponseBankingTransactionByIdV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.setLinks(ModelConstants.DEFAULT_LINKS);
+    data.links(ModelConstants.DEFAULT_LINKS);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.setData(ModelConstants.DEFAULT_BANKING_TRANSACTION_DETAIL);
+    data.data(ModelConstants.DEFAULT_BANKING_TRANSACTION_DETAIL);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.setMeta(ModelConstants.DEFAULT_META);
+    data.meta(ModelConstants.DEFAULT_META);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }

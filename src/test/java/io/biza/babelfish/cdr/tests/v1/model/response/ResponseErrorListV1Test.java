@@ -20,7 +20,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.responses.ResponseErrorList;
+import io.biza.babelfish.cdr.models.responses.ResponseErrorListV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("ResponseErrorList V1 Tests")
@@ -36,7 +36,7 @@ public class ResponseErrorListV1Test {
   @Test
   @DisplayName("Create valid ResponseErrorList")
   void responseErrorList() {
-    ResponseErrorList data = ModelConstants.DEFAULT_RESPONSE_ERROR_LIST;
+    ResponseErrorListV1 data = ModelConstants.DEFAULT_RESPONSE_ERROR_LIST;
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
@@ -44,7 +44,7 @@ public class ResponseErrorListV1Test {
   @Test
   @DisplayName("ResponseErrorList Mandatory Fields")
   void responseErrorListMandatoryFields() {
-    ResponseErrorList data = new ResponseErrorList();
+    ResponseErrorListV1 data = new ResponseErrorListV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.errors(List.of(ModelConstants.DEFAULT_ERROR));

@@ -21,7 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.CommonDiscoveryStatusType;
-import io.biza.babelfish.cdr.models.payloads.common.CommonDiscoveryStatus;
+import io.biza.babelfish.cdr.models.payloads.common.CommonDiscoveryStatusV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("CommonDiscoveryStatus V1 Tests")
@@ -44,7 +44,7 @@ public class CommonDiscoveryStatusV1Test {
   @Test
   @DisplayName("CommonDiscoveryStatus Mandatory Fields OK Status")
   void commonDiscoveryStatusMandatoryFieldsOk() {
-    CommonDiscoveryStatus data = new CommonDiscoveryStatus();
+    CommonDiscoveryStatusV1 data = new CommonDiscoveryStatusV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.status(CommonDiscoveryStatusType.OK);
@@ -69,7 +69,7 @@ public class CommonDiscoveryStatusV1Test {
   @Test
   @DisplayName("CommonDiscoveryStatus Mandatory Fields PARTIAL_FAILURE Status")
   void commonDiscoveryStatusMandatoryFieldsPartialFailure() {
-    CommonDiscoveryStatus data = new CommonDiscoveryStatus();
+    CommonDiscoveryStatusV1 data = new CommonDiscoveryStatusV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.status(CommonDiscoveryStatusType.PARTIAL_FAILURE);
@@ -91,7 +91,7 @@ public class CommonDiscoveryStatusV1Test {
   @Test
   @DisplayName("CommonDiscoveryStatus Mandatory Fields UNAVAILABLE Status")
   void commonDiscoveryStatusMandatoryFieldsUnavailable() {
-    CommonDiscoveryStatus data = new CommonDiscoveryStatus();
+    CommonDiscoveryStatusV1 data = new CommonDiscoveryStatusV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.status(CommonDiscoveryStatusType.UNAVAILABLE);
@@ -112,7 +112,7 @@ public class CommonDiscoveryStatusV1Test {
   @Test
   @DisplayName("CommonDiscoveryStatus Mandatory Fields SCHEDULED_OUTAGE Status")
   void commonDiscoveryStatusMandatoryFieldsScheduledOutage() {
-    CommonDiscoveryStatus data = new CommonDiscoveryStatus();
+    CommonDiscoveryStatusV1 data = new CommonDiscoveryStatusV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.status(CommonDiscoveryStatusType.SCHEDULED_OUTAGE);

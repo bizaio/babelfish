@@ -21,7 +21,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.payloads.banking.account.balance.BankingBalance;
+import io.biza.babelfish.cdr.models.payloads.banking.account.balance.BankingBalanceV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingBalance V1 Tests")
@@ -44,10 +44,10 @@ public class BankingBalanceV1Test {
   @Test
   @DisplayName("BankingBalance Mandatory Fields")
   void bankingBalanceMandatoryFields() {
-    BankingBalance data = new BankingBalance();
+    BankingBalanceV1 data = new BankingBalanceV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.setAccountId(UUID.randomUUID().toString());
+    data.accountId(UUID.randomUUID().toString());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.currentBalance(new BigDecimal("1000.00"));

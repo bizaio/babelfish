@@ -19,7 +19,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.payloads.banking.account.payee.international.BankingInternationalPayee;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.international.BankingInternationalPayeeV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingInternationalPayee V1 Tests")
@@ -42,7 +42,7 @@ public class BankingInternationalPayeeV1Test {
   @Test
   @DisplayName("BankingInternationalPayee Mandatory Fields")
   void bankingInternationalPayeeMandatoryFields() {
-    BankingInternationalPayee data = new BankingInternationalPayee();
+    BankingInternationalPayeeV1 data = new BankingInternationalPayeeV1();
     data.beneficiaryDetails(ModelConstants.DEFAULT_BANKING_INTERNATIONAL_PAYEE_BENEFICIARY_DETAILS);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

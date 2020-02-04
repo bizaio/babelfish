@@ -19,7 +19,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.responses.ResponseBankingAccountById;
+import io.biza.babelfish.cdr.models.responses.ResponseBankingAccountByIdV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("ResponseBankingAccountById V1 Tests")
@@ -42,16 +42,16 @@ public class ResponseBankingAccountByIdV1Test {
   @Test
   @DisplayName("ResponseBankingAccountById Mandatory Fields")
   void responseBankingAccountByIdMandatoryFields() {
-    ResponseBankingAccountById data = new ResponseBankingAccountById();
+    ResponseBankingAccountByIdV1 data = new ResponseBankingAccountByIdV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.setLinks(ModelConstants.DEFAULT_LINKS);
+    data.links(ModelConstants.DEFAULT_LINKS);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.setData(ModelConstants.DEFAULT_BANKING_ACCOUNT_DETAIL);
+    data.data(ModelConstants.DEFAULT_BANKING_ACCOUNT_DETAIL);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.setMeta(ModelConstants.DEFAULT_META);
+    data.meta(ModelConstants.DEFAULT_META);
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }

@@ -24,7 +24,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.BankingTransactionStatus;
 import io.biza.babelfish.cdr.enumerations.BankingTransactionType;
-import io.biza.babelfish.cdr.models.payloads.banking.account.transaction.BankingTransaction;
+import io.biza.babelfish.cdr.models.payloads.banking.account.transaction.BankingTransactionV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingTransaction V1 Tests")
@@ -47,7 +47,7 @@ public class BankingTransactionV1Test {
   @Test
   @DisplayName("BankingTransaction Mandatory Fields for POSTED Transactions")
   void bankingTransactionMandatoryFieldsPosted() {
-    BankingTransaction data = new BankingTransaction();
+    BankingTransactionV1 data = new BankingTransactionV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.accountId(UUID.randomUUID().toString());
@@ -83,7 +83,7 @@ public class BankingTransactionV1Test {
   @Test
   @DisplayName("BankingTransaction Mandatory Fields for PENDING Transactions")
   void bankingTransactionMandatoryFieldsPending() {
-    BankingTransaction data = new BankingTransaction();
+    BankingTransactionV1 data = new BankingTransactionV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.accountId(UUID.randomUUID().toString());

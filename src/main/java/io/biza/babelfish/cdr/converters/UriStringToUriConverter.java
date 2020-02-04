@@ -12,6 +12,7 @@
 package io.biza.babelfish.cdr.converters;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import com.fasterxml.jackson.databind.util.StdConverter;
 
 /**
@@ -24,6 +25,15 @@ public class UriStringToUriConverter extends StdConverter<String, URI> {
   public URI convert(String value) {
     if (null == value || value == "")
       return null;
-    return URI.create(value);
+
+    try {
+      URI uri = new URI(value);
+      if(!uri.isAbsolute() || uri.isOpaque()) {
+        throw new RuntimeException("Supplied URL must be absolute AND not opaque");
+      }
+      return uri;
+    } catch (URISyntaxException e) {
+      throw new RuntimeException("Invalid URL Specified: " + e.getReason());
+    }
   }
 }

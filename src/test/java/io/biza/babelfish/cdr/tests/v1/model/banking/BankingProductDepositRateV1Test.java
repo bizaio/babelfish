@@ -21,7 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.BankingProductDepositRateType;
-import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductDepositRate;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductDepositRateV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingProductDepositRate V1 Tests")
@@ -46,7 +46,7 @@ public class BankingProductDepositRateV1Test {
   @Test
   @DisplayName("BankingProductDepositRate for Fixed")
   void bankingProductDepositRateFixed() {
-    BankingProductDepositRate data = new BankingProductDepositRate()
+    BankingProductDepositRateV1 data = new BankingProductDepositRateV1()
         .depositRateType(BankingProductDepositRateType.FIXED).rate(new BigDecimal("0.05"));
 
     // Null Value invalid
@@ -64,33 +64,33 @@ public class BankingProductDepositRateV1Test {
   @Test
   @DisplayName("BankingProductDepositRate for Bonus")
   void bankingProductDepositRateBonus() {
-    BankingProductDepositRate data = new BankingProductDepositRate()
+    BankingProductDepositRateV1 data = new BankingProductDepositRateV1()
         .depositRateType(BankingProductDepositRateType.BONUS).rate(new BigDecimal("0.05"));
 
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with Description
-    data.setAdditionalValue("Description text");
+    data.additionalValue("Description text");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
   @DisplayName("BankingProductDepositRate for Bundle Bonus")
   void bankingProductDepositRateBundleBonus() {
-    BankingProductDepositRate data = new BankingProductDepositRate()
+    BankingProductDepositRateV1 data = new BankingProductDepositRateV1()
         .depositRateType(BankingProductDepositRateType.BUNDLE_BONUS).rate(new BigDecimal("0.05"));
 
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with Description
-    data.setAdditionalValue("Description text");
+    data.additionalValue("Description text");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
   @DisplayName("BankingProductDepositRate for Variable")
   void bankingProductDepositRateTransaction() {
-    BankingProductDepositRate data = new BankingProductDepositRate()
+    BankingProductDepositRateV1 data = new BankingProductDepositRateV1()
         .depositRateType(BankingProductDepositRateType.VARIABLE).rate(new BigDecimal("0.05"));
 
     // Null Value is correct
@@ -104,7 +104,7 @@ public class BankingProductDepositRateV1Test {
   @Test
   @DisplayName("BankingProductDepositRate for Introductory")
   void bankingProductDepositRateIntroductory() {
-    BankingProductDepositRate data = new BankingProductDepositRate()
+    BankingProductDepositRateV1 data = new BankingProductDepositRateV1()
         .depositRateType(BankingProductDepositRateType.INTRODUCTORY).rate(new BigDecimal("0.05"));
 
     // Null Value invalid
@@ -123,26 +123,26 @@ public class BankingProductDepositRateV1Test {
   @Test
   @DisplayName("BankingProductDepositRate for Floating")
   void bankingProductDepositRateFloating() {
-    BankingProductDepositRate data = new BankingProductDepositRate()
+    BankingProductDepositRateV1 data = new BankingProductDepositRateV1()
         .depositRateType(BankingProductDepositRateType.FLOATING).rate(new BigDecimal("0.05"));
 
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with Description
-    data.setAdditionalValue("Description text");
+    data.additionalValue("Description text");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
   @DisplayName("BankingProductDepositRate for Market Linked")
   void bankingProductDepositRateMarketLinked() {
-    BankingProductDepositRate data = new BankingProductDepositRate()
+    BankingProductDepositRateV1 data = new BankingProductDepositRateV1()
         .depositRateType(BankingProductDepositRateType.MARKET_LINKED).rate(new BigDecimal("0.05"));
 
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with Description
-    data.setAdditionalValue("Description text");
+    data.additionalValue("Description text");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 

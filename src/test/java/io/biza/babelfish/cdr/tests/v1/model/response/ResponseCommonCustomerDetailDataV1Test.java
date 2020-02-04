@@ -20,7 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.PayloadTypeCustomer;
-import io.biza.babelfish.cdr.models.responses.container.ResponseCommonCustomerDetailData;
+import io.biza.babelfish.cdr.models.responses.container.ResponseCommonCustomerDetailDataV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("ResponseCommonCustomerDetailData V1 Tests")
@@ -36,7 +36,7 @@ public class ResponseCommonCustomerDetailDataV1Test {
   @Test
   @DisplayName("Create valid ResponseCommonCustomerDetailData")
   void responseCommonCustomerDetailData() {
-    ResponseCommonCustomerDetailData data =
+    ResponseCommonCustomerDetailDataV1 data =
         ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL_DATA;
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
@@ -44,7 +44,7 @@ public class ResponseCommonCustomerDetailDataV1Test {
   @Test
   @DisplayName("ResponseCommonCustomerDetailData Mandatory Fields (Person)")
   void responseCommonCustomerDetailDataMandatoryFieldsPerson() {
-    ResponseCommonCustomerDetailData data = new ResponseCommonCustomerDetailData();
+    ResponseCommonCustomerDetailDataV1 data = new ResponseCommonCustomerDetailDataV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.type(PayloadTypeCustomer.PERSON);
@@ -62,7 +62,7 @@ public class ResponseCommonCustomerDetailDataV1Test {
   @Test
   @DisplayName("ResponseCommonCustomerDetailData Mandatory Fields (Organisation)")
   void responseCommonCustomerDetailDataMandatoryFieldsOrganisation() {
-    ResponseCommonCustomerDetailData data = new ResponseCommonCustomerDetailData();
+    ResponseCommonCustomerDetailDataV1 data = new ResponseCommonCustomerDetailDataV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.type(PayloadTypeCustomer.ORGANISATION);

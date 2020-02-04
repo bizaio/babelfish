@@ -20,7 +20,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentFrom;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentFromV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingScheduledPaymentFrom V1 Tests")
@@ -43,7 +43,7 @@ public class BankingScheduledPaymentFromV1Test {
   @Test
   @DisplayName("BankingScheduledPaymentFrom Mandatory Fields")
   void bankingScheduledPaymentFromMandatoryFields() {
-    BankingScheduledPaymentFrom data = new BankingScheduledPaymentFrom();
+    BankingScheduledPaymentFromV1 data = new BankingScheduledPaymentFromV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.accountId(UUID.randomUUID().toString());

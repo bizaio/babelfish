@@ -20,7 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.BankingProductDiscountEligibilityType;
-import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductFeeDiscountEligibility;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductFeeDiscountEligibilityV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingProductDiscountEligibility V1 Tests")
@@ -46,7 +46,7 @@ public class BankingProductDiscountEligibilityV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscountEligibility for Business")
   void bankingProductFeeDiscountEligibilityBusiness() {
-    BankingProductFeeDiscountEligibility data = new BankingProductFeeDiscountEligibility()
+    BankingProductFeeDiscountEligibilityV1 data = new BankingProductFeeDiscountEligibilityV1()
         .discountEligibilityType(BankingProductDiscountEligibilityType.BUSINESS);
 
     // Null Value is correct
@@ -60,7 +60,7 @@ public class BankingProductDiscountEligibilityV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscountEligibility for Pension Recipient")
   void bankingProductFeeDiscountEligibilityPensionRecipient() {
-    BankingProductFeeDiscountEligibility data = new BankingProductFeeDiscountEligibility()
+    BankingProductFeeDiscountEligibilityV1 data = new BankingProductFeeDiscountEligibilityV1()
         .discountEligibilityType(BankingProductDiscountEligibilityType.PENSION_RECIPIENT);
 
     // Null Value is correct
@@ -74,7 +74,7 @@ public class BankingProductDiscountEligibilityV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscountEligibility for Minimum Age")
   void bankingProductFeeDiscountEligibilityMinAge() {
-    BankingProductFeeDiscountEligibility data = new BankingProductFeeDiscountEligibility()
+    BankingProductFeeDiscountEligibilityV1 data = new BankingProductFeeDiscountEligibilityV1()
         .discountEligibilityType(BankingProductDiscountEligibilityType.MIN_AGE);
 
     // Null Value is invalid
@@ -97,7 +97,7 @@ public class BankingProductDiscountEligibilityV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscountEligibility for Maximum Age")
   void bankingProductFeeDiscountEligibilityMaxAge() {
-    BankingProductFeeDiscountEligibility data = new BankingProductFeeDiscountEligibility()
+    BankingProductFeeDiscountEligibilityV1 data = new BankingProductFeeDiscountEligibilityV1()
         .discountEligibilityType(BankingProductDiscountEligibilityType.MAX_AGE);
 
     // Null Value is invalid
@@ -120,7 +120,7 @@ public class BankingProductDiscountEligibilityV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscountEligibility for Minimum Income")
   void bankingProductFeeDiscountEligibilityMinIncome() {
-    BankingProductFeeDiscountEligibility data = new BankingProductFeeDiscountEligibility()
+    BankingProductFeeDiscountEligibilityV1 data = new BankingProductFeeDiscountEligibilityV1()
         .discountEligibilityType(BankingProductDiscountEligibilityType.MIN_INCOME);
 
     // Null Value invalid
@@ -143,7 +143,7 @@ public class BankingProductDiscountEligibilityV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscountEligibility for Minimum Turnover")
   void bankingProductFeeDiscountEligibilityMinTurnover() {
-    BankingProductFeeDiscountEligibility data = new BankingProductFeeDiscountEligibility()
+    BankingProductFeeDiscountEligibilityV1 data = new BankingProductFeeDiscountEligibilityV1()
         .discountEligibilityType(BankingProductDiscountEligibilityType.MIN_TURNOVER);
 
     // Null Value invalid
@@ -166,7 +166,7 @@ public class BankingProductDiscountEligibilityV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscountEligibility for Staff")
   void bankingProductFeeDiscountEligibilityStaff() {
-    BankingProductFeeDiscountEligibility data = new BankingProductFeeDiscountEligibility()
+    BankingProductFeeDiscountEligibilityV1 data = new BankingProductFeeDiscountEligibilityV1()
         .discountEligibilityType(BankingProductDiscountEligibilityType.STAFF);
 
     // Null Value is correct
@@ -180,7 +180,7 @@ public class BankingProductDiscountEligibilityV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscountEligibility for Student")
   void bankingProductFeeDiscountEligibilityStudent() {
-    BankingProductFeeDiscountEligibility data = new BankingProductFeeDiscountEligibility()
+    BankingProductFeeDiscountEligibilityV1 data = new BankingProductFeeDiscountEligibilityV1()
         .discountEligibilityType(BankingProductDiscountEligibilityType.STUDENT);
 
     // Null Value is correct
@@ -197,12 +197,12 @@ public class BankingProductDiscountEligibilityV1Test {
   void bankingProductFeeDiscountEligibilityEmploymentStatus() {
 
     // Missing description
-    BankingProductFeeDiscountEligibility data = new BankingProductFeeDiscountEligibility()
+    BankingProductFeeDiscountEligibilityV1 data = new BankingProductFeeDiscountEligibilityV1()
         .discountEligibilityType(BankingProductDiscountEligibilityType.EMPLOYMENT_STATUS);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with name
-    data.setAdditionalValue("Employment Status Description");
+    data.additionalValue("Employment Status Description");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
@@ -212,12 +212,12 @@ public class BankingProductDiscountEligibilityV1Test {
   void bankingProductFeeDiscountEligibilityResidencyStatus() {
 
     // Missing description
-    BankingProductFeeDiscountEligibility data = new BankingProductFeeDiscountEligibility()
+    BankingProductFeeDiscountEligibilityV1 data = new BankingProductFeeDiscountEligibilityV1()
         .discountEligibilityType(BankingProductDiscountEligibilityType.RESIDENCY_STATUS);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with name
-    data.setAdditionalValue("Residency Status Description");
+    data.additionalValue("Residency Status Description");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
@@ -226,7 +226,7 @@ public class BankingProductDiscountEligibilityV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscountEligibility for Natural Person")
   void bankingProductFeeDiscountEligibilityNaturalPerson() {
-    BankingProductFeeDiscountEligibility data = new BankingProductFeeDiscountEligibility()
+    BankingProductFeeDiscountEligibilityV1 data = new BankingProductFeeDiscountEligibilityV1()
         .discountEligibilityType(BankingProductDiscountEligibilityType.NATURAL_PERSON);
 
     // Null Value is correct
@@ -240,7 +240,7 @@ public class BankingProductDiscountEligibilityV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscountEligibility for Introductory Rate")
   void bankingProductFeeDiscountEligibilityIntroductoryRate() {
-    BankingProductFeeDiscountEligibility data = new BankingProductFeeDiscountEligibility()
+    BankingProductFeeDiscountEligibilityV1 data = new BankingProductFeeDiscountEligibilityV1()
         .discountEligibilityType(BankingProductDiscountEligibilityType.INTRODUCTORY);
 
     // Null Value invalid
@@ -258,12 +258,12 @@ public class BankingProductDiscountEligibilityV1Test {
   @Test
   @DisplayName("BankingProductFeeDiscountEligibility for Other")
   void bankingProductFeeDiscountEligibilityOther() {
-    BankingProductFeeDiscountEligibility data = new BankingProductFeeDiscountEligibility()
+    BankingProductFeeDiscountEligibilityV1 data = new BankingProductFeeDiscountEligibilityV1()
         .discountEligibilityType(BankingProductDiscountEligibilityType.OTHER);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Correct with additional information defined
-    data.setAdditionalInfo("Additional Information on Other feature");
+    data.additionalInfo("Additional Information on Other feature");
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 

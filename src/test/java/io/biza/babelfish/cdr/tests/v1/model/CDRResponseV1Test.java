@@ -20,9 +20,9 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.payloads.CDRResponse;
-import io.biza.babelfish.cdr.models.payloads.common.Links;
-import io.biza.babelfish.cdr.models.payloads.common.Meta;
+import io.biza.babelfish.cdr.models.payloads.CDRResponseV1;
+import io.biza.babelfish.cdr.models.payloads.LinksV1;
+import io.biza.babelfish.cdr.models.payloads.MetaV1;
 
 @DisplayName("CDR Response V1 Tests")
 public class CDRResponseV1Test {
@@ -37,22 +37,22 @@ public class CDRResponseV1Test {
   @Test
   @DisplayName("Create valid CDR Response V1")
   void createValidCDRResponse() {
-    CDRResponse myResponse =
-        new CDRResponse().links(new Links().self(URI.create("http://localhost/"))).meta(new Meta());
+    CDRResponseV1 myResponse =
+        new CDRResponseV1().links(new LinksV1().self(URI.create("http://localhost/"))).meta(new MetaV1());
     assertTrue(validator.validate(myResponse).isEmpty());
   }
 
   @Test
   @DisplayName("Create CDR Response V1 with Missing Links and Meta")
-  void createCDRResponseWithMissingLinksAndMeta() {
-    CDRResponse myResponse = new CDRResponse();
+  void createCDRResponseWithMissingLinksAndMetaV1() {
+    CDRResponseV1 myResponse = new CDRResponseV1();
     assertFalse(validator.validate(myResponse).isEmpty());
   }
 
   @Test
   @DisplayName("Create CDR Response V1 with Missing Links")
-  void createCDRResponseWithMissingLinks() {
-    CDRResponse myResponse = new CDRResponse().meta(new Meta());
+  void createCDRResponseWithMissingLinksV1() {
+    CDRResponseV1 myResponse = new CDRResponseV1().meta(new MetaV1());
     assertFalse(validator.validate(myResponse).isEmpty());
   }
 
@@ -60,7 +60,7 @@ public class CDRResponseV1Test {
   @Test
   @DisplayName("Create CDR Response V1 with Links and broken self link")
   void createCDRResponseWithMissingLinksSelf() {
-    CDRResponse myResponse = new CDRResponse().links(new Links()).meta(new Meta());
+    CDRResponseV1 myResponse = new CDRResponseV1().links(new LinksV1()).meta(new MetaV1());
     assertFalse(validator.validate(myResponse).isEmpty());
   }
 

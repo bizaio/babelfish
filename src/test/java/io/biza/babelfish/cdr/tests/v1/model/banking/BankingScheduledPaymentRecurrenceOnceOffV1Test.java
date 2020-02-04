@@ -20,7 +20,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentRecurrenceOnceOff;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled.BankingScheduledPaymentRecurrenceOnceOffV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingScheduledPaymentRecurrenceOnceOff V1 Tests")
@@ -46,7 +46,7 @@ public class BankingScheduledPaymentRecurrenceOnceOffV1Test {
   @Test
   @DisplayName("BankingScheduledPaymentRecurrenceOnceOff Mandatory Fields")
   void bankingScheduledPaymentRecurrenceOnceOffMandatoryFields() {
-    BankingScheduledPaymentRecurrenceOnceOff data = new BankingScheduledPaymentRecurrenceOnceOff();
+    BankingScheduledPaymentRecurrenceOnceOffV1 data = new BankingScheduledPaymentRecurrenceOnceOffV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.paymentDate(LocalDate.now());

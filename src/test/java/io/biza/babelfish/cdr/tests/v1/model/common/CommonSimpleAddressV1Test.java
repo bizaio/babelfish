@@ -21,7 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.Constants;
-import io.biza.babelfish.cdr.models.payloads.common.CommonSimpleAddress;
+import io.biza.babelfish.cdr.models.payloads.common.CommonSimpleAddressV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("CommonSimpleAddress V1 Tests")
@@ -39,14 +39,14 @@ public class CommonSimpleAddressV1Test {
   @Test
   @DisplayName("Create valid CommonSimpleAddress")
   void responseCommonSimpleAddress() {
-    CommonSimpleAddress data = ModelConstants.DEFAULT_COMMON_SIMPLE_ADDRESS;
+    CommonSimpleAddressV1 data = ModelConstants.DEFAULT_COMMON_SIMPLE_ADDRESS;
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
   @DisplayName("CommonSimpleAddress Mandatory Fields (Australia)")
   void responseCommonSimpleAddressMandatoryFieldsAustralia() {
-    CommonSimpleAddress data = new CommonSimpleAddress();
+    CommonSimpleAddressV1 data = new CommonSimpleAddressV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.addressLine1("10 McGill Street");
@@ -66,7 +66,7 @@ public class CommonSimpleAddressV1Test {
   @Test
   @DisplayName("CommonSimpleAddress Mandatory Fields (International)")
   void responseCommonSimpleAddressMandatoryFieldsInternational() {
-    CommonSimpleAddress data = new CommonSimpleAddress();
+    CommonSimpleAddressV1 data = new CommonSimpleAddressV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.addressLine1("10 McGill Street");

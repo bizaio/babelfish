@@ -20,7 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.PayloadTypeBankingDomesticPayeePayId;
-import io.biza.babelfish.cdr.models.payloads.banking.account.payee.domestic.BankingDomesticPayeePayId;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.domestic.BankingDomesticPayeePayIdV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingDomesticPayeePayId V1 Tests")
@@ -43,7 +43,7 @@ public class BankingDomesticPayeePayIdV1Test {
   @Test
   @DisplayName("BankingDomesticPayeePayId Mandatory Fields for Email")
   void bankingDomesticPayeePayIdMandatoryFieldsEmail() {
-    BankingDomesticPayeePayId data = new BankingDomesticPayeePayId();
+    BankingDomesticPayeePayIdV1 data = new BankingDomesticPayeePayIdV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.type(PayloadTypeBankingDomesticPayeePayId.EMAIL);
@@ -60,7 +60,7 @@ public class BankingDomesticPayeePayIdV1Test {
   @Test
   @DisplayName("BankingDomesticPayeePayId Mandatory Fields for ABN")
   void bankingDomesticPayeePayIdMandatoryFieldsABN() {
-    BankingDomesticPayeePayId data = new BankingDomesticPayeePayId();
+    BankingDomesticPayeePayIdV1 data = new BankingDomesticPayeePayIdV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.type(PayloadTypeBankingDomesticPayeePayId.ABN);
@@ -91,7 +91,7 @@ public class BankingDomesticPayeePayIdV1Test {
   @Test
   @DisplayName("BankingDomesticPayeePayId Mandatory Fields for PhoneNumber")
   void bankingDomesticPayeePayIdMandatoryFieldsPhoneNumber() {
-    BankingDomesticPayeePayId data = new BankingDomesticPayeePayId();
+    BankingDomesticPayeePayIdV1 data = new BankingDomesticPayeePayIdV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.type(PayloadTypeBankingDomesticPayeePayId.TELEPHONE);
@@ -118,7 +118,7 @@ public class BankingDomesticPayeePayIdV1Test {
   @Test
   @DisplayName("BankingDomesticPayeePayId Mandatory Fields for OrgIdentifier")
   void bankingDomesticPayeePayIdMandatoryFieldsOrgIdentifier() {
-    BankingDomesticPayeePayId data = new BankingDomesticPayeePayId();
+    BankingDomesticPayeePayIdV1 data = new BankingDomesticPayeePayIdV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.type(PayloadTypeBankingDomesticPayeePayId.ORG_IDENTIFIER);

@@ -20,7 +20,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.biza.babelfish.cdr.models.payloads.common.CommonPersonDetail;
+import io.biza.babelfish.cdr.models.payloads.common.CommonPersonDetailV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("CommonPersonDetail V1 Tests")
@@ -43,7 +43,7 @@ public class CommonPersonDetailV1Test {
   @Test
   @DisplayName("CommonPersonDetail Mandatory Fields")
   void commonPersonDetailMandatoryFields() {
-    CommonPersonDetail data = new CommonPersonDetail();
+    CommonPersonDetailV1 data = new CommonPersonDetailV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.lastName("Last");

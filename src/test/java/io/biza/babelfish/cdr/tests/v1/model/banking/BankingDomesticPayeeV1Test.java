@@ -20,7 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.PayloadTypeBankingDomesticPayee;
-import io.biza.babelfish.cdr.models.payloads.banking.account.payee.domestic.BankingDomesticPayee;
+import io.biza.babelfish.cdr.models.payloads.banking.account.payee.domestic.BankingDomesticPayeeV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingDomesticPayee V1 Tests")
@@ -43,7 +43,7 @@ public class BankingDomesticPayeeV1Test {
   @Test
   @DisplayName("BankingDomesticPayee Mandatory Fields for Account")
   void bankingDomesticPayeeMandatoryFieldsAccount() {
-    BankingDomesticPayee data = new BankingDomesticPayee();
+    BankingDomesticPayeeV1 data = new BankingDomesticPayeeV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.payeeAccountType(PayloadTypeBankingDomesticPayee.ACCOUNT);
@@ -59,7 +59,7 @@ public class BankingDomesticPayeeV1Test {
   @Test
   @DisplayName("BankingDomesticPayee Mandatory Fields for Card")
   void bankingDomesticPayeeMandatoryFieldsCard() {
-    BankingDomesticPayee data = new BankingDomesticPayee();
+    BankingDomesticPayeeV1 data = new BankingDomesticPayeeV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.payeeAccountType(PayloadTypeBankingDomesticPayee.CARD);
@@ -75,7 +75,7 @@ public class BankingDomesticPayeeV1Test {
   @Test
   @DisplayName("BankingDomesticPayee Mandatory Fields for PayId")
   void bankingDomesticPayeeMandatoryFieldsPayId() {
-    BankingDomesticPayee data = new BankingDomesticPayee();
+    BankingDomesticPayeeV1 data = new BankingDomesticPayeeV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.payeeAccountType(PayloadTypeBankingDomesticPayee.PAY_ID);
