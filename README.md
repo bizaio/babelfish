@@ -144,7 +144,7 @@ You need the following installed and available in your $PATH during compilation:
 - Java 11+
 - Apache Maven 3.6.3 or later
 
-### Using Babelfish CDR in your project
+## Using Babelfish CDR in your project
 
 [(Back to top)](#table-of-contents)
 
