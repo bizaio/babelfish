@@ -44,7 +44,23 @@ Generating a compliant payload is as simple as:
 
 Which yields: 
 ```json
-{"data":{"productId":"073e7e70-357d-4858-8f52-92283f4edd6f","lastUpdated":"2020-02-05T10:02:25.26832+11:00","productCategory":"TRANS_AND_SAVINGS_ACCOUNTS","name":"Example Product","description":"Example Product Description","brand":"ACME","isTailored":false},"links":{"self":"http://localhost/cds-au/v1/banking/products/073e7e70-357d-4858-8f52-92283f4edd6f"},"meta":{}}
+{
+   "data":{
+      "productId":"073e7e70-357d-4858-8f52-92283f4edd6f",
+      "lastUpdated":"2020-02-05T10:02:25.26832+11:00",
+      "productCategory":"TRANS_AND_SAVINGS_ACCOUNTS",
+      "name":"Example Product",
+      "description":"Example Product Description",
+      "brand":"ACME",
+      "isTailored":false
+   },
+   "links":{
+      "self":"http://localhost/cds-au/v1/banking/products/073e7e70-357d-4858-8f52-92283f4edd6f"
+   },
+   "meta":{
+
+   }
+}
 ```
 
 Babelfish CDR is currently developed and maintained by [Biza.io](https://www.biza.io).
