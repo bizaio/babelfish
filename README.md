@@ -127,7 +127,7 @@ If you are looking for commercial support for this library please contact us via
 
 [(Back to top)](#table-of-contents)
 
-The Babelfish CDR library tries to provide full coverage of payloads defined within the [Consumer Data Standards](https://consumerdatastandardsaustralia.github.io/standards). While we try to align our version numbers to those the Standards unfortunately the Standards have used all of the *x.y.z* versioning of the semantic versioning scheme. Consequently the following table outlines the alignment between Babelfish versions and the Standards:
+The Babelfish CDR library tries to provide full coverage of payloads defined within the [Consumer Data Standards](https://consumerdatastandardsaustralia.github.io/standards). While we try to align our version numbers to those of the Standards unfortunately the DSB has chosen to use all of the *x.y.z* versioning of the semantic versioning scheme. Consequently the following table outlines the alignment between Babelfish versions and the Standards:
 
 Babelfish CDR Version                | Release Date | CDS Spec Compatibility     | Notes                                                             | Status
 ------------------------------------ | ------------ | -------------------------- | ----------------------------------------------------------------- | --------
