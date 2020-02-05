@@ -33,14 +33,15 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Response containing a Banking Accounts Balance by Identifier", name = "ResponseBankingAccountsBalanceByIdV1")
+@Schema(description = "Response containing a Banking Accounts Balance by Identifier",
+    name = "ResponseBankingAccountsBalanceByIdV1")
 public class ResponseBankingAccountsBalanceByIdV1 extends CDRResponseV1 {
   @Schema(required = true)
   @JsonProperty("data")
   @NotNull
   @Valid
   BankingBalanceV1 data;
-  
+
   @Schema(description = "The Links Object", required = true)
   @JsonProperty("links")
   @NotNull
@@ -48,8 +49,7 @@ public class ResponseBankingAccountsBalanceByIdV1 extends CDRResponseV1 {
   LinksV1 links;
 
   @Schema(
-      description = "The meta object is used to provide additional information such as second factor authorisation data, traffic management, pagination counts or other purposes that are complementary to the workings of the API.",
-      required = true)
+      description = "The meta object is used to provide additional information such as second factor authorisation data, traffic management, pagination counts or other purposes that are complementary to the workings of the API.")
   @JsonProperty("meta")
   @Valid
   MetaV1 meta;

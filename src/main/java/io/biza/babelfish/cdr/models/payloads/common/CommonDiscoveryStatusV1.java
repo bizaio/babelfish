@@ -12,9 +12,7 @@
 package io.biza.babelfish.cdr.models.payloads.common;
 
 import java.time.OffsetDateTime;
-import java.util.Arrays;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -22,7 +20,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.DateTimeStringToOffsetDateTimeConverter;
 import io.biza.babelfish.cdr.converters.OffsetDateTimeToDateTimeStringConverter;
 import io.biza.babelfish.cdr.enumerations.CommonDiscoveryStatusType;
-import io.biza.babelfish.cdr.support.FormatChecker;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,7 +36,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "A single Discovery Status entry", name = "CommonDiscoveryStatusV1")
-public class CommonDiscoveryStatusV1 {
+public class CommonDiscoveryStatusV1
+    extends io.biza.babelfish.cdr.abstracts.payloads.common.CommonDiscoveryStatusV1 {
   @Schema(
       description = "Enumeration with values. OK (implementation is fully functional). PARTIAL_FAILURE (one or more end points are unexpectedly unavailable). UNAVAILABLE (the full implementation is unexpectedly unavailable). SCHEDULED_OUTAGE (an advertised outage is in effect)",
       required = true)
@@ -78,45 +76,6 @@ public class CommonDiscoveryStatusV1 {
   @JsonProperty("expectedResolutionTime")
   OffsetDateTime expectedResolutionTime;
 
-  @AssertTrue(message = "Explanation is MANDATORY if Status is not OK")
-  private boolean isExplanationPresent() {
-    if (status() == null) {
-      return true;
-    }
-    return !Arrays.asList(new CommonDiscoveryStatusType[] {CommonDiscoveryStatusType.OK})
-        .contains(status()) ? FormatChecker.isNotEmpty(explanation()) : true;
-  }
 
-  @AssertTrue(
-      message = "Detection Time should be PRESENT when status is PARTIAL_FAILURE or UNAVAILABLE")
-  private boolean isDetectionTimePresent() {
-    if (status() == null) {
-      return true;
-    }
-    return Arrays.asList(new CommonDiscoveryStatusType[] {CommonDiscoveryStatusType.PARTIAL_FAILURE,
-        CommonDiscoveryStatusType.UNAVAILABLE}).contains(status())
-            ? FormatChecker.isDefined(detectionTime())
-            : true;
-  }
-
-  @AssertTrue(
-      message = "Detection Time should be ABSENT when status isn't PARTIAL_FAILURE or UNAVAILABLE")
-  private boolean isDetectionTimeAbsent() {
-    if (status() == null) {
-      return true;
-    }
-    return !Arrays.asList(new CommonDiscoveryStatusType[] {
-        CommonDiscoveryStatusType.PARTIAL_FAILURE, CommonDiscoveryStatusType.UNAVAILABLE})
-        .contains(status()) ? !FormatChecker.isDefined(detectionTime()) : true;
-  }
-
-  @AssertTrue(message = "Resolution Time should be ABSENT when status is OK")
-  private boolean isExpectedResolutionTimeAbsent() {
-    if (status() == null) {
-      return true;
-    }
-    return Arrays.asList(new CommonDiscoveryStatusType[] {CommonDiscoveryStatusType.OK})
-        .contains(status()) ? !FormatChecker.isDefined(expectedResolutionTime()) : true;
-  }
 
 }

@@ -42,7 +42,7 @@ public class CommonEmailAddressV1 {
   @Schema(
       description = "A correctly formatted email address, as defined by the addr_spec format in [RFC 5322](https://www.ietf.org/rfc/rfc5322.txt)",
       required = true)
-  @Email
+  @Email(message = "Must be a well formatted email address")
   @JsonProperty("address")
   @NotNull
   String address;

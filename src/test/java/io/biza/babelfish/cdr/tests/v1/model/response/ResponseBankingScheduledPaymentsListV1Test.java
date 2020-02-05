@@ -48,13 +48,13 @@ public class ResponseBankingScheduledPaymentsListV1Test {
     ResponseBankingScheduledPaymentsListV1 data = new ResponseBankingScheduledPaymentsListV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.links(ModelConstants.DEFAULT_LINKS_PAGINATED);
+    data.links(ModelConstants.DEFAULT_LINKS_PAGINATED.build());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.meta(ModelConstants.DEFAULT_META_PAGINATED);
+    data.meta(ModelConstants.DEFAULT_META_PAGINATED.build());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.data(ModelConstants.DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST_DATA);
+    data.data(ModelConstants.DEFAULT_RESPONSE_BANKING_SCHEDULED_PAYMENTS_LIST_DATA.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }

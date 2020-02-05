@@ -36,7 +36,7 @@ public class ResponseCommonCustomerDataV1Test {
   @Test
   @DisplayName("Create valid ResponseCommonCustomerData")
   void responseCommonCustomerData() {
-    ResponseCommonCustomerDataV1 data = ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DATA;
+    ResponseCommonCustomerDataV1 data = ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DATA.build();
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
@@ -49,11 +49,11 @@ public class ResponseCommonCustomerDataV1Test {
     data.type(PayloadTypeCustomer.PERSON);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.person(ModelConstants.DEFAULT_COMMON_PERSON);
+    data.person(ModelConstants.DEFAULT_COMMON_PERSON.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Should only have one
-    data.organisation(ModelConstants.DEFAULT_COMMON_ORGANISATION);
+    data.organisation(ModelConstants.DEFAULT_COMMON_ORGANISATION.build());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
@@ -67,11 +67,11 @@ public class ResponseCommonCustomerDataV1Test {
     data.type(PayloadTypeCustomer.ORGANISATION);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.organisation(ModelConstants.DEFAULT_COMMON_ORGANISATION);
+    data.organisation(ModelConstants.DEFAULT_COMMON_ORGANISATION.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Should only have one
-    data.person(ModelConstants.DEFAULT_COMMON_PERSON);
+    data.person(ModelConstants.DEFAULT_COMMON_PERSON.build());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }

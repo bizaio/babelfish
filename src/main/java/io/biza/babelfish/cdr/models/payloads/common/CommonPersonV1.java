@@ -29,7 +29,7 @@ import lombok.experimental.SuperBuilder;
 @Valid
 @ToString
 @EqualsAndHashCode
-@SuperBuilder
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -49,7 +49,8 @@ public class CommonPersonV1 {
   @Schema(description = "For people with single names the single name should be in this field",
       required = true)
   @JsonProperty("lastName")
-  @NotEmpty
+  @NotEmpty(
+      message = "Should be populated with last name or, for single names, this field should be used")
   String lastName;
 
   @Schema(description = "Field is mandatory but array may be empty", required = true)

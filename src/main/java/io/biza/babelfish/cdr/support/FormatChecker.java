@@ -155,6 +155,18 @@ public class FormatChecker {
     return pan != null && pan.matches(TypeConstants.MASKED_ACCOUNT_PATTERN);
   }
 
+  public static Boolean isNatural(BigDecimal number) {
+    return number.signum() >= 0;
+  }
+
+  public static Boolean isPositive(BigDecimal number) {
+    return number.signum() > 0;
+  }
+
+  public static Boolean isNegative(BigDecimal number) {
+    return number.signum() < 0;
+  }
+
   public static Boolean isPositiveInteger(String integer) {
     try {
       if (Integer.parseInt(integer) > 0) {
@@ -229,15 +241,15 @@ public class FormatChecker {
     return urlMap;
   }
 
-  public static Boolean isNaturalNumber(int i) {
+  public static Boolean isNatural(int i) {
     return i >= 0;
   }
 
-  public static Boolean isPositiveInteger(int i) {
+  public static Boolean isPositive(int i) {
     return i > 0;
   }
 
-  public static Boolean isNegativeInteger(int i) {
+  public static Boolean isNegative(int i) {
     return i <= 0;
   }
 
@@ -266,6 +278,10 @@ public class FormatChecker {
     } catch (Exception e) {
       return false;
     }
+  }
+
+  public static Boolean isFedWireFormat(String input) {
+    return Pattern.matches("^\\d{9}$", input);
   }
 
   public static Boolean isRateString(String input) {

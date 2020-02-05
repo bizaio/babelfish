@@ -13,6 +13,7 @@ package io.biza.babelfish.cdr.models.payloads.banking.account;
 
 import java.time.LocalDate;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -33,7 +34,7 @@ import lombok.experimental.SuperBuilder;
 @Valid
 @ToString
 @EqualsAndHashCode
-@SuperBuilder
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -41,7 +42,7 @@ import lombok.experimental.SuperBuilder;
 public class BankingAccountV1 {
   @Schema(description = "A unique ID of the account adhering to the standards for ID permanence",
       required = true)
-  @NotNull
+  @NotEmpty(message = "Must contain a unique identifier")
   @JsonProperty("accountId")
   String accountId;
 
@@ -55,7 +56,7 @@ public class BankingAccountV1 {
   @Schema(
       description = "The display name of the account as defined by the bank. This should not incorporate account numbers or PANs. If it does the values should be masked according to the rules of the MaskedAccountString common type.",
       required = true)
-  @NotNull
+  @NotEmpty(message = "Must contain a display name for the account")
   @JsonProperty("displayName")
   String displayName;
 
@@ -65,20 +66,20 @@ public class BankingAccountV1 {
 
   @Schema(
       description = "Open or closed status for the account. If not present then OPEN is assumed")
-  @JsonProperty("openStatus")
+  @JsonProperty(value = "openStatus", defaultValue = "OPEN")
   @Builder.Default
   BankingAccountStatus openStatus = BankingAccountStatus.OPEN;
 
   @Schema(
       description = "Flag indicating that the customer associated with the authorisation is an owner of the account. Does not indicate sole ownership, however. If not present then 'true' is assumed")
-  @JsonProperty("isOwned")
+  @JsonProperty(value = "isOwned", defaultValue = "true")
   @Builder.Default
   Boolean isOwned = true;
 
   @Schema(
       description = "A masked version of the account. Whether BSB/Account Number, Credit Card PAN or another number",
       required = true)
-  @NotNull
+  @NotEmpty(message = "Must contain a masked number")
   @JsonProperty("maskedNumber")
   String maskedNumber;
 
@@ -90,7 +91,7 @@ public class BankingAccountV1 {
   @Schema(
       description = "The unique identifier of the account as defined by the account holder (akin to model number for the account)",
       required = true)
-  @NotNull
+  @NotEmpty(message = "Must contain a unique product identifier")
   @JsonProperty("productName")
   String productName;
 

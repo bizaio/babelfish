@@ -13,7 +13,6 @@ package io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled;
 
 import java.time.LocalDate;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -36,8 +35,9 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Describes the detail of the scheduled payment", name = "BankingScheduledPaymentRecurrenceV1")
-public class BankingScheduledPaymentRecurrenceV1 {
+@Schema(description = "Describes the detail of the scheduled payment",
+    name = "BankingScheduledPaymentRecurrenceV1")
+public class BankingScheduledPaymentRecurrenceV1 extends io.biza.babelfish.cdr.abstracts.payloads.banking.account.payee.scheduled.BankingScheduledPaymentRecurrenceV1 {
   @Schema(description = "The date of the next payment under the recurrence schedule",
       type = "string", format = "date")
   @JsonSerialize(converter = LocalDateToStringConverter.class)
@@ -69,28 +69,5 @@ public class BankingScheduledPaymentRecurrenceV1 {
   @Schema(description = "Scheduled Payment Event Based Recurrence Details")
   @Valid
   BankingScheduledPaymentRecurrenceEventBasedV1 eventBased;
-  
-  @AssertTrue(
-      message = "One and Only One Recurrence Type Object must be populated to align with recurrencyUType")
-  private boolean isRecurrenceTypeCorrect() {
-    if (type() == null) {
-      return true;
-    }
-
-    if (type().equals(PayloadTypeBankingScheduledPaymentRecurrence.ONCE_OFF)) {
-      return onceOff() != null && intervalSchedule() == null && lastWeekDay() == null
-          && eventBased() == null ? true : false;
-    } else if (type().equals(PayloadTypeBankingScheduledPaymentRecurrence.INTERVAL_SCHEDULE)) {
-      return intervalSchedule() != null && onceOff() == null && lastWeekDay() == null
-          && eventBased() == null ? true : false;
-    } else if (type().equals(PayloadTypeBankingScheduledPaymentRecurrence.LAST_WEEKDAY)) {
-      return lastWeekDay() != null && intervalSchedule() == null && intervalSchedule() == null
-          && eventBased() == null ? true : false;
-    } else if (type().equals(PayloadTypeBankingScheduledPaymentRecurrence.EVENT_BASED)) {
-      return eventBased() != null && onceOff() == null && intervalSchedule() == null
-          && lastWeekDay() == null ? true : false;
-    }
-    return false;
-  }
 
 }

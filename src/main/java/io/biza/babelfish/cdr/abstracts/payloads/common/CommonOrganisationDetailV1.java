@@ -1,4 +1,4 @@
-package io.biza.babelfish.cdr.abstracts.models.common;
+package io.biza.babelfish.cdr.abstracts.payloads.common;
 
 import java.util.List;
 import javax.validation.constraints.AssertTrue;
@@ -6,7 +6,7 @@ import io.biza.babelfish.cdr.enumerations.AddressPurpose;
 import io.biza.babelfish.cdr.models.payloads.common.CommonPhysicalAddressWithPurposeV1;
 
 public abstract class CommonOrganisationDetailV1 extends CommonOrganisationV1 {
-  
+
   public abstract List<CommonPhysicalAddressWithPurposeV1> physicalAddresses();
 
   @AssertTrue(

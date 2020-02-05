@@ -50,7 +50,7 @@ public class BankingScheduledPaymentRecurrenceV1Test {
     data.type(PayloadTypeBankingScheduledPaymentRecurrence.ONCE_OFF);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.onceOff(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_ONCE_OFF);
+    data.onceOff(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_ONCE_OFF.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
@@ -66,7 +66,7 @@ public class BankingScheduledPaymentRecurrenceV1Test {
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.intervalSchedule(
-        ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_INTERVAL_SCHEDULE);
+        ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_INTERVAL_SCHEDULE.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
@@ -80,7 +80,7 @@ public class BankingScheduledPaymentRecurrenceV1Test {
     data.type(PayloadTypeBankingScheduledPaymentRecurrence.LAST_WEEKDAY);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.lastWeekDay(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_LAST_WEEKDAY);
+    data.lastWeekDay(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_LAST_WEEKDAY.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
@@ -94,7 +94,7 @@ public class BankingScheduledPaymentRecurrenceV1Test {
     data.type(PayloadTypeBankingScheduledPaymentRecurrence.EVENT_BASED);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.eventBased(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_EVENT_BASED);
+    data.eventBased(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE_EVENT_BASED.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }

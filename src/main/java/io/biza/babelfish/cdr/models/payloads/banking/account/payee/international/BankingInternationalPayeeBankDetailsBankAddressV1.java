@@ -12,7 +12,7 @@
 package io.biza.babelfish.cdr.models.payloads.banking.account.payee.international;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -29,15 +29,16 @@ import lombok.experimental.SuperBuilder;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "International Payee Bank Address Details", name = "BankingInternationalPayeeBankDetailsBankAddressV1")
+@Schema(description = "International Payee Bank Address Details",
+    name = "BankingInternationalPayeeBankDetailsBankAddressV1")
 public class BankingInternationalPayeeBankDetailsBankAddressV1 {
   @Schema(description = "Name of the recipient Bank", required = true)
-  @NotNull
+  @NotEmpty
   @JsonProperty("name")
   String name;
 
   @Schema(description = "Address of the recipient Bank", required = true)
-  @NotNull
+  @NotEmpty
   @JsonProperty("address")
   String address;
 }

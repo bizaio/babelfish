@@ -34,7 +34,7 @@ public class LinksV1Test {
   @Test
   @DisplayName("Create valid Links")
   void responseLinksV1() {
-    LinksV1 data = ModelConstants.DEFAULT_LINKS;
+    LinksV1 data = ModelConstants.DEFAULT_LINKS.build();
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 

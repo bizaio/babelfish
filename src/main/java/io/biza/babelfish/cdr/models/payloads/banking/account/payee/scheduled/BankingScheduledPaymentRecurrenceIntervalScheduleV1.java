@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -56,17 +56,15 @@ public class BankingScheduledPaymentRecurrenceIntervalScheduleV1 {
 
   @Schema(
       description = "Enumerated field giving the treatment where a scheduled payment date is not a business day.  If absent assumed to be ON")
-  @JsonProperty("nonBusinessDayTreatment")
+  @JsonProperty(value = "nonBusinessDayTreatment", defaultValue = "ON")
   @Builder.Default
   BankingPaymentNonBusinessDayTreatment nonBusinessDayTreatment =
       BankingPaymentNonBusinessDayTreatment.ON;
 
-
-
   @Schema(
       description = "An array of interval objects defining the payment schedule.  Each entry in the array is additive, in that it adds payments to the overall payment schedule.  If multiple intervals result in a payment on the same day then only one payment will be made. Must have at least one entry",
       required = true)
-  @NotNull
+  @NotEmpty(message = "Must contain at least entry")
   @JsonProperty("intervals")
   @Valid
   List<BankingScheduledPaymentIntervalV1> intervals;

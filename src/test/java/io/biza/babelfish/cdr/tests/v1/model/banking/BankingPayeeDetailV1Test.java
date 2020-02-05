@@ -62,7 +62,7 @@ public class BankingPayeeDetailV1Test {
     data.type(PayloadTypeBankingPayee.DOMESTIC);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.domestic(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE);
+    data.domestic(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE.build());
 
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -87,7 +87,7 @@ public class BankingPayeeDetailV1Test {
     data.type(PayloadTypeBankingPayee.BILLER);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.biller(ModelConstants.DEFAULT_BANKING_BILLER_PAYEE);
+    data.biller(ModelConstants.DEFAULT_BANKING_BILLER_PAYEE.build());
 
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -112,7 +112,7 @@ public class BankingPayeeDetailV1Test {
     data.type(PayloadTypeBankingPayee.INTERNATIONAL);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.international(ModelConstants.DEFAULT_BANKING_INTERNATIONAL_PAYEE);
+    data.international(ModelConstants.DEFAULT_BANKING_INTERNATIONAL_PAYEE.build());
 
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());

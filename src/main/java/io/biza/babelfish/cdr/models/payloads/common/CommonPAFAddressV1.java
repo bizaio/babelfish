@@ -12,7 +12,7 @@
 package io.biza.babelfish.cdr.models.payloads.common;
 
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.babelfish.cdr.enumerations.AddressPAFFlatUnitType;
@@ -31,16 +31,16 @@ import lombok.ToString;
 
 @Valid
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(
     description = "Australian address formatted according to the file format defined by the [PAF file format](https://auspost.com.au/content/dam/auspost_corp/media/documents/australia-post-data-guide.pdf)",
-    name = "CommonPAFAddressV1"
-    )
-public class CommonPAFAddressV1 {
+    name = "CommonPAFAddressV1")
+public class CommonPAFAddressV1
+    extends io.biza.babelfish.cdr.abstracts.payloads.common.CommonPAFAddressV1 {
   @Schema(
       description = "Unique identifier for an address as defined by Australia Post.  Also known as Delivery Point Identifier")
   @JsonProperty("dpid")
@@ -151,12 +151,12 @@ public class CommonPAFAddressV1 {
 
   @Schema(description = "Full name of locality", required = true)
   @JsonProperty("localityName")
-  @NotNull
+  @NotEmpty(message = "Locality must be supplied")
   String localityName;
 
   @Schema(description = "Postcode for the locality", required = true)
   @JsonProperty("postcode")
-  @NotNull
+  @NotEmpty(message = "Postcode must be supplied")
   String postcode;
 
   @Schema(
@@ -166,37 +166,5 @@ public class CommonPAFAddressV1 {
   @NotNull
   AddressPAFStateType state;
 
-  @AssertTrue(
-      message = "Thoroughfare Suffixes should only be set when Thoroughfare Numbers are set")
-  private boolean isInvalidSuffixes() {
-    if (thoroughfareNumber1Suffix() != null && thoroughfareNumber1() == null) {
-      return false;
-    }
-    if (thoroughfareNumber2Suffix() != null && thoroughfareNumber2() == null) {
-      return false;
-    }
-    return true;
-  }
 
-  @AssertTrue(
-      message = "Thoroughfare Number 2 must only be set when Thoroughfare Number 1 exists and must be greater than Thoroughfare Number 1")
-  private boolean isThoroughFareNumber2LargerThan1() {
-    if (thoroughfareNumber1() == null) {
-      if (thoroughfareNumber2() == null) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      if (thoroughfareNumber2() == null) {
-        return false;
-      } else {
-        if (thoroughfareNumber2() > thoroughfareNumber1()) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-    }
-  }
 }

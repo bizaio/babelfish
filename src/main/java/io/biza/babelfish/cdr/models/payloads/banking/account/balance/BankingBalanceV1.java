@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.List;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -40,10 +41,10 @@ import lombok.ToString;
 public class BankingBalanceV1 {
   @Schema(description = "A unique ID of the account adhering to the standards for ID permanence",
       required = true)
-  @NotNull
+  @NotEmpty
   @JsonProperty("accountId")
   String accountId;
-  
+
   @Schema(
       description = "The balance of the account at this time. Should align to the balance available via other channels such as Internet Banking. Assumed to be negative if the customer has money owing",
       required = true, type = "string")
@@ -66,15 +67,16 @@ public class BankingBalanceV1 {
       type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
-  @JsonProperty("creditLimit")
-  BigDecimal creditLimit;
+  @JsonProperty(value = "creditLimit", defaultValue = "0")
+  @Builder.Default
+  BigDecimal creditLimit = BigDecimal.ZERO;
 
   @Schema(
       description = "Object representing the available limit amortised according to payment schedule. Assumed to be zero if absent",
       type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
-  @JsonProperty("amortisedLimit")
+  @JsonProperty(value = "amortisedLimit", defaultValue = "0")
   @Builder.Default
   BigDecimal amortisedLimit = BigDecimal.ZERO;
 
@@ -82,8 +84,9 @@ public class BankingBalanceV1 {
       type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
-  @JsonProperty("currency")
-  Currency currency;
+  @JsonProperty(value = "currency", defaultValue = "AUD")
+  @Builder.Default
+  Currency currency = Currency.getInstance("AUD");
 
   @Schema(
       description = "Optional array of balances for the account in other currencies. Included to support accounts that support multi-currency purses such as Travel Cards")

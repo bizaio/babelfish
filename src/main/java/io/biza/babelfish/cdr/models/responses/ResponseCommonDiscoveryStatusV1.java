@@ -40,7 +40,7 @@ public class ResponseCommonDiscoveryStatusV1 extends CDRResponseV1 {
   @NotNull
   @Valid
   CommonDiscoveryStatusV1 data;
-  
+
   @Schema(description = "The Links Object", required = true)
   @JsonProperty("links")
   @NotNull
@@ -48,8 +48,7 @@ public class ResponseCommonDiscoveryStatusV1 extends CDRResponseV1 {
   LinksV1 links;
 
   @Schema(
-      description = "The meta object is used to provide additional information such as second factor authorisation data, traffic management, pagination counts or other purposes that are complementary to the workings of the API.",
-      required = true)
+      description = "The meta object is used to provide additional information such as second factor authorisation data, traffic management, pagination counts or other purposes that are complementary to the workings of the API.")
   @JsonProperty("meta")
   @Valid
   MetaV1 meta;

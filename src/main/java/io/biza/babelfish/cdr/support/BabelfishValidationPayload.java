@@ -10,7 +10,7 @@ public class BabelfishValidationPayload implements Payload {
 
   @JsonProperty("message")
   String message;
-  
+
   @JsonProperty("fields")
   List<String> fields;
 }

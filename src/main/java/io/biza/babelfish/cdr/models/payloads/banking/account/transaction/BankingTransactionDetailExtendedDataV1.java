@@ -31,7 +31,8 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Banking Transaction Detailed Extended Data", name = "BankingTransactionDetailExtendedDataV1")
+@Schema(description = "Banking Transaction Detailed Extended Data",
+    name = "BankingTransactionDetailExtendedDataV1")
 public class BankingTransactionDetailExtendedDataV1 {
   @Schema(description = "Label of the originating payer. Mandatory for inbound payment")
   @JsonProperty("payer")

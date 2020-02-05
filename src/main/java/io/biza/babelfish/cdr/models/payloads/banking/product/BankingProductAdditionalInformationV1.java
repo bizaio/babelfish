@@ -40,12 +40,14 @@ public class BankingProductAdditionalInformationV1 {
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("overviewUri")
+  @Valid
   URI overviewUri;
 
   @Schema(description = "Terms and conditions for the product", type = "string", format = "uri")
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("termsUri")
+  @Valid
   URI termsUri;
 
   @Schema(description = "Eligibility rules and criteria for the product", type = "string",
@@ -53,6 +55,7 @@ public class BankingProductAdditionalInformationV1 {
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("eligibilityUri")
+  @Valid
   URI eligibilityUri;
 
   @Schema(
@@ -61,6 +64,7 @@ public class BankingProductAdditionalInformationV1 {
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("feesAndPricingUri")
+  @Valid
   URI feesAndPricingUri;
 
   @Schema(description = "Description of a bundle that this product can be part of", type = "string",
@@ -68,5 +72,6 @@ public class BankingProductAdditionalInformationV1 {
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("bundleUri")
+  @Valid
   URI bundleUri;
 }

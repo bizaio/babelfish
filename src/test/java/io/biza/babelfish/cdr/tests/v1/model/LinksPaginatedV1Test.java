@@ -34,14 +34,14 @@ public class LinksPaginatedV1Test {
   @Test
   @DisplayName("Create valid LinksPaginated")
   void responseLinksPaginatedV1() {
-    LinksPaginatedV1 data = ModelConstants.DEFAULT_LINKS_PAGINATED;
+    LinksPaginatedV1 data = ModelConstants.DEFAULT_LINKS_PAGINATED.build();
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
   @DisplayName("LinksPaginated Mandatory Fields (Middle Result)")
   void linksPaginatedMandatoryFieldsMiddleResult() {
-    LinksPaginatedV1 data = new LinksPaginatedV1();
+    LinksPaginatedV1 data = LinksPaginatedV1.builder().build();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.self(ModelConstants.DEFAULT_SELF_URI);
@@ -56,7 +56,7 @@ public class LinksPaginatedV1Test {
   @Test
   @DisplayName("LinksPaginated Mandatory Fields (First Result)")
   void linksPaginatedMandatoryFieldsFirstResult() {
-    LinksPaginatedV1 data = new LinksPaginatedV1();
+    LinksPaginatedV1 data = LinksPaginatedV1.builder().build();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.self(ModelConstants.DEFAULT_SELF_URI);
@@ -69,7 +69,7 @@ public class LinksPaginatedV1Test {
   @Test
   @DisplayName("LinksPaginated Mandatory Fields (Last Result)")
   void linksPaginatedMandatoryFieldsLastResult() {
-    LinksPaginatedV1 data = new LinksPaginatedV1();
+    LinksPaginatedV1 data = LinksPaginatedV1.builder().build();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.self(ModelConstants.DEFAULT_SELF_URI);
@@ -82,7 +82,7 @@ public class LinksPaginatedV1Test {
   @Test
   @DisplayName("LinksPaginated Mandatory Fields (First and Last)")
   void linksPaginatedMandatoryFieldsFirstAndLastPage() {
-    LinksPaginatedV1 data = new LinksPaginatedV1();
+    LinksPaginatedV1 data = LinksPaginatedV1.builder().build();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.self(ModelConstants.DEFAULT_FIRST_URI);

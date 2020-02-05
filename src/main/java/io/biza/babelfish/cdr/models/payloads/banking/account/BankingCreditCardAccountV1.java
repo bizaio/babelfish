@@ -35,13 +35,14 @@ import lombok.ToString;
 
 @Valid
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Credit Card Account Details", name = "BankingCreditCardAccountV1")
-public class BankingCreditCardAccountV1 {
+public class BankingCreditCardAccountV1
+    extends io.biza.babelfish.cdr.abstracts.payloads.banking.account.BankingCreditCardAccountV1 {
   @Schema(description = "The minimum payment amount due for the next card payment", required = true,
       type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
@@ -61,7 +62,7 @@ public class BankingCreditCardAccountV1 {
   @Schema(description = "If absent assumes AUD", type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
-  @JsonProperty("paymentCurrency")
+  @JsonProperty(value = "paymentCurrency", defaultValue = "AUD")
   @Builder.Default
   Currency paymentCurrency = Currency.getInstance("AUD");
 

@@ -12,7 +12,6 @@
 package io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled;
 
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.babelfish.cdr.enumerations.PayloadTypeBankingScheduledPaymentTo;
@@ -29,7 +28,7 @@ import lombok.ToString;
 
 @Valid
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @Data
 @NoArgsConstructor
@@ -37,7 +36,7 @@ import lombok.ToString;
 @Schema(
     description = "Object containing details of the destination of the payment. Used to specify a variety of payment destination types",
     name = "BankingScheduledPaymentToV1")
-public class BankingScheduledPaymentToV1 {
+public class BankingScheduledPaymentToV1 extends io.biza.babelfish.cdr.abstracts.payloads.banking.account.payee.scheduled.BankingScheduledPaymentToV1 {
   @Schema(
       description = "The type of object provided that specifies the destination of the funds for the payment.",
       required = true)
@@ -69,30 +68,5 @@ public class BankingScheduledPaymentToV1 {
   @JsonProperty("international")
   @Valid
   BankingInternationalPayeeV1 international;
-
-  @AssertTrue(
-      message = "One and only one of accountId, payeeId, domestic, biller, international should be populated based on type")
-  private boolean isUTypePopulated() {
-    if (type() == null) {
-      return true;
-    }
-    if (type().equals(PayloadTypeBankingScheduledPaymentTo.ACCOUNT_ID)) {
-      return accountId() != null && payeeId() == null && domestic() == null && biller() == null
-          && international() == null;
-    } else if (type().equals(PayloadTypeBankingScheduledPaymentTo.PAYEE_ID)) {
-      return payeeId() != null && accountId() == null && domestic() == null && biller() == null
-          && international() == null;
-    } else if (type().equals(PayloadTypeBankingScheduledPaymentTo.DOMESTIC)) {
-      return domestic() != null && accountId() == null && payeeId() == null && biller() == null
-          && international() == null;
-    } else if (type().equals(PayloadTypeBankingScheduledPaymentTo.BILLER)) {
-      return biller() != null && accountId() == null && payeeId() == null && domestic() == null
-          && international() == null;
-    } else if (type().equals(PayloadTypeBankingScheduledPaymentTo.INTERNATIONAL)) {
-      return international() != null && accountId() == null && payeeId() == null
-          && domestic() == null && biller() == null;
-    }
-    return false;
-  }
 
 }

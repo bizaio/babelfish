@@ -68,7 +68,7 @@ public class BankingScheduledPaymentToV1Test {
     BankingScheduledPaymentToV1 data = new BankingScheduledPaymentToV1();
     data.type(PayloadTypeBankingScheduledPaymentTo.DOMESTIC);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    data.domestic(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE);
+    data.domestic(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
@@ -79,7 +79,7 @@ public class BankingScheduledPaymentToV1Test {
     BankingScheduledPaymentToV1 data = new BankingScheduledPaymentToV1();
     data.type(PayloadTypeBankingScheduledPaymentTo.BILLER);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    data.biller(ModelConstants.DEFAULT_BANKING_BILLER_PAYEE);
+    data.biller(ModelConstants.DEFAULT_BANKING_BILLER_PAYEE.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
@@ -89,7 +89,7 @@ public class BankingScheduledPaymentToV1Test {
     BankingScheduledPaymentToV1 data = new BankingScheduledPaymentToV1();
     data.type(PayloadTypeBankingScheduledPaymentTo.INTERNATIONAL);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
-    data.international(ModelConstants.DEFAULT_BANKING_INTERNATIONAL_PAYEE);
+    data.international(ModelConstants.DEFAULT_BANKING_INTERNATIONAL_PAYEE.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 }

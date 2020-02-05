@@ -32,7 +32,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Response containing a single Banking Account Detail")
-public class CDRResponseV1 extends io.biza.babelfish.cdr.abstracts.responses.CDRResponseV1 {  
+public class CDRResponseV1 extends io.biza.babelfish.cdr.abstracts.responses.CDRResponseV1 {
   @Schema(description = "The Links Object", required = true)
   @JsonProperty("links")
   @NotNull
@@ -45,5 +45,5 @@ public class CDRResponseV1 extends io.biza.babelfish.cdr.abstracts.responses.CDR
   @JsonProperty("meta")
   @Valid
   MetaV1 meta;
-  
+
 }

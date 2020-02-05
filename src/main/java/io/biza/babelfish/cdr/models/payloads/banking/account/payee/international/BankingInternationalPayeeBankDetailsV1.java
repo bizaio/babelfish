@@ -13,6 +13,7 @@ package io.biza.babelfish.cdr.models.payloads.banking.account.payee.internationa
 
 import java.util.Locale;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,7 +21,10 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.CountryStringToLocaleConverter;
 import io.biza.babelfish.cdr.converters.LocaleToCountryStringConverter;
+import io.biza.babelfish.cdr.converters.StringToSwiftBicConverter;
+import io.biza.babelfish.cdr.converters.SwiftBicToStringConverter;
 import io.biza.babelfish.cdr.support.TypeConstants;
+import io.biza.babelfish.cdr.support.customtypes.SwiftBicType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,7 +40,8 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "International Payee Bank Details", name = "BankingInternationalPayeeBankDetailsV1")
+@Schema(description = "International Payee Bank Details",
+    name = "BankingInternationalPayeeBankDetailsV1")
 public class BankingInternationalPayeeBankDetailsV1 {
   @Schema(
       description = "Country of the recipient institution. A valid [ISO 3166 Alpha-3](https://www.iso.org/iso-3166-country-codes.html) country code",
@@ -44,10 +49,11 @@ public class BankingInternationalPayeeBankDetailsV1 {
   @JsonSerialize(converter = LocaleToCountryStringConverter.class)
   @JsonDeserialize(converter = CountryStringToLocaleConverter.class)
   @JsonProperty("country")
+  @NotNull
   Locale country;
 
   @Schema(description = "Account Targeted for payment", required = true)
-  @NotNull
+  @NotEmpty
   @JsonProperty("accountNumber")
   String accountNumber;
 
@@ -57,10 +63,12 @@ public class BankingInternationalPayeeBankDetailsV1 {
   BankingInternationalPayeeBankDetailsBankAddressV1 bankAddress;
 
   @Schema(
-      description = "Swift bank code.  Aligns with standard [ISO 9362](https://www.iso.org/standard/60390.html)")
-  // TODO: BIC Code Validation RFC9362
+      description = "Swift bank code.  Aligns with standard [ISO 9362](https://www.iso.org/standard/60390.html)",
+      type = "string")
   @JsonProperty("beneficiaryBankBIC")
-  String beneficiaryBankBIC;
+  @JsonSerialize(converter = SwiftBicToStringConverter.class)
+  @JsonDeserialize(converter = StringToSwiftBicConverter.class)
+  SwiftBicType beneficiaryBankBIC;
 
   @Schema(description = "Number for Fedwire payment (Federal Reserve Wire Network)")
   @JsonProperty("fedWireNumber")
@@ -80,7 +88,8 @@ public class BankingInternationalPayeeBankDetailsV1 {
 
   @Schema(
       description = "The legal entity identifier (LEI) for the beneficiary.  Aligns with [ISO 17442](https://www.iso.org/standard/59771.html)")
-  @Pattern(regexp = TypeConstants.ISO17442_PATTERN)
+  @Pattern(regexp = TypeConstants.ISO17442_PATTERN,
+      message = "Legal Entity Identifier must match ISO 17442 format")
   @JsonProperty("legalEntityIdentifier")
   String legalEntityIdentifier;
 }

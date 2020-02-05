@@ -20,6 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.models.payloads.banking.account.payee.domestic.BankingDomesticPayeeAccountV1;
+import io.biza.babelfish.cdr.support.customtypes.ApcaNumberType;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("BankingDomesticPayeeAccount V1 Tests")
@@ -45,7 +46,7 @@ public class BankingDomesticPayeeAccountV1Test {
     BankingDomesticPayeeAccountV1 data = new BankingDomesticPayeeAccountV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.bsb("123-123");
+    data.bsb(ApcaNumberType.fromValue("012-055"));
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.accountNumber("12341234");

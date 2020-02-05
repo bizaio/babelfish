@@ -50,5 +50,6 @@ public class BankingProductCardArtV1 {
   @JsonSerialize(converter = UriToUriStringConverter.class)
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("imageUri")
+  @NotNull
   URI imageUri;
 }

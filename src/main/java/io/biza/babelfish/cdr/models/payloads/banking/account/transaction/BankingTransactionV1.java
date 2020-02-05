@@ -15,18 +15,24 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.Currency;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.AmountStringToBigDecimalConverter;
+import io.biza.babelfish.cdr.converters.ApcaNumberToStringConverter;
 import io.biza.babelfish.cdr.converters.BigDecimalToAmountStringConverter;
 import io.biza.babelfish.cdr.converters.CurrencyToStringConverter;
 import io.biza.babelfish.cdr.converters.DateTimeStringToOffsetDateTimeConverter;
+import io.biza.babelfish.cdr.converters.MerchantCategoryCodeToString;
 import io.biza.babelfish.cdr.converters.OffsetDateTimeToDateTimeStringConverter;
+import io.biza.babelfish.cdr.converters.StringToApcaNumberConverter;
 import io.biza.babelfish.cdr.converters.StringToCurrencyConverter;
+import io.biza.babelfish.cdr.converters.StringToMerchantCategoryCodeConverter;
 import io.biza.babelfish.cdr.enumerations.BankingTransactionStatus;
 import io.biza.babelfish.cdr.enumerations.BankingTransactionType;
+import io.biza.babelfish.cdr.support.customtypes.MerchantCategoryCodeType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,15 +43,16 @@ import lombok.ToString;
 
 @Valid
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Banking Transaction Brief Definition", name = "BankingTransactionV1")
-public class BankingTransactionV1 extends io.biza.babelfish.cdr.abstracts.models.banking.BankingTransactionV1 {
+public class BankingTransactionV1
+    extends io.biza.babelfish.cdr.abstracts.payloads.banking.transaction.BankingTransactionV1 {
   @Schema(description = "ID of the account for which transactions are provided", required = true)
-  @NotNull
+  @NotEmpty
   @JsonProperty("accountId")
   String accountId;
 
@@ -117,8 +124,9 @@ public class BankingTransactionV1 extends io.biza.babelfish.cdr.abstracts.models
       type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
-  @JsonProperty("currency")
-  Currency currency;
+  @JsonProperty(value = "currency", defaultValue = "AUD")
+  @Builder.Default
+  Currency currency = Currency.getInstance("AUD");
 
   @Schema(
       description = "The reference for the transaction provided by the originating institution. Empty string if no data provided",
@@ -131,9 +139,12 @@ public class BankingTransactionV1 extends io.biza.babelfish.cdr.abstracts.models
   @JsonProperty("merchantName")
   String merchantName;
 
-  @Schema(description = "The merchant category code (or MCC) for an outgoing payment to a merchant")
+  @Schema(description = "The merchant category code (or MCC) for an outgoing payment to a merchant",
+      type = "string")
   @JsonProperty("merchantCategoryCode")
-  String merchantCategoryCode;
+  @JsonSerialize(converter = MerchantCategoryCodeToString.class)
+  @JsonDeserialize(converter = StringToMerchantCategoryCodeConverter.class)
+  MerchantCategoryCodeType merchantCategoryCode;
 
   @Schema(description = "BPAY Biller Code for the transaction (if available)")
   @JsonProperty("billerCode")
@@ -147,8 +158,10 @@ public class BankingTransactionV1 extends io.biza.babelfish.cdr.abstracts.models
   @JsonProperty("crn")
   String crn;
 
-  @Schema(description = "6 Digit APCA number for the initiating institution")
+  @Schema(description = "6 Digit APCA number for the initiating institution", type = "string")
   @JsonProperty("apcaNumber")
+  @JsonSerialize(converter = ApcaNumberToStringConverter.class)
+  @JsonDeserialize(converter = StringToApcaNumberConverter.class)
   String apcaNumber;
 
 }

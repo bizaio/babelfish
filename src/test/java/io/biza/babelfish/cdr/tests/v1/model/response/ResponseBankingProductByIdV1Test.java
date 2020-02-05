@@ -37,7 +37,7 @@ public class ResponseBankingProductByIdV1Test {
   void createValidEmptyProductList() {
     ResponseBankingProductByIdV1 myResponse =
         new ResponseBankingProductByIdV1().links(new LinksV1().self(ModelConstants.DEFAULT_SELF_URI))
-            .data(ModelConstants.DEFAULT_BANKING_PRODUCT_DETAIL_V1);
+            .data(ModelConstants.DEFAULT_BANKING_PRODUCT_DETAIL_V1.build());
     assertTrue(validator.validate(myResponse).isEmpty(), validator.validate(myResponse).toString());
   }
 

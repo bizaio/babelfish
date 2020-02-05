@@ -13,6 +13,7 @@ package io.biza.babelfish.cdr.models.payloads.banking.account.payee;
 
 import java.time.LocalDate;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -40,16 +41,17 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Banking Payee Detailed Information", name = "BankingPayeeDetailV1")
-public class BankingPayeeDetailV1 extends io.biza.babelfish.cdr.abstracts.models.banking.BankingPayeeDetailV1 {
-  
+public class BankingPayeeDetailV1
+    extends io.biza.babelfish.cdr.abstracts.payloads.banking.BankingPayeeDetailV1 {
+
   @Schema(description = "ID of the payee adhering to the rules of ID permanence", required = true)
-  @NotNull
+  @NotEmpty
   @JsonProperty("payeeId")
   String payeeId;
 
   @Schema(description = "The short display name of the payee as provided by the customer",
       required = true)
-  @NotNull
+  @NotEmpty
   @JsonProperty("nickname")
   String nickname;
 
@@ -87,6 +89,6 @@ public class BankingPayeeDetailV1 extends io.biza.babelfish.cdr.abstracts.models
 
   @JsonProperty("international")
   @Valid
-  BankingInternationalPayeeV1  international;
+  BankingInternationalPayeeV1 international;
 
 }

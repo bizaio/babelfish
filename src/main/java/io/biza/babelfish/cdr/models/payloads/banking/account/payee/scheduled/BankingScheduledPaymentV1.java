@@ -13,6 +13,7 @@ package io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled;
 
 import java.util.List;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.babelfish.cdr.enumerations.BankingScheduledPaymentStatus;
@@ -36,7 +37,7 @@ public class BankingScheduledPaymentV1 {
   @Schema(
       description = "A unique ID of the scheduled payment adhering to the standards for ID permanence",
       required = true)
-  @NotNull
+  @NotEmpty(message = "Must contain a unique identifier")
   @JsonProperty("scheduledPaymentId")
   String scheduledPaymentId;
 
@@ -72,7 +73,7 @@ public class BankingScheduledPaymentV1 {
   BankingScheduledPaymentFromV1 from;
 
   @Schema(required = true)
-  @NotNull
+  @NotEmpty(message = "Must have at least one entry")
   @JsonProperty("paymentSet")
   @Valid
   List<BankingScheduledPaymentSetV1> paymentSet;

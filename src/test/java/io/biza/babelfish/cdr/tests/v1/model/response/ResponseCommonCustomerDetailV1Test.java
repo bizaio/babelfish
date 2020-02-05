@@ -35,7 +35,7 @@ public class ResponseCommonCustomerDetailV1Test {
   @Test
   @DisplayName("Create valid ResponseCommonCustomerDetail")
   void responseCommonCustomerDetail() {
-    ResponseCommonCustomerDetailV1 data = ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL;
+    ResponseCommonCustomerDetailV1 data = ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL.build();
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
@@ -45,14 +45,14 @@ public class ResponseCommonCustomerDetailV1Test {
     ResponseCommonCustomerDetailV1 data = new ResponseCommonCustomerDetailV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.links(ModelConstants.DEFAULT_LINKS);
+    data.links(ModelConstants.DEFAULT_LINKS.build());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.data(ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL_DATA);
+    data.data(ModelConstants.DEFAULT_RESPONSE_COMMON_CUSTOMER_DETAIL_DATA.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Should still validate with meta too
-    data.meta(ModelConstants.DEFAULT_META);
+    data.meta(ModelConstants.DEFAULT_META.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }

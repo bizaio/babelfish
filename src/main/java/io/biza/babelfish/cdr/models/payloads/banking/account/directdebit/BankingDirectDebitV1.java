@@ -14,7 +14,7 @@ package io.biza.babelfish.cdr.models.payloads.banking.account.directdebit;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -33,24 +33,26 @@ import lombok.ToString;
 
 @Valid
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Representation of a Direct Debit Authorisation", name = "BankingDirectDebitV1")
-public class BankingDirectDebitV1 {
+@Schema(description = "Representation of a Direct Debit Authorisation",
+    name = "BankingDirectDebitV1")
+public class BankingDirectDebitV1 extends
+    io.biza.babelfish.cdr.abstracts.payloads.banking.account.directdebit.BankingDirectDebitV1 {
   @Schema(description = "A unique ID of the account adhering to the standards for ID permanence.",
       required = true)
-  @NotNull
+  @NotEmpty
   @JsonProperty("accountId")
   String accountId;
-  
+
   @Schema(required = true)
   @NotNull
   @JsonProperty("authorisedEntity")
   BankingAuthorisedEntityV1 authorisedEntity;
-  
+
   @Schema(description = "The date and time of the last debit executed under this authorisation",
       type = "string", format = "date-time")
   @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
@@ -64,22 +66,4 @@ public class BankingDirectDebitV1 {
   @JsonProperty("lastDebitAmount")
   BigDecimal lastDebitAmount;
 
-
-  @AssertTrue(message = "If lastDebitDateTime set then lastDebitAmount should be PRESENT")
-  private boolean isLastDebitAmountPresent() {
-    if (lastDebitDateTime() == null) {
-      return true;
-    } else {
-      return lastDebitAmount() != null;
-    }
-  }
-
-  @AssertTrue(message = "If lastDebitAmount set then lastDebitDateTime should be PRESENT")
-  private boolean isLastDebitDateTimePresent() {
-    if (lastDebitAmount() == null) {
-      return true;
-    } else {
-      return lastDebitDateTime() != null;
-    }
-  }
 }

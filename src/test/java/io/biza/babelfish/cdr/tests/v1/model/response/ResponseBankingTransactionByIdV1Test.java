@@ -35,7 +35,7 @@ public class ResponseBankingTransactionByIdV1Test {
   @Test
   @DisplayName("Create valid ResponseBankingTransactionById")
   void responseBankingTransactionById() {
-    ResponseBankingTransactionByIdV1 data = ModelConstants.DEFAULT_RESPONSE_BANKING_TRANSACTION_BY_ID;
+    ResponseBankingTransactionByIdV1 data = ModelConstants.DEFAULT_RESPONSE_BANKING_TRANSACTION_BY_ID.build();
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
@@ -45,13 +45,13 @@ public class ResponseBankingTransactionByIdV1Test {
     ResponseBankingTransactionByIdV1 data = new ResponseBankingTransactionByIdV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.links(ModelConstants.DEFAULT_LINKS);
+    data.links(ModelConstants.DEFAULT_LINKS.build());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.data(ModelConstants.DEFAULT_BANKING_TRANSACTION_DETAIL);
+    data.data(ModelConstants.DEFAULT_BANKING_TRANSACTION_DETAIL.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.meta(ModelConstants.DEFAULT_META);
+    data.meta(ModelConstants.DEFAULT_META.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }

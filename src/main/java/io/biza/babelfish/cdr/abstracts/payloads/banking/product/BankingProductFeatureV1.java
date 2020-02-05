@@ -50,11 +50,12 @@ public abstract class BankingProductFeatureV1 {
   private boolean isFreeTransactionAllowanceValid() {
     return FormatChecker.isDefined(featureType())
         && featureType().equals(BankingProductFeatureType.FREE_TXNS_ALLOWANCE)
-            ? FormatChecker.isDefined(additionalValue()) && FormatChecker.isAmountString(additionalValue()) : true;
+            ? FormatChecker.isDefined(additionalValue())
+                && FormatChecker.isAmountString(additionalValue())
+            : true;
   }
-  
-  @AssertTrueBabelfish(
-      message = "Loyalty Program: Should specify the name of the loyalty program",
+
+  @AssertTrueBabelfish(message = "Loyalty Program: Should specify the name of the loyalty program",
       fields = {"additionalValue"})
   private boolean isLoyaltyProgramValid() {
     return FormatChecker.isDefined(featureType())
@@ -62,7 +63,7 @@ public abstract class BankingProductFeatureV1 {
             ? FormatChecker.isNotEmpty(additionalValue())
             : true;
   }
-  
+
   @AssertTrueBabelfish(
       message = "Insurance: Should provide a text description of the type of insurance (eg. Travel Insurance)",
       fields = {"additionalValue"})
@@ -94,9 +95,8 @@ public abstract class BankingProductFeatureV1 {
                 && FormatChecker.isDurationString(additionalValue())
             : true;
   }
-  
-  @AssertTrueBabelfish(
-      message = "Digital Wallet: The name or band of the Digital Wallet provided",
+
+  @AssertTrueBabelfish(message = "Digital Wallet: The name or band of the Digital Wallet provided",
       fields = {"additionalValue"})
   private boolean isDigitalWalletValid() {
     return FormatChecker.isDefined(featureType())
@@ -104,7 +104,7 @@ public abstract class BankingProductFeatureV1 {
             ? FormatChecker.isNotEmpty(additionalValue())
             : true;
   }
-  
+
   @AssertTrueBabelfish(
       message = "Complementary Product Offering: Should be a description of the complementary offering",
       fields = {"additionalValue"})
@@ -114,7 +114,7 @@ public abstract class BankingProductFeatureV1 {
             ? FormatChecker.isNotEmpty(additionalValue())
             : true;
   }
-  
+
   @AssertTrueBabelfish(
       message = "Bonus Rewards: Should specify number of points available (eg. 10000)",
       fields = {"additionalValue"})
@@ -125,8 +125,7 @@ public abstract class BankingProductFeatureV1 {
             : true;
   }
 
-  @AssertTrueBabelfish(
-      message = "Notifications: Provide a description of notification capability",
+  @AssertTrueBabelfish(message = "Notifications: Provide a description of notification capability",
       fields = {"additionalValue"})
   private boolean isNotificationsValid() {
     return FormatChecker.isDefined(featureType())
@@ -134,9 +133,8 @@ public abstract class BankingProductFeatureV1 {
             ? FormatChecker.isNotEmpty(additionalValue())
             : true;
   }
-  
-  @AssertTrueBabelfish(
-      message = "Additional Value should be null with this Feature Type",
+
+  @AssertTrueBabelfish(message = "Additional Value should be null with this Feature Type",
       fields = {"additionalValue"})
   private boolean isValueStringNull() {
     return FormatChecker

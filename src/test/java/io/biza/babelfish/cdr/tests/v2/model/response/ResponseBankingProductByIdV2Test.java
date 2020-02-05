@@ -11,6 +11,7 @@
  *******************************************************************************/
 package io.biza.babelfish.cdr.tests.v2.model.response;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.net.URI;
 import java.time.OffsetDateTime;
@@ -28,11 +29,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.biza.babelfish.cdr.enumerations.BankingProductCategory;
 import io.biza.babelfish.cdr.models.payloads.LinksV1;
 import io.biza.babelfish.cdr.models.payloads.MetaV1;
+import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductDetailV1;
 import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductDetailV2;
 import io.biza.babelfish.cdr.models.responses.ResponseBankingProductByIdV2;
+import io.biza.babelfish.cdr.support.BabelFishConverter;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
+import lombok.extern.slf4j.Slf4j;
 
 @DisplayName("ResponseBankingProductById V1 Tests")
+@Slf4j
 public class ResponseBankingProductByIdV2Test {
   private Validator validator;
 
@@ -47,13 +52,14 @@ public class ResponseBankingProductByIdV2Test {
   void createValidEmptyProductList() {
     ResponseBankingProductByIdV2 myResponse = new ResponseBankingProductByIdV2()
         .links(new LinksV1().self(ModelConstants.DEFAULT_SELF_URI))
-        .data(ModelConstants.DEFAULT_BANKING_PRODUCT_DETAIL_V2);
+        .data(ModelConstants.DEFAULT_BANKING_PRODUCT_DETAIL_V2.build());
     assertTrue(validator.validate(myResponse).isEmpty(), validator.validate(myResponse).toString());
   }
 
   @Test
   @DisplayName("Raw JSON parse and validate")
   void parseProductJsonAndValidate() throws JsonProcessingException {
+    @SuppressWarnings("unused")
     ResponseBankingProductByIdV2 productResponse = new ObjectMapper().readValue(
         "{\"links\":{\"self\":\"http://localhost/cds-au/v1/banking/products/073e7e70-357d-4858-8f52-92283f4edd6f\"},\"meta\":{},"
             + "\"data\":{\"productId\":\"073e7e70-357d-4858-8f52-92283f4edd6f\",\"lastUpdated\":\"2020-02-03T06:32:27Z\","
@@ -76,25 +82,51 @@ public class ResponseBankingProductByIdV2Test {
                 .lastUpdated(OffsetDateTime.now())
                 .productCategory(BankingProductCategory.TRANS_AND_SAVINGS_ACCOUNTS)
                 .name("Example Product").description("Example Product Description").brand("ACME")
-                .tailored(false).build())
+                .isTailored(false).build())
             .build();
     Set<ConstraintViolation<ResponseBankingProductByIdV2>> productResponseValidation =
         Validation.buildDefaultValidatorFactory().getValidator().validate(productResponse);
     if (productResponseValidation.isEmpty()) {
-      System.out.println(new ObjectMapper().setSerializationInclusion(Include.NON_ABSENT)
+      LOG.info(new ObjectMapper().setSerializationInclusion(Include.NON_ABSENT)
           .writeValueAsString(productResponse));
     } else {
-      System.out.println(
-          "Object failed validation with errors of: " + productResponseValidation.toString());
+      LOG.error("Object failed validation with errors of: {}",
+          productResponseValidation.toString());
     }
   }
 
   @Test
   @DisplayName("Documentation enumeration example")
   void produceEnumerationLabel() {
-    System.out.println("name: " + BankingProductCategory.TRANS_AND_SAVINGS_ACCOUNTS.name()
-        + " label: " + BankingProductCategory.TRANS_AND_SAVINGS_ACCOUNTS.label());
+    LOG.info("name: {} label: {}", BankingProductCategory.TRANS_AND_SAVINGS_ACCOUNTS.name(),
+        BankingProductCategory.TRANS_AND_SAVINGS_ACCOUNTS.label());
     // Result: name: TRANS_AND_SAVINGS_ACCOUNTS label: Transaction & Savings
+  }
+  
+  @Test
+  @DisplayName("Downgrade Payload from v2 to v1")
+  void downgradePayloadToV1() {
+    BankingProductDetailV2 detail = BankingProductDetailV2.builder().productId("073e7e70-357d-4858-8f52-92283f4edd6f")
+    .lastUpdated(OffsetDateTime.now())
+    .productCategory(BankingProductCategory.TRANS_AND_SAVINGS_ACCOUNTS)
+    .name("Example Product").description("Example Product Description").brand("ACME")
+    .isTailored(false).build();
+    
+    BankingProductDetailV1 downgradedDetail = BabelFishConverter.convert(detail, BankingProductDetailV1.class);
+    
+    assertEquals(detail.productId(), downgradedDetail.productId());
+    assertEquals(detail.lastUpdated(), downgradedDetail.lastUpdated());
+    assertEquals(detail.productCategory(), downgradedDetail.productCategory());
+    assertEquals(detail.name(), downgradedDetail.name());
+    assertEquals(detail.description(), downgradedDetail.description());
+    assertEquals(detail.isTailored(), downgradedDetail.isTailored());
+    
+    LOG.info("V1 payload is: {}", downgradedDetail);
+    LOG.info("V2 payload is: {}", detail);
+    
+    
+    
+    
   }
 
 }

@@ -61,7 +61,7 @@ public class BankingLoanAccountV1 {
   @Schema(description = "Original Loan Value Currency")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
-  @JsonProperty("originalLoanCurrency")
+  @JsonProperty(value = "originalLoanCurrency", defaultValue = "AUD")
   @Builder.Default
   Currency originalLoanCurrency = Currency.getInstance("AUD");
 
@@ -90,7 +90,7 @@ public class BankingLoanAccountV1 {
   @Schema(description = "Minimum amount currency", type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
-  @JsonProperty("minInstalmentCurrency")
+  @JsonProperty(value = "minInstalmentCurrency", defaultValue = "AUD")
   @Builder.Default
   Currency minInstalmentCurrency = Currency.getInstance("AUD");
 
@@ -105,7 +105,8 @@ public class BankingLoanAccountV1 {
   @Schema(description = "Maximum redraw amount currency")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
-  @JsonProperty("maxRedrawCurrency")
+  @JsonProperty(value = "maxRedrawCurrency", defaultValue = "AUD")
+  @Builder.Default
   Currency maxRedrawCurrency = Currency.getInstance("AUD");
 
   @Schema(description = "Minimum redraw amount", type = "string")
@@ -117,7 +118,8 @@ public class BankingLoanAccountV1 {
   @Schema(description = "Minimum Redraw currency")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
-  @JsonProperty("minRedrawCurrency")
+  @JsonProperty(value = "minRedrawCurrency", defaultValue = "AUD")
+  @Builder.Default
   Currency minRedrawCurrency = Currency.getInstance("AUD");
 
   @Schema(
@@ -132,7 +134,7 @@ public class BankingLoanAccountV1 {
 
   @Schema(
       description = "Options in place for repayments. If absent defaults to PRINCIPAL_AND_INTEREST")
-  @JsonProperty("repaymentType")
+  @JsonProperty(value = "repaymentType", defaultValue = "PRINCIPAL_AND_INTEREST")
   @Builder.Default
   BankingLoanRepaymentType repaymentType = BankingLoanRepaymentType.PRINCIPAL_AND_INTEREST;
 

@@ -12,12 +12,9 @@
 package io.biza.babelfish.cdr.models.payloads.banking.account.payee.domestic;
 
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import io.biza.babelfish.cdr.enumerations.PayloadTypeBankingDomesticPayeePayId;
-import io.biza.babelfish.cdr.support.FormatChecker;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,13 +25,14 @@ import lombok.ToString;
 
 @Valid
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Domestic Payee PayID Detail", name = "BankingDomesticPayeePayIdV1")
-public class BankingDomesticPayeePayIdV1 {
+public class BankingDomesticPayeePayIdV1 extends
+    io.biza.babelfish.cdr.abstracts.payloads.banking.account.payee.domestic.BankingDomesticPayeePayIdV1 {
   @Schema(description = "The name assigned to the PayID by the owner of the PayID")
   @JsonProperty("name")
   String name;
@@ -49,45 +47,5 @@ public class BankingDomesticPayeePayIdV1 {
   @JsonProperty("type")
   @Valid
   PayloadTypeBankingDomesticPayeePayId type;
-  
-  @AssertTrue(message = "Identifier must be a valid telephone number when type is TELEPHONE")
-  private boolean isValidTelephoneNumber() {
-    if (type() != null && type().equals(PayloadTypeBankingDomesticPayeePayId.TELEPHONE)) {
-      if (identifier() == null) {
-        return false;
-      } else {
-        return FormatChecker.isPhoneNumber(identifier(), PhoneNumberUtil.PhoneNumberFormat.NATIONAL,
-            false)
-            || FormatChecker.isPhoneNumber(identifier(),
-                PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL, false)
-            || FormatChecker.isPhoneNumber(identifier(), PhoneNumberUtil.PhoneNumberFormat.RFC3966,
-                false);
-      }
-    }
-    return true;
-  }
 
-  @AssertTrue(message = "Identifier must be a valid Australian Business Number when type is ABN")
-  private boolean isValidAustralianBusinessNumber() {
-    if (type() != null && type().equals(PayloadTypeBankingDomesticPayeePayId.ABN)) {
-      if (identifier() == null) {
-        return false;
-      } else {
-        return FormatChecker.isAbn(identifier());
-      }
-    }
-    return true;
-  }
-
-  @AssertTrue(message = "Identifier must be a valid non local email address when type is EMAIL")
-  private boolean isValidEmailAddress() {
-    if (type() != null && type().equals(PayloadTypeBankingDomesticPayeePayId.EMAIL)) {
-      if (identifier() == null) {
-        return false;
-      } else {
-        return FormatChecker.isEmail(identifier());
-      }
-    }
-    return true;
-  }
 }

@@ -15,6 +15,7 @@ The Babelfish CDR Library is a Java based Maven artifact for the efficient proce
   - Java Validation (JSR-303) rules for all **required attributes**, **[Pagination](https://consumerdatastandardsaustralia.github.io/standards/#pagination)** and **[Product & Account Components](https://consumerdatastandardsaustralia.github.io/standards/#product-amp-account-components)**
   - Fluent Builders for all payloads [powered by Lombok](https://projectlombok.org/)
   - [OpenAPI 3 (fka Swagger)](https://github.com/swagger-api/swagger-core) annotations for all payloads suitable and [tested](https://github.com/bizaio/deepthought) for Spring Framework and [Springdoc](https://springdoc.org)
+  - **Reasonably** well tested, over **350 validation rules** and nearly **300 tests** (but there is always room for more!)
 
 ## Quick Start
 
@@ -201,12 +202,22 @@ ResponseBankingProductByIdV2 productResponse =
 
 [(Back to top)](#table-of-contents)
 
-Babelfish enables you to convert between two different payload versions. This means that a Data Recipient can build for a newer (or older) version of a payload while maintaining ongoing compatibility from individual Data Holders who may be ahead or behind the version expected by the Recipient.
+Babelfish enables you to convert between two different payload versions. This means that a Data Recipient can build for a newer (or older) version of a payload while maintaining ongoing compatibility from individual Data Holders who may be ahead or behind the version expected by the Recipient. We use Orika and a set of specific mappers for each different payload version and then make it available in `BabelFishConverter`.
 
 An example is as follows:
 
-```
-TODO
+```java
+    BankingProductDetailV2 detail = BankingProductDetailV2.builder()
+        .productId("073e7e70-357d-4858-8f52-92283f4edd6f").lastUpdated(OffsetDateTime.now())
+        .productCategory(BankingProductCategory.TRANS_AND_SAVINGS_ACCOUNTS).name("Example Product")
+        .description("Example Product Description").brand("ACME").isTailored(false).build();
+
+    // Downgrade it to V1
+    BankingProductDetailV1 downgradedDetail =
+        BabelFishConverter.convert(detail, BankingProductDetailV1.class);
+    // Upgrade back to V2
+    BankingProductDetailV2 upgradedDetail = BabelFishConverter.convert(downgradedDetail, BankingProductDetailV2.class);
+
 ```
 
 ### Using in Spring
@@ -256,18 +267,20 @@ Babelfish employs a set of `StdConverter` extensions to facilitate the conversio
 
 The following provides a table of the converters available:
 
-Common Field Type          | CDS JSON Type  | Babelfish Java Type | Serializer                              | Deserializer 
--------------------------- | -------------- | ------------------- | ----------------------------------------| -----------------------------------------
-DateTimeString             | String         | OffsetDateTime      | OffsetDateTimeToDateTimeStringConverter | DateTimeStringToOffsetDateTimeConverter
-DateString                 | String         | LocalDate           | LocalDateToStringConverter              | StringToLocalDateConverter
-CurrencyString             | String         | Currency            | CurrencyToStringConverter               | StringToCurrencyConverter
-RateString                 | String         | BigDecimal          | BigDecimalToRateStringConverter         | RateStringToBigDecimalConverter
-AmountString               | String         | BigDecimal          | BigDecimalToAmountStringConverter       | AmountStringToBigDecimalConverter
-URIString                  | String         | URI                 | UriToUriStringConverter                 | UriStringToUriConverter
-ExternalRef (Country)      | String         | Locale              | CountryStringToLocaleConverter          | LocaleToCountryStringConverter
-ExternalRef (Duration)     | String         | Duration            | StringToDurationConverter               | DurationToStringConverter
-ExternalRef (Period)       | String         | Period              | StringToPeriodConverter                 | PeriodToStringConverter
-Base64                     | String (Base64)| String              | StringToBase64StringConverter           | Base64StringToStringConverter
+Common Field Type          | CDS JSON Type  | Babelfish Java Type       | Serializer                              | Deserializer 
+-------------------------- | -------------- | ------------------------- | ----------------------------------------| -----------------------------------------
+DateTimeString             | String         | OffsetDateTime            | OffsetDateTimeToDateTimeStringConverter | DateTimeStringToOffsetDateTimeConverter
+DateString                 | String         | LocalDate                 | LocalDateToStringConverter              | StringToLocalDateConverter
+CurrencyString             | String         | Currency                  | CurrencyToStringConverter               | StringToCurrencyConverter
+RateString                 | String         | BigDecimal                | BigDecimalToRateStringConverter         | RateStringToBigDecimalConverter
+AmountString               | String         | BigDecimal                | BigDecimalToAmountStringConverter       | AmountStringToBigDecimalConverter
+URIString                  | String         | URI                       | UriToUriStringConverter                 | UriStringToUriConverter
+ExternalRef (Country)      | String         | Locale                    | CountryStringToLocaleConverter          | LocaleToCountryStringConverter
+ExternalRef (Duration)     | String         | Duration                  | StringToDurationConverter               | DurationToStringConverter
+ExternalRef (Period)       | String         | Period                    | StringToPeriodConverter                 | PeriodToStringConverter
+ExternalRef (MCC)          | String         | MerchantCategoryCodeType  | StringToMerchantCategoryCode            | MerchantCategoryCodeToString
+ExternalRef (APCA Number)  | String         | ApcaNumberType            | StringToApcaNumber                      | ApcaNumberToString
+Base64                     | String (Base64)| String                    | StringToBase64StringConverter           | Base64StringToStringConverter
 
 ### Custom Assertions
 
@@ -287,6 +300,13 @@ Another notable example demonstrating compound reporting is within `BankingProdu
 ```
 
 This assertion reports a set of field names which can be highlighted but for which only one at a time is accepted.
+
+### Phone Number Parsing
+
+[(Back to top)](#table-of-contents)
+
+The `CommonPhoneNumberV1` class contains a number of additional functions using Google's PhoneNumberUtil library. Most notably there is a method of `setWithFullNumber` which accepts a *standard* Australian number (for example 0733006000) and internationalises it into the requested format and fields. Use of this extension functionality is **entirely** optional.
+
 
 ## Building
 

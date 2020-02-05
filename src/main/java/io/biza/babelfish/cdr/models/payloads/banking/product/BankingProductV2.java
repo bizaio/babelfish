@@ -15,6 +15,7 @@ import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.List;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -26,6 +27,7 @@ import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.enumerations.BankingProductCategory;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -35,7 +37,7 @@ import lombok.experimental.SuperBuilder;
 @Valid
 @ToString
 @EqualsAndHashCode
-@SuperBuilder
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -44,7 +46,7 @@ public class BankingProductV2 {
   @Schema(
       description = "A data holder specific unique identifier for this product. This identifier must be unique to a product but does not otherwise need to adhere to ID permanence guidelines.",
       required = true)
-  @NotNull
+  @NotEmpty
   @JsonProperty("productId")
   String productId;
 
@@ -79,19 +81,19 @@ public class BankingProductV2 {
   BankingProductCategory productCategory;
 
   @Schema(description = "The display name of the product", required = true)
-  @NotNull
+  @NotEmpty
   @JsonProperty("name")
   String name;
 
   @Schema(description = "A description of the product", required = true)
-  @NotNull
+  @NotEmpty
   @JsonProperty("description")
   String description;
 
   @Schema(
       description = "A label of the brand for the product. Able to be used for filtering. For data holders with single brands this value is still required",
       required = true)
-  @NotNull
+  @NotEmpty
   @JsonProperty("brand")
   String brand;
 
@@ -111,7 +113,7 @@ public class BankingProductV2 {
       required = true)
   @NotNull
   @JsonProperty("isTailored")
-  Boolean tailored;
+  Boolean isTailored;
 
   @Schema(description = "Additional Information for Banking Product")
   @JsonProperty("additionalInformation")

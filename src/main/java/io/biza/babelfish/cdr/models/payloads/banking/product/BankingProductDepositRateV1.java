@@ -14,7 +14,6 @@ package io.biza.babelfish.cdr.models.payloads.banking.product;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.time.Period;
-import java.util.Arrays;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
@@ -30,8 +29,6 @@ import io.biza.babelfish.cdr.converters.StringToPeriodConverter;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.enumerations.BankingProductDepositRateType;
-import io.biza.babelfish.cdr.support.AssertTrueBabelfish;
-import io.biza.babelfish.cdr.support.FormatChecker;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,13 +39,14 @@ import lombok.ToString;
 
 @Valid
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "A Description of a Deposit Rate", name = "BankingProductDepositRateV1")
-public class BankingProductDepositRateV1 {
+public class BankingProductDepositRateV1
+    extends io.biza.babelfish.cdr.abstracts.payloads.banking.product.BankingProductDepositRateV1 {
   @Schema(
       description = "The type of rate (base, bonus, etc). See the next section for an overview of valid values and their meaning",
       required = true)
@@ -61,8 +59,8 @@ public class BankingProductDepositRateV1 {
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   @JsonProperty("rate")
-  @Min(0)
-  @Max(2)
+  @Min(-1)
+  @Max(1)
   BigDecimal rate;
 
   @Schema(
@@ -101,41 +99,5 @@ public class BankingProductDepositRateV1 {
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("additionalInfoUri")
   URI additionalInfoUri;
-  
-  @AssertTrueBabelfish(
-      message = "Additional Value must be a Duration String when Fee type is FIXED or INTRODUCTORY",
-      fields = {"additionalValue"})
-  private boolean isValueDuration() {
-    return FormatChecker.isDefined(depositRateType())
-        ? (Arrays.asList(new BankingProductDepositRateType[] {BankingProductDepositRateType.FIXED,
-            BankingProductDepositRateType.INTRODUCTORY}).contains(depositRateType())
-                ? FormatChecker.isDefined(additionalValue())
-                    && FormatChecker.isDurationString(additionalValue())
-                : true)
-        : true;
-  }
 
-  @AssertTrueBabelfish(
-      message = "Additional Value must String when Deposit Rate Type is BONUS, BUNDLE_BONUS, FLOATING or MARKET_LINKED",
-      fields = {"additionalValue"})
-  private boolean isValueString() {
-    return FormatChecker.isDefined(depositRateType())
-        ? (Arrays.asList(new BankingProductDepositRateType[] {BankingProductDepositRateType.BONUS,
-            BankingProductDepositRateType.BUNDLE_BONUS, BankingProductDepositRateType.FLOATING,
-            BankingProductDepositRateType.MARKET_LINKED}).contains(depositRateType())
-                ? FormatChecker.isNotEmpty(additionalValue())
-                : true)
-        : true;
-  }
-
-  @AssertTrueBabelfish(
-      message = "Additional Value should be null when Deposit Rate Type is VARIABLE",
-      fields = {"additionalValue"})
-  private boolean isValueStringNull() {
-    return FormatChecker.isDefined(depositRateType())
-        ? (Arrays
-            .asList(new BankingProductDepositRateType[] {BankingProductDepositRateType.VARIABLE})
-            .contains(depositRateType()) ? !FormatChecker.isNotEmpty(additionalValue()) : true)
-        : true;
-  }
 }

@@ -12,7 +12,7 @@
 package io.biza.babelfish.cdr.models.payloads.banking.account.payee.scheduled;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -35,7 +35,7 @@ import lombok.ToString;
 public class BankingScheduledPaymentFromV1 {
   @Schema(description = "ID of the account that is the source of funds for the payment",
       required = true)
-  @NotNull
+  @NotEmpty(message = "Must contain the Account ID")
   @JsonProperty("accountId")
   String accountId;
 

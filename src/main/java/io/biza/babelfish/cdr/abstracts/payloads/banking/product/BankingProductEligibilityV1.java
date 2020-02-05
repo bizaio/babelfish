@@ -2,7 +2,6 @@ package io.biza.babelfish.cdr.abstracts.payloads.banking.product;
 
 import java.util.Arrays;
 import io.biza.babelfish.cdr.enumerations.BankingProductEligibilityType;
-import io.biza.babelfish.cdr.enumerations.BankingProductFeatureType;
 import io.biza.babelfish.cdr.support.AssertTrueBabelfish;
 import io.biza.babelfish.cdr.support.FormatChecker;
 

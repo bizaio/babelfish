@@ -13,7 +13,7 @@ package io.biza.babelfish.cdr.models.payloads.common;
 
 import java.util.Locale;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -37,7 +37,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Simple Address Detail", name = "CommonSimpleAddressV1")
-public class CommonSimpleAddressV1 {
+public class CommonSimpleAddressV1
+    extends io.biza.babelfish.cdr.abstracts.payloads.common.CommonSimpleAddressV1 {
   @Schema(
       description = "Name of the individual or business formatted for inclusion in an address used for physical mail")
   @JsonProperty("mailingName")
@@ -45,6 +46,7 @@ public class CommonSimpleAddressV1 {
 
   @Schema(description = "First line of the standard address object", required = true)
   @JsonProperty("addressLine1")
+  @NotEmpty(message = "First line of Address must be specified")
   String addressLine1;
 
   @Schema(description = "Second line of the standard address object")
@@ -61,6 +63,7 @@ public class CommonSimpleAddressV1 {
 
   @Schema(description = "Name of the city or locality", required = true)
   @JsonProperty("city")
+  @NotEmpty(message = "City must be populated")
   String city;
 
   @Schema(
@@ -77,13 +80,6 @@ public class CommonSimpleAddressV1 {
   @JsonProperty("country")
   @Builder.Default
   Locale country = new Locale(Constants.DEFAULT_LOCALE, "AU");
-  
-  @AssertTrue(
-      message = "Postcode and State must be correct when Country is defined as Australia (en-AU)")
-  private boolean isAustralianFieldChecks() {
-    if (country().equals(Locale.forLanguageTag("en-AU"))) {
-      return postcode() != null && state() != null ? true : false;
-    }
-    return true;
-  }
+
+
 }

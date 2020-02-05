@@ -41,10 +41,8 @@ public class ResponseBankingProductListV1Test {
   @DisplayName("Create valid ResponseBankingProductList with empty Products")
   void createValidEmptyProductList() {
     ResponseBankingProductListV1 myResponse = new ResponseBankingProductListV1()
-        .links(new LinksPaginatedV1().self(ModelConstants.DEFAULT_SELF_URI)
-            .first(ModelConstants.DEFAULT_FIRST_URI).next(ModelConstants.DEFAULT_NEXT_URI)
-            .last(ModelConstants.DEFAULT_LAST_URI).prev(ModelConstants.DEFAULT_PREV_URI))
-        .meta(new MetaPaginatedV1().totalPages(10).totalRecords(100))
+        .links(ModelConstants.DEFAULT_LINKS_PAGINATED.build())
+        .meta(ModelConstants.DEFAULT_META_PAGINATED.build())
         .data(ResponseBankingProductListDataV1.builder().products(List.of()).build());
     assertTrue(validator.validate(myResponse).isEmpty(), validator.validate(myResponse).toString());
   }
@@ -53,12 +51,10 @@ public class ResponseBankingProductListV1Test {
   @DisplayName("Create valid ResponseBankingProductList with empty Products")
   void createValidProductList() {
     ResponseBankingProductListV1 myResponse = new ResponseBankingProductListV1()
-        .links(new LinksPaginatedV1().self(ModelConstants.DEFAULT_SELF_URI)
-            .first(ModelConstants.DEFAULT_FIRST_URI).next(ModelConstants.DEFAULT_NEXT_URI)
-            .last(ModelConstants.DEFAULT_LAST_URI).prev(ModelConstants.DEFAULT_PREV_URI))
-        .meta(new MetaPaginatedV1().totalPages(10).totalRecords(100))
+        .links(ModelConstants.DEFAULT_LINKS_PAGINATED.build())
+        .meta(ModelConstants.DEFAULT_META_PAGINATED.build())
         .data(ResponseBankingProductListDataV1.builder()
-            .products(List.of(ModelConstants.DEFAULT_BANKING_PRODUCT_V1)).build());
+            .products(List.of(ModelConstants.DEFAULT_BANKING_PRODUCT_V1.build())).build());
     assertTrue(validator.validate(myResponse).isEmpty(), validator.validate(myResponse).toString());
   }
 
@@ -66,10 +62,8 @@ public class ResponseBankingProductListV1Test {
   @DisplayName("Create valid ResponseBankingProductList with Invalid Product Data")
   void createValidProductListWithInvalidProduct() {
     ResponseBankingProductListV1 myResponse = new ResponseBankingProductListV1()
-        .links(new LinksPaginatedV1().self(ModelConstants.DEFAULT_SELF_URI)
-            .first(ModelConstants.DEFAULT_FIRST_URI).next(ModelConstants.DEFAULT_NEXT_URI)
-            .last(ModelConstants.DEFAULT_LAST_URI).prev(ModelConstants.DEFAULT_PREV_URI))
-        .meta(new MetaPaginatedV1().totalPages(10).totalRecords(100))
+        .links(ModelConstants.DEFAULT_LINKS_PAGINATED.build())
+        .meta(ModelConstants.DEFAULT_META_PAGINATED.build())
         .data(ResponseBankingProductListDataV1.builder().products(List.of(new BankingProductV1())).build());
     assertFalse(validator.validate(myResponse).isEmpty(),
         validator.validate(myResponse).toString());

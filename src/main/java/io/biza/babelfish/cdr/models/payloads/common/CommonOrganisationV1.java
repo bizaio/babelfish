@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Locale;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -42,7 +43,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Organisation Definition in Brief", name = "CommonOrganisationV1")
-public class CommonOrganisationV1 extends io.biza.babelfish.cdr.abstracts.models.common.CommonOrganisationV1 {
+public class CommonOrganisationV1
+    extends io.biza.babelfish.cdr.abstracts.payloads.common.CommonOrganisationV1 {
   @Schema(
       description = "The date and time that this record was last updated by the customer. If no update has occurred then this date should reflect the initial creation date for the data",
       format = "date-time")
@@ -60,22 +62,23 @@ public class CommonOrganisationV1 extends io.biza.babelfish.cdr.abstracts.models
       description = "The last name of the individual providing access on behalf of the organisation. For people with single names the single name should be in this field",
       required = true)
   @JsonProperty("agentLastName")
-  @NotNull
+  @NotEmpty(
+      message = "Last Name should have a value, if the agent has only one name it should be placed in this field")
   @Valid
   String agentLastName;
 
   @Schema(
       description = "The role of the individual identified as the agent who is providing authorisation.  Expected to be used for display.  Default to “Unspecified” if the role is not known",
       required = true)
-  @JsonProperty("agentRole")
-  @NotNull
+  @JsonProperty(value = "agentRole", defaultValue = "Unspecified")
+  @NotEmpty(message = "Should be populated with a role or Unspecified if not available")
   @Valid
   @Builder.Default
   String agentRole = "Unspecified";
 
   @Schema(description = "Name of the organisation", required = true)
   @JsonProperty("businessName")
-  @NotNull
+  @NotEmpty(message = "Business Name must be populated with the name of the organisation")
   @Valid
   String businessName;
 
@@ -123,5 +126,5 @@ public class CommonOrganisationV1 extends io.biza.babelfish.cdr.abstracts.models
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   @JsonProperty("establishmentDate")
   LocalDate establishmentDate;
-  
+
 }

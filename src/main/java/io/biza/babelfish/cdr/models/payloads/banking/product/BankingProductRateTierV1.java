@@ -27,13 +27,15 @@ import lombok.ToString;
 
 @Valid
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Defines the criteria and conditions for which a rate applies", name = "BankingProductRateTierV1")
-public class BankingProductRateTierV1 {
+@Schema(description = "Defines the criteria and conditions for which a rate applies",
+    name = "BankingProductRateTierV1")
+public class BankingProductRateTierV1
+    extends io.biza.babelfish.cdr.abstracts.payloads.banking.product.BankingProductRateTierV1 {
   @Schema(description = "A display name for the tier", required = true)
   @NotNull
   @JsonProperty("name")
@@ -63,8 +65,16 @@ public class BankingProductRateTierV1 {
   @JsonProperty("rateApplicationMethod")
   BankingProductRateTierApplicationMethod rateApplicationMethod;
 
+  @Schema(
+      description = "Defines the sub-tier criteria and conditions for which a rate applied. Expected to be deprecated shortly.")
+  @JsonProperty("subTier")
+  @Valid
+  @Deprecated
+  BankingProductRateTierSubTierV1 subTier;
+
   @Schema(description = "Banking Product Rate Applicability Conditions")
   @JsonProperty("applicabilityConditions")
   @Valid
   BankingProductRateTierApplicabilityV1 applicabilityConditions;
+
 }

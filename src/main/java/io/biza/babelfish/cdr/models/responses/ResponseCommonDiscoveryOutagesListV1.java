@@ -33,7 +33,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Response containing Discovery Outage data", name = "ResponseDiscoveryOutagesListV1")
+@Schema(description = "Response containing Discovery Outage data",
+    name = "ResponseDiscoveryOutagesListV1")
 public class ResponseCommonDiscoveryOutagesListV1 extends CDRResponseV1 {
   @Schema(required = true)
   @JsonProperty("data")

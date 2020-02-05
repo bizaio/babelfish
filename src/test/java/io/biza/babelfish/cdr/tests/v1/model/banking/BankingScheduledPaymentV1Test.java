@@ -60,13 +60,13 @@ public class BankingScheduledPaymentV1Test {
     data.status(BankingScheduledPaymentStatus.ACTIVE);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.from(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_FROM);
+    data.from(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_FROM.build());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.paymentSet(List.of(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_SET));
+    data.paymentSet(List.of(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_SET.build()));
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.recurrence(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE);
+    data.recurrence(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_RECURRENCE.build());
 
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());

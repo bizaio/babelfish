@@ -49,7 +49,7 @@ public class BankingTermDepositAccountV1 {
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
   @JsonProperty("lodgementDate")
-  private LocalDate lodgementDate;
+  LocalDate lodgementDate;
 
   @Schema(description = "Maturity date for the term deposit", required = true, format = "date")
   @NotNull
@@ -69,7 +69,7 @@ public class BankingTermDepositAccountV1 {
   @Schema(description = "Maturity Amount Currency", type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
-  @JsonProperty("maturityCurrency")
+  @JsonProperty(value = "maturityCurrency", defaultValue = "AUD")
   @Builder.Default
   Currency maturityCurrency = Currency.getInstance("AUD");
 

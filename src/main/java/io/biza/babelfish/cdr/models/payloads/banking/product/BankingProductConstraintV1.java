@@ -12,7 +12,6 @@
 package io.biza.babelfish.cdr.models.payloads.banking.product;
 
 import java.net.URI;
-import java.util.Arrays;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -21,8 +20,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.enumerations.BankingProductConstraintType;
-import io.biza.babelfish.cdr.support.AssertTrueBabelfish;
-import io.biza.babelfish.cdr.support.FormatChecker;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,13 +30,14 @@ import lombok.ToString;
 
 @Valid
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Banking Product Constraint Definition", name = "BankingProductConstraintV1")
-public class BankingProductConstraintV1 extends io.biza.babelfish.cdr.abstracts.payloads.banking.product.BankingProductConstraintV1 {
+public class BankingProductConstraintV1
+    extends io.biza.babelfish.cdr.abstracts.payloads.banking.product.BankingProductConstraintV1 {
   @Schema(
       description = "The type of constraint described.  See the next section for an overview of valid values and their meaning",
       required = true)
@@ -62,5 +60,5 @@ public class BankingProductConstraintV1 extends io.biza.babelfish.cdr.abstracts.
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("additionalInfoUri")
   URI additionalInfoUri;
-  
+
 }

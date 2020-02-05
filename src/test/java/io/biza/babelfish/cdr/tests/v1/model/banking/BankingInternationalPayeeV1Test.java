@@ -43,11 +43,11 @@ public class BankingInternationalPayeeV1Test {
   @DisplayName("BankingInternationalPayee Mandatory Fields")
   void bankingInternationalPayeeMandatoryFields() {
     BankingInternationalPayeeV1 data = new BankingInternationalPayeeV1();
-    data.beneficiaryDetails(ModelConstants.DEFAULT_BANKING_INTERNATIONAL_PAYEE_BENEFICIARY_DETAILS);
+    data.beneficiaryDetails(ModelConstants.DEFAULT_BANKING_INTERNATIONAL_PAYEE_BENEFICIARY_DETAILS.build());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.bankDetails(ModelConstants.DEFAULT_BANKING_INTERNATIONAL_PAYEE_BANK_DETAILS);
-
+    data.bankDetails(ModelConstants.DEFAULT_BANKING_INTERNATIONAL_PAYEE_BANK_DETAILS.build());
+    
     // Should be a valid payload now
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 

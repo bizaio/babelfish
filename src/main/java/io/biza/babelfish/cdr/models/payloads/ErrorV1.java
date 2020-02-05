@@ -12,7 +12,7 @@
 package io.biza.babelfish.cdr.models.payloads;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -34,17 +34,17 @@ public class ErrorV1 {
   @Schema(description = "Must be one of the following: 0001 – Account not able to be found",
       required = true)
   @JsonProperty("code")
-  @NotNull
+  @NotEmpty(message = "Code Must be specified")
   String code;
 
   @Schema(description = "Must be one of the following: Invalid account", required = true)
   @JsonProperty("title")
-  @NotNull
+  @NotEmpty(message = "Title Must be specified")
   String title;
 
   @Schema(description = "ID of the account not found", required = true)
   @JsonProperty("detail")
-  @NotNull
+  @NotEmpty(message = "Detail Must be specified")
   String detail;
 
   @Schema(description = "Optional additional data for specific error types")

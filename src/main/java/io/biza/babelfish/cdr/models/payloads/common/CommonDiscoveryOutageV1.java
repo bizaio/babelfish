@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr.models.payloads.common;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -65,7 +66,7 @@ public class CommonDiscoveryOutageV1 {
       description = "Provides an explanation of the current outage that can be displayed to an end customer",
       required = true)
   @JsonProperty("explanation")
-  @NotNull
+  @NotEmpty(message = "Must provide an explanation for the current outage")
   String explanation;
 
 }

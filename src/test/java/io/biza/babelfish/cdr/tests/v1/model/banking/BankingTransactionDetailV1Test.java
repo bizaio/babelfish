@@ -77,7 +77,7 @@ public class BankingTransactionDetailV1Test {
     data.postingDateTime(OffsetDateTime.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.extendedData(ModelConstants.DEFAULT_BANKING_TRANSACTION_DETAIL_EXTENDED_DATA);
+    data.extendedData(ModelConstants.DEFAULT_BANKING_TRANSACTION_DETAIL_EXTENDED_DATA.build());
 
     // Should now be valid
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -115,7 +115,7 @@ public class BankingTransactionDetailV1Test {
     data.reference("");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.extendedData(ModelConstants.DEFAULT_BANKING_TRANSACTION_DETAIL_EXTENDED_DATA);
+    data.extendedData(ModelConstants.DEFAULT_BANKING_TRANSACTION_DETAIL_EXTENDED_DATA.build());
     
     // 2020-02-04: Must supply posting data and time as well
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());

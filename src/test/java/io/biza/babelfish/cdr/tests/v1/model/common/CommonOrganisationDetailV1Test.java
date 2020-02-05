@@ -56,7 +56,7 @@ public class CommonOrganisationDetailV1Test {
     data.organisationType(CommonOrganisationType.OTHER);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.physicalAddresses(List.of(ModelConstants.DEFAULT_COMMON_PHYSICAL_ADDRESS_WITH_PURPOSE));
+    data.physicalAddresses(List.of(ModelConstants.DEFAULT_COMMON_PHYSICAL_ADDRESS_WITH_PURPOSE.build()));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
@@ -79,7 +79,7 @@ public class CommonOrganisationDetailV1Test {
     data.acn("010 499 966");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.physicalAddresses(List.of(ModelConstants.DEFAULT_COMMON_PHYSICAL_ADDRESS_WITH_PURPOSE));
+    data.physicalAddresses(List.of(ModelConstants.DEFAULT_COMMON_PHYSICAL_ADDRESS_WITH_PURPOSE.build()));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }

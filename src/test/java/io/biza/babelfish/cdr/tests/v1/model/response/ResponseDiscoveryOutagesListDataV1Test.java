@@ -37,7 +37,7 @@ public class ResponseDiscoveryOutagesListDataV1Test {
   @DisplayName("Create valid ResponseDiscoveryOutagesListData")
   void responseDiscoveryOutagesListData() {
     ResponseCommonDiscoveryOutagesListDataV1 data =
-        ModelConstants.DEFAULT_RESPONSE_COMMON_DISCOVERY_OUTAGES_LIST_DATA;
+        ModelConstants.DEFAULT_RESPONSE_COMMON_DISCOVERY_OUTAGES_LIST_DATA.build();
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
@@ -48,7 +48,7 @@ public class ResponseDiscoveryOutagesListDataV1Test {
     ResponseCommonDiscoveryOutagesListDataV1 data = new ResponseCommonDiscoveryOutagesListDataV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.outages(List.of(ModelConstants.DEFAULT_COMMON_DISCOVERY_OUTAGE));
+    data.outages(List.of(ModelConstants.DEFAULT_COMMON_DISCOVERY_OUTAGE.build()));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
 

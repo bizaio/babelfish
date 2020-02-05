@@ -31,7 +31,8 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Response containing a list of Banking Accounts", name = "ResponseBankingAccountListDataV1")
+@Schema(description = "Response containing a list of Banking Accounts",
+    name = "ResponseBankingAccountListDataV1")
 public class ResponseBankingAccountListDataV1 {
   @Schema(
       description = "The list of accounts returned. If the filter results in an empty set then this array may have no records",

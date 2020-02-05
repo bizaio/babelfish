@@ -12,8 +12,14 @@
 package io.biza.babelfish.cdr.models.payloads.banking.account.payee.domestic;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.biza.babelfish.cdr.converters.ApcaNumberToStringConverter;
+import io.biza.babelfish.cdr.converters.StringToApcaNumberConverter;
+import io.biza.babelfish.cdr.support.customtypes.ApcaNumberType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,13 +41,15 @@ public class BankingDomesticPayeeAccountV1 {
   @JsonProperty("accountName")
   String accountName;
 
-  @Schema(description = "BSB of the account to pay to", required = true)
+  @Schema(description = "BSB of the account to pay to", required = true, type = "string")
   @NotNull
   @JsonProperty("bsb")
-  String bsb;
+  @JsonSerialize(converter = ApcaNumberToStringConverter.class)
+  @JsonDeserialize(converter = StringToApcaNumberConverter.class)
+  ApcaNumberType bsb;
 
   @Schema(description = "Number of the account to pay to", required = true)
-  @NotNull
+  @NotEmpty
   @JsonProperty("accountNumber")
   String accountNumber;
 }

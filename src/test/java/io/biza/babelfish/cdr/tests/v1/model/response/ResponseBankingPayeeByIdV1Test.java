@@ -34,7 +34,7 @@ public class ResponseBankingPayeeByIdV1Test {
   @Test
   @DisplayName("Create valid ResponseBankingPayeeById")
   void responseBankingPayeeById() {
-    ResponseBankingPayeeByIdV1 data = ModelConstants.DEFAULT_RESPONSE_BANKING_PAYEE_BY_ID;
+    ResponseBankingPayeeByIdV1 data = ModelConstants.DEFAULT_RESPONSE_BANKING_PAYEE_BY_ID.build();
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 

@@ -33,8 +33,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Person definition in detail", name = "CommonPersonDetailV1")
-public class CommonPersonDetailV1 extends io.biza.babelfish.cdr.abstracts.models.common.CommonPersonDetailV1 {
-  
+public class CommonPersonDetailV1
+    extends io.biza.babelfish.cdr.abstracts.payloads.common.CommonPersonDetailV1 {
+
   @Schema(
       description = "The date and time that this record was last updated by the customer.  If no update has occurred then this date should reflect the initial creation date for the data",
       format = "date-time")
@@ -49,7 +50,8 @@ public class CommonPersonDetailV1 extends io.biza.babelfish.cdr.abstracts.models
   @Schema(description = "For people with single names the single name should be in this field",
       required = true)
   @JsonProperty("lastName")
-  @NotEmpty
+  @NotEmpty(
+      message = "Should be populated with last name or, for single names, this field should be used")
   String lastName;
 
   @Schema(description = "Field is mandatory but array may be empty", required = true)
@@ -71,7 +73,7 @@ public class CommonPersonDetailV1 extends io.biza.babelfish.cdr.abstracts.models
       description = "Value is a valid [ANZCO v1.2](http://www.abs.gov.au/ANZSCO) Standard Occupation classification.")
   @JsonProperty("occupationCode")
   String occupationCode;
-  
+
   @Schema(description = "Array is mandatory but may be empty if no phone numbers are held",
       required = true)
   @JsonProperty("phoneNumbers")
@@ -95,5 +97,5 @@ public class CommonPersonDetailV1 extends io.biza.babelfish.cdr.abstracts.models
   @Valid
   @Builder.Default
   List<CommonPhysicalAddressWithPurposeV1> physicalAddresses = List.of();
- 
+
 }

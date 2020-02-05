@@ -36,7 +36,7 @@ public class CommonPAFAddressV1Test {
   @Test
   @DisplayName("Create valid CommonPAFAddress")
   void commonPAFAddress() {
-    CommonPAFAddressV1 data = ModelConstants.DEFAULT_COMMON_PAF_ADDRESS;
+    CommonPAFAddressV1 data = ModelConstants.DEFAULT_COMMON_PAF_ADDRESS.build();
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 

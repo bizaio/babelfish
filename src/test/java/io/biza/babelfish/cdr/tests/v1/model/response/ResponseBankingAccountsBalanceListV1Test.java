@@ -35,7 +35,7 @@ public class ResponseBankingAccountsBalanceListV1Test {
   @DisplayName("Create valid ResponseBankingAccountsBalanceList")
   void responseBankingAccountsBalanceList() {
     ResponseBankingAccountsBalanceListV1 data =
-        ModelConstants.DEFAULT_RESPONSE_BANKING_ACCOUNTS_BALANCE_LIST;
+        ModelConstants.DEFAULT_RESPONSE_BANKING_ACCOUNTS_BALANCE_LIST.build();
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 

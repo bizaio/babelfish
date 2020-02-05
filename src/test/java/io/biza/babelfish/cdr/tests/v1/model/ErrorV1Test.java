@@ -37,7 +37,7 @@ public class ErrorV1Test {
   @Test
   @DisplayName("Create valid Error")
   void responseError() {
-    ErrorV1 data = ModelConstants.DEFAULT_ERROR;
+    ErrorV1 data = ModelConstants.DEFAULT_ERROR.build();
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 

@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -32,7 +32,6 @@ import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductFeatu
 import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductFeeV1;
 import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductLendingRateV1;
 import io.biza.babelfish.cdr.models.payloads.common.CommonPhysicalAddressV1;
-import io.biza.babelfish.cdr.support.FormatChecker;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,17 +42,19 @@ import lombok.ToString;
 
 @Valid
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Detailed Australian Banking Account Information", name = "BankingAccountDetailV1")
-public class BankingAccountDetailV1 {
-  
+@Schema(description = "Detailed Australian Banking Account Information",
+    name = "BankingAccountDetailV1")
+public class BankingAccountDetailV1
+    extends io.biza.babelfish.cdr.abstracts.payloads.banking.account.BankingAccountDetailV1 {
+
   @Schema(description = "A unique ID of the account adhering to the standards for ID permanence",
       required = true)
-  @NotNull
+  @NotEmpty(message = "Must contain a unique identifier")
   @JsonProperty("accountId")
   String accountId;
 
@@ -67,7 +68,7 @@ public class BankingAccountDetailV1 {
   @Schema(
       description = "The display name of the account as defined by the bank. This should not incorporate account numbers or PANs. If it does the values should be masked according to the rules of the MaskedAccountString common type.",
       required = true)
-  @NotNull
+  @NotEmpty(message = "Must contain a display name for the account")
   @JsonProperty("displayName")
   String displayName;
 
@@ -77,20 +78,20 @@ public class BankingAccountDetailV1 {
 
   @Schema(
       description = "Open or closed status for the account. If not present then OPEN is assumed")
-  @JsonProperty("openStatus")
+  @JsonProperty(value = "openStatus", defaultValue = "OPEN")
   @Builder.Default
   BankingAccountStatus openStatus = BankingAccountStatus.OPEN;
 
   @Schema(
       description = "Flag indicating that the customer associated with the authorisation is an owner of the account. Does not indicate sole ownership, however. If not present then 'true' is assumed")
-  @JsonProperty("isOwned")
+  @JsonProperty(value = "isOwned", defaultValue = "true")
   @Builder.Default
   Boolean isOwned = true;
 
   @Schema(
       description = "A masked version of the account. Whether BSB/Account Number, Credit Card PAN or another number",
       required = true)
-  @NotNull
+  @NotEmpty(message = "Must contain a masked number")
   @JsonProperty("maskedNumber")
   String maskedNumber;
 
@@ -102,10 +103,10 @@ public class BankingAccountDetailV1 {
   @Schema(
       description = "The unique identifier of the account as defined by the account holder (akin to model number for the account)",
       required = true)
-  @NotNull
+  @NotEmpty(message = "Must contain a unique product identifier")
   @JsonProperty("productName")
   String productName;
-  
+
   @Schema(
       description = "The unmasked BSB for the account. Is expected to be formatted as digits only with leading zeros included and no punctuation or spaces")
   @JsonProperty("bsb")
@@ -185,25 +186,4 @@ public class BankingAccountDetailV1 {
   @Valid
   List<CommonPhysicalAddressV1> addresses;
 
-  @AssertTrue(message = "Account Number must not be an unmasked PAN")
-  private boolean isAccountNumberUnmaskedPan() {
-    return FormatChecker.isPanNumber(accountNumber()) ? false : true;
-  }
-
-  @AssertTrue(message = "Account Type must supply matching Account Type Specific Information")
-  private boolean isAccountTypeCorrect() {
-    // Return true if not defined, @NotNull will pick this up later
-    if (specificAccountUType() == null) {
-      return true;
-    }
-
-    if (specificAccountUType().equals(PayloadTypeBankingAccount.TERM_DEPOSIT)) {
-      return termDeposit() != null && creditCard() == null && loan() == null ? true : false;
-    } else if (specificAccountUType().equals(PayloadTypeBankingAccount.CREDIT_CARD)) {
-      return creditCard() != null && termDeposit() == null && loan() == null ? true : false;
-    } else if (specificAccountUType().equals(PayloadTypeBankingAccount.LOAN)) {
-      return loan() != null && creditCard() == null && termDeposit() == null ? true : false;
-    }
-    return false;
-  }
 }

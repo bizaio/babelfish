@@ -128,7 +128,7 @@ public class BankingProductFeeV1 {
   @JsonProperty("discounts")
   @Valid
   List<BankingProductDiscountV1> discounts;
-  
+
   @AssertTrueBabelfish(
       message = "Additional Value must be a Duration String when Fee type is PERIODIC",
       fields = {"additionalValue"})

@@ -39,7 +39,7 @@ public class CommonSimpleAddressV1Test {
   @Test
   @DisplayName("Create valid CommonSimpleAddress")
   void responseCommonSimpleAddress() {
-    CommonSimpleAddressV1 data = ModelConstants.DEFAULT_COMMON_SIMPLE_ADDRESS;
+    CommonSimpleAddressV1 data = ModelConstants.DEFAULT_COMMON_SIMPLE_ADDRESS.build();
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 

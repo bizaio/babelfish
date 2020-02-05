@@ -34,14 +34,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(
-    description = "Response containing a data object with customer details of either PERSON or ORGANISATION object", name = "ResponseCommonCustomerV1")
+    description = "Response containing a data object with customer details of either PERSON or ORGANISATION object",
+    name = "ResponseCommonCustomerV1")
 public class ResponseCommonCustomerV1 extends CDRResponseV1 {
   @Schema(required = true)
   @JsonProperty("data")
   @NotNull
   @Valid
   ResponseCommonCustomerDataV1 data;
-  
+
   @Schema(description = "The Links Object", required = true)
   @JsonProperty("links")
   @NotNull
@@ -49,8 +50,7 @@ public class ResponseCommonCustomerV1 extends CDRResponseV1 {
   LinksV1 links;
 
   @Schema(
-      description = "The meta object is used to provide additional information such as second factor authorisation data, traffic management, pagination counts or other purposes that are complementary to the workings of the API.",
-      required = true)
+      description = "The meta object is used to provide additional information such as second factor authorisation data, traffic management, pagination counts or other purposes that are complementary to the workings of the API.")
   @JsonProperty("meta")
   @Valid
   MetaV1 meta;

@@ -145,7 +145,7 @@ public class BankingProductFeeDiscountV1Test {
     // No eligibility criteria is invalid
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
     
-    data.eligibility(List.of(ModelConstants.DEFAULT_BANKING_PRODUCT_FEE_DISCOUNT_ELIGIBILITY));
+    data.eligibility(List.of(ModelConstants.DEFAULT_BANKING_PRODUCT_FEE_DISCOUNT_ELIGIBILITY.build()));
     
     // With Eligibility is valid
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());

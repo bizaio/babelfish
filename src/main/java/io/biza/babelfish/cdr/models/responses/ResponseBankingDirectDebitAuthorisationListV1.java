@@ -33,9 +33,9 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Response containing a a list of Direct Debit Authorisations", name = "ResponseBankingDirectDebitAuthorisationListV1")
-public class ResponseBankingDirectDebitAuthorisationListV1
-    extends CDRResponsePaginatedV1 {
+@Schema(description = "Response containing a a list of Direct Debit Authorisations",
+    name = "ResponseBankingDirectDebitAuthorisationListV1")
+public class ResponseBankingDirectDebitAuthorisationListV1 extends CDRResponsePaginatedV1 {
   @Schema(required = true)
   @JsonProperty("data")
   @NotNull

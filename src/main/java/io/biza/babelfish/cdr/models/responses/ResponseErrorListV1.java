@@ -13,7 +13,7 @@ package io.biza.babelfish.cdr.models.responses;
 
 import java.util.List;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.babelfish.cdr.models.payloads.ErrorV1;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -34,7 +34,7 @@ import lombok.ToString;
 @Schema(description = "CDS Error Response", name = "ResponseErrorListV1")
 public class ResponseErrorListV1 {
   @Schema(required = true)
-  @NotNull
+  @NotEmpty(message = "Error Response should contain a list of errors with at least one value")
   @JsonProperty("errors")
   @Valid
   List<ErrorV1> errors;

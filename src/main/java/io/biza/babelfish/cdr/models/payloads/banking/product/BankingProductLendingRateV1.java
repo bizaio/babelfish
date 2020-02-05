@@ -14,7 +14,6 @@ package io.biza.babelfish.cdr.models.payloads.banking.product;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.time.Period;
-import java.util.Arrays;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
@@ -31,8 +30,6 @@ import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.enumerations.BankingProductLendingRateInterestPaymentType;
 import io.biza.babelfish.cdr.enumerations.BankingProductLendingRateType;
-import io.biza.babelfish.cdr.support.AssertTrueBabelfish;
-import io.biza.babelfish.cdr.support.FormatChecker;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,13 +40,15 @@ import lombok.ToString;
 
 @Valid
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Banking Product Lending Rate Definition", name = "BankingProductLendingRateV1")
-public class BankingProductLendingRateV1 {
+@Schema(description = "Banking Product Lending Rate Definition",
+    name = "BankingProductLendingRateV1")
+public class BankingProductLendingRateV1
+    extends io.biza.babelfish.cdr.abstracts.payloads.banking.product.BankingProductLendingRateV1 {
   @Schema(
       description = "The type of rate (fixed, variable, etc). See the next section for an overview of valid values and their meaning",
       required = true)
@@ -115,46 +114,6 @@ public class BankingProductLendingRateV1 {
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("additionalInfoUri")
   URI additionalInfoUri;
-  
-  @AssertTrueBabelfish(
-      message = "Additional Value must be an Duration String when Lending Rate Type INTRODUCTORY or FIXED",
-      fields = {"additionalValue"})
-  private boolean isValueDuration() {
-    return FormatChecker.isDefined(lendingRateType())
-        ? (Arrays.asList(new BankingProductLendingRateType[] {
-            BankingProductLendingRateType.INTRODUCTORY, BankingProductLendingRateType.FIXED})
-            .contains(lendingRateType())
-                ? FormatChecker.isDefined(additionalValue())
-                    && FormatChecker.isDurationString(additionalValue())
-                : true)
-        : true;
-  }
 
-  @AssertTrueBabelfish(
-      message = "Additional Value must be String when Lending Rate Type is DISCOUNT, PENALTY, FLOATING, MARKET_LINKED, BUNDLE_DISCOUNT_FIXED or BUNDLE_DISCOUNT_VARIABLE",
-      fields = {"additionalValue"})
-  private boolean isValueString() {
-    return FormatChecker
-        .isDefined(lendingRateType())
-            ? (Arrays
-                .asList(new BankingProductLendingRateType[] {BankingProductLendingRateType.DISCOUNT,
-                    BankingProductLendingRateType.PENALTY, BankingProductLendingRateType.FLOATING,
-                    BankingProductLendingRateType.MARKET_LINKED,
-                    BankingProductLendingRateType.BUNDLE_DISCOUNT_FIXED,
-                    BankingProductLendingRateType.BUNDLE_DISCOUNT_VARIABLE})
-                .contains(lendingRateType()) ? FormatChecker.isNotEmpty(additionalValue()) : true)
-            : true;
-  }
 
-  @AssertTrueBabelfish(
-      message = "Additional Value should be null when Lending Rate Type is VARIABLE, CASH_ADVANCE or PURCHASE",
-      fields = {"additionalValue"})
-  private boolean isValueStringNull() {
-    return FormatChecker.isDefined(lendingRateType())
-        ? (Arrays
-            .asList(new BankingProductLendingRateType[] {BankingProductLendingRateType.VARIABLE,
-                BankingProductLendingRateType.CASH_ADVANCE, BankingProductLendingRateType.PURCHASE})
-            .contains(lendingRateType()) ? !FormatChecker.isDefined(additionalValue()) : true)
-        : true;
-  }
 }

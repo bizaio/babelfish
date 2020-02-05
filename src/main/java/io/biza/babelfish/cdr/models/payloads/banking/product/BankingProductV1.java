@@ -110,7 +110,7 @@ public class BankingProductV1 {
       required = true)
   @NotNull
   @JsonProperty("isTailored")
-  Boolean tailored;
+  Boolean isTailored;
 
   @Schema(description = "Additional Information for Banking Product")
   @JsonProperty("additionalInformation")

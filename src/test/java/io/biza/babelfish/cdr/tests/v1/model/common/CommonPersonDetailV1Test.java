@@ -49,7 +49,7 @@ public class CommonPersonDetailV1Test {
     data.lastName("Last");
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.physicalAddresses(List.of(ModelConstants.DEFAULT_COMMON_PHYSICAL_ADDRESS_WITH_PURPOSE));
+    data.physicalAddresses(List.of(ModelConstants.DEFAULT_COMMON_PHYSICAL_ADDRESS_WITH_PURPOSE.build()));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }

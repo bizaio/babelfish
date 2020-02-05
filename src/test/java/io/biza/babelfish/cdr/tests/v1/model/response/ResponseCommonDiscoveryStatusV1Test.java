@@ -35,7 +35,7 @@ public class ResponseCommonDiscoveryStatusV1Test {
   @Test
   @DisplayName("Create valid ResponseCommonDiscoveryStatus")
   void responseCommonDiscoveryStatus() {
-    ResponseCommonDiscoveryStatusV1 data = ModelConstants.DEFAULT_RESPONSE_COMMON_DISCOVERY_STATUS;
+    ResponseCommonDiscoveryStatusV1 data = ModelConstants.DEFAULT_RESPONSE_COMMON_DISCOVERY_STATUS.build();
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
@@ -45,14 +45,14 @@ public class ResponseCommonDiscoveryStatusV1Test {
     ResponseCommonDiscoveryStatusV1 data = new ResponseCommonDiscoveryStatusV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.links(ModelConstants.DEFAULT_LINKS);
+    data.links(ModelConstants.DEFAULT_LINKS.build());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.data(ModelConstants.DEFAULT_COMMON_DISCOVERY_STATUS);
+    data.data(ModelConstants.DEFAULT_COMMON_DISCOVERY_STATUS.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Should still validate with meta too
-    data.meta(ModelConstants.DEFAULT_META);
+    data.meta(ModelConstants.DEFAULT_META.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }

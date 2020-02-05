@@ -1,15 +1,17 @@
-package io.biza.babelfish.cdr.abstracts.models.banking;
+package io.biza.babelfish.cdr.abstracts.payloads.banking.transaction;
 
 import java.time.OffsetDateTime;
-import javax.validation.constraints.AssertTrue;
 import io.biza.babelfish.cdr.enumerations.BankingTransactionStatus;
+import io.biza.babelfish.cdr.support.AssertTrueBabelfish;
 
 public abstract class BankingTransactionV1 {
-  
+
   public abstract BankingTransactionStatus status();
+
   public abstract OffsetDateTime postingDateTime();
 
-  @AssertTrue(message = "Posting Date and Time must be set when status is POSTED")
+  @AssertTrueBabelfish(message = "Posting Date and Time must be set when status is POSTED",
+      fields = {"postingDateTime", "status"})
   private boolean isPostedDateDefined() {
     return BankingTransactionStatus.POSTED.equals(status())
         ? (postingDateTime() != null ? true : false)

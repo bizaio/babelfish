@@ -34,14 +34,14 @@ public class MetaPaginatedV1Test {
   @Test
   @DisplayName("Create valid MetaPaginated")
   void responseMetaPaginatedV1() {
-    MetaPaginatedV1 data = ModelConstants.DEFAULT_META_PAGINATED;
+    MetaPaginatedV1 data = ModelConstants.DEFAULT_META_PAGINATED.build();
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
   @Test
   @DisplayName("MetaPaginated Mandatory Fields")
   void responseMetaPaginatedMandatoryFields() {
-    MetaPaginatedV1 data = new MetaPaginatedV1();
+    MetaPaginatedV1 data = MetaPaginatedV1.builder().build();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.totalRecords(100);

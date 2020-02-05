@@ -1,4 +1,4 @@
-package io.biza.babelfish.cdr.abstracts.models.common;
+package io.biza.babelfish.cdr.abstracts.payloads.common;
 
 import java.util.Arrays;
 import io.biza.babelfish.cdr.enumerations.CommonOrganisationType;
@@ -6,11 +6,13 @@ import io.biza.babelfish.cdr.support.AssertTrueBabelfish;
 import io.biza.babelfish.cdr.support.FormatChecker;
 
 public abstract class CommonOrganisationV1 {
-  
+
   public abstract CommonOrganisationType organisationType();
+
   public abstract String abn();
+
   public abstract String acn();
-  
+
   @AssertTrueBabelfish(message = "ACN must be populated when organisationType is COMPANY",
       fields = {"acn"})
   private boolean isAcnPopulated() {

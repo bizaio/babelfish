@@ -1,4 +1,4 @@
-package io.biza.babelfish.cdr.abstracts.models.common;
+package io.biza.babelfish.cdr.abstracts.payloads.common;
 
 import java.util.Arrays;
 import javax.validation.constraints.AssertTrue;
@@ -15,14 +15,21 @@ import io.biza.babelfish.cdr.support.TypeConstants;
 public abstract class CommonPhoneNumberV1<T> {
 
   public abstract String countryCode();
+
   public abstract T countryCode(String countryCode);
+
   public abstract CommonPhoneNumberPurpose purpose();
+
   public abstract String areaCode();
+
   public abstract String fullNumber();
+
   public abstract T fullNumber(String fullNumber);
+
   public abstract T areaCode(String areaCode);
+
   public abstract T extension(String extension);
-  
+
   /**
    * A method to setup a CommonPhoneNumber set of values from a single candidate input number
    * 
@@ -38,11 +45,10 @@ public abstract class CommonPhoneNumberV1<T> {
     if (areaCodeLength > 0) {
       areaCode(nationalSignificantNumber.substring(0, areaCodeLength));
     }
-    fullNumber(phoneUtil.format(number, PhoneNumberFormat.NATIONAL));
     fullNumber(phoneUtil.format(number, PhoneNumberFormat.RFC3966));
     extension(number.getExtension());
   }
-  
+
   @AssertTrue(message = "Country Code, when supplied, should be in +## format")
   private boolean isCountryCodeValid() {
     return countryCode() == null ? true : FormatChecker.phoneNumberCountryCodeValid(countryCode());

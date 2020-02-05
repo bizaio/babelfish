@@ -34,7 +34,8 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Scheduled Payment Interval Description", name = "BankingScheduledPaymentIntervalV1")
+@Schema(description = "Scheduled Payment Interval Description",
+    name = "BankingScheduledPaymentIntervalV1")
 public class BankingScheduledPaymentIntervalV1 {
   @Schema(
       description = "An interval for the payment. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations) with components less than a day in length ignored. This duration defines the period between payments starting with nextPaymentDate",
@@ -50,8 +51,7 @@ public class BankingScheduledPaymentIntervalV1 {
       type = "string")
   @JsonSerialize(converter = PeriodToStringConverter.class)
   @JsonDeserialize(converter = StringToPeriodConverter.class)
-  // TODO: This is a day of week but uses a duration?
-  @JsonProperty("dayInInterval")
+  @JsonProperty(value = "dayInInterval", defaultValue = "P1D")
   @Builder.Default
   Period dayInInterval = Period.ofDays(1);
 }

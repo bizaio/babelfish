@@ -31,13 +31,14 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Object containing a list of CommonDiscoveryOutage objects", name = "DiscoveryOutage")
+@Schema(description = "Object containing a list of CommonDiscoveryOutage objects",
+    name = "DiscoveryOutage")
 public class ResponseCommonDiscoveryOutagesListDataV1 {
   @Schema(
       description = "List of scheduled outages. Property is mandatory but may contain and empty list if no outages are scheduled",
       required = true)
   @JsonProperty("outages")
-  @NotNull
+  @NotNull(message = "Must not be null but may be empty")
   @Valid
   List<CommonDiscoveryOutageV1> outages;
 

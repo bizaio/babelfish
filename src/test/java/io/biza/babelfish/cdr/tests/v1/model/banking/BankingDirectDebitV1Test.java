@@ -51,7 +51,7 @@ public class BankingDirectDebitV1Test {
     data.accountId(UUID.randomUUID().toString());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.authorisedEntity(ModelConstants.DEFAULT_BANKING_AUTHORISED_ENTITY);
+    data.authorisedEntity(ModelConstants.DEFAULT_BANKING_AUTHORISED_ENTITY.build());
 
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -62,7 +62,7 @@ public class BankingDirectDebitV1Test {
   @DisplayName("BankingDirectDebit Last Debit Attributes should be present")
   void bankingDirectDebitVerifyLastDebitAttributesPresent() {
     BankingDirectDebitV1 data = new BankingDirectDebitV1().accountId(UUID.randomUUID().toString())
-        .authorisedEntity(ModelConstants.DEFAULT_BANKING_AUTHORISED_ENTITY);
+        .authorisedEntity(ModelConstants.DEFAULT_BANKING_AUTHORISED_ENTITY.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.lastDebitDateTime(OffsetDateTime.now());

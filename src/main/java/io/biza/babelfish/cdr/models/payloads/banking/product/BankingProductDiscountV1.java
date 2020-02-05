@@ -13,7 +13,6 @@ package io.biza.babelfish.cdr.models.payloads.banking.product;
 
 import java.math.BigDecimal;
 import java.net.URI;
-import java.util.Arrays;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -25,8 +24,6 @@ import io.biza.babelfish.cdr.converters.RateStringToBigDecimalConverter;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.enumerations.BankingProductDiscountType;
-import io.biza.babelfish.cdr.support.AssertTrueBabelfish;
-import io.biza.babelfish.cdr.support.FormatChecker;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,13 +34,14 @@ import lombok.ToString;
 
 @Valid
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(name = "BankingProductDiscountV1", description = "Banking Product Discount Specification")
-public class BankingProductDiscountV1 {
+public class BankingProductDiscountV1
+    extends io.biza.babelfish.cdr.abstracts.payloads.banking.product.BankingProductDiscountV1 {
   @Schema(description = "Description of the discount", required = true)
   @NotNull
   @JsonProperty("description")
@@ -115,54 +113,6 @@ public class BankingProductDiscountV1 {
   @Schema(description = "Eligibility constraints that apply to this discount")
   @JsonProperty("eligibility")
   @Valid
-  List<BankingProductFeeDiscountEligibilityV1> eligibility;
+  List<BankingProductDiscountEligibilityV1> eligibility;
 
-  @AssertTrueBabelfish(
-      message = "Eligibility Criteria must be populated when Discount type is ELIGIBILITY_ONLY",
-      fields = {"eligibility"})
-  private boolean isEligibilityPopulated() {
-    return FormatChecker.isDefined(discountType())
-        ? (Arrays
-            .asList(new BankingProductDiscountType[] {BankingProductDiscountType.ELIGIBILITY_ONLY})
-            .contains(discountType()) ? (eligibility() != null && eligibility().size() > 0) : true)
-        : true;
-  }
-
-  @AssertTrueBabelfish(
-      message = "Additional Value must be an Amount String when Discount type is BALANCE, DEPOSITS or PAYMENTS",
-      fields = {"additionalValue"})
-  private boolean isValueAmount() {
-    return FormatChecker.isDefined(discountType()) ? (Arrays
-        .asList(new BankingProductDiscountType[] {BankingProductDiscountType.BALANCE,
-            BankingProductDiscountType.DEPOSITS, BankingProductDiscountType.PAYMENTS})
-        .contains(discountType())
-            ? FormatChecker.isDefined(additionalValue())
-                && FormatChecker.isAmountString(additionalValue())
-            : true)
-        : true;
-  }
-
-  @AssertTrueBabelfish(
-      message = "Additional Value must be an Duration String when Discount type is FEE_CAP",
-      fields = {"additionalValue"})
-  private boolean isValueDuration() {
-    return FormatChecker.isDefined(discountType())
-        ? (Arrays.asList(new BankingProductDiscountType[] {BankingProductDiscountType.FEE_CAP})
-            .contains(discountType())
-                ? FormatChecker.isDefined(additionalValue())
-                    && FormatChecker.isDurationString(additionalValue())
-                : true)
-        : true;
-  }
-
-  @AssertTrueBabelfish(
-      message = "Additional Value should be null when Discount Type is ELIGIBILITY_ONLY",
-      fields = {"additionalValue"})
-  private boolean isValueStringNull() {
-    return FormatChecker.isDefined(discountType())
-        ? (Arrays
-            .asList(new BankingProductDiscountType[] {BankingProductDiscountType.ELIGIBILITY_ONLY})
-            .contains(discountType()) ? !FormatChecker.isNotEmpty(additionalValue()) : true)
-        : true;
-  }
 }

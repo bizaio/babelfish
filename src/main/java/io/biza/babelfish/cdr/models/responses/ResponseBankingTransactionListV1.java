@@ -33,14 +33,15 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Response containing a Transaction List", name = "ResponseBankingTransactionListV1")
+@Schema(description = "Response containing a Transaction List",
+    name = "ResponseBankingTransactionListV1")
 public class ResponseBankingTransactionListV1 extends CDRResponsePaginatedV1 {
   @Schema(required = true)
   @JsonProperty("data")
   @NotNull
   @Valid
   ResponseBankingTransactionListDataV1 data;
-  
+
   @Schema(description = "The Links Object", required = true)
   @JsonProperty("links")
   @NotNull

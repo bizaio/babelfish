@@ -13,28 +13,27 @@ package io.biza.babelfish.cdr.models.payloads;
 
 import java.net.URI;
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
-import io.biza.babelfish.cdr.support.FormatChecker;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
+@Builder
+@Data
 @Valid
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Schema(description = "Paginated Links", name = "LinksPaginatedV1")
-public class LinksPaginatedV1 {
+public class LinksPaginatedV1 extends io.biza.babelfish.cdr.abstracts.payloads.LinksPaginatedV1 {
 
   @Schema(description = "Fully qualified link that generated the current response document",
       required = true, type = "string", format = "uri")
@@ -81,69 +80,5 @@ public class LinksPaginatedV1 {
   @Valid
   URI last;
 
-  /**
-   * Minimal field validation possible at POJO level Scenario: [ self, first, prev, next, last ]
-   * First Page and not Last: [ Yes, No, No, Yes, Yes ] Last Page and not First: [ Yes, Yes, Yes,
-   * No, No ] First and Last Page: [ Yes, No, No, No, No ] Page not First or Last: [ Yes, Yes, Yes,
-   * Yes, Yes ]
-   */
-  @JsonIgnore
-  @AssertTrue(message = "Previous page set but First Page not set")
-  private boolean isFirstSetWhenPrevExists() {
-    return prev() != null && first() == null ? false : true;
-  }
 
-  @AssertTrue(message = "Next page set but Last Page not set")
-  private boolean isLastSetWhenNextExists() {
-    return next() != null && last() == null ? false : true;
-  }
-
-  @AssertTrue(
-      message = "While on first and last page (next & prev null), zero links should be defined outside of self")
-  private boolean isFirstAndLastPage() {
-    return (next() == null && prev() == null) ? ((first() != null || last() != null) ? false : true)
-        : true;
-  }
-
-  @AssertTrue(message = "First Page URI should contain a parameter of page == 1")
-  private boolean isFirstPagePageParamValid() {
-    return first() != null
-        ? (FormatChecker.mapifyQueryString(first()).get("page") != null
-            && FormatChecker.mapifyQueryString(first()).get("page").equals("1"))
-        : true;
-  }
-
-  @AssertTrue(message = "Next Page URI should have a page equal to current page plus 1")
-  private boolean isNextPageParamValid() {
-    if (self() != null && next() != null) {
-      int selfPage = Integer.parseInt(FormatChecker.mapifyQueryString(self()).get("page"));
-      int nextPage = Integer.parseInt(FormatChecker.mapifyQueryString(next()).get("page"));
-      selfPage++;
-
-      if (selfPage == nextPage) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return true;
-    }
-  }
-
-  @AssertTrue(message = "Prev Page URI should have a page equal to current page minus 1")
-  private boolean isPrevPageParamValid() {
-    if (self() != null && prev() != null) {
-      int selfPage = Integer.parseInt(FormatChecker.mapifyQueryString(self()).get("page"));
-      int prevPage = Integer.parseInt(FormatChecker.mapifyQueryString(prev()).get("page"));
-      selfPage--;
-
-      if (selfPage == prevPage) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return true;
-    }
-  }
 }

@@ -49,7 +49,7 @@ public class BankingDomesticPayeeV1Test {
     data.payeeAccountType(PayloadTypeBankingDomesticPayee.ACCOUNT);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.account(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE_ACCOUNT);
+    data.account(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE_ACCOUNT.build());
 
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -65,7 +65,7 @@ public class BankingDomesticPayeeV1Test {
     data.payeeAccountType(PayloadTypeBankingDomesticPayee.CARD);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.card(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE_CARD);
+    data.card(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE_CARD.build());
 
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
@@ -81,7 +81,7 @@ public class BankingDomesticPayeeV1Test {
     data.payeeAccountType(PayloadTypeBankingDomesticPayee.PAY_ID);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.payId(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE_PAYID);
+    data.payId(ModelConstants.DEFAULT_BANKING_DOMESTIC_PAYEE_PAYID.build());
 
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());

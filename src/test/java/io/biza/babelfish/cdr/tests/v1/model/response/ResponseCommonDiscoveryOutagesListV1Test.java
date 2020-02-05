@@ -47,13 +47,13 @@ public class ResponseCommonDiscoveryOutagesListV1Test {
     ResponseCommonDiscoveryOutagesListV1 data = new ResponseCommonDiscoveryOutagesListV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.links(ModelConstants.DEFAULT_LINKS);
+    data.links(ModelConstants.DEFAULT_LINKS.build());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.meta(ModelConstants.DEFAULT_META);
+    data.meta(ModelConstants.DEFAULT_META.build());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.data(ModelConstants.DEFAULT_RESPONSE_COMMON_DISCOVERY_OUTAGES_LIST_DATA);
+    data.data(ModelConstants.DEFAULT_RESPONSE_COMMON_DISCOVERY_OUTAGES_LIST_DATA.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }

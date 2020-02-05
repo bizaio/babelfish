@@ -41,7 +41,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Schema(description = "Banking Product Detailed Information", name = "BankingProductDetailV2")
 public class BankingProductDetailV2 {
-  
+
   @Schema(
       description = "A data holder specific unique identifier for this product. This identifier must be unique to a product but does not otherwise need to adhere to ID permanence guidelines.",
       required = true)
@@ -112,7 +112,7 @@ public class BankingProductDetailV2 {
       required = true)
   @NotNull
   @JsonProperty("isTailored")
-  Boolean tailored;
+  Boolean isTailored;
 
   @Schema(description = "Additional Information for Banking Product")
   @JsonProperty("additionalInformation")

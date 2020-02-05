@@ -12,6 +12,7 @@
 package io.biza.babelfish.cdr.models.payloads.common;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.babelfish.cdr.enumerations.CommonPhoneNumberPurpose;
@@ -31,10 +32,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Phone Number Detail", name = "CommonPhoneNumberV1")
-public class CommonPhoneNumberV1 extends io.biza.babelfish.cdr.abstracts.models.common.CommonPhoneNumberV1<CommonPhoneNumberV1> {
+public class CommonPhoneNumberV1 extends
+    io.biza.babelfish.cdr.abstracts.payloads.common.CommonPhoneNumberV1<CommonPhoneNumberV1> {
   @Schema(
       description = "May be true for one and only one entry to indicate the preferred phone number. Assumed to be 'false' if not present")
-  @JsonProperty("isPreferred")
+  @JsonProperty(value = "isPreferred", defaultValue = "false")
   @Builder.Default
   Boolean isPreferred = false;
 
@@ -55,6 +57,7 @@ public class CommonPhoneNumberV1 extends io.biza.babelfish.cdr.abstracts.models.
 
   @Schema(description = "The actual phone number, with leading zeros as appropriate",
       required = true)
+  @NotEmpty(message = "Phone Number must be populated")
   @JsonProperty("number")
   String number;
 
@@ -66,6 +69,8 @@ public class CommonPhoneNumberV1 extends io.biza.babelfish.cdr.abstracts.models.
       description = "Fully formatted phone number with country code, area code, number and extension incorporated. Formatted according to section 5.1.4. of [RFC 3966](https://www.ietf.org/rfc/rfc3966.txt)",
       required = true)
   @JsonProperty("fullNumber")
+  @NotEmpty(
+      message = "Full Phone Number with Country Code, Area Code, Number and Extension in RFC-3966 format is required")
   String fullNumber;
-  
+
 }

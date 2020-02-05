@@ -76,7 +76,7 @@ public class BankingScheduledPaymentRecurrenceLastWeekdayV1 {
 
   @Schema(
       description = "Enumerated field giving the treatment where a scheduled payment date is not a business day. If absent assumed to be ON")
-  @JsonProperty("nonBusinessDayTreatment")
+  @JsonProperty(value = "nonBusinessDayTreatment", defaultValue = "ON")
   @Builder.Default
   BankingPaymentNonBusinessDayTreatment nonBusinessDayTreatment =
       BankingPaymentNonBusinessDayTreatment.ON;

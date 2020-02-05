@@ -21,6 +21,7 @@ import io.biza.babelfish.cdr.converters.CountryStringToLocaleConverter;
 import io.biza.babelfish.cdr.converters.LocaleToCountryStringConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -30,11 +31,12 @@ import lombok.experimental.SuperBuilder;
 @Valid
 @ToString
 @EqualsAndHashCode
-@SuperBuilder
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "International Payee Beneficiary Details", name = "BankingInternationalPayeeBeneficiaryDetailsV1")
+@Schema(description = "International Payee Beneficiary Details",
+    name = "BankingInternationalPayeeBeneficiaryDetailsV1")
 public class BankingInternationalPayeeBeneficiaryDetailsV1 {
   @Schema(description = "Name of the beneficiary")
   @JsonProperty("name")

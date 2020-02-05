@@ -12,23 +12,24 @@
 package io.biza.babelfish.cdr.models.payloads;
 
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
 @Valid
 @ToString
-@EqualsAndHashCode
+@Builder
+@Data
+@EqualsAndHashCode(callSuper = false)
 @Schema(description = "Paginated Meta Details", name = "MetaPaginatedV1")
-public class MetaPaginatedV1 {
+public class MetaPaginatedV1 extends io.biza.babelfish.cdr.abstracts.payloads.MetaPaginatedV1 {
   @Schema(description = "The total number of records in the full set.", required = true)
   @JsonProperty("totalRecords")
   @NotNull
@@ -42,19 +43,6 @@ public class MetaPaginatedV1 {
   @Min(0)
   @Valid
   Integer totalPages;
-  
-  @AssertTrue(message = "If totalRecords is 0 totalPages MUST be 0")
-  private boolean isZeroTotalRecordsMatchesZeroPages() {
-    return (totalRecords() != null && totalRecords() == 0)
-        ? ((totalPages() != null && totalPages() == 0) ? true : false)
-        : true;
-  }
 
-  @AssertTrue(message = "If totalPages is 0 then totalRecords should be 0")
-  private boolean isZeroTotalPagesButNotZeroRecords() {
-    return (totalPages() != null && totalPages() == 0)
-        ? ((totalRecords() != null && totalRecords() == 0) ? true : false)
-        : true;
-  }
 
 }

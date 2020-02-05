@@ -26,6 +26,7 @@ import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.enumerations.BankingProductCategory;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -35,13 +36,13 @@ import lombok.experimental.SuperBuilder;
 @Valid
 @ToString
 @EqualsAndHashCode
-@SuperBuilder
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Banking Product Detailed Information", name = "BankingProductDetailV1")
 public class BankingProductDetailV1 {
-  
+
   @Schema(
       description = "A data holder specific unique identifier for this product. This identifier must be unique to a product but does not otherwise need to adhere to ID permanence guidelines.",
       required = true)
@@ -112,7 +113,7 @@ public class BankingProductDetailV1 {
       required = true)
   @NotNull
   @JsonProperty("isTailored")
-  Boolean tailored;
+  Boolean isTailored;
 
   @Schema(description = "Additional Information for Banking Product")
   @JsonProperty("additionalInformation")

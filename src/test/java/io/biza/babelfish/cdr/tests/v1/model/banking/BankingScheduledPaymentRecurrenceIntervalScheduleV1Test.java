@@ -52,7 +52,7 @@ public class BankingScheduledPaymentRecurrenceIntervalScheduleV1Test {
         new BankingScheduledPaymentRecurrenceIntervalScheduleV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.intervals(List.of(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_INTERVAL));
+    data.intervals(List.of(ModelConstants.DEFAULT_BANKING_SCHEDULED_PAYMENT_INTERVAL.build()));
 
     // Should now be a valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());

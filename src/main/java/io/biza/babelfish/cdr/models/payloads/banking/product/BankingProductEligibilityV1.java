@@ -12,7 +12,6 @@
 package io.biza.babelfish.cdr.models.payloads.banking.product;
 
 import java.net.URI;
-import java.util.Arrays;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -21,8 +20,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.enumerations.BankingProductEligibilityType;
-import io.biza.babelfish.cdr.support.AssertTrueBabelfish;
-import io.biza.babelfish.cdr.support.FormatChecker;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,13 +30,15 @@ import lombok.ToString;
 
 @Valid
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Eligibility criteria to obtain a particular banking product", name = "BankingProductEligibilityV1")
-public class BankingProductEligibilityV1  extends io.biza.babelfish.cdr.abstracts.payloads.banking.product.BankingProductEligibilityV1 {
+@Schema(description = "Eligibility criteria to obtain a particular banking product",
+    name = "BankingProductEligibilityV1")
+public class BankingProductEligibilityV1
+    extends io.biza.babelfish.cdr.abstracts.payloads.banking.product.BankingProductEligibilityV1 {
   @Schema(
       description = "The type of eligibility criteria described.  See the next section for an overview of valid values and their meaning",
       required = true)
@@ -64,5 +63,5 @@ public class BankingProductEligibilityV1  extends io.biza.babelfish.cdr.abstract
   @JsonProperty("additionalInfoUri")
   @Valid
   URI additionalInfoUri;
-  
+
 }

@@ -13,6 +13,7 @@ package io.biza.babelfish.cdr;
 
 import java.math.RoundingMode;
 import java.time.format.DateTimeFormatter;
+import io.biza.babelfish.cdr.orika.OrikaFactoryConfigurerInterface;
 
 /**
  * Various Constants used within Babelfish
@@ -50,4 +51,10 @@ public class Constants {
    * CDR DateString
    */
   public static final DateTimeFormatter CDR_DATESTRING_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
+
+  /**
+   * Orika implementer
+   */
+  public static final String ORIKA_IMPLEMENTING_CLASS =
+      OrikaFactoryConfigurerInterface.class.getName();
 }

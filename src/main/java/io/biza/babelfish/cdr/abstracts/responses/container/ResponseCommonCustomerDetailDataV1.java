@@ -1,15 +1,17 @@
 package io.biza.babelfish.cdr.abstracts.responses.container;
 
 import javax.validation.constraints.AssertTrue;
-import io.biza.babelfish.cdr.abstracts.models.common.CommonOrganisationDetailV1;
+import io.biza.babelfish.cdr.abstracts.payloads.common.CommonOrganisationDetailV1;
 import io.biza.babelfish.cdr.enumerations.PayloadTypeCustomer;
 import io.biza.babelfish.cdr.models.payloads.common.CommonPersonDetailV1;
 
 public abstract class ResponseCommonCustomerDetailDataV1 {
   public abstract PayloadTypeCustomer type();
+
   public abstract CommonPersonDetailV1 person();
+
   public abstract CommonOrganisationDetailV1 organisation();
-  
+
   @AssertTrue(message = "Only person should be populated when customer type is set to PERSON")
   private boolean isPersonPopulated() {
     if (type() != null && type().equals(PayloadTypeCustomer.PERSON)) {
@@ -28,5 +30,5 @@ public abstract class ResponseCommonCustomerDetailDataV1 {
       return true;
     }
   }
-  
+
 }

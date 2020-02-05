@@ -33,7 +33,7 @@ public class MetaV1Test {
   @Test
   @DisplayName("Create valid Meta")
   void responseMetaV1() {
-    MetaV1 data = ModelConstants.DEFAULT_META;
+    MetaV1 data = ModelConstants.DEFAULT_META.build();
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 

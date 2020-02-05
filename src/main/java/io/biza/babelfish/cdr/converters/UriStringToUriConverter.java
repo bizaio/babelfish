@@ -28,7 +28,7 @@ public class UriStringToUriConverter extends StdConverter<String, URI> {
 
     try {
       URI uri = new URI(value);
-      if(!uri.isAbsolute() || uri.isOpaque()) {
+      if (!uri.isAbsolute() || uri.isOpaque()) {
         throw new RuntimeException("Supplied URL must be absolute AND not opaque");
       }
       return uri;

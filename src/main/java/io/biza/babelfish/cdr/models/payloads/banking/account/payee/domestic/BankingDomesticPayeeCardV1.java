@@ -12,8 +12,7 @@
 package io.biza.babelfish.cdr.models.payloads.banking.account.payee.domestic;
 
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -25,29 +24,16 @@ import lombok.ToString;
 
 @Valid
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Domestic Payee Card Number Details", name = "BankingDomesticPayeeCardV1")
-public class BankingDomesticPayeeCardV1 {
+public class BankingDomesticPayeeCardV1 extends
+    io.biza.babelfish.cdr.abstracts.payloads.banking.account.payee.domestic.BankingDomesticPayeeCardV1 {
   @Schema(description = "Name of the account to pay to", required = true)
-  @NotNull
+  @NotEmpty
   @JsonProperty("cardNumber")
   String cardNumber;
-
-  @AssertTrue(message = "Card Number MUST be Masked PAN Format")
-  private boolean isPanMasked() {
-    if (cardNumber() == null) {
-      return true;
-    }
-    // We check masked PAN by checking for explicit types that are unmasked
-    if (cardNumber().matches("\\d{4}-\\d{4}-\\d{4}-\\d{4}")
-        || cardNumber().matches("\\d{4} \\d{4} \\d{4} \\d{4}") || cardNumber().matches("\\d{16}")) {
-      return false;
-    } else {
-      return true;
-    }
-  }
 }

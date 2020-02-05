@@ -45,13 +45,13 @@ public class ResponseBankingAccountByIdV1Test {
     ResponseBankingAccountByIdV1 data = new ResponseBankingAccountByIdV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.links(ModelConstants.DEFAULT_LINKS);
+    data.links(ModelConstants.DEFAULT_LINKS.build());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.data(ModelConstants.DEFAULT_BANKING_ACCOUNT_DETAIL);
+    data.data(ModelConstants.DEFAULT_BANKING_ACCOUNT_DETAIL.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.meta(ModelConstants.DEFAULT_META);
+    data.meta(ModelConstants.DEFAULT_META.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }

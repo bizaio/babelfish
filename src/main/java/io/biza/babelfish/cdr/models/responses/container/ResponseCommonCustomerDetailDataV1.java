@@ -33,8 +33,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(
-    description = "Object containing either a PersonDetail or OrganisationDetail object defined by a type attribute", name = "ResponseCommonCustomerDetailData")
-public class ResponseCommonCustomerDetailDataV1  extends io.biza.babelfish.cdr.abstracts.responses.container.ResponseCommonCustomerDetailDataV1 {
+    description = "Object containing either a PersonDetail or OrganisationDetail object defined by a type attribute",
+    name = "ResponseCommonCustomerDetailData")
+public class ResponseCommonCustomerDetailDataV1
+    extends io.biza.babelfish.cdr.abstracts.responses.container.ResponseCommonCustomerDetailDataV1 {
   @Schema(description = "The type of customer object that is present", required = true)
   @JsonProperty("customerUType")
   @NotNull
@@ -50,5 +52,5 @@ public class ResponseCommonCustomerDetailDataV1  extends io.biza.babelfish.cdr.a
   @JsonProperty("organisation")
   @Valid
   CommonOrganisationDetail organisation;
-  
+
 }

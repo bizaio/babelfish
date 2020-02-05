@@ -45,13 +45,13 @@ public class ResponseBankingAccountListV1Test {
     ResponseBankingAccountListV1 data = new ResponseBankingAccountListV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.links(ModelConstants.DEFAULT_LINKS_PAGINATED);
+    data.links(ModelConstants.DEFAULT_LINKS_PAGINATED.build());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.meta(ModelConstants.DEFAULT_META_PAGINATED);
+    data.meta(ModelConstants.DEFAULT_META_PAGINATED.build());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.data(ModelConstants.DEFAULT_RESPONSE_BANKING_ACCOUNT_LIST_DATA);
+    data.data(ModelConstants.DEFAULT_RESPONSE_BANKING_ACCOUNT_LIST_DATA.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }

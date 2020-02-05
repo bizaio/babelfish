@@ -12,7 +12,6 @@
 package io.biza.babelfish.cdr.models.payloads.banking.product;
 
 import java.net.URI;
-import java.util.Arrays;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -21,8 +20,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.enumerations.BankingProductFeatureType;
-import io.biza.babelfish.cdr.support.AssertTrueBabelfish;
-import io.biza.babelfish.cdr.support.FormatChecker;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,7 +27,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import lombok.experimental.SuperBuilder;
 
 @Valid
 @ToString
@@ -40,7 +36,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "A Banking Product Feature", name = "BankingProductFeatureV1")
-public class BankingProductFeatureV1 extends io.biza.babelfish.cdr.abstracts.payloads.banking.product.BankingProductFeatureV1 {
+public class BankingProductFeatureV1
+    extends io.biza.babelfish.cdr.abstracts.payloads.banking.product.BankingProductFeatureV1 {
   @Schema(description = "The type of feature described", required = true)
   @JsonProperty("featureType")
   @Valid
@@ -63,5 +60,5 @@ public class BankingProductFeatureV1 extends io.biza.babelfish.cdr.abstracts.pay
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   @JsonProperty("additionalInfoUri")
   URI additionalInfoUri;
-  
+
 }

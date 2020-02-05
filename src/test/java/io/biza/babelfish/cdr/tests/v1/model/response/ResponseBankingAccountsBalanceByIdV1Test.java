@@ -37,7 +37,7 @@ public class ResponseBankingAccountsBalanceByIdV1Test {
   void responseBankingAccountsBalanceById() {
     ResponseBankingAccountsBalanceByIdV1 myResponse = new ResponseBankingAccountsBalanceByIdV1()
         .links(new LinksV1().self(ModelConstants.DEFAULT_SELF_URI))
-        .data(ModelConstants.DEFAULT_BANKING_BALANCE);
+        .data(ModelConstants.DEFAULT_BANKING_BALANCE.build());
     assertTrue(validator.validate(myResponse).isEmpty(), validator.validate(myResponse).toString());
   }
 

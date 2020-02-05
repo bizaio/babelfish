@@ -36,7 +36,7 @@ public class CommonPhysicalAddressV1Test {
   @Test
   @DisplayName("Create valid CommonPhysicalAddress")
   void commonPhysicalAddress() {
-    CommonPhysicalAddressV1 data = ModelConstants.DEFAULT_COMMON_PHYSICAL_ADDRESS;
+    CommonPhysicalAddressV1 data = ModelConstants.DEFAULT_COMMON_PHYSICAL_ADDRESS.build();
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
@@ -49,11 +49,11 @@ public class CommonPhysicalAddressV1Test {
     data.type(PayloadTypeAddress.SIMPLE);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.simple(ModelConstants.DEFAULT_COMMON_SIMPLE_ADDRESS);
+    data.simple(ModelConstants.DEFAULT_COMMON_SIMPLE_ADDRESS.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Should only have one
-    data.paf(ModelConstants.DEFAULT_COMMON_PAF_ADDRESS);
+    data.paf(ModelConstants.DEFAULT_COMMON_PAF_ADDRESS.build());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }
@@ -67,11 +67,11 @@ public class CommonPhysicalAddressV1Test {
     data.type(PayloadTypeAddress.PAF);
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.paf(ModelConstants.DEFAULT_COMMON_PAF_ADDRESS);
+    data.paf(ModelConstants.DEFAULT_COMMON_PAF_ADDRESS.build());
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     // Should only have one
-    data.simple(ModelConstants.DEFAULT_COMMON_SIMPLE_ADDRESS);
+    data.simple(ModelConstants.DEFAULT_COMMON_SIMPLE_ADDRESS.build());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
   }

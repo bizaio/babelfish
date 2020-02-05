@@ -91,33 +91,33 @@ public class FieldTypesTest {
   @DisplayName("Verify Natural Number")
   void verifyNaturalNumber() {
     // Verify valid positive integer
-    assertTrue(FormatChecker.isNaturalNumber(1));
+    assertTrue(FormatChecker.isNatural(1));
     // Verify valid zero value
-    assertTrue(FormatChecker.isNaturalNumber(0));
+    assertTrue(FormatChecker.isNatural(0));
     // Verify invalid negative value
-    assertFalse(FormatChecker.isNaturalNumber(-99));
+    assertFalse(FormatChecker.isNatural(-99));
   }
 
   @Test
   @DisplayName("Verify Positive Integer")
   void verifyPositiveInteger() {
     // Verify valid positive integer
-    assertTrue(FormatChecker.isPositiveInteger(1));
+    assertTrue(FormatChecker.isPositive(1));
     // Verify invalid zero value
-    assertFalse(FormatChecker.isPositiveInteger(0));
+    assertFalse(FormatChecker.isPositive(0));
     // Verify invalid negative value
-    assertFalse(FormatChecker.isPositiveInteger(-99));
+    assertFalse(FormatChecker.isPositive(-99));
   }
 
   @Test
   @DisplayName("Verify Negative Integer")
   void verifyNegativeInteger() {
     // Verify invalid positive integer
-    assertFalse(FormatChecker.isNegativeInteger(1));
+    assertFalse(FormatChecker.isNegative(1));
     // Verify valid zero value
-    assertTrue(FormatChecker.isNegativeInteger(0));
+    assertTrue(FormatChecker.isNegative(0));
     // Verify valid negative value
-    assertTrue(FormatChecker.isNegativeInteger(-99));
+    assertTrue(FormatChecker.isNegative(-99));
   }
 
   @Test

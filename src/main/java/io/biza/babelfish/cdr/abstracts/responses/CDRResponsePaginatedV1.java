@@ -20,7 +20,8 @@ import io.biza.babelfish.cdr.support.FormatChecker;
 @Valid
 public abstract class CDRResponsePaginatedV1 {
 
-  public abstract LinksPaginatedV1 links();  
+  public abstract LinksPaginatedV1 links();
+
   public abstract MetaPaginatedV1 meta();
 
   @AssertTrue(message = "First and Last Page Detected but Total Pages is >1")

@@ -36,7 +36,7 @@ public class ResponseErrorListV1Test {
   @Test
   @DisplayName("Create valid ResponseErrorList")
   void responseErrorList() {
-    ResponseErrorListV1 data = ModelConstants.DEFAULT_RESPONSE_ERROR_LIST;
+    ResponseErrorListV1 data = ModelConstants.DEFAULT_RESPONSE_ERROR_LIST.build();
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
@@ -47,7 +47,7 @@ public class ResponseErrorListV1Test {
     ResponseErrorListV1 data = new ResponseErrorListV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.errors(List.of(ModelConstants.DEFAULT_ERROR));
+    data.errors(List.of(ModelConstants.DEFAULT_ERROR.build()));
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());
   }
 
