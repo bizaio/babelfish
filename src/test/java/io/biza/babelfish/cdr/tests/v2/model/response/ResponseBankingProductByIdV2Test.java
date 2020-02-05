@@ -102,31 +102,27 @@ public class ResponseBankingProductByIdV2Test {
         BankingProductCategory.TRANS_AND_SAVINGS_ACCOUNTS.label());
     // Result: name: TRANS_AND_SAVINGS_ACCOUNTS label: Transaction & Savings
   }
-  
+
   @Test
   @DisplayName("Downgrade Payload from v2 to v1")
   void downgradePayloadToV1() {
-    BankingProductDetailV2 detail = BankingProductDetailV2.builder().productId("073e7e70-357d-4858-8f52-92283f4edd6f")
-    .lastUpdated(OffsetDateTime.now())
-    .productCategory(BankingProductCategory.TRANS_AND_SAVINGS_ACCOUNTS)
-    .name("Example Product").description("Example Product Description").brand("ACME")
-    .isTailored(false).build();
-    
-    BankingProductDetailV1 downgradedDetail = BabelFishConverter.convert(detail, BankingProductDetailV1.class);
-    
+    BankingProductDetailV2 detail = BankingProductDetailV2.builder()
+        .productId("073e7e70-357d-4858-8f52-92283f4edd6f").lastUpdated(OffsetDateTime.now())
+        .productCategory(BankingProductCategory.TRANS_AND_SAVINGS_ACCOUNTS).name("Example Product")
+        .description("Example Product Description").brand("ACME").isTailored(false).build();
+
+    BankingProductDetailV1 downgradedDetail =
+        BabelFishConverter.convert(detail, BankingProductDetailV1.class);
+
     assertEquals(detail.productId(), downgradedDetail.productId());
     assertEquals(detail.lastUpdated(), downgradedDetail.lastUpdated());
     assertEquals(detail.productCategory(), downgradedDetail.productCategory());
     assertEquals(detail.name(), downgradedDetail.name());
     assertEquals(detail.description(), downgradedDetail.description());
     assertEquals(detail.isTailored(), downgradedDetail.isTailored());
-    
+
     LOG.info("V1 payload is: {}", downgradedDetail);
     LOG.info("V2 payload is: {}", detail);
-    
-    
-    
-    
   }
 
 }
