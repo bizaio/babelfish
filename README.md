@@ -8,7 +8,7 @@ The Babelfish CDR Library is a Java based Maven artifact for the efficient proce
 
 Processing an input payload and validating it is as simple as:
 
-```
+```java
     ResponseBankingProductByIdV2 productResponse = new ObjectMapper().readValue(
         "{\"links\":{\"self\":\"http://localhost/cds-au/v1/banking/products/073e7e70-357d-4858-8f52-92283f4edd6f\"},\"meta\":{},"
         + "\"data\":{\"productId\":\"073e7e70-357d-4858-8f52-92283f4edd6f\",\"lastUpdated\":\"2020-02-03T06:32:27Z\","
@@ -19,7 +19,7 @@ Processing an input payload and validating it is as simple as:
 
 Generating a compliant payload is as simple as:
 
-```
+```java
     ResponseBankingProductByIdV2 productResponse =
         ResponseBankingProductByIdV2.builder()
             .links(LinksV1.builder().self(URI.create(
@@ -43,7 +43,7 @@ Generating a compliant payload is as simple as:
 ```
 
 Which yields: 
-```
+```json
 {"data":{"productId":"073e7e70-357d-4858-8f52-92283f4edd6f","lastUpdated":"2020-02-05T10:02:25.26832+11:00","productCategory":"TRANS_AND_SAVINGS_ACCOUNTS","name":"Example Product","description":"Example Product Description","brand":"ACME","isTailored":false},"links":{"self":"http://localhost/cds-au/v1/banking/products/073e7e70-357d-4858-8f52-92283f4edd6f"},"meta":{}}
 ```
 
@@ -79,7 +79,7 @@ Babelfish CDR is currently developed and maintained by [Biza.io](https://www.biz
 [(Back to top)](#table-of-contents)
 
 This library is available on [Maven Central](https://search.maven.org/artifact/io.biza/babelfish-cdr) and therefore can be utilised by adding the following lines to your `pom.xml`:
-```
+```xml
 <dependency>
     <groupId>io.biza</groupId>
     <artifactId>babelfish-cdr</artifactId>
@@ -136,7 +136,7 @@ Babelfish CDR is intended for embedding within your CDR client or server project
 
 Parsing a sample JSON payload can be conducted using Jackson and then verified using Java Validation API:
 
-```
+```java
     ResponseBankingProductByIdV2 productResponse = new ObjectMapper().readValue(
         "{\"links\":{\"self\":\"http://localhost/cds-au/v1/banking/products/073e7e70-357d-4858-8f52-92283f4edd6f\"},\"meta\":{},"
         + "\"data\":{\"productId\":\"073e7e70-357d-4858-8f52-92283f4edd6f\",\"lastUpdated\":\"2020-02-03T06:32:27Z\","
@@ -155,7 +155,7 @@ Generating a CDR Payload can be conducted using the fluent builder API within Ba
 
 An example is as follows:
 
-```
+```java
 ResponseBankingProductByIdV2 productResponse =
         ResponseBankingProductByIdV2.builder()
             .links(LinksV1.builder().self(URI.create(
@@ -190,6 +190,27 @@ An example is as follows:
 TODO
 ```
 
+### Using in Spring
+
+We are actively using Babelfish CDR payload descriptions within [Deep Thought](https://github.com/bizaio/deepthought) as part of a Spring + Springdoc project. The following demonstrates the definition of a `Get Product Detail` endpoint:
+
+```java
+@Operation(summary = "Get Product Detail",
+      description = "Returns details product information based on the specified product identifier")
+  @ApiResponses(
+      value = {
+          @ApiResponse(responseCode = "200", description = "Response Successful",
+              content = @Content(schema = @Schema(oneOf = {ResponseBankingProductByIdV1.class,
+                  ResponseBankingProductByIdV2.class}))),
+          @ApiResponse(responseCode = "404",
+              description = "Unable to find requested Product Identifier")})
+  @GetMapping(value = "/{productId}", produces = {MediaType.APPLICATION_JSON_VALUE})
+  default ResponseEntity<ResponseBankingProductByIdV2> getProductDetail(
+      @NotNull @Valid @PathVariable("productId") UUID productId) {
+    return getDelegate().getProductDetail(productId);
+  }
+```
+
 ## Extended Features
 
 [(Back to top)](#table-of-contents)
@@ -202,7 +223,7 @@ Babelfish incorporates a number of customised features to aid developers with in
 
 All enumerations used within Babelfish provide a human readable label available via the `label()` method:
 
-```
+```java
     System.out.println("name: " + BankingProductCategory.TRANS_AND_SAVINGS_ACCOUNTS.name()
         + " label: " + BankingProductCategory.TRANS_AND_SAVINGS_ACCOUNTS.label());
     // Result: name: TRANS_AND_SAVINGS_ACCOUNTS label: Transaction & Savings
@@ -240,7 +261,7 @@ Many of the payloads contain a custom `javax.validation.Constraint` called `Asse
 One such example is in `BankingConstraintV1` which verifies that when a Constraint Type of `MIN_BALANCE` is specified the `additionalValue` field must be in CDS AmountString format.
 
 Another notable example demonstrating compound reporting is within `BankingProductFeeV1`
-```
+```java
   @AssertTrueBabelfish(
       message = "One of amount, balanceRate, transactionRate or accruedRate is MANDATORY",
       fields = {"amount", "balanceRate", "accruedRate", "transactionRate"})
