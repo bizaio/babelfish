@@ -6,6 +6,8 @@
 
 The Babelfish CDR Library is a Java based Maven artifact for the efficient processing of JSON payloads associated with the Australian Consumer Data Right (aka *open banking*). It provides the ability to parse, manipulate, generate and validate compliant payloads associated with the Consumer Data Standards. It is annotated with industry standard [Jackson](https://github.com/FasterXML/jackson) and [OpenAPI (*fka Swagger*)](https://github.com/swagger-api/swagger-core) annotations to enable smooth integration into downstream projects.
 
+Babelfish CDR is currently developed and maintained by [Biza.io](https://www.biza.io).
+
 ## Features
 
   - Jackson mappings for **all payloads** defined within the [Consumer Data Standards](https://consumerdatastandardsaustralia.github.io/standards)
@@ -75,9 +77,6 @@ Which yields:
    }
 }
 ```
-
-Babelfish CDR is currently developed and maintained by [Biza.io](https://www.biza.io).
-
 
 ## Table of Contents
 
