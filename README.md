@@ -64,12 +64,15 @@ Babelfish CDR is currently developed and maintained by [Biza.io](https://www.biz
 
 - [Features](#features)
 - [Usage](#usage)
+- [Projects](#projects)
+- [Support](#support)
 - [Compatibility](#compatibility)
 - [Prerequisites](#prerequisites)
-- [Building](#building)
 - [Using Babelfish CDR in your project](#using-babelfish-cdr-in-your-project)
 - [Extended Features](#extended-features)
-
+- [Building](#building)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Usage
 
@@ -84,6 +87,23 @@ This library is available on [Maven Central](https://search.maven.org/artifact/i
 </dependency>
 ```
 
+## Projects
+
+`babelfish-cdr` is utilised in a number of public projects:
+- [Deep Thought](https://github.com/bizaio/deepthought)
+- [Electronic Thumb](https://github.com/bizaio/electronic-thumb)
+
+If you are using `babelfish-cdr` in your project drop us an [email](mailto:hello@biza.io) and we will add it here.
+
+## Support
+
+[Biza Pty Ltd](https://biza.io/) are currently the primary maintainers of this software. 
+
+We welcome bug reports via [GitHub Issues](https://github.com/bizaio/babelfish-cdr/) or if you prefer via [email](mailto:hello@biza.io).
+
+If you are looking for commercial support for this library please contact us via [email](mailto:hello@biza.io).
+
+
 ## Compatibility
 
 [(Back to top)](#table-of-contents)
@@ -94,7 +114,7 @@ Babelfish CDR Version                | Release Date | CDS Spec Compatibility    
 ------------------------------------ | ------------ | -------------------------- | ----------------------------------------------------------------- | --------
 1.2.1-SNAPSHOT (**current develop**) | Regular      | 1.2.0                      | Snapshot Development Release                                      | Active Development
 1.2.0 (**current stable**)           | 2020-02-05   | 1.2.0                      | [tag v1.2.0](https://github.com/bizaio/babelfish-cdr/tree/v1.2.0) | Supported
-1.0.0 (**deprecated**)               | 2020-02-04   | 1.0.0                      | Initial Release, **do not use**                                   | Deprecated
+1.0.0                                | 2020-02-04   | 1.0.0                      | Initial Release, **do not use**                                   | Deprecated
 
 ## Prerequisites
 
@@ -104,24 +124,13 @@ You need the following installed and available in your $PATH during compilation:
 - Java 11+
 - Apache Maven 3.6.3 or later
 
-## Building
-
-[(Back to top)](#table-of-contents)
-
-`babelfish-cdr` uses Maven for compilation activies.
-
-To build the library and install it in your local Maven cache:
-
-1. `cd babelfish-cdr`
-2. `mvn clean install`
-
 ### Using Babelfish CDR in your project
 
 [(Back to top)](#table-of-contents)
 
 Babelfish CDR is intended for embedding within your CDR client or server project as a Maven (or Gradle) dependency. Once it is added to your project you gain access to the ability to manipulate CDR payloads in a number of different ways.
 
-#### Parse and Validate CDR Payload
+### Parse and Validate CDR Payload
 
 [(Back to top)](#table-of-contents)
 
@@ -138,7 +147,7 @@ Parsing a sample JSON payload can be conducted using Jackson and then verified u
         Validation.buildDefaultValidatorFactory().getValidator().validate(productResponse);
 ```
 
-#### Validate and Generate CDR Payload
+### Validate and Generate CDR Payload
 
 [(Back to top)](#table-of-contents)
 
@@ -169,7 +178,7 @@ ResponseBankingProductByIdV2 productResponse =
     }
 ```
 
-#### Convert CDR Payload between versions
+### Convert CDR Payload between versions
 
 [(Back to top)](#table-of-contents)
 
@@ -181,13 +190,13 @@ An example is as follows:
 TODO
 ```
 
-### Extended Features
+## Extended Features
 
 [(Back to top)](#table-of-contents)
 
 Babelfish incorporates a number of customised features to aid developers with integrating with and using the CDR payloads.
 
-#### Enumeration Labels
+### Enumeration Labels
 
 [(Back to top)](#table-of-contents)
 
@@ -199,7 +208,7 @@ All enumerations used within Babelfish provide a human readable label available 
     // Result: name: TRANS_AND_SAVINGS_ACCOUNTS label: Transaction & Savings
 ```
 
-#### JSON (De)Serialisators
+### JSON (De)Serialisators
 
 [(Back to top)](#table-of-contents)
 
@@ -220,7 +229,7 @@ ExternalRef (Duration)     | String         | Duration            | StringToDura
 ExternalRef (Period)       | String         | Period              | StringToPeriodConverter                 | PeriodToStringConverter
 Base64                     | String (Base64)| String              | StringToBase64StringConverter           | Base64StringToStringConverter
 
-#### Custom Assertions
+### Custom Assertions
 
 [(Back to top)](#table-of-contents)
 
@@ -239,7 +248,19 @@ Another notable example demonstrating compound reporting is within `BankingProdu
 
 This assertion reports a set of field names which can be highlighted but for which only one at a time is accepted.
 
-### Contributing
+## Building
+
+[(Back to top)](#table-of-contents)
+
+`babelfish-cdr` uses Maven for compilation activies.
+
+To build the library and install it in your local Maven cache:
+
+1. `cd babelfish-cdr`
+2. `mvn clean install`
+
+
+## Contributing
 
 [(Back to top)](#table-of-contents)
 
@@ -247,7 +268,7 @@ This assertion reports a set of field names which can be highlighted but for whi
 2. Make changes (including tests please!)
 3. Submit Pull Request for integration of changes
 
-### License
+## License
 
 [(Back to top)](#table-of-contents)
 
