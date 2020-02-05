@@ -278,8 +278,8 @@ URIString                  | String         | URI                       | UriToU
 ExternalRef (Country)      | String         | Locale                    | CountryStringToLocaleConverter          | LocaleToCountryStringConverter
 ExternalRef (Duration)     | String         | Duration                  | StringToDurationConverter               | DurationToStringConverter
 ExternalRef (Period)       | String         | Period                    | StringToPeriodConverter                 | PeriodToStringConverter
-ExternalRef (MCC)          | String         | MerchantCategoryCodeType  | StringToMerchantCategoryCode            | MerchantCategoryCodeToString
-ExternalRef (APCA Number)  | String         | ApcaNumberType            | StringToApcaNumber                      | ApcaNumberToString
+ExternalRef (MCC)          | String         | MerchantCategoryCodeType  | StringToMerchantCategoryCodeConverter   | MerchantCategoryCodeToStringConverter
+ExternalRef (APCA Number)  | String         | ApcaNumberType            | StringToApcaNumberConverter             | ApcaNumberToStringConverter
 Base64                     | String (Base64)| String                    | StringToBase64StringConverter           | Base64StringToStringConverter
 
 ### Custom Assertions
