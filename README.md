@@ -6,6 +6,18 @@
 
 The Babelfish CDR Library is a Java based Maven artifact for the efficient processing of JSON payloads associated with the Australian Consumer Data Right (aka *open banking*). It provides the ability to parse, manipulate, generate and validate compliant payloads associated with the Consumer Data Standards. It is annotated with industry standard [Jackson](https://github.com/FasterXML/jackson) and [OpenAPI (*fka Swagger*)](https://github.com/swagger-api/swagger-core) annotations to enable smooth integration into downstream projects.
 
+## Features
+
+  - Jackson mappings for **all payloads** defined within the [Consumer Data Standards](https://consumerdatastandardsaustralia.github.io/standards)
+  - On demand conversion **between payload versions** powered by [Orika Mapper](https://github.com/orika-mapper/orika)
+  - **All enumerations** defined within [Consumer Data Standards](https://consumerdatastandardsaustralia.github.io/standards) with **human readable descriptions** for presentation layer
+  - Serialisation and Deserialisation to **strong Java types** for all [Common Field Types](https://consumerdatastandardsaustralia.github.io/standards/#common-field-types)
+  - Java Validation (JSR-303) rules for all **required attributes**, **[Pagination](https://consumerdatastandardsaustralia.github.io/standards/#pagination)** and **[Product & Account Components](https://consumerdatastandardsaustralia.github.io/standards/#product-amp-account-components)**
+  - Fluent Builders for all payloads [powered by Lombok](https://projectlombok.org/)
+  - [OpenAPI 3 (fka Swagger)](https://github.com/swagger-api/swagger-core) annotations for all payloads suitable and [tested](https://github.com/bizaio/deepthought) for Spring Framework and [Springdoc](https://springdoc.org)
+
+## Quick Start
+
 Processing an input payload and validating it is as simple as:
 
 ```java
@@ -65,20 +77,11 @@ Which yields:
 
 Babelfish CDR is currently developed and maintained by [Biza.io](https://www.biza.io).
 
-## Features
-
-  - Jackson mappings for **all payloads** defined within the [Consumer Data Standards](https://consumerdatastandardsaustralia.github.io/standards)
-  - On demand conversion **between payload versions** powered by [Orika Mapper](https://github.com/orika-mapper/orika)
-  - **All enumerations** defined within [Consumer Data Standards](https://consumerdatastandardsaustralia.github.io/standards) with **human readable descriptions** for presentation layer
-  - Serialisation and Deserialisation to **strong Java types** for all [Common Field Types](https://consumerdatastandardsaustralia.github.io/standards/#common-field-types)
-  - Java Validation (JSR-303) rules for all **required attributes**, **[Pagination](https://consumerdatastandardsaustralia.github.io/standards/#pagination)** and **[Product & Account Components](https://consumerdatastandardsaustralia.github.io/standards/#product-amp-account-components)**
-  - Fluent Builders for all payloads [powered by Lombok](https://projectlombok.org/)
-  - [OpenAPI 3 (fka Swagger)](https://github.com/swagger-api/swagger-core) annotations for all payloads suitable and [tested](https://github.com/bizaio/deepthought) for Spring Framework and [Springdoc](https://springdoc.org)
-
 
 ## Table of Contents
 
 - [Features](#features)
+- [Quick Start](#quick-start)
 - [Usage](#usage)
 - [Projects](#projects)
 - [Support](#support)
