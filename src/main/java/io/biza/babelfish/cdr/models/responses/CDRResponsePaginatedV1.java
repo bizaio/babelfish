@@ -9,11 +9,13 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *******************************************************************************/
-package io.biza.babelfish.cdr.models.payloads;
+package io.biza.babelfish.cdr.models.responses;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.biza.babelfish.cdr.models.payloads.LinksPaginatedV1;
+import io.biza.babelfish.cdr.models.payloads.MetaPaginatedV1;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

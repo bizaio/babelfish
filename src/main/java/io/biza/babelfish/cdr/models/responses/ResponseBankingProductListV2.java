@@ -13,6 +13,7 @@ package io.biza.babelfish.cdr.models.responses;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.babelfish.cdr.abstracts.responses.CDRResponsePaginatedV1;
 import io.biza.babelfish.cdr.models.payloads.LinksPaginatedV1;
@@ -55,5 +56,5 @@ public class ResponseBankingProductListV2 extends CDRResponsePaginatedV1 {
   @NotNull
   @Valid
   MetaPaginatedV1 meta;
-
+  
 }

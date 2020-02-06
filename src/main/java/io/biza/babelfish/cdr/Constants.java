@@ -13,6 +13,7 @@ package io.biza.babelfish.cdr;
 
 import java.math.RoundingMode;
 import java.time.format.DateTimeFormatter;
+import io.biza.babelfish.cdr.models.VersionerConstants;
 import io.biza.babelfish.cdr.orika.OrikaFactoryConfigurerInterface;
 
 /**
@@ -57,4 +58,7 @@ public class Constants {
    */
   public static final String ORIKA_IMPLEMENTING_CLASS =
       OrikaFactoryConfigurerInterface.class.getName();
+  
+  public static final String BASE_PACKAGE = VersionerConstants.class.getPackageName();
+  
 }

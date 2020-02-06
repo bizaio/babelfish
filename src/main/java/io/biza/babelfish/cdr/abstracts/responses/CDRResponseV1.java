@@ -18,6 +18,5 @@ import io.biza.babelfish.cdr.models.payloads.MetaV1;
 @Valid
 public abstract class CDRResponseV1 {
   public abstract LinksV1 links();
-
   public abstract MetaV1 meta();
 }

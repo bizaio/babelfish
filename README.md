@@ -221,6 +221,8 @@ An example is as follows:
 
 ### Using in Spring
 
+[(Back to top)](#table-of-contents)
+
 We are actively using Babelfish CDR payload descriptions within [Deep Thought](https://github.com/bizaio/deepthought) as part of a Spring + Springdoc project. The following demonstrates the definition of a `Get Product Detail` endpoint:
 
 ```java

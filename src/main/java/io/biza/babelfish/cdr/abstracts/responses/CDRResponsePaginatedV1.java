@@ -21,18 +21,17 @@ import io.biza.babelfish.cdr.support.FormatChecker;
 public abstract class CDRResponsePaginatedV1 {
 
   public abstract LinksPaginatedV1 links();
-
   public abstract MetaPaginatedV1 meta();
 
   @AssertTrue(message = "First and Last Page Detected but Total Pages is >1")
-  public boolean isTotalPagesBiggerThanLinks() {
+  private boolean isTotalPagesBiggerThanLinks() {
     return (links() != null && links().next() == null && links().prev() == null)
         ? (meta() != null && meta().totalPages() > 1 ? false : true)
         : true;
   }
 
   @AssertTrue(message = "Last Page URI page parameter should match totalPages")
-  public boolean isLastPagePageParamValid() {
+  private boolean isLastPagePageParamValid() {
     return (links() != null && links().last() != null && meta() != null
         && meta().totalPages() != null)
             ? ((Integer.parseInt(
