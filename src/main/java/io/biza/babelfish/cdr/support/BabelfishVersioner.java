@@ -67,11 +67,12 @@ public class BabelfishVersioner {
     return VersionerConstants.versionMap.getOrDefault(clazz, 1);
   }
 
-  public static <S, D> D convert(S sourceClass, Class<D> destinationClass)
+  public static <S, D> D convert(S sourceObject, Class<D> destinationClass)
       throws PayloadConversionException {
     try {
       OrikaFactoryConfigurer factory = new OrikaFactoryConfigurer();
-      return factory.getFactory().getMapperFacade().map(sourceClass, destinationClass);
+      LOG.debug("Converting from {} to {}", sourceObject.getClass(), destinationClass);
+      return factory.getFactory().getMapperFacade().map(sourceObject, destinationClass);
     } catch (Exception e) {
       throw new PayloadConversionException(e.getMessage());
     }
