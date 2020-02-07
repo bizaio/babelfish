@@ -32,6 +32,7 @@ import io.biza.babelfish.cdr.converters.StringToCurrencyConverter;
 import io.biza.babelfish.cdr.converters.StringToMerchantCategoryCodeConverter;
 import io.biza.babelfish.cdr.enumerations.BankingTransactionStatus;
 import io.biza.babelfish.cdr.enumerations.BankingTransactionType;
+import io.biza.babelfish.cdr.support.NullOrNotEmpty;
 import io.biza.babelfish.cdr.support.customtypes.MerchantCategoryCodeType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -57,8 +58,8 @@ public class BankingTransactionV1
   String accountId;
 
   @Schema(
-      description = "A unique ID of the transaction adhering to the standards for ID permanence. ")
-  @NotNull
+      description = "A unique ID of the transaction adhering to the standards for ID permanence. ", required = true)
+  @NullOrNotEmpty
   @JsonProperty("transactionId")
   String transactionId;
 
