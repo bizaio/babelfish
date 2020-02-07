@@ -11,11 +11,13 @@
  *******************************************************************************/
 package io.biza.babelfish.cdr.models.payloads;
 
+import java.net.URI;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,6 +30,7 @@ import lombok.ToString;
 @Builder
 @Data
 @EqualsAndHashCode(callSuper = false)
+@AllArgsConstructor
 @Schema(description = "Paginated Meta Details", name = "MetaPaginatedV1")
 public class MetaPaginatedV1 extends io.biza.babelfish.cdr.abstracts.payloads.MetaPaginatedV1 {
   @Schema(description = "The total number of records in the full set.", required = true)

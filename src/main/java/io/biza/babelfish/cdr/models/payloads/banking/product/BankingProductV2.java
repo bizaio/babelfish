@@ -120,7 +120,6 @@ public class BankingProductV2 {
   @Schema(description = "Additional Information for Banking Product")
   @JsonProperty("additionalInformation")
   @Valid
-  @JsonInclude(Include.NON_EMPTY)
   BankingProductAdditionalInformationV1 additionalInformation;
 
   @Schema(description = "An array of card art images")

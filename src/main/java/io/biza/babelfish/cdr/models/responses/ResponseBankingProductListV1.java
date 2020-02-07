@@ -18,6 +18,7 @@ import io.biza.babelfish.cdr.abstracts.responses.CDRResponsePaginatedV1;
 import io.biza.babelfish.cdr.models.payloads.LinksPaginatedV1;
 import io.biza.babelfish.cdr.models.payloads.MetaPaginatedV1;
 import io.biza.babelfish.cdr.models.responses.container.ResponseBankingProductListDataV1;
+import io.biza.babelfish.cdr.support.BabelfishVersionedModel;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,6 +36,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Schema(description = "Response containing a Banking Payee List",
     name = "ResponseBankingPayeeListV1")
+@BabelfishVersionedModel(schemaName = "ResponseBankingProductList", version = 1)
 public class ResponseBankingProductListV1 extends CDRResponsePaginatedV1 {
   @Schema(required = true)
   @JsonProperty("data")

@@ -32,7 +32,7 @@ import io.biza.babelfish.cdr.models.payloads.MetaV1;
 import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductDetailV1;
 import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductDetailV2;
 import io.biza.babelfish.cdr.models.responses.ResponseBankingProductByIdV2;
-import io.biza.babelfish.cdr.support.BabelFishConverter;
+import io.biza.babelfish.cdr.support.BabelfishConverter;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 import lombok.extern.slf4j.Slf4j;
 
@@ -112,7 +112,7 @@ public class ResponseBankingProductByIdV2Test {
         .description("Example Product Description").brand("ACME").isTailored(false).build();
 
     BankingProductDetailV1 downgradedDetail =
-        BabelFishConverter.convert(detail, BankingProductDetailV1.class);
+        BabelfishConverter.convert(detail, BankingProductDetailV1.class);
 
     assertEquals(detail.productId(), downgradedDetail.productId());
     assertEquals(detail.lastUpdated(), downgradedDetail.lastUpdated());

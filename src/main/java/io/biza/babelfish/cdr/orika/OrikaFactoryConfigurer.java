@@ -60,7 +60,7 @@ public class OrikaFactoryConfigurer {
      * Configure bidirectional configurers
      */
     try (ScanResult mapperResult = new ClassGraph().enableAllInfo()
-        .whitelistPackages("io.biza.babelfish.cdr.orika.mappers").scan()) {
+        .whitelistPackages(Constants.ORIKA_PACKAGE_BASE).scan()) {
       ClassInfoList configurerClasses =
           mapperResult.getClassesImplementing(Constants.ORIKA_IMPLEMENTING_CLASS);
 
