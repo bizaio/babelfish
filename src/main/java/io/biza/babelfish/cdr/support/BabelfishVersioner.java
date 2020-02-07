@@ -43,6 +43,7 @@ public class BabelfishVersioner {
      */
     for (Integer targetVersion = version; targetVersion >= minimumVersion; targetVersion--) {
       if (versionMap.get(targetVersion) != null) {
+        LOG.debug("Identified version of {} and target class of {}", targetVersion, versionMap.get(targetVersion));
         return versionMap.get(targetVersion);
       }
     }
