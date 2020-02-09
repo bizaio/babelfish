@@ -31,7 +31,7 @@ import lombok.ToString;
 
 @Valid
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @Data
 @NoArgsConstructor

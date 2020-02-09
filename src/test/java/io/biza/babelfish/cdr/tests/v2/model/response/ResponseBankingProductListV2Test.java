@@ -21,8 +21,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductV2;
-import io.biza.babelfish.cdr.models.payloads.LinksPaginatedV1;
-import io.biza.babelfish.cdr.models.payloads.MetaPaginatedV1;
 import io.biza.babelfish.cdr.models.responses.ResponseBankingProductListV2;
 import io.biza.babelfish.cdr.models.responses.container.ResponseBankingProductListDataV2;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
