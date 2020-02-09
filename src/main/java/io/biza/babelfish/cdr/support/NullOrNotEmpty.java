@@ -21,16 +21,4 @@ public @interface NullOrNotEmpty {
   String message() default "Must not be a blank string";
   Class<?>[] groups() default { };
   Class<? extends Payload>[] payload() default { };
-
-  /**
-   * Defines several {@code @NotBlank} constraints on the same element.
-   *
-   * @see NotBlank
-   */
-  @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
-  @Retention(RUNTIME)
-  @Documented
-  public @interface List {
-      NotBlank[] value();
-  }
 }
