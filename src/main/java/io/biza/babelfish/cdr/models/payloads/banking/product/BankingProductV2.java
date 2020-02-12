@@ -17,9 +17,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.DateTimeStringToOffsetDateTimeConverter;
@@ -34,7 +32,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import lombok.experimental.SuperBuilder;
 
 @Valid
 @ToString
@@ -120,7 +117,6 @@ public class BankingProductV2 {
   @Schema(description = "Additional Information for Banking Product")
   @JsonProperty("additionalInformation")
   @Valid
-  @JsonInclude(Include.NON_EMPTY)
   BankingProductAdditionalInformationV1 additionalInformation;
 
   @Schema(description = "An array of card art images")

@@ -254,11 +254,6 @@
             <version>${slf4j-simple.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.squareup</groupId>
-            <artifactId>javapoet</artifactId>
-            <version>${javapoet.version}</version>
-        </dependency>
     </dependencies>
     <distributionManagement>
         <snapshotRepository>

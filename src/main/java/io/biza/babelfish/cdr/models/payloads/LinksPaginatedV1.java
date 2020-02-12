@@ -20,11 +20,10 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 @Builder
@@ -32,6 +31,7 @@ import lombok.ToString;
 @Valid
 @ToString
 @EqualsAndHashCode(callSuper = false)
+@AllArgsConstructor
 @Schema(description = "Paginated Links", name = "LinksPaginatedV1")
 public class LinksPaginatedV1 extends io.biza.babelfish.cdr.abstracts.payloads.LinksPaginatedV1 {
 

@@ -18,6 +18,7 @@ Babelfish CDR is currently developed and maintained by [Biza.io](https://www.biz
   - Fluent Builders for all payloads [powered by Lombok](https://projectlombok.org/)
   - [OpenAPI 3 (fka Swagger)](https://github.com/swagger-api/swagger-core) annotations for all payloads suitable and [tested](https://github.com/bizaio/deepthought) for Spring Framework and [Springdoc](https://springdoc.org)
   - **Reasonably** well tested, over **350 validation rules** and nearly **300 tests** (but there is always room for more!)
+  - Lookup and Validation for **Merchant Category Codes**, **BSB Numbers** and **SWIFT Routing Codes**
 
 ## Quick Start
 
@@ -281,6 +282,7 @@ ExternalRef (Duration)     | String         | Duration                  | String
 ExternalRef (Period)       | String         | Period                    | StringToPeriodConverter                 | PeriodToStringConverter
 ExternalRef (MCC)          | String         | MerchantCategoryCodeType  | StringToMerchantCategoryCodeConverter   | MerchantCategoryCodeToStringConverter
 ExternalRef (APCA Number)  | String         | ApcaNumberType            | StringToApcaNumberConverter             | ApcaNumberToStringConverter
+ExternalRef (SWIFT Routing)| String         | SwiftBicType              | StringToSwiftBicConverter               | SwiftBicToStringConverter   
 Base64                     | String (Base64)| String                    | StringToBase64StringConverter           | Base64StringToStringConverter
 
 ### Custom Assertions

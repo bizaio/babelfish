@@ -18,6 +18,7 @@ import io.biza.babelfish.cdr.abstracts.responses.CDRResponseV1;
 import io.biza.babelfish.cdr.models.payloads.LinksV1;
 import io.biza.babelfish.cdr.models.payloads.MetaV1;
 import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductDetailV2;
+import io.biza.babelfish.cdr.support.BabelfishVersionedModel;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,6 +36,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Schema(description = "Response containing a single BankingProductDetail entry",
     name = "ResponseBankingProductByIdV2")
+@BabelfishVersionedModel(schemaName = "ResponseBankingProductById", version = 2)
 public class ResponseBankingProductByIdV2 extends CDRResponseV1 {
   @Schema(required = true)
   @JsonProperty("data")
