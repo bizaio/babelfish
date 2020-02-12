@@ -132,8 +132,10 @@ The Babelfish CDR library tries to provide full coverage of payloads defined wit
 
 Babelfish CDR Version                | Release Date | CDS Spec Compatibility     | Notes                                                             | Status
 ------------------------------------ | ------------ | -------------------------- | ----------------------------------------------------------------- | --------
-1.2.1-SNAPSHOT (**current develop**) | Regular      | 1.2.0                      | Snapshot Development Release                                      | Active Development
-1.2.0 (**current stable**)           | 2020-02-05   | 1.2.0                      | [tag v1.2.0](https://github.com/bizaio/babelfish-cdr/tree/v1.2.0) | Supported
+1.2.3-SNAPSHOT (**current develop**) | Regular      | 1.2.0                      | Snapshot Development Release                                      | Active Development
+1.2.2 (**current stable**)           | 2020-02-12   | 1.2.0                      | [tag v1.2.2](https://github.com/bizaio/babelfish-cdr/tree/v1.2.2) | Supported
+1.2.1-SNAPSHOT                       | 2020-02-12   | 1.2.0                      | Snapshot Development Release                                      | Deprecated
+1.2.0                                | 2020-02-05   | 1.2.0                      | [tag v1.2.0](https://github.com/bizaio/babelfish-cdr/tree/v1.2.0) | Deprecated
 1.0.0                                | 2020-02-04   | 1.0.0                      | Initial Release, **do not use**                                   | Deprecated
 
 ## Prerequisites
@@ -219,6 +221,21 @@ An example is as follows:
     BankingProductDetailV2 upgradedDetail = BabelFishConverter.convert(downgradedDetail, BankingProductDetailV2.class);
 
 ```
+
+### Dynamically discover what class to use for version conversion
+
+[(Back to top)](#table-of-contents)
+
+To make it easier to integrate Babelfish into upstream projects we also make available the `BabelfishVersioner` class. Here's an example where we hand it a `BankingProductDetailV2` and ask it for the nearest version (in this case the range is only 1 <= 2):
+
+```java
+    Class<?> destinationType = BabelfishVersioner.getVersionedClass(inputData.getClass(),
+        2, 1);
+    BabelfishVersioner.convert(inputData, destinationType);
+```
+
+This is coupled in Deep Thought to allow for dynamic payload version switching based on request parameters (in [CDRVersioner](https://github.com/bizaio/deepthought/blob/develop/common/src/main/java/io/biza/deepthought/common/support/CDRVersioner.java)).
+
 
 ### Using in Spring
 
