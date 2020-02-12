@@ -13,7 +13,6 @@ package io.biza.babelfish.cdr.converters;
 
 import java.time.OffsetDateTime;
 import com.fasterxml.jackson.databind.util.StdConverter;
-import io.biza.babelfish.cdr.Constants;
 
 /**
  * A Jackson StdConverter implementation for converting between Java OffsetDateTime and Epoch
