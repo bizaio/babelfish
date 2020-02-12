@@ -56,9 +56,17 @@ public class BabelfishVersioner {
             clazz.getName(), minimumVersion, version));
 
   }
+  
+  public static Boolean isSupported(Class<?> clazz) {
+    if (clazz.getPackageName().startsWith(Constants.BASE_MODELS_PACKAGE)) {
+      return true;
+    }
+    
+    return false;
+  }
 
   public static Integer getVersion(Class<?> clazz) throws UnsupportedPayloadException {
-    if (!clazz.getPackageName().startsWith(Constants.BASE_MODELS_PACKAGE)) {
+    if(!isSupported(clazz)) {
       throw new UnsupportedPayloadException(
           "BabelFishVersioner only supports version discovery for classes in "
               + Constants.BASE_MODELS_PACKAGE);
