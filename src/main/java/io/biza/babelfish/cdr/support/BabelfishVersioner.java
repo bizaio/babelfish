@@ -1,6 +1,7 @@
 package io.biza.babelfish.cdr.support;
 
 import java.util.HashMap;
+import java.util.Optional;
 import io.biza.babelfish.cdr.Constants;
 import io.biza.babelfish.cdr.exceptions.PayloadConversionException;
 import io.biza.babelfish.cdr.exceptions.UnsupportedPayloadException;
@@ -11,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class BabelfishVersioner {
 
-  public static Class<?> getVersionedClass(Class<?> clazz, Integer version, Integer minimumVersion)
+  public static Class<?> getVersionedClass(Class<?> clazz, Integer version, Optional<Integer> optionalMinimum)
       throws UnsupportedPayloadException {
 
     if (VersionerConstants.classMap == null) {
@@ -24,9 +25,11 @@ public class BabelfishVersioner {
     if (version == null) {
       version = getVersion(clazz);
     }
-
-    if (minimumVersion == null || minimumVersion > version) {
-      minimumVersion = version;
+    
+    Integer minimumVersion = version;
+    
+    if (optionalMinimum.isPresent() && optionalMinimum.get() < version) {
+      minimumVersion = optionalMinimum.get();
     }
 
     /**
