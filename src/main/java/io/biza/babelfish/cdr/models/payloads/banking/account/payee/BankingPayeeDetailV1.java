@@ -34,8 +34,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Valid
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
+@ToString
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @Data
 @NoArgsConstructor

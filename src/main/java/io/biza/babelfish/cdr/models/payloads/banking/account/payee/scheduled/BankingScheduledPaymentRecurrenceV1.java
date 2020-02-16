@@ -47,7 +47,7 @@ public class BankingScheduledPaymentRecurrenceV1 extends io.biza.babelfish.cdr.a
 
   @Schema(description = "The type of recurrence used to define the schedule", required = true)
   @NotNull
-  @JsonProperty("type")
+  @JsonProperty("recurrenceUType")
   PayloadTypeBankingScheduledPaymentRecurrence type;
 
   @JsonProperty("onceOff")

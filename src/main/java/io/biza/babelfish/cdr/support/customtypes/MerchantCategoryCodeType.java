@@ -13,6 +13,7 @@ package io.biza.babelfish.cdr.support.customtypes;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -20,8 +21,10 @@ import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.extern.slf4j.Slf4j;
 
 @Schema(description = "Merchant Category Codes", enumAsRef = true)
+@Slf4j
 public class MerchantCategoryCodeType implements LabelValueEnumInterface {
   private String value;
   private String label;
@@ -69,4 +72,22 @@ public class MerchantCategoryCodeType implements LabelValueEnumInterface {
   public String name() {
     return value;
   }
+  
+  @Override
+  public boolean equals(Object o) {
+    if(o == this) { return true; }
+    
+    if(!(o instanceof MerchantCategoryCodeType)) {
+      return false;
+    }
+    MerchantCategoryCodeType c = (MerchantCategoryCodeType) o;
+    return toString().equals(c.toString());
+  }
+  
+  @Override
+  public int hashCode() {
+    return Objects.hash(value);
+  }
+  
+  
 }
