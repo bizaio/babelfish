@@ -44,7 +44,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Organisation Definition in Detail", name = "CommonOrganisationDetailV1")
-public class CommonOrganisationDetail
+public class CommonOrganisationDetailV1
     extends io.biza.babelfish.cdr.abstracts.payloads.common.CommonOrganisationDetailV1 {
   @Schema(
       description = "The date and time that this record was last updated by the customer. If no update has occurred then this date should reflect the initial creation date for the data",

@@ -12,7 +12,7 @@
 package io.biza.babelfish.cdr.models.responses.container;
 
 import io.biza.babelfish.cdr.enumerations.PayloadTypeCustomer;
-import io.biza.babelfish.cdr.models.payloads.common.CommonOrganisationDetail;
+import io.biza.babelfish.cdr.models.payloads.common.CommonOrganisationDetailV1;
 import io.biza.babelfish.cdr.models.payloads.common.CommonPersonDetailV1;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -51,6 +51,6 @@ public class ResponseCommonCustomerDetailDataV1
   @Schema(description = "The Organisation Record for the Customer")
   @JsonProperty("organisation")
   @Valid
-  CommonOrganisationDetail organisation;
+  CommonOrganisationDetailV1 organisation;
 
 }

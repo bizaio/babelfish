@@ -150,8 +150,8 @@ import io.biza.babelfish.cdr.models.payloads.common.CommonEmailAddressV1;
 import io.biza.babelfish.cdr.models.payloads.common.CommonEmailAddressV1.CommonEmailAddressV1Builder;
 import io.biza.babelfish.cdr.models.payloads.common.CommonOrganisationV1;
 import io.biza.babelfish.cdr.models.payloads.common.CommonOrganisationV1.CommonOrganisationV1Builder;
-import io.biza.babelfish.cdr.models.payloads.common.CommonOrganisationDetail;
-import io.biza.babelfish.cdr.models.payloads.common.CommonOrganisationDetail.CommonOrganisationDetailBuilder;
+import io.biza.babelfish.cdr.models.payloads.common.CommonOrganisationDetailV1;
+import io.biza.babelfish.cdr.models.payloads.common.CommonOrganisationDetailV1.CommonOrganisationDetailV1Builder;
 import io.biza.babelfish.cdr.models.payloads.common.CommonPAFAddressV1;
 import io.biza.babelfish.cdr.models.payloads.common.CommonPAFAddressV1.CommonPAFAddressV1Builder;
 import io.biza.babelfish.cdr.models.payloads.common.CommonPersonV1;
@@ -500,8 +500,8 @@ public class ModelConstants {
   public static CommonPersonDetailV1Builder DEFAULT_COMMON_PERSON_DETAIL =
       CommonPersonDetailV1.builder().lastName("Last")
           .physicalAddresses(List.of(DEFAULT_COMMON_PHYSICAL_ADDRESS_WITH_PURPOSE.build()));
-  public static CommonOrganisationDetailBuilder DEFAULT_COMMON_ORGANISATION_DETAIL =
-      CommonOrganisationDetail.builder().agentLastName("Last")
+  public static CommonOrganisationDetailV1Builder DEFAULT_COMMON_ORGANISATION_DETAIL =
+      CommonOrganisationDetailV1.builder().agentLastName("Last")
           .businessName("Organisation Business Name").organisationType(CommonOrganisationType.OTHER)
           .physicalAddresses(List.of(DEFAULT_COMMON_PHYSICAL_ADDRESS_WITH_PURPOSE.build()));
 

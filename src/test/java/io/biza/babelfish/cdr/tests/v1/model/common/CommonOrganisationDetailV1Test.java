@@ -21,7 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.biza.babelfish.cdr.enumerations.CommonOrganisationType;
-import io.biza.babelfish.cdr.models.payloads.common.CommonOrganisationDetail;
+import io.biza.babelfish.cdr.models.payloads.common.CommonOrganisationDetailV1;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;
 
 @DisplayName("CommonOrganisationDetail V1 Tests")
@@ -44,7 +44,7 @@ public class CommonOrganisationDetailV1Test {
   @Test
   @DisplayName("CommonOrganisationDetail Mandatory Fields Other Organisation")
   void commonOrganisationDetailMandatoryFieldsOther() {
-    CommonOrganisationDetail data = new CommonOrganisationDetail();
+    CommonOrganisationDetailV1 data = new CommonOrganisationDetailV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.agentLastName("Last");
@@ -64,7 +64,7 @@ public class CommonOrganisationDetailV1Test {
   @Test
   @DisplayName("CommonOrganisationDetail Mandatory Fields Company")
   void commonOrganisationDetailMandatoryFieldsCompany() {
-    CommonOrganisationDetail data = new CommonOrganisationDetail();
+    CommonOrganisationDetailV1 data = new CommonOrganisationDetailV1();
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
     data.agentLastName("Last");

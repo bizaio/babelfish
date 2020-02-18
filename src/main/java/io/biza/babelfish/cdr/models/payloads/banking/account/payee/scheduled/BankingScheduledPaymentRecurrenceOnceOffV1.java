@@ -43,7 +43,7 @@ public class BankingScheduledPaymentRecurrenceOnceOffV1 {
   @NotNull
   @JsonSerialize(converter = LocalDateToStringConverter.class)
   @JsonDeserialize(converter = StringToLocalDateConverter.class)
-  @JsonProperty("nonBusinessDayTreatment")
+  @JsonProperty("paymentDate")
   LocalDate paymentDate;
 
 }
