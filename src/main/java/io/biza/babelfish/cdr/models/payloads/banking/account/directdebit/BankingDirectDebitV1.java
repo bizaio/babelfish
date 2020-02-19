@@ -60,7 +60,7 @@ public class BankingDirectDebitV1 extends
   @JsonProperty("lastDebitDateTime")
   OffsetDateTime lastDebitDateTime;
 
-  @Schema(description = "The amount of the last debit executed under this authorisation")
+  @Schema(description = "The amount of the last debit executed under this authorisation", type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   @JsonProperty("lastDebitAmount")

@@ -56,7 +56,7 @@ public class BankingProductLendingRateV1
   @JsonProperty("lendingRateType")
   BankingProductLendingRateType lendingRateType;
 
-  @Schema(description = "The rate to be applied", required = true)
+  @Schema(description = "The rate to be applied", required = true, type = "string")
   @NotNull(message = "Rate to be applied is required")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
@@ -65,7 +65,7 @@ public class BankingProductLendingRateV1
   @Max(1)
   BigDecimal rate;
 
-  @Schema(description = "A comparison rate equivalent for this rate")
+  @Schema(description = "A comparison rate equivalent for this rate", type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   @JsonProperty("comparisonRate")

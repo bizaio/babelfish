@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr.models.payloads.banking.account;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Currency;
 import java.util.List;
 import javax.validation.Valid;
@@ -26,8 +27,10 @@ import io.biza.babelfish.cdr.converters.BigDecimalToAmountStringConverter;
 import io.biza.babelfish.cdr.converters.CurrencyToStringConverter;
 import io.biza.babelfish.cdr.converters.DurationToStringConverter;
 import io.biza.babelfish.cdr.converters.LocalDateToStringConverter;
+import io.biza.babelfish.cdr.converters.PeriodToStringConverter;
 import io.biza.babelfish.cdr.converters.StringToCurrencyConverter;
 import io.biza.babelfish.cdr.converters.StringToLocalDateConverter;
+import io.biza.babelfish.cdr.converters.StringToPeriodConverter;
 import io.biza.babelfish.cdr.enumerations.BankingLoanRepaymentType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -58,7 +61,7 @@ public class BankingLoanAccountV1 {
   @JsonProperty("originalLoanAmount")
   BigDecimal originalLoanAmount;
 
-  @Schema(description = "Original Loan Value Currency")
+  @Schema(description = "Original Loan Value Currency", type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   @JsonProperty(value = "originalLoanCurrency", defaultValue = "AUD")
@@ -102,7 +105,7 @@ public class BankingLoanAccountV1 {
   @JsonProperty("maxRedraw")
   BigDecimal maxRedraw;
 
-  @Schema(description = "Maximum redraw amount currency")
+  @Schema(description = "Maximum redraw amount currency", type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   @JsonProperty(value = "maxRedrawCurrency", defaultValue = "AUD")
@@ -115,7 +118,7 @@ public class BankingLoanAccountV1 {
   @JsonProperty("minRedraw")
   BigDecimal minRedraw;
 
-  @Schema(description = "Minimum Redraw currency")
+  @Schema(description = "Minimum Redraw currency", type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   @JsonProperty(value = "minRedrawCurrency", defaultValue = "AUD")
@@ -140,9 +143,12 @@ public class BankingLoanAccountV1 {
 
   @Schema(
       description = "The expected or required repayment frequency. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations)",
+      type = "string",
       required = true)
   @NotNull
-  @JsonSerialize(converter = DurationToStringConverter.class)
+  @JsonSerialize(converter = PeriodToStringConverter.class)
+  @JsonDeserialize(converter = StringToPeriodConverter.class)
   @JsonProperty("repaymentFrequency")
-  Duration repaymentFrequency;
+  Period repaymentFrequency;
+  
 }

@@ -40,14 +40,14 @@ import lombok.ToString;
 @Schema(description = "An Australian Bank Account Purse Balance Representation",
     name = "BankingBalancePurseV1")
 public class BankingBalancePurseV1 {
-  @Schema(description = "The balance available for this additional currency purse", required = true)
+  @Schema(description = "The balance available for this additional currency purse", required = true, type = "string")
   @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
   @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
   @NotNull
   @JsonProperty("amount")
   BigDecimal amount;
 
-  @Schema(description = "The currency for the purse")
+  @Schema(description = "The currency for the purse", type = "string")
   @JsonSerialize(converter = CurrencyToStringConverter.class)
   @JsonDeserialize(converter = StringToCurrencyConverter.class)
   @JsonProperty("currency")

@@ -15,7 +15,7 @@ public abstract class CommonPhysicalAddressV1 {
 
   @AssertTrue(
       message = "One and only one of simple or paf should be populated based on addressUType")
-  public boolean isAddressTypeSpecifiedIsPopulated() {
+  private boolean isAddressTypeSpecifiedIsPopulated() {
     if (type() == null) {
       return true;
     }

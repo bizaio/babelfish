@@ -22,6 +22,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.AmountStringToBigDecimalConverter;
 import io.biza.babelfish.cdr.converters.BigDecimalToAmountStringConverter;
+import io.biza.babelfish.cdr.converters.CurrencyToStringConverter;
+import io.biza.babelfish.cdr.converters.StringToCurrencyConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -82,8 +84,8 @@ public class BankingBalanceV1 {
 
   @Schema(description = "The currency for the balance amounts. If absent assumed to be AUD",
       type = "string")
-  @JsonSerialize(converter = BigDecimalToAmountStringConverter.class)
-  @JsonDeserialize(converter = AmountStringToBigDecimalConverter.class)
+  @JsonSerialize(converter = CurrencyToStringConverter.class)
+  @JsonDeserialize(converter = StringToCurrencyConverter.class)
   @JsonProperty(value = "currency", defaultValue = "AUD")
   @Builder.Default
   Currency currency = Currency.getInstance("AUD");

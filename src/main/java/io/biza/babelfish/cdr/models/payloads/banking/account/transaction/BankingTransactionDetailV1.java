@@ -17,6 +17,7 @@ import java.util.Currency;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -51,6 +52,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Schema(description = "Banking Transaction Detailed Information",
     name = "BankingTransactionDetailV1")
+@JsonIgnoreProperties({"detailAvailable"})
 public class BankingTransactionDetailV1 extends
     io.biza.babelfish.cdr.abstracts.payloads.banking.transaction.BankingTransactionDetailV1 {
 

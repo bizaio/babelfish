@@ -45,7 +45,7 @@ import lombok.ToString;
 public class BankingInternationalPayeeBankDetailsV1 {
   @Schema(
       description = "Country of the recipient institution. A valid [ISO 3166 Alpha-3](https://www.iso.org/iso-3166-country-codes.html) country code",
-      required = true)
+      required = true, type = "string")
   @JsonSerialize(converter = LocaleToCountryStringConverter.class)
   @JsonDeserialize(converter = CountryStringToLocaleConverter.class)
   @JsonProperty("country")

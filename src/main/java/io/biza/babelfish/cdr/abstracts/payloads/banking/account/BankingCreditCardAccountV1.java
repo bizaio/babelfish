@@ -12,12 +12,12 @@ public abstract class BankingCreditCardAccountV1 {
 
   @AssertTrueBabelfish(message = "Minimum Payment Amount should be >= 0",
       fields = {"minPaymentAmount"})
-  public boolean isMinimumPaymentAmountZeroOrMore() {
+  private boolean isMinimumPaymentAmountZeroOrMore() {
     return FormatChecker.isDefined(minPaymentAmount()) ? FormatChecker.isNatural(minPaymentAmount()) : true;
   }
 
   @AssertTrueBabelfish(message = "Payment Due Amount should be >= 0", fields = {"paymentDueAmount"})
-  public boolean isPaymentDueAmountZeroOrMore() {
+  private boolean isPaymentDueAmountZeroOrMore() {
     return FormatChecker.isDefined(paymentDueAmount()) ? FormatChecker.isNatural(paymentDueAmount()) : true;
   }
 

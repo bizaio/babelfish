@@ -13,7 +13,7 @@ public abstract class BankingTransactionDetailV1 extends BankingTransactionV1 {
 
   @AssertTrueBabelfish(message = "Payer must be populated for inbound payments",
       fields = {"extendedData.payer"})
-  public boolean isPayerPopulated() {
+  private boolean isPayerPopulated() {
     return FormatChecker.isDefined(amount()) && FormatChecker.isPositive(amount())
         ? extendedData() != null && FormatChecker.isNotEmpty(extendedData().payer())
         : true;
@@ -21,7 +21,7 @@ public abstract class BankingTransactionDetailV1 extends BankingTransactionV1 {
 
   @AssertTrueBabelfish(message = "Payee must be populated for outbound payments",
       fields = {"extendedData.payee"})
-  public boolean isPayeePopulated() {
+  private boolean isPayeePopulated() {
     return FormatChecker.isDefined(amount()) && FormatChecker.isNegative(amount())
         ? extendedData() != null && FormatChecker.isNotEmpty(extendedData().payee())
         : true;

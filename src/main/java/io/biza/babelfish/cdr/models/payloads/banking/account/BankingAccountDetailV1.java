@@ -17,6 +17,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -49,6 +50,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Schema(description = "Detailed Australian Banking Account Information",
     name = "BankingAccountDetailV1")
+@JsonIgnoreProperties({"owned"})
 public class BankingAccountDetailV1
     extends io.biza.babelfish.cdr.abstracts.payloads.banking.account.BankingAccountDetailV1 {
 
@@ -129,7 +131,7 @@ public class BankingAccountDetailV1
   @Schema(description = "Term Deposit Account Information")
   @JsonProperty("termDeposit")
   @Valid
-  BankingTermDepositAccountV1 termDeposit;
+  List<BankingTermDepositAccountV1> termDeposit;
 
   @Schema(description = "Credit Card Account Information")
   @JsonProperty("creditCard")
@@ -142,7 +144,7 @@ public class BankingAccountDetailV1
   BankingLoanAccountV1 loan;
 
   @Schema(
-      description = "current rate to calculate interest earned being applied to deposit balances as it stands at the time of the API call")
+      description = "current rate to calculate interest earned being applied to deposit balances as it stands at the time of the API call", type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   @JsonProperty("depositRate")
@@ -150,7 +152,7 @@ public class BankingAccountDetailV1
   BigDecimal depositRate;
 
   @Schema(
-      description = "The current rate to calculate interest payable being applied to lending balances as it stands at the time of the API call")
+      description = "The current rate to calculate interest payable being applied to lending balances as it stands at the time of the API call", type = "string")
   @JsonSerialize(converter = BigDecimalToRateStringConverter.class)
   @JsonDeserialize(converter = RateStringToBigDecimalConverter.class)
   @JsonProperty("lendingRate")

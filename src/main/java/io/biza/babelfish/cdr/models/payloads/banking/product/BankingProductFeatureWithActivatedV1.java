@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr.models.payloads.banking.product;
 import java.net.URI;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -35,6 +36,7 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @Schema(name = "BankingAccountProductFeatureV1", description = "Banking Account Product Feature",
     allOf = {BankingProductFeatureV1.class})
+@JsonIgnoreProperties({"activated"})
 public class BankingProductFeatureWithActivatedV1
     extends io.biza.babelfish.cdr.abstracts.payloads.banking.product.BankingProductFeatureV1 {
 

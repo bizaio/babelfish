@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.Period;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -53,7 +54,7 @@ public class BankingLoanAccountV1Test {
     data.nextInstalmentDate(LocalDate.now());
     assertFalse(validator.validate(data).isEmpty(), validator.validate(data).toString());
 
-    data.repaymentFrequency(Duration.ofDays(10));
+    data.repaymentFrequency(Period.ofDays(10));
 
     // Should now be valid payload
     assertTrue(validator.validate(data).isEmpty(), validator.validate(data).toString());

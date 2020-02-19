@@ -312,7 +312,7 @@ public class ModelConstants {
           .paymentDueAmount(new BigDecimal("10.00")).paymentDueDate(LocalDate.now());
   public static BankingLoanAccountV1Builder DEFAULT_BANKING_LOAN_ACCOUNT =
       BankingLoanAccountV1.builder().loanEndDate(LocalDate.now()).nextInstalmentDate(LocalDate.now())
-          .repaymentFrequency(Duration.ofDays(10));
+          .repaymentFrequency(Period.ofDays(10));
 
   public static ResponseBankingAccountListV1Builder DEFAULT_RESPONSE_BANKING_ACCOUNT_LIST =
       ResponseBankingAccountListV1.builder().links(DEFAULT_LINKS_PAGINATED.build()).meta(DEFAULT_META_PAGINATED.build())

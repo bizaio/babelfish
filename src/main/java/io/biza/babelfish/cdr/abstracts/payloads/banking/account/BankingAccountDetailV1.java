@@ -1,5 +1,6 @@
 package io.biza.babelfish.cdr.abstracts.payloads.banking.account;
 
+import java.util.List;
 import io.biza.babelfish.cdr.enumerations.PayloadTypeBankingAccount;
 import io.biza.babelfish.cdr.models.payloads.banking.account.BankingCreditCardAccountV1;
 import io.biza.babelfish.cdr.models.payloads.banking.account.BankingLoanAccountV1;
@@ -13,7 +14,7 @@ public abstract class BankingAccountDetailV1 {
 
   public abstract String accountNumber();
 
-  public abstract BankingTermDepositAccountV1 termDeposit();
+  public abstract List<BankingTermDepositAccountV1> termDeposit();
 
   public abstract BankingCreditCardAccountV1 creditCard();
 
