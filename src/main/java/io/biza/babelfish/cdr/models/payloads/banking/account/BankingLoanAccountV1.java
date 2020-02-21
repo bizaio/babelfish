@@ -12,7 +12,6 @@
 package io.biza.babelfish.cdr.models.payloads.banking.account;
 
 import java.math.BigDecimal;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Currency;
@@ -25,7 +24,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.AmountStringToBigDecimalConverter;
 import io.biza.babelfish.cdr.converters.BigDecimalToAmountStringConverter;
 import io.biza.babelfish.cdr.converters.CurrencyToStringConverter;
-import io.biza.babelfish.cdr.converters.DurationToStringConverter;
 import io.biza.babelfish.cdr.converters.LocalDateToStringConverter;
 import io.biza.babelfish.cdr.converters.PeriodToStringConverter;
 import io.biza.babelfish.cdr.converters.StringToCurrencyConverter;
