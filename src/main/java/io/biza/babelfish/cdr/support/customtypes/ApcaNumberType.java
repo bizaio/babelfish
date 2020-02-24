@@ -23,11 +23,14 @@ import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Schema(description = "APCA Numbers (aka BSB Numbers)")
 @Slf4j
-@Data
+@Getter
+@Setter
 @Builder
 public class ApcaNumberType implements LabelValueEnumInterface {
   private String bsb;
@@ -56,17 +59,34 @@ public class ApcaNumberType implements LabelValueEnumInterface {
   public String toString() {
     return String.valueOf(bsb);
   }
+  
+  @Override
+  public boolean equals(Object o) {
+    if (o == this) {
+      return true;
+    }
+
+    /*
+     * Check if o is an instance of Complex or not "null instanceof [type]" also returns false
+     */
+    if (!(o instanceof ApcaNumberType)) {
+      return false;
+    }
+
+    ApcaNumberType a = (ApcaNumberType) o;
+    return a.bsb().equals(this.bsb());
+  }
 
   @JsonCreator
   public static ApcaNumberType fromValue(String text) {
     LOG.debug("Converting APCA value from text of: {}", text);
     try {
       InputStream bsbDirectory = ApcaNumberType.class.getResourceAsStream("/bsb-directory.csv");
-      
+
       CSVReader csvReader = new CSVReader(new InputStreamReader(bsbDirectory));
       String[] line;
       ApcaNumberType result = null;
-      
+
 
       while ((line = csvReader.readNext()) != null) {
         if (line[0].equals(text)) {
@@ -78,7 +98,7 @@ public class ApcaNumberType implements LabelValueEnumInterface {
       }
 
       csvReader.close();
-      
+
       if (result != null) {
         LOG.debug("APCA Converter produced result of: {}", result.toString());
         return result;
@@ -87,7 +107,7 @@ public class ApcaNumberType implements LabelValueEnumInterface {
     } catch (CsvValidationException | IOException e) {
       LOG.error("Received unexpected exception while converting BSB");
     }
-    
+
     throw new IllegalArgumentException(
         "Unable to find BSB in Directory with specified input of " + text);
   }

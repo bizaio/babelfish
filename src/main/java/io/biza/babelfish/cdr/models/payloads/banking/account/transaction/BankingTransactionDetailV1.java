@@ -34,6 +34,7 @@ import io.biza.babelfish.cdr.converters.StringToMerchantCategoryCodeConverter;
 import io.biza.babelfish.cdr.enumerations.BankingTransactionStatus;
 import io.biza.babelfish.cdr.enumerations.BankingTransactionType;
 import io.biza.babelfish.cdr.support.NullOrNotEmpty;
+import io.biza.babelfish.cdr.support.customtypes.ApcaNumberType;
 import io.biza.babelfish.cdr.support.customtypes.MerchantCategoryCodeType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -167,7 +168,7 @@ public class BankingTransactionDetailV1 extends
   @JsonProperty("apcaNumber")
   @JsonSerialize(converter = ApcaNumberToStringConverter.class)
   @JsonDeserialize(converter = StringToApcaNumberConverter.class)
-  String apcaNumber;
+  ApcaNumberType apcaNumber;
 
   @Schema(required = true)
   @NotNull

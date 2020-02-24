@@ -15,9 +15,7 @@ import com.fasterxml.jackson.databind.util.StdConverter;
 import io.biza.babelfish.cdr.support.customtypes.ApcaNumberType;
 
 /**
- * A Jackson StdConverter implementation for converting between CDR DateString and Java LocalDate
- * 
- * @since 0.9.6
+ * A Jackson StdConverter implementation for converting between CDR APCA String and Babelfish ApcaNumber
  */
 public class StringToApcaNumberConverter extends StdConverter<String, ApcaNumberType> {
   @Override
