@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.biza</groupId>
     <artifactId>babelfish-cdr</artifactId>
-    <version>1.2.4</version>
+    <version>1.2.5-SNAPSHOT</version>
     <name>Babelfish: CDR</name>
     <description>The Babelfish CDR is a library for handling payloads associated with the Australian Consumer Data Right. It is currently being developed and maintained by Biza.io.</description>
     <url>https://github.com/bizaio/babelfish-cdr</url>
