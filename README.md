@@ -103,7 +103,7 @@ This library is available on [Maven Central](https://search.maven.org/artifact/i
 <dependency>
     <groupId>io.biza</groupId>
     <artifactId>babelfish-cdr</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.4</version>
 </dependency>
 ```
 
