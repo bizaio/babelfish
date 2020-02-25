@@ -134,8 +134,8 @@ Babelfish CDR Version                | Release Date | CDS Spec Compatibility    
 ------------------------------------ | ------------ | -------------------------- | ----------------------------------------------------------------- | --------
 1.2.5-SNAPSHOT (**current develop**) | Regular      | 1.2.0                      | Snapshot Development Release                                      | Active Development
 1.2.4 (**current stable**)           | 2020-02-25   | 1.2.0                      | [tag v1.2.4](https://github.com/bizaio/babelfish-cdr/tree/v1.2.4) | Supported
-1.2.3-SNAPSHOT                       | 2020-02-25   | 1.2.0                      | Snapshot Development Release                                      | Deprecated        
-1.2.2                                | 2020-02-12   | 1.2.0                      | [tag v1.2.2](https://github.com/bizaio/babelfish-cdr/tree/v1.2.2) | Deprecated
+1.2.3-SNAPSHOT (**current develop**) | 2020-02-25   | 1.2.0                      | Snapshot Development Release                                      | Deprecated        
+1.2.2 (**current stable**)           | 2020-02-12   | 1.2.0                      | [tag v1.2.2](https://github.com/bizaio/babelfish-cdr/tree/v1.2.2) | Deprecated
 1.2.1-SNAPSHOT                       | 2020-02-12   | 1.2.0                      | Snapshot Development Release                                      | Deprecated
 1.2.0                                | 2020-02-05   | 1.2.0                      | [tag v1.2.0](https://github.com/bizaio/babelfish-cdr/tree/v1.2.0) | Deprecated
 1.0.0                                | 2020-02-04   | 1.0.0                      | Initial Release, **do not use**                                   | Deprecated
