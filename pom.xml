@@ -86,6 +86,7 @@
     </properties>
 
     <build>
+	<defaultGoal>clean package install</defaultGoal>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
