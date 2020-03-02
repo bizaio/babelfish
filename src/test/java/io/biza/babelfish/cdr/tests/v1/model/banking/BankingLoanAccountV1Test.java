@@ -13,7 +13,6 @@ package io.biza.babelfish.cdr.tests.v1.model.banking;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
 import javax.validation.Validation;

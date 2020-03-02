@@ -83,10 +83,11 @@
         <opencsv.version>5.1</opencsv.version>
         <slf4j-simple.version>1.7.30</slf4j-simple.version>
         <javapoet.version>1.12.1</javapoet.version>
+        <babelfish-oidc.version>1.2.5-SNAPSHOT</babelfish-oidc.version>
     </properties>
 
     <build>
-	<defaultGoal>clean package install</defaultGoal>
+        <defaultGoal>clean package install</defaultGoal>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -254,6 +255,11 @@
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4j-simple.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.biza</groupId>
+            <artifactId>babelfish-oidc</artifactId>
+            <version>1.2.5-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <distributionManagement>
