@@ -6,6 +6,10 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.biza.babelfish.cdr.converters.DateTimeStringToOffsetDateTimeConverter;
+import io.biza.babelfish.cdr.converters.OffsetDateTimeToDateTimeStringConverter;
 import io.biza.babelfish.cdr.enumerations.register.DataHolderStatusType;
 import io.biza.babelfish.cdr.enumerations.register.IndustryType;
 import io.biza.babelfish.cdr.models.payloads.register.common.LegalEntityDetail;
@@ -67,6 +71,8 @@ public class RegisterDataHolderBrand {
   @JsonProperty("lastUpdated")
   @NotNull
   @Schema(description = "The date/time that the Data Holder Brand data was last updated in the Register", type = "string", format = "date-time")
+  @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
+  @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)  
   OffsetDateTime lastUpdated;
   
 }

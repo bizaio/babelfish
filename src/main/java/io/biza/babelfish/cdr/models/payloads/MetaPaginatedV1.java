@@ -20,6 +20,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Valid
@@ -28,6 +29,7 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "Paginated Meta Details", name = "MetaPaginatedV1")
 public class MetaPaginatedV1 extends io.biza.babelfish.cdr.abstracts.payloads.MetaPaginatedV1 {
   @Schema(description = "The total number of records in the full set.", required = true)

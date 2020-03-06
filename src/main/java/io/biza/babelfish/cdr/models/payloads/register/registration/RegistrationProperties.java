@@ -14,6 +14,8 @@ import io.biza.babelfish.cdr.converters.OffsetDateTimeToEpochConverter;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.enumerations.register.ClientAuthenticationMethodType;
+import io.biza.babelfish.oidc.converters.ListStringToSpaceListConverter;
+import io.biza.babelfish.oidc.converters.SpaceListToListStringConverter;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionMethodType;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
@@ -187,6 +189,8 @@ public class RegistrationProperties {
   @NotNull
   @Schema(
       description = "String containing a space-separated list of scope values that the client can use when requesting access tokens.")
+  @JsonDeserialize(converter = SpaceListToListStringConverter.class)
+  @JsonSerialize(converter = ListStringToSpaceListConverter.class)
   List<String> scope;
 
 }

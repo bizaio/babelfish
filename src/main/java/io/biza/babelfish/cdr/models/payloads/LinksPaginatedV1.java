@@ -24,6 +24,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Builder
@@ -32,6 +33,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "Paginated Links", name = "LinksPaginatedV1")
 public class LinksPaginatedV1 extends io.biza.babelfish.cdr.abstracts.payloads.LinksPaginatedV1 {
 

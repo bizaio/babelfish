@@ -14,6 +14,8 @@ import io.biza.babelfish.cdr.converters.OffsetDateTimeToEpochConverter;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.cdr.enumerations.register.RegisterSoftwareRole;
+import io.biza.babelfish.oidc.converters.ListStringToSpaceListConverter;
+import io.biza.babelfish.oidc.converters.SpaceListToListStringConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -150,6 +152,8 @@ public class SoftwareStatementAssertion {
   @NotNull
   @Schema(
       description = "String containing a space-separated list of scope values that the client can use when requesting access tokens.")
-  String scope;
+  @JsonDeserialize(converter = SpaceListToListStringConverter.class)
+  @JsonSerialize(converter = ListStringToSpaceListConverter.class)
+  List<String> scope;
 
 }
