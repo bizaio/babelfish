@@ -1,6 +1,13 @@
 
-Babelfish CDR Release Notes
+Babelfish Release Notes
 ==============================
+
+????
+-------
+
+* Convert to Babelfish Meta Package containing CDR, OIDC and Utility functions
+* Introduce OIDC Payloads library
+* Introduce Utility library for signing
 
 1.2.2
 ------
