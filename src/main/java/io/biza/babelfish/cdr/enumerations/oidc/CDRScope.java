@@ -1,4 +1,4 @@
-package io.biza.babelfish.cdr.enumerations.register;
+package io.biza.babelfish.cdr.enumerations.oidc;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -7,9 +7,11 @@ import io.biza.babelfish.cdr.exceptions.LabelValueEnumValueNotSupportedException
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Register Available Scopes", enumAsRef = true)
-public enum RegisterScope implements LabelValueEnumInterface {
+@Schema(description = "Scopes used within the CDR", enumAsRef = true)
+public enum CDRScope implements LabelValueEnumInterface {
   // @formatter:off
+  OPENID("openid", "openid"),
+  PROFILE("profile", "profile"),
   BANK_ACCOUNTS_BASIC_READ("bank:accounts.basic:read", "bank:accounts.basic:read"),
   BANK_ACCOUNTS_DETAIL_READ("bank:accounts.detail:read", "bank:accounts.detail:read"),
   BANK_TRANSACTIONS_READ("bank:transactions:read", "bank:transactions:read"),
@@ -24,7 +26,7 @@ public enum RegisterScope implements LabelValueEnumInterface {
 
   private String label;
 
-  RegisterScope(String value, String label) {
+  CDRScope(String value, String label) {
     this.value = value;
     this.label = label;
   }
@@ -36,16 +38,16 @@ public enum RegisterScope implements LabelValueEnumInterface {
   }
 
   @JsonCreator
-  public static RegisterScope fromValue(String text)
+  public static CDRScope fromValue(String text)
       throws LabelValueEnumValueNotSupportedException {
-    for (RegisterScope b : RegisterScope.values()) {
+    for (CDRScope b : CDRScope.values()) {
       if (String.valueOf(b.value).equals(text)) {
         return b;
       }
     }
     throw new LabelValueEnumValueNotSupportedException(
         "Unable to identify value of RegisterScope from " + text,
-        RegisterScope.class.getSimpleName(), RegisterScope.values(),
+        CDRScope.class.getSimpleName(), CDRScope.values(),
         text);
   }
 

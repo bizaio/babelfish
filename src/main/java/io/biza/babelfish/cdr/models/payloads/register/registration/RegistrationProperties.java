@@ -13,7 +13,6 @@ import io.biza.babelfish.cdr.converters.EpochToOffsetDateTimeConverter;
 import io.biza.babelfish.cdr.converters.OffsetDateTimeToEpochConverter;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
-import io.biza.babelfish.cdr.enumerations.register.ClientAuthenticationMethodType;
 import io.biza.babelfish.oidc.converters.ListStringToSpaceListConverter;
 import io.biza.babelfish.oidc.converters.SpaceListToListStringConverter;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
@@ -21,6 +20,7 @@ import io.biza.babelfish.oidc.enumerations.JWEEncryptionMethodType;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.OAuth2ResponseType;
 import io.biza.babelfish.oidc.enumerations.OIDCApplicationType;
+import io.biza.babelfish.oidc.enumerations.OIDCAuthMethod;
 import io.biza.babelfish.oidc.enumerations.OIDCGrantType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -134,7 +134,7 @@ public class RegistrationProperties {
   @JsonProperty("token_endpoint_auth_method")
   @NotNull
   @Schema(description = "The requested authentication method for the token endpoint")
-  ClientAuthenticationMethodType tokenEndpointAuthMethod;
+  OIDCAuthMethod tokenEndpointAuthMethod;
 
   @JsonProperty("token_endpoint_auth_signing_alg")
   @NotNull
@@ -160,25 +160,28 @@ public class RegistrationProperties {
 
   @JsonProperty("id_token_signed_response_alg")
   @Schema(description = "ID Token JWS Signing Algorithms Supported")
-  @Builder.Default
   @NotNull
-  List<JWSSigningAlgorithmType> idTokenSigningAlgorithms = List.of(JWSSigningAlgorithmType.PS256);
+  JWSSigningAlgorithmType idTokenSigningAlgorithm;
 
   @JsonProperty("id_token_encrypted_response_alg")
   @Schema(description = "ID Token JWE Encryption Algorithms Supported")
-  List<JWEEncryptionAlgorithmType> idTokenEncryptionAlgorithms;
+  @NotNull
+  JWEEncryptionAlgorithmType idTokenEncryptionAlgorithm;
 
   @JsonProperty("id_token_encrypted_response_enc")
   @Schema(description = "ID Token JWE Encryption Algorithms Supported")
-  List<JWEEncryptionMethodType> idTokenEncryptionMethods;
+  @NotNull
+  JWEEncryptionMethodType idTokenEncryptionMethod;
 
   @JsonProperty("request_object_signing_alg")
   @Schema(description = "Request Object Signing Algorithms")
-  List<JWSSigningAlgorithmType> requestObjectSigningAlgorithms;
+  // TODO: https://github.com/cdr-register/register/issues/79
+  @NotNull
+  JWSSigningAlgorithmType requestObjectSigningAlgorithm;
 
   @JsonProperty("software_statement")
   @Schema(description = "The Software Statement Assertion")
-  SoftwareStatementAssertion ssa;
+  String ssa;
 
   @JsonProperty("software_id")
   @Schema(

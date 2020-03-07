@@ -39,8 +39,11 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "An individual software product with status")
-public class ClientRegistration {
+@Schema(description = "A request for Recipient Registration with a Holder")
+public class RegistrationRequest {
+  /**
+   * As defined in ACCC Register Documentation: https://cdr-register.github.io/register/#registration-request-using-jwt
+   */
 
   @JsonProperty("iss")
   @NotEmpty
@@ -73,50 +76,6 @@ public class ClientRegistration {
       description = "The audience for the request. This should be the Data Holder authorisation server URI")
   String aud;
 
-  @JsonProperty("client_id")
-  @NotEmpty
-  @Schema(description = "Data Holder issued client identifier string")
-  String clientId;
-
-  @JsonProperty("client_id_issued_at")
-  @JsonSerialize(converter = OffsetDateTimeToEpochConverter.class)
-  @JsonDeserialize(converter = EpochToOffsetDateTimeConverter.class)
-  @Schema(
-      description = "Time at which the client identifier was issued expressed as seconds since 1970-01-01T00:00:00Z as measured in UTC")
-  @Builder.Default
-  OffsetDateTime issuedAt = OffsetDateTime.now();
-
-  @JsonProperty("client_name")
-  @NotEmpty
-  @Schema(
-      description = "Human-readable string name of the software product to be presented to the end-user during authorization")
-  String clientName;
-
-  @JsonProperty("client_description")
-  @NotEmpty
-  @Schema(
-      description = "Human-readable string name of the software product description to be presented to the end user during authorization")
-  String clientDescription;
-
-  @JsonProperty("client_uri")
-  @NotNull
-  @Schema(description = "URL string of a web page providing information about the client")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
-  URI clientUri;
-
-  @JsonProperty("org_id")
-  @NotEmpty
-  @Schema(
-      description = "A unique identifier string assigned by the CDR Register that identifies the Accredited Data Recipient Brand")
-  String organisationId;
-
-  @JsonProperty("org_name")
-  @NotEmpty
-  @Schema(
-      description = "Human-readable string name of the Accredited Data Recipient to be presented to the end user during authorization")
-  String organisationName;
-
   @JsonProperty("redirect_uris")
   @NotNull
   @Schema(description = "Array of redirection URI strings for use in redirect-based flows")
@@ -124,55 +83,15 @@ public class ClientRegistration {
   @JsonDeserialize(converter = UriStringToUriConverter.class)
   List<URI> redirectUris;
 
-  @JsonProperty("logo_uri")
-  @NotNull
-  @Schema(
-      description = "URL string that references a logo for the client. If present, the server SHOULD display this image to the end-user during approval")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
-  URI logoUri;
-
-  @JsonProperty("tos_uri")
-  @NotNull
-  @Schema(
-      description = "URL string that points to a human-readable terms of service document for the Software Product")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
-  URI tosUri;
-
-  @JsonProperty("policy_uri")
-  @NotNull
-  @Schema(
-      description = "URL string that points to a human-readable policy document for the Software Product")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
-  URI policyUri;
-
-  @JsonProperty("jwks_uri")
-  @NotNull
-  @Schema(
-      description = "URL string referencing the client JSON Web Key (JWK) Set [RFC7517] document, which contains the client public keys")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
-  URI jwksUri;
-
-  @JsonProperty("revocation_uri")
-  @NotNull
-  @Schema(
-      description = "URI string that references the location of the Software Product consent revocation endpoint")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
-  URI revocationUri;
-
-  @JsonProperty("token_endpoint_auth_method")
-  @NotNull
-  @Schema(description = "The requested authentication method for the token endpoint")
-  OIDCAuthMethod tokenEndpointAuthMethod;
-
   @JsonProperty("token_endpoint_auth_signing_alg")
   @NotNull
   @Schema(description = "The algorithm used for signing the JWT")
   JWSSigningAlgorithmType tokenEndpointAuthSigningAlgorithm;
+  
+  @JsonProperty("token_endpoint_auth_method")
+  @NotNull
+  @Schema(description = "The requested authentication method for the token endpoint")
+  OIDCAuthMethod tokenEndpointAuthMethod;
 
   @JsonProperty("grant_types")
   @NotEmpty
@@ -191,7 +110,8 @@ public class ClientRegistration {
   @JsonProperty("application_type")
   @NotNull
   @Schema(description = "Kind of the application. The only supported application type will be web")
-  OIDCApplicationType applicationType;
+  @Builder.Default
+  OIDCApplicationType applicationType = OIDCApplicationType.WEB;
 
   @JsonProperty("id_token_signed_response_alg")
   @Schema(description = "ID Token JWS Signing Algorithms Supported")
@@ -218,19 +138,5 @@ public class ClientRegistration {
   @Schema(description = "The Software Statement Assertion")
   @NotNull
   String ssa;
-
-  @JsonProperty("software_id")
-  @Schema(
-      description = "String representing a unique identifier assigned by the ACCC Register and used by registration endpoints to identify the software product to be dynamically registered.")
-  @NotNull
-  String softwareId;
-
-  @JsonProperty("scope")
-  @NotNull
-  @Schema(
-      description = "String containing a space-separated list of scope values that the client can use when requesting access tokens.")
-  @JsonDeserialize(converter = SpaceListToListStringConverter.class)
-  @JsonSerialize(converter = ListStringToSpaceListConverter.class)
-  List<String> scope;
 
 }

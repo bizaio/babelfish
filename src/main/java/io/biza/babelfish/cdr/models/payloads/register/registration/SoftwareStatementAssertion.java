@@ -13,6 +13,7 @@ import io.biza.babelfish.cdr.converters.EpochToOffsetDateTimeConverter;
 import io.biza.babelfish.cdr.converters.OffsetDateTimeToEpochConverter;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
+import io.biza.babelfish.cdr.enumerations.oidc.CDRScope;
 import io.biza.babelfish.cdr.enumerations.register.RegisterSoftwareRole;
 import io.biza.babelfish.oidc.converters.ListStringToSpaceListConverter;
 import io.biza.babelfish.oidc.converters.SpaceListToListStringConverter;
@@ -154,6 +155,6 @@ public class SoftwareStatementAssertion {
       description = "String containing a space-separated list of scope values that the client can use when requesting access tokens.")
   @JsonDeserialize(converter = SpaceListToListStringConverter.class)
   @JsonSerialize(converter = ListStringToSpaceListConverter.class)
-  List<String> scope;
+  List<CDRScope> scope;
 
 }
