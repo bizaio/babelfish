@@ -29,7 +29,6 @@ public class RequestTokenPrivateKeyJwt {
    * RFC6749 3.2.1
    */
   @JsonProperty("client_id")
-  @NotEmpty
   String clientId;
   
   // Optional for Assertion based setups

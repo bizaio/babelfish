@@ -46,7 +46,7 @@ public class JWKUtil {
       while ((object = pemParser.readObject()) != null) {
         if (object instanceof X509CertificateHolder) {
           try {
-            X509Certificate x509Cert = (X509Certificate) new JcaX509CertificateConverter()
+            X509Certificate x509Cert = new JcaX509CertificateConverter()
                 .getCertificate((X509CertificateHolder) object);
             x5uCertificates.add(x509Cert);
           } catch (CertificateException e) {

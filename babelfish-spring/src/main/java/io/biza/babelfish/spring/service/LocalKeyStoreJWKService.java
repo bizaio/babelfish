@@ -1,28 +1,20 @@
 package io.biza.babelfish.spring.service;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
-import java.security.KeyFactory;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.UnrecoverableKeyException;
-import java.security.cert.CertificateException;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.Security;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.EncryptionMethod;
 import com.nimbusds.jose.JOSEException;
@@ -31,24 +23,23 @@ import com.nimbusds.jose.JWEHeader;
 import com.nimbusds.jose.JWEObject;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;
+import com.nimbusds.jose.JWSSigner;
 import com.nimbusds.jose.JWSVerifier;
 import com.nimbusds.jose.Payload;
 import com.nimbusds.jose.crypto.RSAEncrypter;
+import com.nimbusds.jose.crypto.RSASSASigner;
 import com.nimbusds.jose.crypto.RSASSAVerifier;
+import com.nimbusds.jose.crypto.bc.BouncyCastleProviderSingleton;
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKMatcher;
-import com.nimbusds.jose.jwk.JWKMatcher.Builder;
 import com.nimbusds.jose.jwk.JWKSelector;
 import com.nimbusds.jose.jwk.JWKSet;
-import com.nimbusds.jose.jwk.KeyType;
 import com.nimbusds.jose.jwk.KeyUse;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.gen.RSAKeyGenerator;
 import com.nimbusds.jwt.SignedJWT;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionMethodType;
-import io.biza.babelfish.oidc.enumerations.JWKKeyOps;
-import io.biza.babelfish.oidc.enumerations.JWKPublicKeyUse;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
 import io.biza.babelfish.oidc.payloads.JWKS;
 import io.biza.babelfish.oidc.payloads.JWTClaims;
@@ -71,7 +62,7 @@ public class LocalKeyStoreJWKService implements JWKService {
   @Value("${babelfish.jwk-file:babelfish-jwks.json}")
   String KEYSET_PATH;
 
-  @Value("${babelfish.signing-key-size:2048")
+  @Value("${babelfish.signing-key-size:2048}")
   Integer SIGNING_KEY_SIZE;
 
   JWKSet jwkSet;
@@ -79,7 +70,30 @@ public class LocalKeyStoreJWKService implements JWKService {
 
   @Override
   public JWKS getJwks() throws NotInitialisedException {
-    return mapper.convertValue(jwkSet.toPublicJWKSet().toJSONObject().toJSONString(), JWKS.class);
+    try {
+      return mapper.readValue(jwkSet.toPublicJWKSet().toJSONObject().toJSONString(), JWKS.class);
+    } catch (JsonProcessingException e) {
+      LOG.error("Encountered JSON Processing exception processing from smart-json to jackson?", e);
+      throw NotInitialisedException.builder().build();
+    }
+  }
+
+  public static LocalKeyStoreJWKService clientService(String keySetPath, Integer signingKeySize) {
+    LocalKeyStoreJWKService local = new LocalKeyStoreJWKService(keySetPath, signingKeySize);
+    return local;
+  }
+
+  private LocalKeyStoreJWKService(String keyPath, Integer keySize) {
+    Security.addProvider(BouncyCastleProviderSingleton.getInstance());
+    this.KEYSET_PATH = Optional.of(keyPath).orElse("babelfish-jwks.json");
+    this.SIGNING_KEY_SIZE = Optional.of(keySize).orElse(2048);
+    this.mapper = new ObjectMapper();
+    try {
+      setupKeySet();
+    } catch (NotInitialisedException e) {
+      LOG.error(
+          "Something went wrong while setting up a manually established Key Store JWK Service", e);
+    }
   }
 
   public LocalKeyStoreJWKService() throws NotInitialisedException {
@@ -87,13 +101,10 @@ public class LocalKeyStoreJWKService implements JWKService {
      * Initialise jackson
      */
     this.mapper = new ObjectMapper();
-
-    /**
-     * Setup (and maybe initialise) keyset
-     */
-    setupKeySet();
+    Security.addProvider(BouncyCastleProviderSingleton.getInstance());
   }
 
+  @PostConstruct
   private void setupKeySet() throws NotInitialisedException {
     /**
      * If the keyset doesn't exist go create it
@@ -119,9 +130,9 @@ public class LocalKeyStoreJWKService implements JWKService {
       LOG.info("Initialising the signing and encryption keys for use during operations at: {}",
           KEYSET_PATH);
       RSAKey signingKey = new RSAKeyGenerator(SIGNING_KEY_SIZE).keyUse(KeyUse.SIGNATURE)
-          .keyID(UUID.randomUUID().toString()).generate();
+          .keyID(UUID.randomUUID().toString()).algorithm(JWSAlgorithm.PS256).generate();
       RSAKey encryptKey = new RSAKeyGenerator(SIGNING_KEY_SIZE).keyUse(KeyUse.ENCRYPTION)
-          .keyID(UUID.randomUUID().toString()).generate();
+          .keyID(UUID.randomUUID().toString()).algorithm(JWSAlgorithm.PS256).generate();
       JWKSet localJwk = new JWKSet(List.of(signingKey, encryptKey));
 
       /**
@@ -147,7 +158,7 @@ public class LocalKeyStoreJWKService implements JWKService {
 
     try {
       SignedJWT inputJwt = SignedJWT.parse(compactSerialisation);
-      JWK remoteJwk = remoteSigningKey(jwksUri,
+      JWK remoteJwk = remoteSigningKey(jwksUri, inputJwt.getHeader().getKeyID(),
           JWSSigningAlgorithmType.fromValue(inputJwt.getHeader().getAlgorithm().getName()));
       JWSVerifier verifier = new RSASSAVerifier(remoteJwk.toRSAKey());
 
@@ -181,9 +192,26 @@ public class LocalKeyStoreJWKService implements JWKService {
   private SignedJWT signToObject(JWTClaims claims, JWSSigningAlgorithmType algorithm)
       throws SigningOperationException {
     JWK senderJWK = localSigningKey(algorithm);
-    return new SignedJWT(
-        new JWSHeader.Builder(JWSAlgorithm.RS256).keyID(senderJWK.getKeyID()).build(),
-        NimbusUtil.toClaimsSet(claims));
+    JWSSigner signer;
+    try {
+      signer = new RSASSASigner(senderJWK.toRSAKey().toPrivateKey());
+
+    } catch (JOSEException e) {
+      LOG.warn("Encountered a JOSEException while attempting to setup RSA signer", e);
+      throw SigningOperationException.builder().message(e.getMessage()).build();
+    }
+
+    SignedJWT signedJwt =
+        new SignedJWT(new JWSHeader.Builder(JWSAlgorithm.parse(algorithm.toString()))
+            .keyID(senderJWK.getKeyID()).build(), NimbusUtil.toClaimsSet(claims));
+    try {
+      signedJwt.sign(signer);
+      return signedJwt;
+    } catch (JOSEException e) {
+      LOG.warn("Encountered a JOSEException while performing signature", e);
+      throw SigningOperationException.builder().message(e.getMessage()).build();
+    }
+
   }
 
   @Override
@@ -231,11 +259,14 @@ public class LocalKeyStoreJWKService implements JWKService {
     }
   }
 
-  private JWK remoteSigningKey(URI jwksUri, JWSSigningAlgorithmType algorithm)
+  private JWK remoteSigningKey(URI jwksUri, String keyId, JWSSigningAlgorithmType algorithm)
       throws KeyRetrievalException {
+    
+    JWKSet remoteJwks = getRemoteJwks(jwksUri);
+    
     List<JWK> matches = new JWKSelector(new JWKMatcher.Builder().keyUse(KeyUse.SIGNATURE)
-        .algorithm(JWSAlgorithm.parse(algorithm.toString())).build())
-            .select(getRemoteJwks(jwksUri));
+        .algorithm(JWSAlgorithm.parse(algorithm.toString())).keyID(keyId).build())
+            .select(remoteJwks);
     if (matches.size() > 0) {
       return matches.get(0).toPublicJWK();
     } else {
@@ -252,6 +283,17 @@ public class LocalKeyStoreJWKService implements JWKService {
     } else {
       throw SigningOperationException.builder()
           .message("Unable to match a key for signing with algorithm " + algorithm).build();
+    }
+  }
+
+  @Override
+  public String peekAtIssuer(String compactSerialisation) throws SigningVerificationException {
+    try {
+      SignedJWT inputJwt = SignedJWT.parse(compactSerialisation);
+      return inputJwt.getJWTClaimsSet().getIssuer();
+    } catch (ParseException e) {
+      LOG.error("Unable to peek at issuer inside supplied JWT: {}", e.getMessage(), e);
+      throw SigningVerificationException.builder().message(e.getMessage()).build();
     }
   }
 

@@ -1,10 +1,8 @@
 package io.biza.babelfish.spring.interfaces;
 
 import java.net.URI;
-import com.nimbusds.jose.JOSEException;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionMethodType;
-import io.biza.babelfish.oidc.enumerations.JWKKeyOps;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
 import io.biza.babelfish.oidc.payloads.JWKS;
 import io.biza.babelfish.oidc.payloads.JWTClaims;
@@ -65,5 +63,10 @@ public interface JWKService {
   public String encryptAndSign(JWTClaims claims, URI jwksUri, JWSSigningAlgorithmType signingAlgorithm, JWEEncryptionAlgorithmType encryptionAlgorithm,
       JWEEncryptionMethodType encryptionMethod) throws SigningOperationException, EncryptionOperationException, KeyRetrievalException;
 
-
+  
+  /**
+   * Given a compact serialisation, take a peek at the issuer so it can be used to lookup a client id
+   * @throws SigningVerificationException 
+   */
+  public String peekAtIssuer(String compactSerialisation) throws SigningVerificationException;
 }

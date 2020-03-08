@@ -18,8 +18,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.oidc.Constants;
 import io.biza.babelfish.oidc.converters.EpochToOffsetDateTimeConverter;
+import io.biza.babelfish.oidc.converters.ListStringToSpaceListConverter;
 import io.biza.babelfish.oidc.converters.OffsetDateTimeToEpochConverter;
-import io.biza.babelfish.oidc.payloads.JWKS.JWKSBuilder;
+import io.biza.babelfish.oidc.converters.SpaceListToListStringConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -73,7 +74,12 @@ public class JWTClaims {
 
   @JsonProperty("jti")
   String jwtId;
-
+  
+  @JsonProperty("scope")
+  @JsonSerialize(converter = ListStringToSpaceListConverter.class)
+  @JsonDeserialize(converter = SpaceListToListStringConverter.class)
+  List<String> scope;
+  
   /**
    * A catch all Map for all other additional claims
    */
@@ -121,6 +127,28 @@ public class JWTClaims {
       }
       return this;
     }
+    
+    public JWTClaimsBuilder audience(String audience) {
+      if (audience != null) {
+        this.audience = List.of(audience);
+      }
+      return this;
+    }
+    
+    public JWTClaimsBuilder audience(List<String> audience) {
+      if (audience != null) {
+        this.audience = audience;
+      }
+      return this;
+    }
+    
+    public JWTClaimsBuilder audience(URI audience) {
+      if (audience != null) {
+        this.audience = List.of(audience.toString());
+      }
+      return this;
+    }
+
   }
   
   /**
