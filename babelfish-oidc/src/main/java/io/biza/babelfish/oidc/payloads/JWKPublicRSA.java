@@ -37,6 +37,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.biza.babelfish.oidc.converters.Base64UrlEncodedToByteConverter;
+import io.biza.babelfish.oidc.converters.ByteToBase64UrlEncodedConverter;
 import io.biza.babelfish.oidc.converters.FutureSecondsToOffsetDateTimeConverter;
 import io.biza.babelfish.oidc.converters.ListBase64CertificateToListX509CertificateConverter;
 import io.biza.babelfish.oidc.converters.ListStringToSpaceListConverter;
@@ -48,7 +50,6 @@ import io.biza.babelfish.oidc.enumerations.JWKKeyOps;
 import io.biza.babelfish.oidc.enumerations.JWKKeyType;
 import io.biza.babelfish.oidc.enumerations.JWKPublicKeyUse;
 import io.biza.babelfish.oidc.enumerations.OAuth2TokenType;
-import io.biza.babelfish.oidc.support.JWKUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -60,124 +61,49 @@ import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 
 @Valid
-@Schema(description = "JSON Web Key")
+@Getter
+@Setter
+@ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Schema(description = "JSON Web Key for Public RSA Keys")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public interface JWK {
+public class JWKPublicRSA implements JWK {
 
   /**
    * Common Parameters https://tools.ietf.org/html/rfc7517#page-6
+   *
    */
-  
+  JWKKeyType kty;
+  JWKPublicKeyUse use;
+  List<JWKKeyOps> keyOps;
+  JWKAlgorithm alg;
+  String kid;
+  URI x5u;
+  List<X509Certificate> x5c;
+  List<String> x5t;
+  List<String> x5t256;
+
   /**
-   * Key Type
+   * Parameters for Public Keys https://tools.ietf.org/html/rfc7518#page-30
    */
-  @JsonProperty("kty")
+  @JsonProperty("n")
   @NotNull
-  JWKKeyType kty();
+  @JsonDeserialize(converter = Base64UrlEncodedToByteConverter.class)
+  @JsonSerialize(converter = ByteToBase64UrlEncodedConverter.class)
+  byte[] modulus;
+
+  @JsonProperty("e")
+  @NotNull
+  @JsonDeserialize(converter = Base64UrlEncodedToByteConverter.class)
+  @JsonSerialize(converter = ByteToBase64UrlEncodedConverter.class)
+  byte[] exponent;
 
   /**
-   * Public Key Use
+   * Utility variables
    */
-  @JsonProperty("use")
-  JWKPublicKeyUse use();
-
-  /**
-   * Key Operations
-   */
-  @JsonProperty("keyOps")
-  List<JWKKeyOps> keyOps();
-
-  /**
-   * Algorithm
-   */
-  @JsonProperty("alg")
-  JWKAlgorithm alg();
-
-  /**
-   * Key Identifier
-   */
-  @JsonProperty("kid")
-  String kid();
-
-  /**
-   * X.509 URL Parameter
-   */
-  @JsonProperty("x5u")
-  URI x5u();
-
-  /**
-   * X.509 Certificate Chain
-   */
-  @JsonProperty("x5c")
-  @JsonDeserialize(converter = ListBase64CertificateToListX509CertificateConverter.class)
-  @JsonSerialize(converter = ListX509CertificateToListBase64CertificateConverter.class)
-  List<X509Certificate> x5c();
-
-  /**
-   * X.509 Certificate Thumbprints
-   */
-  @JsonSetter("x5t")
-  List<String> x5t();
-
-  @JsonGetter("x5t")
-  default List<String> x5tGenerator() {
-    if (x5c() != null && x5c().size() > 0) {
-      return JWKUtil.makeDigests(x5c(), "SHA-1");
-    } else if (x5u() != null && enableCertRetrieval()) {
-      return JWKUtil.makeUriDigests(x5u(), "SHA-1");
-    } else {
-      return x5t();
-    }
-  }
-
-  /**
-   * X.509 Certificate SHA-256 Thumbprint
-   * 
-   * @return
-   */
-  @JsonSetter("x5t#S256")
-  List<String> x5t256();
-
   @JsonIgnore
-  Boolean enableCertRetrieval();
-
-
-  @JsonGetter("x5t#S256")
-  default List<String> x5t256Generator() {
-    if (x5c() != null && x5c().size() > 0) {
-      return JWKUtil.makeDigests(x5c(), "SHA-256");
-    } else if (x5u() != null && enableCertRetrieval()) {
-      return JWKUtil.makeUriDigests(x5u(), "SHA-256");
-    } else {
-      return x5t256();
-    }
-  }
-
-  @AssertFalse(message = "Only one of use or keyOps should be used, see RFC7517 4.3")
-  private Boolean isUseAndKeyOpsExclusive() {
-    return use() != null && (keyOps() != null && keyOps().size() > 0);
-  }
-
-  @AssertTrue(message = "Sign should only be paired with Verify, see RFC7517 4.3")
-  private Boolean isSigningOnly() {
-    return keyOps() != null
-        ? keyOps().stream().allMatch(op -> Set.of(JWKKeyOps.SIGN, JWKKeyOps.VERIFY).contains(op))
-        : true;
-  }
-
-  @AssertTrue(message = "Encrypt should only be paired with Decrypt, see RFC7517 4.3")
-  private Boolean isEncryptionOnly() {
-    return keyOps() != null
-        ? keyOps().stream().allMatch(op -> Set.of(JWKKeyOps.ENCRYPT, JWKKeyOps.DECRYPT).contains(op))
-        : true;
-  }
-
-  @AssertTrue(message = "Wrap should only be paired with Unwrap, see RFC7517 4.3")
-  private Boolean isWrappedOnly() {
-    return keyOps() != null
-        ? keyOps().stream()
-            .allMatch(op -> Set.of(JWKKeyOps.WRAP_KEY, JWKKeyOps.UNWRAP_KEY).contains(op))
-        : true;
-  }
-
+  @Builder.Default
+  Boolean enableCertRetrieval = false;
 }

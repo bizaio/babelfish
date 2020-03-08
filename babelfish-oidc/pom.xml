@@ -6,7 +6,7 @@
         <groupId>io.biza</groupId>
         <artifactId>babelfish</artifactId>
         <version>1.2.6-SNAPSHOT</version>
-    </parent>    
+    </parent>
     <artifactId>babelfish-oidc</artifactId>
     <name>Babelfish: OIDC</name>
     <description>The Babelfish OIDC is a library for handling OpenID Connect Payloads. It is currently being developed and maintained by Biza.io.</description>
@@ -176,6 +176,16 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4j-simple.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>${bcprov-jdk.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcpkix-jdk15on</artifactId>
+            <version>${bcprov-jdk.version}</version>
         </dependency>
     </dependencies>
     <distributionManagement>

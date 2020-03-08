@@ -39,7 +39,7 @@
     <issueManagement>
         <url>https://github.com/bizaio/babelfish/issues</url>
         <system>Github</system>
-</issueManagement>
+    </issueManagement>
     <properties>
         <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -71,76 +71,17 @@
         <opencsv.version>5.1</opencsv.version>
         <slf4j-simple.version>1.7.30</slf4j-simple.version>
         <javapoet.version>1.12.1</javapoet.version>
-        <java.version>11</java.version>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <validation-api.version>2.0.1.Final</validation-api.version>
-        <jackson.version>2.10.1</jackson.version>
-        <libphonenumber.version>8.11.1</libphonenumber.version>
-        <lombok.version>1.18.10</lombok.version>
-        <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
-        <junit-jupiter.version>5.6.0-M1</junit-jupiter.version>
-        <hibernate-validator.version>[6.1.0,)</hibernate-validator.version>
-        <javax.el-api.version>3.0.0</javax.el-api.version>
-        <javax.el.version>2.2.6</javax.el.version>
-        <maven-surefire-report-plugin.version>3.0.0-M4</maven-surefire-report-plugin.version>
-        <maven-site-plugin.version>3.8.2</maven-site-plugin.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
-        <apache-commons-lang.version>3.9</apache-commons-lang.version>
-        <commons-beanutils.version>1.9.4</commons-beanutils.version>
-        <commons-validator.version>1.6</commons-validator.version>
-        <swagger-core.version>2.1.1</swagger-core.version>
-        <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
-        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
-        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-        <orika.version>1.5.4</orika.version>
-        <classgraph.version>4.8.60</classgraph.version>
-        <opencsv.version>5.1</opencsv.version>
-	<slf4j-simple.version>1.7.30</slf4j-simple.version>	
-        <java.version>11</java.version>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <validation-api.version>2.0.1.Final</validation-api.version>
-        <lombok.version>1.18.10</lombok.version>
-        <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
-        <hibernate-validator.version>[6.1.0,)</hibernate-validator.version>
-        <javax.el-api.version>3.0.0</javax.el-api.version>
-        <maven-surefire-report-plugin.version>3.0.0-M4</maven-surefire-report-plugin.version>
-        <maven-site-plugin.version>3.8.2</maven-site-plugin.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
-        <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
-        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
-        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-        <slf4j-simple.version>1.7.30</slf4j-simple.version>
         <jose4j.version>0.7.0</jose4j.version>
         <okhttp.version>4.4.0</okhttp.version>
-	
+        <bcprov-jdk.version>1.64</bcprov-jdk.version>
     </properties>
     <modules>
-	    <module>babelfish-cdr</module>
-	    <module>babelfish-oidc</module>
-	    <module>babelfish-util</module>
+        <module>babelfish-cdr</module>
+        <module>babelfish-oidc</module>
+        <module>babelfish-util</module>
     </modules>
     <build>
         <defaultGoal>clean package install</defaultGoal>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-        <testResources>
-            <testResource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </testResource>
-        </testResources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

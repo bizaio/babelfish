@@ -8,10 +8,12 @@ import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.biza.babelfish.oidc.Constants;
 import io.biza.babelfish.oidc.converters.EpochToOffsetDateTimeConverter;
 import io.biza.babelfish.oidc.converters.OffsetDateTimeToEpochConverter;
 import io.biza.babelfish.oidc.payloads.JWKS.JWKSBuilder;
@@ -39,28 +41,32 @@ public class JWTClaims {
    * https://tools.ietf.org/html/rfc7519#page-9
    */
   @JsonProperty("iss")
-  String iss;
+  String issuer;
   
   @JsonProperty("sub")
-  String sub;
+  String subject;
   
   @JsonProperty("aud")
-  String aud;
+  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+  List<String> audience;
   
   @JsonProperty("exp")
   @JsonSerialize(converter = OffsetDateTimeToEpochConverter.class)
   @JsonDeserialize(converter = EpochToOffsetDateTimeConverter.class)
-  OffsetDateTime exp;
+  @Builder.Default
+  OffsetDateTime expiry = OffsetDateTime.now().plusMinutes(Constants.DEFAULT_MINUTES_EXPIRY);
 
   @JsonProperty("nbf")
   @JsonSerialize(converter = OffsetDateTimeToEpochConverter.class)
   @JsonDeserialize(converter = EpochToOffsetDateTimeConverter.class)
-  OffsetDateTime nbf;
+  @Builder.Default
+  OffsetDateTime notBefore = OffsetDateTime.now().minusMinutes(Constants.DEFAULT_MINUTES_NOT_BEFORE);
  
   @JsonProperty("iat")
   @JsonSerialize(converter = OffsetDateTimeToEpochConverter.class)
   @JsonDeserialize(converter = EpochToOffsetDateTimeConverter.class)
-  OffsetDateTime iat;
+  @Builder.Default
+  OffsetDateTime issuedAt = OffsetDateTime.now();
   
   @JsonProperty("jti")
   String jti;
@@ -79,12 +85,12 @@ public class JWTClaims {
    */
   @AssertTrue(message = "When defined exp must be in the future (1 min skew allowance), see RFC7519: https://tools.ietf.org/html/rfc7519#page-9")
   private Boolean isExpiryTimeFutureDated() {
-      return exp() != null ? exp().isAfter(OffsetDateTime.now().minusMinutes(1)) : true;
+      return expiry() != null ? expiry().isAfter(OffsetDateTime.now().minusMinutes(1)) : true;
   }
   
   @AssertTrue(message = "When defined nbf must be in the past (1 min skew allowance), see RFC7519: https://tools.ietf.org/html/rfc7519#page-9")
   private Boolean isNotBeforePastDated() {
-      return nbf() != null ? nbf().isBefore(OffsetDateTime.now().plusMinutes(1)) : true;
+      return notBefore() != null ? notBefore().isBefore(OffsetDateTime.now().plusMinutes(1)) : true;
   }
 
   

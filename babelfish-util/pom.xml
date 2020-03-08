@@ -154,11 +154,16 @@
             <groupId>org.bitbucket.b_c</groupId>
             <artifactId>jose4j</artifactId>
             <version>${jose4j.version}</version>
-        </dependency>        
+        </dependency>
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
             <version>${okhttp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.biza</groupId>
+            <artifactId>babelfish-oidc</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
     <distributionManagement>

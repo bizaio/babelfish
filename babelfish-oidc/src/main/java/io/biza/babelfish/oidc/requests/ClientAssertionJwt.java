@@ -18,28 +18,32 @@ import lombok.Data;
 @Valid
 public class ClientAssertionJwt extends JWTClaims {
 
-  @AssertTrue(message = "iss must be populated, see RFC7523 Section 3: https://tools.ietf.org/html/rfc7523#page-5")
-  private Boolean isRfc7523IssPopulated() {
-    return iss() != null && iss().length() > 0;
+  @AssertTrue(message = "issuer must be populated, see RFC7523 Section 3: https://tools.ietf.org/html/rfc7523#page-5")
+  private Boolean isRfc7523issuerPopulated() {
+    return issuer() != null && issuer().length() > 0;
   }
 
-  @AssertTrue(message = "aud must be populated, see RFC7523 Section 3: https://tools.ietf.org/html/rfc7523#page-5")
-  private Boolean isRfc7523AudPopulated() {
-    return aud() != null && aud().length() > 0;
+  @AssertTrue(message = "audience must be populated, see RFC7523 Section 3: https://tools.ietf.org/html/rfc7523#page-5")
+  private Boolean isRfc7523audiencePopulated() {
+    return audience() != null && audience().size() > 0;
   }
   
-  @AssertTrue(message = "sub must be populated, see RFC7523 Section 3: https://tools.ietf.org/html/rfc7523#page-5")
-  private Boolean isRfc7523SubPopulated() {
-    return sub() != null && sub().length() > 0;
+  @AssertTrue(message = "subject must be populated, see RFC7523 Section 3: https://tools.ietf.org/html/rfc7523#page-5")
+  private Boolean isRfc7523subjectPopulated() {
+    return subject() != null && subject().length() > 0;
   }
 
-  @AssertTrue(message = "exp must be populated, see RFC7523 Section 3: https://tools.ietf.org/html/rfc7523#page-5")
-  private Boolean isRfc7523ExpPopulated() {
-    return exp() != null;
+  @AssertTrue(message = "expiry must be populated, see RFC7523 Section 3: https://tools.ietf.org/html/rfc7523#page-5")
+  private Boolean isRfc7523expiryPopulated() {
+    return expiry() != null;
   }
   
-  @AssertTrue(message = "nbf must be populated, see RFC7523 Section 3: https://tools.ietf.org/html/rfc7523#page-5")
-  private Boolean isRfc7523NbfPopulated() {
-    return nbf() != null;
+  @AssertTrue(message = "notBefore must be populated, see RFC7523 Section 3: https://tools.ietf.org/html/rfc7523#page-5")
+  private Boolean isRfc7523notBeforePopulated() {
+    return notBefore() != null;
+  }
+  
+  public static ClientAssertionJwt from(JWTClaims claims) {
+    return (ClientAssertionJwt) claims;
   }
 }
