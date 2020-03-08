@@ -1,14 +1,17 @@
 package io.biza.babelfish.oidc.payloads;
 
+import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -37,19 +40,18 @@ import lombok.ToString;
 public class JWTClaims {
 
   /**
-   * Registered Claim Names RFC7519 4.1
-   * https://tools.ietf.org/html/rfc7519#page-9
+   * Registered Claim Names RFC7519 4.1 https://tools.ietf.org/html/rfc7519#page-9
    */
   @JsonProperty("iss")
   String issuer;
-  
+
   @JsonProperty("sub")
   String subject;
-  
+
   @JsonProperty("aud")
   @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
   List<String> audience;
-  
+
   @JsonProperty("exp")
   @JsonSerialize(converter = OffsetDateTimeToEpochConverter.class)
   @JsonDeserialize(converter = EpochToOffsetDateTimeConverter.class)
@@ -60,40 +62,94 @@ public class JWTClaims {
   @JsonSerialize(converter = OffsetDateTimeToEpochConverter.class)
   @JsonDeserialize(converter = EpochToOffsetDateTimeConverter.class)
   @Builder.Default
-  OffsetDateTime notBefore = OffsetDateTime.now().minusMinutes(Constants.DEFAULT_MINUTES_NOT_BEFORE);
- 
+  OffsetDateTime notBefore =
+      OffsetDateTime.now().minusMinutes(Constants.DEFAULT_MINUTES_NOT_BEFORE);
+
   @JsonProperty("iat")
   @JsonSerialize(converter = OffsetDateTimeToEpochConverter.class)
   @JsonDeserialize(converter = EpochToOffsetDateTimeConverter.class)
   @Builder.Default
   OffsetDateTime issuedAt = OffsetDateTime.now();
-  
+
   @JsonProperty("jti")
-  String jti;
-  
+  String jwtId;
+
   /**
    * A catch all Map for all other additional claims
    */
   @JsonAnySetter
-  @Getter(onMethod_={@JsonAnyGetter})
+  @Getter(onMethod_ = {@JsonAnyGetter})
   @Builder.Default
-  Map<String,Object> additionalClaims = new HashMap<String,Object>();
+  Map<String, Object> additionalClaims = new HashMap<String, Object>();
+
+  /**
+   * Convenience functions
+   */
+  public static class JWTClaimsBuilder {
+    public JWTClaimsBuilder issuerByUUID(UUID issuer) {
+      if (issuer != null) {
+        this.issuer = issuer.toString();
+      }
+      return this;
+    }
+
+    public JWTClaimsBuilder issuerByURI(URI issuer) {
+      if (issuer != null) {
+        this.issuer = issuer.toString();
+      }
+      return this;
+    }
+
+    public JWTClaimsBuilder subjectByUUID(UUID subject) {
+      if (subject != null) {
+        this.subject = subject.toString();
+      }
+      return this;
+    }
+    
+    public JWTClaimsBuilder jwtIdByUUID(UUID jwtId) {
+      if (jwtId != null) {
+        this.jwtId = jwtId.toString();
+      }
+      return this;
+    }
+
+
+    public JWTClaimsBuilder subjectByURI(URI subject) {
+      if (subject != null) {
+        this.subject = subject.toString();
+      }
+      return this;
+    }
+  }
   
-  
+  /**
+   * Convenience methods
+   */
+  @JsonIgnore
+  public JWTClaims issuerByURI(URI issuer) {
+    if (issuer != null) {
+      issuer(issuer.toString());
+    }
+    return this;
+  }
+
+
   /**
    * Verification Assertions
    */
-  @AssertTrue(message = "When defined exp must be in the future (1 min skew allowance), see RFC7519: https://tools.ietf.org/html/rfc7519#page-9")
+  @AssertTrue(
+      message = "When defined exp must be in the future (1 min skew allowance), see RFC7519: https://tools.ietf.org/html/rfc7519#page-9")
   private Boolean isExpiryTimeFutureDated() {
-      return expiry() != null ? expiry().isAfter(OffsetDateTime.now().minusMinutes(1)) : true;
-  }
-  
-  @AssertTrue(message = "When defined nbf must be in the past (1 min skew allowance), see RFC7519: https://tools.ietf.org/html/rfc7519#page-9")
-  private Boolean isNotBeforePastDated() {
-      return notBefore() != null ? notBefore().isBefore(OffsetDateTime.now().plusMinutes(1)) : true;
+    return expiry() != null ? expiry().isAfter(OffsetDateTime.now().minusMinutes(1)) : true;
   }
 
-  
-  
-  
+  @AssertTrue(
+      message = "When defined nbf must be in the past (1 min skew allowance), see RFC7519: https://tools.ietf.org/html/rfc7519#page-9")
+  private Boolean isNotBeforePastDated() {
+    return notBefore() != null ? notBefore().isBefore(OffsetDateTime.now().plusMinutes(1)) : true;
+  }
+
+
+
 }

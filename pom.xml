@@ -74,11 +74,14 @@
         <jose4j.version>0.7.0</jose4j.version>
         <okhttp.version>4.4.0</okhttp.version>
         <bcprov-jdk.version>1.64</bcprov-jdk.version>
+        <spring-boot.version>2.2.3.RELEASE</spring-boot.version>
+        <nimbus-jose-jwt.version>8.9</nimbus-jose-jwt.version>
     </properties>
     <modules>
         <module>babelfish-cdr</module>
         <module>babelfish-oidc</module>
         <module>babelfish-util</module>
+        <module>babelfish-spring</module>
     </modules>
     <build>
         <defaultGoal>clean package install</defaultGoal>
