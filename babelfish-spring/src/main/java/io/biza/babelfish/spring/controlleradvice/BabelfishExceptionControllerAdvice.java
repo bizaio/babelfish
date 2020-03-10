@@ -13,6 +13,7 @@ package io.biza.babelfish.spring.controlleradvice;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -40,6 +41,14 @@ public class BabelfishExceptionControllerAdvice {
         .body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.INVALID_CLIENT)
             .errorDescription(Constants.OAUTH2_INVALID_CLIENT_MESSAGE)
             .errorUri(Constants.OAUTH2_ERROR_RESPONSE_URI).build());
+  }
+  
+  @ExceptionHandler(HttpMessageNotReadableException.class)
+  public ResponseEntity<Object> handleNotReadableException(HttpServletRequest req,
+      HttpMessageNotReadableException ex) {
+
+    LOG.error("Encountered not readable exception", ex);
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
   }
 
   @ExceptionHandler(NullPointerException.class)

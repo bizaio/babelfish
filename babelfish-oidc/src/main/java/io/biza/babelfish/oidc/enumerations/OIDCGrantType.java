@@ -23,6 +23,7 @@ public enum OIDCGrantType {
   AUTHORISATION_CODE("authorization_code"),
   IMPLICIT("implicit"),
   CLIENT_CREDENTIALS("client_credentials"),
+  JWT_BEARER("urn:ietf:params:oauth:grant-type:jwt-bearer"),
   REFRESH_TOKEN("refresh_token");
   // @formatter:on
   

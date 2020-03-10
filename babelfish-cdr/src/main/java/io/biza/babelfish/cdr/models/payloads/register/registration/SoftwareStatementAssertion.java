@@ -88,55 +88,41 @@ public class SoftwareStatementAssertion {
   @JsonProperty("client_uri")
   @NotNull
   @Schema(description = "URL string of a web page providing information about the client")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
   URI clientUri;
 
   @JsonProperty("redirect_uris")
   @NotNull
   @Schema(description = "Array of redirection URI strings for use in redirect-based flows")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
   List<URI> redirectUris;
   
   @JsonProperty("logo_uri")
   @NotNull
   @Schema(
       description = "URL string that references a logo for the client. If present, the server SHOULD display this image to the end-user during approval")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
   URI logoUri;
 
   @JsonProperty("tos_uri")
   @NotNull
   @Schema(
       description = "URL string that points to a human-readable terms of service document for the Software Product")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
   URI tosUri;
 
   @JsonProperty("policy_uri")
   @NotNull
   @Schema(
       description = "URL string that points to a human-readable policy document for the Software Product")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
   URI policyUri;
 
   @JsonProperty("jwks_uri")
   @NotNull
   @Schema(
       description = "URL string referencing the client JSON Web Key (JWK) Set [RFC7517] document, which contains the client public keys")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
   URI jwksUri;
 
   @JsonProperty("revocation_uri")
   @NotNull
   @Schema(
       description = "URI string that references the location of the Software Product consent revocation endpoint")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
   URI revocationUri;
   
   
@@ -145,7 +131,7 @@ public class SoftwareStatementAssertion {
       description = "String representing a unique identifier assigned by the ACCC Register and used by registration endpoints to identify the software product to be dynamically registered.")
   String softwareId;
   
-  @JsonProperty("software_role")
+  @JsonProperty("software_roles")
   @NotNull
   RegisterSoftwareRole softwareRole;
 
@@ -155,6 +141,6 @@ public class SoftwareStatementAssertion {
       description = "String containing a space-separated list of scope values that the client can use when requesting access tokens.")
   @JsonDeserialize(converter = SpaceListToListStringConverter.class)
   @JsonSerialize(converter = ListStringToSpaceListConverter.class)
-  List<CDRScope> scope;
+  List<String> scope;
 
 }

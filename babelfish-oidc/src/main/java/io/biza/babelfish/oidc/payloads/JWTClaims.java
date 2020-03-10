@@ -13,14 +13,15 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.oidc.Constants;
-import io.biza.babelfish.oidc.converters.EpochToOffsetDateTimeConverter;
 import io.biza.babelfish.oidc.converters.ListStringToSpaceListConverter;
-import io.biza.babelfish.oidc.converters.OffsetDateTimeToEpochConverter;
 import io.biza.babelfish.oidc.converters.SpaceListToListStringConverter;
+import io.biza.babelfish.oidc.converters.EpochToOffsetDateTimeConverter;
+import io.biza.babelfish.oidc.converters.OffsetDateTimeToEpochConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,6 +39,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Schema(description = "JSON Web Token Claims")
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class JWTClaims {
 
   /**
@@ -50,7 +52,7 @@ public class JWTClaims {
   String subject;
 
   @JsonProperty("aud")
-  @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+  @JsonFormat(with = { JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY, JsonFormat.Feature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED })
   List<String> audience;
 
   @JsonProperty("exp")

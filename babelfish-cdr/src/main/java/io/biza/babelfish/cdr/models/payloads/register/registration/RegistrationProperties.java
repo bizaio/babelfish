@@ -22,6 +22,7 @@ import io.biza.babelfish.oidc.enumerations.OAuth2ResponseType;
 import io.biza.babelfish.oidc.enumerations.OIDCApplicationType;
 import io.biza.babelfish.oidc.enumerations.OIDCAuthMethod;
 import io.biza.babelfish.oidc.enumerations.OIDCGrantType;
+import io.biza.babelfish.oidc.enumerations.OIDCResponseType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -87,48 +88,36 @@ public class RegistrationProperties {
   @JsonProperty("redirect_uris")
   @NotNull
   @Schema(description = "Array of redirection URI strings for use in redirect-based flows")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
   List<URI> redirectUris;
 
   @JsonProperty("logo_uri")
   @NotNull
   @Schema(
       description = "URL string that references a logo for the client. If present, the server SHOULD display this image to the end-user during approval")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
   URI logoUri;
 
   @JsonProperty("tos_uri")
   @NotNull
   @Schema(
       description = "URL string that points to a human-readable terms of service document for the Software Product")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
   URI tosUri;
 
   @JsonProperty("policy_uri")
   @NotNull
   @Schema(
       description = "URL string that points to a human-readable policy document for the Software Product")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
   URI policyUri;
 
   @JsonProperty("jwks_uri")
   @NotNull
   @Schema(
       description = "URL string referencing the client JSON Web Key (JWK) Set [RFC7517] document, which contains the client public keys")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
   URI jwksUri;
 
   @JsonProperty("revocation_uri")
   @NotNull
   @Schema(
       description = "URI string that references the location of the Software Product consent revocation endpoint")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
   URI revocationUri;
 
   @JsonProperty("token_endpoint_auth_method")
@@ -145,13 +134,13 @@ public class RegistrationProperties {
   @NotNull
   @Schema(
       description = "Array of OAuth 2.0 grant type strings that the client can use at the token endpoint")
-  List<List<OIDCGrantType>> grantTypes;
+  List<OIDCGrantType> grantTypes;
 
   @JsonProperty("response_types")
   @NotNull
   @Schema(
       description = "Array of the OAuth 2.0 response type strings that the client can use at the authorization endpoint.")
-  List<OAuth2ResponseType> responseTypes;
+  List<OIDCResponseType> responseTypes;
 
   @JsonProperty("application_type")
   @NotNull

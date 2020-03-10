@@ -15,12 +15,12 @@ import java.util.List;
 import com.fasterxml.jackson.databind.util.StdConverter;
 
 /**
- * A Jackson implementation to convert a List of Strings to a space separated string set
+ * A Jackson implementation to convert a separated list of strings to a List<String>
  */
 public class ListStringToSpaceListConverter extends StdConverter<List<String>, String> {
   @Override
   public String convert(List<String> value) {
-    if (value == null || value.size() < 1) return "";
+    if(value == null || value.size() < 1) return "";
     return String.join(" ", value);
   }
 }

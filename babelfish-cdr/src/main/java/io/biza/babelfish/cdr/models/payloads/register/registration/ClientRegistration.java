@@ -13,9 +13,7 @@ import io.biza.babelfish.cdr.converters.EpochToOffsetDateTimeConverter;
 import io.biza.babelfish.cdr.converters.OffsetDateTimeToEpochConverter;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
-import io.biza.babelfish.oidc.converters.ListSpaceListToNestedListConverter;
 import io.biza.babelfish.oidc.converters.ListStringToSpaceListConverter;
-import io.biza.babelfish.oidc.converters.NestedListToListSpaceListConverter;
 import io.biza.babelfish.oidc.converters.SpaceListToListStringConverter;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionMethodType;
@@ -24,6 +22,7 @@ import io.biza.babelfish.oidc.enumerations.OAuth2ResponseType;
 import io.biza.babelfish.oidc.enumerations.OIDCApplicationType;
 import io.biza.babelfish.oidc.enumerations.OIDCAuthMethod;
 import io.biza.babelfish.oidc.enumerations.OIDCGrantType;
+import io.biza.babelfish.oidc.enumerations.OIDCResponseType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -184,9 +183,7 @@ public class ClientRegistration {
   @NotNull
   @Schema(
       description = "Array of the OAuth 2.0 response type strings that the client can use at the authorization endpoint.")
-  @JsonSerialize(converter = NestedListToListSpaceListConverter.class)
-  @JsonDeserialize(converter = ListSpaceListToNestedListConverter.class)
-  List<List<OAuth2ResponseType>> responseTypes;
+  List<OIDCResponseType> responseTypes;
 
   @JsonProperty("application_type")
   @NotNull

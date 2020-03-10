@@ -6,6 +6,8 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -13,10 +15,7 @@ import io.biza.babelfish.cdr.converters.EpochToOffsetDateTimeConverter;
 import io.biza.babelfish.cdr.converters.OffsetDateTimeToEpochConverter;
 import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
 import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
-import io.biza.babelfish.oidc.converters.ListSpaceListToNestedListConverter;
-import io.biza.babelfish.oidc.converters.ListStringToSpaceListConverter;
-import io.biza.babelfish.oidc.converters.NestedListToListSpaceListConverter;
-import io.biza.babelfish.oidc.converters.SpaceListToListStringConverter;
+import io.biza.babelfish.oidc.enumerations.OIDCResponseType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionMethodType;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
@@ -40,6 +39,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "A request for Recipient Registration with a Holder")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RegistrationRequest {
   /**
    * As defined in ACCC Register Documentation: https://cdr-register.github.io/register/#registration-request-using-jwt
@@ -74,13 +74,13 @@ public class RegistrationRequest {
   @NotEmpty
   @Schema(
       description = "The audience for the request. This should be the Data Holder authorisation server URI")
-  String aud;
+  @JsonFormat(with = { JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY, JsonFormat.Feature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED })
+  List<String> audience;
 
   @JsonProperty("redirect_uris")
   @NotNull
-  @Schema(description = "Array of redirection URI strings for use in redirect-based flows")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
+  @NotEmpty
+  @Schema(description = "Array of redirection URI strings for use in redirect-based flows, otherwise derived from SSA")
   List<URI> redirectUris;
 
   @JsonProperty("token_endpoint_auth_signing_alg")
@@ -103,9 +103,7 @@ public class RegistrationRequest {
   @NotNull
   @Schema(
       description = "Array of the OAuth 2.0 response type strings that the client can use at the authorization endpoint.")
-  @JsonSerialize(converter = NestedListToListSpaceListConverter.class)
-  @JsonDeserialize(converter = ListSpaceListToNestedListConverter.class)
-  List<List<OAuth2ResponseType>> responseTypes;
+  List<OIDCResponseType> responseTypes;
 
   @JsonProperty("application_type")
   @NotNull

@@ -49,7 +49,7 @@ import io.biza.babelfish.spring.exceptions.NotInitialisedException;
 import io.biza.babelfish.spring.exceptions.SigningOperationException;
 import io.biza.babelfish.spring.exceptions.SigningVerificationException;
 import io.biza.babelfish.spring.interfaces.JWKService;
-import io.biza.babelfish.spring.interfaces.NimbusUtil;
+import io.biza.babelfish.spring.util.NimbusUtil;
 import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONStyle;
 
@@ -64,7 +64,7 @@ public class LocalKeyStoreJWKService implements JWKService {
 
   @Value("${babelfish.signing-key-size:2048}")
   Integer SIGNING_KEY_SIZE;
-
+  
   JWKSet jwkSet;
   ObjectMapper mapper;
 
@@ -153,7 +153,7 @@ public class LocalKeyStoreJWKService implements JWKService {
   }
 
   @Override
-  public JWTClaims verify(String compactSerialisation, URI jwksUri, JWTClaims claims)
+  public JWTClaims verify(String compactSerialisation, URI jwksUri, JWTClaims claimChecks)
       throws SigningVerificationException, KeyRetrievalException {
 
     try {
@@ -163,7 +163,15 @@ public class LocalKeyStoreJWKService implements JWKService {
       JWSVerifier verifier = new RSASSAVerifier(remoteJwk.toRSAKey());
 
       if (inputJwt.verify(verifier)) {
-        return NimbusUtil.fromClaimsSet(inputJwt.getJWTClaimsSet());
+        JWTClaims inputClaims = NimbusUtil.fromClaimsSet(inputJwt.getJWTClaimsSet());
+        
+        if(claimChecks != null) {
+          checkEquals("issuer", claimChecks.issuer(), inputClaims.issuer());
+          checkEquals("subject", claimChecks.subject(), inputClaims.subject());
+          checkEquals("audience", claimChecks.audience(), inputClaims.audience());
+        }
+        
+        return inputClaims;
       } else {
         LOG.warn("Received signing verification error for kid of {} from {}", remoteJwk.getKeyID(),
             jwksUri);
@@ -180,6 +188,16 @@ public class LocalKeyStoreJWKService implements JWKService {
       LOG.warn("Encountered a JOSEException while attempting to verify payload {} using jwks {}",
           compactSerialisation, jwksUri, e);
       throw SigningVerificationException.builder().message(e.getMessage()).build();
+    }
+  }
+
+  private <T> void checkEquals(String name, T classOne, T classTwo)
+      throws SigningVerificationException {
+    if(classOne == null) return;
+    if (!classOne.equals(classTwo)) {
+      throw SigningVerificationException.builder().message(
+          "Verification of " + name + " required claim failed: " + classOne + " versus " + classTwo)
+          .build();
     }
   }
 
@@ -261,9 +279,9 @@ public class LocalKeyStoreJWKService implements JWKService {
 
   private JWK remoteSigningKey(URI jwksUri, String keyId, JWSSigningAlgorithmType algorithm)
       throws KeyRetrievalException {
-    
+
     JWKSet remoteJwks = getRemoteJwks(jwksUri);
-    
+
     List<JWK> matches = new JWKSelector(new JWKMatcher.Builder().keyUse(KeyUse.SIGNATURE)
         .algorithm(JWSAlgorithm.parse(algorithm.toString())).keyID(keyId).build())
             .select(remoteJwks);
@@ -271,7 +289,7 @@ public class LocalKeyStoreJWKService implements JWKService {
       return matches.get(0).toPublicJWK();
     } else {
       throw KeyRetrievalException.builder()
-          .message("Unable to match a key for signing with algorithm " + algorithm).build();
+          .message("Unable to match a key for signing with algorithm " + algorithm + " from " + jwksUri).build();
     }
   }
 
@@ -296,5 +314,18 @@ public class LocalKeyStoreJWKService implements JWKService {
       throw SigningVerificationException.builder().message(e.getMessage()).build();
     }
   }
+
+  @Override
+  public String peekAtSoftwareStatement(String compactSerialisation)
+      throws SigningVerificationException {
+    try {
+      SignedJWT inputJwt = SignedJWT.parse(compactSerialisation);
+      return inputJwt.getJWTClaimsSet().getStringClaim("software_statement");
+    } catch (ParseException e) {
+      LOG.error("Unable to peek at software statement inside supplied JWT: {}", e.getMessage(), e);
+      throw SigningVerificationException.builder().message(e.getMessage()).build();
+    }
+  }
+
 
 }

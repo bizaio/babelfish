@@ -36,7 +36,7 @@ public enum OAuth2ResponseType {
   public String toString() {
     return text;
   }
-
+  
   @JsonCreator
   public static OAuth2ResponseType fromValue(String value) {
     for (OAuth2ResponseType b : OAuth2ResponseType.values()) {

@@ -16,6 +16,7 @@ import io.biza.babelfish.oidc.enumerations.OAuth2ResponseType;
 import io.biza.babelfish.oidc.enumerations.OIDCDisplayType;
 import io.biza.babelfish.oidc.enumerations.OIDCPromptType;
 import io.biza.babelfish.oidc.enumerations.OIDCResponseMode;
+import io.biza.babelfish.oidc.enumerations.OIDCResponseType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

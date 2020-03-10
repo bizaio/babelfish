@@ -10,8 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.babelfish.oidc.converters.NestedListToListSpaceListConverter;
-import io.biza.babelfish.oidc.converters.ListSpaceListToNestedListConverter;
+import io.biza.babelfish.oidc.enumerations.OIDCResponseType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionMethodType;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
@@ -85,9 +84,7 @@ public class ProviderDiscoveryMetadata {
 
   @JsonProperty("response_types_supported")
   @Schema(description = "OAuth2 Response Types supported")
-  @JsonSerialize(converter = NestedListToListSpaceListConverter.class)
-  @JsonDeserialize(converter = ListSpaceListToNestedListConverter.class)
-  List<List<OAuth2ResponseType>> responseTypesSupported;
+  List<OIDCResponseType> responseTypesSupported;
 
   @JsonProperty("response_modes_supported")
   @Schema(description = "OAuth2 Response Modes supported")

@@ -69,4 +69,11 @@ public interface JWKService {
    * @throws SigningVerificationException 
    */
   public String peekAtIssuer(String compactSerialisation) throws SigningVerificationException;
+  
+  /**
+   * Given a compact serialisation, take a peek at the software_statement claim
+   * @throws SigningVerificationException
+   */
+  public String peekAtSoftwareStatement(String compactSerialisation) throws SigningVerificationException;
+  
 }
