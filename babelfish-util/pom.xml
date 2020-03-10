@@ -2,12 +2,19 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.biza</groupId>
-    <artifactId>babelfish</artifactId>
-    <version>1.2.6-SNAPSHOT</version>
-    <name>Babelfish: Parent Project</name>
-    <description>The Babelfish metapackage is a set of libraries and utilities for handling payloads associated with the Australian Consumer Data Right. It is currently being developed and maintained by Biza.io.</description>
-    <packaging>pom</packaging>
+    <parent>
+        <groupId>io.biza</groupId>
+        <artifactId>babelfish</artifactId>
+        <version>1.2.6-SNAPSHOT</version>
+    </parent>
+    <artifactId>babelfish-util</artifactId>
+    <name>Babelfish: Utility</name>
+    <description>The Babelfish Utility library supplied a number of support functions around the babelfish-cdr and babelfish libraries. It is primarily intended to ensure that these libraries remain lightweight and free of complex code (like encryption and signing). It is currently being developed and maintained by Biza.io.</description>
+    <url>https://github.com/bizaio/babelfish</url>
+    <organization>
+        <name>Biza Pty Ltd</name>
+        <url>https://biza.io/</url>
+    </organization>
     <developers>
         <developer>
             <id>perlboy</id>
@@ -19,7 +26,7 @@
                 <role>founder</role>
                 <role>developer</role>
             </roles>
-            <timezone>+11</timezone>
+            <timezone>+10</timezone>
             <properties>
                 <picUrl>https://avatars.githubusercontent.com/perlboy</picUrl>
             </properties>
@@ -40,51 +47,21 @@
         <url>https://github.com/bizaio/babelfish/issues</url>
         <system>Github</system>
     </issueManagement>
-    <properties>
-        <java.version>11</java.version>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <validation-api.version>2.0.1.Final</validation-api.version>
-        <jackson.version>2.10.1</jackson.version>
-        <libphonenumber.version>8.11.1</libphonenumber.version>
-        <lombok.version>1.18.10</lombok.version>
-        <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
-        <junit-jupiter.version>5.6.0-M1</junit-jupiter.version>
-        <hibernate-validator.version>[6.1.0,)</hibernate-validator.version>
-        <javax.el-api.version>3.0.0</javax.el-api.version>
-        <javax.el.version>2.2.6</javax.el.version>
-        <maven-surefire-report-plugin.version>3.0.0-M4</maven-surefire-report-plugin.version>
-        <maven-site-plugin.version>3.8.2</maven-site-plugin.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
-        <apache-commons-lang.version>3.9</apache-commons-lang.version>
-        <commons-beanutils.version>1.9.4</commons-beanutils.version>
-        <commons-validator.version>1.6</commons-validator.version>
-        <swagger-core.version>2.1.1</swagger-core.version>
-        <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
-        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
-        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-        <orika.version>1.5.4</orika.version>
-        <classgraph.version>4.8.60</classgraph.version>
-        <opencsv.version>5.1</opencsv.version>
-        <slf4j-simple.version>1.7.30</slf4j-simple.version>
-        <javapoet.version>1.12.1</javapoet.version>
-        <jose4j.version>0.7.0</jose4j.version>
-        <okhttp.version>4.4.0</okhttp.version>
-        <bcprov-jdk.version>1.64</bcprov-jdk.version>
-        <spring-boot.version>2.2.3.RELEASE</spring-boot.version>
-        <nimbus-jose-jwt.version>8.9</nimbus-jose-jwt.version>
-    </properties>
-    <modules>
-        <module>babelfish-cdr</module>
-        <module>babelfish-oidc</module>
-        <module>babelfish-util</module>
-        <module>babelfish-spring</module>
-    </modules>
+
     <build>
         <defaultGoal>clean package install</defaultGoal>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -127,6 +104,7 @@
             </plugin>
         </plugins>
     </build>
+
     <reporting>
         <plugins>
             <plugin>
@@ -144,24 +122,51 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${validation-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>${javax.el-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j-simple.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${okhttp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.biza</groupId>
+            <artifactId>babelfish-oidc</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
-    <repositories>
-        <repository>
-            <id>oss.sonatype.org-snapshot</id>
-            <url>http://oss.sonatype.org/content/repositories/snapshots</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
     <profiles>
         <profile>
             <id>release</id>
