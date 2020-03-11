@@ -327,5 +327,28 @@ public class LocalKeyStoreJWKService implements JWKService {
     }
   }
 
+  @Override
+  public String peekAtClientId(String compactSerialisation)
+      throws SigningVerificationException {
+    try {
+      SignedJWT inputJwt = SignedJWT.parse(compactSerialisation);
+      return inputJwt.getJWTClaimsSet().getStringClaim("client_id");
+    } catch (ParseException e) {
+      LOG.error("Unable to peek at client id inside supplied JWT: {}", e.getMessage(), e);
+      throw SigningVerificationException.builder().message(e.getMessage()).build();
+    }
+  }
+
+
+  @Override
+  public Boolean checkFormat(String compactSerialisation) {
+    try {
+      SignedJWT.parse(compactSerialisation);
+    } catch (ParseException e) {
+      return false;
+    }
+    return true;
+  }
+
 
 }

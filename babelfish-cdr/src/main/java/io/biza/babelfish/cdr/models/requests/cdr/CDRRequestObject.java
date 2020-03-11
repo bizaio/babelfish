@@ -1,4 +1,4 @@
-package io.biza.babelfish.oidc.requests;
+package io.biza.babelfish.cdr.models.requests.cdr;
 
 import java.net.URI;
 import java.util.List;
@@ -6,6 +6,10 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.biza.babelfish.oidc.converters.ListStringToSpaceListConverter;
+import io.biza.babelfish.oidc.converters.SpaceListToListStringConverter;
 import io.biza.babelfish.oidc.enumerations.OAuth2ResponseType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,11 +26,15 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RequestAuthorisationCodeIdToken {
+public class CDRRequestObject {
   
   /**
-   * OpenID Connect Core 1.0 3.3.2.1
+   * CDR Specified Request Object
+   * https://consumerdatastandardsaustralia.github.io/standards/#request-object
    */
+  @JsonProperty("aud")
+  URI aud;
+  
   @JsonProperty("response_type")
   @Builder.Default
   String responseType = "id_token token";
@@ -40,15 +48,17 @@ public class RequestAuthorisationCodeIdToken {
   URI redirectUri;
   
   @JsonProperty("scope")
+  @JsonSerialize(converter = ListStringToSpaceListConverter.class)
+  @JsonDeserialize(converter = SpaceListToListStringConverter.class)
   List<String> scopes;
-
-  @JsonProperty("nonce")
-  String nonce;
   
   @JsonProperty("state")
   String state;
   
-  @JsonProperty("request")
-  String request;
+  @JsonProperty("nonce")
+  String nonce;
+  
+  @JsonProperty("claims")
+  CDRRequestClaims claims;
   
 }

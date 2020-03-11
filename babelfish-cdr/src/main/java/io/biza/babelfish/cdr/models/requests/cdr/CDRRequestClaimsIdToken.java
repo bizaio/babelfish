@@ -1,4 +1,4 @@
-package io.biza.babelfish.oidc.requests;
+package io.biza.babelfish.cdr.models.requests.cdr;
 
 import java.net.URI;
 import java.util.List;
@@ -22,33 +22,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RequestAuthorisationCodeIdToken {
+public class CDRRequestClaimsIdToken {
   
   /**
-   * OpenID Connect Core 1.0 3.3.2.1
+   * CDR Specified Request Object
+   * https://consumerdatastandardsaustralia.github.io/standards/#request-object
    */
-  @JsonProperty("response_type")
-  @Builder.Default
-  String responseType = "id_token token";
-  
-  @JsonProperty("client_id")
-  @NotNull
-  String clientId;
-  
-  @JsonProperty("redirect_uri")
-  @NotNull
-  URI redirectUri;
-  
-  @JsonProperty("scope")
-  List<String> scopes;
-
-  @JsonProperty("nonce")
-  String nonce;
-  
-  @JsonProperty("state")
-  String state;
-  
-  @JsonProperty("request")
-  String request;
+  @JsonProperty("acr")
+  CDRRequestClaimsIdTokenAcr acr;
   
 }
