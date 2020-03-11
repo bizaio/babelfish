@@ -29,6 +29,12 @@ import lombok.ToString;
 public class CDRRequestObject {
   
   /**
+   * Claims from OpenID not mentioned in CDR Request Object
+   */
+  @JsonProperty("iss")
+  String iss;
+  
+  /**
    * CDR Specified Request Object
    * https://consumerdatastandardsaustralia.github.io/standards/#request-object
    */
