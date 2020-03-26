@@ -8,6 +8,8 @@ The Babelfish CDR Library is a Java based Maven artifact for the efficient proce
 
 Babelfish CDR is currently developed and maintained by [Biza.io](https://www.biza.io).
 
+We welcome discussion around the Consumer Data Right at the [DataRight.io Slack Channel](https://join.slack.com/t/datarightio/shared_invite/enQtNzAyNTI2MjA2MzU1LTU1NGE4MmQ2N2JiZWI2ODA5MTQ2N2Q0NTRmYmM0OWRlM2U5YzA3NzU5NDYyODlhNjRmNzU3ZDZmNTI0MDE3NjY).
+
 ## Features
 
   - Jackson mappings for **all payloads** defined within the [Consumer Data Standards](https://consumerdatastandardsaustralia.github.io/standards)
