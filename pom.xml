@@ -51,7 +51,7 @@
         <lombok.version>1.18.10</lombok.version>
         <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
         <junit-jupiter.version>5.6.0-M1</junit-jupiter.version>
-        <hibernate-validator.version>[6.1.0,)</hibernate-validator.version>
+        <hibernate-validator.version>6.1.2.Final</hibernate-validator.version>
         <javax.el-api.version>3.0.0</javax.el-api.version>
         <javax.el.version>2.2.6</javax.el.version>
         <maven-surefire-report-plugin.version>3.0.0-M4</maven-surefire-report-plugin.version>
