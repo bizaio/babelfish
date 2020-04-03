@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.EncryptionMethod;
 import com.nimbusds.jose.JOSEException;
@@ -57,7 +56,7 @@ import net.minidev.json.JSONStyle;
 @Service
 @ConditionalOnProperty(name = "babelfish.service.JWKService",
     havingValue = "LocalKeyStoreJWKService", matchIfMissing = true)
-public class LocalKeyStoreJWKService implements JWKService {
+public class LocalJWKService implements JWKService {
 
   @Value("${babelfish.jwk-file:babelfish-jwks.json}")
   String KEYSET_PATH;
@@ -78,12 +77,12 @@ public class LocalKeyStoreJWKService implements JWKService {
     }
   }
 
-  public static LocalKeyStoreJWKService clientService(String keySetPath, Integer signingKeySize) {
-    LocalKeyStoreJWKService local = new LocalKeyStoreJWKService(keySetPath, signingKeySize);
+  public static LocalJWKService clientService(String keySetPath, Integer signingKeySize) {
+    LocalJWKService local = new LocalJWKService(keySetPath, signingKeySize);
     return local;
   }
 
-  private LocalKeyStoreJWKService(String keyPath, Integer keySize) {
+  private LocalJWKService(String keyPath, Integer keySize) {
     Security.addProvider(BouncyCastleProviderSingleton.getInstance());
     this.KEYSET_PATH = Optional.of(keyPath).orElse("babelfish-jwks.json");
     this.SIGNING_KEY_SIZE = Optional.of(keySize).orElse(2048);
@@ -96,7 +95,7 @@ public class LocalKeyStoreJWKService implements JWKService {
     }
   }
 
-  public LocalKeyStoreJWKService() throws NotInitialisedException {
+  public LocalJWKService() throws NotInitialisedException {
     /**
      * Initialise jackson
      */

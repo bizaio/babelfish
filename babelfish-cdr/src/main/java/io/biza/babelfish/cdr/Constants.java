@@ -14,6 +14,7 @@ package io.biza.babelfish.cdr;
 import java.math.RoundingMode;
 import java.time.format.DateTimeFormatter;
 import io.biza.babelfish.cdr.models.VersionerConstants;
+import io.biza.babelfish.cdr.models.payloads.ErrorV1;
 import io.biza.babelfish.cdr.orika.OrikaFactoryConfigurer;
 import io.biza.babelfish.cdr.orika.OrikaFactoryConfigurerInterface;
 import io.biza.babelfish.cdr.support.BabelfishVersionedModel;
@@ -62,9 +63,28 @@ public class Constants {
   public static final String ORIKA_PACKAGE_BASE = OrikaFactoryConfigurer.class.getPackageName();
   public static final String ORIKA_IMPLEMENTING_CLASS =
       OrikaFactoryConfigurerInterface.class.getName();
-  
+
   public static final String BASE_MODELS_PACKAGE = VersionerConstants.class.getPackageName();
   public static final String BASE_MODELS_ANNOTATION = Schema.class.getName();
   public static final String VERSIONED_MODEL = BabelfishVersionedModel.class.getName();
-  
+
+  /**
+   * Prepared Error Responses
+   */
+  public static final ErrorV1 ERROR_ATTRIBUTE_NOT_SUPPORTED =
+      ErrorV1.builder().code("1001").title("Attribute Not Supported")
+          .detail("Provided content contains attribute data which is not supported").build();
+  public static final ErrorV1 ERROR_INVALID_ENUM_VALUE =
+      ErrorV1.builder().code("1002").title("Invalid Enumeration Value")
+          .detail("Provided content contains enumeration data which is not supported").build();
+  public static final ErrorV1 ERROR_PAYLOAD_CONVERSION_FAILURE = ErrorV1.builder().code("2001")
+      .title("Payload Conversion Failure")
+      .detail(
+          "An error was encountered while attempting to perform conversion between source and destination payload")
+      .build();
+  public static final ErrorV1 ERROR_UNSUPPORTED_VERSION = ErrorV1.builder().code("3001")
+      .title("Unsupported Version")
+      .detail("The request specified a version which is not supported by this endpoint").build();
+
+
 }

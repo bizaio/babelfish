@@ -31,6 +31,16 @@ public class Constants {
   public final static String RESPONSE_CODE_NOT_FOUND = "404";
   public final static String RESPONSE_CODE_NO_CONTENT = "204";
   public final static String RESPONSE_CODE_UNPROCESSABLE_ENTITY = "422";
+  
+  /**
+   * Certificate Authority defaults
+   */
+  public static final String CA_ALGORITHM = "RSA";
+  public static final int CA_KEY_SIZE = 2048;
+  public static final int CA_VALIDITY_YEARS = 10;
+  public static final int CERT_VALIDITY_YEARS = 2;
+  public static final String CA_DN = "CN=Babelfish Development Register CA";
+  public static final String CA_SIGNING_ALGORITHM = "SHA256WithRSA";
 
   /**
    * Content Types

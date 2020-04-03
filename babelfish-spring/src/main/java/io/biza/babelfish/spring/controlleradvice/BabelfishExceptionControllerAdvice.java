@@ -13,114 +13,48 @@ package io.biza.babelfish.spring.controlleradvice;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import io.biza.babelfish.oidc.enumerations.OAuth2ErrorCode;
-import io.biza.babelfish.oidc.exceptions.InvalidClientException;
-import io.biza.babelfish.oidc.exceptions.InvalidGrantException;
-import io.biza.babelfish.oidc.exceptions.InvalidRequestException;
-import io.biza.babelfish.oidc.exceptions.InvalidScopeException;
-import io.biza.babelfish.oidc.exceptions.UnauthorisedClientException;
-import io.biza.babelfish.oidc.exceptions.UnsupportedGrantTypeException;
-import io.biza.babelfish.oidc.requests.OAuth2ErrorResponse;
-import io.biza.babelfish.spring.Constants;
+import io.biza.babelfish.cdr.Constants;
+import io.biza.babelfish.cdr.exceptions.AttributeNotSupportedException;
+import io.biza.babelfish.cdr.exceptions.LabelValueEnumValueNotSupportedException;
+import io.biza.babelfish.cdr.exceptions.PayloadConversionException;
+import io.biza.babelfish.cdr.exceptions.UnsupportedVersionException;
+import io.biza.babelfish.cdr.models.responses.ResponseErrorListV1;
 import lombok.extern.slf4j.Slf4j;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 @Slf4j
 public class BabelfishExceptionControllerAdvice {
   
-  @ExceptionHandler(InvalidClientException.class)
-  public ResponseEntity<Object> handleInvalidClientException(HttpServletRequest req,
-      InvalidClientException ex) {
-
+  @ExceptionHandler(AttributeNotSupportedException.class)
+  public ResponseEntity<Object> handleAttributeNotSupported(HttpServletRequest req,
+      AttributeNotSupportedException ex) {
     return ResponseEntity.badRequest()
-        .body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.INVALID_CLIENT)
-            .errorDescription(Constants.OAUTH2_INVALID_CLIENT_MESSAGE)
-            .errorUri(Constants.OAUTH2_ERROR_RESPONSE_URI).build());
+        .body(ResponseErrorListV1.builder().errors(List.of(Constants.ERROR_ATTRIBUTE_NOT_SUPPORTED)).build());
   }
   
-  @ExceptionHandler(HttpMessageNotReadableException.class)
-  public ResponseEntity<Object> handleNotReadableException(HttpServletRequest req,
-      HttpMessageNotReadableException ex) {
-
-    LOG.error("Encountered not readable exception", ex);
-    return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-  }
-
-  @ExceptionHandler(NullPointerException.class)
-  public ResponseEntity<Object> handleInvalidGrantException(HttpServletRequest req,
-      NullPointerException ex) {
-
-    LOG.error("Encountered uncaught NullPointerException", ex);
-    return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build();
-  }
-
-  @ExceptionHandler(InvalidGrantException.class)
-  public ResponseEntity<Object> handleInvalidGrantException(HttpServletRequest req,
-      InvalidGrantException ex) {
-
+  @ExceptionHandler(LabelValueEnumValueNotSupportedException.class)
+  public ResponseEntity<Object> handleInvalidEnum(HttpServletRequest req,
+      AttributeNotSupportedException ex) {
     return ResponseEntity.badRequest()
-        .body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.INVALID_GRANT)
-            .errorDescription(Constants.OAUTH2_INVALID_GRANT_MESSAGE)
-            .errorUri(Constants.OAUTH2_ERROR_RESPONSE_URI).build());
+        .body(ResponseErrorListV1.builder().errors(List.of(Constants.ERROR_INVALID_ENUM_VALUE)).build());
   }
-
-  @ExceptionHandler(InvalidRequestException.class)
-  public ResponseEntity<Object> handleInvalidRequestException(HttpServletRequest req,
-      InvalidRequestException ex) {
-
+  
+  @ExceptionHandler(PayloadConversionException.class)
+  public ResponseEntity<Object> handlePayloadConversionFailure(HttpServletRequest req,
+      PayloadConversionException ex) {
     return ResponseEntity.badRequest()
-        .body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.INVALID_REQUEST)
-            .errorDescription(Constants.OAUTH2_INVALID_REQUEST_MESSAGE)
-            .errorUri(Constants.OAUTH2_ERROR_RESPONSE_URI).build());
+        .body(ResponseErrorListV1.builder().errors(List.of(Constants.ERROR_PAYLOAD_CONVERSION_FAILURE)).build());
   }
-
-  @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-  public ResponseEntity<Object> handleInvalidMediaType(HttpServletRequest req,
-      HttpMediaTypeNotSupportedException ex) {
-
-    LOG.error("Received unsupported media type exception", ex);
-
-    return ResponseEntity.badRequest()
-        .body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.INVALID_REQUEST)
-            .errorDescription(Constants.OAUTH2_INVALID_REQUEST_MESSAGE)
-            .errorUri(Constants.OAUTH2_ERROR_RESPONSE_URI).build());
+  
+  @ExceptionHandler(UnsupportedVersionException.class)
+  public ResponseEntity<Object> handleUnsupportedPayload(HttpServletRequest req,
+      UnsupportedVersionException ex) {
+    return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
+        .body(ResponseErrorListV1.builder().errors(List.of(Constants.ERROR_UNSUPPORTED_VERSION)).build());
   }
-
-  @ExceptionHandler(InvalidScopeException.class)
-  public ResponseEntity<Object> handleInvalidScopeException(HttpServletRequest req,
-      InvalidScopeException ex) {
-
-    return ResponseEntity.badRequest()
-        .body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.INVALID_CLIENT)
-            .errorDescription(Constants.OAUTH2_INVALID_SCOPE_MESSAGE)
-            .errorUri(Constants.OAUTH2_ERROR_RESPONSE_URI).build());
-  }
-
-  @ExceptionHandler(UnauthorisedClientException.class)
-  public ResponseEntity<Object> handleUnauthorisedClientException(HttpServletRequest req,
-      UnauthorisedClientException ex) {
-
-    return ResponseEntity.badRequest()
-        .body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.UNAUTHORISED_CLIENT)
-            .errorDescription(Constants.OAUTH2_UNAUTHORIZED_CLIENT_MESSAGE)
-            .errorUri(Constants.OAUTH2_ERROR_RESPONSE_URI).build());
-  }
-
-
-  @ExceptionHandler(UnsupportedGrantTypeException.class)
-  public ResponseEntity<Object> handleUnsupportedGrantTypeException(HttpServletRequest req,
-      UnsupportedGrantTypeException ex) {
-
-    return ResponseEntity.badRequest()
-        .body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.UNSUPPORTED_GRANT_TYPE)
-            .errorDescription(Constants.OAUTH2_UNSUPPORTED_GRANT_TYPE_MESSAGE)
-            .errorUri(Constants.OAUTH2_ERROR_RESPONSE_URI).build());
-  }
-
-
+  
 }
