@@ -27,11 +27,11 @@
            [type]="control.subType || 'text'"/>
     <textarea *ngSwitchCase="'textarea'" [id]="idForLabel" [formControl]="control" pInputTextarea rows="5"></textarea>
     <p-dropdown *ngSwitchCase="'select'" [inputId]="idForLabel" [formControl]="control" [options]="control.options"
-                [autoWidth]="false" [style]="{'width':'100%'}"></p-dropdown>
+                [style]="{'width':'100%'}"></p-dropdown>
     <p-calendar *ngSwitchCase="'date'" [inputId]="idForLabel" [formControl]="control" appendTo="body"
                 showButtonBar="true"></p-calendar>
-    <app-duration-picker *ngSwitchCase="'duration'" [inputId]="idForLabel"
-                         [formControl]="control"></app-duration-picker>
+    <babelfish-duration-picker *ngSwitchCase="'duration'" [inputId]="idForLabel"
+                               [formControl]="control"></babelfish-duration-picker>
   </ng-container>
 
 </fieldset>
