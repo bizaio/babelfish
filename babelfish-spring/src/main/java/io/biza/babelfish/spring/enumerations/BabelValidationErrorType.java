@@ -13,7 +13,7 @@ package io.biza.babelfish.spring.enumerations;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Babelfish Exception Type", enumAsRef = true)
-public enum BabelfishExceptionType {
-  VALIDATION_ERROR, DATABASE_ERROR, INVALID_JSON
+@Schema(description = "Babelfish Validation Error Type", enumAsRef = true)
+public enum BabelValidationErrorType {
+  ATTRIBUTE_INVALID, DATABASE_INTEGRITY, PATH_PARAMETER_INVALID
 }

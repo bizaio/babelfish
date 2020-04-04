@@ -27,11 +27,11 @@ import com.fasterxml.jackson.databind.exc.ValueInstantiationException;
 import io.biza.babelfish.cdr.exceptions.LabelValueEnumValueNotSupportedException;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.biza.babelfish.spring.Messages;
-import io.biza.babelfish.spring.enumerations.BabelfishExceptionType;
-import io.biza.babelfish.spring.enumerations.BabelfishValidationErrorType;
+import io.biza.babelfish.spring.enumerations.BabelExceptionType;
+import io.biza.babelfish.spring.enumerations.BabelValidationErrorType;
 import io.biza.babelfish.spring.exceptions.ValidationListException;
 import io.biza.babelfish.spring.payloads.ResponseValidationError;
-import io.biza.babelfish.spring.payloads.ValidationError;
+import io.biza.babelfish.spring.payloads.BabelValidationError;
 import io.biza.babelfish.spring.util.MessageUtil;
 import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class BabelfishExceptionAdvice {
       IllegalStateException ex) {
 
     return ResponseEntity.unprocessableEntity()
-        .body(ResponseValidationError.builder().type(BabelfishExceptionType.VALIDATION_ERROR)
+        .body(ResponseValidationError.builder().type(BabelExceptionType.VALIDATION_ERROR)
             .explanation(
                 MessageUtil.format(Messages.ILLEGAL_STATE_EXCEPTION_MESSAGE, ex.getMessage()))
             .build());
@@ -61,7 +61,7 @@ public class BabelfishExceptionAdvice {
       RollbackException ex) {
 
     ResponseValidationError errors =
-        ResponseValidationError.builder().type(BabelfishExceptionType.VALIDATION_ERROR)
+        ResponseValidationError.builder().type(BabelExceptionType.VALIDATION_ERROR)
             .explanation(Messages.INVALID_PARAMETERS_SEE_VALIDATION_ERRORS_MESSAGE).build();
 
     Throwable exThrowable = ex.getCause();
@@ -73,17 +73,17 @@ public class BabelfishExceptionAdvice {
       constraintException.getConstraintViolations().forEach(violation -> {
         try {
           errors.validationErrors()
-              .add(ValidationError.builder().fields(List.of(violation.getPropertyPath().toString()))
+              .add(BabelValidationError.builder().fields(List.of(violation.getPropertyPath().toString()))
                   .message(StringUtils.capitalize(violation.getMessage()))
-                  .type(BabelfishValidationErrorType.ATTRIBUTE_INVALID).build());
+                  .type(BabelValidationErrorType.ATTRIBUTE_INVALID).build());
         } catch (IllegalArgumentException e) {
           LOG.error(
               MessageUtil.format(Messages.UNSUPPORTED_UNWRAP_WITH_DESCRIPTION_MESSAGE, violation));
           errors.validationErrors()
-              .add(ValidationError.builder()
+              .add(BabelValidationError.builder()
                   .fields(List.of(violation.getConstraintDescriptor().toString()))
                   .message(StringUtils.capitalize(violation.getMessage()))
-                  .type(BabelfishValidationErrorType.ATTRIBUTE_INVALID).build());
+                  .type(BabelValidationErrorType.ATTRIBUTE_INVALID).build());
         }
       });
     } else {
@@ -119,19 +119,19 @@ public class BabelfishExceptionAdvice {
 
         return ResponseEntity.unprocessableEntity()
             .body(
-                ResponseValidationError.builder().type(BabelfishExceptionType.INVALID_JSON)
+                ResponseValidationError.builder().type(BabelExceptionType.INVALID_JSON)
                     .explanation(Messages.INVALID_PARAMETERS_SEE_VALIDATION_ERRORS_MESSAGE)
-                    .validationErrors(List.of(ValidationError.builder()
+                    .validationErrors(List.of(BabelValidationError.builder()
                         .fields(List.of(String.join(".", fieldNames)))
                         .message(MessageUtil.format(Messages.INVALID_PARAMETER_WITH_OPTIONS_MESSAGE,
                             labelEx.getSuppliedValue(), labelEx.getClassName(),
                             String.join(", ", enumValuesList)))
-                        .type(BabelfishValidationErrorType.ATTRIBUTE_INVALID).build()))
+                        .type(BabelValidationErrorType.ATTRIBUTE_INVALID).build()))
                     .build());
       } else {
 
         return ResponseEntity.unprocessableEntity()
-            .body(ResponseValidationError.builder().type(BabelfishExceptionType.INVALID_JSON)
+            .body(ResponseValidationError.builder().type(BabelExceptionType.INVALID_JSON)
                 .explanation(MessageUtil
                     .format(Messages.INVALID_PARAMETERS_WITH_EXPLANATION_MESSAGE, ex.getMessage()))
                 .build());
@@ -140,7 +140,7 @@ public class BabelfishExceptionAdvice {
       InvalidFormatException e = (InvalidFormatException) ex.getCause();
 
       ResponseValidationError errors =
-          ResponseValidationError.builder().type(BabelfishExceptionType.VALIDATION_ERROR)
+          ResponseValidationError.builder().type(BabelExceptionType.VALIDATION_ERROR)
               .explanation(Messages.INVALID_PARAMETERS_SEE_VALIDATION_ERRORS_MESSAGE).build();
 
       /**
@@ -152,16 +152,16 @@ public class BabelfishExceptionAdvice {
       }
 
       errors.validationErrors()
-          .add(ValidationError.builder().fields(List.of(String.join(".", pathList)))
+          .add(BabelValidationError.builder().fields(List.of(String.join(".", pathList)))
               .message(StringUtils.capitalize(e.getCause().getMessage()))
-              .type(BabelfishValidationErrorType.ATTRIBUTE_INVALID).build());
+              .type(BabelValidationErrorType.ATTRIBUTE_INVALID).build());
 
       return ResponseEntity.unprocessableEntity().body(errors);
     } else if (ex.getCause() != null && ex.getCause() instanceof JsonMappingException) {
       JsonMappingException e = (JsonMappingException) ex.getCause();
 
       ResponseValidationError errors =
-          ResponseValidationError.builder().type(BabelfishExceptionType.VALIDATION_ERROR)
+          ResponseValidationError.builder().type(BabelExceptionType.VALIDATION_ERROR)
               .explanation(Messages.INVALID_PARAMETERS_SEE_VALIDATION_ERRORS_MESSAGE).build();
 
       /**
@@ -173,15 +173,15 @@ public class BabelfishExceptionAdvice {
       }
 
       errors.validationErrors()
-          .add(ValidationError.builder().fields(List.of(String.join(".", pathList)))
+          .add(BabelValidationError.builder().fields(List.of(String.join(".", pathList)))
               .message(StringUtils.capitalize(e.getCause().getMessage()))
-              .type(BabelfishValidationErrorType.ATTRIBUTE_INVALID).build());
+              .type(BabelValidationErrorType.ATTRIBUTE_INVALID).build());
 
       return ResponseEntity.unprocessableEntity().body(errors);
 
     } else {
       return ResponseEntity.unprocessableEntity()
-          .body(ResponseValidationError.builder().type(BabelfishExceptionType.INVALID_JSON)
+          .body(ResponseValidationError.builder().type(BabelExceptionType.INVALID_JSON)
               .explanation(Messages.JSON_PARSE_ERROR_MESSAGE).build());
     }
   }
@@ -201,22 +201,22 @@ public class BabelfishExceptionAdvice {
       MethodArgumentNotValidException ex) {
 
     ResponseValidationError errors =
-        ResponseValidationError.builder().type(BabelfishExceptionType.VALIDATION_ERROR)
+        ResponseValidationError.builder().type(BabelExceptionType.VALIDATION_ERROR)
             .explanation(Messages.INVALID_PARAMETERS_SEE_VALIDATION_ERRORS_MESSAGE).build();
 
     ex.getBindingResult().getAllErrors().forEach(error -> {
       ConstraintViolation<?> violation = error.unwrap(ConstraintViolation.class);
       try {
         errors.validationErrors()
-            .add(ValidationError.builder().fields(List.of(violation.getPropertyPath().toString()))
+            .add(BabelValidationError.builder().fields(List.of(violation.getPropertyPath().toString()))
                 .message(StringUtils.capitalize(violation.getMessage()))
-                .type(BabelfishValidationErrorType.ATTRIBUTE_INVALID).build());
+                .type(BabelValidationErrorType.ATTRIBUTE_INVALID).build());
       } catch (IllegalArgumentException e) {
         LOG.error(MessageUtil.format(Messages.UNSUPPORTED_UNWRAP_WITH_DESCRIPTION_MESSAGE, error));
         errors.validationErrors()
-            .add(ValidationError.builder().fields(List.of(error.getCode()))
+            .add(BabelValidationError.builder().fields(List.of(error.getCode()))
                 .message(StringUtils.capitalize(error.getDefaultMessage()))
-                .type(BabelfishValidationErrorType.ATTRIBUTE_INVALID).build());
+                .type(BabelValidationErrorType.ATTRIBUTE_INVALID).build());
       }
     });
 
@@ -228,7 +228,7 @@ public class BabelfishExceptionAdvice {
       JsonParseException ex) {
 
     ResponseValidationError errors =
-        ResponseValidationError.builder().type(BabelfishExceptionType.INVALID_JSON)
+        ResponseValidationError.builder().type(BabelExceptionType.INVALID_JSON)
             .explanation(Messages.JSON_PARSE_ERROR_MESSAGE).build();
 
     return ResponseEntity.unprocessableEntity().body(errors);
@@ -239,7 +239,7 @@ public class BabelfishExceptionAdvice {
       DataIntegrityViolationException ex) {
 
     ResponseValidationError errors =
-        ResponseValidationError.builder().type(BabelfishExceptionType.VALIDATION_ERROR)
+        ResponseValidationError.builder().type(BabelExceptionType.VALIDATION_ERROR)
             .explanation(MessageUtil.format(
                 Messages.DATABASE_ATTRIBUTE_FORMAT_ERROR_WITH_DESCRIPTION_MESSAGE,
                 ex.getMostSpecificCause().getMessage()))
@@ -253,7 +253,7 @@ public class BabelfishExceptionAdvice {
       MethodArgumentTypeMismatchException ex) {
 
     ResponseValidationError errors =
-        ResponseValidationError.builder().type(BabelfishExceptionType.VALIDATION_ERROR)
+        ResponseValidationError.builder().type(BabelExceptionType.VALIDATION_ERROR)
             .explanation(MessageUtil.format(
                 Messages.PATH_PARAMETER_VALIDATION_ERROR_WITH_NAME_TARGET_MESSAGE,
                 ex.getParameter().getParameterName(), ex.getRequiredType().getSimpleName()))

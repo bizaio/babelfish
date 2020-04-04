@@ -15,8 +15,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.babelfish.spring.enumerations.BabelfishExceptionType;
-import io.biza.babelfish.spring.enumerations.BabelfishValidationErrorType;
+import io.biza.babelfish.spring.enumerations.BabelValidationErrorType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,13 +33,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "A Single Validation Error")
-public class ValidationError {
+public class BabelValidationError {
   @JsonProperty("type")
   @NotNull
   @NonNull
   @Schema(description = "Validation Error Type")
   @Builder.Default
-  BabelfishValidationErrorType type = BabelfishValidationErrorType.ATTRIBUTE_INVALID;
+  BabelValidationErrorType type = BabelValidationErrorType.ATTRIBUTE_INVALID;
 
   @JsonProperty("fields")
   @Schema(description = "Fields which failed validation")

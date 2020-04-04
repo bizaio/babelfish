@@ -15,19 +15,14 @@ import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import java.util.List;
-import javax.validation.constraints.NotNull;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import io.biza.babelfish.cdr.orika.OrikaFactoryConfig;
 import io.biza.babelfish.cdr.orika.OrikaFactoryConfigurer;
-import lombok.Builder;
-import lombok.NonNull;
 
 @Service
 public class OrikaMapperService extends ConfigurableMapper implements ApplicationContextAware {

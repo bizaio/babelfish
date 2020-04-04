@@ -12,11 +12,10 @@
 package io.biza.babelfish.spring.exceptions;
 
 import java.util.List;
-import java.util.ArrayList;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.babelfish.spring.enumerations.BabelfishExceptionType;
-import io.biza.babelfish.spring.payloads.ValidationError;
+import io.biza.babelfish.spring.enumerations.BabelExceptionType;
+import io.biza.babelfish.spring.payloads.BabelValidationError;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,7 +34,7 @@ public class ValidationListException extends Exception {
   @NotNull
   @NonNull
   @Schema(description = "Exception Type")
-  BabelfishExceptionType type;
+  BabelExceptionType type;
 
   @JsonProperty("explanation")
   @NotNull
@@ -45,7 +44,6 @@ public class ValidationListException extends Exception {
 
   @JsonProperty("validationErrors")
   @Schema(description = "A List of Validation Errors Encountered")
-  @Builder.Default
-  List<ValidationError> validationErrors = new ArrayList<ValidationError>();
+  List<BabelValidationError> validationErrors;
 
 }
