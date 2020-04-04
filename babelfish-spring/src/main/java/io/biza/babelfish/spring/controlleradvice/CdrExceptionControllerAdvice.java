@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 @Slf4j
-public class BabelfishExceptionControllerAdvice {
+public class CdrExceptionControllerAdvice {
   
   @ExceptionHandler(AttributeNotSupportedException.class)
   public ResponseEntity<Object> handleAttributeNotSupported(HttpServletRequest req,
