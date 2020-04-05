@@ -1,4 +1,4 @@
-## @bizaoss/babelfish-type-service-client@1.0.0-SNAPSHOT.202004051204
+## @bizaoss/babelfish-type-service-client@1.0.0-SNAPSHOT.202004051617
 
 ### Building
 
@@ -19,7 +19,7 @@ Navigate to the folder of your consuming project and run one of next commands.
 _published:_
 
 ```
-npm install @bizaoss/babelfish-type-service-client@1.0.0-SNAPSHOT.202004051204 --save
+npm install @bizaoss/babelfish-type-service-client@1.0.0-SNAPSHOT.202004051617 --save
 ```
 
 _without publishing (not recommended):_
