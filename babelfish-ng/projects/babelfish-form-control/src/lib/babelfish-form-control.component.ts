@@ -1,6 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
-import {SelectItem} from 'primeng/api';
+import {AbstractControl, FormGroup} from '@angular/forms';
+import {BabelfishFormControl} from './controls/babelfish-form-control';
+import {BabelfishFormSelect} from './controls/babelfish-form-control-select';
+import {BabelfishFormTextarea} from './controls/babelfish-form-control-textarea';
+import {BabelfishFormInput} from './controls/babelfish-form-control-input';
+import {BabelfishFormCheckbox} from './controls/babelfish-form-control-checkbox';
+import {BabelfishFormDate} from './controls/babelfish-form-control-date';
+import {BabelfishFormDuration} from './controls/babelfish-form-control-duration';
+import {ResponseGetTypes, TypeService} from '@bizaoss/babelfish-type-service-client';
+import {BabelfishFormSelectType} from './controls/babelfish-form-control-selecttype';
 
 export enum BabelfishFormControlTypes {
   INPUT = 'input',
@@ -9,75 +17,13 @@ export enum BabelfishFormControlTypes {
   DATE = 'date',
   CHECKBOX = 'checkbox',
   DURATION = 'duration',
-}
-
-export class BabelfishFormControl extends FormControl {
-
-  type: BabelfishFormControlTypes;
-  label: string;
-  isVisible = true;
-
-  constructor(type: BabelfishFormControlTypes, defaultValue, label: string, validators = [], asyncValidators = []) {
-    super(defaultValue, validators, asyncValidators);
-
-    this.type = type;
-    this.label = label;
-  }
-}
-
-export class BabelfishFormInput extends BabelfishFormControl {
-
-  subType: string;
-
-  constructor(defaultValue, label: string, validators = [], subType = 'text', asyncValidators = []) {
-    super(BabelfishFormControlTypes.INPUT, defaultValue, label, validators, asyncValidators);
-
-    this.subType = subType;
-  }
-}
-
-export class BabelfishFormSelect extends BabelfishFormControl {
-
-  options: SelectItem[];
-
-  constructor(defaultValue, label: string, validators = [], options: SelectItem[] = [], asyncValidators = []) {
-    super(BabelfishFormControlTypes.SELECT, defaultValue, label, validators, asyncValidators);
-
-    this.options = options;
-  }
-}
-
-export class BabelfishFormTextarea extends BabelfishFormControl {
-
-  constructor(defaultValue, label: string, validators = [], asyncValidators = []) {
-    super(BabelfishFormControlTypes.TEXTAREA, defaultValue, label, validators, asyncValidators);
-  }
-}
-
-export class BabelfishFormDate extends BabelfishFormControl {
-
-  constructor(defaultValue, label: string, validators = [], asyncValidators = []) {
-    super(BabelfishFormControlTypes.DATE, defaultValue, label, validators, asyncValidators);
-  }
-}
-
-export class BabelfishFormCheckbox extends BabelfishFormControl {
-
-  constructor(defaultValue, label: string, validators = [], asyncValidators = []) {
-    super(BabelfishFormControlTypes.CHECKBOX, defaultValue, label, validators, asyncValidators);
-  }
-}
-
-export class BabelfishFormDuration extends BabelfishFormControl {
-
-  constructor(defaultValue, label: string, validators = [], asyncValidators = []) {
-    super(BabelfishFormControlTypes.DURATION, defaultValue, label, validators, asyncValidators);
-  }
+  SELECTTYPE = 'selecttype',
 }
 
 type FormControlType =
   BabelfishFormInput
   & BabelfishFormSelect
+  & BabelfishFormSelectType
   & BabelfishFormTextarea
   & BabelfishFormDate
   & BabelfishFormCheckbox
@@ -100,15 +46,36 @@ export class BabelfishFormControlComponent implements OnInit {
 
   @Input()
   public showLabel = true;
-
+  private loading = false;
   public idForLabel = `${Date.now()}${Math.round(Math.random() * 10000)}`;
 
   public originalOrder = ((): number => 0);
+  private typeMap: ResponseGetTypes = {};
 
-  constructor() {
+  constructor(private typeService: TypeService) {
+
   }
 
   ngOnInit() {
+
+  }
+
+  public populateTypes(typeNames: string[], overwrite: boolean = false) {
+    // Strip out types we have already retrieved
+    if (!overwrite) {
+      typeNames = typeNames.filter((typeName) => !this.typeMap.fieldTypes[typeName]);
+    }
+
+    if (typeNames.length > 0) {
+      this.loading = true;
+
+      this.typeService.getEnumerationTypes(typeNames).subscribe(returnedTypes => {
+        for (const oneType of typeNames) {
+          this.typeMap.fieldTypes[oneType] = returnedTypes.fieldTypes[oneType];
+        }
+        this.loading = false;
+      });
+    }
   }
 
   hasRequiredValidator(abstractControl: AbstractControl): boolean {

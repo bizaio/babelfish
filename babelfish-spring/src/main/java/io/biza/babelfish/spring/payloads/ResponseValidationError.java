@@ -11,6 +11,7 @@
  *******************************************************************************/
 package io.biza.babelfish.spring.payloads;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -48,6 +49,7 @@ public class ResponseValidationError {
 
   @JsonProperty("validationErrors")
   @Schema(description = "A List of Validation Errors Encountered")
-  List<BabelValidationError> validationErrors;
+  @Builder.Default
+  List<BabelValidationError> validationErrors = new ArrayList<BabelValidationError>();
 
 }

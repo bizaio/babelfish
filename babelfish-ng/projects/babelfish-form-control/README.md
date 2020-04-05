@@ -1,6 +1,6 @@
 # Babelfish Form Control
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0. It provides a thin wrapper around PrimeNG components for Babelfish purposes in particular validation highlighting processed in the context of a Babelfish ValidationError list.
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0. It provides a thin wrapper around PrimeNG components for Babelfish purposes in particular support for the Babelfish Type Service client and Validation highlighting.
 
 ## Build
 
