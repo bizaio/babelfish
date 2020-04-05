@@ -76,11 +76,17 @@
         <bcprov-jdk.version>1.64</bcprov-jdk.version>
         <spring-boot.version>2.2.3.RELEASE</spring-boot.version>
         <nimbus-jose-jwt.version>8.9</nimbus-jose-jwt.version>
+        <springdoc-openapi-ui.version>1.2.25</springdoc-openapi-ui.version>
+        <springdoc-openapi-maven-plugin.version>0.3</springdoc-openapi-maven-plugin.version>
+        <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
+        <maven-failsafe-plugin.version>${maven-surefire-plugin.version}</maven-failsafe-plugin.version>
+        <docker.image.prefix>bizaio</docker.image.prefix>
     </properties>
     <modules>
         <module>babelfish-cdr</module>
         <module>babelfish-oidc</module>
         <module>babelfish-spring</module>
+        <module>babelfish-type-service</module>
     </modules>
     <build>
         <defaultGoal>clean package install</defaultGoal>

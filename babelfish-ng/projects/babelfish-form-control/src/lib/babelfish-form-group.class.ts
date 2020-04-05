@@ -1,7 +1,7 @@
 import { FormGroup } from '@angular/forms';
 import {BabelfishFormInput} from './babelfish-form-control.component';
 
-export class CdrFormGroup extends FormGroup {
+export class BabelfishFormGroup extends FormGroup {
 
     private _submitted = false;
 

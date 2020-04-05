@@ -22,7 +22,9 @@ public class Constants {
   public final static String TAG_DISCOVERY_DESCRIPTION = "Discovery Endpoints";
   public final static String TAG_TOKEN_NAME = "token";
   public final static String TAG_TOKEN_DESCRIPTION = "Token Authorisation Endpoints";
-
+  public final static String TAG_TYPE_NAME = "type";
+  public final static String TAG_TYPE_DESCRIPTION = "Type Discovery API";
+  
   /**
    * Certificate Authority defaults
    */

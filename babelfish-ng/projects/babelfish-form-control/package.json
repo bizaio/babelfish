@@ -1,6 +1,6 @@
 {
   "name": "@bizaoss/babelfish-form-control",
-  "version": "1.2.6-SNAPSHOT.202004051002",
+  "version": "1.2.6-SNAPSHOT.202004051008",
   "description": "Form Control Handler for Biza.io components",
   "scripts": {
     "postinstall": "ngcc"
