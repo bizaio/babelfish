@@ -3,7 +3,7 @@ package io.biza.babelfish.spring;
 import java.net.URI;
 import java.util.List;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
-import io.biza.babelfish.oidc.enumerations.JWEEncryptionMethodType;
+import io.biza.babelfish.oidc.enumerations.JWEEncryptionEncodingType;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.OAuth2ResponseType;
 import io.biza.babelfish.oidc.enumerations.OIDCApplicationType;
@@ -62,8 +62,8 @@ public class Constants {
       List.of(JWSSigningAlgorithmType.PS256);
   public final static List<JWEEncryptionAlgorithmType> SUPPORTED_ENCRYPTION_ALGORITHMS =
       List.of(JWEEncryptionAlgorithmType.RSA_OAEP);
-  public final static List<JWEEncryptionMethodType> SUPPORTED_ENCRYPTION_METHODS =
-      List.of(JWEEncryptionMethodType.A256GCM);
+  public final static List<JWEEncryptionEncodingType> SUPPORTED_ENCRYPTION_METHODS =
+      List.of(JWEEncryptionEncodingType.A256GCM);
   public final static List<OIDCApplicationType> SUPPORTED_OIDC_APPLICATION_TYPES =
       List.of(OIDCApplicationType.WEB);
   public final static List<OIDCAuthMethod> SUPPORTED_TOKEN_AUTH_METHODS =

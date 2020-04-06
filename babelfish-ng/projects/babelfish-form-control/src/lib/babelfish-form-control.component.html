@@ -14,7 +14,7 @@
   *ngIf="!control.controls && control.isVisible;"
   [class.--hasError]="showErrors && control.errors"
 >
-  <p-checkbox *ngIf="control.type === 'checkbox'" [inputId]="idForLabel" binary="true"
+  <p-checkbox *ngIf="control.type === 'checkbox'" [inputId]="idForLabel" binary="true" [style]="control.controlStyle"
               [formControl]="control"></p-checkbox>
 
   <label *ngIf="showLabel" [for]="idForLabel">
@@ -23,14 +23,12 @@
   <p class="error">{{ getFirstError(control) }}</p>
 
   <ng-container [ngSwitch]="control.type">
-    <input *ngSwitchCase="'input'" [id]="idForLabel" [formControl]="control" pInputText
+    <input *ngSwitchCase="'input'" [id]="idForLabel" [formControl]="control" [style]="control.controlStyle" pInputText
            [type]="control.subType || 'text'"/>
-    <textarea *ngSwitchCase="'textarea'" [id]="idForLabel" [formControl]="control" pInputTextarea rows="5"></textarea>
+    <textarea *ngSwitchCase="'textarea'" [id]="idForLabel" [formControl]="control" pInputTextarea rows="5" [style]="control.controlStyle"></textarea>
     <p-dropdown *ngSwitchCase="'select'" [inputId]="idForLabel" [formControl]="control" [options]="control.options"
-                [style]="{'width':'100%'}"></p-dropdown>
-    <p-dropdown *ngSwitchCase="'selecttype'" [inputId]="idForLabel" [formControl]="control" [options]="populateTypes([control.subType])"
-                [style]="{'width':'100%'}"></p-dropdown>
-    <p-calendar *ngSwitchCase="'date'" [inputId]="idForLabel" [formControl]="control" appendTo="body"
+                [style]="control.controlStyle"></p-dropdown>
+    <p-calendar *ngSwitchCase="'date'" [inputId]="idForLabel" [formControl]="control" appendTo="body" [style]="control.controlStyle"
                 showButtonBar="true"></p-calendar>
     <babelfish-duration-picker *ngSwitchCase="'duration'" [inputId]="idForLabel"
                                [formControl]="control"></babelfish-duration-picker>

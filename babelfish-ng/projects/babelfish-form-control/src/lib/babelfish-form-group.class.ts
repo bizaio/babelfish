@@ -1,5 +1,5 @@
-import { FormGroup } from '@angular/forms';
-import {BabelfishFormInput} from './babelfish-form-control.component';
+import {AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormGroup, ValidatorFn} from '@angular/forms';
+import {BabelfishFormInput} from './controls/babelfish-form-control-input';
 
 export class BabelfishFormGroup extends FormGroup {
 

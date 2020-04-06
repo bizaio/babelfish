@@ -7,8 +7,6 @@ import {BabelfishFormInput} from './controls/babelfish-form-control-input';
 import {BabelfishFormCheckbox} from './controls/babelfish-form-control-checkbox';
 import {BabelfishFormDate} from './controls/babelfish-form-control-date';
 import {BabelfishFormDuration} from './controls/babelfish-form-control-duration';
-import {ResponseGetTypes, TypeService} from '@bizaoss/babelfish-type-service-client';
-import {BabelfishFormSelectType} from './controls/babelfish-form-control-selecttype';
 
 export enum BabelfishFormControlTypes {
   INPUT = 'input',
@@ -17,13 +15,11 @@ export enum BabelfishFormControlTypes {
   DATE = 'date',
   CHECKBOX = 'checkbox',
   DURATION = 'duration',
-  SELECTTYPE = 'selecttype',
 }
 
 type FormControlType =
   BabelfishFormInput
   & BabelfishFormSelect
-  & BabelfishFormSelectType
   & BabelfishFormTextarea
   & BabelfishFormDate
   & BabelfishFormCheckbox
@@ -45,37 +41,16 @@ export class BabelfishFormControlComponent implements OnInit {
   public showErrors = false;
 
   @Input()
+  public controlStyle: string;
+
+  @Input()
   public showLabel = true;
   private loading = false;
   public idForLabel = `${Date.now()}${Math.round(Math.random() * 10000)}`;
 
   public originalOrder = ((): number => 0);
-  private typeMap: ResponseGetTypes = {};
-
-  constructor(private typeService: TypeService) {
-
-  }
 
   ngOnInit() {
-
-  }
-
-  public populateTypes(typeNames: string[], overwrite: boolean = false) {
-    // Strip out types we have already retrieved
-    if (!overwrite) {
-      typeNames = typeNames.filter((typeName) => !this.typeMap.fieldTypes[typeName]);
-    }
-
-    if (typeNames.length > 0) {
-      this.loading = true;
-
-      this.typeService.getEnumerationTypes(typeNames).subscribe(returnedTypes => {
-        for (const oneType of typeNames) {
-          this.typeMap.fieldTypes[oneType] = returnedTypes.fieldTypes[oneType];
-        }
-        this.loading = false;
-      });
-    }
   }
 
   hasRequiredValidator(abstractControl: AbstractControl): boolean {

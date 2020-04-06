@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.oidc.enumerations.OIDCResponseType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
-import io.biza.babelfish.oidc.enumerations.JWEEncryptionMethodType;
+import io.biza.babelfish.oidc.enumerations.JWEEncryptionEncodingType;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.OAuth2PKCEType;
 import io.biza.babelfish.oidc.enumerations.OAuth2ResponseType;
@@ -116,7 +116,7 @@ public class ProviderDiscoveryMetadata {
   
   @JsonProperty("id_token_encryption_enc_values_supported")
   @Schema(description = "ID Token JWE Encryption Algorithms Supported")
-  List<JWEEncryptionMethodType> idTokenEncryptionMethods;
+  List<JWEEncryptionEncodingType> idTokenEncryptionMethods;
 
   @JsonProperty("userinfo_signing_alg_values_supported")
   @Schema(description = "User Info JWS Signing Algorithms Supported")
@@ -130,7 +130,7 @@ public class ProviderDiscoveryMetadata {
   
   @JsonProperty("userinfo_encryption_enc_values_supported")
   @Schema(description = "User Info JWE Encryption Algorithms Supported")
-  List<JWEEncryptionMethodType> userInfoEncryptionMethods;
+  List<JWEEncryptionEncodingType> userInfoEncryptionMethods;
   
   @JsonProperty("request_object_signing_alg_values_supported")
   @Schema(description = "Request Object JWS Signing Algorithms Supported")
@@ -144,7 +144,7 @@ public class ProviderDiscoveryMetadata {
   
   @JsonProperty("request_object_encryption_enc_values_supported")
   @Schema(description = "Request Object JWE Encryption Algorithms Supported")
-  List<JWEEncryptionMethodType> requestObjectEncryptionMethods;
+  List<JWEEncryptionEncodingType> requestObjectEncryptionMethods;
   
   @JsonProperty("token_endpoint_auth_methods_supported")
   @Schema(description = "Token Endpoint Client Authentication methods supported")

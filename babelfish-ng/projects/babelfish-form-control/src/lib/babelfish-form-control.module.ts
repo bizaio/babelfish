@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { BabelfishFormControlComponent } from './babelfish-form-control.component';
+import {Inject, ModuleWithProviders, NgModule, Optional, SkipSelf} from '@angular/core';
+import {BabelfishFormControlComponent} from './babelfish-form-control.component';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CalendarModule, CheckboxModule, DropdownModule, OverlayPanelModule} from 'primeng';
@@ -20,4 +20,4 @@ import {BabelfishDurationPickerComponent} from './duration-picker/babelfish-dura
   ],
   exports: [BabelfishFormControlComponent]
 })
-export class BabelfishFormControlModule { }
+export class BabelfishFormControlModule {}

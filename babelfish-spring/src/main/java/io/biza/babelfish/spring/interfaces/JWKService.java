@@ -2,7 +2,7 @@ package io.biza.babelfish.spring.interfaces;
 
 import java.net.URI;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
-import io.biza.babelfish.oidc.enumerations.JWEEncryptionMethodType;
+import io.biza.babelfish.oidc.enumerations.JWEEncryptionEncodingType;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
 import io.biza.babelfish.oidc.payloads.JWKS;
 import io.biza.babelfish.oidc.payloads.JWTClaims;
@@ -61,7 +61,7 @@ public interface JWKService {
    * @throws KeyRetrievalException  
    */
   public String encryptAndSign(JWTClaims claims, URI jwksUri, JWSSigningAlgorithmType signingAlgorithm, JWEEncryptionAlgorithmType encryptionAlgorithm,
-      JWEEncryptionMethodType encryptionMethod) throws SigningOperationException, EncryptionOperationException, KeyRetrievalException;
+      JWEEncryptionEncodingType encryptionMethod) throws SigningOperationException, EncryptionOperationException, KeyRetrievalException;
 
   
   /**

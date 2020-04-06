@@ -5,7 +5,8 @@
     "entryFile": "src/public-api.ts",
     "umdModuleIds": {
       "primeng": "primeng",
-      "ngx-duration-picker": "ngxDurationPicker"
+      "ngx-duration-picker": "ngxDurationPicker",
+      "babelfish-type-service-client": "babelfishTypeServiceClient"
     }
   }
 }

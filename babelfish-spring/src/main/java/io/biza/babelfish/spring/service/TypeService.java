@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.WordUtils;
 import org.springframework.beans.BeansException;
@@ -62,7 +63,7 @@ public class TypeService implements ApplicationContextAware {
 
   public void init() {
     classMap = new HashMap<String, Class<?>>();
-    
+
     if (packageBase != null) {
       try (ScanResult mapperResult = new ClassGraph().enableAllInfo()
           .whitelistPackages(packageBase.toArray(new String[0])).scan()) {
@@ -76,14 +77,15 @@ public class TypeService implements ApplicationContextAware {
       }
     }
   }
-  
+
   public List<FormFieldType> listTypes() {
     List<FormFieldType> fieldType = new ArrayList<FormFieldType>();
-    
+
     classMap.keySet().stream().forEach(className -> {
-      fieldType.add(FormFieldType.builder().name(className).type(BabelFieldType.ENUMERATION).build());
+      fieldType
+          .add(FormFieldType.builder().name(className).type(BabelFieldType.ENUMERATION).build());
     });
-    
+
     return fieldType;
   }
 
@@ -95,8 +97,11 @@ public class TypeService implements ApplicationContextAware {
         Class<?> targetClass = classMap.get(oneFieldType);
         List<FormLabelValue> fieldValue = new ArrayList<FormLabelValue>();
 
-        LOG.debug("Check {} says {} and enum assignable {} and ApiModel present {}", targetClass,
-            targetClass.isEnum(), LabelValueEnumInterface.class.isAssignableFrom(targetClass),
+        LOG.debug(
+            "{} -> isEnum: {} LabelValueEnumInterface: {} LabelValueDerivedInterface: {} ApiModel: {}",
+            targetClass, targetClass.isEnum(),
+            LabelValueEnumInterface.class.isAssignableFrom(targetClass),
+            LabelValueDerivedInterface.class.isAssignableFrom(targetClass),
             targetClass.isAnnotationPresent(Schema.class));
         if (targetClass.isEnum() && LabelValueEnumInterface.class.isAssignableFrom(targetClass)) {
           for (Object b : targetClass.getEnumConstants()) {
@@ -117,6 +122,12 @@ public class TypeService implements ApplicationContextAware {
                 "Encountered an error when attempting to cast {} to a LabelValueDerivedInterface class with error: {}",
                 targetClass.getSimpleName(), e.getMessage());
           }
+        } else if (targetClass.isEnum()) {
+          for (Object b : targetClass.getEnumConstants()) {
+            fieldValue
+                .add(FormLabelValue.builder().label(b.toString()).value(b.toString()).build());
+          }
+          formLabels.put(oneFieldType, fieldValue);
         } else if (targetClass.isAnnotationPresent(Schema.class)) {
           formLabels.put(oneFieldType, LabelValueOpenApiUtil.getFormLabels(targetClass));
         } else {

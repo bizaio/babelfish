@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "JWE Encryption Methods", enumAsRef = true)
-public enum JWEEncryptionMethodType {
+public enum JWEEncryptionEncodingType {
   // @formatter:off
   A128CBC_HS256("A128CBC-HS256"),
   A192CBC_HS384("A192CBC-HS384"),
@@ -30,7 +30,7 @@ public enum JWEEncryptionMethodType {
   
   private String text;
 
-  JWEEncryptionMethodType(String value) {
+  JWEEncryptionEncodingType(String value) {
     this.text = value;
   }
 
@@ -41,8 +41,8 @@ public enum JWEEncryptionMethodType {
   }
 
   @JsonCreator
-  public static JWEEncryptionMethodType fromValue(String value) {
-    for (JWEEncryptionMethodType b : JWEEncryptionMethodType.values()) {
+  public static JWEEncryptionEncodingType fromValue(String value) {
+    for (JWEEncryptionEncodingType b : JWEEncryptionEncodingType.values()) {
       if (String.valueOf(b.text).equals(value)) {
         return b;
       }

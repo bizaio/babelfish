@@ -16,7 +16,7 @@ import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.oidc.converters.ListStringToSpaceListConverter;
 import io.biza.babelfish.oidc.converters.SpaceListToListStringConverter;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
-import io.biza.babelfish.oidc.enumerations.JWEEncryptionMethodType;
+import io.biza.babelfish.oidc.enumerations.JWEEncryptionEncodingType;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.OAuth2ResponseType;
 import io.biza.babelfish.oidc.enumerations.OIDCApplicationType;
@@ -160,7 +160,7 @@ public class RegistrationProperties {
   @JsonProperty("id_token_encrypted_response_enc")
   @Schema(description = "ID Token JWE Encryption Algorithms Supported")
   @NotNull
-  JWEEncryptionMethodType idTokenEncryptionMethod;
+  JWEEncryptionEncodingType idTokenEncryptionMethod;
 
   @JsonProperty("request_object_signing_alg")
   @Schema(description = "Request Object Signing Algorithms")

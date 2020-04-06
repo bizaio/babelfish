@@ -5,8 +5,8 @@ export class BabelfishFormInput extends BabelfishFormControl {
 
   subType: string;
 
-  constructor(defaultValue, label: string, validators = [], subType = 'text', asyncValidators = []) {
-    super(BabelfishFormControlTypes.INPUT, defaultValue, label, validators, asyncValidators);
+  constructor(defaultValue, label: string, validators = [], controlStyle: string = "", subType: string = "text", asyncValidators = []) {
+    super(BabelfishFormControlTypes.INPUT, defaultValue, label, validators, controlStyle, asyncValidators);
 
     this.subType = subType;
   }

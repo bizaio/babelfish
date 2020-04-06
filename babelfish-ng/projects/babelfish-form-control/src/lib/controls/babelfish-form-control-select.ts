@@ -6,8 +6,8 @@ export class BabelfishFormSelect extends BabelfishFormControl {
 
   options: SelectItem[];
 
-  constructor(defaultValue, label: string, validators = [], options: SelectItem[] = [], asyncValidators = []) {
-    super(BabelfishFormControlTypes.SELECT, defaultValue, label, validators, asyncValidators);
+  constructor(defaultValue, label: string, validators = [], options: SelectItem[] = [], controlStyle: string = "", asyncValidators = []) {
+    super(BabelfishFormControlTypes.SELECT, defaultValue, label, validators, controlStyle, asyncValidators);
 
     this.options = options;
   }

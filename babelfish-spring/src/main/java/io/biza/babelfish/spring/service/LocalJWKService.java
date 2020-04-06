@@ -38,7 +38,7 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.gen.RSAKeyGenerator;
 import com.nimbusds.jwt.SignedJWT;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
-import io.biza.babelfish.oidc.enumerations.JWEEncryptionMethodType;
+import io.biza.babelfish.oidc.enumerations.JWEEncryptionEncodingType;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
 import io.biza.babelfish.oidc.payloads.JWKS;
 import io.biza.babelfish.oidc.payloads.JWTClaims;
@@ -234,7 +234,7 @@ public class LocalJWKService implements JWKService {
   @Override
   public String encryptAndSign(JWTClaims claims, URI jwksUri,
       JWSSigningAlgorithmType signingAlgorithm, JWEEncryptionAlgorithmType encryptionAlgorithm,
-      JWEEncryptionMethodType method)
+      JWEEncryptionEncodingType method)
       throws SigningOperationException, EncryptionOperationException, KeyRetrievalException {
 
     SignedJWT signedJWT = signToObject(claims, signingAlgorithm);
