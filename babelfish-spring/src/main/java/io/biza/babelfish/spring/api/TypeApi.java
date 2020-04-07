@@ -11,7 +11,6 @@
  *******************************************************************************/
 package io.biza.babelfish.spring.api;
 
-import io.biza.babelfish.spring.payloads.FormFieldType;
 import io.biza.babelfish.spring.payloads.ResponseGetTypes;
 import io.biza.babelfish.spring.service.TypeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -39,16 +38,6 @@ public class TypeApi {
   @Autowired
   TypeService typeService;
   
-  @Operation(summary = "Get a List of Available Types",
-      description = "Returns a list of available types and the type of type they are")
-  @ApiResponses(value = {@ApiResponse(responseCode = Constants.RESPONSE_CODE_OK,
-      description = "List of possible form fields",
-      content = @Content(array = @ArraySchema(schema = @Schema(implementation = FormFieldType.class))))})
-  @RequestMapping(method = RequestMethod.GET)
-  public ResponseEntity<List<FormFieldType>> listTypes() {
-    return ResponseEntity.ok(typeService.listTypes());
-  }
-
   @Operation(summary = "Get a value/label set for one or more enumeration types",
       description = "Returns a value/label set of FormValueLabel's based on the enumerations requested")
   @ApiResponses(value = {@ApiResponse(responseCode = Constants.RESPONSE_CODE_OK,

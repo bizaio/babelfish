@@ -21,20 +21,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import io.biza.babelfish.spring.payloads.FormLabelValue;
+import io.biza.babelfish.spring.payloads.BabelFieldLabelValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
 public class LabelValueOpenApiUtil {
-  public static List<FormLabelValue> getFormLabels(Class<?> typeClass) {
+  public static List<BabelFieldLabelValue> getFormLabels(Class<?> typeClass) {
     return getFormLabels(typeClass, "");
   }
 
-  public static List<FormLabelValue> getFormLabels(Class<?> typeClass, String prefix) {
+  public static List<BabelFieldLabelValue> getFormLabels(Class<?> typeClass, String prefix) {
     LOG.debug("Processing for {} with prefix of {}", typeClass.getName(), prefix);
-    List<FormLabelValue> labels = new ArrayList<FormLabelValue>();
+    List<BabelFieldLabelValue> labels = new ArrayList<BabelFieldLabelValue>();
     Field[] allFields = typeClass.getDeclaredFields();
     for (Field field : allFields) {
       if (field.isAnnotationPresent(JsonUnwrapped.class)) {
@@ -55,7 +55,7 @@ public class LabelValueOpenApiUtil {
             if (fieldType.isEnum()) {
               if (StringUtils.isEmpty(modelProperty.description())) {
                 if (!StringUtils.isEmpty(fieldType.getAnnotation(Schema.class).description())) {
-                  labels.add(FormLabelValue.builder()
+                  labels.add(BabelFieldLabelValue.builder()
                       .label(fieldType.getAnnotation(Schema.class).description())
                       .value(field.getName()).build());
                 }
@@ -64,7 +64,7 @@ public class LabelValueOpenApiUtil {
               labels.addAll(getFormLabels(fieldType, field.getName()));
             }
           } else {
-            labels.add(FormLabelValue.builder().label(modelProperty.description())
+            labels.add(BabelFieldLabelValue.builder().label(modelProperty.description())
                 .value((StringUtils.isEmpty(prefix) ? "" : prefix + ".") + field.getName())
                 .build());
           }

@@ -16,7 +16,6 @@ package io.biza.babelfish.spring.payloads;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.babelfish.spring.enumerations.BabelFieldType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,18 +33,17 @@ import lombok.ToString;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "TypeField", description = "Type Field Definition")
-public class FormFieldType {
+@Schema(name = "FormLabelValue", description = "Form Label to Value Mapping")
+public class BabelFieldLabelValue {
 
-  @JsonProperty("name")
-  @Schema(description = "Type Name")
+  @JsonProperty("label")
+  @Schema(description = "Form Label", example = "Form Label")
   @NotNull
-  public String name;
+  public String label;
 
-  @JsonProperty("type")
-  @Schema(description = "Field Type", example = "ENUMERATION")
+  @JsonProperty("value")
+  @Schema(description = "Form Value", example = "Form Value")
   @NotNull
-  @Builder.Default
-  public BabelFieldType type = BabelFieldType.ENUMERATION;
+  public String value;
 
 }

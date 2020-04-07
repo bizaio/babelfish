@@ -14,9 +14,9 @@
 package io.biza.babelfish.spring.interfaces;
 
 import java.util.List;
-import io.biza.babelfish.spring.payloads.FormLabelValue;
+import io.biza.babelfish.spring.payloads.BabelFieldLabelValue;
 
 
 public interface LabelValueDerivedInterface {
-  public List<FormLabelValue> getFormLabels();
+  public List<BabelFieldLabelValue> getFormLabels();
 }

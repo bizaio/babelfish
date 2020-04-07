@@ -31,10 +31,8 @@ import org.springframework.stereotype.Service;
 import io.biza.babelfish.cdr.orika.OrikaFactoryConfig;
 import io.biza.babelfish.cdr.orika.OrikaFactoryConfigurer;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
-import io.biza.babelfish.spring.enumerations.BabelFieldType;
 import io.biza.babelfish.spring.interfaces.LabelValueDerivedInterface;
-import io.biza.babelfish.spring.payloads.FormFieldType;
-import io.biza.babelfish.spring.payloads.FormLabelValue;
+import io.biza.babelfish.spring.payloads.BabelFieldLabelValue;
 import io.biza.babelfish.spring.payloads.ResponseGetTypes;
 import io.biza.babelfish.spring.util.LabelValueOpenApiUtil;
 import io.github.classgraph.ClassGraph;
@@ -78,24 +76,13 @@ public class TypeService implements ApplicationContextAware {
     }
   }
 
-  public List<FormFieldType> listTypes() {
-    List<FormFieldType> fieldType = new ArrayList<FormFieldType>();
-
-    classMap.keySet().stream().forEach(className -> {
-      fieldType
-          .add(FormFieldType.builder().name(className).type(BabelFieldType.ENUMERATION).build());
-    });
-
-    return fieldType;
-  }
-
-  public Map<String, List<FormLabelValue>> getEnumerationTypes(List<String> labelTypes) {
-    Map<String, List<FormLabelValue>> formLabels = new HashMap<String, List<FormLabelValue>>();
+  public Map<String, List<BabelFieldLabelValue>> getEnumerationTypes(List<String> labelTypes) {
+    Map<String, List<BabelFieldLabelValue>> formLabels = new HashMap<String, List<BabelFieldLabelValue>>();
 
     labelTypes.forEach(oneFieldType -> {
       if (classMap.containsKey(oneFieldType)) {
         Class<?> targetClass = classMap.get(oneFieldType);
-        List<FormLabelValue> fieldValue = new ArrayList<FormLabelValue>();
+        List<BabelFieldLabelValue> fieldValue = new ArrayList<BabelFieldLabelValue>();
 
         LOG.debug(
             "{} -> isEnum: {} LabelValueEnumInterface: {} LabelValueDerivedInterface: {} ApiModel: {}",
@@ -107,7 +94,7 @@ public class TypeService implements ApplicationContextAware {
           for (Object b : targetClass.getEnumConstants()) {
             LabelValueEnumInterface value = (LabelValueEnumInterface) b;
             fieldValue
-                .add(FormLabelValue.builder().label(value.label()).value(value.toString()).build());
+                .add(BabelFieldLabelValue.builder().label(value.label()).value(value.toString()).build());
           }
 
           formLabels.put(oneFieldType, fieldValue);
@@ -125,7 +112,7 @@ public class TypeService implements ApplicationContextAware {
         } else if (targetClass.isEnum()) {
           for (Object b : targetClass.getEnumConstants()) {
             fieldValue
-                .add(FormLabelValue.builder().label(b.toString()).value(b.toString()).build());
+                .add(BabelFieldLabelValue.builder().label(b.toString()).value(b.toString()).build());
           }
           formLabels.put(oneFieldType, fieldValue);
         } else if (targetClass.isAnnotationPresent(Schema.class)) {

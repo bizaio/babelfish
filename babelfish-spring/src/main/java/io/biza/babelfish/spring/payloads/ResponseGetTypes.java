@@ -36,7 +36,7 @@ public class ResponseGetTypes {
   
   @JsonProperty("fieldTypes")
   @Schema(description = "Field Type Values")
-  Map<String, List<FormLabelValue>> fieldTypes;
+  Map<String, List<BabelFieldLabelValue>> fieldTypes;
   
   public ResponseGetTypes populateFieldNames() {
     this.fieldNames = fieldTypes.keySet().stream().collect(Collectors.toList());
