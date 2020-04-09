@@ -6,7 +6,8 @@ export class BabelfishFormControl extends FormControl {
   type: BabelfishFormControlTypes;
   label: string;
   isVisible = true;
-  controlStyle: string
+  controlStyle: string;
+  tooltip: string;
 
   constructor(type: BabelfishFormControlTypes, defaultValue, label: string, validators = [], controlStyle: string = "", asyncValidators = []) {
     super(defaultValue, validators, asyncValidators);

@@ -17,7 +17,7 @@ export enum BabelfishFormControlTypes {
   DURATION = 'duration',
 }
 
-type FormControlType =
+export type FormControlType =
   BabelfishFormInput
   & BabelfishFormSelect
   & BabelfishFormTextarea

@@ -13,6 +13,9 @@
  *******************************************************************************/
 package io.biza.babelfish.spring.payloads;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,6 +26,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Singular;
 import lombok.ToString;
 
 @Valid
@@ -33,17 +37,20 @@ import lombok.ToString;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "BabelFormLabelValue", description = "Babelfish Form Label to Value Mapping")
-public class BabelFieldLabelValue {
-
-  @JsonProperty("label")
-  @Schema(description = "Form Label", example = "Form Label")
-  @NotNull
-  public String label;
-
-  @JsonProperty("value")
-  @Schema(description = "Form Value", example = "Form Value")
-  @NotNull
-  public String value;
+@Schema(name = "BabelForm", description = "Babelfish Form Definition")
+public class BabelForm {
   
+  @JsonProperty("title")
+  @Schema(description = "Form Title")
+  String title;
+  
+  @JsonProperty("description")
+  @Schema(description = "Form Description")
+  String description;
+
+  @JsonProperty("formFields")
+  @Schema(description = "Form Fields")
+  @NotNull
+  List<BabelFormField> formFields;
+
 }

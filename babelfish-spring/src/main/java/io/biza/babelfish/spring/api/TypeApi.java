@@ -11,6 +11,7 @@
  *******************************************************************************/
 package io.biza.babelfish.spring.api;
 
+import io.biza.babelfish.spring.payloads.BabelForm;
 import io.biza.babelfish.spring.payloads.ResponseGetTypes;
 import io.biza.babelfish.spring.service.TypeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -37,7 +38,7 @@ public class TypeApi {
 
   @Autowired
   TypeService typeService;
-  
+
   @Operation(summary = "Get a value/label set for one or more enumeration types",
       description = "Returns a value/label set of FormValueLabel's based on the enumerations requested")
   @ApiResponses(value = {@ApiResponse(responseCode = Constants.RESPONSE_CODE_OK,
@@ -47,8 +48,19 @@ public class TypeApi {
   public ResponseEntity<ResponseGetTypes> getEnumerationTypes(
       @Parameter(name = "labelTypes", description = "Set of Value Label Type lists to get",
           required = true, in = ParameterIn.QUERY) @RequestParam List<String> labelTypes) {
-    return ResponseEntity.ok(ResponseGetTypes.builder().fieldTypes(typeService.getEnumerationTypes(labelTypes))
-        .build().populateFieldNames());
+    return ResponseEntity.ok(ResponseGetTypes.builder()
+        .fieldTypes(typeService.getEnumerationTypes(labelTypes)).build().populateFieldNames());
+  }
+
+  @Operation(summary = "Get a form definition for a specified Model",
+      description = "Returns a BabelForm containing a definition of a Schema model for processing")
+  @ApiResponses(value = {@ApiResponse(responseCode = Constants.RESPONSE_CODE_OK,
+      description = "BabelForm form specification",
+      content = @Content(schema = @Schema(implementation = BabelForm.class)))})
+  @RequestMapping(path = "/form", method = RequestMethod.GET, params = {"formType"})
+  public ResponseEntity<BabelForm> getForm(@Parameter(name = "formType", description = "Form Type",
+      required = true, in = ParameterIn.QUERY) @RequestParam String formType) {
+    return ResponseEntity.ok(typeService.getFormDefinition(formType));
   }
 
 }

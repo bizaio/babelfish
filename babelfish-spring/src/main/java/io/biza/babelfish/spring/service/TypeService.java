@@ -33,6 +33,7 @@ import io.biza.babelfish.cdr.orika.OrikaFactoryConfigurer;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.biza.babelfish.spring.interfaces.LabelValueDerivedInterface;
 import io.biza.babelfish.spring.payloads.BabelFieldLabelValue;
+import io.biza.babelfish.spring.payloads.BabelForm;
 import io.biza.babelfish.spring.payloads.ResponseGetTypes;
 import io.biza.babelfish.spring.util.LabelValueOpenApiUtil;
 import io.github.classgraph.ClassGraph;
@@ -45,10 +46,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class TypeService implements ApplicationContextAware {
 
-  @Value("${babelfish.typeManager.packageBase:io.biza.babelfish.cdr.enumerations}")
-  List<String> packageBase;
+  @Value("${babelfish.typeManager.enumerations.packages:io.biza.babelfish.cdr.enumerations}")
+  List<String> enumPackages;
 
-  private Map<String, Class<?>> classMap;
+  @Value("${babelfish.typeManager.forms.packages:io.biza.babelfish.cdr.models}")
+  List<String> formPackages;
+
+  private Map<String, Class<?>> enumerationMap = new HashMap<String, Class<?>>();
+  private Map<String, Class<?>> formMap = new HashMap<String, Class<?>>();
 
   @SuppressWarnings("unused")
   private ApplicationContext applicationContext;
@@ -60,72 +65,110 @@ public class TypeService implements ApplicationContextAware {
   }
 
   public void init() {
-    classMap = new HashMap<String, Class<?>>();
-
-    if (packageBase != null) {
+    if (enumPackages != null) {
       try (ScanResult mapperResult = new ClassGraph().enableAllInfo()
-          .whitelistPackages(packageBase.toArray(new String[0])).scan()) {
+          .whitelistPackages(enumPackages.toArray(new String[0])).scan()) {
 
         ClassInfoList configurerClasses = mapperResult.getAllClasses();
 
         for (Class<?> clazz : configurerClasses.loadClasses()) {
-          classMap.put(clazz.getSimpleName(), clazz);
-          LOG.debug("Registered Type Lookup for for {}", clazz.getSimpleName());
+          enumerationMap.put(clazz.getSimpleName(), clazz);
+          LOG.debug("Registered Type for {}", clazz.getSimpleName());
         }
       }
     }
+
+    if (formPackages != null) {
+      try (ScanResult mapperResult = new ClassGraph().enableAllInfo()
+          .whitelistPackages(formPackages.toArray(new String[0])).scan()) {
+        
+        ClassInfoList configurerClasses = mapperResult.getClassesWithAnnotation("io.swagger.v3.oas.annotations.media.Schema");
+
+        for (Class<?> clazz : configurerClasses.loadClasses()) {
+          formMap.put(clazz.getSimpleName(), clazz);
+          LOG.debug("Registered Form for {}", clazz.getSimpleName());
+        }
+      }
+    }
+
+  }
+
+  public BabelForm getFormDefinition(String formName) {
+    if (formMap.containsKey(formName)) {
+      Class<?> targetClass = formMap.get(formName);
+      if (targetClass.isAnnotationPresent(Schema.class)) {
+        return LabelValueOpenApiUtil.getForm(targetClass);
+      } else {
+        LOG.error("Retrieving Form Definition requested for {} with unknown type of {}",
+            targetClass);
+        return null;
+      }
+    }
+    
+    LOG.error("Unable to locate requested field name of {} in enumeration map", formName);
+    return null;
   }
 
   public Map<String, List<BabelFieldLabelValue>> getEnumerationTypes(List<String> labelTypes) {
-    Map<String, List<BabelFieldLabelValue>> formLabels = new HashMap<String, List<BabelFieldLabelValue>>();
-
+    Map<String, List<BabelFieldLabelValue>> formLabels =
+        new HashMap<String, List<BabelFieldLabelValue>>();
     labelTypes.forEach(oneFieldType -> {
-      if (classMap.containsKey(oneFieldType)) {
-        Class<?> targetClass = classMap.get(oneFieldType);
-        List<BabelFieldLabelValue> fieldValue = new ArrayList<BabelFieldLabelValue>();
-
-        LOG.debug(
-            "{} -> isEnum: {} LabelValueEnumInterface: {} LabelValueDerivedInterface: {} ApiModel: {}",
-            targetClass, targetClass.isEnum(),
-            LabelValueEnumInterface.class.isAssignableFrom(targetClass),
-            LabelValueDerivedInterface.class.isAssignableFrom(targetClass),
-            targetClass.isAnnotationPresent(Schema.class));
-        if (targetClass.isEnum() && LabelValueEnumInterface.class.isAssignableFrom(targetClass)) {
-          for (Object b : targetClass.getEnumConstants()) {
-            LabelValueEnumInterface value = (LabelValueEnumInterface) b;
-            fieldValue
-                .add(BabelFieldLabelValue.builder().label(value.label()).value(value.toString()).build());
-          }
-
-          formLabels.put(oneFieldType, fieldValue);
-        } else if (LabelValueDerivedInterface.class.isAssignableFrom(targetClass)) {
-          try {
-            LabelValueDerivedInterface value = LabelValueDerivedInterface.class
-                .cast(targetClass.getDeclaredConstructor().newInstance());
-            formLabels.put(oneFieldType, value.getFormLabels());
-          } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-              | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-            LOG.error(
-                "Encountered an error when attempting to cast {} to a LabelValueDerivedInterface class with error: {}",
-                targetClass.getSimpleName(), e.getMessage());
-          }
-        } else if (targetClass.isEnum()) {
-          for (Object b : targetClass.getEnumConstants()) {
-            fieldValue
-                .add(BabelFieldLabelValue.builder().label(b.toString()).value(b.toString()).build());
-          }
-          formLabels.put(oneFieldType, fieldValue);
-        } else if (targetClass.isAnnotationPresent(Schema.class)) {
-          formLabels.put(oneFieldType, LabelValueOpenApiUtil.getFormLabels(targetClass));
-        } else {
-          LOG.error(
-              "Unable to create type fields response, found object but unable to determine how to interogate it");
-        }
+      List<BabelFieldLabelValue> fieldList = getEnumerationTypes(oneFieldType);
+      if (fieldList != null) {
+        formLabels.put(oneFieldType, fieldList);
       }
     });
 
     return formLabels;
+  }
 
+  public List<BabelFieldLabelValue> getEnumerationTypes(String oneFieldType) {
+    if (enumerationMap.containsKey(oneFieldType)) {
+      Class<?> targetClass = enumerationMap.get(oneFieldType);
+      List<BabelFieldLabelValue> fieldValue = new ArrayList<BabelFieldLabelValue>();
 
+      LOG.debug(
+          "{} -> isEnum: {} LabelValueEnumInterface: {} LabelValueDerivedInterface: {} ApiModel: {}",
+          targetClass, targetClass.isEnum(),
+          LabelValueEnumInterface.class.isAssignableFrom(targetClass),
+          LabelValueDerivedInterface.class.isAssignableFrom(targetClass),
+          targetClass.isAnnotationPresent(Schema.class));
+      if (targetClass.isEnum() && LabelValueEnumInterface.class.isAssignableFrom(targetClass)) {
+        for (Object b : targetClass.getEnumConstants()) {
+          LabelValueEnumInterface value = (LabelValueEnumInterface) b;
+          fieldValue.add(
+              BabelFieldLabelValue.builder().label(value.label()).value(value.toString()).build());
+        }
+
+        return fieldValue;
+      } else if (LabelValueDerivedInterface.class.isAssignableFrom(targetClass)) {
+        try {
+          LabelValueDerivedInterface value = LabelValueDerivedInterface.class
+              .cast(targetClass.getDeclaredConstructor().newInstance());
+          return value.getFormLabels();
+        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+            | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+          LOG.error(
+              "Encountered an error when attempting to cast {} to a LabelValueDerivedInterface class with error: {}",
+              targetClass.getSimpleName(), e.getMessage());
+        }
+      } else if (targetClass.isEnum()) {
+        for (Object b : targetClass.getEnumConstants()) {
+          fieldValue
+              .add(BabelFieldLabelValue.builder().label(b.toString()).value(b.toString()).build());
+        }
+        return fieldValue;
+
+      } else if (targetClass.isAnnotationPresent(Schema.class)) {
+        return LabelValueOpenApiUtil.getFormLabels(targetClass);
+      } else {
+        LOG.error(
+            "Unable to create type fields response, found object but unable to determine how to interogate it");
+        return null;
+      }
+    }
+
+    LOG.error("Unable to locate requested field name of {} in enumeration map", oneFieldType);
+    return null;
   }
 }
