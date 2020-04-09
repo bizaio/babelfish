@@ -3,7 +3,7 @@ import {BabelfishFormControlTypes} from '../babelfish-form-control.component';
 
 export class BabelfishFormDate extends BabelfishFormControl {
 
-  constructor(defaultValue, label: string, validators = [], controlStyle: string = "", asyncValidators = []) {
-    super(BabelfishFormControlTypes.DATE, defaultValue, label, validators, controlStyle, asyncValidators);
+  constructor(defaultValue, label: string, tooltip: string, validators = [], controlStyle: string = "", asyncValidators = []) {
+    super(BabelfishFormControlTypes.DATE, defaultValue, label, tooltip, validators, controlStyle, asyncValidators);
   }
 }
