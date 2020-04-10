@@ -20,6 +20,7 @@
     "ngx-duration-picker": "^3.2.0"
   },
   "devDependencies": {
+    "@angular-devkit/build-ng-packagr": "^0.901.1",
     "@angular/cdk": "^9.2.0",
     "@angular/common": "^9.1.0",
     "@angular/compiler": "^9.1.0",
