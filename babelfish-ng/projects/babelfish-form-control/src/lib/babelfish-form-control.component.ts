@@ -7,23 +7,41 @@ import {BabelfishFormInput} from './controls/babelfish-form-control-input';
 import {BabelfishFormCheckbox} from './controls/babelfish-form-control-checkbox';
 import {BabelfishFormDate} from './controls/babelfish-form-control-date';
 import {BabelfishFormDuration} from './controls/babelfish-form-control-duration';
+import {BabelfishFormInputMulti} from './controls/babelfish-form-control-inputmulti';
+import {BabelfishFormSelectMulti} from './controls/babelfish-form-control-selectmulti';
+import {BabelfishFormSelectList} from './controls/babelfish-form-control-selectlist';
+import {BabelfishFormDateTime} from './controls/babelfish-form-control-datetime';
+import {BabelfishFormTime} from './controls/babelfish-form-control-time';
+import {BabelfishFormForm} from './controls/babelfish-form-control-form';
 
 export enum BabelfishFormControlTypes {
-  INPUT = 'input',
-  SELECT = 'select',
-  TEXTAREA = 'textarea',
-  DATE = 'date',
   CHECKBOX = 'checkbox',
+  INPUT = 'input',
+  TEXTAREA = 'textarea',
+  INPUT_MULTI = 'inputmulti',
+  SELECT = 'select',
+  SELECT_MULTI = 'selectmulti',
+  SELECT_LIST = 'selectlist',
+  DATETIME = 'datetime',
+  DATE = 'date',
+  TIME = 'time',
   DURATION = 'duration',
+  FORM = 'form',
 }
 
 export type FormControlType =
-  BabelfishFormInput
-  & BabelfishFormSelect
+  BabelfishFormCheckbox
+  & BabelfishFormInput
   & BabelfishFormTextarea
+  & BabelfishFormInputMulti
+  & BabelfishFormSelect
+  & BabelfishFormSelectMulti
+  & BabelfishFormSelectList
+  & BabelfishFormDateTime
   & BabelfishFormDate
-  & BabelfishFormCheckbox
+  & BabelfishFormTime
   & BabelfishFormDuration
+  & BabelfishFormForm
   & AbstractControl
   & FormGroup;
 

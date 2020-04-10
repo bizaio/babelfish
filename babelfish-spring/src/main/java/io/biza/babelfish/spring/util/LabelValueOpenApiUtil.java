@@ -14,11 +14,14 @@ package io.biza.babelfish.spring.util;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
+import java.net.URI;
 import java.time.OffsetDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
+import java.util.Set;
+import javax.persistence.Lob;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -105,6 +108,13 @@ public class LabelValueOpenApiUtil {
         if(modelProperty.required() || field.isAnnotationPresent(NotNull.class)) {
           formField.mandatory(true);
         }
+        
+        /**
+         * Initialise text area
+         */
+        if(field.isAnnotationPresent(Lob.class)) {
+          formField.fieldType(BabelFormFieldType.TEXTAREA);
+        }
 
         /**
          * Initialise Tooltip
@@ -140,7 +150,11 @@ public class LabelValueOpenApiUtil {
             }
             formField.values(values);
           }
-          formField.fieldType(BabelFormFieldType.SELECT);
+          if(Set.class.isAssignableFrom(field.getType())) {
+            formField.fieldType(BabelFormFieldType.SELECT_MULTI);
+          } else {
+            formField.fieldType(BabelFormFieldType.SELECT);
+          }
         }
 
         /**
@@ -195,10 +209,12 @@ public class LabelValueOpenApiUtil {
         }
         
         /**
-         * List input
+         * Multi Input
          */
-        if(List.class.isAssignableFrom(fieldType)) {
-          formField.fieldType(BabelFormFieldType.LIST_INPUT);
+        if(Set.class.isAssignableFrom(field.getType()) ) {
+          if(String.class.isAssignableFrom(fieldType) || URI.class.isAssignableFrom(fieldType)) {
+            formField.fieldType(BabelFormFieldType.INPUT_MULTI);
+          }
         }
         
         /**
@@ -206,6 +222,7 @@ public class LabelValueOpenApiUtil {
          */
         if(fieldType.getPackageName().equals(typeClass.getPackageName())) {
           formField.form(getForm(fieldType));
+          formField.fieldType(BabelFormFieldType.FORM);
         }
         
         /**

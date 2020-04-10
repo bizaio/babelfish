@@ -1,5 +1,14 @@
 package io.biza.babelfish.spring.enumerations;
 
 public enum BabelFormFieldType {
-  CHECKBOX, DATETIME, DURATION, INPUT, SELECT, TEXTAREA, FORM, LIST_INPUT
+  // Boolean
+  CHECKBOX,
+  // Text
+  INPUT, TEXTAREA, INPUT_MULTI,
+  // Drop Downs
+  SELECT, SELECT_MULTI, SELECT_LIST, 
+  // Date and Time related
+  DATETIME, DATE, TIME, DURATION,
+  // Nested Form
+  FORM
 }

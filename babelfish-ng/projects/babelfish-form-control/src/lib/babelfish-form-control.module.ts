@@ -2,7 +2,14 @@ import {Inject, ModuleWithProviders, NgModule, Optional, SkipSelf} from '@angula
 import {BabelfishFormControlComponent} from './babelfish-form-control.component';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {CalendarModule, CheckboxModule, DropdownModule, OverlayPanelModule} from 'primeng';
+import {
+  CalendarModule,
+  CheckboxModule, ChipsModule,
+  DropdownModule,
+  InputSwitchModule, ListboxModule, MultiSelectModule,
+  OverlayPanelModule,
+  TooltipModule
+} from 'primeng';
 import {DurationPickerModule} from 'ngx-duration-picker';
 import {BabelfishDurationPickerComponent} from './duration-picker/babelfish-duration-picker.component';
 
@@ -16,7 +23,12 @@ import {BabelfishDurationPickerComponent} from './duration-picker/babelfish-dura
     DropdownModule,
     DurationPickerModule,
     OverlayPanelModule,
-    FormsModule
+    FormsModule,
+    TooltipModule,
+    InputSwitchModule,
+    ChipsModule,
+    MultiSelectModule,
+    ListboxModule
   ],
   exports: [BabelfishFormControlComponent]
 })

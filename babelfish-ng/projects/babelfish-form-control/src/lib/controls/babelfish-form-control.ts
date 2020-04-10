@@ -9,11 +9,12 @@ export class BabelfishFormControl extends FormControl {
   controlStyle: string;
   tooltip: string;
 
-  constructor(type: BabelfishFormControlTypes, defaultValue, label: string, validators = [], controlStyle: string = "", asyncValidators = []) {
+  constructor(type: BabelfishFormControlTypes, defaultValue, label: string, tooltip: string, validators = [], controlStyle: string = "", asyncValidators = []) {
     super(defaultValue, validators, asyncValidators);
 
     this.type = type;
     this.label = label;
+    this.tooltip = tooltip;
     this.controlStyle = controlStyle;
   }
 }
