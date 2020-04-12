@@ -5,7 +5,6 @@ import java.util.List;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionEncodingType;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
-import io.biza.babelfish.oidc.enumerations.OAuth2ResponseType;
 import io.biza.babelfish.oidc.enumerations.OIDCApplicationType;
 import io.biza.babelfish.oidc.enumerations.OIDCAuthMethod;
 import io.biza.babelfish.oidc.enumerations.OIDCGrantType;
@@ -70,8 +69,6 @@ public class Constants {
       List.of(OIDCAuthMethod.PRIVATE_KEY_JWT);
   public final static List<OIDCGrantType> SUPPORTED_OIDC_GRANT_TYPES =
       List.of(OIDCGrantType.CLIENT_CREDENTIALS);
-  public final static List<List<OAuth2ResponseType>> SUPPORTED_OAUTH2_RESPONSE_TYPES =
-      List.of(List.of(OAuth2ResponseType.CODE, OAuth2ResponseType.ID_TOKEN));
 
 
   /**

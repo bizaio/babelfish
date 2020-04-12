@@ -1,4 +1,4 @@
-package io.biza.babelfish.oidc.exceptions;
+package io.biza.babelfish.oauth2.exceptions;
 
 
 public class UnauthorisedClientException extends Exception {

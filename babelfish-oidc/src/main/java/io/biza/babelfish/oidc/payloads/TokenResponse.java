@@ -45,13 +45,13 @@ public class TokenResponse {
    */
   @JsonProperty("token_type")
   @NotNull
-  OAuth2TokenType tokenType;
+  @Builder.Default
+  OAuth2TokenType tokenType = OAuth2TokenType.BEARER;
 
   /**
    * Access Token expiry time
    * 
-   * NOTE: Within thumb we do a conversion of this to/from it's seconds of validity to an
-   * OffsetDateTime we can manipulate during check operations
+   * NOTE: Conversion to Java OffsetDateTime internally for operations to be easier
    */
   @JsonProperty("expires_in")
   @JsonDeserialize(converter = FutureSecondsToOffsetDateTimeConverter.class)
@@ -67,13 +67,19 @@ public class TokenResponse {
   /**
    * Refresh token expiry time
    * 
-   * NOTE: Within thumb we do a conversion of this to/from it's seconds of validity to an
-   * OffsetDateTime we can manipulate during check operations
+   * NOTE: Conversion to Java OffsetDateTime internally for operations to be easier
    */
   @JsonProperty("refresh_expires_in")
   @JsonDeserialize(converter = FutureSecondsToOffsetDateTimeConverter.class)
   @JsonSerialize(converter = OffsetDateTimeToFutureSecondsConverter.class)
   OffsetDateTime refreshExpiresAt;
+  
+  /**
+   * ID Token
+   */
+  @JsonProperty("id_token")
+  String idToken;
+  
   /**
    * List of scopes the access token has access to
    * 

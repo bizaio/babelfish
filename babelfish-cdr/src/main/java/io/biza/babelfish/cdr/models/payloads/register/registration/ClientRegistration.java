@@ -18,7 +18,6 @@ import io.biza.babelfish.oidc.converters.SpaceListToListStringConverter;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionEncodingType;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
-import io.biza.babelfish.oidc.enumerations.OAuth2ResponseType;
 import io.biza.babelfish.oidc.enumerations.OIDCApplicationType;
 import io.biza.babelfish.oidc.enumerations.OIDCAuthMethod;
 import io.biza.babelfish.oidc.enumerations.OIDCGrantType;

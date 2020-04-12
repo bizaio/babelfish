@@ -24,6 +24,14 @@ public class ValidationUtil {
     return validationErrorList;
   }
   
+  public static <T> String toValidationMessage(Set<ConstraintViolation<T>> validationErrors) {
+    StringBuilder value = new StringBuilder();
+    for(ConstraintViolation<T> violation : validationErrors) {
+      value.append(violation.getMessage());
+    }
+    return value.toString();
+  }
+  
   public static <T> void validateOrThrow(Validator validator, T object) {
     Set<ConstraintViolation<T>> validationResult = validator.validate(object);
     if(validationResult.size() > 0) {

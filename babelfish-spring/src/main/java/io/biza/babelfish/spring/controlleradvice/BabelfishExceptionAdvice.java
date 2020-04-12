@@ -29,6 +29,7 @@ import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.biza.babelfish.spring.Messages;
 import io.biza.babelfish.spring.enumerations.BabelExceptionType;
 import io.biza.babelfish.spring.enumerations.BabelValidationErrorType;
+import io.biza.babelfish.spring.exceptions.NotFoundException;
 import io.biza.babelfish.spring.exceptions.ValidationListException;
 import io.biza.babelfish.spring.payloads.ResponseValidationError;
 import io.biza.babelfish.spring.payloads.BabelValidationError;
@@ -186,6 +187,12 @@ public class BabelfishExceptionAdvice {
     }
   }
 
+  @ExceptionHandler(NotFoundException.class)
+  public ResponseEntity<Object> handleNotFoundException(HttpServletRequest req,
+      NotFoundException ex) {
+
+    return ResponseEntity.notFound().build();
+  }
 
   @ExceptionHandler(ValidationListException.class)
   public ResponseEntity<Object> handleValidationException(HttpServletRequest req,
