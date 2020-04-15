@@ -1,12 +1,9 @@
 package io.biza.babelfish.spring.persistence.converter;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import javax.persistence.AttributeConverter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 import io.biza.babelfish.oidc.payloads.JWTClaims;
 import lombok.extern.slf4j.Slf4j;
 

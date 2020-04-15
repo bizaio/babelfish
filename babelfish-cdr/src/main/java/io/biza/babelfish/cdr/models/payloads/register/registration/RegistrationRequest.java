@@ -13,8 +13,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.EpochToOffsetDateTimeConverter;
 import io.biza.babelfish.cdr.converters.OffsetDateTimeToEpochConverter;
-import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
-import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
 import io.biza.babelfish.oidc.enumerations.OIDCResponseType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionEncodingType;

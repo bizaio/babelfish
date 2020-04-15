@@ -23,8 +23,6 @@ import java.util.List;
 import java.util.Set;
 import javax.persistence.Lob;
 import javax.validation.constraints.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.biza.babelfish.cdr.support.LabelValueEnumInterface;

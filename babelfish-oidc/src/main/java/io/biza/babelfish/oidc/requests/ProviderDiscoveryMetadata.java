@@ -3,14 +3,12 @@ package io.biza.babelfish.oidc.requests;
 import java.net.URI;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.babelfish.oidc.enumerations.OIDCResponseType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionEncodingType;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
@@ -83,7 +81,7 @@ public class ProviderDiscoveryMetadata {
 
   @JsonProperty("response_types_supported")
   @Schema(description = "OAuth2 Response Types supported")
-  List<OIDCResponseType> responseTypesSupported;
+  Set<String> responseTypesSupported;
 
   @JsonProperty("response_modes_supported")
   @Schema(description = "OAuth2 Response Modes supported")

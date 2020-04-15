@@ -1,7 +1,6 @@
 package io.biza.babelfish.cdr.orika;
 
 import java.lang.reflect.InvocationTargetException;
-import io.biza.babelfish.cdr.Constants;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;

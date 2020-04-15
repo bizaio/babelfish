@@ -1,10 +1,8 @@
 package io.biza.babelfish.cdr.enumerations.oidc;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.biza.babelfish.cdr.exceptions.LabelValueEnumValueNotSupportedException;
-import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "Scopes used within the CDR", enumAsRef = true)

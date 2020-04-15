@@ -13,8 +13,6 @@
  *******************************************************************************/
 package io.biza.babelfish.typeservice.api.controller;
 
-import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import io.biza.babelfish.spring.api.TypeApi;
 

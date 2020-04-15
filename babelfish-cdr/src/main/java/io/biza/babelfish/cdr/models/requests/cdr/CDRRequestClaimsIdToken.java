@@ -1,9 +1,6 @@
 package io.biza.babelfish.cdr.models.requests.cdr;
 
-import java.net.URI;
-import java.util.List;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

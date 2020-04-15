@@ -47,7 +47,6 @@ import io.biza.babelfish.spring.exceptions.KeyRetrievalException;
 import io.biza.babelfish.spring.exceptions.NotInitialisedException;
 import io.biza.babelfish.spring.exceptions.SigningOperationException;
 import io.biza.babelfish.spring.exceptions.SigningVerificationException;
-import io.biza.babelfish.spring.interfaces.JWKService;
 import io.biza.babelfish.spring.interfaces.OldJWKService;
 import io.biza.babelfish.spring.util.NimbusUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -56,20 +55,20 @@ import net.minidev.json.JSONStyle;
 @Slf4j
 @Service
 @ConditionalOnProperty(name = "babelfish.service.JWKService",
-    havingValue = "LocalJWKService", matchIfMissing = true)
-public class LocalJWKService implements JWKService {
+    havingValue = "LocalKeyStoreJWKService", matchIfMissing = true)
+public class OldLocalJWKService implements OldJWKService {
 
-  @Value("${babelfish.jwk.filePath:babelfish-jwks.json}")
+  @Value("${babelfish.jwk-file:babelfish-jwks.json}")
   String KEYSET_PATH;
 
-  @Value("${babelfish.jwk.signing-key-size:2048}")
+  @Value("${babelfish.signing-key-size:2048}")
   Integer SIGNING_KEY_SIZE;
 
   JWKSet jwkSet;
   ObjectMapper mapper;
 
   @Override
-  public JWKS getJwks(String name) throws NotInitialisedException {
+  public JWKS getJwks() throws NotInitialisedException {
     try {
       return mapper.readValue(jwkSet.toPublicJWKSet().toJSONObject().toJSONString(), JWKS.class);
     } catch (JsonProcessingException e) {
@@ -78,7 +77,25 @@ public class LocalJWKService implements JWKService {
     }
   }
 
-  public LocalJWKService() throws NotInitialisedException {
+  public static OldLocalJWKService clientService(String keySetPath, Integer signingKeySize) {
+    OldLocalJWKService local = new OldLocalJWKService(keySetPath, signingKeySize);
+    return local;
+  }
+
+  private OldLocalJWKService(String keyPath, Integer keySize) {
+    Security.addProvider(BouncyCastleProviderSingleton.getInstance());
+    this.KEYSET_PATH = Optional.of(keyPath).orElse("babelfish-jwks.json");
+    this.SIGNING_KEY_SIZE = Optional.of(keySize).orElse(2048);
+    this.mapper = new ObjectMapper();
+    try {
+      setupKeySet();
+    } catch (NotInitialisedException e) {
+      LOG.error(
+          "Something went wrong while setting up a manually established Key Store JWK Service", e);
+    }
+  }
+
+  public OldLocalJWKService() throws NotInitialisedException {
     /**
      * Initialise jackson
      */
@@ -318,7 +335,7 @@ public class LocalJWKService implements JWKService {
   }
 
   @Override
-  public String peekAt(String compactSerialisation, JWTPeekAttribute peekAttribute) throws SigningVerificationException {
+  public String peekAtClientId(String compactSerialisation) throws SigningVerificationException {
     try {
       SignedJWT inputJwt = SignedJWT.parse(compactSerialisation);
       return inputJwt.getJWTClaimsSet().getStringClaim("client_id");
