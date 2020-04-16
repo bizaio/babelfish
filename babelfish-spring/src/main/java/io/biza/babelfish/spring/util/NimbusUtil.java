@@ -20,6 +20,7 @@ import io.biza.babelfish.oidc.converters.ListStringToSpaceListConverter;
 import io.biza.babelfish.oidc.converters.SpaceListToListStringConverter;
 import io.biza.babelfish.oidc.payloads.JWTClaims;
 import io.biza.babelfish.oidc.payloads.JWTClaims.JWTClaimsBuilder;
+import io.biza.babelfish.spring.exceptions.SigningVerificationException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -119,4 +120,25 @@ public class NimbusUtil {
     }
 
   }
+  
+  public static void checkClaims(JWTClaims inputClaims, JWTClaims claimChecks) throws SigningVerificationException {
+			if(claimChecks.issuer() != null) NimbusUtil.checkEquals("issuer", claimChecks.issuer(), inputClaims.issuer());
+			if(claimChecks.subject() != null) NimbusUtil.checkEquals("subject", claimChecks.subject(), inputClaims.subject());
+			if(claimChecks.audience() != null) NimbusUtil.checkEquals("audience", claimChecks.audience(), inputClaims.audience());
+			if(claimChecks.additionalClaims() != null) {
+				for(String claim : claimChecks.additionalClaims().keySet()) {
+					NimbusUtil.checkEquals(claim, claimChecks.additionalClaims().get(claim), inputClaims.additionalClaims().get(claim));
+				}
+			}
+  }
+
+	public static <T> void checkEquals(String name, T classOne, T classTwo) throws SigningVerificationException {
+		if (classOne == null)
+			return;
+		if (!classOne.equals(classTwo)) {
+			throw SigningVerificationException.builder()
+					.message("Verification of " + name + " required claim failed: " + classOne + " versus " + classTwo)
+					.build();
+		}
+	}
 }

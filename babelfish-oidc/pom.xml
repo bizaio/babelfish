@@ -182,6 +182,11 @@
 			<artifactId>bcpkix-jdk15on</artifactId>
 			<version>${bcprov-jdk.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.nimbusds</groupId>
+			<artifactId>nimbus-jose-jwt</artifactId>
+			<version>${nimbus-jose-jwt.version}</version>
+		</dependency>		
 	</dependencies>
 	<distributionManagement>
 		<snapshotRepository>

@@ -15,6 +15,8 @@ package io.biza.babelfish.oidc.enumerations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.nimbusds.jose.JWSAlgorithm;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "JWT Signing Algorithm Types", enumAsRef = true)
@@ -57,4 +59,13 @@ public enum JWSSigningAlgorithmType {
 
     return null;
   }
+  
+  public static JWSSigningAlgorithmType fromNimbus(JWSAlgorithm value) {
+	  return fromValue(value.getName());
+  }
+  
+  public JWSAlgorithm toNimbus() {
+	  return JWSAlgorithm.parse(text);
+  }
+  
 }

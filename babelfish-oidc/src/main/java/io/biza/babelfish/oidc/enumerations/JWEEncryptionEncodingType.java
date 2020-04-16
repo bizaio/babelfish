@@ -15,6 +15,9 @@ package io.biza.babelfish.oidc.enumerations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.nimbusds.jose.EncryptionMethod;
+import com.nimbusds.jose.JWEAlgorithm;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "JWE Encryption Methods", enumAsRef = true)
@@ -49,5 +52,13 @@ public enum JWEEncryptionEncodingType {
     }
 
     return null;
+  }
+  
+  public static JWEEncryptionEncodingType fromNimbus(EncryptionMethod value) {
+	  return fromValue(value.getName());
+  }
+  
+  public EncryptionMethod toNimbus() {
+	  return EncryptionMethod.parse(text);
   }
 }

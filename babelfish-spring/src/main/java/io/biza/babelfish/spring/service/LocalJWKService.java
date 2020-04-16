@@ -6,10 +6,15 @@ import java.io.IOException;
 import java.net.URI;
 import java.security.Security;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import javax.annotation.PostConstruct;
+
+import org.apache.commons.collections.ListUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
@@ -31,6 +36,7 @@ import com.nimbusds.jose.crypto.RSASSAVerifier;
 import com.nimbusds.jose.crypto.bc.BouncyCastleProviderSingleton;
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKMatcher;
+import com.nimbusds.jose.jwk.JWKMatcher.Builder;
 import com.nimbusds.jose.jwk.JWKSelector;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.KeyUse;
@@ -39,9 +45,11 @@ import com.nimbusds.jose.jwk.gen.RSAKeyGenerator;
 import com.nimbusds.jwt.SignedJWT;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionEncodingType;
+import io.biza.babelfish.oidc.enumerations.JWKPublicKeyUse;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
 import io.biza.babelfish.oidc.payloads.JWKS;
 import io.biza.babelfish.oidc.payloads.JWTClaims;
+import io.biza.babelfish.spring.enumerations.JWTPeekAttribute;
 import io.biza.babelfish.spring.exceptions.EncryptionOperationException;
 import io.biza.babelfish.spring.exceptions.KeyRetrievalException;
 import io.biza.babelfish.spring.exceptions.NotInitialisedException;
@@ -49,295 +57,203 @@ import io.biza.babelfish.spring.exceptions.SigningOperationException;
 import io.biza.babelfish.spring.exceptions.SigningVerificationException;
 import io.biza.babelfish.spring.interfaces.JWKService;
 import io.biza.babelfish.spring.interfaces.OldJWKService;
+import io.biza.babelfish.spring.util.KeyUtil;
+import io.biza.babelfish.spring.util.MessageUtil;
 import io.biza.babelfish.spring.util.NimbusUtil;
 import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONStyle;
 
 @Slf4j
 @Service
-@ConditionalOnProperty(name = "babelfish.service.JWKService",
-    havingValue = "LocalJWKService", matchIfMissing = true)
+@ConditionalOnProperty(name = "babelfish.service.JWKService", havingValue = "LocalJWKService", matchIfMissing = true)
 public class LocalJWKService implements JWKService {
 
-  @Value("${babelfish.jwk.filePath:babelfish-jwks.json}")
-  String KEYSET_PATH;
+	Map<String, JWKSet> jwkSets;
 
-  @Value("${babelfish.jwk.signing-key-size:2048}")
-  Integer SIGNING_KEY_SIZE;
+	@Value("${babelfish.jwk.setPrefix:babelfish}")
+	String KEYSET_PREFIX;
 
-  JWKSet jwkSet;
-  ObjectMapper mapper;
+	@Value("${babelfish.jwk.autoInit:true}")
+	Boolean AUTO_INIT;
 
-  @Override
-  public JWKS getJwks(String name) throws NotInitialisedException {
-    try {
-      return mapper.readValue(jwkSet.toPublicJWKSet().toJSONObject().toJSONString(), JWKS.class);
-    } catch (JsonProcessingException e) {
-      LOG.error("Encountered JSON Processing exception processing from smart-json to jackson?", e);
-      throw NotInitialisedException.builder().build();
-    }
-  }
+	@Value("${babelfish.jwk.key-size:2048}")
+	Integer KEY_SIZE;
 
-  public LocalJWKService() throws NotInitialisedException {
-    /**
-     * Initialise jackson
-     */
-    this.mapper = new ObjectMapper();
-    Security.addProvider(BouncyCastleProviderSingleton.getInstance());
-  }
+	/**
+	 * @Value("${babelfish.jwk.filePath:babelfish-jwks.json}") String KEYSET_PATH;
+	 * 
+	 * @Value("${babelfish.jwk.signing-key-size:2048}") Integer SIGNING_KEY_SIZE;
+	 */
 
-  @PostConstruct
-  private void setupKeySet() throws NotInitialisedException {
-    /**
-     * If the keyset doesn't exist go create it
-     */
-    if (!new File(KEYSET_PATH).exists()) {
-      initialiseKeyset();
-    }
+	@Autowired
+	ObjectMapper mapper;
 
-    try {
-      this.jwkSet = JWKSet.load(new File(KEYSET_PATH));
-    } catch (IOException | ParseException e) {
-      LOG.error("Encountered error while attempting to load JWKSet from {}", KEYSET_PATH);
-      throw NotInitialisedException.builder().build();
-    }
+	@Override
+	public JWKS jwks(String name) throws NotInitialisedException {
+		try {
+			if (!jwkSets.containsKey(name)) {
+				throw NotInitialisedException.builder().build();
+			}
+			return mapper.readValue(getJWKSet(name).toPublicJWKSet().toJSONObject().toJSONString(), JWKS.class);
+		} catch (JsonProcessingException e) {
+			LOG.error("Encountered JSON Processing exception processing from smart-json to jackson?", e);
+			throw NotInitialisedException.builder().build();
+		}
+	}
 
-  }
+	@Override
+	public JWTClaims verify(String compactSerialisation, URI jwksUri, JWTClaims claimChecks)
+			throws SigningVerificationException, KeyRetrievalException {
 
-  private void initialiseKeyset() throws NotInitialisedException {
-    /**
-     * Create a key for signing
-     */
-    try {
-      LOG.info("Initialising the signing and encryption keys for use during operations at: {}",
-          KEYSET_PATH);
-      RSAKey signingKey = new RSAKeyGenerator(SIGNING_KEY_SIZE).keyUse(KeyUse.SIGNATURE)
-          .keyID(UUID.randomUUID().toString()).algorithm(JWSAlgorithm.PS256).generate();
-      RSAKey encryptKey = new RSAKeyGenerator(SIGNING_KEY_SIZE).keyUse(KeyUse.ENCRYPTION)
-          .keyID(UUID.randomUUID().toString()).algorithm(JWSAlgorithm.PS256).generate();
-      JWKSet localJwk = new JWKSet(List.of(signingKey, encryptKey));
+		try {
+			SignedJWT jwt = SignedJWT.parse(compactSerialisation);
 
-      /**
-       * Output the new Keyset
-       */
-      FileWriter jwkFile = new FileWriter(KEYSET_PATH);
-      jwkFile.write(localJwk.toJSONObject(false).toJSONString(JSONStyle.NO_COMPRESS));
-      jwkFile.close();
+			JWK remoteJwk = KeyUtil.getRemoteKey(jwksUri, KeyUtil.getJwkMatcher(jwt, KeyUse.SIGNATURE));
+			JWSVerifier verifier = new RSASSAVerifier(remoteJwk.toRSAKey());
 
-    } catch (JOSEException e) {
-      LOG.error("Encountered error while attempting to generate keys for JWKSet {}", KEYSET_PATH);
-      throw NotInitialisedException.builder().build();
-    } catch (IOException e) {
-      LOG.error("Encountered I/O Error while writing new JWKS at: {}", KEYSET_PATH, e);
-      throw NotInitialisedException.builder().build();
-    }
+			if (jwt.verify(verifier)) {
+				JWTClaims inputClaims = NimbusUtil.fromClaimsSet(jwt.getJWTClaimsSet());
 
-  }
+				if (claimChecks != null) {
+					NimbusUtil.checkClaims(inputClaims, claimChecks);
+				}
+				return inputClaims;
+			} else {
+				LOG.warn("Received signing verification error for kid of {} from {}", remoteJwk.getKeyID(), jwksUri);
+				throw SigningVerificationException.builder().message("Unable to verify serialisation using kid "
+						+ remoteJwk.getKeyID() + " retrieved from " + jwksUri).build();
+			}
+		} catch (ParseException e) {
+			LOG.error("Unable to parse supplied JWT: {}", e.getMessage(), e);
+			throw SigningVerificationException.builder().message(e.getMessage()).build();
+		} catch (JOSEException e) {
+			LOG.warn("Encountered a JOSEException while attempting to verify payload {} using jwks {}",
+					compactSerialisation, jwksUri, e);
+			throw SigningVerificationException.builder().message(e.getMessage()).build();
+		}
+	}
 
-  @Override
-  public JWTClaims verify(String compactSerialisation, URI jwksUri, JWTClaims claimChecks)
-      throws SigningVerificationException, KeyRetrievalException {
+	@Override
+	public String sign(String name, JWTClaims claims, JWSSigningAlgorithmType algorithm)
+			throws SigningOperationException, NotInitialisedException {
+		JWK jwk = getJWK(name, algorithm, JWKPublicKeyUse.SIGN);
+		JWSSigner signer;
+		try {
+			signer = new RSASSASigner(jwk.toRSAKey().toPrivateKey());
 
-    try {
-      SignedJWT inputJwt = SignedJWT.parse(compactSerialisation);
-      JWK remoteJwk = remoteSigningKey(jwksUri, inputJwt.getHeader().getKeyID(),
-          JWSSigningAlgorithmType.fromValue(inputJwt.getHeader().getAlgorithm().getName()));
-      JWSVerifier verifier = new RSASSAVerifier(remoteJwk.toRSAKey());
+		} catch (JOSEException e) {
+			LOG.warn("Encountered a JOSEException while attempting to setup RSA signer", e);
+			throw SigningOperationException.builder().message(e.getMessage()).build();
+		}
 
-      if (inputJwt.verify(verifier)) {
-        JWTClaims inputClaims = NimbusUtil.fromClaimsSet(inputJwt.getJWTClaimsSet());
+		SignedJWT signedJwt = new SignedJWT(new JWSHeader.Builder(algorithm.toNimbus()).keyID(jwk.getKeyID()).build(),
+				NimbusUtil.toClaimsSet(claims));
+		try {
+			signedJwt.sign(signer);
+			return signedJwt.serialize();
+		} catch (JOSEException e) {
+			LOG.warn("Encountered a JOSEException while performing signature", e);
+			throw SigningOperationException.builder().message(e.getMessage()).build();
+		}
+	}
 
-        if (claimChecks != null) {
-          checkEquals("issuer", claimChecks.issuer(), inputClaims.issuer());
-          checkEquals("subject", claimChecks.subject(), inputClaims.subject());
-          checkEquals("audience", claimChecks.audience(), inputClaims.audience());
-        }
+	@Override
+	public String encryptAndSign(String name, JWTClaims claims, URI jwksUri, JWSSigningAlgorithmType signingAlgorithm,
+			JWEEncryptionAlgorithmType encryptionAlgorithm, JWEEncryptionEncodingType method)
+			throws SigningOperationException, EncryptionOperationException, KeyRetrievalException,
+			NotInitialisedException {
 
-        return inputClaims;
-      } else {
-        LOG.warn("Received signing verification error for kid of {} from {}", remoteJwk.getKeyID(),
-            jwksUri);
-        throw SigningVerificationException.builder()
-            .message("Unable to verify serialisation using kid " + remoteJwk.getKeyID()
-                + " retrieved from " + jwksUri)
-            .build();
-      }
+		JWEObject jweObject = new JWEObject(
+				new JWEHeader.Builder(encryptionAlgorithm.toNimbus(), method.toNimbus()).contentType("JWT").build(),
+				new Payload(sign(name, claims, signingAlgorithm)));
 
-    } catch (ParseException e) {
-      LOG.error("Unable to parse supplied JWT: {}", e.getMessage(), e);
-      throw SigningVerificationException.builder().message(e.getMessage()).build();
-    } catch (JOSEException e) {
-      LOG.warn("Encountered a JOSEException while attempting to verify payload {} using jwks {}",
-          compactSerialisation, jwksUri, e);
-      throw SigningVerificationException.builder().message(e.getMessage()).build();
-    }
-  }
+		try {
+			jweObject.encrypt(new RSAEncrypter(
+					(RSAKey) KeyUtil.getRemoteKey(jwksUri, JWKMatcher.forJWEHeader(jweObject.getHeader()))));
+			return jweObject.serialize();
+		} catch (JOSEException e) {
+			LOG.error("Encountered JOSE Exception during encrypt operation", e);
+			throw EncryptionOperationException.builder().message(e.getMessage()).build();
+		}
 
-  private <T> void checkEquals(String name, T classOne, T classTwo)
-      throws SigningVerificationException {
-    if (classOne == null)
-      return;
-    if (!classOne.equals(classTwo)) {
-      throw SigningVerificationException.builder().message(
-          "Verification of " + name + " required claim failed: " + classOne + " versus " + classTwo)
-          .build();
-    }
-  }
+	}
 
-  @Override
-  public String sign(JWTClaims claims, JWSSigningAlgorithmType algorithm)
-      throws SigningOperationException {
-    return signToObject(claims, algorithm).serialize();
-  }
+	private JWKSet getJWKSet(String name) throws NotInitialisedException {
+		/**
+		 * If it already exists return it
+		 */
+		String setFilename = String.format("{}-{}.json", KEYSET_PREFIX, name);
+		if (jwkSets.containsKey(name)) {
+			return jwkSets.get(name);
+		} else if (new File(setFilename).exists()) {
+			try {
+				jwkSets.put(name, JWKSet.load(new File(setFilename)));
+				return jwkSets.get(name);
+			} catch (IOException e) {
+				LOG.error("Encountered IOException when attempting to load file from: {}", setFilename);
+				throw NotInitialisedException.builder().build();
+			} catch (ParseException e) {
+				LOG.error("Encountered Parsing Exception when attempting to load file from: {}", setFilename);
+				throw NotInitialisedException.builder().build();
+			}
+		} else {
+			if (AUTO_INIT) {
+				try {
+					FileWriter jwkFile = new FileWriter(setFilename);
+					JWKSet localJwk = new JWKSet();
+					jwkFile.write(localJwk.toJSONObject(false).toJSONString(JSONStyle.NO_COMPRESS));
+					jwkFile.close();
+					return localJwk;
+				} catch (IOException e) {
+					LOG.error("Attempt to initialise JWKS at {} failed with {}", setFilename, e.getMessage(), e);
+					throw NotInitialisedException.builder().build();
+				}
 
-  private SignedJWT signToObject(JWTClaims claims, JWSSigningAlgorithmType algorithm)
-      throws SigningOperationException {
-    JWK senderJWK = localSigningKey(algorithm);
-    JWSSigner signer;
-    try {
-      signer = new RSASSASigner(senderJWK.toRSAKey().toPrivateKey());
+			} else {
+				throw NotInitialisedException.builder().build();
+			}
 
-    } catch (JOSEException e) {
-      LOG.warn("Encountered a JOSEException while attempting to setup RSA signer", e);
-      throw SigningOperationException.builder().message(e.getMessage()).build();
-    }
+		}
+	}
 
-    SignedJWT signedJwt =
-        new SignedJWT(new JWSHeader.Builder(JWSAlgorithm.parse(algorithm.toString()))
-            .keyID(senderJWK.getKeyID()).build(), NimbusUtil.toClaimsSet(claims));
-    try {
-      signedJwt.sign(signer);
-      return signedJwt;
-    } catch (JOSEException e) {
-      LOG.warn("Encountered a JOSEException while performing signature", e);
-      throw SigningOperationException.builder().message(e.getMessage()).build();
-    }
+	private JWK getJWK(String name, JWSSigningAlgorithmType algorithm, JWKPublicKeyUse use)
+			throws NotInitialisedException, SigningOperationException {
+		String setFilename = String.format("{}-{}.json", KEYSET_PREFIX, name);
+		JWKSet jwkSet = getJWKSet(name);
 
-  }
+		List<JWK> matches = new JWKSelector(KeyUtil.getJwkMatcher(algorithm, use)).select(jwkSet);
+		if (matches.size() > 0) {
+			return matches.get(0);
+		} else {
+			if (AUTO_INIT) {
 
-  @Override
-  public String encryptAndSign(JWTClaims claims, URI jwksUri,
-      JWSSigningAlgorithmType signingAlgorithm, JWEEncryptionAlgorithmType encryptionAlgorithm,
-      JWEEncryptionEncodingType method)
-      throws SigningOperationException, EncryptionOperationException, KeyRetrievalException {
+				try {
+					RSAKey key = new RSAKeyGenerator(KEY_SIZE).keyUse(use.toNimbus()).keyIDFromThumbprint(true)
+							.algorithm(algorithm.toNimbus()).generate();
+					List<JWK> jwks = new ArrayList<JWK>(List.of(key));
+					jwks.addAll(matches);
+					JWKSet localJwk = new JWKSet(jwks);
+					FileWriter jwkFile = new FileWriter(setFilename);
+					jwkFile.write(localJwk.toJSONObject(false).toJSONString(JSONStyle.NO_COMPRESS));
+					jwkFile.close();
+					jwkSets.put(name, JWKSet.load(new File(setFilename)));
+					return key;
+				} catch (JOSEException e) {
+					throw SigningOperationException.builder()
+							.message(MessageUtil.format(
+									"Unable to initialise a new key with algorithm of {} and use of {}", algorithm,
+									use))
+							.build();
+				} catch (IOException | ParseException e) {
+					throw SigningOperationException.builder().message(MessageUtil.format(
+							"Encountered an I/O or Parsing Exception while attempting to initialise additional key with algorithm of {} and use of {}",
+							algorithm, use)).build();
+				}
 
-    SignedJWT signedJWT = signToObject(claims, signingAlgorithm);
-
-    JWEObject jweObject = new JWEObject(
-        new JWEHeader.Builder(JWEAlgorithm.parse(encryptionAlgorithm.toString()),
-            EncryptionMethod.parse(method.toString())).contentType("JWT").build(),
-        new Payload(signedJWT));
-
-    try {
-      jweObject
-          .encrypt(new RSAEncrypter((RSAKey) remoteEncryptionKey(jwksUri, jweObject.getHeader())));
-      return jweObject.serialize();
-    } catch (JOSEException e) {
-      LOG.error("Encountered JOSE Exception during encrypt operation", e);
-      throw EncryptionOperationException.builder().message(e.getMessage()).build();
-    }
-
-  }
-
-  private JWKSet getRemoteJwks(URI jwksUri) throws KeyRetrievalException {
-    try {
-      return JWKSet.load(jwksUri.toURL());
-    } catch (IOException | ParseException e) {
-      LOG.error("Attempt to retrieve JWKS from {} failed", jwksUri, e);
-      throw KeyRetrievalException.builder().message(e.getMessage()).build();
-    }
-  }
-
-  private JWK remoteEncryptionKey(URI jwksUri, JWEHeader header) throws KeyRetrievalException {
-    List<JWK> matches =
-        new JWKSelector(JWKMatcher.forJWEHeader(header)).select(getRemoteJwks(jwksUri));
-    if (matches.size() > 0) {
-      return matches.get(0);
-    } else {
-      throw KeyRetrievalException.builder()
-          .message("Unable to match a key for encryption with JWEHeader of " + header.toString())
-          .build();
-    }
-  }
-
-  private JWK remoteSigningKey(URI jwksUri, String keyId, JWSSigningAlgorithmType algorithm)
-      throws KeyRetrievalException {
-
-    JWKSet remoteJwks = getRemoteJwks(jwksUri);
-
-    LOG.debug("Attempting to select SIGNATURE key with alg: {}, keyId: {} within JWKS {}",
-        algorithm.toString(), keyId, remoteJwks.toPublicJWKSet().toJSONObject().toJSONString());
-
-    List<JWK> matches = new JWKSelector(new JWKMatcher.Builder().keyUse(KeyUse.SIGNATURE)
-        .keyID(keyId).build())
-            .select(remoteJwks);
-    
-    LOG.debug("Matches to JWK are: {}", matches.toString());
-    if (matches.size() > 0) {
-      return matches.get(0).toPublicJWK();
-    } else {
-      throw KeyRetrievalException.builder()
-          .message(
-              "Unable to match a key for signing with algorithm " + algorithm + " from " + jwksUri)
-          .build();
-    }
-  }
-
-  private JWK localSigningKey(JWSSigningAlgorithmType algorithm) throws SigningOperationException {
-    List<JWK> matches = new JWKSelector(new JWKMatcher.Builder().keyUse(KeyUse.SIGNATURE)
-        .algorithm(JWSAlgorithm.parse(algorithm.toString())).build()).select(jwkSet);
-    if (matches.size() > 0) {
-      return matches.get(0);
-    } else {
-      throw SigningOperationException.builder()
-          .message("Unable to match a key for signing with algorithm " + algorithm).build();
-    }
-  }
-
-  @Override
-  public String peekAtIssuer(String compactSerialisation) throws SigningVerificationException {
-    try {
-      SignedJWT inputJwt = SignedJWT.parse(compactSerialisation);
-      return inputJwt.getJWTClaimsSet().getIssuer();
-    } catch (ParseException e) {
-      LOG.error("Unable to peek at issuer inside supplied JWT: {}", e.getMessage(), e);
-      throw SigningVerificationException.builder().message(e.getMessage()).build();
-    }
-  }
-
-  @Override
-  public String peekAtSoftwareStatement(String compactSerialisation)
-      throws SigningVerificationException {
-    try {
-      SignedJWT inputJwt = SignedJWT.parse(compactSerialisation);
-      return inputJwt.getJWTClaimsSet().getStringClaim("software_statement");
-    } catch (ParseException e) {
-      LOG.error("Unable to peek at software statement inside supplied JWT: {}", e.getMessage(), e);
-      throw SigningVerificationException.builder().message(e.getMessage()).build();
-    }
-  }
-
-  @Override
-  public String peekAt(String compactSerialisation, JWTPeekAttribute peekAttribute) throws SigningVerificationException {
-    try {
-      SignedJWT inputJwt = SignedJWT.parse(compactSerialisation);
-      return inputJwt.getJWTClaimsSet().getStringClaim("client_id");
-    } catch (ParseException e) {
-      LOG.error("Unable to peek at client id inside supplied JWT: {}", e.getMessage(), e);
-      throw SigningVerificationException.builder().message(e.getMessage()).build();
-    }
-  }
-
-
-  @Override
-  public Boolean checkFormat(String compactSerialisation) {
-    try {
-      SignedJWT.parse(compactSerialisation);
-    } catch (ParseException e) {
-      return false;
-    }
-    return true;
-  }
-
+			} else {
+				throw NotInitialisedException.builder().build();
+			}
+		}
+	}
 
 }
