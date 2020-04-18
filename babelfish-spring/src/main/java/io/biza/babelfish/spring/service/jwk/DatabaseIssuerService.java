@@ -8,9 +8,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -54,7 +56,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @ConditionalOnProperty(name = "babelfish.service.IssuerService", havingValue = "DatabaseIssuerService", matchIfMissing = true)
-@Import(IssuerRepository.class)
+@EntityScan(basePackageClasses = IssuerData.class)
+@EnableJpaRepositories(basePackageClasses = IssuerRepository.class)
 public class DatabaseIssuerService implements IssuerService {
 
 	@Autowired
@@ -142,7 +145,7 @@ public class DatabaseIssuerService implements IssuerService {
 		 * Retrieve existing issuer, create it if AUTO INIT is enabled or return null
 		 * 
 		 */
-		IssuerData issuerData = issuerRepository.findByName(issuer).orElseGet(() -> {
+		IssuerData issuerData = issuerRepository.findByIssuer(issuer).orElseGet(() -> {
 			if (AUTO_INIT) {
 				IssuerData data = issuerRepository.save(IssuerData.builder().issuer(issuer).build());
 				return data;
@@ -181,7 +184,7 @@ public class DatabaseIssuerService implements IssuerService {
 		 * If it doesn't exist, try and retrieve it which will either throw an exception
 		 * or auto init
 		 */
-		if (!issuerRepository.existsByName(issuer)) {
+		if (!issuerRepository.existsByIssuer(issuer)) {
 			getSet(issuer);
 		}
 
@@ -203,7 +206,7 @@ public class DatabaseIssuerService implements IssuerService {
 							.algorithm(algorithm.toNimbus()).generate();
 					IssuerKeyData data = issuerKeyRepository
 							.save(IssuerKeyData.builder().creationTime(OffsetDateTime.now()).enabled(true)
-									.issuer(issuerRepository.findByName(issuer).get()).keyContent(key.toJSONString())
+									.issuer(issuerRepository.findByIssuer(issuer).get()).keyContent(key.toJSONString())
 									.keyType(JWKKeyType.RSA).keyUse(use).build());
 					keyData = List.of(data);
 				} catch (JOSEException e) {

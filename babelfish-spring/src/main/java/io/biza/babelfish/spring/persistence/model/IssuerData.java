@@ -22,6 +22,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.Type;
@@ -40,29 +41,30 @@ import lombok.ToString;
 @Entity
 @ToString
 @Valid
-@Table(name = "BABELFISH_ISSUER")
+@Table(name = "BABELFISH_ISSUER", uniqueConstraints = {
+		@UniqueConstraint(columnNames = { "issuer" }, name = "babelfish_issuer_issuer_uk") })
 public class IssuerData {
 
-  @Id
-  @Column(name = "ID", insertable = false, updatable = false)
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Type(type = "uuid-char")
-  UUID id;
+	@Id
+	@Column(name = "ID", insertable = false, updatable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Type(type = "uuid-char")
+	UUID id;
 
-  @Column(name = "ISSUER", unique = true)
-  @NotNull
-  String issuer;
+	@Column(name = "ISSUER")
+	@NotNull
+	String issuer;
 
-  @OneToMany(mappedBy = "dataHolder", cascade = CascadeType.ALL)
-  @Builder.Default
-  Set<IssuerKeyData> keys = Set.of();
+	@OneToMany(mappedBy = "issuer", cascade = CascadeType.ALL)
+	@Builder.Default
+	Set<IssuerKeyData> keys = Set.of();
 
-  @PrePersist
-  public void prePersist() {
-    if (keys() != null) {
-      for (IssuerKeyData one : keys) {
-        one.issuer(this);
-      }
-    }
-  }
+	@PrePersist
+	public void prePersist() {
+		if (keys() != null) {
+			for (IssuerKeyData one : keys) {
+				one.issuer(this);
+			}
+		}
+	}
 }

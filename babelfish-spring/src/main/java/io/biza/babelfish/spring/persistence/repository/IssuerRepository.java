@@ -23,7 +23,7 @@ import io.biza.babelfish.spring.persistence.model.IssuerData;
 public interface IssuerRepository
     extends JpaRepository<IssuerData, UUID>, JpaSpecificationExecutor<IssuerData> {
   
-  public boolean existsByName(String name);
-  public Optional<IssuerData> findByName(String name);
+  public boolean existsByIssuer(String issuer);
+  public Optional<IssuerData> findByIssuer(String issuer);
 
 }
