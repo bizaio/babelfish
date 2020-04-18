@@ -2,6 +2,9 @@ package io.biza.babelfish.oidc.enumerations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.nimbusds.jose.jwk.KeyType;
+import com.nimbusds.jose.jwk.KeyUse;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "JWK Key Types", enumAsRef = true)
@@ -32,6 +35,26 @@ public enum JWKKeyType {
     }
 
     return null;
+  }
+  
+  public KeyType toNimbus() {
+	  if(this.equals(RSA)) {
+		  return KeyType.RSA;
+	  } else if(this.equals(EC)) {
+		  return KeyType.EC;
+	  } else {
+		  return null;
+	  }
+  }
+  
+  public JWKKeyType fromNimbus(KeyType type) {
+	  if(type.equals(KeyType.RSA)) {
+		  return JWKKeyType.RSA;
+	  } else if(type.equals(KeyType.EC)) {
+		  return JWKKeyType.EC;
+	  } else {
+		  return null;
+	  }
   }
 
 }

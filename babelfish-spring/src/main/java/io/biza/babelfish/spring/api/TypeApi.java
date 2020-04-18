@@ -13,7 +13,7 @@ package io.biza.babelfish.spring.api;
 
 import io.biza.babelfish.spring.payloads.BabelForm;
 import io.biza.babelfish.spring.payloads.ResponseGetTypes;
-import io.biza.babelfish.spring.service.TypeService;
+import io.biza.babelfish.spring.service.type.TypeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;

@@ -81,12 +81,15 @@
         <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
         <maven-failsafe-plugin.version>${maven-surefire-plugin.version}</maven-failsafe-plugin.version>
         <docker.image.prefix>bizaio</docker.image.prefix>
+        <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
+        <dockerfile.skip>true</dockerfile.skip>
     </properties>
     <modules>
         <module>babelfish-cdr</module>
         <module>babelfish-oidc</module>
         <module>babelfish-spring</module>
         <module>babelfish-type-service</module>
+        <module>babelfish-util</module>
     </modules>
     <build>
         <defaultGoal>clean package install</defaultGoal>

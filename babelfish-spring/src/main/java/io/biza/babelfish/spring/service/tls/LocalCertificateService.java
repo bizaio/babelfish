@@ -1,4 +1,4 @@
-package io.biza.babelfish.spring.service;
+package io.biza.babelfish.spring.service.tls;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

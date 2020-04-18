@@ -1,6 +1,5 @@
-package io.biza.babelfish.spring.enumerations;
+package io.biza.babelfish.oidc.enumerations;
 
-import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "JWT Claims can peek into", name = "JWTPeekAttribute", enumAsRef = true)

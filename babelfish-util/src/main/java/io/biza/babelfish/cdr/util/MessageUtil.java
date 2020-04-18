@@ -1,4 +1,4 @@
-package io.biza.babelfish.spring.util;
+package io.biza.babelfish.cdr.util;
 
 import org.slf4j.helpers.MessageFormatter;
 

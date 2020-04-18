@@ -1,4 +1,4 @@
-package io.biza.babelfish.spring.exceptions;
+package io.biza.babelfish.oidc.exceptions;
 
 import lombok.Builder;
 import lombok.Data;

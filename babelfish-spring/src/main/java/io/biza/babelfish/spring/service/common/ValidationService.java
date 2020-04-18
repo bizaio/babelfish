@@ -1,4 +1,4 @@
-package io.biza.babelfish.spring.service;
+package io.biza.babelfish.spring.service.common;
 
 import java.util.Set;
 import javax.validation.ConstraintViolation;

@@ -25,7 +25,7 @@ import org.bouncycastle.openssl.PEMParser;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class JWKUtil {
+public class X509Util {
   /**
    * Generate base64 url encoded digests from a set of X509 Certificates
    * 
