@@ -2,6 +2,7 @@ package io.biza.babelfish.oidc.payloads;
 
 import java.util.List;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -35,6 +36,7 @@ public class JWKS {
    */
   @JsonProperty("keys")
   @NotNull
-  List<JWK> keys;
+  @Builder.Default
+  List<JWK> keys = new ArrayList<JWK>();
 
 }

@@ -6,8 +6,11 @@ import java.util.stream.Collectors;
 
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionEncodingType;
+import io.biza.babelfish.oidc.enumerations.JWKKeyType;
+import io.biza.babelfish.oidc.enumerations.JWKPublicKeyUse;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
 import io.biza.babelfish.oidc.exceptions.KeyRetrievalException;
+import io.biza.babelfish.oidc.payloads.JWK;
 import io.biza.babelfish.oidc.payloads.JWKS;
 import io.biza.babelfish.oidc.payloads.JWTClaims;
 import io.biza.babelfish.spring.exceptions.EncryptionOperationException;
@@ -62,12 +65,12 @@ public interface IssuerService {
 	 * @throws SigningOperationException
 	 * @throws NotInitialisedException
 	 */
-	public String sign(String name, JWTClaims claims, JWSSigningAlgorithmType algorithm)
+	public String sign(String name, JWKKeyType keyType, JWTClaims claims, JWSSigningAlgorithmType algorithm)
 			throws SigningOperationException, NotInitialisedException;
 
-	default String sign(URI name, JWTClaims claims, JWSSigningAlgorithmType algorithm)
+	default String sign(URI name, JWKKeyType keyType, JWTClaims claims, JWSSigningAlgorithmType algorithm)
 			throws SigningOperationException, NotInitialisedException {
-		return sign(name.toASCIIString(), claims, algorithm);
+		return sign(name.toASCIIString(), keyType, claims, algorithm);
 	}
 
 	/**
@@ -82,7 +85,7 @@ public interface IssuerService {
 	 * @throws KeyRetrievalException
 	 * @throws EncryptionOperationException
 	 */
-	public String encrypt(String payload, URI remoteJwks, JWEEncryptionAlgorithmType algorithm,
+	public String encrypt(String payload, JWKKeyType keyType, URI remoteJwks, JWEEncryptionAlgorithmType algorithm,
 			JWEEncryptionEncodingType encoding) throws KeyRetrievalException, EncryptionOperationException;
 
 	/**
@@ -102,18 +105,59 @@ public interface IssuerService {
 	 * @throws NotInitialisedException
 	 * @throws EncryptionOperationException
 	 */
-	default String signAndEncrypt(String name, JWTClaims claims, URI remoteJwks,
+	default String signAndEncrypt(String name, JWKKeyType keyType, JWTClaims claims, URI remoteJwks,
 			JWSSigningAlgorithmType signingAlgorithm, JWEEncryptionAlgorithmType encryptionAlgorithm,
 			JWEEncryptionEncodingType encryptionMethod) throws SigningOperationException, NotInitialisedException,
 			KeyRetrievalException, EncryptionOperationException {
-		return encrypt(sign(name, claims, signingAlgorithm), remoteJwks, encryptionAlgorithm, encryptionMethod);
+		return encrypt(sign(name, keyType, claims, signingAlgorithm), keyType, remoteJwks, encryptionAlgorithm, encryptionMethod);
 	}
 
-	default String signAndEncrypt(URI issuer, JWTClaims claims, URI remoteJwks,
+	default String signAndEncrypt(URI issuer, JWKKeyType keyType, JWTClaims claims, URI remoteJwks,
 			JWSSigningAlgorithmType signingAlgorithm, JWEEncryptionAlgorithmType encryptionAlgorithm,
 			JWEEncryptionEncodingType encryptionMethod) throws SigningOperationException, NotInitialisedException,
 			KeyRetrievalException, EncryptionOperationException {
-		return encrypt(sign(issuer, claims, signingAlgorithm), remoteJwks, encryptionAlgorithm, encryptionMethod);
+		return encrypt(sign(issuer, keyType, claims, signingAlgorithm), keyType, remoteJwks, encryptionAlgorithm, encryptionMethod);
 	}
+
+	/**
+	 * Initialise Key for a given issuer
+	 * 
+	 * @param issuer              containing the issuer name
+	 * @param type                type of key to produce
+	 * @param use                 describing the intended key use
+	 * @param signingAlgorithm    containing the Algorithm to use for Signing use
+	 * @param encryptionAlgorithm containing the algorithm to use forEencryption use
+	 * @return a Babelfish JWK Object with the new key
+	 * @throws NotInitialisedException if you are unable to initialise
+	 */
+	public JWK initKey(String issuer, JWKKeyType type, JWKPublicKeyUse use, JWSSigningAlgorithmType signingAlgorithm,
+			JWEEncryptionAlgorithmType encryptionAlgorithm) throws NotInitialisedException;
+
+	default JWK initSigningKey(String issuer, JWKKeyType type, JWSSigningAlgorithmType signingAlgorithm)
+			throws NotInitialisedException {
+		return initKey(issuer, type, JWKPublicKeyUse.SIGN, signingAlgorithm, null);
+	}
+
+	default JWK initEncryptionKey(String issuer, JWKKeyType type, JWEEncryptionAlgorithmType encryptionAlgorithm)
+			throws NotInitialisedException {
+		return initKey(issuer, type, JWKPublicKeyUse.ENCRYPT, null, encryptionAlgorithm);
+	}
+
+	/**
+	 * Initialise a new issuer with an empty JWKS
+	 * 
+	 * @param issuer containing the name of the issuer to issue for
+	 * @return JWKS containing an empty key set
+	 * @throws NotInitialisedException if unable to initialise or issuer already
+	 *                                 exists
+	 */
+	public JWKS createIssuer(String issuer) throws NotInitialisedException;
+
+	/**
+	 * Delete an issuer and all keys
+	 * 
+	 * @param issuer name to delete
+	 */
+	public void deleteIssuer(String issuer);
 
 }

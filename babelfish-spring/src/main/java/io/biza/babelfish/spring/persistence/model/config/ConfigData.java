@@ -9,7 +9,7 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
  *******************************************************************************/
-package io.biza.babelfish.spring.persistence.model;
+package io.biza.babelfish.spring.persistence.model.config;
 
 import java.util.Set;
 import java.util.UUID;
@@ -19,6 +19,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -41,9 +42,9 @@ import lombok.ToString;
 @Entity
 @ToString
 @Valid
-@Table(name = "BABELFISH_ISSUER", uniqueConstraints = {
-		@UniqueConstraint(columnNames = { "issuer" }, name = "babelfish_issuer_issuer_uk") })
-public class IssuerData {
+@Table(name = "BABELFISH_CONFIG", uniqueConstraints = {
+		@UniqueConstraint(columnNames = { "object", "key" }, name = "babelfish_config_object_key_uk") })
+public class ConfigData {
 
 	@Id
 	@Column(name = "ID", insertable = false, updatable = false)
@@ -51,20 +52,21 @@ public class IssuerData {
 	@Type(type = "uuid-char")
 	UUID id;
 
-	@Column(name = "ISSUER")
+	@Column(name = "OBJECT")
 	@NotNull
-	String issuer;
+	String object;
+	
+	@Column(name = "KEY")
+	@NotNull
+	String key;
+	
+	@Column(name = "KEY_CLASS")
+	@NotNull
+	String keyClass;
 
-	@OneToMany(mappedBy = "issuer", cascade = CascadeType.ALL)
-	@Builder.Default
-	Set<IssuerKeyData> keys = Set.of();
-
-	@PrePersist
-	public void prePersist() {
-		if (keys() != null) {
-			for (IssuerKeyData one : keys) {
-				one.issuer(this);
-			}
-		}
-	}
+	@Column(name = "VALUE")
+	@NotNull
+	@Lob
+	String value;
+	
 }

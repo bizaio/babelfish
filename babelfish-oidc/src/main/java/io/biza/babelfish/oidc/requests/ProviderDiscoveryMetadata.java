@@ -112,8 +112,8 @@ public class ProviderDiscoveryMetadata {
   List<JWEEncryptionAlgorithmType> idTokenEncryptionAlgorithms;
   
   @JsonProperty("id_token_encryption_enc_values_supported")
-  @Schema(description = "ID Token JWE Encryption Algorithms Supported")
-  List<JWEEncryptionEncodingType> idTokenEncryptionMethods;
+  @Schema(description = "ID Token JWE Encryption Encoding Methods Supported")
+  List<JWEEncryptionEncodingType> idTokenEncryptionEncodings;
 
   @JsonProperty("userinfo_signing_alg_values_supported")
   @Schema(description = "User Info JWS Signing Algorithms Supported")

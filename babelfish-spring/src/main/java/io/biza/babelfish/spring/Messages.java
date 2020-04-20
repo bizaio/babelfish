@@ -26,4 +26,9 @@ public static final String ENCOUNTERED_X_EXCEPTION_WHILE_PERFORMING_Y = "Encount
 public static final String ENCOUNTERED_UNSUPPORTED_KEY_TYPE_WITH_ID = "Encountered an unsupported key type of {} with id of {}";
 public static final String ENCOUNTERED_PARSE_EXCEPTION_WITH_ALG_USE = "Encountered parse exception when retrieving content with algorithm of {} and use of {}";
 public static final String ENCOUNTERED_PARSE_EXCEPTION_WITH_ID = "Encountered parsing error when processing key with id of {}";
+public static final String REALM_INITIALISATION_WITH_NAME = "Initialising Realm with name of {}";
+public static final String AUTO_INITIALISATION_DISABLED_WITH_NAME = "Auto Initialisation is disabled for {} realm";
+public static final String CONFIG_UNABLE_TO_LOCATE = "Unable to locate configuration value for object {} and key {}";
+public static final String CONFIG_UNABLE_TO_PARSE = "Unable to parse configuration value for object {} and key {}";
+public static final String CONFIG_UNABLE_TO_PROCESS = "Unable to serialise to json configuration value for object {} and key {}";
 }

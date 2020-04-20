@@ -9,17 +9,16 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
  *******************************************************************************/
-package io.biza.babelfish.spring.persistence.repository;
+package io.biza.babelfish.spring.persistence.repository.issuer;
 
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import io.biza.babelfish.spring.persistence.model.IssuerKeyData;
+import io.biza.babelfish.spring.persistence.model.issuer.IssuerKeyData;
 
 @Repository
 public interface IssuerKeyRepository
     extends JpaRepository<IssuerKeyData, UUID>, JpaSpecificationExecutor<IssuerKeyData> {
-
 }
