@@ -5,15 +5,12 @@ import java.text.ParseException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -46,6 +43,7 @@ import io.biza.babelfish.oidc.payloads.JWKS;
 import io.biza.babelfish.oidc.payloads.JWTClaims;
 import io.biza.babelfish.oidc.support.NimbusUtil;
 import io.biza.babelfish.spring.Messages;
+import io.biza.babelfish.spring.exceptions.AlreadyInitialisedException;
 import io.biza.babelfish.spring.exceptions.EncryptionOperationException;
 import io.biza.babelfish.spring.exceptions.NotInitialisedException;
 import io.biza.babelfish.spring.exceptions.SigningOperationException;
@@ -62,7 +60,6 @@ import lombok.extern.slf4j.Slf4j;
 @ConditionalOnProperty(name = "babelfish.service.IssuerService", havingValue = "DatabaseIssuerService", matchIfMissing = true)
 @EntityScan(basePackageClasses = IssuerData.class)
 @EnableJpaRepositories(basePackageClasses = IssuerRepository.class)
-@Transactional
 public class DatabaseIssuerService implements IssuerService {
 
 	@Autowired
@@ -75,7 +72,7 @@ public class DatabaseIssuerService implements IssuerService {
 	Integer KEY_SIZE;
 
 	@Autowired
-	ObjectMapper mapper; 
+	ObjectMapper mapper;
 
 	@Override
 	public JWKS jwks(String... names) throws NotInitialisedException {
@@ -119,20 +116,22 @@ public class DatabaseIssuerService implements IssuerService {
 	}
 
 	@Override
-	public String encrypt(String payload, JWKKeyType keyType, URI jwksUri, JWEEncryptionAlgorithmType encryptionAlgorithm,
-			JWEEncryptionEncodingType method) throws KeyRetrievalException, EncryptionOperationException {
+	public String encrypt(String payload, JWKKeyType keyType, URI jwksUri,
+			JWEEncryptionAlgorithmType encryptionAlgorithm, JWEEncryptionEncodingType method)
+			throws KeyRetrievalException, EncryptionOperationException {
 
 		JWEObject jweObject = new JWEObject(
 				new JWEHeader.Builder(encryptionAlgorithm.toNimbus(), method.toNimbus()).contentType("JWT").build(),
 				new Payload(payload));
 
 		try {
-			if(keyType.equals(JWKKeyType.RSA)) {
+			if (keyType.equals(JWKKeyType.RSA)) {
 				jweObject.encrypt(new RSAEncrypter(
 						(RSAKey) NimbusUtil.getRemoteKey(jwksUri, JWKMatcher.forJWEHeader(jweObject.getHeader()))));
-			return jweObject.serialize();
+				return jweObject.serialize();
 			} else {
-				throw EncryptionOperationException.builder().message(MessageUtil.format("Key Type of {} is not supported", keyType)).build();
+				throw EncryptionOperationException.builder()
+						.message(MessageUtil.format("Key Type of {} is not supported", keyType)).build();
 			}
 		} catch (JOSEException e) {
 			LOG.warn(Messages.ENCOUNTERED_X_EXCEPTION_WHILE_PERFORMING_Y, e.getClass().getSimpleName(), "ENCRYPT", e);
@@ -140,7 +139,7 @@ public class DatabaseIssuerService implements IssuerService {
 		}
 
 	}
-	
+
 	private JWKSet getSet(String issuer) throws NotInitialisedException {
 
 		/**
@@ -174,7 +173,8 @@ public class DatabaseIssuerService implements IssuerService {
 		 * or auto init
 		 */
 		if (!issuerRepository.existsByIssuer(issuer)) {
-			getSet(issuer);
+			throw NotInitialisedException.builder()
+					.message(MessageUtil.format("Issuer of {} is not initialised", issuer)).build();
 		}
 
 		List<IssuerKeyData> keyData = issuerKeyRepository
@@ -186,7 +186,7 @@ public class DatabaseIssuerService implements IssuerService {
 						Sort.by(List.of(Order.desc("creationTime"))));
 
 		try {
-			if(keyData != null && keyData.size() > 0) {
+			if (keyData != null && keyData.size() > 0) {
 				return JWK.parse(keyData.get(0).keyContent());
 			} else {
 				// No key found for the specified use and algorithm
@@ -233,7 +233,8 @@ public class DatabaseIssuerService implements IssuerService {
 
 			IssuerKeyData keyData = issuerKeyRepository
 					.save(IssuerKeyData.builder().creationTime(OffsetDateTime.now()).enabled(true).issuer(issuerData)
-							.keyContent(key.toJSONString()).keyType(JWKKeyType.RSA).keyUse(use).build());
+							.encryptionAlgorithm(encryptionAlgorithm).keyContent(key.toJSONString())
+							.signingAlgorithm(signingAlgorithm).keyType(JWKKeyType.RSA).keyUse(use).build());
 
 			try {
 				return mapper.readValue(keyData.keyContent(), io.biza.babelfish.oidc.payloads.JWK.class);
@@ -249,11 +250,11 @@ public class DatabaseIssuerService implements IssuerService {
 	}
 
 	@Override
-	public JWKS createIssuer(String issuer) throws NotInitialisedException {
-		// If it already exists, we throw not intialised
-		if(issuerRepository.existsByIssuer(issuer)) {
-			LOG.error("Issuer of {} already exists", issuer);
-			throw NotInitialisedException.builder().build();
+	public JWKS createIssuer(String issuer) throws NotInitialisedException, AlreadyInitialisedException {
+		// If it already exists, we throw already initialised
+		if (existsIssuer(issuer)) {
+			LOG.warn("Issuer of {} already exists", issuer);
+			throw AlreadyInitialisedException.builder().build();
 		}
 		issuerRepository.save(IssuerData.builder().issuer(issuer).build());
 		return jwks(issuer);
@@ -261,11 +262,16 @@ public class DatabaseIssuerService implements IssuerService {
 
 	@Override
 	public void deleteIssuer(String issuer) {
-		if(!issuerRepository.existsByIssuer(issuer)) {
+		if (!issuerRepository.existsByIssuer(issuer)) {
 			LOG.warn("Issuer {} does not exist", issuer);
 			return;
 		}
 		issuerRepository.deleteByIssuer(issuer);
+	}
+
+	@Override
+	public Boolean existsIssuer(String issuer) {
+		return issuerRepository.existsByIssuer(issuer);
 	}
 
 }

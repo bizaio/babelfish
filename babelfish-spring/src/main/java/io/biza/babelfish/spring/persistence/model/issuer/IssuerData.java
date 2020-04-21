@@ -16,6 +16,7 @@ import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -55,7 +56,7 @@ public class IssuerData {
 	@NotNull
 	String issuer;
 
-	@OneToMany(mappedBy = "issuer", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "issuer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Builder.Default
 	Set<IssuerKeyData> keys = Set.of();
 

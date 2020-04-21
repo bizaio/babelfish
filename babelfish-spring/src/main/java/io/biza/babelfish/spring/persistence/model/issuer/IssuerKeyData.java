@@ -94,8 +94,7 @@ public class IssuerKeyData {
 	@Enumerated(EnumType.STRING)	
 	JWEEncryptionAlgorithmType encryptionAlgorithm;
 	
-	@Column(name = "KEY_CONTENT")
-	@Lob
+	@Column(name = "KEY_CONTENT", length = 8192)
 	String keyContent;
 
 	@PrePersist

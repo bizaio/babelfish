@@ -16,8 +16,6 @@ package io.biza.babelfish.oidc.enumerations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.nimbusds.jose.JWEAlgorithm;
-import com.nimbusds.jose.JWSAlgorithm;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "JWE Encryption Algorithm Types", enumAsRef = true)

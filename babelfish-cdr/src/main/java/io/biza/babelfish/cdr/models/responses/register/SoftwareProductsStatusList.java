@@ -3,6 +3,8 @@ package io.biza.babelfish.cdr.models.responses.register;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.babelfish.cdr.models.payloads.register.recipient.SoftwareProductStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -24,7 +26,7 @@ import lombok.ToString;
 public class SoftwareProductsStatusList {
   
   @JsonProperty("softwareProducts")
-  @NotEmpty
+  @NotNull
   @Schema(
       description = "Software Products with Statuses")
   List<SoftwareProductStatus> softwareProducts;

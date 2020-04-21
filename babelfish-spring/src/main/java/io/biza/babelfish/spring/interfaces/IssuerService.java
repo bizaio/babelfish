@@ -13,6 +13,7 @@ import io.biza.babelfish.oidc.exceptions.KeyRetrievalException;
 import io.biza.babelfish.oidc.payloads.JWK;
 import io.biza.babelfish.oidc.payloads.JWKS;
 import io.biza.babelfish.oidc.payloads.JWTClaims;
+import io.biza.babelfish.spring.exceptions.AlreadyInitialisedException;
 import io.biza.babelfish.spring.exceptions.EncryptionOperationException;
 import io.biza.babelfish.spring.exceptions.NotInitialisedException;
 import io.biza.babelfish.spring.exceptions.SigningOperationException;
@@ -137,6 +138,12 @@ public interface IssuerService {
 			throws NotInitialisedException {
 		return initKey(issuer, type, JWKPublicKeyUse.SIGN, signingAlgorithm, null);
 	}
+	
+	default JWK initSigningKey(URI issuer, JWKKeyType type, JWSSigningAlgorithmType signingAlgorithm)
+			throws NotInitialisedException {
+		return initKey(issuer.toASCIIString(), type, JWKPublicKeyUse.SIGN, signingAlgorithm, null);
+	}
+
 
 	default JWK initEncryptionKey(String issuer, JWKKeyType type, JWEEncryptionAlgorithmType encryptionAlgorithm)
 			throws NotInitialisedException {
@@ -148,10 +155,30 @@ public interface IssuerService {
 	 * 
 	 * @param issuer containing the name of the issuer to issue for
 	 * @return JWKS containing an empty key set
-	 * @throws NotInitialisedException if unable to initialise or issuer already
-	 *                                 exists
+	 * @throws NotInitialisedException if unable to initialise 
+	 * @throws AlreadyInitialisedException if issuer is already intialised
 	 */
-	public JWKS createIssuer(String issuer) throws NotInitialisedException;
+	public JWKS createIssuer(String issuer) throws NotInitialisedException, AlreadyInitialisedException;
+	
+	/**
+	 * Initialised a new issuer with a URI
+	 * @param issuer containing the issuer base URI
+	 * @return JWKS containing an empty key set
+	 * @throws NotInitialisedException if unable to intialise
+	 * @throws AlreadyInitialisedException if issuer already initialised
+	 */
+	default JWKS createIssuer(URI issuer) throws NotInitialisedException, AlreadyInitialisedException {
+		return createIssuer(issuer.toASCIIString());
+	}
+	
+	/**
+	 * Check issuer exists
+	 */
+	public Boolean existsIssuer(String issuer);
+	
+	default Boolean existsIssuer(URI issuer) {
+		return existsIssuer(issuer.toASCIIString());
+	}
 
 	/**
 	 * Delete an issuer and all keys

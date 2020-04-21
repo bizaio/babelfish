@@ -19,7 +19,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import io.biza.babelfish.spring.persistence.model.config.ConfigData;
-import io.biza.babelfish.spring.persistence.model.issuer.IssuerData;
 
 @Repository
 public interface ConfigRepository

@@ -2,6 +2,8 @@ package io.biza.babelfish.cdr.models.responses.register;
 
 import java.util.List;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.babelfish.cdr.models.payloads.register.recipient.RegisterDataRecipient;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,6 +27,7 @@ public class ResponseRegisterDataRecipientList {
   @JsonProperty("data")
   @Schema(
       description = "A list of Data Recipients")
+  @NotNull
   List<RegisterDataRecipient> data;
   
 }

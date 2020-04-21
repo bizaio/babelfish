@@ -28,6 +28,7 @@ public class ResponseRegisterDataHolderBrandList {
   @JsonProperty("data")
   @Schema(
       description = "A list of Data Holder Brand Objects")
+  @NotNull
   List<RegisterDataHolderBrand> data;
   
   @Schema(description = "The Links Object", required = true)
