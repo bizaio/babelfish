@@ -28,67 +28,65 @@ import ma.glasnost.orika.converter.BidirectionalConverter;
  * @since 0.9.6
  */
 public class Constants {
-  /**
-   * Generic Constants
-   */
-  public static final String DEFAULT_LOCALE = "en";
+	/**
+	 * Generic Constants
+	 */
+	public static final String DEFAULT_LOCALE = "en";
 
-  /**
-   * CDR AmountString
-   */
-  public static final String CDR_AMOUNTSTRING_PATTERN =
-      "##############0.00###;-##############0.00###";
+	/**
+	 * CDR AmountString
+	 */
+	public static final String CDR_AMOUNTSTRING_PATTERN = "##############0.00###;-##############0.00###";
 
-  /**
-   * CDR RateString
-   */
-  public static final String CDR_RATESTRING_PATTERN = "0.00##############;0.00##############";
+	/**
+	 * CDR RateString
+	 */
+	public static final String CDR_RATESTRING_PATTERN = "0.00##############;0.00##############";
 
-  public static final int CDR_RATESTRING_SCALE = 16;
+	public static final int CDR_RATESTRING_SCALE = 16;
 
-  public static final RoundingMode CDR_RATESTRING_ROUNDING_MODE = RoundingMode.HALF_EVEN;
+	public static final RoundingMode CDR_RATESTRING_ROUNDING_MODE = RoundingMode.HALF_EVEN;
 
-  /**
-   * CDR DateTimeString
-   */
-  public static final DateTimeFormatter CDR_DATETIMESTRING_FORMATTER =
-      DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+	/**
+	 * CDR DateTimeString
+	 */
+	public static final DateTimeFormatter CDR_DATETIMESTRING_FORMATTER = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 
-  /**
-   * CDR DateString
-   */
-  public static final DateTimeFormatter CDR_DATESTRING_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
+	/**
+	 * CDR DateString
+	 */
+	public static final DateTimeFormatter CDR_DATESTRING_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
 
-  /**
-   * Orika implementer
-   */
-  public static final String ORIKA_PACKAGE_BASE = OrikaFactoryConfigurer.class.getPackageName();
-  public static final String ORIKA_IMPLEMENTING_CLASS =
-      OrikaFactoryConfigurerInterface.class.getName();
-  public static final String ORIKA_BIDIRECTIONAL_CLASS = BidirectionalConverter.class.getName();
+	/**
+	 * Orika implementer
+	 */
+	public static final String ORIKA_PACKAGE_BASE = OrikaFactoryConfigurer.class.getPackageName();
+	public static final String ORIKA_IMPLEMENTING_CLASS = OrikaFactoryConfigurerInterface.class.getName();
+	public static final String ORIKA_BIDIRECTIONAL_CLASS = BidirectionalConverter.class.getName();
 
-  public static final String BASE_MODELS_PACKAGE = VersionerConstants.class.getPackageName();
-  public static final String BASE_MODELS_ANNOTATION = Schema.class.getName();
-  public static final String BASE_CONVERTER_PACKAGE = UUIDConverter.class.getPackageName();
-  public static final String VERSIONED_MODEL = BabelfishVersionedModel.class.getName();
+	public static final String BASE_MODELS_PACKAGE = VersionerConstants.class.getPackageName();
+	public static final String BASE_MODELS_ANNOTATION = Schema.class.getName();
+	public static final String BASE_CONVERTER_PACKAGE = UUIDConverter.class.getPackageName();
+	public static final String VERSIONED_MODEL = BabelfishVersionedModel.class.getName();
 
-  /**
-   * Prepared Error Responses
-   */
-  public static final ErrorV1 ERROR_ATTRIBUTE_NOT_SUPPORTED =
-      ErrorV1.builder().code("1001").title("Attribute Not Supported")
-          .detail("Provided content contains attribute data which is not supported").build();
-  public static final ErrorV1 ERROR_INVALID_ENUM_VALUE =
-      ErrorV1.builder().code("1002").title("Invalid Enumeration Value")
-          .detail("Provided content contains enumeration data which is not supported").build();
-  public static final ErrorV1 ERROR_PAYLOAD_CONVERSION_FAILURE = ErrorV1.builder().code("2001")
-      .title("Payload Conversion Failure")
-      .detail(
-          "An error was encountered while attempting to perform conversion between source and destination payload")
-      .build();
-  public static final ErrorV1 ERROR_UNSUPPORTED_VERSION = ErrorV1.builder().code("3001")
-      .title("Unsupported Version")
-      .detail("The request specified a version which is not supported by this endpoint").build();
-
+	/**
+	 * Prepared Error Responses
+	 */
+	public static final ErrorV1 ERROR_ATTRIBUTE_NOT_SUPPORTED = ErrorV1.builder().code("1001")
+			.title("Attribute Not Supported").detail("Provided content contains attribute data which is not supported")
+			.build();
+	public static final ErrorV1 ERROR_INVALID_ENUM_VALUE = ErrorV1.builder().code("1002")
+			.title("Invalid Enumeration Value")
+			.detail("Provided content contains enumeration data which is not supported").build();
+	public static final ErrorV1 ERROR_PAYLOAD_CONVERSION_FAILURE = ErrorV1.builder().code("2001")
+			.title("Payload Conversion Failure")
+			.detail("An error was encountered while attempting to perform conversion between source and destination payload")
+			.build();
+	public static final ErrorV1 ERROR_UNSUPPORTED_VERSION = ErrorV1.builder().code("3001").title("Unsupported Version")
+			.detail("The request specified a version which is not supported by this endpoint").build();
+	public static final ErrorV1 ERROR_NOT_INITIALISED = ErrorV1.builder().code("4001")
+			.title("Key Issuer Service Not Initialised")
+			.detail("The Key Issuer service is not initialised and therefore cryptographic encryption and signature operations cannot be performed. Please initialise the key issuer service")
+			.build();
 
 }

@@ -4,6 +4,8 @@ import java.net.URI;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -42,6 +44,7 @@ public class SoftwareProductMetaData {
   
   @JsonProperty("softwareProductDescription")
   @NotEmpty
+  @Size(max = 8192)
   @Schema(
       description = "Description of the software product")
   String softwareProductDescription;
