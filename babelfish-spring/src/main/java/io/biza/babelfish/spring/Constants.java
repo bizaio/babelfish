@@ -17,10 +17,6 @@ public class Constants {
   /**
    * Tag definitions
    */
-  public final static String TAG_DISCOVERY_NAME = "discovery";
-  public final static String TAG_DISCOVERY_DESCRIPTION = "Discovery Endpoints";
-  public final static String TAG_TOKEN_NAME = "token";
-  public final static String TAG_TOKEN_DESCRIPTION = "Token Authorisation Endpoints";
   public final static String TAG_TYPE_NAME = "type";
   public final static String TAG_TYPE_DESCRIPTION = "Type Discovery API";
   
@@ -33,42 +29,6 @@ public class Constants {
   public static final int CERT_VALIDITY_YEARS = 2;
   public static final String CA_DN = "CN=Babelfish Development Register CA";
   public static final String CA_SIGNING_ALGORITHM = "SHA256WithRSA";
-
-  /**
-   * Content Types
-   */
-  public final static String CONTENT_TYPE_APPLICATION_JWT = "application/jwt";
-
-  /**
-   * Security Scopes
-   */
-  public final static String SECURITY_SCHEME_NAME = "wikkitgate_auth";
-
-  /**
-   * SSA Errors
-   */
-  public final static String REGISTRATION_INVALID_SOFTWARE_STATEMENT =
-      "The software statement presented is invalid";
-  public final static String REGISTRATION_INVALID_REDIRECT_URI =
-      "The value of one or more redirection URIs is invalid.";
-  public final static String REGISTRATION_INVALID_CLIENT_METADATA =
-      "The value of one of the client metadata fields is invalid and the server has rejected this request. This error value is also used when attempts at duplicate registrations for the same software_id are rejected ";
-
-  /**
-   * Signing and Encryption Support
-   */
-  public final static List<JWSSigningAlgorithmType> SUPPORTED_SIGNING_ALGORITHMS =
-      List.of(JWSSigningAlgorithmType.PS256);
-  public final static List<JWEEncryptionAlgorithmType> SUPPORTED_ENCRYPTION_ALGORITHMS =
-      List.of(JWEEncryptionAlgorithmType.RSA_OAEP);
-  public final static List<JWEEncryptionEncodingType> SUPPORTED_ENCRYPTION_METHODS =
-      List.of(JWEEncryptionEncodingType.A256GCM);
-  public final static List<OIDCApplicationType> SUPPORTED_OIDC_APPLICATION_TYPES =
-      List.of(OIDCApplicationType.WEB);
-  public final static List<OIDCAuthMethod> SUPPORTED_TOKEN_AUTH_METHODS =
-      List.of(OIDCAuthMethod.PRIVATE_KEY_JWT);
-  public final static List<OIDCGrantType> SUPPORTED_OIDC_GRANT_TYPES =
-      List.of(OIDCGrantType.CLIENT_CREDENTIALS);
 
 
   /**

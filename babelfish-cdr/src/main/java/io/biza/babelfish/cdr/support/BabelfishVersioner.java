@@ -1,5 +1,6 @@
 package io.biza.babelfish.cdr.support;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Optional;
 import io.biza.babelfish.cdr.Constants;
@@ -56,6 +57,24 @@ public class BabelfishVersioner {
             clazz.getName(), minimumVersion, version));
 
   }
+  
+  public static Integer getMinimumVersion(Class<?> clazz) throws UnsupportedVersionException {
+	    HashMap<Integer, Class<?>> versionMap = VersionerConstants.classMap.get(clazz);
+	    if(versionMap != null) {
+	    	return versionMap.keySet().stream().sorted().findFirst().get();
+	    } else {
+	    	return getVersion(clazz);
+	    }
+  }
+  
+  public static Integer getMaximumVersion(Class<?> clazz) throws UnsupportedVersionException {
+	    HashMap<Integer, Class<?>> versionMap = VersionerConstants.classMap.get(clazz);
+	    if(versionMap != null) {
+	    	return versionMap.keySet().stream().sorted(Comparator.reverseOrder()).findFirst().get();
+	    } else {
+	    	return getVersion(clazz);
+	    }
+}
   
   public static Boolean isSupported(Class<?> clazz) {
     if (clazz.getPackageName().startsWith(Constants.BASE_MODELS_PACKAGE)) {
