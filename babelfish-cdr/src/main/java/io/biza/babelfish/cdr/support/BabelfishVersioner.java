@@ -29,7 +29,7 @@ public class BabelfishVersioner {
     
     Integer minimumVersion = version;
     
-    if (optionalMinimum.isPresent() && optionalMinimum.get() < version) {
+    if (optionalMinimum != null && optionalMinimum.isPresent() && optionalMinimum.get() < version) {
       minimumVersion = optionalMinimum.get();
     }
 
