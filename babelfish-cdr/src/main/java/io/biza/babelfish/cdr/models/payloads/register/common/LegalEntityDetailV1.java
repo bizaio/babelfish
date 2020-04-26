@@ -28,7 +28,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "The data that is common to all organisations, regardless of the type (e.g. company, trust, partnership, government)")
-public class LegalEntityDetail {
+public class LegalEntityDetailV1 {
   
   @JsonProperty("legalEntityId")
   @NotEmpty

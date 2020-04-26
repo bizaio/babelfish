@@ -25,7 +25,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "A Single Data Holder Brand")
-public class RegisterDataHolderAuth {
+public class RegisterDataHolderAuthV1 {
   
   @JsonProperty("registerUType")
   @NotNull

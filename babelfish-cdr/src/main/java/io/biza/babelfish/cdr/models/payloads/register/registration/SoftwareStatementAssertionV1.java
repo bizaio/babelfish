@@ -11,17 +11,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.cdr.converters.EpochToOffsetDateTimeConverter;
 import io.biza.babelfish.cdr.converters.OffsetDateTimeToEpochConverter;
-import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
-import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
+import io.biza.babelfish.cdr.enumerations.register.RegisterSoftwareRole;
 import io.biza.babelfish.oidc.converters.ListStringToSpaceListConverter;
 import io.biza.babelfish.oidc.converters.SpaceListToListStringConverter;
-import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
-import io.biza.babelfish.oidc.enumerations.JWEEncryptionEncodingType;
-import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
-import io.biza.babelfish.oidc.enumerations.OIDCApplicationType;
-import io.biza.babelfish.oidc.enumerations.OIDCAuthMethod;
-import io.biza.babelfish.oidc.enumerations.OIDCGrantType;
-import io.biza.babelfish.oidc.enumerations.OIDCResponseType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,22 +29,47 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "An individual software product with status")
-public class RegistrationProperties {
-
-  @JsonProperty("client_id")
+@Schema(description = "A Software Statement issued by the Register")
+public class SoftwareStatementAssertionV1 {
+  
+  @JsonProperty("iss")
   @NotEmpty
-  @Schema(description = "Data Holder issued client identifier string")
-  String clientId;
+  @Schema(description = "The Register Issuer Identifier")
+  String iss;
 
-  @JsonProperty("client_id_issued_at")
+  @JsonProperty("iat")
+  @JsonSerialize(converter = OffsetDateTimeToEpochConverter.class)
+  @JsonDeserialize(converter = EpochToOffsetDateTimeConverter.class)
+  @Builder.Default
+  @Schema(
+      description = "The time at which the request was issued by the Recipient expressed as seconds since 1970-01-01T00:00:00Z as measured in UTC")
+  OffsetDateTime iat = OffsetDateTime.now();
+
+  @JsonProperty("exp")
   @JsonSerialize(converter = OffsetDateTimeToEpochConverter.class)
   @JsonDeserialize(converter = EpochToOffsetDateTimeConverter.class)
   @Schema(
-      description = "Time at which the client identifier was issued expressed as seconds since 1970-01-01T00:00:00Z as measured in UTC")
-  @Builder.Default
-  OffsetDateTime issuedAt = OffsetDateTime.now();
+      description = "The time at which the request expires expressed as seconds since 1970-01-01T00:00:00Z as measured in UTC")
 
+  OffsetDateTime exp;
+
+  @JsonProperty("jti")
+  @NotEmpty
+  @Schema(description = "Unique identifier for the JWT, used to prevent replay of the token")
+  String jti;
+  
+  @JsonProperty("org_id")
+  @NotEmpty
+  @Schema(
+      description = "A unique identifier string assigned by the CDR Register that identifies the Accredited Data Recipient Brand")
+  String organisationId;
+
+  @JsonProperty("org_name")
+  @NotEmpty
+  @Schema(
+      description = "Human-readable string name of the Accredited Data Recipient to be presented to the end user during authorization")
+  String organisationName;
+  
   @JsonProperty("client_name")
   @NotEmpty
   @Schema(
@@ -68,27 +85,13 @@ public class RegistrationProperties {
   @JsonProperty("client_uri")
   @NotNull
   @Schema(description = "URL string of a web page providing information about the client")
-  @JsonSerialize(converter = UriToUriStringConverter.class)
-  @JsonDeserialize(converter = UriStringToUriConverter.class)
   URI clientUri;
-
-  @JsonProperty("org_id")
-  @NotEmpty
-  @Schema(
-      description = "A unique identifier string assigned by the CDR Register that identifies the Accredited Data Recipient Brand")
-  String organisationId;
-
-  @JsonProperty("org_name")
-  @NotEmpty
-  @Schema(
-      description = "Human-readable string name of the Accredited Data Recipient to be presented to the end user during authorization")
-  String organisationName;
 
   @JsonProperty("redirect_uris")
   @NotNull
   @Schema(description = "Array of redirection URI strings for use in redirect-based flows")
   List<URI> redirectUris;
-
+  
   @JsonProperty("logo_uri")
   @NotNull
   @Schema(
@@ -118,63 +121,16 @@ public class RegistrationProperties {
   @Schema(
       description = "URI string that references the location of the Software Product consent revocation endpoint")
   URI revocationUri;
-
-  @JsonProperty("token_endpoint_auth_method")
-  @NotNull
-  @Schema(description = "The requested authentication method for the token endpoint")
-  OIDCAuthMethod tokenEndpointAuthMethod;
-
-  @JsonProperty("token_endpoint_auth_signing_alg")
-  @NotNull
-  @Schema(description = "The algorithm used for signing the JWT")
-  JWSSigningAlgorithmType tokenEndpointAuthSigningAlgorithm;
-
-  @JsonProperty("grant_types")
-  @NotNull
-  @Schema(
-      description = "Array of OAuth 2.0 grant type strings that the client can use at the token endpoint")
-  List<OIDCGrantType> grantTypes;
-
-  @JsonProperty("response_types")
-  @NotNull
-  @Schema(
-      description = "Array of the OAuth 2.0 response type strings that the client can use at the authorization endpoint.")
-  List<OIDCResponseType> responseTypes;
-
-  @JsonProperty("application_type")
-  @NotNull
-  @Schema(description = "Kind of the application. The only supported application type will be web")
-  OIDCApplicationType applicationType;
-
-  @JsonProperty("id_token_signed_response_alg")
-  @Schema(description = "ID Token JWS Signing Algorithms Supported")
-  @NotNull
-  JWSSigningAlgorithmType idTokenSigningAlgorithm;
-
-  @JsonProperty("id_token_encrypted_response_alg")
-  @Schema(description = "ID Token JWE Encryption Algorithms Supported")
-  @NotNull
-  JWEEncryptionAlgorithmType idTokenEncryptionAlgorithm;
-
-  @JsonProperty("id_token_encrypted_response_enc")
-  @Schema(description = "ID Token JWE Encryption Algorithms Supported")
-  @NotNull
-  JWEEncryptionEncodingType idTokenEncryptionMethod;
-
-  @JsonProperty("request_object_signing_alg")
-  @Schema(description = "Request Object Signing Algorithms")
-  // TODO: https://github.com/cdr-register/register/issues/79
-  @NotNull
-  JWSSigningAlgorithmType requestObjectSigningAlgorithm;
-
-  @JsonProperty("software_statement")
-  @Schema(description = "The Software Statement Assertion")
-  String ssa;
-
+  
+  
   @JsonProperty("software_id")
   @Schema(
       description = "String representing a unique identifier assigned by the ACCC Register and used by registration endpoints to identify the software product to be dynamically registered.")
   String softwareId;
+  
+  @JsonProperty("software_roles")
+  @NotNull
+  RegisterSoftwareRole softwareRole;
 
   @JsonProperty("scope")
   @NotNull

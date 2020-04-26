@@ -5,7 +5,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.babelfish.cdr.models.payloads.register.recipient.RegisterDataRecipient;
+import io.biza.babelfish.cdr.models.payloads.register.recipient.DataRecipientStatusV1;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,13 +21,13 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Response containing a list of Data Recipients in the CDR Register")
-public class ResponseRegisterDataRecipientList {
+@Schema(description = "A list of Data Recipient Statuses")
+public class DataRecipientsStatusListV1 {
   
-  @JsonProperty("data")
-  @Schema(
-      description = "A list of Data Recipients")
+  @JsonProperty("dataRecipients")
   @NotNull
-  List<RegisterDataRecipient> data;
-  
+  @Schema(
+      description = "Data Recipient Statuses")
+  List<DataRecipientStatusV1> dataRecipients;
+
 }

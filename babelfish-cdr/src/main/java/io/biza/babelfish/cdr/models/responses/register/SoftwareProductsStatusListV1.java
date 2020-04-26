@@ -2,11 +2,10 @@ package io.biza.babelfish.cdr.models.responses.register;
 
 import java.util.List;
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.babelfish.cdr.models.payloads.register.recipient.DataRecipientStatus;
+import io.biza.babelfish.cdr.models.payloads.register.recipient.SoftwareProductStatusV1;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,13 +21,13 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "A list of Data Recipient Statuses")
-public class DataRecipientsStatusList {
+@Schema(description = "A list of Software Product Statuses")
+public class SoftwareProductsStatusListV1 {
   
-  @JsonProperty("dataRecipients")
+  @JsonProperty("softwareProducts")
   @NotNull
   @Schema(
-      description = "Data Recipient Statuses")
-  List<DataRecipientStatus> dataRecipients;
+      description = "Software Products with Statuses")
+  List<SoftwareProductStatusV1> softwareProducts;
 
 }

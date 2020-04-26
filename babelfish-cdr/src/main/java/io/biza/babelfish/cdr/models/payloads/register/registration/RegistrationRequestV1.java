@@ -37,7 +37,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Schema(description = "A request for Recipient Registration with a Holder")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RegistrationRequest {
+public class RegistrationRequestV1 {
   /**
    * As defined in ACCC Register Documentation: https://cdr-register.github.io/register/#registration-request-using-jwt
    */

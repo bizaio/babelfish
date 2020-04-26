@@ -4,7 +4,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.babelfish.cdr.enumerations.register.SoftwareProductStatusType;
+import io.biza.babelfish.cdr.enumerations.register.DataRecipientStatusType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,18 +21,18 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "An individual software product with status")
-public class SoftwareProductStatus {
+public class DataRecipientStatusV1 {
   
-  @JsonProperty("softwareProductId")
+  @JsonProperty("dataRecipientId")
   @NotEmpty
   @Schema(
-      description = "Unique Software Product Identifier")
-  String softwareProductId;
+      description = "Unique Data Recipient Identifier")
+  String dataRecipientId;
   
-  @JsonProperty("softwareProductStatus")
+  @JsonProperty("dataRecipientStatus")
   @NotNull
   @Schema(
-      description = "Software Product Status")
-  SoftwareProductStatusType softwareProductStatus;
+      description = "Data Recipient Status")
+  DataRecipientStatusType dataRecipientStatus;
 
 }

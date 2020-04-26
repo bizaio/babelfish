@@ -21,7 +21,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class RequestGetDataHolderBrands {
+public class RequestGetDataHolderBrandsV1 {
   OffsetDateTime updatedSince;
   @Min(1)
   Integer page;

@@ -25,7 +25,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "Endpoints related to Data Holder Brand services")
-public class RegisterDataHolderBrandServiceEndpoint {
+public class RegisterDataHolderBrandServiceEndpointV1 {
   
   @JsonProperty("version")
   @NotNull

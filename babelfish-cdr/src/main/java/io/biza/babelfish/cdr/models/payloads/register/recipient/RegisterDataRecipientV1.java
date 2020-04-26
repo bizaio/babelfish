@@ -31,7 +31,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "A Single Data Recipient")
-public class RegisterDataRecipient {
+public class RegisterDataRecipientV1 {
 
   @JsonProperty("legalEntityId")
   @NotEmpty
@@ -56,7 +56,7 @@ public class RegisterDataRecipient {
 
   @JsonProperty("dataRecipientBrands")
   @Schema(description = "Endpoints related to Data Recipient Brands")
-  List<DataRecipientBrandMetaData> dataRecipientBrands;
+  List<DataRecipientBrandMetaDataV1> dataRecipientBrands;
 
   @JsonProperty("status")
   @Schema(description = "Data Recipient Brand Status")

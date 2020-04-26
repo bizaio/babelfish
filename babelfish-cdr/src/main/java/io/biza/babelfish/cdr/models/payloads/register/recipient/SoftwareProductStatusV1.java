@@ -1,10 +1,10 @@
-package io.biza.babelfish.cdr.models.payloads.register.registration;
+package io.biza.babelfish.cdr.models.payloads.register.recipient;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.biza.babelfish.cdr.enumerations.register.RegistrationErrorType;
+import io.biza.babelfish.cdr.enumerations.register.SoftwareProductStatusType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,16 +21,18 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "An individual software product with status")
-public class RegistrationError {
-
-  @JsonProperty("error")
-  @NotNull
-  @Schema(description = "Predefined error code as described in section 3.3 OIDC Dynamic Client Registration")
-  RegistrationErrorType error;
+public class SoftwareProductStatusV1 {
   
-  @JsonProperty("error_description")
+  @JsonProperty("softwareProductId")
   @NotEmpty
-  @Schema(description = "Additional text description of the error for debugging.")
-  String errorDescription;
+  @Schema(
+      description = "Unique Software Product Identifier")
+  String softwareProductId;
+  
+  @JsonProperty("softwareProductStatus")
+  @NotNull
+  @Schema(
+      description = "Software Product Status")
+  SoftwareProductStatusType softwareProductStatus;
 
 }

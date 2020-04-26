@@ -28,7 +28,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "Endpoints related to Data Holder Brand services")
-public class SoftwareProductMetaData {
+public class SoftwareProductMetaDataV1 {
   
   @JsonProperty("softwareProductId")
   @NotEmpty

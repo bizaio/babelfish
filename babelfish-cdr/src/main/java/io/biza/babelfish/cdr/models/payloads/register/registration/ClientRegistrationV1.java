@@ -38,7 +38,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "An individual software product with status")
-public class ClientRegistration {
+public class ClientRegistrationV1 {
 
   @JsonProperty("iss")
   @NotEmpty

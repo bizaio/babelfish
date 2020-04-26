@@ -1,13 +1,6 @@
 package io.biza.babelfish.spring;
 
 import java.net.URI;
-import java.util.List;
-import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
-import io.biza.babelfish.oidc.enumerations.JWEEncryptionEncodingType;
-import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
-import io.biza.babelfish.oidc.enumerations.OIDCApplicationType;
-import io.biza.babelfish.oidc.enumerations.OIDCAuthMethod;
-import io.biza.babelfish.oidc.enumerations.OIDCGrantType;
 
 public class Constants {
 

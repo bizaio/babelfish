@@ -12,7 +12,7 @@ import io.biza.babelfish.cdr.converters.DateTimeStringToOffsetDateTimeConverter;
 import io.biza.babelfish.cdr.converters.OffsetDateTimeToDateTimeStringConverter;
 import io.biza.babelfish.cdr.enumerations.register.DataHolderStatusType;
 import io.biza.babelfish.cdr.enumerations.register.IndustryType;
-import io.biza.babelfish.cdr.models.payloads.register.common.LegalEntityDetail;
+import io.biza.babelfish.cdr.models.payloads.register.common.LegalEntityDetailV1;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,7 +29,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "A Single Data Holder Brand")
-public class RegisterDataHolderBrand {
+public class RegisterDataHolderBrandV1 {
   
   @JsonProperty("dataHolderBrandId")
   @NotEmpty
@@ -51,7 +51,7 @@ public class RegisterDataHolderBrand {
   @NotNull
   @Schema(
       description = "The data that is common to all organisations, regardless of the type (e.g. company, trust, partnership, government)")
-  LegalEntityDetail legalEntity;
+  LegalEntityDetailV1 legalEntity;
   
   @JsonProperty("status")
   @NotNull
@@ -61,12 +61,12 @@ public class RegisterDataHolderBrand {
   @JsonProperty("endpointDetail")
   @NotNull
   @Schema(description = "Provides the endpoint details for the brand")
-  RegisterDataHolderBrandServiceEndpoint endpointDetail;
+  RegisterDataHolderBrandServiceEndpointV1 endpointDetail;
   
   @JsonProperty("authDetails")
   @NotNull
   @Schema(description = "Provides details of authorisation endpoints for Data Holders")
-  List<RegisterDataHolderAuth> authDetails;
+  List<RegisterDataHolderAuthV1> authDetails;
   
   @JsonProperty("lastUpdated")
   @NotNull
