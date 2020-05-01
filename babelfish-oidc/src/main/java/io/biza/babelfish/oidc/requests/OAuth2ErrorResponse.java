@@ -4,6 +4,10 @@ import java.net.URI;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.biza.babelfish.oidc.converters.UriStringToUriConverter;
+import io.biza.babelfish.oidc.converters.UriToUriStringConverter;
 import io.biza.babelfish.oidc.enumerations.OAuth2ErrorCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -41,6 +45,8 @@ public class OAuth2ErrorResponse {
    * Error URI
    */
   @JsonProperty("error_uri")
+  @JsonSerialize(converter = UriToUriStringConverter.class)
+  @JsonDeserialize(converter = UriStringToUriConverter.class)
   public URI errorUri;
   
   

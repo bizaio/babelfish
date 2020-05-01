@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(description = "Register Auth Configuration Type", enumAsRef = true)
 public enum RegisterAuthType implements LabelValueEnumInterface {
   // @formatter:off
-  HYBRIDFLOW_JWKS("HYBRIDFLOW-JWKS", "Hybrid Flow with JWKS");
+  SIGNED_JWT("SIGNED-JWT", "Signed JWT Authentication to Revocation Endpoint");
   // @formatter:on
 
   private String value;

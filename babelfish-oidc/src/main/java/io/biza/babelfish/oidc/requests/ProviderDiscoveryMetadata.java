@@ -3,19 +3,16 @@ package io.biza.babelfish.oidc.requests;
 import java.net.URI;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.babelfish.oidc.enumerations.OIDCResponseType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
-import io.biza.babelfish.oidc.enumerations.JWEEncryptionMethodType;
+import io.biza.babelfish.oidc.enumerations.JWEEncryptionEncodingType;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.OAuth2PKCEType;
-import io.biza.babelfish.oidc.enumerations.OAuth2ResponseType;
 import io.biza.babelfish.oidc.enumerations.OIDCAuthMethod;
 import io.biza.babelfish.oidc.enumerations.OIDCClaimType;
 import io.biza.babelfish.oidc.enumerations.OIDCDisplayType;
@@ -84,7 +81,7 @@ public class ProviderDiscoveryMetadata {
 
   @JsonProperty("response_types_supported")
   @Schema(description = "OAuth2 Response Types supported")
-  List<OIDCResponseType> responseTypesSupported;
+  Set<String> responseTypesSupported;
 
   @JsonProperty("response_modes_supported")
   @Schema(description = "OAuth2 Response Modes supported")
@@ -115,8 +112,8 @@ public class ProviderDiscoveryMetadata {
   List<JWEEncryptionAlgorithmType> idTokenEncryptionAlgorithms;
   
   @JsonProperty("id_token_encryption_enc_values_supported")
-  @Schema(description = "ID Token JWE Encryption Algorithms Supported")
-  List<JWEEncryptionMethodType> idTokenEncryptionMethods;
+  @Schema(description = "ID Token JWE Encryption Encoding Methods Supported")
+  List<JWEEncryptionEncodingType> idTokenEncryptionEncodings;
 
   @JsonProperty("userinfo_signing_alg_values_supported")
   @Schema(description = "User Info JWS Signing Algorithms Supported")
@@ -130,7 +127,7 @@ public class ProviderDiscoveryMetadata {
   
   @JsonProperty("userinfo_encryption_enc_values_supported")
   @Schema(description = "User Info JWE Encryption Algorithms Supported")
-  List<JWEEncryptionMethodType> userInfoEncryptionMethods;
+  List<JWEEncryptionEncodingType> userInfoEncryptionMethods;
   
   @JsonProperty("request_object_signing_alg_values_supported")
   @Schema(description = "Request Object JWS Signing Algorithms Supported")
@@ -144,7 +141,7 @@ public class ProviderDiscoveryMetadata {
   
   @JsonProperty("request_object_encryption_enc_values_supported")
   @Schema(description = "Request Object JWE Encryption Algorithms Supported")
-  List<JWEEncryptionMethodType> requestObjectEncryptionMethods;
+  List<JWEEncryptionEncodingType> requestObjectEncryptionMethods;
   
   @JsonProperty("token_endpoint_auth_methods_supported")
   @Schema(description = "Token Endpoint Client Authentication methods supported")

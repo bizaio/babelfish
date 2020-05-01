@@ -24,7 +24,8 @@ public enum OIDCAuthMethod {
   CLIENT_SECRET_BASIC("client_secret_basic"),
   CLIENT_SECRET_POST("client_secret_post"),
   TLS_CLIENT_AUTH("tls_client_auth"),
-  CLIENT_SECRET_JWT("client_secret_jwt");
+  CLIENT_SECRET_JWT("client_secret_jwt"),
+  NONE("none");
   // @formatter:on
   
   private String text;

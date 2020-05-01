@@ -36,135 +36,124 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(
-    description = "Australian address formatted according to the file format defined by the [PAF file format](https://auspost.com.au/content/dam/auspost_corp/media/documents/australia-post-data-guide.pdf)",
-    name = "CommonPAFAddressV1")
-public class CommonPAFAddressV1
-    extends io.biza.babelfish.cdr.abstracts.payloads.common.CommonPAFAddressV1 {
-  @Schema(
-      description = "Unique identifier for an address as defined by Australia Post.  Also known as Delivery Point Identifier")
-  @JsonProperty("dpid")
-  String dpid;
+@Schema(description = "Australian address formatted according to the file format defined by the [PAF file format](https://auspost.com.au/content/dam/auspost_corp/media/documents/australia-post-data-guide.pdf)", name = "CommonPAFAddressV1")
+public class CommonPAFAddressV1 extends io.biza.babelfish.cdr.abstracts.payloads.common.CommonPAFAddressV1 {
+	@Schema(description = "Unique identifier for an address as defined by Australia Post.  Also known as Delivery Point Identifier")
+	@JsonProperty("dpid")
+	String dpid;
 
-  @Schema(
-      description = "Thoroughfare number for a property (first number in a property ranged address)")
-  @JsonProperty("thoroughfareNumber1")
-  Integer thoroughfareNumber1;
+	public void dpid(Integer dpid) {
+		if (dpid != null) {
+			this.dpid = dpid.toString();
+		}
+	}
 
-  public void thoroughfareNumber1(String thoroughfareNumber1String) {
-    if (thoroughfareNumber1String != null) {
-      thoroughfareNumber1 = thoroughfareNumber1String.equals("00000") ? null
-          : Integer.parseInt(thoroughfareNumber1String);
-    }
-  }
+	@Schema(description = "Thoroughfare number for a property (first number in a property ranged address)")
+	@JsonProperty("thoroughfareNumber1")
+	Integer thoroughfareNumber1;
 
-  @Schema(
-      description = "Suffix for the thoroughfare number. Only relevant is thoroughfareNumber1 is populated")
-  @JsonProperty("thoroughfareNumber1Suffix")
-  String thoroughfareNumber1Suffix;
+	public void thoroughfareNumber1(String thoroughfareNumber1String) {
+		if (thoroughfareNumber1String != null) {
+			thoroughfareNumber1 = thoroughfareNumber1String.equals("00000") ? null
+					: Integer.parseInt(thoroughfareNumber1String);
+		}
+	}
 
-  @Schema(
-      description = "Second thoroughfare number (only used if the property has a ranged address eg 23-25)")
-  @JsonProperty("thoroughfareNumber2")
-  Integer thoroughfareNumber2;
+	@Schema(description = "Suffix for the thoroughfare number. Only relevant is thoroughfareNumber1 is populated")
+	@JsonProperty("thoroughfareNumber1Suffix")
+	String thoroughfareNumber1Suffix;
 
-  public void thoroughfareNumber2(String thoroughfareNumber2String) {
-    if (thoroughfareNumber2String != null) {
-      thoroughfareNumber2 = thoroughfareNumber2String.equals("00000") ? null
-          : Integer.parseInt(thoroughfareNumber2String);
-    }
-  }
+	@Schema(description = "Second thoroughfare number (only used if the property has a ranged address eg 23-25)")
+	@JsonProperty("thoroughfareNumber2")
+	Integer thoroughfareNumber2;
 
-  @Schema(
-      description = "Suffix for the second thoroughfare number. Only relevant is thoroughfareNumber2 is populated")
-  @JsonProperty("thoroughfareNumber2Suffix")
-  String thoroughfareNumber2Suffix;
+	public void thoroughfareNumber2(String thoroughfareNumber2String) {
+		if (thoroughfareNumber2String != null) {
+			thoroughfareNumber2 = thoroughfareNumber2String.equals("00000") ? null
+					: Integer.parseInt(thoroughfareNumber2String);
+		}
+	}
 
-  @Schema(description = "Type of flat or unit for the address", type = "string")
-  @JsonProperty("flatUnitType")
-  AddressPAFFlatUnitType flatUnitType;
+	@Schema(description = "Suffix for the second thoroughfare number. Only relevant is thoroughfareNumber2 is populated")
+	@JsonProperty("thoroughfareNumber2Suffix")
+	String thoroughfareNumber2Suffix;
 
-  @Schema(description = "Unit number (including suffix, if applicable)")
-  @JsonProperty("flatUnitNumber")
-  String flatUnitNumber;
+	@Schema(description = "Type of flat or unit for the address", type = "string")
+	@JsonProperty("flatUnitType")
+	AddressPAFFlatUnitType flatUnitType;
 
-  @Schema(description = "Type of floor or level for the address", type = "string")
-  @JsonProperty("floorLevelType")
-  AddressPAFFloorLevelType floorLevelType;
+	@Schema(description = "Unit number (including suffix, if applicable)")
+	@JsonProperty("flatUnitNumber")
+	String flatUnitNumber;
 
-  @Schema(description = "Floor or level number (including alpha characters)")
-  @JsonProperty("floorLevelNumber")
-  String floorLevelNumber;
+	@Schema(description = "Type of floor or level for the address", type = "string")
+	@JsonProperty("floorLevelType")
+	AddressPAFFloorLevelType floorLevelType;
 
-  @Schema(description = "Allotment number for the address")
-  @JsonProperty("lotNumber")
-  String lotNumber;
+	@Schema(description = "Floor or level number (including alpha characters)")
+	@JsonProperty("floorLevelNumber")
+	String floorLevelNumber;
 
-  @Schema(description = "Building/Property name 1")
-  @JsonProperty("buildingName1")
-  String buildingName1;
+	@Schema(description = "Allotment number for the address")
+	@JsonProperty("lotNumber")
+	String lotNumber;
 
-  @Schema(description = "Building/Property name 2")
-  @JsonProperty("buildingName2")
-  String buildingName2;
+	@Schema(description = "Building/Property name 1")
+	@JsonProperty("buildingName1")
+	String buildingName1;
 
-  @Schema(description = "The name of the street")
-  @JsonProperty("streetName")
-  String streetName;
+	@Schema(description = "Building/Property name 2")
+	@JsonProperty("buildingName2")
+	String buildingName2;
 
-  @Schema(
-      description = "The street type. Valid enumeration defined by Australia Post PAF code file",
-      type = "string")
-  @JsonProperty("streetType")
-  AddressPAFStreetType streetType;
+	@Schema(description = "The name of the street")
+	@JsonProperty("streetName")
+	String streetName;
 
-  @Schema(
-      description = "The street type suffix. Valid enumeration defined by Australia Post PAF code file",
-      type = "string")
-  @JsonProperty("streetSuffix")
-  AddressPAFStreetSuffix streetSuffix;
+	@Schema(description = "The street type. Valid enumeration defined by Australia Post PAF code file", type = "string")
+	@JsonProperty("streetType")
+	AddressPAFStreetType streetType;
 
-  @Schema(
-      description = "Postal delivery type. (eg. PO BOX). Valid enumeration defined by Australia Post PAF code file",
-      type = "string")
-  @JsonProperty("postalDeliveryType")
-  AddressPAFPostalDeliveryType postalDeliveryType;
+	@Schema(description = "The street type suffix. Valid enumeration defined by Australia Post PAF code file", type = "string")
+	@JsonProperty("streetSuffix")
+	AddressPAFStreetSuffix streetSuffix;
 
-  @Schema(description = "Postal delivery number if the address is a postal delivery type")
-  @JsonProperty("postalDeliveryNumber")
-  Integer postalDeliveryNumber;
+	@Schema(description = "Postal delivery type. (eg. PO BOX). Valid enumeration defined by Australia Post PAF code file", type = "string")
+	@JsonProperty("postalDeliveryType")
+	AddressPAFPostalDeliveryType postalDeliveryType;
 
-  public void postalDeliveryNumber(String postalDeliveryNumberString) {
-    if (postalDeliveryNumberString != null) {
-      postalDeliveryNumber = postalDeliveryNumberString.equals("00000") ? null
-          : Integer.parseInt(postalDeliveryNumberString);
-    }
-  }
+	@Schema(description = "Postal delivery number if the address is a postal delivery type")
+	@JsonProperty("postalDeliveryNumber")
+	Integer postalDeliveryNumber;
 
-  @Schema(description = "Postal delivery number prefix related to the postal delivery number")
-  @JsonProperty("postalDeliveryNumberPrefix")
-  String postalDeliveryNumberPrefix;
+	public void postalDeliveryNumber(String postalDeliveryNumberString) {
+		if (postalDeliveryNumberString != null) {
+			postalDeliveryNumber = postalDeliveryNumberString.equals("00000") ? null
+					: Integer.parseInt(postalDeliveryNumberString);
+		}
+	}
 
-  @Schema(description = "Postal delivery number suffix related to the postal delivery number")
-  @JsonProperty("postalDeliveryNumberSuffix")
-  String postalDeliveryNumberSuffix;
+	@Schema(description = "Postal delivery number prefix related to the postal delivery number")
+	@JsonProperty("postalDeliveryNumberPrefix")
+	String postalDeliveryNumberPrefix;
 
-  @Schema(description = "Full name of locality", required = true)
-  @JsonProperty("localityName")
-  @NotEmpty(message = "Locality must be supplied")
-  String localityName;
+	@Schema(description = "Postal delivery number suffix related to the postal delivery number")
+	@JsonProperty("postalDeliveryNumberSuffix")
+	String postalDeliveryNumberSuffix;
 
-  @Schema(description = "Postcode for the locality", required = true)
-  @JsonProperty("postcode")
-  @NotEmpty(message = "Postcode must be supplied")
-  String postcode;
+	@Schema(description = "Full name of locality", required = true)
+	@JsonProperty("localityName")
+	@NotEmpty(message = "Locality must be supplied")
+	String localityName;
 
-  @Schema(
-      description = "State in which the address belongs. Valid enumeration defined by Australia Post PAF code file",
-      required = true, type = "string")
-  @JsonProperty("state")
-  @NotNull
-  AddressPAFStateType state;
+	@Schema(description = "Postcode for the locality", required = true)
+	@JsonProperty("postcode")
+	@NotEmpty(message = "Postcode must be supplied")
+	String postcode;
 
+	@Schema(description = "State in which the address belongs. Valid enumeration defined by Australia Post PAF code file", required = true, type = "string")
+	@JsonProperty("state")
+	@NotNull
+	AddressPAFStateType state;
 
 }

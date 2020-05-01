@@ -1,10 +1,11 @@
 package io.biza.babelfish.cdr.support;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Optional;
 import io.biza.babelfish.cdr.Constants;
 import io.biza.babelfish.cdr.exceptions.PayloadConversionException;
-import io.biza.babelfish.cdr.exceptions.UnsupportedPayloadException;
+import io.biza.babelfish.cdr.exceptions.UnsupportedVersionException;
 import io.biza.babelfish.cdr.models.VersionerConstants;
 import io.biza.babelfish.cdr.orika.OrikaFactoryConfigurer;
 import lombok.extern.slf4j.Slf4j;
@@ -13,11 +14,11 @@ import lombok.extern.slf4j.Slf4j;
 public class BabelfishVersioner {
 
   public static Class<?> getVersionedClass(Class<?> clazz, Integer version, Optional<Integer> optionalMinimum)
-      throws UnsupportedPayloadException {
+      throws UnsupportedVersionException {
 
     if (VersionerConstants.classMap == null) {
       LOG.error("Class mapper is not initialised");
-      throw new UnsupportedPayloadException("Class Mapper has not been initialised!");
+      throw new UnsupportedVersionException("Class Mapper has not been initialised!");
     }
 
     HashMap<Integer, Class<?>> versionMap = VersionerConstants.classMap.get(clazz);
@@ -28,7 +29,7 @@ public class BabelfishVersioner {
     
     Integer minimumVersion = version;
     
-    if (optionalMinimum.isPresent() && optionalMinimum.get() < version) {
+    if (optionalMinimum != null && optionalMinimum.isPresent() && optionalMinimum.get() < version) {
       minimumVersion = optionalMinimum.get();
     }
 
@@ -37,7 +38,7 @@ public class BabelfishVersioner {
      */
     if (versionMap == null) {
       LOG.error("Version map has not initialised!");
-      throw new UnsupportedPayloadException(
+      throw new UnsupportedVersionException(
           String.format("Unable to retrieve version map for class: %s", clazz.getName()));
     }
 
@@ -51,11 +52,29 @@ public class BabelfishVersioner {
       }
     }
 
-    throw new UnsupportedPayloadException(
+    throw new UnsupportedVersionException(
         String.format("Unable to locate a version of class %s for version %d <= %d",
             clazz.getName(), minimumVersion, version));
 
   }
+  
+  public static Integer getMinimumVersion(Class<?> clazz) throws UnsupportedVersionException {
+	    HashMap<Integer, Class<?>> versionMap = VersionerConstants.classMap.get(clazz);
+	    if(versionMap != null) {
+	    	return versionMap.keySet().stream().sorted().findFirst().get();
+	    } else {
+	    	return getVersion(clazz);
+	    }
+  }
+  
+  public static Integer getMaximumVersion(Class<?> clazz) throws UnsupportedVersionException {
+	    HashMap<Integer, Class<?>> versionMap = VersionerConstants.classMap.get(clazz);
+	    if(versionMap != null) {
+	    	return versionMap.keySet().stream().sorted(Comparator.reverseOrder()).findFirst().get();
+	    } else {
+	    	return getVersion(clazz);
+	    }
+}
   
   public static Boolean isSupported(Class<?> clazz) {
     if (clazz.getPackageName().startsWith(Constants.BASE_MODELS_PACKAGE)) {
@@ -65,15 +84,15 @@ public class BabelfishVersioner {
     return false;
   }
 
-  public static Integer getVersion(Class<?> clazz) throws UnsupportedPayloadException {
+  public static Integer getVersion(Class<?> clazz) throws UnsupportedVersionException {
     if(!isSupported(clazz)) {
-      throw new UnsupportedPayloadException(
+      throw new UnsupportedVersionException(
           "BabelFishVersioner only supports version discovery for classes in "
               + Constants.BASE_MODELS_PACKAGE);
     }
 
     if (VersionerConstants.versionMap == null) {
-      throw new UnsupportedPayloadException("Version mapper has not been initialised!");
+      throw new UnsupportedVersionException("Version mapper has not been initialised!");
     }
     return VersionerConstants.versionMap.getOrDefault(clazz, 1);
   }

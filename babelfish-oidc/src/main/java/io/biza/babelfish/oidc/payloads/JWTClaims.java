@@ -164,7 +164,6 @@ public class JWTClaims {
     return this;
   }
 
-
   /**
    * Verification Assertions
    */

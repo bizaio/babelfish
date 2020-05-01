@@ -10,7 +10,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.oidc.converters.ListStringToSpaceListConverter;
 import io.biza.babelfish.oidc.converters.SpaceListToListStringConverter;
-import io.biza.babelfish.oidc.enumerations.OAuth2ResponseType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
