@@ -48,9 +48,10 @@ import org.bouncycastle.pqc.crypto.util.PrivateKeyFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
+
+import io.biza.babelfish.cdr.exceptions.EncryptionOperationException;
+import io.biza.babelfish.cdr.exceptions.NotInitialisedException;
 import io.biza.babelfish.spring.Constants;
-import io.biza.babelfish.spring.exceptions.EncryptionOperationException;
-import io.biza.babelfish.spring.exceptions.NotInitialisedException;
 import io.biza.babelfish.spring.interfaces.CertificateService;
 import lombok.extern.slf4j.Slf4j;
 

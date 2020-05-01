@@ -2,8 +2,9 @@ package io.biza.babelfish.spring.interfaces;
 
 import java.util.Map;
 import java.util.UUID;
-import io.biza.babelfish.spring.exceptions.NotFoundException;
-import io.biza.babelfish.spring.exceptions.NotInitialisedException;
+
+import io.biza.babelfish.cdr.exceptions.NotFoundException;
+import io.biza.babelfish.cdr.exceptions.NotInitialisedException;
 
 public interface ConfigService {
 

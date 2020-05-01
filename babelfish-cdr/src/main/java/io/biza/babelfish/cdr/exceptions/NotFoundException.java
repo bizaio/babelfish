@@ -1,4 +1,4 @@
-package io.biza.babelfish.spring.exceptions;
+package io.biza.babelfish.cdr.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

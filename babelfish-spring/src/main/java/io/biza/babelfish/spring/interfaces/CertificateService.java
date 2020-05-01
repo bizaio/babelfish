@@ -1,7 +1,7 @@
 package io.biza.babelfish.spring.interfaces;
 
-import io.biza.babelfish.spring.exceptions.EncryptionOperationException;
-import io.biza.babelfish.spring.exceptions.NotInitialisedException;
+import io.biza.babelfish.cdr.exceptions.EncryptionOperationException;
+import io.biza.babelfish.cdr.exceptions.NotInitialisedException;
 
 public interface CertificateService {
 

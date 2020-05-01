@@ -1,4 +1,4 @@
-package io.biza.babelfish.spring.exceptions;
+package io.biza.babelfish.cdr.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AlreadyInitialisedException extends Exception {
+public class NotInitialisedException extends Exception {
   private static final long serialVersionUID = 1L;
   
   public String message;

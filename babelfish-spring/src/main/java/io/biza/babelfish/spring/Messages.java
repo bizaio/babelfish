@@ -15,6 +15,9 @@ public class Messages {
   public static final String PATH_PARAMETER_VALIDATION_ERROR_WITH_NAME_TARGET_MESSAGE = "A supplied path parameter was unable to be validated: {} should be a {}";
 public static final String UNSUPPORTED_UNWRAP_WITH_DESCRIPTION_MESSAGE = "Attempted to unwrap an error which is not supported: {}";
 public static final String RECEIVED_SPECIFIED_ERROR_WITH_DESCRIPTION_MESSAGE = "Received a {} with detail of: {}";
+public static final String UNABLE_TO_CREATE_HOLDER = "Attempted to create a new holder failed";
+public static final String UNABLE_TO_UPDATE_HOLDER = "Attempted to update a holder failed";
+public static final String UNABLE_TO_FIND_HOLDER = "The holder requested ({}) was not found";
 public static final String UNABLE_TO_VALIDATE_GENERIC_WITH_CONTENT =
 "Unable to validate {} with input of: {}";
 public static final String CREATED_NEW_GENERIC_WITH_CONTENT =
@@ -31,4 +34,5 @@ public static final String AUTO_INITIALISATION_DISABLED_WITH_NAME = "Auto Initia
 public static final String CONFIG_UNABLE_TO_LOCATE = "Unable to locate configuration value for object {} and key {}";
 public static final String CONFIG_UNABLE_TO_PARSE = "Unable to parse configuration value for object {} and key {}";
 public static final String CONFIG_UNABLE_TO_PROCESS = "Unable to serialise to json configuration value for object {} and key {}";
+public static final String ENCOUNTERED_DISCOVERY_FAILURE_WHILE_ATTEMPTING_AUTH_AT_X = "Encountered a Discovery Failure while attempting discovery at the issuer with a base uri of {}";
 }

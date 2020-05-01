@@ -11,22 +11,29 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *******************************************************************************/
-package io.biza.babelfish.cdr.models.responses.register;
+package io.biza.babelfish.cdr.models.requests.register;
 
 import java.time.OffsetDateTime;
 import javax.validation.constraints.Min;
-import lombok.Builder;
-import lombok.Data;
+import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.biza.babelfish.cdr.enumerations.register.IndustryType;
+import lombok.Builder;
+import io.biza.babelfish.cdr.RequestParameters;
+import lombok.Data;
 
 @Data
 @Builder
 public class RequestGetDataHolderBrandsV1 {
-  OffsetDateTime updatedSince;
-  @Min(1)
-  Integer page;
-  @Min(0)
-  @Builder.Default
-  Integer pageSize = 25;
-}
 
+	@JsonIgnore
+	@NotNull
+	@Builder.Default
+	IndustryType industryType = IndustryType.BANKING;
+
+	@JsonProperty(RequestParameters.UPDATED_SINCE)
+	OffsetDateTime updatedSince;
+}

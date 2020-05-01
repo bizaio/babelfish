@@ -9,7 +9,7 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
  *******************************************************************************/
-package io.biza.babelfish.spring.enumerations;
+package io.biza.babelfish.cdr.enumerations;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

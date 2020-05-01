@@ -7,8 +7,9 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
 import org.apache.commons.lang3.StringUtils;
-import io.biza.babelfish.spring.enumerations.BabelValidationErrorType;
-import io.biza.babelfish.spring.payloads.BabelValidationError;
+
+import io.biza.babelfish.cdr.enumerations.BabelValidationErrorType;
+import io.biza.babelfish.cdr.models.payloads.BabelValidationError;
 public class ValidationUtil {
 
   public static <T> List<BabelValidationError> toValidationList(

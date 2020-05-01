@@ -1,4 +1,4 @@
-package io.biza.babelfish.spring.exceptions;
+package io.biza.babelfish.cdr.exceptions;
 
 import javax.validation.constraints.NotNull;
 import io.biza.babelfish.cdr.enumerations.register.RegistrationErrorType;

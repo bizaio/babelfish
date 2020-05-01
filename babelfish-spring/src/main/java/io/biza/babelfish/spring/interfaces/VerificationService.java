@@ -3,12 +3,12 @@ package io.biza.babelfish.spring.interfaces;
 import java.net.URI;
 import java.text.ParseException;
 
+import io.biza.babelfish.cdr.exceptions.SigningOperationException;
 import io.biza.babelfish.oidc.enumerations.JWTPeekAttribute;
 import io.biza.babelfish.oidc.exceptions.KeyRetrievalException;
 import io.biza.babelfish.oidc.exceptions.SigningVerificationException;
 import io.biza.babelfish.oidc.payloads.JWTClaims;
 import io.biza.babelfish.oidc.support.NimbusUtil;
-import io.biza.babelfish.spring.exceptions.SigningOperationException;
 
 public interface VerificationService {
 
