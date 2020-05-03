@@ -18,6 +18,7 @@ public enum CDRClaim implements LabelValueEnumInterface {
   FAMILY_NAME("family_name", "family_name"),
   UPDATED_AT("updated_at", "updated_at"),
   REFRESH_TOKEN_EXPIRES_AT("refresh_token_expires_at", "refresh_token_expires_at"),
+  SHARING_DURATION("sharing_duration", "sharing_duration"),
   SHARING_EXPIRES_AT("sharing_expires_at", "sharing_expires_at");
   // @formatter:on
 

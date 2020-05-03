@@ -1,4 +1,4 @@
-package io.biza.babelfish.spring.interfaces;
+package io.biza.babelfish.interfaces;
 
 import java.util.Map;
 import java.util.UUID;

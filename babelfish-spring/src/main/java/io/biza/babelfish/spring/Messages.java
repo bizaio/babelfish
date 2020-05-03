@@ -28,6 +28,7 @@ public static final String UPDATED_GENERIC_WITH_CONTENT = "Updated {} with conte
 public static final String ENCOUNTERED_X_EXCEPTION_WHILE_PERFORMING_Y = "Encountered {} exception while performing {}";
 public static final String ENCOUNTERED_UNSUPPORTED_KEY_TYPE_WITH_ID = "Encountered an unsupported key type of {} with id of {}";
 public static final String ENCOUNTERED_PARSE_EXCEPTION_WITH_ALG_USE = "Encountered parse exception when retrieving content with algorithm of {} and use of {}";
+public static final String ENCOUNTERED_PARSE_EXCEPTION_POST_REQUEST_OBJECT_SIGNING = "Encountered parse exception when attempting to process successfully signed request object";
 public static final String ENCOUNTERED_PARSE_EXCEPTION_WITH_ID = "Encountered parsing error when processing key with id of {}";
 public static final String REALM_INITIALISATION_WITH_NAME = "Initialising Realm with name of {}";
 public static final String AUTO_INITIALISATION_DISABLED_WITH_NAME = "Auto Initialisation is disabled for {} realm";

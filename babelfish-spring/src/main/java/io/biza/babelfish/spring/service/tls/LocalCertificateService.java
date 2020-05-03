@@ -51,8 +51,8 @@ import org.springframework.stereotype.Service;
 
 import io.biza.babelfish.cdr.exceptions.EncryptionOperationException;
 import io.biza.babelfish.cdr.exceptions.NotInitialisedException;
+import io.biza.babelfish.interfaces.CertificateService;
 import io.biza.babelfish.spring.Constants;
-import io.biza.babelfish.spring.interfaces.CertificateService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

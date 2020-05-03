@@ -1,4 +1,4 @@
-package io.biza.babelfish.spring.interfaces;
+package io.biza.babelfish.interfaces;
 
 import io.biza.babelfish.cdr.exceptions.EncryptionOperationException;
 import io.biza.babelfish.cdr.exceptions.NotInitialisedException;
