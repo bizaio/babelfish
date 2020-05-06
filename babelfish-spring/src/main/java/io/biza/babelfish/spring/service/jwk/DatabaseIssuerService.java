@@ -73,7 +73,7 @@ public class DatabaseIssuerService implements IssuerService {
 	ObjectMapper mapper;
 
 	@Override
-	public JWKS jwks(String... names) throws NotInitialisedException {
+	public JWKS jwks(String... names) {
 		JWKS jwks = new JWKS();
 		for (String name : names) {
 			try {
@@ -82,7 +82,9 @@ public class DatabaseIssuerService implements IssuerService {
 			} catch (JsonProcessingException e) {
 				LOG.error(Messages.ENCOUNTERED_X_EXCEPTION_WHILE_PERFORMING_Y, e.getClass().getName(),
 						"processing from smart-json to jackson", e);
-				throw NotInitialisedException.builder().build();
+			} catch (NotInitialisedException e) {
+				LOG.warn(Messages.ENCOUNTERED_X_EXCEPTION_WHILE_PERFORMING_Y, e.getClass().getName(),
+						"while processing issuer with name of " + name);
 			}
 		}
 		return jwks;

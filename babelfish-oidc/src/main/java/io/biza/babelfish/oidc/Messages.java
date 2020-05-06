@@ -10,5 +10,9 @@ public class Messages {
 	public static final String MATCHED_JWK = "Matched JWK is: {}";
 	public static final String UNABLE_TO_IDENTIFY_MESSAGE_DIGESTER = "Unable to identify required message digester for state hash calculation";
 	public static final String UNSUPPORTED_DIGEST_FOR_ALGORITHM = "Unsupported digest method for algorithm of {}";
+	public static final String CLAIMS_SET_CONVERSION_PRODUCED_X = "Claims Set Conversion produced: {}";
+	public static final String ATTEMPTING_TO_DISABLE_TLS_VERIFICATION = "Attempting to disable TLS verification";
+
+
 
 }

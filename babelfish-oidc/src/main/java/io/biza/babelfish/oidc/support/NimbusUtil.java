@@ -50,8 +50,8 @@ public class NimbusUtil {
 	public static JWTClaims fromClaimsSet(JWTClaimsSet inputClaims) {
 		try {
 			// Ask json-smart to serialise to a JSON String then let Jackson pick it up.
-			LOG.trace("Claims data to serialise is: {}", inputClaims.toJSONObject().toJSONString());
-			LOG.trace("And jackson is producing: {}",
+			LOG.debug("Claims data to serialise is: {}", inputClaims.toJSONObject().toJSONString());
+			LOG.debug("And jackson is producing: {}",
 					mapper.readValue(inputClaims.toJSONObject().toJSONString(), JWTClaims.class).toString());
 			return mapper.readValue(inputClaims.toJSONObject().toJSONString(), JWTClaims.class);
 		} catch (JsonProcessingException jacksonFailure) {
@@ -112,11 +112,15 @@ public class NimbusUtil {
 		claims.additionalClaims().forEach((claimName, claimValue) -> {
 			claimSet.claim(claimName, claimValue);
 		});
-		return claimSet.build();
+		
+		JWTClaimsSet claimsSetResult = claimSet.build();
+		LOG.debug(MessageUtil.format(Messages.CLAIMS_SET_CONVERSION_PRODUCED_X, claimsSetResult));
+		return claimsSetResult;
 	}
 
 	public static SSLSocketFactory tlsDisableSocketFactory() {
 
+		LOG.debug(Messages.ATTEMPTING_TO_DISABLE_TLS_VERIFICATION);
 		try {
 			SSLContext sslContext = SSLContext.getInstance("SSL");
 			sslContext.init(null, new TrustManager[] { new X509TrustManager() {
