@@ -100,7 +100,7 @@ public class RegistrationRequestV1 {
   @NotNull
   @Schema(
       description = "Array of the OAuth 2.0 response type strings that the client can use at the authorization endpoint.")
-  List<OIDCResponseType> responseTypes;
+  List<String> responseTypes;
 
   @JsonProperty("application_type")
   @NotNull

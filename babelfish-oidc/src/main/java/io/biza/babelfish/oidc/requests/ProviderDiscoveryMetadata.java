@@ -13,6 +13,7 @@ import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionEncodingType;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.OAuth2PKCEType;
+import io.biza.babelfish.oidc.enumerations.OIDCApplicationType;
 import io.biza.babelfish.oidc.enumerations.OIDCAuthMethod;
 import io.biza.babelfish.oidc.enumerations.OIDCClaimType;
 import io.biza.babelfish.oidc.enumerations.OIDCDisplayType;
@@ -77,7 +78,7 @@ public class ProviderDiscoveryMetadata {
   @Schema(
       description = "JSON array containing a list of OAuth 2.0 scope values that this server supports")
   @Builder.Default
-  List<String> scopesSupported = List.of("openid", "profile");
+  Set<String> scopesSupported = Set.of("openid", "profile");
 
   @JsonProperty("response_types_supported")
   @Schema(description = "OAuth2 Response Types supported")
@@ -85,76 +86,76 @@ public class ProviderDiscoveryMetadata {
 
   @JsonProperty("response_modes_supported")
   @Schema(description = "OAuth2 Response Modes supported")
-  List<OIDCResponseMode> responseModesSupported;
+  Set<OIDCResponseMode> responseModesSupported;
   
   @JsonProperty("grant_types_supported")
   @Schema(description = "OAuth 2.0 Grant Type values supported")
-  List<OIDCGrantType> grantTypesSupported;
+  Set<OIDCGrantType> grantTypesSupported;
   
   @JsonProperty("acr_values_supported")
   @Schema(description = "List of Authentication Context Class References supported")
-  List<String> acrValuesSupported;
+  Set<String> acrValuesSupported;
   
   @JsonProperty("subject_types_supported")
   @Schema(description = "Subject Identifier types supported")
   @NotEmpty
   @Builder.Default
-  List<OIDCSubjectType> subjectTypesSupported = List.of(OIDCSubjectType.PAIRWISE);
+  Set<OIDCSubjectType> subjectTypesSupported = Set.of(OIDCSubjectType.PAIRWISE);
   
   @JsonProperty("id_token_signing_alg_values_supported")
   @Schema(description = "ID Token JWS Signing Algorithms Supported")
   @Builder.Default
   @NotEmpty
-  List<JWSSigningAlgorithmType> idTokenSigningAlgorithms = List.of(JWSSigningAlgorithmType.PS256);
+  Set<JWSSigningAlgorithmType> idTokenSigningAlgorithms = Set.of(JWSSigningAlgorithmType.PS256);
   
   @JsonProperty("id_token_encryption_alg_values_supported")
   @Schema(description = "ID Token JWE Encryption Algorithms Supported")
-  List<JWEEncryptionAlgorithmType> idTokenEncryptionAlgorithms;
+  Set<JWEEncryptionAlgorithmType> idTokenEncryptionAlgorithms;
   
   @JsonProperty("id_token_encryption_enc_values_supported")
   @Schema(description = "ID Token JWE Encryption Encoding Methods Supported")
-  List<JWEEncryptionEncodingType> idTokenEncryptionEncodings;
+  Set<JWEEncryptionEncodingType> idTokenEncryptionEncodings;
 
   @JsonProperty("userinfo_signing_alg_values_supported")
   @Schema(description = "User Info JWS Signing Algorithms Supported")
   @Builder.Default
   @NotEmpty
-  List<JWSSigningAlgorithmType> userInfoSigningAlgorithms = List.of(JWSSigningAlgorithmType.PS256);
+  Set<JWSSigningAlgorithmType> userInfoSigningAlgorithms = Set.of(JWSSigningAlgorithmType.PS256);
   
   @JsonProperty("userinfo_encryption_alg_values_supported")
   @Schema(description = "User Info JWE Encryption Algorithms Supported")
-  List<JWEEncryptionAlgorithmType> userInfoEncryptionAlgorithms;
+  Set<JWEEncryptionAlgorithmType> userInfoEncryptionAlgorithms;
   
   @JsonProperty("userinfo_encryption_enc_values_supported")
   @Schema(description = "User Info JWE Encryption Algorithms Supported")
-  List<JWEEncryptionEncodingType> userInfoEncryptionMethods;
+  Set<JWEEncryptionEncodingType> userInfoEncryptionMethods;
   
   @JsonProperty("request_object_signing_alg_values_supported")
   @Schema(description = "Request Object JWS Signing Algorithms Supported")
   @Builder.Default
   @NotEmpty
-  List<JWSSigningAlgorithmType> requestObjectSigningAlgorithms = List.of(JWSSigningAlgorithmType.PS256);
+  Set<JWSSigningAlgorithmType> requestObjectSigningAlgorithms = Set.of(JWSSigningAlgorithmType.PS256);
   
   @JsonProperty("request_object_encryption_alg_values_supported")
   @Schema(description = "Request Object JWE Encryption Algorithms Supported")
-  List<JWEEncryptionAlgorithmType> requestObjectEncryptionAlgorithms;
+  Set<JWEEncryptionAlgorithmType> requestObjectEncryptionAlgorithms;
   
   @JsonProperty("request_object_encryption_enc_values_supported")
   @Schema(description = "Request Object JWE Encryption Algorithms Supported")
-  List<JWEEncryptionEncodingType> requestObjectEncryptionMethods;
+  Set<JWEEncryptionEncodingType> requestObjectEncryptionMethods;
   
   @JsonProperty("token_endpoint_auth_methods_supported")
   @Schema(description = "Token Endpoint Client Authentication methods supported")
   @Builder.Default
-  List<OIDCAuthMethod> tokenEndpointAuthMethods = List.of(OIDCAuthMethod.CLIENT_SECRET_BASIC);
+  Set<OIDCAuthMethod> tokenEndpointAuthMethods = Set.of(OIDCAuthMethod.CLIENT_SECRET_BASIC);
   
   @JsonProperty("token_endpoint_auth_signing_alg_values_supported")
   @Schema(description = "Token Endpoint Signing Algorithms Supported")
-  List<JWSSigningAlgorithmType> tokenEndpointSigningAlgorithms;
+  Set<JWSSigningAlgorithmType> tokenEndpointSigningAlgorithms;
   
   @JsonProperty("display_values_supported")
   @Schema(description = "OIDC Display Parameters supported")
-  List<OIDCDisplayType> displayValuesSupported;
+  Set<OIDCDisplayType> displayValuesSupported;
   
   @JsonProperty("service_documentation")
   @Schema(description = "URL of a page containing human-readable information the developers might want or need to know when using this OpenID Provider")
@@ -173,12 +174,12 @@ public class ProviderDiscoveryMetadata {
   
   @JsonProperty("claims_supported")
   @Schema(description = "Array containing a list of Client Authentication Methods supported by this Token Endpoint")
-  List<String> claimsSupported;
+  Set<String> claimsSupported;
   
   @JsonProperty("claim_types_supported")
   @Schema(description = "Array containing a list of Claim Types supported by the OIDC Provider")
   @Builder.Default
-  List<OIDCClaimType> claimTypesSupported = List.of(OIDCClaimType.NORMAL);
+  Set<OIDCClaimType> claimTypesSupported = Set.of(OIDCClaimType.NORMAL);
   
   @JsonProperty("request_parameter_supported")
   @Schema(description = "Specify whether OP supports use of request parameter")
@@ -213,7 +214,7 @@ public class ProviderDiscoveryMetadata {
   
   @JsonProperty("code_challenge_methods_supported")
   @Schema(description = "JSON array containing a list of Proof Key for Code Exchange (PKCE) [RFC7636] code challenge methods supported by this authorization server.")
-  List<OAuth2PKCEType> codeChallengeMethodsSupported;
+  Set<OAuth2PKCEType> codeChallengeMethodsSupported;
   
   @JsonProperty("tls_client_certificate_bound_access_tokens")
   @Schema(description = "Boolean value indicating support for mutal TLS client certificate bound access tokens")

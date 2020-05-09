@@ -6,19 +6,24 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.ToString;
 
 @Builder
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Schema(description = "Describes a Dynamic Registration Failure")
+@ToString
 public class RegistrationErrorException extends Exception {
   private static final long serialVersionUID = 1L;
 
+  @Schema(description = "Registration Error Type")
   @NotNull
   @NonNull
   RegistrationErrorType errorType;
-  String errorDescription;
   
+  @Schema(description = "Registration Error Description")
+  String errorDescription;
   
   @Schema(description = "Throwable cause object for further inspection")
   Throwable errorCause;

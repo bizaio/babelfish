@@ -20,7 +20,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(description = "OIDC Response Modes", enumAsRef = true)
 public enum OIDCGrantType {
   // @formatter:off
-  AUTHORISATION_CODE("authorization_code"),
+  AUTHORIZATION_CODE("authorization_code"),
   IMPLICIT("implicit"),
   CLIENT_CREDENTIALS("client_credentials"),
   JWT_BEARER("urn:ietf:params:oauth:grant-type:jwt-bearer"),

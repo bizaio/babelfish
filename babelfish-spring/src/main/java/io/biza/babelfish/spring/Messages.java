@@ -20,6 +20,7 @@ public static final String UNABLE_TO_UPDATE_HOLDER = "Attempted to update a hold
 public static final String UNABLE_TO_FIND_HOLDER = "The holder requested ({}) was not found";
 public static final String UNABLE_TO_VALIDATE_GENERIC_WITH_CONTENT =
 "Unable to validate {} with input of: {}";
+public static final String MODIFICATION_OF_SYSTEM_PROFILE_X_NOT_ALLOWED = "The {} profile is marked as a system profile and cannot be modified";
 public static final String CREATED_NEW_GENERIC_WITH_CONTENT =
 "Created a new {} with content of: {}";
 public static final String LIST_ALL_GENERIC_AND_RECEIVED =
@@ -36,4 +37,7 @@ public static final String CONFIG_UNABLE_TO_LOCATE = "Unable to locate configura
 public static final String CONFIG_UNABLE_TO_PARSE = "Unable to parse configuration value for object {} and key {}";
 public static final String CONFIG_UNABLE_TO_PROCESS = "Unable to serialise to json configuration value for object {} and key {}";
 public static final String ENCOUNTERED_DISCOVERY_FAILURE_WHILE_ATTEMPTING_AUTH_AT_X = "Encountered a Discovery Failure while attempting discovery at the issuer with a base uri of {}";
+public static final String ILLEGAL_ARGUMENT_CDR_CODE = "2001";
+public static final String ILLEGAL_ARGUMENT_TITLE = "Invalid Request";
+
 }
