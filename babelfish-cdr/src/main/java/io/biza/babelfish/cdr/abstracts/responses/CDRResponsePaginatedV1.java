@@ -20,24 +20,27 @@ import io.biza.babelfish.cdr.support.FormatChecker;
 @Valid
 public abstract class CDRResponsePaginatedV1 {
 
-  public abstract LinksPaginatedV1 links();
-  public abstract MetaPaginatedV1 meta();
+	public abstract LinksPaginatedV1 links();
 
-  @AssertTrue(message = "First and Last Page Detected but Total Pages is >1")
-  private boolean isTotalPagesBiggerThanLinks() {
-    return (links() != null && links().next() == null && links().prev() == null)
-        ? (meta() != null && meta().totalPages() > 1 ? false : true)
-        : true;
-  }
+	public abstract MetaPaginatedV1 meta();
 
-  @AssertTrue(message = "Last Page URI page parameter should match totalPages")
-  private boolean isLastPagePageParamValid() {
-    return (links() != null && links().last() != null && meta() != null
-        && meta().totalPages() != null)
-            ? ((Integer.parseInt(
-                FormatChecker.mapifyQueryString(links().last()).get("page")) != meta().totalPages())
-                    ? false
-                    : true)
-            : true;
-  }
+	@AssertTrue(message = "First and Last Page Detected but Total Pages is >1")
+	private boolean isTotalPagesBiggerThanLinks() {
+		return (links() != null && links().next() == null && links().prev() == null)
+				? (meta() != null && meta().totalPages() > 1 ? false : true)
+				: true;
+	}
+
+	@AssertTrue(message = "Last Page URI page parameter should match totalPages")
+	private boolean isLastPagePageParamValid() {
+		try {
+			return (links() != null && links().last() != null && meta() != null && meta().totalPages() != null)
+					? ((Integer.parseInt(FormatChecker.mapifyQueryString(links().last()).get("page")) != meta()
+							.totalPages()) ? false : true)
+					: true;
+		} catch (NumberFormatException e) {
+			// 2020-05-10: Unchecked exception discovered by end user.
+			return false;
+		}
+	}
 }
