@@ -1,8 +1,9 @@
 package io.biza.babelfish.cdr.models;
 
 import java.util.HashMap;
-import io.biza.babelfish.cdr.Constants;
+
 import io.biza.babelfish.cdr.support.BabelfishVersionedModel;
+import io.biza.babelfish.util.Constants;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;

@@ -34,12 +34,11 @@ import com.fasterxml.jackson.databind.deser.std.FromStringDeserializer;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
-import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
-import io.biza.babelfish.cdr.enumerations.BabelValidationErrorType;
-import io.biza.babelfish.cdr.models.payloads.BabelValidationError;
 import io.biza.babelfish.cdr.models.responses.ResponseBankingProductByIdV2;
 import io.biza.babelfish.cdr.models.responses.ResponseBankingProductListV2;
 import io.biza.babelfish.cdr.tests.common.ValidationListDeserialiser;
+import io.biza.babelfish.common.enumerations.BabelValidationErrorType;
+import io.biza.babelfish.common.payloads.BabelValidationError;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

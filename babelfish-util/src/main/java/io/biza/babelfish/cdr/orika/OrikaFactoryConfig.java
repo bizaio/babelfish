@@ -3,7 +3,8 @@ package io.biza.babelfish.cdr.orika;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import io.biza.babelfish.cdr.Constants;
+
+import io.biza.babelfish.util.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

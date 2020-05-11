@@ -1,4 +1,4 @@
-package io.biza.babelfish.cdr;
+package io.biza.babelfish.util;
 
 import io.biza.babelfish.cdr.models.VersionerConstants;
 import io.biza.babelfish.cdr.orika.OrikaFactoryConfigurer;

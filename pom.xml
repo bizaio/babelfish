@@ -85,13 +85,13 @@
         <dockerfile.skip>true</dockerfile.skip>
     </properties>
     <modules>
+        <module>babelfish-common</module>
         <module>babelfish-cdr</module>
         <module>babelfish-oidc</module>
         <module>babelfish-spring</module>
         <module>babelfish-type-service</module>
         <module>babelfish-util</module>
         <module>babelfish-interfaces</module>
-        <module>babelfish-converters</module>
     </modules>
     <build>
         <defaultGoal>clean package install</defaultGoal>
