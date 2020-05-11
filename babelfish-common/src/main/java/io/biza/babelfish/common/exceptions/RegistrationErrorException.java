@@ -5,8 +5,6 @@ import javax.validation.constraints.NotNull;
 import io.biza.babelfish.common.enumerations.RegistrationErrorType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;

@@ -1,7 +1,6 @@
 package io.biza.babelfish.oidc.requests;
 
 import java.net.URI;
-import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import javax.validation.Valid;
@@ -13,7 +12,6 @@ import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionEncodingType;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.OAuth2PKCEType;
-import io.biza.babelfish.oidc.enumerations.OIDCApplicationType;
 import io.biza.babelfish.oidc.enumerations.OIDCAuthMethod;
 import io.biza.babelfish.oidc.enumerations.OIDCClaimType;
 import io.biza.babelfish.oidc.enumerations.OIDCDisplayType;

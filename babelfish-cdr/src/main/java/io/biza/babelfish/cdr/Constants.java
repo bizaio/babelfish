@@ -11,12 +11,8 @@
  *******************************************************************************/
 package io.biza.babelfish.cdr;
 
-import java.math.RoundingMode;
 import java.time.format.DateTimeFormatter;
 import io.biza.babelfish.cdr.models.payloads.ErrorV1;
-import io.biza.babelfish.cdr.support.BabelfishVersionedModel;
-import io.swagger.v3.oas.annotations.media.Schema;
-import ma.glasnost.orika.converter.BidirectionalConverter;
 
 /**
  * Various Constants used within Babelfish

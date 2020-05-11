@@ -15,8 +15,6 @@ import io.biza.babelfish.common.jackson.EpochToOffsetDateTimeConverter;
 import io.biza.babelfish.common.jackson.ListStringToSpaceListConverter;
 import io.biza.babelfish.common.jackson.OffsetDateTimeToEpochConverter;
 import io.biza.babelfish.common.jackson.SpaceListToListStringConverter;
-import io.biza.babelfish.common.jackson.UriStringToUriConverter;
-import io.biza.babelfish.common.jackson.UriToUriStringConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
