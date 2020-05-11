@@ -18,10 +18,11 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.babelfish.cdr.converters.AmountStringToBigDecimalConverter;
-import io.biza.babelfish.cdr.converters.BigDecimalToAmountStringConverter;
-import io.biza.babelfish.cdr.converters.CurrencyToStringConverter;
-import io.biza.babelfish.cdr.converters.StringToCurrencyConverter;
+
+import io.biza.babelfish.common.jackson.AmountStringToBigDecimalConverter;
+import io.biza.babelfish.common.jackson.BigDecimalToAmountStringConverter;
+import io.biza.babelfish.common.jackson.CurrencyToStringConverter;
+import io.biza.babelfish.common.jackson.StringToCurrencyConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

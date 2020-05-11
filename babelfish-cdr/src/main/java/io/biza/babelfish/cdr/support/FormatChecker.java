@@ -28,6 +28,7 @@ import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.PhoneNumberUtil.PhoneNumberFormat;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 import io.biza.babelfish.cdr.Constants;
+import io.biza.babelfish.cdr.enumerations.PhoneNumberValidationResultType;
 
 public class FormatChecker {
   public static boolean phoneNumberCountryCodeValid(String countryCode) {
@@ -103,35 +104,35 @@ public class FormatChecker {
     return EmailValidator.getInstance().isValid(inputEmail);
   }
 
-  public static PhoneNumberValidationResult phoneNumberValidity(String fullNumber,
+  public static PhoneNumberValidationResultType phoneNumberValidity(String fullNumber,
       PhoneNumberFormat phoneFormat) {
     if (fullNumber == null) {
-      return PhoneNumberValidationResult.INVALID;
+      return PhoneNumberValidationResultType.INVALID;
     }
     try {
       PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
-      PhoneNumber currentNumber = phoneUtil.parse(fullNumber, TypeConstants.AUSTRALIA_ALPHA2);
+      PhoneNumber currentNumber = phoneUtil.parse(fullNumber, Constants.AUSTRALIA_ALPHA2);
       if (phoneUtil.isValidNumber(currentNumber)) {
         if (phoneUtil.format(currentNumber, phoneFormat).equals(fullNumber)) {
-          return PhoneNumberValidationResult.VALID;
+          return PhoneNumberValidationResultType.VALID;
         } else {
-          return PhoneNumberValidationResult.INCORRECT_FORMAT;
+          return PhoneNumberValidationResultType.INCORRECT_FORMAT;
         }
       } else {
-        return PhoneNumberValidationResult.INVALID;
+        return PhoneNumberValidationResultType.INVALID;
       }
     } catch (NumberParseException e) {
-      return PhoneNumberValidationResult.INVALID;
+      return PhoneNumberValidationResultType.INVALID;
     }
   }
 
   public static Boolean isPhoneNumber(String fullNumber, PhoneNumberFormat phoneFormat,
       Boolean strictMode) {
-    if (phoneNumberValidity(fullNumber, phoneFormat).equals(PhoneNumberValidationResult.VALID)) {
+    if (phoneNumberValidity(fullNumber, phoneFormat).equals(PhoneNumberValidationResultType.VALID)) {
       return true;
     }
     if (phoneNumberValidity(fullNumber, phoneFormat)
-        .equals(PhoneNumberValidationResult.INCORRECT_FORMAT) && !strictMode) {
+        .equals(PhoneNumberValidationResultType.INCORRECT_FORMAT) && !strictMode) {
       return true;
     } else {
       return false;
@@ -148,11 +149,11 @@ public class FormatChecker {
   }
 
   public static Boolean isPanNumber(String pan) {
-    return pan != null && pan.matches(TypeConstants.PAN_NUMBER_PATTERN);
+    return pan != null && pan.matches(Constants.PAN_NUMBER_PATTERN);
   }
 
   public static Boolean isMaskedPanNumber(String pan) {
-    return pan != null && pan.matches(TypeConstants.MASKED_ACCOUNT_PATTERN);
+    return pan != null && pan.matches(Constants.MASKED_ACCOUNT_PATTERN);
   }
 
   public static Boolean isNatural(BigDecimal number) {

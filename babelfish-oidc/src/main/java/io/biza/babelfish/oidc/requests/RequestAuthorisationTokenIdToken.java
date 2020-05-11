@@ -8,8 +8,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.babelfish.oidc.converters.ListStringToSpaceListConverter;
-import io.biza.babelfish.oidc.converters.SpaceListToListStringConverter;
+
+import io.biza.babelfish.common.jackson.ListStringToSpaceListConverter;
+import io.biza.babelfish.common.jackson.SpaceListToListStringConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

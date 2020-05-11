@@ -19,7 +19,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
+
+import io.biza.babelfish.common.interfaces.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;

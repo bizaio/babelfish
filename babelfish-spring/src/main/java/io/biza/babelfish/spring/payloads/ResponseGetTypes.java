@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.biza.babelfish.common.payloads.BabelFieldLabelValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -8,10 +8,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.babelfish.oidc.converters.ListStringToSpaceListConverter;
-import io.biza.babelfish.oidc.converters.SpaceListToListStringConverter;
-import io.biza.babelfish.oidc.converters.FutureSecondsToOffsetDateTimeConverter;
-import io.biza.babelfish.oidc.converters.OffsetDateTimeToFutureSecondsConverter;
+
+import io.biza.babelfish.common.jackson.FutureSecondsToOffsetDateTimeConverter;
+import io.biza.babelfish.common.jackson.ListStringToSpaceListConverter;
+import io.biza.babelfish.common.jackson.OffsetDateTimeToFutureSecondsConverter;
+import io.biza.babelfish.common.jackson.SpaceListToListStringConverter;
 import io.biza.babelfish.oidc.enumerations.OAuth2TokenType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

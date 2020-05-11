@@ -23,15 +23,18 @@ import java.util.List;
 import java.util.Set;
 import javax.persistence.Lob;
 import javax.validation.constraints.NotNull;
-import org.springframework.util.StringUtils;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
-import io.biza.babelfish.spring.enumerations.BabelFormFieldType;
+
+import io.biza.babelfish.common.enumerations.BabelFormFieldType;
+import io.biza.babelfish.common.interfaces.LabelValueEnumInterface;
+import io.biza.babelfish.common.payloads.BabelFieldLabelValue;
+import io.biza.babelfish.common.payloads.BabelForm;
+import io.biza.babelfish.common.payloads.BabelForm.BabelFormBuilder;
+import io.biza.babelfish.common.payloads.BabelFormField;
 import io.biza.babelfish.spring.interfaces.LabelValueDerivedInterface;
-import io.biza.babelfish.spring.payloads.BabelFieldLabelValue;
-import io.biza.babelfish.spring.payloads.BabelForm;
-import io.biza.babelfish.spring.payloads.BabelForm.BabelFormBuilder;
-import io.biza.babelfish.spring.payloads.BabelFormField;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.AccessMode;
 import lombok.extern.slf4j.Slf4j;

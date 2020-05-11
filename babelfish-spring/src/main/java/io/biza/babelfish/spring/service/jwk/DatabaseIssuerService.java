@@ -30,18 +30,17 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.gen.RSAKeyGenerator;
 import com.nimbusds.jwt.SignedJWT;
 
-import io.biza.babelfish.cdr.exceptions.AlreadyInitialisedException;
-import io.biza.babelfish.cdr.exceptions.EncryptionOperationException;
-import io.biza.babelfish.cdr.exceptions.NotInitialisedException;
-import io.biza.babelfish.cdr.exceptions.SigningOperationException;
-import io.biza.babelfish.cdr.util.MessageUtil;
+import io.biza.babelfish.common.exceptions.AlreadyInitialisedException;
+import io.biza.babelfish.common.exceptions.EncryptionOperationException;
+import io.biza.babelfish.common.exceptions.KeyRetrievalException;
+import io.biza.babelfish.common.exceptions.NotInitialisedException;
+import io.biza.babelfish.common.exceptions.SigningOperationException;
 import io.biza.babelfish.interfaces.IssuerService;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionEncodingType;
 import io.biza.babelfish.oidc.enumerations.JWKKeyType;
 import io.biza.babelfish.oidc.enumerations.JWKPublicKeyUse;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
-import io.biza.babelfish.oidc.exceptions.KeyRetrievalException;
 import io.biza.babelfish.oidc.payloads.JWKS;
 import io.biza.babelfish.oidc.payloads.JWTClaims;
 import io.biza.babelfish.oidc.support.NimbusUtil;
@@ -51,6 +50,7 @@ import io.biza.babelfish.spring.persistence.model.issuer.IssuerKeyData;
 import io.biza.babelfish.spring.persistence.repository.issuer.IssuerKeyRepository;
 import io.biza.babelfish.spring.persistence.repository.issuer.IssuerRepository;
 import io.biza.babelfish.spring.persistence.specifications.IssuerKeySpecifications;
+import io.biza.babelfish.util.MessageUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

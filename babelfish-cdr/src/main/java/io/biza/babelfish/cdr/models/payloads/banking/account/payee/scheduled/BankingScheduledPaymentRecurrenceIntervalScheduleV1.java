@@ -19,9 +19,10 @@ import javax.validation.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.babelfish.cdr.converters.LocalDateToStringConverter;
-import io.biza.babelfish.cdr.converters.StringToLocalDateConverter;
+
 import io.biza.babelfish.cdr.enumerations.BankingPaymentNonBusinessDayTreatment;
+import io.biza.babelfish.common.jackson.LocalDateToStringConverter;
+import io.biza.babelfish.common.jackson.StringToLocalDateConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

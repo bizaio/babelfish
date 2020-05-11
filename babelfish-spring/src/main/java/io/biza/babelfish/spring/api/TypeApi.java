@@ -11,7 +11,6 @@
  *******************************************************************************/
 package io.biza.babelfish.spring.api;
 
-import io.biza.babelfish.spring.payloads.BabelForm;
 import io.biza.babelfish.spring.payloads.ResponseGetTypes;
 import io.biza.babelfish.spring.service.type.TypeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
+import io.biza.babelfish.common.payloads.BabelForm;
 import io.biza.babelfish.spring.Constants;
 
 @Tag(name = Constants.TAG_TYPE_NAME, description = Constants.TAG_TYPE_DESCRIPTION)

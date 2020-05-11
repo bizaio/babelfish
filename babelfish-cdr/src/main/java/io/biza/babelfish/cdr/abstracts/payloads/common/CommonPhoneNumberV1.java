@@ -7,10 +7,11 @@ import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.PhoneNumberUtil.PhoneNumberFormat;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
+
+import io.biza.babelfish.cdr.Constants;
 import io.biza.babelfish.cdr.enumerations.CommonPhoneNumberPurpose;
+import io.biza.babelfish.cdr.enumerations.PhoneNumberValidationResultType;
 import io.biza.babelfish.cdr.support.FormatChecker;
-import io.biza.babelfish.cdr.support.PhoneNumberValidationResult;
-import io.biza.babelfish.cdr.support.TypeConstants;
 
 public abstract class CommonPhoneNumberV1<T> {
 
@@ -38,7 +39,7 @@ public abstract class CommonPhoneNumberV1<T> {
    */
   public void setWithFullNumber(@NotNull String inputNumber) throws NumberParseException {
     PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
-    PhoneNumber number = phoneUtil.parse(inputNumber, TypeConstants.AUSTRALIA_ALPHA2);
+    PhoneNumber number = phoneUtil.parse(inputNumber, Constants.AUSTRALIA_ALPHA2);
     countryCode("+" + number.getCountryCode());
     String nationalSignificantNumber = phoneUtil.getNationalSignificantNumber(number);
     int areaCodeLength = phoneUtil.getLengthOfGeographicalAreaCode(number);
@@ -77,8 +78,8 @@ public abstract class CommonPhoneNumberV1<T> {
   @AssertTrue(message = "Full Phone Number could not be passed as possibly valid")
   private boolean isFullPhoneNumberValid() {
     return Arrays
-        .asList(new PhoneNumberValidationResult[] {PhoneNumberValidationResult.VALID,
-            PhoneNumberValidationResult.INCORRECT_FORMAT})
+        .asList(new PhoneNumberValidationResultType[] {PhoneNumberValidationResultType.VALID,
+            PhoneNumberValidationResultType.INCORRECT_FORMAT})
         .contains(FormatChecker.phoneNumberValidity(fullNumber(), PhoneNumberFormat.RFC3966));
   }
 
@@ -86,7 +87,7 @@ public abstract class CommonPhoneNumberV1<T> {
       message = "Full Phone Number must be formatted according to section 5.1.4. of RFC 3966")
   private boolean isFullPhoneNumberCorrectlyFormatted() {
     return Arrays
-        .asList(new PhoneNumberValidationResult[] {PhoneNumberValidationResult.INCORRECT_FORMAT})
+        .asList(new PhoneNumberValidationResultType[] {PhoneNumberValidationResultType.INCORRECT_FORMAT})
         .contains(FormatChecker.phoneNumberValidity(fullNumber(), PhoneNumberFormat.RFC3966));
   }
 }

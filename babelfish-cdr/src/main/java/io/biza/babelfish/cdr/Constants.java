@@ -13,11 +13,7 @@ package io.biza.babelfish.cdr;
 
 import java.math.RoundingMode;
 import java.time.format.DateTimeFormatter;
-import io.biza.babelfish.cdr.models.VersionerConstants;
 import io.biza.babelfish.cdr.models.payloads.ErrorV1;
-import io.biza.babelfish.cdr.orika.OrikaFactoryConfigurer;
-import io.biza.babelfish.cdr.orika.OrikaFactoryConfigurerInterface;
-import io.biza.babelfish.cdr.orika.converter.UUIDConverter;
 import io.biza.babelfish.cdr.support.BabelfishVersionedModel;
 import io.swagger.v3.oas.annotations.media.Schema;
 import ma.glasnost.orika.converter.BidirectionalConverter;
@@ -32,42 +28,6 @@ public class Constants {
 	 * Generic Constants
 	 */
 	public static final String DEFAULT_LOCALE = "en";
-
-	/**
-	 * CDR AmountString
-	 */
-	public static final String CDR_AMOUNTSTRING_PATTERN = "##############0.00###;-##############0.00###";
-
-	/**
-	 * CDR RateString
-	 */
-	public static final String CDR_RATESTRING_PATTERN = "0.00##############;0.00##############";
-
-	public static final int CDR_RATESTRING_SCALE = 16;
-
-	public static final RoundingMode CDR_RATESTRING_ROUNDING_MODE = RoundingMode.HALF_EVEN;
-
-	/**
-	 * CDR DateTimeString
-	 */
-	public static final DateTimeFormatter CDR_DATETIMESTRING_FORMATTER = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
-
-	/**
-	 * CDR DateString
-	 */
-	public static final DateTimeFormatter CDR_DATESTRING_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
-
-	/**
-	 * Orika implementer
-	 */
-	public static final String ORIKA_PACKAGE_BASE = OrikaFactoryConfigurer.class.getPackageName();
-	public static final String ORIKA_IMPLEMENTING_CLASS = OrikaFactoryConfigurerInterface.class.getName();
-	public static final String ORIKA_BIDIRECTIONAL_CLASS = BidirectionalConverter.class.getName();
-
-	public static final String BASE_MODELS_PACKAGE = VersionerConstants.class.getPackageName();
-	public static final String BASE_MODELS_ANNOTATION = Schema.class.getName();
-	public static final String BASE_CONVERTER_PACKAGE = UUIDConverter.class.getPackageName();
-	public static final String VERSIONED_MODEL = BabelfishVersionedModel.class.getName();
 
 	/**
 	 * Prepared Error Responses
@@ -89,4 +49,26 @@ public class Constants {
 			.detail("The Key Issuer service is not initialised and therefore cryptographic encryption and signature operations cannot be performed. Please initialise the key issuer service")
 			.build();
 
+
+	/**
+	 * CDR DateTimeString
+	 */
+	public static final DateTimeFormatter CDR_DATETIMESTRING_FORMATTER = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+
+	/**
+	 * CDR DateString
+	 */
+	public static final DateTimeFormatter CDR_DATESTRING_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
+
+	public static final String BASE_PAYLOAD_VERSION = "1";
+
+	public static final String PAN_NUMBER_PATTERN = "(\\d{4} *){3}(\\d{4})";
+
+	public static final String ISO17442_PATTERN = "^[0-9A-Z]{18}[0-9]{2}$";
+
+	public static final String MASKED_ACCOUNT_PATTERN = "(xxx\\\\-xxx xxxxx|(xxxx ){3})?\\\\d{4}";
+
+	public static final String AUSTRALIA_PHONE_CODE = "+61";
+
+	public static final String AUSTRALIA_ALPHA2 = "AU";
 }

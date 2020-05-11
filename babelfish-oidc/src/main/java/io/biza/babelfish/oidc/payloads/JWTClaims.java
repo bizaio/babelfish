@@ -17,11 +17,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import io.biza.babelfish.common.jackson.EpochToOffsetDateTimeConverter;
+import io.biza.babelfish.common.jackson.ListStringToSpaceListConverter;
+import io.biza.babelfish.common.jackson.OffsetDateTimeToEpochConverter;
+import io.biza.babelfish.common.jackson.SpaceListToListStringConverter;
 import io.biza.babelfish.oidc.Constants;
-import io.biza.babelfish.oidc.converters.ListStringToSpaceListConverter;
-import io.biza.babelfish.oidc.converters.SpaceListToListStringConverter;
-import io.biza.babelfish.oidc.converters.EpochToOffsetDateTimeConverter;
-import io.biza.babelfish.oidc.converters.OffsetDateTimeToEpochConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

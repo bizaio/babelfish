@@ -7,9 +7,9 @@ import javax.validation.ValidationException;
 import javax.validation.Validator;
 import org.springframework.stereotype.Service;
 
-import io.biza.babelfish.cdr.enumerations.BabelExceptionType;
-import io.biza.babelfish.cdr.exceptions.ValidationListException;
-import io.biza.babelfish.spring.util.ValidationUtil;
+import io.biza.babelfish.common.enumerations.BabelExceptionType;
+import io.biza.babelfish.common.exceptions.ValidationListException;
+import io.biza.babelfish.util.ValidationUtil;
 
 @Service
 public class ValidationService {

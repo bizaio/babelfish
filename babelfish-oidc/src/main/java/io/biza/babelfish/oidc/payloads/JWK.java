@@ -10,8 +10,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.babelfish.oidc.converters.ListBase64CertificateToListX509CertificateConverter;
-import io.biza.babelfish.oidc.converters.ListX509CertificateToListBase64CertificateConverter;
+
+import io.biza.babelfish.common.jackson.ListBase64CertificateToListX509CertificateConverter;
+import io.biza.babelfish.common.jackson.ListX509CertificateToListBase64CertificateConverter;
 import io.biza.babelfish.oidc.enumerations.JWKAlgorithm;
 import io.biza.babelfish.oidc.enumerations.JWKKeyOps;
 import io.biza.babelfish.oidc.enumerations.JWKKeyType;

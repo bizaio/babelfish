@@ -73,6 +73,16 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>io.biza</groupId>
+			<artifactId>babelfish-interfaces</artifactId>
+			<version>${project.version}</version>
+		</dependency>		
+		<dependency>
+			<groupId>io.biza</groupId>
+			<artifactId>babelfish-util</artifactId>
+			<version>${project.version}</version>
+		</dependency>			
+		<dependency>
 			<groupId>com.nimbusds</groupId>
 			<artifactId>nimbus-jose-jwt</artifactId>
 			<version>${nimbus-jose-jwt.version}</version>

@@ -21,10 +21,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
-import io.biza.babelfish.cdr.support.LabelValueEnumInterface;
+
+import io.biza.babelfish.common.interfaces.LabelValueEnumInterface;
+import io.biza.babelfish.common.payloads.BabelFieldLabelValue;
+import io.biza.babelfish.common.payloads.BabelForm;
 import io.biza.babelfish.spring.interfaces.LabelValueDerivedInterface;
-import io.biza.babelfish.spring.payloads.BabelFieldLabelValue;
-import io.biza.babelfish.spring.payloads.BabelForm;
 import io.biza.babelfish.spring.util.LabelValueOpenApiUtil;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfoList;

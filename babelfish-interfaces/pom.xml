@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.biza</groupId>
+		<artifactId>babelfish</artifactId>
+		<version>1.2.6-SNAPSHOT</version>
+	</parent>
+	<artifactId>babelfish-interfaces</artifactId>
+	<name>Babelfish: Implementation Interfaces</name>
+	<description>This module contains interfaces for implementation by third parties.</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.biza</groupId>
+			<artifactId>babelfish-cdr</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.biza</groupId>
+			<artifactId>babelfish-oidc</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.biza</groupId>
+			<artifactId>babelfish-util</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+</project>

@@ -126,7 +126,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.biza</groupId>
-			<artifactId>babelfish-util</artifactId>
+			<artifactId>babelfish-common</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

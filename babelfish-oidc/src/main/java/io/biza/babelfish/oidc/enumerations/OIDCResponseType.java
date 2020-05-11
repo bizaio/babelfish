@@ -3,7 +3,8 @@ package io.biza.babelfish.oidc.enumerations;
 import org.slf4j.helpers.MessageFormatter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.biza.babelfish.oauth2.exceptions.InvalidRequestException;
+
+import io.biza.babelfish.common.exceptions.InvalidRequestException;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "OIDC Response Types", enumAsRef = true)

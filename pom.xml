@@ -90,6 +90,8 @@
         <module>babelfish-spring</module>
         <module>babelfish-type-service</module>
         <module>babelfish-util</module>
+        <module>babelfish-interfaces</module>
+        <module>babelfish-converters</module>
     </modules>
     <build>
         <defaultGoal>clean package install</defaultGoal>

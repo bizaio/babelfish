@@ -17,8 +17,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.biza.babelfish.cdr.enumerations.BabelExceptionType;
-import io.biza.babelfish.cdr.models.payloads.BabelValidationError;
+import io.biza.babelfish.common.enumerations.BabelExceptionType;
+import io.biza.babelfish.common.payloads.BabelValidationError;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

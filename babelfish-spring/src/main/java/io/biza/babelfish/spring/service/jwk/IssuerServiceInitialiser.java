@@ -8,8 +8,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
 
-import io.biza.babelfish.cdr.exceptions.AlreadyInitialisedException;
-import io.biza.babelfish.cdr.exceptions.NotInitialisedException;
+import io.biza.babelfish.common.exceptions.AlreadyInitialisedException;
+import io.biza.babelfish.common.exceptions.NotInitialisedException;
 import io.biza.babelfish.interfaces.IssuerService;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.JWKKeyType;

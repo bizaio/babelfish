@@ -16,8 +16,9 @@ import javax.validation.Valid;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.babelfish.cdr.converters.UriStringToUriConverter;
-import io.biza.babelfish.cdr.converters.UriToUriStringConverter;
+
+import io.biza.babelfish.common.jackson.UriStringToUriConverter;
+import io.biza.babelfish.common.jackson.UriToUriStringConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

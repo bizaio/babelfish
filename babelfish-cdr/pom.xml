@@ -132,6 +132,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>io.biza</groupId>
+			<artifactId>babelfish-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 			<version>${validation-api.version}</version>
@@ -210,11 +215,6 @@
 			<version>${orika.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>io.github.classgraph</groupId>
-			<artifactId>classgraph</artifactId>
-			<version>${classgraph.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>com.opencsv</groupId>
 			<artifactId>opencsv</artifactId>
 			<version>${opencsv.version}</version>
@@ -224,11 +224,6 @@
 			<artifactId>slf4j-simple</artifactId>
 			<version>${slf4j-simple.version}</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.biza</groupId>
-			<artifactId>babelfish-oidc</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 	<distributionManagement>

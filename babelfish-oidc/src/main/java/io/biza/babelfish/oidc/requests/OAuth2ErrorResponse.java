@@ -6,8 +6,9 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.babelfish.oidc.converters.UriStringToUriConverter;
-import io.biza.babelfish.oidc.converters.UriToUriStringConverter;
+
+import io.biza.babelfish.common.jackson.UriStringToUriConverter;
+import io.biza.babelfish.common.jackson.UriToUriStringConverter;
 import io.biza.babelfish.oidc.enumerations.OAuth2ErrorCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

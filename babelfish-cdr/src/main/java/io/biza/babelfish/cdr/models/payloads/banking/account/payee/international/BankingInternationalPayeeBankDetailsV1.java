@@ -19,12 +19,13 @@ import javax.validation.constraints.Pattern;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.babelfish.cdr.converters.CountryStringToLocaleConverter;
-import io.biza.babelfish.cdr.converters.LocaleToCountryStringConverter;
+
+import io.biza.babelfish.cdr.Constants;
 import io.biza.babelfish.cdr.converters.StringToSwiftBicConverter;
 import io.biza.babelfish.cdr.converters.SwiftBicToStringConverter;
-import io.biza.babelfish.cdr.support.TypeConstants;
 import io.biza.babelfish.cdr.support.customtypes.SwiftBicType;
+import io.biza.babelfish.common.jackson.CountryStringToLocaleConverter;
+import io.biza.babelfish.common.jackson.LocaleToCountryStringConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -88,7 +89,7 @@ public class BankingInternationalPayeeBankDetailsV1 {
 
   @Schema(
       description = "The legal entity identifier (LEI) for the beneficiary.  Aligns with [ISO 17442](https://www.iso.org/standard/59771.html)")
-  @Pattern(regexp = TypeConstants.ISO17442_PATTERN,
+  @Pattern(regexp = Constants.ISO17442_PATTERN,
       message = "Legal Entity Identifier must match ISO 17442 format")
   @JsonProperty("legalEntityIdentifier")
   String legalEntityIdentifier;

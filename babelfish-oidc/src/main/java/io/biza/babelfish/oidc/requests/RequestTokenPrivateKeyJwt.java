@@ -6,8 +6,9 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.babelfish.oidc.converters.ListStringToSpaceListConverter;
-import io.biza.babelfish.oidc.converters.SpaceListToListStringConverter;
+
+import io.biza.babelfish.common.jackson.ListStringToSpaceListConverter;
+import io.biza.babelfish.common.jackson.SpaceListToListStringConverter;
 import io.biza.babelfish.oidc.enumerations.OAuth2ClientAssertionType;
 import io.biza.babelfish.oidc.enumerations.OAuth2GrantType;
 import lombok.Builder;

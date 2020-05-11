@@ -17,9 +17,10 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.biza.babelfish.cdr.converters.DateTimeStringToOffsetDateTimeConverter;
-import io.biza.babelfish.cdr.converters.OffsetDateTimeToDateTimeStringConverter;
+
 import io.biza.babelfish.cdr.enumerations.CommonDiscoveryStatusType;
+import io.biza.babelfish.common.jackson.DateTimeStringToOffsetDateTimeConverter;
+import io.biza.babelfish.common.jackson.OffsetDateTimeToDateTimeStringConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
