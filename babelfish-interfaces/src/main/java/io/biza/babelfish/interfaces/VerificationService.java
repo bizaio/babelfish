@@ -44,5 +44,4 @@ public interface VerificationService {
 	default Boolean canJwtParse(String compactSerialisation) {
 		return NimbusUtil.canParse(compactSerialisation);
 	}
-
 }

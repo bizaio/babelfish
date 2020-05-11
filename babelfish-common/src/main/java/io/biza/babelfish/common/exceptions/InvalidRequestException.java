@@ -1,9 +1,19 @@
 package io.biza.babelfish.common.exceptions;
 
-public class InvalidRequestException extends Exception {
-  public InvalidRequestException(String message) {
-    super(message);
-  }
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-  private static final long serialVersionUID = 1L;
+@Builder
+@Data
+@EqualsAndHashCode(callSuper = false)
+public class InvalidRequestException extends Exception {
+	private static final long serialVersionUID = 1L;
+	String message;
+	
+	@Override
+	public String getMessage() {
+		return message();
+	}
+
 }

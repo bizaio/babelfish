@@ -1,6 +1,5 @@
 package io.biza.babelfish.oidc.enumerations;
 
-import org.slf4j.helpers.MessageFormatter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -33,8 +32,7 @@ public enum OIDCResponseType {
 			}
 		}
 
-		throw new InvalidRequestException(
-				MessageFormatter.format("Unrecognised response_type of {} specified", value).getMessage());
+		throw InvalidRequestException.builder().message("Unrecognised response_type of " + value + " specified").build();
 	}
 
 }

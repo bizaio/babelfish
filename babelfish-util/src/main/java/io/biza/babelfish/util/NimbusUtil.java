@@ -20,6 +20,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSVerifier;
+import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jose.crypto.RSASSAVerifier;
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKMatcher;
@@ -166,6 +167,32 @@ public class NimbusUtil {
 			throw SigningVerificationException.builder()
 					.message("Verification of " + name + " required claim failed: " + classOne + " versus " + classTwo)
 					.build();
+		}
+	}
+	
+	public static JWTClaims verifyHmac(String compactSerialisation, String hmacSecret, JWTClaims claimChecks)
+			throws SigningVerificationException {
+		try {
+			SignedJWT jwt = SignedJWT.parse(compactSerialisation);
+			JWSVerifier verifier = new MACVerifier(hmacSecret);
+
+			if (jwt.verify(verifier)) {
+				JWTClaims inputClaims = NimbusUtil.fromClaimsSet(jwt.getJWTClaimsSet());
+
+				if (claimChecks != null) {
+					NimbusUtil.checkClaims(inputClaims, claimChecks);
+				}
+				return inputClaims;
+			} else {
+				LOG.warn("Unable to verify supplied JWT using specified secret");
+				throw SigningVerificationException.builder().message("Unable to verify HMAC Signed JWT").build();
+			}
+		} catch (ParseException e) {
+			LOG.error("Unable to parse supplied JWT: {}", e.getMessage(), e);
+			throw SigningVerificationException.builder().message(e.getMessage()).build();
+		} catch (JOSEException e) {
+			LOG.warn("Encountered a JOSEException while attempting to verify hmac signed JWT", e);
+			throw SigningVerificationException.builder().message(e.getMessage()).build();
 		}
 	}
 

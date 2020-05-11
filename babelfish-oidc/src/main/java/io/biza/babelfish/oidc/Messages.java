@@ -12,7 +12,6 @@ public class Messages {
 	public static final String UNSUPPORTED_DIGEST_FOR_ALGORITHM = "Unsupported digest method for algorithm of {}";
 	public static final String CLAIMS_SET_CONVERSION_PRODUCED_X = "Claims Set Conversion produced: {}";
 	public static final String ATTEMPTING_TO_DISABLE_TLS_VERIFICATION = "Attempting to disable TLS verification";
-
-
+	public static final String INVALID_RESPONSE_TYPE = "Unrecognised response_type of {} specified";
 
 }
