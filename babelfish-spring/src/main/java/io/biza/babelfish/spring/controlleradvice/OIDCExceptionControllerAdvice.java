@@ -24,11 +24,9 @@ import io.biza.babelfish.common.exceptions.UnsupportedGrantTypeException;
 import io.biza.babelfish.oidc.enumerations.OAuth2ErrorCode;
 import io.biza.babelfish.oidc.requests.OAuth2ErrorResponse;
 import io.biza.babelfish.spring.Constants;
-import lombok.extern.slf4j.Slf4j;
 import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
-@Slf4j
 public class OIDCExceptionControllerAdvice {
   
   @ExceptionHandler(InvalidClientException.class)

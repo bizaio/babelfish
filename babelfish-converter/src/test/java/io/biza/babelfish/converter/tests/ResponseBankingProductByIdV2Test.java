@@ -13,25 +13,17 @@ package io.biza.babelfish.converter.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import java.net.URI;
+
 import java.time.OffsetDateTime;
-import java.util.Set;
-import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.biza.babelfish.cdr.enumerations.BankingProductCategory;
-import io.biza.babelfish.cdr.models.payloads.LinksV1;
-import io.biza.babelfish.cdr.models.payloads.MetaV1;
 import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductDetailV1;
 import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductDetailV2;
-import io.biza.babelfish.cdr.models.responses.ResponseBankingProductByIdV2;
 import io.biza.babelfish.converter.support.BabelfishConverter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -53,6 +45,8 @@ public class ResponseBankingProductByIdV2Test {
         .productId("073e7e70-357d-4858-8f52-92283f4edd6f").lastUpdated(OffsetDateTime.now())
         .productCategory(BankingProductCategory.TRANS_AND_SAVINGS_ACCOUNTS).name("Example Product")
         .description("Example Product Description").brand("ACME").isTailored(false).build();
+    
+    assertTrue(validator.validate(detail).isEmpty());
 
     BankingProductDetailV1 downgradedDetail =
         BabelfishConverter.convert(detail, BankingProductDetailV1.class);

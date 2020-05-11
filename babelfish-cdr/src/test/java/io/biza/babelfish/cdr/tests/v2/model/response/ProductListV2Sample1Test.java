@@ -1,40 +1,28 @@
 package io.biza.babelfish.cdr.tests.v2.model.response;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
-import javax.validation.ValidationException;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-
 import org.apache.commons.lang3.StringUtils;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.BeanDescription;
 import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.BeanDeserializerModifier;
-import com.fasterxml.jackson.databind.deser.std.FromStringDeserializer;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
-import io.biza.babelfish.cdr.models.responses.ResponseBankingProductByIdV2;
 import io.biza.babelfish.cdr.models.responses.ResponseBankingProductListV2;
 import io.biza.babelfish.cdr.tests.common.ValidationListDeserialiser;
 import io.biza.babelfish.common.enumerations.BabelValidationErrorType;
@@ -43,14 +31,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class ProductListV2Sample1Test {
-
-	private Validator validator;
-
-	@BeforeEach
-	public void setup() {
-		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-		validator = factory.getValidator();
-	}
 
 	@Test
 	@DisplayName("Process broken application uri and bad links payload and expect a JsonProcessingException")
@@ -101,6 +81,7 @@ public class ProductListV2Sample1Test {
 	private ObjectMapper getErrorlessMapper(List<BabelValidationError> validationErrors) {
 		SimpleModule module = new SimpleModule();
 		module.setDeserializerModifier(new BeanDeserializerModifier() {
+			@SuppressWarnings({ "unchecked", "rawtypes" })
 			@Override
 			public JsonDeserializer<?> modifyDeserializer(DeserializationConfig config, BeanDescription beanDesc,
 					JsonDeserializer<?> defaultDeserializer) {

@@ -22,10 +22,8 @@ import com.opencsv.exceptions.CsvValidationException;
 
 import io.biza.babelfish.common.interfaces.LabelValueEnumInterface;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.extern.slf4j.Slf4j;
 
 @Schema(description = "Merchant Category Codes", enumAsRef = true)
-@Slf4j
 public class MerchantCategoryCodeType implements LabelValueEnumInterface {
   private String value;
   private String label;

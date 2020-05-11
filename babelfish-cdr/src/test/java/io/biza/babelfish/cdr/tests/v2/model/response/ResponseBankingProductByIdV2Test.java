@@ -11,7 +11,6 @@
  *******************************************************************************/
 package io.biza.babelfish.cdr.tests.v2.model.response;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.net.URI;
 import java.time.OffsetDateTime;
@@ -29,7 +28,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.biza.babelfish.cdr.enumerations.BankingProductCategory;
 import io.biza.babelfish.cdr.models.payloads.LinksV1;
 import io.biza.babelfish.cdr.models.payloads.MetaV1;
-import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductDetailV1;
 import io.biza.babelfish.cdr.models.payloads.banking.product.BankingProductDetailV2;
 import io.biza.babelfish.cdr.models.responses.ResponseBankingProductByIdV2;
 import io.biza.babelfish.cdr.tests.v1.model.ModelConstants;

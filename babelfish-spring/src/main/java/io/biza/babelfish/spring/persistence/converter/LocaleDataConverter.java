@@ -14,11 +14,9 @@ package io.biza.babelfish.spring.persistence.converter;
 import java.util.Locale;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
-import lombok.extern.slf4j.Slf4j;
 
 
 @Converter(autoApply = true)
-@Slf4j
 public class LocaleDataConverter implements AttributeConverter<Locale, String> {
 
   @Override
