@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>io.biza</groupId>
 		<artifactId>babelfish</artifactId>
-		<version>1.2.6-SNAPSHOT</version>
+		<version>1.2.7-SNAPSHOT</version>
 	</parent>
 	<artifactId>babelfish-spring</artifactId>
 	<name>Babelfish: Spring</name>
@@ -76,12 +76,17 @@
 			<groupId>io.biza</groupId>
 			<artifactId>babelfish-interfaces</artifactId>
 			<version>${project.version}</version>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>io.biza</groupId>
 			<artifactId>babelfish-util</artifactId>
 			<version>${project.version}</version>
-		</dependency>			
+		</dependency>
+		<dependency>
+			<groupId>io.biza</groupId>
+			<artifactId>babelfish-converter</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.nimbusds</groupId>
 			<artifactId>nimbus-jose-jwt</artifactId>

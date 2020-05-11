@@ -7,21 +7,21 @@
 		<artifactId>babelfish</artifactId>
 		<version>1.2.7-SNAPSHOT</version>
 	</parent>
-	<artifactId>babelfish-util</artifactId>
-	<name>Babelfish: Utility Functions</name>
-	<description>This library contains shared utility functions comprising mostly static methods</description>
+	<artifactId>babelfish-converter</artifactId>
+	<name>Babelfish: Converter</name>
+	<description>This module contains converters between different Babelfish versions</description>
 
 	<dependencies>
 		<dependency>
 			<groupId>io.biza</groupId>
 			<artifactId>babelfish-cdr</artifactId>
 			<version>${project.version}</version>
-		</dependency>	
+		</dependency>
 		<dependency>
 			<groupId>io.biza</groupId>
 			<artifactId>babelfish-oidc</artifactId>
 			<version>${project.version}</version>
-		</dependency>			
+		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
@@ -37,7 +37,7 @@
 			<groupId>io.github.classgraph</groupId>
 			<artifactId>classgraph</artifactId>
 			<version>${classgraph.version}</version>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
@@ -49,6 +49,6 @@
 			<artifactId>junit-jupiter-engine</artifactId>
 			<version>${junit-jupiter.version}</version>
 			<scope>test</scope>
-		</dependency>		
+		</dependency>
 	</dependencies>
 </project>

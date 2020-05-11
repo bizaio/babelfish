@@ -43,7 +43,6 @@ import io.biza.babelfish.oidc.enumerations.JWKPublicKeyUse;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
 import io.biza.babelfish.oidc.payloads.JWKS;
 import io.biza.babelfish.oidc.payloads.JWTClaims;
-import io.biza.babelfish.oidc.support.NimbusUtil;
 import io.biza.babelfish.spring.Messages;
 import io.biza.babelfish.spring.persistence.model.issuer.IssuerData;
 import io.biza.babelfish.spring.persistence.model.issuer.IssuerKeyData;
@@ -51,6 +50,7 @@ import io.biza.babelfish.spring.persistence.repository.issuer.IssuerKeyRepositor
 import io.biza.babelfish.spring.persistence.repository.issuer.IssuerRepository;
 import io.biza.babelfish.spring.persistence.specifications.IssuerKeySpecifications;
 import io.biza.babelfish.util.MessageUtil;
+import io.biza.babelfish.util.NimbusUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

@@ -8,7 +8,7 @@ import io.biza.babelfish.common.exceptions.SigningOperationException;
 import io.biza.babelfish.common.exceptions.SigningVerificationException;
 import io.biza.babelfish.oidc.enumerations.JWTPeekAttribute;
 import io.biza.babelfish.oidc.payloads.JWTClaims;
-import io.biza.babelfish.oidc.support.NimbusUtil;
+import io.biza.babelfish.util.NimbusUtil;
 
 public interface VerificationService {
 

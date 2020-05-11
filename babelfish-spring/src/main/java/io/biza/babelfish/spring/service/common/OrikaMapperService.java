@@ -21,8 +21,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
-import io.biza.babelfish.cdr.orika.OrikaFactoryConfig;
-import io.biza.babelfish.cdr.orika.OrikaFactoryConfigurer;
+
+import io.biza.babelfish.converter.orika.OrikaFactoryConfig;
+import io.biza.babelfish.converter.orika.OrikaFactoryConfigurer;
 
 @Service
 public class OrikaMapperService extends ConfigurableMapper implements ApplicationContextAware {

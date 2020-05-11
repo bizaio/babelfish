@@ -4,7 +4,7 @@ import javax.net.ssl.HttpsURLConnection;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
-import io.biza.babelfish.oidc.support.NimbusUtil;
+import io.biza.babelfish.util.NimbusUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

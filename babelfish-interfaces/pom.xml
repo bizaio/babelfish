@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>io.biza</groupId>
 		<artifactId>babelfish</artifactId>
-		<version>1.2.6-SNAPSHOT</version>
+		<version>1.2.7-SNAPSHOT</version>
 	</parent>
 	<artifactId>babelfish-interfaces</artifactId>
 	<name>Babelfish: Implementation Interfaces</name>
