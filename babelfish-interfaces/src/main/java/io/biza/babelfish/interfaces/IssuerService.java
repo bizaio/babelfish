@@ -17,6 +17,7 @@ import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
 import io.biza.babelfish.oidc.payloads.JWK;
 import io.biza.babelfish.oidc.payloads.JWKS;
 import io.biza.babelfish.oidc.payloads.JWTClaims;
+import io.biza.babelfish.util.NimbusUtil;
 
 public interface IssuerService {
 
@@ -72,6 +73,21 @@ public interface IssuerService {
 	default String sign(URI name, JWKKeyType keyType, JWTClaims claims, JWSSigningAlgorithmType algorithm)
 			throws SigningOperationException, NotInitialisedException {
 		return sign(name.toASCIIString(), keyType, claims, algorithm);
+	}
+	
+	/**
+	 * Given a realm name and a compact serialisation verify that it came from the realm and is still valid
+	 * 
+	 * @param name containing the unique key set name expected to have been used
+	 * @param compactSerialisation containing a compact serialisation of the jwt
+	 * @return Boolean if validated as accurate for this realm
+	 */
+	default Boolean validate(String name, String compactSerialisation, JWTClaims jwtClaims) {
+		try {
+			return NimbusUtil.validate(compactSerialisation, jwks(name), jwtClaims);
+		} catch (NotInitialisedException e) {
+			return false;
+		}
 	}
 
 	/**

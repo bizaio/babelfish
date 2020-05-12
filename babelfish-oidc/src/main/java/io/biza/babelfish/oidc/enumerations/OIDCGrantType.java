@@ -15,13 +15,14 @@ package io.biza.babelfish.oidc.enumerations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+
+import io.biza.babelfish.common.exceptions.UnsupportedGrantTypeException;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "OIDC Response Modes", enumAsRef = true)
+@Schema(description = "OIDC Grant Types", enumAsRef = true)
 public enum OIDCGrantType {
   // @formatter:off
   AUTHORIZATION_CODE("authorization_code"),
-  IMPLICIT("implicit"),
   CLIENT_CREDENTIALS("client_credentials"),
   JWT_BEARER("urn:ietf:params:oauth:grant-type:jwt-bearer"),
   REFRESH_TOKEN("refresh_token");
@@ -40,13 +41,13 @@ public enum OIDCGrantType {
   }
 
   @JsonCreator
-  public static OIDCGrantType fromValue(String value) {
+  public static OIDCGrantType fromValue(String value) throws UnsupportedGrantTypeException {
     for (OIDCGrantType b : OIDCGrantType.values()) {
       if (String.valueOf(b.text).equals(value)) {
         return b;
       }
     }
 
-    return null;
+    throw UnsupportedGrantTypeException.builder().build();
   }
 }

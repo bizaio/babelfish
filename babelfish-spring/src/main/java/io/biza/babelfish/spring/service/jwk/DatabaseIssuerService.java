@@ -273,5 +273,4 @@ public class DatabaseIssuerService implements IssuerService {
 	public Boolean existsIssuer(String issuer) {
 		return issuerRepository.existsByIssuer(issuer);
 	}
-
 }

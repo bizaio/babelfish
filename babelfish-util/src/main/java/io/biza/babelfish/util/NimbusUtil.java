@@ -20,12 +20,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSVerifier;
+import com.nimbusds.jose.crypto.ECDSAVerifier;
 import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jose.crypto.RSASSAVerifier;
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKMatcher;
 import com.nimbusds.jose.jwk.JWKSelector;
 import com.nimbusds.jose.jwk.JWKSet;
+import com.nimbusds.jose.jwk.KeyType;
 import com.nimbusds.jose.jwk.KeyUse;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
@@ -38,6 +40,7 @@ import io.biza.babelfish.oidc.Messages;
 import io.biza.babelfish.oidc.enumerations.JWKPublicKeyUse;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.JWTPeekAttribute;
+import io.biza.babelfish.oidc.payloads.JWKS;
 import io.biza.babelfish.oidc.payloads.JWTClaims;
 import io.biza.babelfish.oidc.payloads.JWTClaims.JWTClaimsBuilder;
 import lombok.extern.slf4j.Slf4j;
@@ -112,7 +115,7 @@ public class NimbusUtil {
 		claims.additionalClaims().forEach((claimName, claimValue) -> {
 			claimSet.claim(claimName, claimValue);
 		});
-		
+
 		JWTClaimsSet claimsSetResult = claimSet.build();
 		LOG.debug(MessageUtil.format(Messages.CLAIMS_SET_CONVERSION_PRODUCED_X, claimsSetResult));
 		return claimsSetResult;
@@ -169,7 +172,7 @@ public class NimbusUtil {
 					.build();
 		}
 	}
-	
+
 	public static JWTClaims verifyHmac(String compactSerialisation, String hmacSecret, JWTClaims claimChecks)
 			throws SigningVerificationException {
 		try {
@@ -198,12 +201,51 @@ public class NimbusUtil {
 
 	public static JWTClaims verify(String compactSerialisation, URI jwksUri, JWTClaims claimChecks)
 			throws SigningVerificationException, KeyRetrievalException {
-
 		try {
 			SignedJWT jwt = SignedJWT.parse(compactSerialisation);
 
 			JWK remoteJwk = getRemoteKey(jwksUri, getJwkMatcher(jwt, KeyUse.SIGNATURE));
-			JWSVerifier verifier = new RSASSAVerifier(remoteJwk.toRSAKey());
+			return verify(jwt, remoteJwk, claimChecks);
+		} catch (ParseException e) {
+			LOG.error("Unable to parse supplied JWT: {}", e.getMessage(), e);
+			throw SigningVerificationException.builder().message(e.getMessage()).build();
+		}
+	}
+	
+	public static Boolean validate(String compactSerialisation, JWKS jwks, JWTClaims claimChecks) {
+		try {
+			SignedJWT jwt = SignedJWT.parse(compactSerialisation);
+			
+			List<JWK> matches = new JWKSelector(getJwkMatcher(jwt, KeyUse.SIGNATURE)).select(JWKSet.parse(StaticObjectMapper.toJSON(jwks)));
+			if (matches.size() > 0) {
+				try {
+					verify(jwt, matches.get(0), claimChecks);
+					return true;
+				} catch (SigningVerificationException | KeyRetrievalException e) {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		} catch (ParseException e) {
+			return false;
+		}
+	}
+
+	public static JWTClaims verify(SignedJWT jwt, JWK jwk, JWTClaims claimChecks)
+			throws SigningVerificationException, KeyRetrievalException {
+
+		try {
+			JWSVerifier verifier;
+			if (jwk.getKeyType().equals(KeyType.RSA)) {
+				verifier = new RSASSAVerifier(jwk.toRSAKey());
+			} else if (jwk.getKeyType().equals(KeyType.EC)) {
+				verifier = new ECDSAVerifier(jwk.toECKey());
+			} else {
+				throw SigningVerificationException.builder().message(
+						MessageFormat.format(Messages.UNSUPPORTED_KEY_TYPE_WITH_VALUE, jwk.getKeyType().toString()))
+						.build();
+			}
 
 			if (jwt.verify(verifier)) {
 				JWTClaims inputClaims = NimbusUtil.fromClaimsSet(jwt.getJWTClaimsSet());
@@ -213,18 +255,19 @@ public class NimbusUtil {
 				}
 				return inputClaims;
 			} else {
-				LOG.warn("Received signing verification error for kid of {} from {}", remoteJwk.getKeyID(), jwksUri);
-				throw SigningVerificationException.builder().message("Unable to verify serialisation using kid "
-						+ remoteJwk.getKeyID() + " retrieved from " + jwksUri).build();
+				LOG.warn("Received signing verification error for kid of {}", jwk.getKeyID());
+				throw SigningVerificationException.builder()
+						.message("Unable to verify serialisation using kid " + jwk.getKeyID()).build();
 			}
 		} catch (ParseException e) {
 			LOG.error("Unable to parse supplied JWT: {}", e.getMessage(), e);
 			throw SigningVerificationException.builder().message(e.getMessage()).build();
+
 		} catch (JOSEException e) {
-			LOG.warn("Encountered a JOSEException while attempting to verify payload {} using jwks {}",
-					compactSerialisation, jwksUri, e);
+			LOG.warn("Encountered a JOSEException while attempting to verify payload {}", jwt.serialize(), e);
 			throw SigningVerificationException.builder().message(e.getMessage()).build();
 		}
+
 	}
 
 	/**
