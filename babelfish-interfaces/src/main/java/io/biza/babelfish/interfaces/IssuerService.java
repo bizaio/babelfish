@@ -74,17 +74,23 @@ public interface IssuerService {
 			throws SigningOperationException, NotInitialisedException {
 		return sign(name.toASCIIString(), keyType, claims, algorithm);
 	}
-	
+
 	/**
-	 * Given a realm name and a compact serialisation verify that it came from the realm and is still valid
+	 * Given a realm name and a compact serialisation verify that it came from the
+	 * realm and is still valid
 	 * 
-	 * @param name containing the unique key set name expected to have been used
+	 * @param name                 containing the unique key set name expected to
+	 *                             have been used
 	 * @param compactSerialisation containing a compact serialisation of the jwt
 	 * @return Boolean if validated as accurate for this realm
 	 */
 	default Boolean validate(String name, String compactSerialisation, JWTClaims jwtClaims) {
 		try {
-			return NimbusUtil.validate(compactSerialisation, jwks(name), jwtClaims);
+			if (compactSerialisation != null) {
+				return NimbusUtil.validate(compactSerialisation, jwks(name), jwtClaims);
+			} else {
+				return false;
+			}
 		} catch (NotInitialisedException e) {
 			return false;
 		}
@@ -126,14 +132,16 @@ public interface IssuerService {
 			JWSSigningAlgorithmType signingAlgorithm, JWEEncryptionAlgorithmType encryptionAlgorithm,
 			JWEEncryptionEncodingType encryptionMethod) throws SigningOperationException, NotInitialisedException,
 			KeyRetrievalException, EncryptionOperationException {
-		return encrypt(sign(name, keyType, claims, signingAlgorithm), keyType, remoteJwks, encryptionAlgorithm, encryptionMethod);
+		return encrypt(sign(name, keyType, claims, signingAlgorithm), keyType, remoteJwks, encryptionAlgorithm,
+				encryptionMethod);
 	}
 
 	default String signAndEncrypt(URI issuer, JWKKeyType keyType, JWTClaims claims, URI remoteJwks,
 			JWSSigningAlgorithmType signingAlgorithm, JWEEncryptionAlgorithmType encryptionAlgorithm,
 			JWEEncryptionEncodingType encryptionMethod) throws SigningOperationException, NotInitialisedException,
 			KeyRetrievalException, EncryptionOperationException {
-		return encrypt(sign(issuer, keyType, claims, signingAlgorithm), keyType, remoteJwks, encryptionAlgorithm, encryptionMethod);
+		return encrypt(sign(issuer, keyType, claims, signingAlgorithm), keyType, remoteJwks, encryptionAlgorithm,
+				encryptionMethod);
 	}
 
 	/**
@@ -154,12 +162,11 @@ public interface IssuerService {
 			throws NotInitialisedException {
 		return initKey(issuer, type, JWKPublicKeyUse.SIGN, signingAlgorithm, null);
 	}
-	
+
 	default JWK initSigningKey(URI issuer, JWKKeyType type, JWSSigningAlgorithmType signingAlgorithm)
 			throws NotInitialisedException {
 		return initKey(issuer.toASCIIString(), type, JWKPublicKeyUse.SIGN, signingAlgorithm, null);
 	}
-
 
 	default JWK initEncryptionKey(String issuer, JWKKeyType type, JWEEncryptionAlgorithmType encryptionAlgorithm)
 			throws NotInitialisedException {
@@ -171,27 +178,28 @@ public interface IssuerService {
 	 * 
 	 * @param issuer containing the name of the issuer to issue for
 	 * @return JWKS containing an empty key set
-	 * @throws NotInitialisedException if unable to initialise 
+	 * @throws NotInitialisedException     if unable to initialise
 	 * @throws AlreadyInitialisedException if issuer is already intialised
 	 */
 	public JWKS createIssuer(String issuer) throws NotInitialisedException, AlreadyInitialisedException;
-	
+
 	/**
 	 * Initialised a new issuer with a URI
+	 * 
 	 * @param issuer containing the issuer base URI
 	 * @return JWKS containing an empty key set
-	 * @throws NotInitialisedException if unable to intialise
+	 * @throws NotInitialisedException     if unable to intialise
 	 * @throws AlreadyInitialisedException if issuer already initialised
 	 */
 	default JWKS createIssuer(URI issuer) throws NotInitialisedException, AlreadyInitialisedException {
 		return createIssuer(issuer.toASCIIString());
 	}
-	
+
 	/**
 	 * Check issuer exists
 	 */
 	public Boolean existsIssuer(String issuer);
-	
+
 	default Boolean existsIssuer(URI issuer) {
 		return existsIssuer(issuer.toASCIIString());
 	}

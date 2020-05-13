@@ -153,6 +153,11 @@ public class NimbusUtil {
 			NimbusUtil.checkEquals("issuer", claimChecks.issuer(), inputClaims.issuer());
 		if (claimChecks.subject() != null)
 			NimbusUtil.checkEquals("subject", claimChecks.subject(), inputClaims.subject());
+		if (claimChecks.expiry() != null)
+			if (claimChecks.expiry().isBefore(inputClaims.expiry())) {
+				throw SigningVerificationException.builder().message("Verification of expiration time claim failed "
+						+ inputClaims.expiry() + " is after " + claimChecks.expiry()).build();
+			}
 		if (claimChecks.audience() != null)
 			NimbusUtil.checkEquals("audience", claimChecks.audience(), inputClaims.audience());
 		if (claimChecks.additionalClaims() != null) {
@@ -211,12 +216,13 @@ public class NimbusUtil {
 			throw SigningVerificationException.builder().message(e.getMessage()).build();
 		}
 	}
-	
+
 	public static Boolean validate(String compactSerialisation, JWKS jwks, JWTClaims claimChecks) {
 		try {
 			SignedJWT jwt = SignedJWT.parse(compactSerialisation);
-			
-			List<JWK> matches = new JWKSelector(getJwkMatcher(jwt, KeyUse.SIGNATURE)).select(JWKSet.parse(StaticObjectMapper.toJSON(jwks)));
+
+			List<JWK> matches = new JWKSelector(getJwkMatcher(jwt, KeyUse.SIGNATURE))
+					.select(JWKSet.parse(StaticObjectMapper.toJSON(jwks)));
 			if (matches.size() > 0) {
 				try {
 					verify(jwt, matches.get(0), claimChecks);
@@ -303,6 +309,11 @@ public class NimbusUtil {
 			return false;
 		}
 		return true;
+	}
+
+	public static String getSignature(String compactSerialisation) throws ParseException {
+		SignedJWT jwt = SignedJWT.parse(compactSerialisation);
+		return jwt.getSignature().toString();
 	}
 
 	/**

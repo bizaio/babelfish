@@ -27,6 +27,10 @@ public interface VerificationService {
 			throws SigningVerificationException, KeyRetrievalException {
 		return NimbusUtil.verify(compactSerialisation, jwksUri, claims);
 	}
+	
+	default String jwtSignature(String compactSerialisation) throws ParseException {
+		return NimbusUtil.getSignature(compactSerialisation);
+	}
 
 	/**
 	 * Given a compact serialisation, take a peek at the specified attribute
@@ -44,4 +48,6 @@ public interface VerificationService {
 	default Boolean canJwtParse(String compactSerialisation) {
 		return NimbusUtil.canParse(compactSerialisation);
 	}
+	
+	
 }
