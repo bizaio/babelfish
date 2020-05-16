@@ -13,5 +13,4 @@ public class Messages {
 	public static final String CLAIMS_SET_CONVERSION_PRODUCED_X = "Claims Set Conversion produced: {}";
 	public static final String ATTEMPTING_TO_DISABLE_TLS_VERIFICATION = "Attempting to disable TLS verification";
 	public static final String INVALID_RESPONSE_TYPE = "Unrecognised response_type of {} specified";
-
 }

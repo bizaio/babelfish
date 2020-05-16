@@ -1,4 +1,4 @@
-package io.biza.babelfish.common.exceptions;
+package io.biza.babelfish.oidc.exceptions.openid.core;
 
 
 public class RequestUriNotSupportedException extends Exception {

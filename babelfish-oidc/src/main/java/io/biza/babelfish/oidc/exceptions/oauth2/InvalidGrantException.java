@@ -1,4 +1,4 @@
-package io.biza.babelfish.common.exceptions;
+package io.biza.babelfish.oidc.exceptions.oauth2;
 
 
 public class InvalidGrantException extends Exception {
