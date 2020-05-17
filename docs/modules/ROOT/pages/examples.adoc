@@ -1,0 +1,115 @@
+= Examples
+
+== Prerequisites
+
+You need the following installed and available in your `$PATH` during compilation:
+
+- Java 11+
+- Apache Maven 3.6.3 or later
+
+== Using Babelfish CDR in your project
+
+Babelfish CDR is intended for embedding within your CDR client or server project as a Maven (or Gradle) dependency.
+Once it is added to your project you gain access to the ability to manipulate CDR payloads in a number of different ways.
+
+=== Parse and Validate CDR Payload
+
+Parsing a sample JSON payload can be conducted using Jackson and then verified using Java Validation API:
+
+[source,java]
+----
+    ResponseBankingProductByIdV2 productResponse = new ObjectMapper().readValue(
+        "{\"links\":{\"self\":\"http://localhost/cds-au/v1/banking/products/073e7e70-357d-4858-8f52-92283f4edd6f\"},\"meta\":{},"
+        + "\"data\":{\"productId\":\"073e7e70-357d-4858-8f52-92283f4edd6f\",\"lastUpdated\":\"2020-02-03T06:32:27Z\","
+        + "\"productCategory\":\"TRANS_AND_SAVINGS_ACCOUNTS\",\"name\":\"Example Product\",\"description\":\"Example Product Description\","
+        + "\"brand\":\"ACME\",\"brandName\":\"ACME Bank\",\"isTailored\":false}}",
+        ResponseBankingProductByIdV2.class);
+    Set<ConstraintViolation<ResponseBankingProductByIdV2>> productResponseValidation =
+        Validation.buildDefaultValidatorFactory().getValidator().validate(productResponse);
+----
+
+=== Validate and Generate CDR Payload
+
+Generating a CDR Payload can be conducted using the fluent builder API within Babelfish.
+Additionally the payload can be validated using Java Validation API.
+
+An example is as follows:
+
+[source,java]
+----
+ResponseBankingProductByIdV2 productResponse =
+        ResponseBankingProductByIdV2.builder()
+            .links(LinksV1.builder().self(URI.create(
+                "http://localhost/cds-au/v1/banking/products/073e7e70-357d-4858-8f52-92283f4edd6f"))
+                .build())
+            .meta(MetaV1.builder().build())
+            .data(BankingProductDetailV2.builder().productId("073e7e70-357d-4858-8f52-92283f4edd6f")
+                .lastUpdated(OffsetDateTime.now())
+                .productCategory(BankingProductCategory.TRANS_AND_SAVINGS_ACCOUNTS)
+                .name("Example Product").description("Example Product Description").brand("ACME")
+                .tailored(false).build())
+            .build();
+    Set<ConstraintViolation<ResponseBankingProductByIdV2>> productResponseValidation =
+        Validation.buildDefaultValidatorFactory().getValidator().validate(productResponse);
+    if (productResponseValidation.isEmpty()) {
+      System.out.println(new ObjectMapper().setSerializationInclusion(Include.NON_ABSENT).writeValueAsString(productResponse));
+    } else {
+      System.out.println(
+          "Object failed validation with errors of: " + productResponseValidation.toString());
+    }
+----
+
+=== Convert CDR Payload between versions
+
+Babelfish enables you to convert between two different payload versions.
+This means that a Data Recipient can build for a newer (or older) version of a payload while maintaining ongoing compatibility from individual Data Holders who may be ahead or behind the version expected by the Recipient.
+We use Orika and a set of specific mappers for each different payload version and then make it available in `BabelFishConverter`.
+
+An example is as follows:
+
+[source,java]
+----
+    BankingProductDetailV2 detail = BankingProductDetailV2.builder()
+        .productId("073e7e70-357d-4858-8f52-92283f4edd6f").lastUpdated(OffsetDateTime.now())
+        .productCategory(BankingProductCategory.TRANS_AND_SAVINGS_ACCOUNTS).name("Example Product")
+        .description("Example Product Description").brand("ACME").isTailored(false).build();
+
+    // Downgrade it to V1
+    BankingProductDetailV1 downgradedDetail =
+        BabelFishConverter.convert(detail, BankingProductDetailV1.class);
+    // Upgrade back to V2
+    BankingProductDetailV2 upgradedDetail = BabelFishConverter.convert(downgradedDetail, BankingProductDetailV2.class);
+
+----
+
+=== Dynamically discover what class to use for version conversion
+
+To make it easier to integrate Babelfish into upstream projects we also make available the `BabelfishVersioner` class.
+Here's an example where we hand it a `BankingProductDetailV2` and ask it for the nearest version (in this case the range is only 1 <= 2):
+
+[source,java]
+----
+    Class<?> destinationType = BabelfishVersioner.getVersionedClass(inputData.getClass(),
+        2, 1);
+    BabelfishVersioner.convert(inputData, destinationType);
+----
+
+This is coupled in Deep Thought to allow for dynamic payload version switching based on request parameters (in link:https://github.com/bizaio/deepthought/blob/develop/common/src/main/java/io/biza/deepthought/common/support/CDRVersioner.java[CDRVersioner]).
+
+### Using in Spring
+
+We are actively using Babelfish CDR payload descriptions within link:https://github.com/bizaio/deepthought[Deep Thought] as part of a Spring + Springdoc project.
+The following demonstrates the definition of a `Get Product Detail` endpoint:
+
+[source,java]
+----
+@Operation(summary = "Get Product Detail", description = "Returns details product information based on the specified product identifier")
+@ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Response Successful", content = @Content( schema = @Schema( oneOf = { ResponseBankingProductByIdV1.class, ResponseBankingProductByIdV2.class}))),
+        @ApiResponse(responseCode = "404", description = "Unable to find requested Product Identifier")
+})
+@GetMapping(value = "/{productId}", produces = {MediaType.APPLICATION_JSON_VALUE})
+default ResponseEntity<ResponseBankingProductByIdV2> getProductDetail(@NotNull @Valid @PathVariable("productId") UUID productId) {
+        return getDelegate().getProductDetail(productId);
+}
+----

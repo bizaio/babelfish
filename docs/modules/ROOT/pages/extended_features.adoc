@@ -1,0 +1,60 @@
+= Extended Features
+
+Babelfish incorporates a number of customised features to aid developers with integrating with and using the CDR payloads.
+
+== Enumeration Labels
+
+All enumerations used within Babelfish provide a human readable label available via the `label()` method:
+
+[source,java]
+----
+    System.out.println("name: " + BankingProductCategory.TRANS_AND_SAVINGS_ACCOUNTS.name()
+        + " label: " + BankingProductCategory.TRANS_AND_SAVINGS_ACCOUNTS.label());
+    // Result: name: TRANS_AND_SAVINGS_ACCOUNTS label: Transaction & Savings
+----
+
+== JSON (De)Serialisators
+
+Babelfish employs a set of `StdConverter` extensions to facilitate the conversion to/from [Common Field Types](https://consumerdatastandardsaustralia.github.io/standards/#common-field-types) specified within the Standards. These are embedded as `@JsonSerialize` and `@JsonDeserialize` annotations within payloads but can be used independently if desired.
+
+The following provides a table of the converters available:
+
+|===
+| Common Field Type          | CDS JSON Type  | Babelfish Java Type       | Serializer                              | Deserializer
+| DateTimeString             | String         | OffsetDateTime            | OffsetDateTimeToDateTimeStringConverter | DateTimeStringToOffsetDateTimeConverter
+| DateString                 | String         | LocalDate                 | LocalDateToStringConverter              | StringToLocalDateConverter
+| CurrencyString             | String         | Currency                  | CurrencyToStringConverter               | StringToCurrencyConverter
+| RateString                 | String         | BigDecimal                | BigDecimalToRateStringConverter         | RateStringToBigDecimalConverter
+| AmountString               | String         | BigDecimal                | BigDecimalToAmountStringConverter       | AmountStringToBigDecimalConverter
+| URIString                  | String         | URI                       | UriToUriStringConverter                 | UriStringToUriConverter
+| ExternalRef (Country)      | String         | Locale                    | CountryStringToLocaleConverter          | LocaleToCountryStringConverter
+| ExternalRef (Duration)     | String         | Duration                  | StringToDurationConverter               | DurationToStringConverter
+| ExternalRef (Period)       | String         | Period                    | StringToPeriodConverter                 | PeriodToStringConverter
+| ExternalRef (MCC)          | String         | MerchantCategoryCodeType  | StringToMerchantCategoryCodeConverter   | MerchantCategoryCodeToStringConverter
+| ExternalRef (APCA Number)  | String         | ApcaNumberType            | StringToApcaNumberConverter             | ApcaNumberToStringConverter
+| ExternalRef (SWIFT Routing)| String         | SwiftBicType              | StringToSwiftBicConverter               | SwiftBicToStringConverter
+| Base64                     | String (Base64)| String                    | StringToBase64StringConverter           | Base64StringToStringConverter
+|===
+
+== Custom Assertions
+
+Many of the payloads contain a custom `javax.validation.Constraint` called `AssertTrueBabelfish`.
+
+`AssertTrueBabelfish` behaves like the default `AssertTrue` validation assertion but includes an additional `String[]` array called `fields` which provides information about the specific field(s) which were involved within a failure of the assertion. This annotation is used **extensively** for validating CDR payloads which utilise the `additionalValue` conditional field structure and are intended to provide human presentable error messages along with a pointer to the field(s) in question.
+
+One such example is in `BankingConstraintV1` which verifies that when a Constraint Type of `MIN_BALANCE` is specified the `additionalValue` field must be in CDS AmountString format.
+
+Another notable example demonstrating compound reporting is within `BankingProductFeeV1`
+
+[source,java]
+----
+  @AssertTrueBabelfish(
+      message = "One of amount, balanceRate, transactionRate or accruedRate is MANDATORY",
+      fields = {"amount", "balanceRate", "accruedRate", "transactionRate"})
+----
+
+This assertion reports a set of field names which can be highlighted but for which only one at a time is accepted.
+
+== Phone Number Parsing
+
+The `CommonPhoneNumberV1` class contains a number of additional functions using Google's PhoneNumberUtil library. Most notably there is a method of `setWithFullNumber` which accepts a *standard* Australian number (for example 0733006000) and internationalises it into the requested format and fields. Use of this extension functionality is **entirely** optional.
