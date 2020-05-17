@@ -13,7 +13,7 @@ All enumerations used within Babelfish provide a human readable label available 
     // Result: name: TRANS_AND_SAVINGS_ACCOUNTS label: Transaction & Savings
 ----
 
-== JSON (De)Serialisators
+== JSON (De)Serialisers
 
 Babelfish employs a set of `StdConverter` extensions to facilitate the conversion to/from [Common Field Types](https://consumerdatastandardsaustralia.github.io/standards/#common-field-types) specified within the Standards. These are embedded as `@JsonSerialize` and `@JsonDeserialize` annotations within payloads but can be used independently if desired.
 
