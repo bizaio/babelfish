@@ -10,17 +10,9 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonMappingException.Reference;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.DelegatingDeserializer;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
-
-import io.biza.babelfish.cdr.enumerations.BabelExceptionType;
 import io.biza.babelfish.cdr.enumerations.BabelValidationErrorType;
-import io.biza.babelfish.cdr.exceptions.ValidationListException;
 import io.biza.babelfish.cdr.models.payloads.BabelValidationError;
-import io.biza.babelfish.cdr.util.MessageUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
