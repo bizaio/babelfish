@@ -1,0 +1,14 @@
+= Developing
+
+`babelfish-cdr` uses Maven for compilation activies.
+
+To build the library and install it in your local Maven cache:
+
+1. `cd babelfish-cdr`
+2. `mvn clean install`
+
+== Contributing
+
+1. Clone repository and create a new branch: `$ git checkout https://github.com/bizaio/babelfish-cdr -b my_new_branch`
+2. Make changes (including tests please!)
+3. Submit Pull Request for integration of changes

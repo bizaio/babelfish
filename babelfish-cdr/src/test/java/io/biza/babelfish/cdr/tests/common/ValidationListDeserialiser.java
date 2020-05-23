@@ -13,7 +13,9 @@ import com.fasterxml.jackson.databind.JsonMappingException.Reference;
 import com.fasterxml.jackson.databind.deser.std.DelegatingDeserializer;
 import io.biza.babelfish.common.enumerations.BabelValidationErrorType;
 import io.biza.babelfish.common.payloads.BabelValidationError;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class ValidationListDeserialiser<T> extends DelegatingDeserializer {
 	private static final long serialVersionUID = 1L;
 	private Class<T> clazz;
