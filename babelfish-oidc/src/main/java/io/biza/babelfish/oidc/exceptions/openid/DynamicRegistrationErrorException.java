@@ -1,30 +1,10 @@
 package io.biza.babelfish.oidc.exceptions.openid;
 
-import java.net.URI;
-import java.time.OffsetDateTime;
-import java.util.List;
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import io.biza.babelfish.common.jackson.EpochToOffsetDateTimeConverter;
-import io.biza.babelfish.common.jackson.ListStringToSpaceListConverter;
-import io.biza.babelfish.common.jackson.OffsetDateTimeToEpochConverter;
-import io.biza.babelfish.common.jackson.SpaceListToListStringConverter;
-import io.biza.babelfish.common.jackson.UriStringToUriConverter;
-import io.biza.babelfish.common.jackson.UriToUriStringConverter;
-import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
-import io.biza.babelfish.oidc.enumerations.JWEEncryptionEncodingType;
-import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
-import io.biza.babelfish.oidc.enumerations.OIDCApplicationType;
-import io.biza.babelfish.oidc.enumerations.OIDCAuthMethod;
-import io.biza.babelfish.oidc.enumerations.OIDCGrantType;
-import io.biza.babelfish.oidc.enumerations.OIDCResponseType;
 import io.biza.babelfish.oidc.enumerations.RegistrationErrorCode;
 import io.biza.babelfish.oidc.exceptions.oauth2.registration.InvalidClientMetadataException;
 import io.biza.babelfish.oidc.exceptions.oauth2.registration.InvalidRedirectUriException;

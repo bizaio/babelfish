@@ -144,6 +144,11 @@ public interface IssuerService {
 				encryptionMethod);
 	}
 
+	default String decrypt(URI issuer, String encryptedSerialisation, JWEEncryptionEncodingType encType,
+			JWEEncryptionAlgorithmType algType) throws EncryptionOperationException {
+		throw EncryptionOperationException.builder().build();
+	}
+
 	/**
 	 * Initialise Key for a given issuer
 	 * 

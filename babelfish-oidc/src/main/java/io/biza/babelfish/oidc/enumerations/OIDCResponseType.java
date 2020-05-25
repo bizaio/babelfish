@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.biza.babelfish.common.exceptions.UnsupportedResponseTypeException;
-import io.biza.babelfish.oidc.exceptions.oauth2.InvalidRequestException;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "OIDC Response Types", enumAsRef = true)

@@ -237,7 +237,7 @@ public class NimbusUtil {
 			return false;
 		}
 	}
-
+	
 	public static JWTClaims verify(SignedJWT jwt, JWK jwk, JWTClaims claimChecks)
 			throws SigningVerificationException, KeyRetrievalException {
 
