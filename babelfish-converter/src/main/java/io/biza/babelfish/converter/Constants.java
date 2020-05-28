@@ -15,8 +15,7 @@ public class Constants {
 	public static final String ORIKA_PACKAGE_BASE = OrikaFactoryConfigurer.class.getPackageName();
 	public static final String ORIKA_IMPLEMENTING_CLASS = OrikaFactoryConfigurerInterface.class.getName();
 	public static final String ORIKA_BIDIRECTIONAL_CLASS = BidirectionalConverter.class.getName();
-
-	public static final String BASE_MODELS_PACKAGE = VersionerConstants.class.getPackageName();
+	public static final String BASE_MODELS_PACKAGE = io.biza.babelfish.cdr.Constants.class.getPackageName();
 	public static final String BASE_MODELS_ANNOTATION = Schema.class.getName();
 	public static final String BASE_CONVERTER_PACKAGE = UUIDConverter.class.getPackageName();
 	public static final String VERSIONED_MODEL = BabelfishVersionedModel.class.getName();
