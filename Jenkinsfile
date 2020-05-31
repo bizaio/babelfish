@@ -4,12 +4,8 @@ node {
 	def buildInfo
 	def rtMaven
 	
-	parameters {
-    	gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
-  	}
-	
 	stage ('Clone Source and switch Branch') {
-        git branch: "${params.BRANCH}", url: 'https://github.com/bizaio/babelfish.git'
+        git branch: env.BRANCH_NAME, credentialsId: 'bizabuilder', url: 'https://github.com/bizaio/babelfish.git'
     }
 	
     stage ('Artifactory configuration') {
