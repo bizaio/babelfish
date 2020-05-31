@@ -26,4 +26,10 @@ hs_err_pid*
 target/
 
 *.versionsBackup
-
+.project
+.settings
+.classpath
+.idea/*
+.idea
+.factorypath
+*.iml

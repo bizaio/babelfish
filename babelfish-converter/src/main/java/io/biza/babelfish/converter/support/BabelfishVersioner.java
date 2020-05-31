@@ -78,7 +78,8 @@ public class BabelfishVersioner {
 }
   
   public static Boolean isSupported(Class<?> clazz) {
-    if (clazz.getPackageName().startsWith(Constants.BASE_MODELS_PACKAGE)) {
+	  
+	  if (clazz.getPackageName().startsWith(Constants.BASE_MODELS_PACKAGE)) {
       return true;
     }
     
