@@ -15,80 +15,119 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import io.biza.babelfish.oidc.Constants;
 import io.biza.babelfish.oidc.OIDCErrorMessages;
 import io.biza.babelfish.oidc.enumerations.OAuth2ErrorCode;
+import io.biza.babelfish.oidc.exceptions.oauth2.AccessDeniedException;
 import io.biza.babelfish.oidc.exceptions.oauth2.InvalidClientException;
 import io.biza.babelfish.oidc.exceptions.oauth2.InvalidGrantException;
 import io.biza.babelfish.oidc.exceptions.oauth2.InvalidRequestException;
 import io.biza.babelfish.oidc.exceptions.oauth2.InvalidScopeException;
 import io.biza.babelfish.oidc.exceptions.oauth2.UnauthorisedClientException;
 import io.biza.babelfish.oidc.exceptions.oauth2.UnsupportedGrantTypeException;
+import io.biza.babelfish.oidc.exceptions.oauth2.UnsupportedResponseTypeException;
 import io.biza.babelfish.oidc.requests.OAuth2ErrorResponse;
+
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class OIDCExceptionControllerAdvice {
-  
-  @ExceptionHandler(InvalidClientException.class)
-  public ResponseEntity<Object> handleInvalidClientException(HttpServletRequest req,
-      InvalidClientException ex) {
 
-    return ResponseEntity.badRequest()
-        .body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.INVALID_CLIENT)
-            .errorDescription(OIDCErrorMessages.OAUTH2_INVALID_CLIENT)
-            .errorUri(OIDCErrorMessages.OAUTH2_ERROR_RESPONSE_URI).build());
-  }
-  
-  @ExceptionHandler(InvalidGrantException.class)
-  public ResponseEntity<Object> handleInvalidGrantException(HttpServletRequest req,
-      InvalidGrantException ex) {
+	@ExceptionHandler(InvalidRequestException.class)
+	public ResponseEntity<Object> handleInvalidRequestException(HttpServletRequest req, InvalidRequestException ex) {
+		return ResponseEntity.badRequest().body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.INVALID_REQUEST)
+				.errorDescription(Optional.of(ex.errorDescription()).orElse(OIDCErrorMessages.OAUTH2_INVALID_REQUEST))
+				.errorUri(Optional.of(ex.errorUri()).orElse(OIDCErrorMessages.OAUTH2_ERROR_RESPONSE_URI))
+				.state(req.getParameter(Constants.STATE)).build());
+	}
 
-    return ResponseEntity.badRequest()
-        .body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.INVALID_GRANT)
-            .errorDescription(OIDCErrorMessages.OAUTH2_INVALID_GRANT)
-            .errorUri(OIDCErrorMessages.OAUTH2_ERROR_RESPONSE_URI).build());
-  }
+	@ExceptionHandler(UnauthorisedClientException.class)
+	public ResponseEntity<Object> handleUnauthorisedClientException(HttpServletRequest req,
+			UnauthorisedClientException ex) {
 
-  @ExceptionHandler(InvalidRequestException.class)
-  public ResponseEntity<Object> handleInvalidRequestException(HttpServletRequest req,
-      InvalidRequestException ex) {
+		return ResponseEntity.badRequest()
+				.body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.UNAUTHORISED_CLIENT)
+						.errorDescription(OIDCErrorMessages.OAUTH2_UNAUTHORIZED_CLIENT)
+						.errorUri(OIDCErrorMessages.OAUTH2_ERROR_RESPONSE_URI).state(req.getParameter(Constants.STATE))
+						.build());
+	}
 
-    return ResponseEntity.badRequest()
-        .body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.INVALID_REQUEST)
-            .errorDescription(OIDCErrorMessages.OAUTH2_INVALID_REQUEST)
-            .errorUri(OIDCErrorMessages.OAUTH2_ERROR_RESPONSE_URI).build());
-  }
+	@ExceptionHandler(AccessDeniedException.class)
+	public ResponseEntity<Object> handleAccessDeniedException(HttpServletRequest req, AccessDeniedException ex) {
 
-  @ExceptionHandler(InvalidScopeException.class)
-  public ResponseEntity<Object> handleInvalidScopeException(HttpServletRequest req,
-      InvalidScopeException ex) {
+		return ResponseEntity.badRequest()
+				.body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.ACCESS_DENIED)
+						.errorDescription(OIDCErrorMessages.OAUTH2_ACCESS_DENIED)
+						.errorUri(OIDCErrorMessages.OAUTH2_ERROR_RESPONSE_URI).state(req.getParameter(Constants.STATE))
+						.build());
+	}
 
-    return ResponseEntity.badRequest()
-        .body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.INVALID_CLIENT)
-            .errorDescription(OIDCErrorMessages.OAUTH2_INVALID_SCOPE)
-            .errorUri(OIDCErrorMessages.OAUTH2_ERROR_RESPONSE_URI).build());
-  }
+	@ExceptionHandler(UnsupportedResponseTypeException.class)
+	public ResponseEntity<Object> handleUnsupportedResponseTypeException(HttpServletRequest req,
+			UnsupportedResponseTypeException ex) {
 
-  @ExceptionHandler(UnauthorisedClientException.class)
-  public ResponseEntity<Object> handleUnauthorisedClientException(HttpServletRequest req,
-      UnauthorisedClientException ex) {
+		return ResponseEntity.badRequest().body(OAuth2ErrorResponse.builder()
+				.error(OAuth2ErrorCode.UNSUPPORTED_RESPONSE_TYPE)
+				.errorDescription(
+						Optional.of(ex.errorDescription()).orElse(OIDCErrorMessages.OAUTH2_UNSUPPORTED_RESPONSE_TYPE))
+				.errorUri(Optional.of(ex.errorUri()).orElse(OIDCErrorMessages.OAUTH2_ERROR_RESPONSE_URI))
+				.state(req.getParameter(Constants.STATE)).build());
+	}
 
-    return ResponseEntity.badRequest()
-        .body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.UNAUTHORISED_CLIENT)
-            .errorDescription(OIDCErrorMessages.OAUTH2_UNAUTHORIZED_CLIENT)
-            .errorUri(OIDCErrorMessages.OAUTH2_ERROR_RESPONSE_URI).build());
-  }
+	@ExceptionHandler(InvalidScopeException.class)
+	public ResponseEntity<Object> handleInvalidScopeException(HttpServletRequest req, InvalidScopeException ex) {
 
+		return ResponseEntity.badRequest()
+				.body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.INVALID_SCOPE)
+						.errorDescription(OIDCErrorMessages.OAUTH2_INVALID_SCOPE)
+						.errorUri(OIDCErrorMessages.OAUTH2_ERROR_RESPONSE_URI).state(req.getParameter(Constants.STATE))
+						.build());
+	}
 
-  @ExceptionHandler(UnsupportedGrantTypeException.class)
-  public ResponseEntity<Object> handleUnsupportedGrantTypeException(HttpServletRequest req,
-      UnsupportedGrantTypeException ex) {
+	@ExceptionHandler(InvalidClientException.class)
+	public ResponseEntity<Object> handleInvalidClientException(HttpServletRequest req, InvalidClientException ex) {
 
-    return ResponseEntity.badRequest()
-        .body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.UNSUPPORTED_GRANT_TYPE)
-            .errorDescription(OIDCErrorMessages.OAUTH2_UNSUPPORTED_GRANT_TYPE)
-            .errorUri(OIDCErrorMessages.OAUTH2_ERROR_RESPONSE_URI).build());
-  }
+		return ResponseEntity.badRequest()
+				.body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.INVALID_CLIENT)
+						.errorDescription(OIDCErrorMessages.OAUTH2_INVALID_CLIENT)
+						.errorUri(OIDCErrorMessages.OAUTH2_ERROR_RESPONSE_URI).state(req.getParameter(Constants.STATE))
+						.build());
+	}
 
+	@ExceptionHandler(InvalidGrantException.class)
+	public ResponseEntity<Object> handleInvalidGrantException(HttpServletRequest req, InvalidGrantException ex) {
+
+		return ResponseEntity.badRequest()
+				.body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.INVALID_GRANT)
+						.errorDescription(OIDCErrorMessages.OAUTH2_INVALID_GRANT)
+						.errorUri(OIDCErrorMessages.OAUTH2_ERROR_RESPONSE_URI).state(req.getParameter(Constants.STATE))
+						.build());
+	}
+
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<Object> handleUnhandledError(HttpServletRequest req, Exception ex) {
+		return ResponseEntity.badRequest()
+				.body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.SERVER_ERROR)
+						.errorDescription(OIDCErrorMessages.OAUTH2_SERVER_ERROR)
+						.state(req.getParameter(Constants.STATE)).build());
+	}
+
+	/**
+	 * @ExceptionHandler(UnsupportedGrantTypeException.class) public
+	 *                                                        ResponseEntity<Object>
+	 *                                                        handleUnsupportedGrantTypeException(HttpServletRequest
+	 *                                                        req,
+	 *                                                        UnsupportedGrantTypeException
+	 *                                                        ex) {
+	 * 
+	 *                                                        return
+	 *                                                        ResponseEntity.badRequest()
+	 *                                                        .body(OAuth2ErrorResponse.builder().error(OAuth2ErrorCode.UNSUPPORTED_GRANT_TYPE)
+	 *                                                        .errorDescription(OIDCErrorMessages.OAUTH2_UNSUPPORTED_GRANT_TYPE)
+	 *                                                        .errorUri(OIDCErrorMessages.OAUTH2_ERROR_RESPONSE_URI).build());
+	 *                                                        }
+	 */
 
 }

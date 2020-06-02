@@ -6,6 +6,7 @@ public class Constants {
   public static Integer DEFAULT_MINUTES_NOT_BEFORE = 1;
   public static Integer DEFAULT_MINUTES_EXPIRY = 3;
   public static Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
+  public static String STATE = "state";
   
   
 }

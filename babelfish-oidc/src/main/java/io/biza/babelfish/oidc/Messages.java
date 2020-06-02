@@ -1,5 +1,7 @@
 package io.biza.babelfish.oidc;
 
+import java.net.URI;
+
 public class Messages {
 
 	public static final String FAILED_TO_RETRIEVE_JWKS = "Attempt to retrieve JWKS from {} failed";
@@ -12,5 +14,6 @@ public class Messages {
 	public static final String UNSUPPORTED_DIGEST_FOR_ALGORITHM = "Unsupported digest method for algorithm of {}";
 	public static final String CLAIMS_SET_CONVERSION_PRODUCED_X = "Claims Set Conversion produced: {}";
 	public static final String ATTEMPTING_TO_DISABLE_TLS_VERIFICATION = "Attempting to disable TLS verification";
-	public static final String INVALID_RESPONSE_TYPE = "Unrecognised response_type of {} specified";
+	public static final String INVALID_RESPONSE_TYPE = "Unrecognised response_type of %s specified";
+	public static final URI RESPONSE_TYPE_URL = URI.create("https://tools.ietf.org/html/rfc6749#section-3.1.1");
 }

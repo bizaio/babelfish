@@ -1,9 +1,12 @@
 package io.biza.babelfish.oidc.enumerations;
 
+import java.text.MessageFormat;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import io.biza.babelfish.common.exceptions.UnsupportedResponseTypeException;
+import io.biza.babelfish.oidc.Messages;
+import io.biza.babelfish.oidc.exceptions.oauth2.UnsupportedResponseTypeException;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "OIDC Response Types", enumAsRef = true)
@@ -32,7 +35,9 @@ public enum OIDCResponseType {
 			}
 		}
 
-		throw UnsupportedResponseTypeException.builder().build();
+		throw UnsupportedResponseTypeException.builder()
+				.errorDescription(String.format(Messages.INVALID_RESPONSE_TYPE, value))
+				.errorUri(Messages.RESPONSE_TYPE_URL).build();
 	}
 
 }

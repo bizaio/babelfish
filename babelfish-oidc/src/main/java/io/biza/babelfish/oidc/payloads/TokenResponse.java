@@ -9,8 +9,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import io.biza.babelfish.common.jackson.DateTimeStringToOffsetDateTimeConverter;
 import io.biza.babelfish.common.jackson.FutureSecondsToOffsetDateTimeConverter;
 import io.biza.babelfish.common.jackson.ListStringToSpaceListConverter;
+import io.biza.babelfish.common.jackson.OffsetDateTimeToDateTimeStringConverter;
 import io.biza.babelfish.common.jackson.OffsetDateTimeToFutureSecondsConverter;
 import io.biza.babelfish.common.jackson.SpaceListToListStringConverter;
 import io.biza.babelfish.oidc.enumerations.OAuth2TokenType;
@@ -66,13 +68,11 @@ public class TokenResponse {
   String refreshToken;
 
   /**
-   * Refresh token expiry time
-   * 
-   * NOTE: Conversion to Java OffsetDateTime internally for operations to be easier
+   * Refresh token expiry timestamp
    */
-  @JsonProperty("refresh_expires_in")
-  @JsonDeserialize(converter = FutureSecondsToOffsetDateTimeConverter.class)
-  @JsonSerialize(converter = OffsetDateTimeToFutureSecondsConverter.class)
+  @JsonProperty("refresh_expires_at")
+  @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
+  @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)  
   OffsetDateTime refreshExpiresAt;
   
   /**

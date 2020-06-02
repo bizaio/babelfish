@@ -7,6 +7,7 @@ public enum OAuth2ErrorCode {
   // @formatter:off
   INVALID_REQUEST("invalid_request"),
   UNAUTHORISED_CLIENT("unauthorized_client"),
+  ACCESS_DENIED("access_denied"),
   UNSUPPORTED_RESPONSE_TYPE("unsupported_response_type"),
   UNSUPPORTED_GRANT_TYPE("unsupported_grant_type"),
   INVALID_SCOPE("invalid_scope"),

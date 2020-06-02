@@ -4,7 +4,6 @@ import java.net.URI;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,9 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class InvalidRequestException extends Exception {
+public class UnsupportedResponseTypeException extends Exception {
 	private static final long serialVersionUID = 1L;
-	
 	private String errorDescription;
 	private URI errorUri;
 }

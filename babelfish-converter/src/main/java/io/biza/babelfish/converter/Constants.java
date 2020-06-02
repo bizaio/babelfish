@@ -1,7 +1,6 @@
 package io.biza.babelfish.converter;
 
 import io.biza.babelfish.cdr.support.BabelfishVersionedModel;
-import io.biza.babelfish.converter.models.VersionerConstants;
 import io.biza.babelfish.converter.orika.OrikaFactoryConfigurer;
 import io.biza.babelfish.converter.orika.OrikaFactoryConfigurerInterface;
 import io.biza.babelfish.converter.orika.converter.UUIDConverter;

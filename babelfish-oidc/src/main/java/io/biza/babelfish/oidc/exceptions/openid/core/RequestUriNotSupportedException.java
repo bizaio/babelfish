@@ -1,6 +1,8 @@
 package io.biza.babelfish.oidc.exceptions.openid.core;
 
+import lombok.Builder;
 
+@Builder
 public class RequestUriNotSupportedException extends Exception {
-  private static final long serialVersionUID = 1L;
+  
 }

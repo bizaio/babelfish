@@ -128,7 +128,7 @@
 			<groupId>io.biza</groupId>
 			<artifactId>babelfish-common</artifactId>
 			<version>${project.version}</version>
-		</dependency>
+		</dependency>	
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>

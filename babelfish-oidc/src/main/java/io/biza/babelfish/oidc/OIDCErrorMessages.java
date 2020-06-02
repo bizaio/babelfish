@@ -11,7 +11,10 @@ public class OIDCErrorMessages {
 	public static final String OAUTH2_INVALID_CLIENT = "Client authentication failed (e.g., unknown client, no client authentication included, or unsupported authentication method).";
 	public static final String OAUTH2_INVALID_GRANT = "The provided authorization grant (e.g., authorization code, resource owner credentials) or refresh token is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client.";
 	public static final String OAUTH2_UNAUTHORIZED_CLIENT = "The authenticated client is not authorized to use this authorization grant type.";
+	public static final String OAUTH2_ACCESS_DENIED = "The resource owner or authorization server denied the request";
+	public static final String OAUTH2_SERVER_ERROR = "Encountered an unknown server error";
 	public static final String OAUTH2_UNSUPPORTED_GRANT_TYPE = "The authorization grant type is not supported by the authorization server.";
+	public static final String OAUTH2_UNSUPPORTED_RESPONSE_TYPE = "The authorization server does not support the specified response type(s)";
 	public static final String OAUTH2_INVALID_SCOPE = "The requested scope is invalid, unknown, malformed, or exceeds the scope granted by the resource owner.";
 	public static final URI OAUTH2_ERROR_RESPONSE_URI = URI.create("https://tools.ietf.org/html/rfc6749#section-5.2");
 
