@@ -2,8 +2,13 @@ package io.biza.babelfish.oidc.payloads;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -15,8 +20,9 @@ import io.biza.babelfish.common.jackson.ListStringToSpaceListConverter;
 import io.biza.babelfish.common.jackson.OffsetDateTimeToDateTimeStringConverter;
 import io.biza.babelfish.common.jackson.OffsetDateTimeToFutureSecondsConverter;
 import io.biza.babelfish.common.jackson.SpaceListToListStringConverter;
-import io.biza.babelfish.oidc.enumerations.OAuth2TokenType;
+import io.biza.babelfish.oidc.enumerations.OAuth2TokenType; 
 import io.swagger.v3.oas.annotations.media.Schema;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -50,6 +56,12 @@ public class TokenResponse {
   @NotNull
   @Builder.Default
   OAuth2TokenType tokenType = OAuth2TokenType.BEARER;
+  
+  /**
+   * Refresh token to use (if available) to retrieve a new access token
+   */
+  @JsonProperty("refresh_token")
+  String refreshToken;
 
   /**
    * Access Token expiry time
@@ -60,26 +72,6 @@ public class TokenResponse {
   @JsonDeserialize(converter = FutureSecondsToOffsetDateTimeConverter.class)
   @JsonSerialize(converter = OffsetDateTimeToFutureSecondsConverter.class)
   OffsetDateTime expiresAt;
-
-  /**
-   * Refresh token to use (if available) to retrieve a new access token
-   */
-  @JsonProperty("refresh_token")
-  String refreshToken;
-
-  /**
-   * Refresh token expiry timestamp
-   */
-  @JsonProperty("refresh_expires_at")
-  @JsonSerialize(converter = OffsetDateTimeToDateTimeStringConverter.class)
-  @JsonDeserialize(converter = DateTimeStringToOffsetDateTimeConverter.class)  
-  OffsetDateTime refreshExpiresAt;
-  
-  /**
-   * ID Token
-   */
-  @JsonProperty("id_token")
-  String idToken;
   
   /**
    * List of scopes the access token has access to
@@ -91,5 +83,23 @@ public class TokenResponse {
   @JsonDeserialize(converter = SpaceListToListStringConverter.class)
   @JsonSerialize(converter = ListStringToSpaceListConverter.class)
   List<String> scope;
-
+  
+  /**
+   * ID Token
+   */
+  @JsonProperty("id_token")
+  String idToken;
+  
+  /**
+   * A catch all Map for all other attributes
+   */
+  @JsonAnySetter
+  @Getter(onMethod_ = {@JsonAnyGetter})
+  @Builder.Default
+  Map<String, Object> additionalAttributes = new HashMap<String, Object>();
+  
+  public TokenResponse addAttribute(String name, Object value) {
+	  this.additionalAttributes.put(name, value);
+	  return this;
+  }
 }
