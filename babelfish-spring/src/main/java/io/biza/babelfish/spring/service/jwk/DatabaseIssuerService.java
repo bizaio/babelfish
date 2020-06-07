@@ -139,6 +139,16 @@ public class DatabaseIssuerService implements IssuerService {
 		}
 
 	}
+	
+	@Override
+	public String encrypt(JWTClaims claims, JWKKeyType keyType, URI remoteJwks, JWEEncryptionAlgorithmType algorithm,
+			JWEEncryptionEncodingType encoding) throws KeyRetrievalException, EncryptionOperationException {
+		try {
+			return encrypt(mapper.writeValueAsString(claims), keyType, remoteJwks, algorithm, encoding);
+		} catch (JsonProcessingException e) {
+			throw EncryptionOperationException.builder().message("Encountered JSON translation error with supplied claims").build();
+		}
+	}
 
 	private JWKSet getSet(String issuer) throws NotInitialisedException {
 

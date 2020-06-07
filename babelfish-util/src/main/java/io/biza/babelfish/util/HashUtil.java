@@ -14,7 +14,7 @@ import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
 
 public class HashUtil {
 
-	public static String stateHash(String state, JWSSigningAlgorithmType algorithm)
+	public static String oidcHash(String state, JWSSigningAlgorithmType algorithm)
 			throws SigningVerificationException {
 		// This is pulled straight out of the OpenID Conformance Suite CalculateSHash
 		// Thanks to Joseph Heenan who I think is the original author.

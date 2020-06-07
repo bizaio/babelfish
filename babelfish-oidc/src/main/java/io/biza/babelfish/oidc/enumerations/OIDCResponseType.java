@@ -1,7 +1,5 @@
 package io.biza.babelfish.oidc.enumerations;
 
-import java.text.MessageFormat;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 

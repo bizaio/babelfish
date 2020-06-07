@@ -63,4 +63,9 @@ public enum JWKKeyType {
 		return fromNimbus(algorithm.toNimbus());
 	}
 
+	public static JWKKeyType fromAlgorithm(JWEEncryptionAlgorithmType encryptionAlgorithm) {
+		return fromNimbus(KeyType.forAlgorithm(encryptionAlgorithm.toNimbus()));
+
+	}
+
 }

@@ -23,6 +23,7 @@ import io.biza.babelfish.common.jackson.ListStringToSpaceListConverter;
 import io.biza.babelfish.common.jackson.OffsetDateTimeToEpochConverter;
 import io.biza.babelfish.common.jackson.SpaceListToListStringConverter;
 import io.biza.babelfish.oidc.Constants;
+import io.biza.babelfish.oidc.payloads.oidc.OIDCClaimMap;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -82,6 +83,9 @@ public class JWTClaims {
   @JsonSerialize(converter = ListStringToSpaceListConverter.class)
   @JsonDeserialize(converter = SpaceListToListStringConverter.class)
   List<String> scope;
+  
+  @JsonProperty("claims")
+  OIDCClaimMap claims;
   
   /**
    * A catch all Map for all other additional claims

@@ -24,7 +24,6 @@ import io.biza.babelfish.oidc.exceptions.oauth2.InvalidGrantException;
 import io.biza.babelfish.oidc.exceptions.oauth2.InvalidRequestException;
 import io.biza.babelfish.oidc.exceptions.oauth2.InvalidScopeException;
 import io.biza.babelfish.oidc.exceptions.oauth2.UnauthorisedClientException;
-import io.biza.babelfish.oidc.exceptions.oauth2.UnsupportedGrantTypeException;
 import io.biza.babelfish.oidc.exceptions.oauth2.UnsupportedResponseTypeException;
 import io.biza.babelfish.oidc.requests.OAuth2ErrorResponse;
 

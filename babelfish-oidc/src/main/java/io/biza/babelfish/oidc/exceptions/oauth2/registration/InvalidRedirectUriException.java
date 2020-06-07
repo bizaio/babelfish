@@ -3,7 +3,6 @@ package io.biza.babelfish.oidc.exceptions.oauth2.registration;
 import java.net.URI;
 
 import lombok.Builder;
-import lombok.Data;
 
 @Builder
 public class InvalidRedirectUriException extends Exception {

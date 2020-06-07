@@ -110,6 +110,9 @@ public interface IssuerService {
 	 */
 	public String encrypt(String payload, JWKKeyType keyType, URI remoteJwks, JWEEncryptionAlgorithmType algorithm,
 			JWEEncryptionEncodingType encoding) throws KeyRetrievalException, EncryptionOperationException;
+	
+	public String encrypt(JWTClaims claims, JWKKeyType keyType, URI remoteJwks, JWEEncryptionAlgorithmType algorithm,
+			JWEEncryptionEncodingType encoding) throws KeyRetrievalException, EncryptionOperationException;
 
 	/**
 	 * Given a set of JWTClaims and a recipient JWKS uri sign and encrypt the data

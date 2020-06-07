@@ -14,10 +14,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import io.biza.babelfish.common.jackson.DateTimeStringToOffsetDateTimeConverter;
 import io.biza.babelfish.common.jackson.FutureSecondsToOffsetDateTimeConverter;
 import io.biza.babelfish.common.jackson.ListStringToSpaceListConverter;
-import io.biza.babelfish.common.jackson.OffsetDateTimeToDateTimeStringConverter;
 import io.biza.babelfish.common.jackson.OffsetDateTimeToFutureSecondsConverter;
 import io.biza.babelfish.common.jackson.SpaceListToListStringConverter;
 import io.biza.babelfish.oidc.enumerations.OAuth2TokenType; 
