@@ -1,0 +1,47 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "babelfish-form-control": {
+      "projectType": "library",
+      "root": "projects/babelfish-form-control",
+      "sourceRoot": "projects/babelfish-form-control/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/babelfish-form-control/tsconfig.lib.json",
+            "project": "projects/babelfish-form-control/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/babelfish-form-control/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/babelfish-form-control/src/test.ts",
+            "tsConfig": "projects/babelfish-form-control/tsconfig.spec.json",
+            "karmaConfig": "projects/babelfish-form-control/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/babelfish-form-control/tsconfig.lib.json",
+              "projects/babelfish-form-control/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }},
+  "defaultProject": "babelfish-form-control"
+}

@@ -1,0 +1,62 @@
+= Quick Start
+
+Processing an input payload and validating it is as simple as:
+
+[source,java]
+----
+    ResponseBankingProductByIdV2 productResponse = new ObjectMapper().readValue(
+        "{\"links\":{\"self\":\"http://localhost/cds-au/v1/banking/products/073e7e70-357d-4858-8f52-92283f4edd6f\"},\"meta\":{},"
+        + "\"data\":{\"productId\":\"073e7e70-357d-4858-8f52-92283f4edd6f\",\"lastUpdated\":\"2020-02-03T06:32:27Z\","
+        + "\"productCategory\":\"TRANS_AND_SAVINGS_ACCOUNTS\",\"name\":\"Example Product\",\"description\":\"Example Product Description\","
+        + "\"brand\":\"ACME\",\"brandName\":\"ACME Bank\",\"isTailored\":false}}",
+        ResponseBankingProductByIdV2.class);
+----
+
+Generating a compliant payload is as simple as:
+
+[source,java]
+----
+    ResponseBankingProductByIdV2 productResponse =
+        ResponseBankingProductByIdV2.builder()
+            .links(LinksV1.builder().self(URI.create(
+                "http://localhost/cds-au/v1/banking/products/073e7e70-357d-4858-8f52-92283f4edd6f"))
+                .build())
+            .meta(MetaV1.builder().build())
+            .data(BankingProductDetailV2.builder().productId("073e7e70-357d-4858-8f52-92283f4edd6f")
+                .lastUpdated(OffsetDateTime.now())
+                .productCategory(BankingProductCategory.TRANS_AND_SAVINGS_ACCOUNTS)
+                .name("Example Product").description("Example Product Description").brand("ACME")
+                .tailored(false).build())
+            .build();
+    Set<ConstraintViolation<ResponseBankingProductByIdV2>> productResponseValidation =
+        Validation.buildDefaultValidatorFactory().getValidator().validate(productResponse);
+    if (productResponseValidation.isEmpty()) {
+      System.out.println(new ObjectMapper().setSerializationInclusion(Include.NON_ABSENT).writeValueAsString(productResponse));
+    } else {
+      System.out.println(
+          "Object failed validation with errors of: " + productResponseValidation.toString());
+    }
+----
+
+Which yields:
+
+[source,json]
+----
+{
+   "data":{
+      "productId":"073e7e70-357d-4858-8f52-92283f4edd6f",
+      "lastUpdated":"2020-02-05T10:02:25.26832+11:00",
+      "productCategory":"TRANS_AND_SAVINGS_ACCOUNTS",
+      "name":"Example Product",
+      "description":"Example Product Description",
+      "brand":"ACME",
+      "isTailored":false
+   },
+   "links":{
+      "self":"http://localhost/cds-au/v1/banking/products/073e7e70-357d-4858-8f52-92283f4edd6f"
+   },
+   "meta":{
+
+   }
+}
+----

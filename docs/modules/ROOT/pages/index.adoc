@@ -1,0 +1,72 @@
+= Babelfish
+
+image:https://img.shields.io/maven-central/v/io.biza/babelfish-cdr?label=latest%20release[link=https://search.maven.org/artifact/io.biza/babelfish-cdr] image:https://img.shields.io/nexus/s/io.biza/babelfish-cdr?label=latest%20snapshot&server=https%3A%2F%2Foss.sonatype.org[link=https://search.maven.org/search?q=g:io.biza%20AND%20a:babelfish*] image:https://img.shields.io/badge/Consumer%20Data%20Standards-v1.2.0-success[link=https://consumerdatastandardsaustralia.github.io/standards] image:https://img.shields.io/travis/com/bizaio/babelfish/develop?label=develop%20build[link=https://travis-ci.com/bizaio/babelfish] image:https://img.shields.io/travis/com/bizaio/babelfish/master?label=master%20build[link=https://travis-ci.com/bizaio/babelfish] image:https://img.shields.io/github/issues/bizaio/babelfish[link=https://github.com/bizaio/babelfish/issues] image:https://img.shields.io/github/license/bizaio/babelfish[]
+
+The Babelfish CDR Library is a Java based Maven artifact for the efficient processing of JSON payloads associated with the Australian Consumer Data Right (aka *open banking*). It provides the ability to parse, manipulate, generate and validate compliant payloads associated with the Consumer Data Standards. It is annotated with industry standard link:https://github.com/FasterXML/jackson[Jackson] and link:https://github.com/swagger-api/swagger-core[OpenAPI (*fka Swagger*)] annotations to enable smooth integration into downstream projects.
+
+Babelfish CDR is currently developed and maintained by link:https://www.biza.io[Biza.io].
+
+
+== Features
+
+- Jackson mappings for **all payloads** defined within the link:https://consumerdatastandardsaustralia.github.io/standards[Consumer Data Standards]
+- On demand conversion **between payload versions** powered by link:https://github.com/orika-mapper/orika[Orika Mapper]
+- **All enumerations** defined within link:https://consumerdatastandardsaustralia.github.io/standards[Consumer Data Standards] with **human readable descriptions** for presentation layer
+- Serialisation and Deserialisation to **strong Java types** for all link:https://consumerdatastandardsaustralia.github.io/standards/#common-field-types[Common Field Types]
+- Java Validation (JSR-303) rules for all **required attributes**, **link:https://consumerdatastandardsaustralia.github.io/standards/#pagination[Pagination]** and **link:https://consumerdatastandardsaustralia.github.io/standards/#product-amp-account-components[Product & Account Components]**
+- Fluent Builders for all payloads link:https://projectlombok.org/[powered by Lombok]
+- link:https://github.com/swagger-api/swagger-core[OpenAPI 3 (fka Swagger)] annotations for all payloads suitable and link:https://github.com/bizaio/deepthought[tested] for Spring Framework and link:https://springdoc.org[Springdoc]
+- **Reasonably** well tested, over **350 validation rules** and nearly **300 tests** (but there is always room for more!)
+- Lookup and Validation for **Merchant Category Codes**, **BSB Numbers** and **SWIFT Routing Codes**
+
+== Usage
+
+This library is available on link:https://search.maven.org/artifact/io.biza/babelfish-cdr[Maven Central] and therefore can be utilised by adding the following lines to your `pom.xml`:
+```xml
+<dependency>
+    <groupId>io.biza</groupId>
+    <artifactId>babelfish-cdr</artifactId>
+    <version>1.2.4</version>
+</dependency>
+```
+
+== Compatibility
+
+The Babelfish CDR library tries to provide full coverage of payloads defined within the link:https://consumerdatastandardsaustralia.github.io/standards[Consumer Data Standards]. While we try to align our version numbers to those of the Standards unfortunately the DSB has chosen to use all of the *x.y.z* versioning of the semantic versioning scheme. Consequently the following table outlines the alignment between Babelfish versions and the Standards:
+
+|===
+| Babelfish CDR Version                  | Release Date | CDS Spec Compatibility     | Notes                                                             | Status
+| 1.2.6-SNAPSHOT (**current develop**) | Regular      | 1.2.0                      | Snapshot Development Release                                      | Active Development
+| 1.2.5-SNAPSHOT                       | 2020-03-25   | 1.2.0                      | Snapshot Development Release                                      | Deprecated
+| 1.2.4 (**current stable**)           | 2020-02-25   | 1.2.0                      | link:https://github.com/bizaio/babelfish-cdr/tree/v1.2.4[tag v1.2.4] | Supported
+| 1.2.3-SNAPSHOT                       | 2020-02-25   | 1.2.0                      | Snapshot Development Release                                      | Deprecated
+| 1.2.2                                | 2020-02-12   | 1.2.0                      | link:https://github.com/bizaio/babelfish-cdr/tree/v1.2.2[tag v1.2.2] | Deprecated
+| 1.2.1-SNAPSHOT                       | 2020-02-12   | 1.2.0                      | Snapshot Development Release                                      | Deprecated
+| 1.2.0                                | 2020-02-05   | 1.2.0                      | link:https://github.com/bizaio/babelfish-cdr/tree/v1.2.0[tag v1.2.0] | Deprecated
+| 1.0.0                                | 2020-02-04   | 1.0.0                      | Initial Release, **do not use**                                   | Deprecated
+|===
+
+## Projects
+
+`babelfish-cdr` is utilised in a number of projects:
+
+- link:https://github.com/bizaio/deepthought[Deep Thought]
+- link:https://github.com/bizaio/electronic-thumb[Electronic Thumb]
+- A Major Identity Software Vendors Sandbox
+
+If you are using `babelfish-cdr` in your project drop us an mailto:hello@biza.io[email] and we will add it here.
+
+## Support
+
+link:https://biza.io/[Biza Pty Ltd] are currently the primary maintainers of this software.
+
+We welcome bug reports via link:https://github.com/bizaio/babelfish/[GitHub Issues] or if you prefer via mailto:hello@biza.io[email].
+
+If you are looking for commercial support for this library please contact us via mailto:hello@biza.io[email].
+
+== License
+
+GNU Lesser General Public License v3.0 2020 link:https://biza.io/[Biza Pty Ltd].
+
+Please have a look at the link:https://github.com/bizaio/babelfish/blob/master/LICENSE.md[LICENSE.md] for more details.
+

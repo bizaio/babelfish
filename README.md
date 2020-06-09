@@ -1,5 +1,10 @@
 # Babelfish CDR 
 
+## Metapackage Conversion in Progress
+
+**NB:** We are converting Babelfish CDR to a Metapackage with multiple components, some links might 404 at the moment
+
+
 [![Maven Central](https://img.shields.io/maven-central/v/io.biza/babelfish-cdr?label=latest%20release)](https://search.maven.org/artifact/io.biza/babelfish-cdr) ![Nexus Latest Snapshot](https://img.shields.io/nexus/s/io.biza/babelfish-cdr?label=latest%20snapshot&server=https%3A%2F%2Foss.sonatype.org) [![Consumer Data Standards v1.2.0](https://img.shields.io/badge/Consumer%20Data%20Standards-v1.2.0-success)](https://consumerdatastandardsaustralia.github.io/standards)
 
 [![develop build](https://img.shields.io/travis/com/bizaio/babelfish/develop?label=develop%20build)](https://travis-ci.com/bizaio/babelfish) [![master build](https://img.shields.io/travis/com/bizaio/babelfish/master?label=master%20build)](https://travis-ci.com/bizaio/babelfish) [![GitHub issues](https://img.shields.io/github/issues/bizaio/babelfish)](https://github.com/bizaio/babelfish/issues) ![GitHub](https://img.shields.io/github/license/bizaio/babelfish) 
