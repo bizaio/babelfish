@@ -6,4 +6,14 @@ jdk:
 cache:
   directories:
     - $HOME/.m2
+    - $HOME/.sonar/cache
+
+addons:
+  sonarcloud:
+    organization: "bizaio"
+    token:
+      secure: "RyWYPtX3bOe5ZlFfZNuf2Gnzec2KdlgThP0t4TgRbbySRXwOPkYzKlK0hd49Jm1FlFXPV+Yzsz6qHHL5lWx2YVHdN/YcQ0e545a92zvNFTIptLpALWwxPl4O5ib+0g0VkTFiIcgFQMzdIrMe7V7OhlOCuyrKmddjO//BQ2kFpG66texgCniznleOcR5Fw3Vnv2EUQxHPSkJ3tEFUsbsuX77RmcuoZTB6A/Uiiz+QO3+KCPsFC16/qDFkqSJdJbsU56TqVJNYsMZUQICSyepmCJ6p09hwz1jntzCowmhXnRrsxseLJVdAovwp6vORHpeZwCRY5bNR0MJsvG1RFbPwMF2pvAmo1A8mzdwxhhLzbrVofb+RrUHWuuvUidh80amwusCD7+zqfrS1ivsePTN2qNIkxRi5ylb8vP9V3yqgUJC4ZnT+VrNlHyNpq3bOzOh59tRems4QM6w4RIK4NTCK40zZrdE3kp6FZnUNTZYK0up71sEeRFx8P9H43orK8ZEviZxTUbs92RC9AwUhlmE1HUnZ9o6TnaIKXnljs6ZzVI2h2/znyjOSOUhKFxTierx5OKUl4alN7OFX7dyMAgviIOSXax/7d7z9H5kZW0H9FmgyysEuLqiI0Gnu4g4F94WPYgJZYoyEo56XOSvKYlKyZo6nG9lfflFIlpLsPSyxmoc="
+
+script:
+  - mvn clean verify sonar:sonar -Pcoverage 
 
