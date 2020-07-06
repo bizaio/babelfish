@@ -1,4 +1,4 @@
-package io.biza.babelfish.spring.service.config;
+package io.biza.babelfish.spring.service.config.manager;
 
 import java.text.MessageFormat;
 import java.util.HashMap;
@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.biza.babelfish.common.exceptions.NotFoundException;
 import io.biza.babelfish.common.exceptions.NotInitialisedException;
-import io.biza.babelfish.interfaces.ConfigService;
+import io.biza.babelfish.interfaces.ConfigManagerService;
 import io.biza.babelfish.spring.Messages;
 import io.biza.babelfish.spring.persistence.model.config.ConfigData;
 import io.biza.babelfish.spring.persistence.repository.config.ConfigRepository;
@@ -26,11 +26,11 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-@ConditionalOnProperty(name = "babelfish.service.ConfigService", havingValue = "DatabaseConfigService", matchIfMissing = true)
+@ConditionalOnProperty(name = "babelfish.service.config-service", havingValue = "DatabaseConfigService", matchIfMissing = true)
 @EntityScan(basePackageClasses = ConfigData.class)
 @EnableJpaRepositories(basePackageClasses = ConfigRepository.class)
 @Transactional
-public class DatabaseConfigService implements ConfigService {
+public class DatabaseConfigService implements ConfigManagerService {
 
 	@Autowired
 	ObjectMapper mapper;

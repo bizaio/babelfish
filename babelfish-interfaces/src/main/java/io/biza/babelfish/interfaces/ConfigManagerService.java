@@ -6,7 +6,7 @@ import java.util.UUID;
 import io.biza.babelfish.common.exceptions.NotFoundException;
 import io.biza.babelfish.common.exceptions.NotInitialisedException;
 
-public interface ConfigService {
+public interface ConfigManagerService {
 
 	/**
 	 * Given a configuration key and an implied type parameter retrieve a config

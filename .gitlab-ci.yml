@@ -1,0 +1,16 @@
+cache:
+  paths:
+    - .m2/repository
+
+stages:
+  - build
+  - test
+  - publish
+  - deploy
+
+include:
+  - project: 'gitlab-support/gitlab-templates'
+    file: 'Maven.gitlab-ci.yml'
+  - project: 'gitlab-support/gitlab-templates'
+    file: 'Common.gitlab-ci.yml'
+

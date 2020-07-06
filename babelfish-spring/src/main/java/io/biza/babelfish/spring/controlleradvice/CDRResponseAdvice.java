@@ -26,6 +26,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import io.biza.babelfish.common.exceptions.PayloadConversionException;
 import io.biza.babelfish.common.exceptions.UnsupportedVersionException;
 import io.biza.babelfish.converter.support.BabelfishVersioner;
+import io.biza.babelfish.spring.Variables;
 import io.biza.babelfish.spring.util.CDRVersioner;
 import lombok.extern.slf4j.Slf4j;
 
@@ -53,8 +54,8 @@ public class CDRResponseAdvice implements ResponseBodyAdvice<Object> {
     /**
      * Add Interaction Id
      */
-    response.getHeaders().put("x-fapi-interaction-id", request.getHeaders()
-        .getOrDefault("x-fapi-interaction-id", List.of(UUID.randomUUID().toString())));
+    response.getHeaders().put(Variables.X_FAPI_INTERACTION_ID, request.getHeaders()
+        .getOrDefault(Variables.X_FAPI_INTERACTION_ID, List.of(UUID.randomUUID().toString())));
 
     /**
      * Check if we should be converting

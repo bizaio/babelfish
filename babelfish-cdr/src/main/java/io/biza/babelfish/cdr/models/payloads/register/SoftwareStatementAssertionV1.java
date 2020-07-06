@@ -123,7 +123,6 @@ public class SoftwareStatementAssertionV1 {
       description = "URI string that references the location of the Software Product consent revocation endpoint")
   URI revocationUri;
   
-  
   @JsonProperty("software_id")
   @Schema(
       description = "String representing a unique identifier assigned by the ACCC Register and used by registration endpoints to identify the software product to be dynamically registered.")

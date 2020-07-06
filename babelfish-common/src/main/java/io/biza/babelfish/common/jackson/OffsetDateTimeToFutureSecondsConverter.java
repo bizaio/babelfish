@@ -22,9 +22,9 @@ public class OffsetDateTimeToFutureSecondsConverter extends StdConverter<OffsetD
   @Override
   public Long convert(OffsetDateTime value) {
     if (value == null)
-      return Long.valueOf(0);
+      return 0L;
     
-    long expirySeconds = ChronoUnit.SECONDS.between(OffsetDateTime.now(), value);
+    long expirySeconds = OffsetDateTime.now().until(value, ChronoUnit.SECONDS);
     
     return expirySeconds > 0 ? expirySeconds : 0;
     

@@ -23,21 +23,26 @@ import io.biza.babelfish.common.exceptions.LabelValueEnumValueNotSupportedExcept
 import io.biza.babelfish.common.exceptions.PayloadConversionException;
 import io.biza.babelfish.common.exceptions.UnsupportedVersionException;
 import io.biza.babelfish.spring.Messages;
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
+@Slf4j
 public class CdrExceptionControllerAdvice {
 
 	@ExceptionHandler(AttributeNotSupportedException.class)
 	public ResponseEntity<Object> handleAttributeNotSupported(HttpServletRequest req,
 			AttributeNotSupportedException ex) {
+		LOG.debug("Attribute not supported", ex);
 		return ResponseEntity.badRequest()
 				.body(ResponseErrorListV1.builder().errors(List.of(io.biza.babelfish.cdr.Constants.ERROR_ATTRIBUTE_NOT_SUPPORTED)).build());
 	}
 
 	@ExceptionHandler(LabelValueEnumValueNotSupportedException.class)
 	public ResponseEntity<Object> handleInvalidEnum(HttpServletRequest req, AttributeNotSupportedException ex) {
+		LOG.debug("LabelValueEnumValue not supported", ex);
 		return ResponseEntity.badRequest()
 				.body(ResponseErrorListV1.builder().errors(List.of(io.biza.babelfish.cdr.Constants.ERROR_INVALID_ENUM_VALUE)).build());
 	}
@@ -45,18 +50,21 @@ public class CdrExceptionControllerAdvice {
 	@ExceptionHandler(PayloadConversionException.class)
 	public ResponseEntity<Object> handlePayloadConversionFailure(HttpServletRequest req,
 			PayloadConversionException ex) {
+		LOG.debug("PayloadConversionException encountered", ex);
 		return ResponseEntity.badRequest().body(
 				ResponseErrorListV1.builder().errors(List.of(io.biza.babelfish.cdr.Constants.ERROR_PAYLOAD_CONVERSION_FAILURE)).build());
 	}
 
 	@ExceptionHandler(UnsupportedVersionException.class)
 	public ResponseEntity<Object> handleUnsupportedPayload(HttpServletRequest req, UnsupportedVersionException ex) {
+		LOG.debug("UnsupportedVersionException encountered", ex);
 		return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
 				.body(ResponseErrorListV1.builder().errors(List.of(io.biza.babelfish.cdr.Constants.ERROR_UNSUPPORTED_VERSION)).build());
 	}
 
 	@ExceptionHandler(IllegalArgumentException.class)
 	public ResponseEntity<Object> handleIllegalArgumentException(HttpServletRequest req, IllegalArgumentException ex) {
+		LOG.debug("IllegalArgumentException encountered", ex);
 		return ResponseEntity
 				.status(HttpStatus.BAD_REQUEST).body(
 						ResponseErrorListV1.builder()

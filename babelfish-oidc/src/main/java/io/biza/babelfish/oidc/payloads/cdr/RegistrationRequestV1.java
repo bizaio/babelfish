@@ -3,6 +3,8 @@ package io.biza.babelfish.oidc.payloads.cdr;
 import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Set;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -13,12 +15,15 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.biza.babelfish.common.jackson.EpochToOffsetDateTimeConverter;
 import io.biza.babelfish.common.jackson.OffsetDateTimeToEpochConverter;
+import io.biza.babelfish.common.jackson.SetStringToSpaceListConverter;
+import io.biza.babelfish.common.jackson.SpaceListToSetStringConverter;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionEncodingType;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.OIDCApplicationType;
 import io.biza.babelfish.oidc.enumerations.OIDCAuthMethod;
 import io.biza.babelfish.oidc.enumerations.OIDCGrantType;
+import io.biza.babelfish.oidc.enumerations.OIDCResponseType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -77,7 +82,7 @@ public class RegistrationRequestV1 {
   @NotNull
   @NotEmpty
   @Schema(description = "Array of redirection URI strings for use in redirect-based flows, otherwise derived from SSA")
-  List<URI> redirectUris;
+  Set<URI> redirectUris;
 
   @JsonProperty("token_endpoint_auth_signing_alg")
   @NotNull
@@ -93,13 +98,13 @@ public class RegistrationRequestV1 {
   @NotEmpty
   @Schema(
       description = "Array of OAuth 2.0 grant type strings that the client can use at the token endpoint")
-  List<OIDCGrantType> grantTypes;
+  Set<OIDCGrantType> grantTypes;
 
   @JsonProperty("response_types")
   @NotNull
   @Schema(
       description = "Array of the OAuth 2.0 response type strings that the client can use at the authorization endpoint.")
-  List<String> responseTypes;
+  Set<OIDCResponseType> responseTypes;
 
   @JsonProperty("application_type")
   @NotNull
@@ -132,5 +137,12 @@ public class RegistrationRequestV1 {
   @Schema(description = "The Software Statement Assertion")
   @NotNull
   String ssa;
+  
+  @JsonProperty("scope")
+  @Schema(
+      description = "String containing a space-separated list of scope values that the client is requesting access to.")
+  @JsonDeserialize(converter = SpaceListToSetStringConverter.class)
+  @JsonSerialize(converter = SetStringToSpaceListConverter.class)
+  Set<String> scope;
 
 }

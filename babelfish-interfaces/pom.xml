@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>io.biza</groupId>
 		<artifactId>babelfish</artifactId>
-		<version>1.2.7-SNAPSHOT</version>
+		<version>1.2.9-SNAPSHOT</version>
 	</parent>
 	<artifactId>babelfish-interfaces</artifactId>
 	<name>Babelfish: Implementation Interfaces</name>
@@ -15,19 +15,16 @@
 		<dependency>
 			<groupId>io.biza</groupId>
 			<artifactId>babelfish-cdr</artifactId>
-			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.biza</groupId>
 			<artifactId>babelfish-oidc</artifactId>
-			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.biza</groupId>
 			<artifactId>babelfish-util</artifactId>
-			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

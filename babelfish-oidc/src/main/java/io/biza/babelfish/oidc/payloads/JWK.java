@@ -18,11 +18,13 @@ import io.biza.babelfish.oidc.enumerations.JWKKeyOps;
 import io.biza.babelfish.oidc.enumerations.JWKKeyType;
 import io.biza.babelfish.oidc.enumerations.JWKPublicKeyUse;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.ToString;
 
 @Valid
 @Schema(description = "JSON Web Key")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@ToString
 public class JWK {
 
   /**

@@ -6,7 +6,6 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.domain.Sort;
@@ -49,13 +48,14 @@ import io.biza.babelfish.spring.persistence.model.issuer.IssuerKeyData;
 import io.biza.babelfish.spring.persistence.repository.issuer.IssuerKeyRepository;
 import io.biza.babelfish.spring.persistence.repository.issuer.IssuerRepository;
 import io.biza.babelfish.spring.persistence.specifications.IssuerKeySpecifications;
+import io.biza.babelfish.spring.service.config.properties.BabelfishProperties;
 import io.biza.babelfish.util.MessageUtil;
 import io.biza.babelfish.util.NimbusUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-@ConditionalOnProperty(name = "babelfish.service.IssuerService", havingValue = "DatabaseIssuerService", matchIfMissing = true)
+@ConditionalOnProperty(name = "babelfish.service.issuer-service", havingValue = "DatabaseIssuerService", matchIfMissing = true)
 @EntityScan(basePackageClasses = IssuerData.class)
 @EnableJpaRepositories(basePackageClasses = IssuerRepository.class)
 public class DatabaseIssuerService implements IssuerService {
@@ -65,9 +65,9 @@ public class DatabaseIssuerService implements IssuerService {
 
 	@Autowired
 	IssuerKeyRepository issuerKeyRepository;
-
-	@Value("${babelfish.jwk.key-size:2048}")
-	Integer KEY_SIZE;
+	
+	@Autowired
+	BabelfishProperties properties;
 
 	@Autowired
 	ObjectMapper mapper;
@@ -93,7 +93,7 @@ public class DatabaseIssuerService implements IssuerService {
 	@Override
 	public String sign(String name, JWKKeyType keyType, JWTClaims claims, JWSSigningAlgorithmType algorithm)
 			throws SigningOperationException, NotInitialisedException {
-		JWK jwk = getKey(name, keyType, algorithm, JWKPublicKeyUse.SIGN);
+		JWK jwk = getKey(name, keyType, algorithm, null, JWKPublicKeyUse.SIGN);
 		JWSSigner signer;
 		try {
 			signer = new RSASSASigner(jwk.toRSAKey().toPrivateKey());
@@ -139,14 +139,15 @@ public class DatabaseIssuerService implements IssuerService {
 		}
 
 	}
-	
+
 	@Override
 	public String encrypt(JWTClaims claims, JWKKeyType keyType, URI remoteJwks, JWEEncryptionAlgorithmType algorithm,
 			JWEEncryptionEncodingType encoding) throws KeyRetrievalException, EncryptionOperationException {
 		try {
 			return encrypt(mapper.writeValueAsString(claims), keyType, remoteJwks, algorithm, encoding);
 		} catch (JsonProcessingException e) {
-			throw EncryptionOperationException.builder().message("Encountered JSON translation error with supplied claims").build();
+			throw EncryptionOperationException.builder()
+					.message("Encountered JSON translation error with supplied claims").build();
 		}
 	}
 
@@ -175,7 +176,8 @@ public class DatabaseIssuerService implements IssuerService {
 
 	}
 
-	private JWK getKey(String issuer, JWKKeyType keyType, JWSSigningAlgorithmType algorithm, JWKPublicKeyUse use)
+	private JWK getKey(String issuer, JWKKeyType keyType, JWSSigningAlgorithmType signingAlg,
+			JWEEncryptionAlgorithmType encryptionAlg, JWKPublicKeyUse use)
 			throws NotInitialisedException, SigningOperationException {
 
 		/**
@@ -191,7 +193,9 @@ public class DatabaseIssuerService implements IssuerService {
 				.findAll(
 						IssuerKeySpecifications.issuer(issuer).and(IssuerKeySpecifications.keyType(keyType))
 								.and(IssuerKeySpecifications.keyUse(use)
-										.and(IssuerKeySpecifications.signingAlgorithm(algorithm)))
+										.and(use.equals(JWKPublicKeyUse.SIGN)
+												? IssuerKeySpecifications.signingAlgorithm(signingAlg)
+												: IssuerKeySpecifications.signingAlgorithm(encryptionAlg)))
 								.and(IssuerKeySpecifications.enabled(true)),
 						Sort.by(List.of(Order.desc("creationTime"))));
 
@@ -200,11 +204,15 @@ public class DatabaseIssuerService implements IssuerService {
 				return JWK.parse(keyData.get(0).keyContent());
 			} else {
 				// No key found for the specified use and algorithm
-				throw NotInitialisedException.builder().build();
+				throw NotInitialisedException.builder()
+						.message(MessageUtil.format(
+								"Unable to locate an enabled key for issuer: {}, type: {}, use: {}, algorithm: {}",
+								issuer, keyType, use, signingAlg))
+						.build();
 			}
 		} catch (ParseException e) {
 			throw SigningOperationException.builder()
-					.message(MessageUtil.format(Messages.ENCOUNTERED_PARSE_EXCEPTION_WITH_ALG_USE, algorithm, use, e))
+					.message(MessageUtil.format(Messages.ENCOUNTERED_PARSE_EXCEPTION_WITH_ALG_USE, signingAlg, use, e))
 					.build();
 		}
 	}
@@ -221,7 +229,7 @@ public class DatabaseIssuerService implements IssuerService {
 			RSAKey key;
 			if (use.equals(JWKPublicKeyUse.SIGN)) {
 				try {
-					key = new RSAKeyGenerator(KEY_SIZE).keyUse(use.toNimbus()).keyIDFromThumbprint(true)
+					key = new RSAKeyGenerator(properties.issuer().defaultKeySize()).keyUse(use.toNimbus()).keyIDFromThumbprint(true)
 							.algorithm(signingAlgorithm.toNimbus()).generate();
 				} catch (JOSEException e) {
 					LOG.error("Encountered JOSE Exception while performing initialisation", e);
@@ -230,7 +238,7 @@ public class DatabaseIssuerService implements IssuerService {
 
 			} else if (use.equals(JWKPublicKeyUse.ENCRYPT)) {
 				try {
-					key = new RSAKeyGenerator(KEY_SIZE).keyUse(use.toNimbus()).keyIDFromThumbprint(true)
+					key = new RSAKeyGenerator(properties.issuer().defaultKeySize()).keyUse(use.toNimbus()).keyIDFromThumbprint(true)
 							.algorithm(encryptionAlgorithm.toNimbus()).generate();
 				} catch (JOSEException e) {
 					LOG.error("Encountered JOSE Exception while performing initialisation", e);
@@ -283,4 +291,16 @@ public class DatabaseIssuerService implements IssuerService {
 	public Boolean existsIssuer(String issuer) {
 		return issuerRepository.existsByIssuer(issuer);
 	}
+
+	@Override
+	public Boolean hasKey(String issuer, JWKKeyType type, JWKPublicKeyUse use, JWSSigningAlgorithmType signingAlgorithm,
+			JWEEncryptionAlgorithmType encryptionAlgorithm) {
+		try {
+			getKey(issuer, type, signingAlgorithm, encryptionAlgorithm, use);
+			return true;
+		} catch (NotInitialisedException | SigningOperationException e) {
+			return false;
+		}
+	}
+
 }

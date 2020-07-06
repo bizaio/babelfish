@@ -23,7 +23,7 @@ public class HashUtil {
 		try {
 			Matcher matcher = Pattern.compile("^(HS|RS|ES|PS)(256|384|512)$").matcher(algorithm.toString());
 			if (!matcher.matches()) {
-				throw SigningVerificationException.builder().message(Messages.UNABLE_TO_IDENTIFY_MESSAGE_DIGESTER)
+				throw SigningVerificationException.builder().errorDescription(Messages.UNABLE_TO_IDENTIFY_MESSAGE_DIGESTER)
 						.build();
 			}
 
@@ -32,7 +32,7 @@ public class HashUtil {
 
 		} catch (NoSuchAlgorithmException e) {
 			throw SigningVerificationException.builder()
-					.message(MessageUtil.format(Messages.UNSUPPORTED_DIGEST_FOR_ALGORITHM, algorithm.toString()))
+					.errorDescription(MessageUtil.format(Messages.UNSUPPORTED_DIGEST_FOR_ALGORITHM, algorithm.toString()))
 					.build();
 		}
 

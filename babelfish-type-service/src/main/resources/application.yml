@@ -1,11 +1,13 @@
 babelfish:
   version: 1.2.6-SNAPSHOT
+  type-service:
+    enabled: true
 server:
   servlet:
     context-path: /dio-au
   port: 8080
 spring:
    jackson:
-     default-property-inclusion: non_empty
+     default-property-inclusion: NON_EMPTY
 
    

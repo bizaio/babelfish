@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>io.biza</groupId>
 		<artifactId>babelfish</artifactId>
-		<version>1.2.7-SNAPSHOT</version>
+		<version>1.2.9-SNAPSHOT</version>
 	</parent>
 	<artifactId>babelfish-spring</artifactId>
 	<name>Babelfish: Spring</name>
@@ -16,7 +16,6 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>${build-helper-maven-plugin.version}</version>
 				<executions>
 					<execution>
 						<phase>generate-sources</phase>
@@ -32,6 +31,36 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>com.google.code.maven-replacer-plugin</groupId>
+					<artifactId>maven-replacer-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>replace-version-number</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>replace</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<basedir>${project.basedir}/src/main/java</basedir>
+						<includes>
+							<include>io/biza/babelfish/spring/service/config/properties/BabelfishProperties.java</include>
+						</includes>
+						<preserveDir>true</preserveDir>
+						<replacements>
+							<replacement>
+								<token>version = ".*"</token>
+								<value>version = "Biza.io Babelfish ${project.version}"</value>
+							</replacement>
+						</replacements>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 	<dependencies>
@@ -65,33 +94,27 @@
 		<dependency>
 			<groupId>io.biza</groupId>
 			<artifactId>babelfish-oidc</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.biza</groupId>
 			<artifactId>babelfish-cdr</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.biza</groupId>
 			<artifactId>babelfish-interfaces</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.biza</groupId>
 			<artifactId>babelfish-util</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.biza</groupId>
 			<artifactId>babelfish-converter</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.nimbusds</groupId>
 			<artifactId>nimbus-jose-jwt</artifactId>
-			<version>${nimbus-jose-jwt.version}</version>
-		</dependency>
+			</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -100,6 +123,11 @@
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>

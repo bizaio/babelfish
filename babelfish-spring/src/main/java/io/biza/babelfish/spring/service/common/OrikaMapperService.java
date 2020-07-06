@@ -14,70 +14,51 @@ package io.biza.babelfish.spring.service.common;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
-import java.util.List;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
 import io.biza.babelfish.converter.orika.OrikaFactoryConfig;
 import io.biza.babelfish.converter.orika.OrikaFactoryConfigurer;
+import io.biza.babelfish.spring.service.config.properties.BabelfishProperties;
 
 @Service
 public class OrikaMapperService extends ConfigurableMapper implements ApplicationContextAware {
 
-  @Value("${babelfish.orika.packageBase:#{null}}")
-  List<String> packageBase;
+	@Autowired
+	BabelfishProperties properties;
 
-  @Value("${babelfish.orika.implementingClass:#{null}}")
-  String implementingClass;
+	@SuppressWarnings("unused")
+	private ApplicationContext applicationContext;
+	private OrikaFactoryConfigurer configurer;
 
-  @Value("${babelfish.orika.selfMappingAnnotation:#{null}}")
-  String selfMappingAnnotation;
+	public OrikaMapperService() {
+		super(false);
+		configurer = new OrikaFactoryConfigurer();
+	}
 
-  @Value("${babelfish.orika.converterPackage:#{null}}")
-  List<String> converterPackage;
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.applicationContext = applicationContext;
+		init();
+	}
 
-  @Value("${babelfish.orika.bidirectionalClass:#{null}}")
-  String bidirectionalClass;
+	@Override
+	protected void configureFactoryBuilder(DefaultMapperFactory.Builder factoryBuilder) {
+		configurer.configureFactoryBuilder(factoryBuilder);
+	}
 
-  @SuppressWarnings("unused")
-  private ApplicationContext applicationContext;
-  private OrikaFactoryConfigurer configurer;
-
-  public OrikaMapperService() {
-    super(false);
-    configurer = new OrikaFactoryConfigurer();
-  }
-
-  @Override
-  public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-    this.applicationContext = applicationContext;
-    init();
-  }
-
-  @Override
-  protected void configureFactoryBuilder(DefaultMapperFactory.Builder factoryBuilder) {
-    configurer.configureFactoryBuilder(factoryBuilder);
-  }
-
-  @Override
-  protected void configure(MapperFactory factory) {
-    OrikaFactoryConfig config = OrikaFactoryConfig.builder().build();
-    if (packageBase != null && packageBase.size() > 0)
-      config.packageBase(packageBase);
-    if (StringUtils.isNotBlank(implementingClass))
-      config.implementingClass(implementingClass);
-    if (StringUtils.isNotBlank(selfMappingAnnotation))
-      config.selfMappingAnnotation(selfMappingAnnotation);
-    if (converterPackage != null && converterPackage.size() > 0)
-      config.converterPackage(converterPackage);
-    if (StringUtils.isNotBlank(bidirectionalClass))
-      config.bidirectionalClass(bidirectionalClass);
-
-    configurer.configureMapperFactory(factory, config);
-  }
+	@Override
+	protected void configure(MapperFactory factory) {
+		OrikaFactoryConfig config = OrikaFactoryConfig.builder().build();
+		config.packageBase(properties.orika().packageBase());
+		config.implementingClass(properties.orika().implementingClass());
+		config.selfMappingAnnotation(properties.orika().selfMappingAnnotation());
+		config.converterPackage(properties.orika().converterPackage());
+		config.bidirectionalClass(properties.orika().bidirectionalClass());
+		configurer.configureMapperFactory(factory, config);
+	}
 
 }

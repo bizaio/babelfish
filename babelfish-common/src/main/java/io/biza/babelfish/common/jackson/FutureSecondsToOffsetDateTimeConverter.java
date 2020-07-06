@@ -22,6 +22,7 @@ public class FutureSecondsToOffsetDateTimeConverter extends StdConverter<Long, O
   public OffsetDateTime convert(Long value) {
     if (value == null || value == 0L)
       return null;
+    
     return OffsetDateTime.now().plusSeconds(value);
   }
 }

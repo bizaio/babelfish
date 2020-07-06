@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.UUID;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -22,13 +24,13 @@ import io.biza.babelfish.common.jackson.EpochToOffsetDateTimeConverter;
 import io.biza.babelfish.common.jackson.ListStringToSpaceListConverter;
 import io.biza.babelfish.common.jackson.OffsetDateTimeToEpochConverter;
 import io.biza.babelfish.common.jackson.SpaceListToListStringConverter;
-import io.biza.babelfish.oidc.Constants;
-import io.biza.babelfish.oidc.payloads.oidc.OIDCClaimMap;
+import io.biza.babelfish.oidc.payloads.oidc.OIDCClaimRequestMap;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -60,15 +62,16 @@ public class JWTClaims {
   @JsonProperty("exp")
   @JsonSerialize(converter = OffsetDateTimeToEpochConverter.class)
   @JsonDeserialize(converter = EpochToOffsetDateTimeConverter.class)
-  @Builder.Default
-  OffsetDateTime expiry = OffsetDateTime.now().plusMinutes(Constants.DEFAULT_MINUTES_EXPIRY);
+  @NotNull
+  @NonNull
+  OffsetDateTime expiry;
 
   @JsonProperty("nbf")
   @JsonSerialize(converter = OffsetDateTimeToEpochConverter.class)
   @JsonDeserialize(converter = EpochToOffsetDateTimeConverter.class)
-  @Builder.Default
-  OffsetDateTime notBefore =
-      OffsetDateTime.now().minusMinutes(Constants.DEFAULT_MINUTES_NOT_BEFORE);
+  @NotNull
+  @NonNull
+  OffsetDateTime notBefore;
 
   @JsonProperty("iat")
   @JsonSerialize(converter = OffsetDateTimeToEpochConverter.class)
@@ -85,7 +88,7 @@ public class JWTClaims {
   List<String> scope;
   
   @JsonProperty("claims")
-  OIDCClaimMap claims;
+  OIDCClaimRequestMap claims;
   
   /**
    * A catch all Map for all other additional claims

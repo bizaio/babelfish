@@ -20,13 +20,14 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
+import io.biza.babelfish.spring.service.config.properties.BabelfishProperties;
 import io.biza.babelfish.spring.service.type.TypeService;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class})
-@Import(TypeService.class)
+@Import({ BabelfishProperties.class, TypeService.class })
 public class BabelfishTypeServiceApplication {
 
   public static void main(String[] args) {

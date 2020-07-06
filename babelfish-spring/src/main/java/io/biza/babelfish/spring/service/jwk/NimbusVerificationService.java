@@ -6,5 +6,5 @@ import org.springframework.stereotype.Service;
 import io.biza.babelfish.interfaces.VerificationService;
 
 @Service
-@ConditionalOnProperty(name = "babelfish.service.VerificationService", havingValue = "NimbusVerificationService", matchIfMissing = true)
+@ConditionalOnProperty(name = "babelfish.service.verification-service", havingValue = "NimbusVerificationService", matchIfMissing = true)
 public class NimbusVerificationService implements VerificationService {}

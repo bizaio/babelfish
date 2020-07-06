@@ -165,20 +165,36 @@ public interface IssuerService {
 	 */
 	public JWK initKey(String issuer, JWKKeyType type, JWKPublicKeyUse use, JWSSigningAlgorithmType signingAlgorithm,
 			JWEEncryptionAlgorithmType encryptionAlgorithm) throws NotInitialisedException;
+	
+	public Boolean hasKey(String issuer, JWKKeyType type, JWKPublicKeyUse use, JWSSigningAlgorithmType signingAlgorithm,
+			JWEEncryptionAlgorithmType encryptionAlgorithm);
 
 	default JWK initSigningKey(String issuer, JWKKeyType type, JWSSigningAlgorithmType signingAlgorithm)
 			throws NotInitialisedException {
 		return initKey(issuer, type, JWKPublicKeyUse.SIGN, signingAlgorithm, null);
 	}
+	
+	default Boolean hasSigningKey(String issuer, JWKKeyType type, JWSSigningAlgorithmType signingAlgorithm) {
+		return hasKey(issuer, type, JWKPublicKeyUse.SIGN, signingAlgorithm, null);
+	}
 
 	default JWK initSigningKey(URI issuer, JWKKeyType type, JWSSigningAlgorithmType signingAlgorithm)
 			throws NotInitialisedException {
-		return initKey(issuer.toASCIIString(), type, JWKPublicKeyUse.SIGN, signingAlgorithm, null);
+		return initSigningKey(issuer.toASCIIString(), type, signingAlgorithm);
 	}
-
+	
 	default JWK initEncryptionKey(String issuer, JWKKeyType type, JWEEncryptionAlgorithmType encryptionAlgorithm)
 			throws NotInitialisedException {
 		return initKey(issuer, type, JWKPublicKeyUse.ENCRYPT, null, encryptionAlgorithm);
+	}
+	
+	default JWK initEncryptionKey(URI issuer, JWKKeyType type, JWEEncryptionAlgorithmType encryptionAlgorithm)
+			throws NotInitialisedException {
+		return initEncryptionKey(issuer.toASCIIString(), type, encryptionAlgorithm);
+	}
+	
+	default Boolean hasEncryptionKey(String issuer, JWKKeyType type, JWEEncryptionAlgorithmType encryptionAlgorithm) {
+		return hasKey(issuer, type, JWKPublicKeyUse.ENCRYPT, null, encryptionAlgorithm);
 	}
 
 	/**

@@ -7,7 +7,6 @@ import java.util.UUID;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -19,18 +18,19 @@ import io.biza.babelfish.interfaces.SecretService;
 import io.biza.babelfish.oidc.payloads.JWTClaims;
 import io.biza.babelfish.spring.persistence.model.secret.SecretData;
 import io.biza.babelfish.spring.persistence.repository.secret.SecretRepository;
+import io.biza.babelfish.spring.service.config.properties.BabelfishProperties;
 import io.biza.babelfish.util.NimbusUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-@ConditionalOnProperty(name = "babelfish.service.SecretService", havingValue = "DatabaseSecretService", matchIfMissing = true)
+@ConditionalOnProperty(name = "babelfish.service.secret-service", havingValue = "DatabaseSecretService", matchIfMissing = true)
 @EntityScan(basePackageClasses = SecretData.class)
 @EnableJpaRepositories(basePackageClasses = SecretRepository.class)
 public class DatabaseSecretService implements SecretService {
 	
-	@Value("${babelfish.secret.length:32}")
-	Integer secretLength;
+	@Autowired
+	BabelfishProperties properties;
 	
 	@Autowired
 	SecretRepository secretRepository;
@@ -52,7 +52,7 @@ public class DatabaseSecretService implements SecretService {
 			secretData = SecretData.builder().id(identifier).build();
 		}
 		
-		String secret = RandomStringUtils.randomAlphanumeric(secretLength);
+		String secret = RandomStringUtils.randomAlphanumeric(properties.secretManager().defaultSecretLength());
 		
 		if(oneWay) {
 		MessageDigest digest;

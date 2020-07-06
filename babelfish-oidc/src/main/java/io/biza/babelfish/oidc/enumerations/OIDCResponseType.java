@@ -28,7 +28,7 @@ public enum OIDCResponseType {
 	@JsonCreator
 	public static OIDCResponseType fromValue(String value) throws UnsupportedResponseTypeException {
 		for (OIDCResponseType b : OIDCResponseType.values()) {
-			if (String.valueOf(b.value).equalsIgnoreCase(value)) {
+			if (String.valueOf(b.toString()).equalsIgnoreCase(value)) {
 				return b;
 			}
 		}

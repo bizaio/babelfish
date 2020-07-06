@@ -3,6 +3,9 @@ package io.biza.babelfish.oidc.requests;
 import java.net.URI;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -26,6 +29,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "OAuth 2.0 Error Response")
+@JsonInclude(Include.NON_NULL)
 public class OAuth2ErrorResponse {
 
   /**

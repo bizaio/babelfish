@@ -10,12 +10,16 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import io.biza.babelfish.common.jackson.EpochToOffsetDateTimeConverter;
 import io.biza.babelfish.common.jackson.FutureSecondsToOffsetDateTimeConverter;
 import io.biza.babelfish.common.jackson.ListStringToSpaceListConverter;
+import io.biza.babelfish.common.jackson.OffsetDateTimeToEpochConverter;
 import io.biza.babelfish.common.jackson.OffsetDateTimeToFutureSecondsConverter;
 import io.biza.babelfish.common.jackson.SpaceListToListStringConverter;
 import io.biza.babelfish.oidc.enumerations.OAuth2TokenType; 
@@ -37,6 +41,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Schema(description = "OAuth 2.0 Token Response")
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
 public class TokenResponse {
 
 
@@ -70,6 +75,17 @@ public class TokenResponse {
   @JsonDeserialize(converter = FutureSecondsToOffsetDateTimeConverter.class)
   @JsonSerialize(converter = OffsetDateTimeToFutureSecondsConverter.class)
   OffsetDateTime expiresAt;
+  
+  /**
+   * Refresh Token expiry time
+   * 
+   * NOTE: Conversion to Java OffsetDateTime internally for operations to be easier
+   */
+  @JsonProperty("refresh_token_expires_at")
+  @JsonDeserialize(converter = EpochToOffsetDateTimeConverter.class)
+  @JsonSerialize(converter = OffsetDateTimeToEpochConverter.class)
+  OffsetDateTime refreshExpiresAt;
+  
   
   /**
    * List of scopes the access token has access to

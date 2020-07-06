@@ -43,7 +43,7 @@ import lombok.ToString;
 @ToString
 @Valid
 @Table(name = "BABELFISH_ISSUER", uniqueConstraints = {
-		@UniqueConstraint(columnNames = { "issuer" }, name = "babelfish_issuer_issuer_uk") })
+		@UniqueConstraint(columnNames = { "ISSUER" }, name = "BABELFISH_ISSUER_UK") })
 public class IssuerData {
 
 	@Id

@@ -2,9 +2,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>io.biza</groupId>
+	<parent>
+		<groupId>io.biza</groupId>
+		<artifactId>biza-bom</artifactId>
+		<version>0.0.3-SNAPSHOT</version>
+	</parent>
 	<artifactId>babelfish</artifactId>
-	<version>1.2.7-SNAPSHOT</version>
+	<version>1.2.9-SNAPSHOT</version>
 	<name>Babelfish: Parent Project</name>
 	<description>The Babelfish metapackage is a set of libraries and utilities for handling payloads associated with the Australian Consumer Data Right. It is currently being developed and maintained by Biza.io.</description>
 	<packaging>pom</packaging>
@@ -40,51 +44,6 @@
 		<url>https://github.com/bizaio/babelfish/issues</url>
 		<system>Github</system>
 	</issueManagement>
-	<properties>
-		<java.version>11</java.version>
-		<maven.compiler.source>${java.version}</maven.compiler.source>
-		<maven.compiler.target>${java.version}</maven.compiler.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<validation-api.version>2.0.1.Final</validation-api.version>
-		<jackson.version>2.10.1</jackson.version>
-		<libphonenumber.version>8.11.1</libphonenumber.version>
-		<lombok.version>1.18.10</lombok.version>
-		<maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
-		<junit-jupiter.version>5.6.0-M1</junit-jupiter.version>
-		<hibernate-validator.version>6.1.2.Final</hibernate-validator.version>
-		<javax.el-api.version>3.0.0</javax.el-api.version>
-		<javax.el.version>2.2.6</javax.el.version>
-		<maven-surefire-report-plugin.version>3.0.0-M4</maven-surefire-report-plugin.version>
-		<maven-site-plugin.version>3.8.2</maven-site-plugin.version>
-		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-		<maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
-		<apache-commons-lang.version>3.9</apache-commons-lang.version>
-		<commons-beanutils.version>1.9.4</commons-beanutils.version>
-		<commons-validator.version>1.6</commons-validator.version>
-		<swagger-core.version>2.1.1</swagger-core.version>
-		<maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
-		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-		<nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
-		<maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-		<orika.version>1.5.4</orika.version>
-		<classgraph.version>4.8.60</classgraph.version>
-		<opencsv.version>5.1</opencsv.version>
-		<slf4j-simple.version>1.7.30</slf4j-simple.version>
-		<javapoet.version>1.12.1</javapoet.version>
-		<jose4j.version>0.7.0</jose4j.version>
-		<okhttp.version>4.4.0</okhttp.version>
-		<bcprov-jdk.version>1.64</bcprov-jdk.version>
-		<spring-boot.version>2.2.3.RELEASE</spring-boot.version>
-		<nimbus-jose-jwt.version>8.9</nimbus-jose-jwt.version>
-		<springdoc-openapi-ui.version>1.2.25</springdoc-openapi-ui.version>
-		<springdoc-openapi-maven-plugin.version>0.3</springdoc-openapi-maven-plugin.version>
-		<dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
-		<maven-failsafe-plugin.version>${maven-surefire-plugin.version}</maven-failsafe-plugin.version>
-		<docker.image.prefix>bizaio</docker.image.prefix>
-		<build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
-		<dockerfile.skip>true</dockerfile.skip>
-		<jacoco-maven-plugin.version>0.8.3</jacoco-maven-plugin.version>
-	</properties>
 	<modules>
 		<module>babelfish-common</module>
 		<module>babelfish-cdr</module>
@@ -101,7 +60,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
@@ -114,17 +72,14 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${maven-surefire-plugin.version}</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>${maven-site-plugin.version}</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>${maven-project-info-reports-plugin.version}</version>
 			</plugin>
 		</plugins>
 	</build>
@@ -145,130 +100,4 @@
 			</plugin>
 		</plugins>
 	</reporting>
-	<profiles>
-		<profile>
-			<id>biza</id>
-			<distributionManagement>
-				<snapshotRepository>
-					<id>biza</id>
-					<url>https://build.dev.biza.net.au/artifactory/libs-snapshot-local
-					</url>
-				</snapshotRepository>
-			</distributionManagement>
-		</profile>
-		<profile>
-			<id>public</id>
-			<distributionManagement>
-				<snapshotRepository>
-					<id>ossrh</id>
-					<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-				</snapshotRepository>
-			</distributionManagement>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.sonatype.plugins</groupId>
-						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>${nexus-staging-maven-plugin.version}</version>
-						<extensions>true</extensions>
-						<configuration>
-							<serverId>ossrh</serverId>
-							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-							<autoReleaseAfterClose>true</autoReleaseAfterClose>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>release</id>
-			<distributionManagement>
-				<snapshotRepository>
-					<id>ossrh</id>
-					<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-				</snapshotRepository>
-			</distributionManagement>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.sonatype.plugins</groupId>
-						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>${nexus-staging-maven-plugin.version}</version>
-						<extensions>true</extensions>
-						<configuration>
-							<serverId>ossrh</serverId>
-							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-							<autoReleaseAfterClose>true</autoReleaseAfterClose>
-						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>${maven-gpg-plugin.version}</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-javadoc-plugin</artifactId>
-						<version>${maven-javadoc-plugin.version}</version>
-						<executions>
-							<execution>
-								<id>attach-javadocs</id>
-								<goals>
-									<goal>jar</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-source-plugin</artifactId>
-						<version>${maven-source-plugin.version}</version>
-						<executions>
-							<execution>
-								<id>attach-sources</id>
-								<goals>
-									<goal>jar-no-fork</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>coverage</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.jacoco</groupId>
-						<artifactId>jacoco-maven-plugin</artifactId>
-						<version>${jacoco-maven-plugin.version}</version>
-						<executions>
-							<execution>
-								<id>prepare-agent</id>
-								<goals>
-									<goal>prepare-agent</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>report</id>
-								<goals>
-									<goal>report</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 </project>

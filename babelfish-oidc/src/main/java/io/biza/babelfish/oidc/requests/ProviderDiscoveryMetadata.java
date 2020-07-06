@@ -7,6 +7,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.JWEEncryptionEncodingType;
@@ -35,6 +37,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Schema(description = "OpenID Provider Discovery Document")
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
 public class ProviderDiscoveryMetadata {
   @JsonProperty("issuer")
   @NotNull
@@ -219,6 +222,13 @@ public class ProviderDiscoveryMetadata {
   @Builder.Default
   Boolean oauthMtlsSupported = false;
   
+  @JsonProperty("authorization_details_supported")
+  @Schema(description = "Rich Authorization Support")
+  @Builder.Default
+  Boolean authorisationDetailsSupported = false;
   
+  @JsonProperty("authorization_data_types_supported")
+  @Schema(description = "Rich Authorization Data Types Supported")
+  Set<String> authorisationDataTypesSupported;
   
 }

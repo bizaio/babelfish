@@ -45,7 +45,7 @@ import org.bouncycastle.operator.bc.BcRSAContentSignerBuilder;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
 import org.bouncycastle.pkcs.PKCS10CertificationRequest;
 import org.bouncycastle.pqc.crypto.util.PrivateKeyFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
@@ -53,29 +53,19 @@ import io.biza.babelfish.common.exceptions.EncryptionOperationException;
 import io.biza.babelfish.common.exceptions.NotInitialisedException;
 import io.biza.babelfish.interfaces.CertificateService;
 import io.biza.babelfish.spring.Constants;
+import io.biza.babelfish.spring.service.config.properties.BabelfishProperties;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-@ConditionalOnProperty(name = "babelfish.service.CertificateService",
+@ConditionalOnProperty(name = "babelfish.service.certificate-service",
     havingValue = "LocalKeyStoreCertificateService", matchIfMissing = true)
 public class LocalCertificateService implements CertificateService {
 
-  @Value("${babelfish.ca.key-store-password:solongandthanksforallthefish}")
-  String KEYSTORE_PASSWORD;
 
-  @Value("${babelfish.ca.key-store:babelfish-ca.jks}")
-  String KEYSTORE_PATH;
-
-  @Value("${babelfish.ca.key-id:babelfish-ca-key}")
-  String KEYSTORE_CA_KEY_ID;
-
-  @Value("${babelfish.ca.cert-id:babelfish-ca}")
-  String KEYSTORE_CA_CERT_ID;
-
-  @Value("${babelfish.ca.show_private_keys:false}")
-  Boolean CA_SHOW_KEYS;
-
+	@Autowired
+	BabelfishProperties properties;
+	
   @Override
   public String signRequest(String inputCsr)
       throws NotInitialisedException, EncryptionOperationException {
@@ -131,8 +121,8 @@ public class LocalCertificateService implements CertificateService {
   private KeyPair keyPair() throws EncryptionOperationException {
     try {
       KeyStore keystore = getKeyStore();
-      return new KeyPair(keystore.getCertificate(KEYSTORE_CA_CERT_ID).getPublicKey(),
-          (PrivateKey) keystore.getKey(KEYSTORE_CA_KEY_ID, KEYSTORE_PASSWORD.toCharArray()));
+      return new KeyPair(keystore.getCertificate(properties.ca().keystoreCaCertId()).getPublicKey(),
+          (PrivateKey) keystore.getKey(properties.ca().keystoreCaKeyId(), properties.ca().keyStorePassword().toCharArray()));
     } catch (KeyStoreException e) {
       throw EncryptionOperationException.builder().message(e.getMessage()).build();
     } catch (UnrecoverableKeyException e) {
@@ -157,12 +147,12 @@ public class LocalCertificateService implements CertificateService {
   }
 
   private KeyStore getKeyStore() throws EncryptionOperationException {
-    if (new File(KEYSTORE_PATH).exists()) {
+    if (new File(properties.ca().keystorePath()).exists()) {
       try {
-        LOG.info("Keystore {} appears to already exist, moving on", KEYSTORE_PATH);
-        FileInputStream fos = new FileInputStream(KEYSTORE_PATH);
+        LOG.info("Keystore {} appears to already exist, moving on", properties.ca().keystorePath());
+        FileInputStream fos = new FileInputStream(properties.ca().keystorePath());
         KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
-        keystore.load(fos, KEYSTORE_PASSWORD.toCharArray());
+        keystore.load(fos, properties.ca().keyStorePassword().toCharArray());
         return keystore;
       } catch (FileNotFoundException e) {
         return null;
@@ -190,8 +180,8 @@ public class LocalCertificateService implements CertificateService {
 
     KeyStore keystore = getKeyStore();
     try {
-      return keystore.containsAlias(KEYSTORE_CA_KEY_ID)
-          && keystore.containsAlias(KEYSTORE_CA_CERT_ID);
+      return keystore.containsAlias(properties.ca().keystoreCaKeyId())
+          && keystore.containsAlias(properties.ca().keystoreCaCertId());
 
     } catch (KeyStoreException e) {
       LOG.error("Key store was found but opening it failed with: {}", e);
@@ -267,28 +257,28 @@ public class LocalCertificateService implements CertificateService {
        * Save CA to keystore
        */
       KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
-      char[] pwdArray = KEYSTORE_PASSWORD.toCharArray();
+      char[] pwdArray = properties.ca().keyStorePassword().toCharArray();
       ks.load(null, pwdArray);
-      FileOutputStream fos = new FileOutputStream(KEYSTORE_PATH);
-      ks.setKeyEntry(KEYSTORE_CA_KEY_ID, keyPair.getPrivate(), KEYSTORE_PASSWORD.toCharArray(),
+      FileOutputStream fos = new FileOutputStream(properties.ca().keystorePath());
+      ks.setKeyEntry(properties.ca().keystoreCaKeyId(), keyPair.getPrivate(), properties.ca().keyStorePassword().toCharArray(),
           certificateChain);
-      ks.setCertificateEntry(KEYSTORE_CA_CERT_ID, CertificateFactory.getInstance("X.509")
+      ks.setCertificateEntry(properties.ca().keystoreCaCertId(), CertificateFactory.getInstance("X.509")
           .generateCertificate(new ByteArrayInputStream(selfSignedCert.getEncoded())));
       ks.store(fos, pwdArray);
       fos.close();
 
       LOG.warn("Certificate authority initialisation has been completed!");
       LOG.debug("PEM of Certificate Authority is output as follows");
-      if (CA_SHOW_KEYS) {
+      if (properties.ca().showPrivateKeys()) {
         LOG.debug("\n\n-----BEGIN RSA PRIVATE KEY-----\n{}\n-----END RSA PRIVATE KEY-----\n",
             new String(Base64.getEncoder().encode(
-                ks.getKey(KEYSTORE_CA_KEY_ID, KEYSTORE_PASSWORD.toCharArray()).getEncoded()))
+                ks.getKey(properties.ca().keystoreCaKeyId(), properties.ca().keyStorePassword().toCharArray()).getEncoded()))
                     .replaceAll(".{80}(?=.)", "$0\n"));
       }
 
       LOG.debug("\n\n-----BEGIN CERTIFICATE-----\n{}\n-----END CERTIFICATE-----\n",
           new String(Base64.getEncoder()
-              .encode(ks.getCertificate(KEYSTORE_CA_CERT_ID).getPublicKey().getEncoded()))
+              .encode(ks.getCertificate(properties.ca().keystoreCaCertId()).getPublicKey().getEncoded()))
                   .replaceAll(".{80}(?=.)", "$0\n"));
 
     } catch (NoSuchAlgorithmException e) {

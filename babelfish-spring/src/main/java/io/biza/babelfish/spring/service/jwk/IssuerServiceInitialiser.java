@@ -1,8 +1,6 @@
 package io.biza.babelfish.spring.service.jwk;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -11,40 +9,31 @@ import org.springframework.stereotype.Service;
 import io.biza.babelfish.common.exceptions.AlreadyInitialisedException;
 import io.biza.babelfish.common.exceptions.NotInitialisedException;
 import io.biza.babelfish.interfaces.IssuerService;
-import io.biza.babelfish.oidc.enumerations.JWEEncryptionAlgorithmType;
 import io.biza.babelfish.oidc.enumerations.JWKKeyType;
-import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
+import io.biza.babelfish.spring.service.config.properties.BabelfishProperties;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-@ConditionalOnProperty(name = "babelfish.issuer.autoInit", havingValue = "true")
+@ConditionalOnProperty(name = "babelfish.issuer.auto-init", havingValue = "true")
 public class IssuerServiceInitialiser implements
 ApplicationListener<ContextRefreshedEvent> {
 
 	@Autowired
 	IssuerService issuerService;
 	
-	@Value("${babelfish.issuer.autoInitRealms}")
-	List<String> realmList;
+	@Autowired
+	BabelfishProperties properties;
 	
-	@Value("${babelfish.issuer.autoInitKeyType:RSA}")
-	JWKKeyType keyType = JWKKeyType.RSA;
-	
-	@Value("${babelfish.issuer.autoInitSigningAlgorithm:PS256}")
-	JWSSigningAlgorithmType signingType = JWSSigningAlgorithmType.PS256;
-	
-	@Value("${babelfish.issuer.autoInitEncryptionAlgorithm:RSA-OAEP}")
-	JWEEncryptionAlgorithmType encryptionType = JWEEncryptionAlgorithmType.RSA_OAEP;
 	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		if(realmList != null) {
-			for(String realm : realmList) {
+		if(properties.issuer().autoInitRealms() != null) {
+			for(String realm : properties.issuer().autoInitRealms()) {
 				try {
 					issuerService.createIssuer(realm);
-					issuerService.initSigningKey(realm, keyType, signingType);
-					issuerService.initEncryptionKey(realm, keyType, encryptionType);
+					issuerService.initSigningKey(realm, JWKKeyType.fromAlgorithm(properties.issuer().signingType()), properties.issuer().signingType());
+					issuerService.initEncryptionKey(realm, JWKKeyType.fromAlgorithm(properties.issuer().encryptionType()), properties.issuer().encryptionType());
 				} catch (NotInitialisedException e) {
 					LOG.error("Encountered error while attempting automatic initialisation", e);
 				} catch (AlreadyInitialisedException e) {

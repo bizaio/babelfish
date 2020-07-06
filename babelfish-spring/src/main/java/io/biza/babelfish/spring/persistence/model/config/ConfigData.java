@@ -39,7 +39,7 @@ import lombok.ToString;
 @ToString
 @Valid
 @Table(name = "BABELFISH_CONFIG", uniqueConstraints = {
-		@UniqueConstraint(columnNames = { "object", "key" }, name = "babelfish_config_object_key_uk") })
+		@UniqueConstraint(columnNames = { "OBJECT", "KEY" }, name = "BABELFISH_CONFIG_OBJECT_KEY_UK") })
 public class ConfigData {
 
 	@Id

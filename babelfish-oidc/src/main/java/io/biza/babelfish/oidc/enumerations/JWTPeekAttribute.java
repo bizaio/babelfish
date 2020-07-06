@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public enum JWTPeekAttribute {
 	  ISSUER("issuer"),
 	  SOFTWARE_STATEMENT("software_statement"),
-	  CLIENT_ID("client_id");
+	  CLIENT_ID("client_id"), REDIRECT_URI("redirect_uri");
 	  
 	  String value;
 	

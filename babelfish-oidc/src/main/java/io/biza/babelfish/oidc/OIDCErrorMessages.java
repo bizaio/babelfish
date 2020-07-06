@@ -30,6 +30,10 @@ public class OIDCErrorMessages {
 	public static final String OAUTH2_REGISTRATION_INVALID_CLIENT_METADATA = "The value of one of the Client Metadata fields is invalid and the server has rejected this request.";
 	public static final String OAUTH2_REGISTRATION_INVALID_SOFTWARE_STATEMENT = "The software statement presented is invalid.";
 	public static final String OAUTH2_REGISTRATION_UNAPPROVED_SOFTWARE_STATEMENT = "The software statement presented is not approved for use by this authorization server.";
+	public static final URI OAUTH2_REGISTRATION_ERROR_RESPONSE_URI = URI.create("https://tools.ietf.org/html/rfc7591#section-3.2.2");
+	public static final URI OPENID_CONNECT_ERROR_RESPONSE_URI = URI.create("https://openid.net/specs/openid-connect-core-1_0.html#AuthError");
+	public static final String OAUTH2_REQUEST_NOT_SUPPORTED = "The OP does not support use of the request parameter defined in Section 6.";
+	public static final String OPENID_CONNECT_INVALID_REQUEST_OBJECT = "The request parameter contains an invalid Request Object.";
 
 
 	/**

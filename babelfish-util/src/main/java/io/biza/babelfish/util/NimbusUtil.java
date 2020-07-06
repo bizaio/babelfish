@@ -6,16 +6,24 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.text.MessageFormat;
 import java.text.ParseException;
+import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
+
+import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+import javax.validation.Validation;
+import javax.validation.Validator;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.JOSEException;
@@ -36,6 +44,7 @@ import io.biza.babelfish.common.exceptions.KeyRetrievalException;
 import io.biza.babelfish.common.exceptions.SigningVerificationException;
 import io.biza.babelfish.common.jackson.ListStringToSpaceListConverter;
 import io.biza.babelfish.common.jackson.SpaceListToListStringConverter;
+import io.biza.babelfish.oidc.Constants;
 import io.biza.babelfish.oidc.Messages;
 import io.biza.babelfish.oidc.enumerations.JWKPublicKeyUse;
 import io.biza.babelfish.oidc.enumerations.JWSSigningAlgorithmType;
@@ -49,6 +58,8 @@ import lombok.extern.slf4j.Slf4j;
 public class NimbusUtil {
 
 	public static ObjectMapper mapper = new ObjectMapper();
+
+	public static final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
 	public static JWTClaims fromClaimsSet(JWTClaimsSet inputClaims) {
 		try {
@@ -102,10 +113,13 @@ public class NimbusUtil {
 	}
 
 	public static JWTClaimsSet toClaimsSet(JWTClaims claims) {
+
 		com.nimbusds.jwt.JWTClaimsSet.Builder claimSet = new JWTClaimsSet.Builder().issuer(claims.issuer())
 				.subject(claims.subject()).audience(claims.audience())
-				.expirationTime(Date.from(claims.expiry().toInstant()))
-				.notBeforeTime(Date.from(claims.notBefore().toInstant()))
+				.expirationTime(Date.from(Optional.ofNullable(claims.expiry())
+						.orElse(OffsetDateTime.now().plusMinutes(Constants.DEFAULT_MINUTES_EXPIRY)).toInstant()))
+				.notBeforeTime(Date.from(Optional.ofNullable(claims.notBefore())
+						.orElse(OffsetDateTime.now().minusMinutes(Constants.DEFAULT_MINUTES_NOT_BEFORE)).toInstant()))
 				.issueTime(Date.from(claims.issuedAt().toInstant())).jwtID(claims.jwtId());
 
 		if (claims.scope() != null) {
@@ -122,8 +136,6 @@ public class NimbusUtil {
 	}
 
 	public static SSLSocketFactory tlsDisableSocketFactory() {
-
-		LOG.debug(Messages.ATTEMPTING_TO_DISABLE_TLS_VERIFICATION);
 		try {
 			SSLContext sslContext = SSLContext.getInstance("SSL");
 			sslContext.init(null, new TrustManager[] { new X509TrustManager() {
@@ -148,15 +160,27 @@ public class NimbusUtil {
 
 	}
 
+	public static HostnameVerifier anyHostnameVerifier() {
+		return new HostnameVerifier() {
+			@Override
+			public boolean verify(String arg0, SSLSession arg1) {
+				// Verifies anything
+				return true;
+			}
+		};
+	}
+
 	public static void checkClaims(JWTClaims inputClaims, JWTClaims claimChecks) throws SigningVerificationException {
 		if (claimChecks.issuer() != null)
 			NimbusUtil.checkEquals("issuer", claimChecks.issuer(), inputClaims.issuer());
 		if (claimChecks.subject() != null)
 			NimbusUtil.checkEquals("subject", claimChecks.subject(), inputClaims.subject());
 		if (claimChecks.expiry() != null)
-			if (claimChecks.expiry().isBefore(inputClaims.expiry())) {
-				throw SigningVerificationException.builder().message("Verification of expiration time claim failed "
-						+ inputClaims.expiry() + " is after " + claimChecks.expiry()).build();
+			if (claimChecks.expiry().isAfter(inputClaims.expiry())) {
+				throw SigningVerificationException.builder()
+						.errorDescription("Verification of expiration time claim failed " + claimChecks.expiry()
+								+ " is after " + inputClaims.expiry())
+						.build();
 			}
 		if (claimChecks.audience() != null)
 			NimbusUtil.checkEquals("audience", claimChecks.audience(), inputClaims.audience());
@@ -173,7 +197,8 @@ public class NimbusUtil {
 			return;
 		if (!classOne.equals(classTwo)) {
 			throw SigningVerificationException.builder()
-					.message("Verification of " + name + " required claim failed: " + classOne + " versus " + classTwo)
+					.errorDescription(
+							"Verification of " + name + " required claim failed: " + classOne + " versus " + classTwo)
 					.build();
 		}
 	}
@@ -193,14 +218,15 @@ public class NimbusUtil {
 				return inputClaims;
 			} else {
 				LOG.warn("Unable to verify supplied JWT using specified secret");
-				throw SigningVerificationException.builder().message("Unable to verify HMAC Signed JWT").build();
+				throw SigningVerificationException.builder().errorDescription("Unable to verify HMAC Signed JWT")
+						.build();
 			}
 		} catch (ParseException e) {
 			LOG.error("Unable to parse supplied JWT: {}", e.getMessage(), e);
-			throw SigningVerificationException.builder().message(e.getMessage()).build();
+			throw SigningVerificationException.builder().errorDescription(e.getMessage()).build();
 		} catch (JOSEException e) {
 			LOG.warn("Encountered a JOSEException while attempting to verify hmac signed JWT", e);
-			throw SigningVerificationException.builder().message(e.getMessage()).build();
+			throw SigningVerificationException.builder().errorDescription(e.getMessage()).build();
 		}
 	}
 
@@ -213,31 +239,34 @@ public class NimbusUtil {
 			return verify(jwt, remoteJwk, claimChecks);
 		} catch (ParseException e) {
 			LOG.error("Unable to parse supplied JWT: {}", e.getMessage(), e);
-			throw SigningVerificationException.builder().message(e.getMessage()).build();
+			throw SigningVerificationException.builder().errorDescription(e.getMessage()).build();
 		}
 	}
 
 	public static Boolean validate(String compactSerialisation, JWKS jwks, JWTClaims claimChecks) {
 		try {
-			SignedJWT jwt = SignedJWT.parse(compactSerialisation);
-
-			List<JWK> matches = new JWKSelector(getJwkMatcher(jwt, KeyUse.SIGNATURE))
-					.select(JWKSet.parse(StaticObjectMapper.toJSON(jwks)));
-			if (matches.size() > 0) {
-				try {
-					verify(jwt, matches.get(0), claimChecks);
-					return true;
-				} catch (SigningVerificationException | KeyRetrievalException e) {
-					return false;
-				}
-			} else {
-				return false;
-			}
-		} catch (ParseException e) {
+			verify(compactSerialisation, jwks, claimChecks);
+			return true;
+		} catch (SigningVerificationException | KeyRetrievalException | ParseException e1) {
 			return false;
 		}
 	}
-	
+
+	public static JWTClaims verify(String compactSerialisation, JWKS jwks, JWTClaims claimChecks)
+			throws SigningVerificationException, KeyRetrievalException, ParseException {
+		SignedJWT jwt = SignedJWT.parse(compactSerialisation);
+
+		List<JWK> matches = new JWKSelector(getJwkMatcher(jwt, KeyUse.SIGNATURE))
+				.select(JWKSet.parse(StaticObjectMapper.toJSON(jwks)));
+		if (matches.size() > 0) {
+			return verify(jwt, matches.get(0), claimChecks);
+		} else {
+			throw SigningVerificationException.builder()
+					.errorDescription("Unable to locate suitable key from supplied JWKS to perform verification")
+					.build();
+		}
+	}
+
 	public static JWTClaims verify(SignedJWT jwt, JWK jwk, JWTClaims claimChecks)
 			throws SigningVerificationException, KeyRetrievalException {
 
@@ -248,7 +277,7 @@ public class NimbusUtil {
 			} else if (jwk.getKeyType().equals(KeyType.EC)) {
 				verifier = new ECDSAVerifier(jwk.toECKey());
 			} else {
-				throw SigningVerificationException.builder().message(
+				throw SigningVerificationException.builder().errorDescription(
 						MessageFormat.format(Messages.UNSUPPORTED_KEY_TYPE_WITH_VALUE, jwk.getKeyType().toString()))
 						.build();
 			}
@@ -263,15 +292,15 @@ public class NimbusUtil {
 			} else {
 				LOG.warn("Received signing verification error for kid of {}", jwk.getKeyID());
 				throw SigningVerificationException.builder()
-						.message("Unable to verify serialisation using kid " + jwk.getKeyID()).build();
+						.errorDescription("Unable to verify serialisation using kid " + jwk.getKeyID()).build();
 			}
 		} catch (ParseException e) {
 			LOG.error("Unable to parse supplied JWT: {}", e.getMessage(), e);
-			throw SigningVerificationException.builder().message(e.getMessage()).build();
+			throw SigningVerificationException.builder().errorDescription(e.getMessage()).build();
 
 		} catch (JOSEException e) {
 			LOG.warn("Encountered a JOSEException while attempting to verify payload {}", jwt.serialize(), e);
-			throw SigningVerificationException.builder().message(e.getMessage()).build();
+			throw SigningVerificationException.builder().errorDescription(e.getMessage()).build();
 		}
 
 	}
@@ -328,7 +357,7 @@ public class NimbusUtil {
 			return JWKSet.load(jwksUri.toURL());
 		} catch (IOException | ParseException e) {
 			LOG.error(Messages.FAILED_TO_RETRIEVE_JWKS, jwksUri, e);
-			throw KeyRetrievalException.builder().message(e.getMessage()).build();
+			throw KeyRetrievalException.builder().errorDescription(e.getMessage()).build();
 		}
 	}
 
@@ -338,7 +367,8 @@ public class NimbusUtil {
 			return matches.get(0);
 		} else {
 			throw KeyRetrievalException.builder()
-					.message(MessageUtil.format(Messages.UNABLE_TO_FIND_KEY_WITH_DETAIL, jwksUri, matcher.toString()))
+					.errorDescription(
+							MessageUtil.format(Messages.UNABLE_TO_FIND_KEY_WITH_DETAIL, jwksUri, matcher.toString()))
 					.build();
 		}
 	}
@@ -377,7 +407,8 @@ public class NimbusUtil {
 			return matches.get(0).toPublicJWK();
 		} else {
 			throw KeyRetrievalException.builder()
-					.message(MessageFormat.format(Messages.UNABLE_TO_FIND_KEY_WITH_DETAIL, algorithm, jwksUri)).build();
+					.errorDescription(MessageFormat.format(Messages.UNABLE_TO_FIND_KEY_WITH_DETAIL, algorithm, jwksUri))
+					.build();
 		}
 	}
 }
